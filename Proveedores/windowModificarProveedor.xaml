@@ -362,11 +362,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-                                <ScrollViewer.Effect>
-                                    <DropShadowEffect/>
-                                </ScrollViewer.Effect>
-                            </ScrollViewer>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
@@ -447,11 +443,11 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
@@ -468,24 +464,17 @@
     <Grid Background="#FF302E2E">
         <Rectangle Width="476.747" VerticalAlignment="Top" Margin="13.723,36.5,0,0" Height="443.367" HorizontalAlignment="Left" Fill="#FF121212" Effect="{DynamicResource DropShadow30}"/>
         <Label x:Name="lblDetalle" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="13.723,-0.5,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Modificar proveedor" Background="#FF121212"/>
-        <TextBox x:Name="txtCuit" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="13.723,60.834,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblCuit" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="106.477,36.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuit"/>
-        <TextBox x:Name="txtCategoria" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,60.834,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblCategoria" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="353.477,36.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
         <Label x:Name="lblRazonSocial" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="106.477,83.834,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Razón social"/>
-        <TextBox x:Name="txtCP" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,108.168,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblCP" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="353.477,83.834,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Código postal"/>
-        <TextBox x:Name="txtDireccion" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="13.723,155.502,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblDireccion" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="106.477,131.168,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Dirección"/>
-        <TextBox x:Name="txtLocalidad" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,155.502,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblLocalidad" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="353.477,131.168,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Localidad"/>
         <DataGrid x:Name="dgvContacto" Width="471.747" VerticalAlignment="Top" Margin="13.723,203.502,0,0" Height="240.165" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblContacto" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="353.477,178.502,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Contacto"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="490.47,36.5,0,0" Height="443.367" HorizontalAlignment="Left" Fill="#FF06B2CA"/>
-        <ComboBox x:Name="cmbRazonSocial" HorizontalAlignment="Left" Height="23" Margin="13.723,108.834,0,0" VerticalAlignment="Top" Width="224.747" Style="{DynamicResource ComboBoxStyle3}" FontSize="14"/>
         <Rectangle Width="396" VerticalAlignment="Top" Margin="525,36.5,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF171717" Effect="{DynamicResource DropShadow30}"/>
-        <TextBox x:Name="txtBuscar" Width="386" VerticalAlignment="Top" Text="Búsqueda" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="530,61.5,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
-        <ComboBox x:Name="cmbCategoria" Width="386" VerticalAlignment="Top" Style="{DynamicResource ComboBoxStyle3}" Margin="530,107.611,0,0" Height="23" HorizontalAlignment="Left" FontSize="14"/>
+        <TextBox x:Name="txtBuscar" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="530,61.5,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblCategoria_Copy" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="784.007,82.611,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
         <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="841,135.611,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}"/>
         <Rectangle HorizontalAlignment="Left" Height="174.448" Margin="921,36.5,0,0" VerticalAlignment="Top" Width="3.5" Fill="#FFD24A06"/>
@@ -494,6 +483,14 @@
         <Button x:Name="btnEliminarContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="330.47,446.867,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="-" BorderBrush="{x:Null}"/>
         <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="830.47,445.667,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="{x:Null}"/>
         <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="830.47,397.667,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtCuit" Width="219" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="19.47,55.834,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtDireccion" Width="219" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="19.47,156.168,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtCategoria" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,60.834,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtCP" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,108.168,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtLocalidad" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,155.502,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="530,107.611,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
+        <Label x:Name="lblBuscar" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="784.007,36,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
+        <ComboBox x:Name="cmbRazonSocial" HorizontalAlignment="Left" Height="23" Margin="19.47,107.611,0,0" VerticalAlignment="Top" Width="219" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
 
     </Grid>
 </Window>

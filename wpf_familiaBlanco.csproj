@@ -186,6 +186,23 @@
   <ItemGroup>
     <Resource Include="ceibo line not white.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Productos\icons8-search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo__ mono mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo__ mono mini black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo typo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

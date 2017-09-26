@@ -76,11 +76,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-                                <ScrollViewer.Effect>
-                                    <DropShadowEffect/>
-                                </ScrollViewer.Effect>
-                            </ScrollViewer>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
@@ -446,11 +442,11 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
@@ -468,7 +464,6 @@
     <Grid Background="#FF302E2E" Margin="0,0,0,-0.666">
         <Rectangle Width="396" VerticalAlignment="Top" Margin="463,37.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF171717" Effect="{DynamicResource DropShadow30}"/>
         <TextBox x:Name="txtBuscar" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="468,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" GotMouseCapture="txtBuscar_GotMouseCapture" TextChanged="txtBuscar_TextChanged"/>
-        <ComboBox x:Name="cmbCategoria" Width="386" VerticalAlignment="Top" Style="{DynamicResource ComboBoxStyle3}" Margin="468,108.27,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Cursor="None"/>
         <Label x:Name="lblCategoria" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="722.007,83.27,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
         <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="779,136.27,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}"/>
         <Rectangle Width="833" VerticalAlignment="Top" Margin="26,284.886,0,0" Height="262.448" HorizontalAlignment="Left" Fill="#FF171717">
@@ -476,7 +471,6 @@
                 <DropShadowEffect BlurRadius="20"/>
             </Rectangle.Effect>
         </Rectangle>
-        <ComboBox x:Name="cmbFiltro" Width="386" VerticalAlignment="Top" Style="{DynamicResource ComboBoxStyle3}" Margin="31,309.886,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" SelectedIndex="0"/>
         <Label x:Name="lblFiltrar" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.007,284.886,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Filtrar por"/>
         <TextBox x:Name="txtFiltro" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="31,356.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" TextChanged="txtFiltro_TextChanged" SpellCheck.IsEnabled="True" />
         <Label x:Name="lblProveedores" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.007,379.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedores"/>
@@ -505,6 +499,9 @@
         <Label x:Name="lblAgregarProducto" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="26,0,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar producto" Background="#FF171717"/>
         <Label x:Name="lblAgregarCategoria" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="463,0.159,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoría" Background="#FF171717"/>
         <Label x:Name="lblAgregarProveedor" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="26,247.886,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar proveedor" Background="#FF171717"/>
+        <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="468,108.27,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
+        <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="31,314.886,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
+        <Image HorizontalAlignment="Left" Height="23" Margin="422,356.159,0,0" VerticalAlignment="Top" Width="23" Source="icons8-search.png" Opacity="0.5"/>
 
     </Grid>
 </Window>

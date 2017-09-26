@@ -347,29 +347,9 @@
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Padding" Value="5"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Label}">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                            <Border.Background>
-                                <SolidColorBrush Color="Black" Opacity="0.2"/>
-                            </Border.Background>
-                            <ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <ContentPresenter.Effect>
-                                    <DropShadowEffect/>
-                                </ContentPresenter.Effect>
-                            </ContentPresenter>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Template" Value="{DynamicResource LabelControlTemplate1}"/>
         </Style>
         <LinearGradientBrush x:Key="NavigationWindowNavigationChromeBackground" EndPoint="0,1" StartPoint="0,0">
             <GradientStop Color="#FFFFFF" Offset="0"/>
@@ -817,6 +797,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <ControlTemplate x:Key="LabelControlTemplate1" TargetType="{x:Type Label}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="41.225,-3.006,41.225,0">
+                    <ContentPresenter.Effect>
+                        <DropShadowEffect/>
+                    </ContentPresenter.Effect>
+                </ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
     <Grid Background="#FF302E2E">
         <DockPanel x:Name="dockPanel" HorizontalAlignment="Left" Height="581.889" LastChildFill="False" VerticalAlignment="Top" Width="236" Margin="0,0,0,-0.222">
@@ -861,11 +855,6 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Label x:Name="lblFamiliaBlanco" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="0,549.667,0,-0.222" Width="236" Foreground="#FFFEFEFE" Background="{x:Null}" Style="{DynamicResource LabelStyle}">
-            <Label.BorderBrush>
-                <SolidColorBrush Color="White" Opacity="0"/>
-            </Label.BorderBrush>
-        </Label>
         <Frame x:Name="frameInicio" Content="Inicio" HorizontalAlignment="Left" Height="549.667" Margin="236,0,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717" Foreground="White" Style="{DynamicResource FrameStyle}" NavigationUIVisibility="Hidden"/>
         <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="32" Margin="401,0,0,0" VerticalAlignment="Top" Width="868.666">
             <Rectangle.ContextMenu>
@@ -882,6 +871,12 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
+        <Image HorizontalAlignment="Left" Height="21.454" Margin="1197.917,549.667,0,0" VerticalAlignment="Top" Width="66.75" Opacity="0.8" Source="ceibo typo.png"/>
+        <Label x:Name="lblFamiliaBlanco" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="0,549.667,0,-0.222" Width="236" Foreground="#FFFEFEFE" Background="{x:Null}" Style="{DynamicResource LabelStyle}">
+            <Label.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Label.BorderBrush>
+        </Label>
 
     </Grid>
 </Window>

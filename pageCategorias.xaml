@@ -53,11 +53,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" SnapsToDevicePixels="True" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Focusable="false">
-                                <ScrollViewer.Effect>
-                                    <DropShadowEffect/>
-                                </ScrollViewer.Effect>
-                            </ScrollViewer>
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Focusable="false"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
@@ -448,11 +444,11 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
