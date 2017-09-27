@@ -466,16 +466,17 @@
     <Grid Background="#FF171717">
         <Label x:Name="lblCategorias" Content="Categorias" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Rectangle Width="396" VerticalAlignment="Top" Margin="448,79.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF171717" Effect="{DynamicResource DropShadow30}"/>
+        <Rectangle Width="396" VerticalAlignment="Top" Margin="448,79,0,0" Height="229" HorizontalAlignment="Left" Fill="#FF171717" Effect="{DynamicResource DropShadow30}"/>
         <TextBox x:Name="textnombre" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="453,104.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="707.007,79.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="844,79.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FFD24A06"/>
         <Label x:Name="lblAgregarCategoria" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="448,42.159,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoría" Background="#FF171717"/>
-        <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="764,199.356,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="764,151.356,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnModificar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="764,199.356,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Modificar" BorderBrush="{x:Null}" Click="btnModificar_Click_1"/>
+        <Button x:Name="btnAgregar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="764,151.356,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Agregar" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
         <Rectangle Width="396" VerticalAlignment="Top" Margin="15,79.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF171717" Effect="{DynamicResource DropShadow30}"/>
-        <ListBox x:Name="ltsCategorias" HorizontalAlignment="Left" Height="118.197" Margin="20,104.159,0,0" VerticalAlignment="Top" Width="384.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14"/>
+        <ListBox x:Name="ltsCategorias" HorizontalAlignment="Left" Height="118.197" Margin="20,104.159,0,0" VerticalAlignment="Top" Width="384.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14" SelectionChanged="ltsCategorias_SelectionChanged" IsSynchronizedWithCurrentItem="True"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="416,79.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF063F97"/>
+        <Button x:Name="btnEliminar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="764,253,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Eliminar" BorderBrush="{x:Null}" RenderTransformOrigin="0.579,2.246" Click="btnEliminar_Click"/>
 
     </Grid>
 </Page>
