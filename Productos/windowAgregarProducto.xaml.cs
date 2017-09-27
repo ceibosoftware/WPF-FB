@@ -20,6 +20,7 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowAgregarProducto : Window
     {
+        
         CRUD conexion = new CRUD();
         public windowAgregarProducto()
         {
@@ -57,13 +58,14 @@ namespace wpfFamiliaBlanco
         }
         private void LoadListaProveedor()
         {
+
             String consulta = " Select * from proveedor ";
-            conexion.Consulta(consulta, ltsProveedores);
+            conexion.Consulta(consulta , ltsProveedores );
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
         }
 
-     
+
         private void LlenarComboFiltro()
         {
             cmbFiltro.Items.Add("Nombre");
@@ -89,6 +91,30 @@ namespace wpfFamiliaBlanco
             }
 
             ltsProveedores.ItemsSource = productos.AsDataView();
+        }
+
+        private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+            Console.WriteLine(ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()));
+            /*for (int i = ltsProvProductos.Items.Count; i <= 0; i++ )
+            {
+                Console.WriteLine(ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()));
+               /* if (selectedDataRow["nombre"].ToString() != (String)ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()))
+                {
+                    ltsProvProductos.Items.Add(selectedDataRow["nombre"].ToString());
+                }*/
+
+
+
+
+
+        }
+
+        private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(ltsProvProductos.SelectedValue.ToString());
+            ltsProvProductos.Items.Remove(ltsProvProductos.SelectedItem);
         }
     }
 }

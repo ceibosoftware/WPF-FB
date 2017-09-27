@@ -36,13 +36,13 @@ namespace wpfFamiliaBlanco
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarProducto();
-            newW.Show();
+            newW.ShowDialog();
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowModificarProducto();
-            newW.Show();
+            newW.ShowDialog();
         }
 
         private void loadListaProducto()
