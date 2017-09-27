@@ -60,8 +60,20 @@
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pageProductosAgregar.xaml.cs">
-      <DependentUpon>pageProductosAgregar.xaml</DependentUpon>
+    <Compile Include="pageTabs_Blank.xaml.cs">
+      <DependentUpon>pageTabs_Blank.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageTabs_Categorias.xaml.cs">
+      <DependentUpon>pageTabs_Categorias.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageTab_Productos.xaml.cs">
+      <DependentUpon>pageTab_Productos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageTab_Proveedores.xaml.cs">
+      <DependentUpon>pageTab_Proveedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageTab_Usuario.xaml.cs">
+      <DependentUpon>pageTab_Usuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Productos\windowAgregarProducto.xaml.cs">
       <DependentUpon>windowAgregarProducto.xaml</DependentUpon>
@@ -99,9 +111,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pageProductosAgregar.xaml">
+    <Page Include="pageTabs_Blank.xaml">
       <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageTabs_Categorias.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageTab_Productos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageTab_Proveedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageTab_Usuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Productos\pageProductos.xaml">
       <SubType>Designer</SubType>
@@ -203,6 +231,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ceibo typo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo FAMILIA BLANCO raiz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="B- Familia Blanco NNFIXED.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

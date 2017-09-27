@@ -728,46 +728,42 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" RenderTransformOrigin="0.5,0.5">
+                            <Border.Background>
+                                <ImageBrush ImageSource="B- Familia Blanco NNFIXED.png" Stretch="Uniform"/>
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="MouseOver">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <ImageBrush ImageSource="ceibo ss.png"/>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
                                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderThickness)" Storyboard.TargetName="border">
                                                 <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
                                             </ThicknessAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="border">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1.139"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="border">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <ImageBrush ImageSource="ceibo ss.png"/>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
                                             <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderThickness)" Storyboard.TargetName="border">
                                                 <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
                                             </ThicknessAnimationUsingKeyFrames>
                                             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsSharedSizeScope)" Storyboard.TargetName="border">
                                                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                                             </BooleanAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.OpacityMask)" Storyboard.TargetName="border">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <SolidColorBrush Color="Black" Opacity="1"/>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Disabled"/>
@@ -811,13 +807,76 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <ControlTemplate x:Key="ButtonB_B" TargetType="{x:Type Button}">
+            <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid.Background>
+                    <ImageBrush ImageSource="B- Familia Blanco NNFIXED.png" Stretch="Uniform"/>
+                </Grid.Background>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0" To="MouseOver">
+                                <VisualTransition.GeneratedEasingFunction>
+                                    <BackEase EasingMode="EaseIn"/>
+                                </VisualTransition.GeneratedEasingFunction>
+                                <Storyboard/>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Normal">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="grid">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush ImageSource="B- Familia Blanco NNFIXED.png" Stretch="Uniform"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.052"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="grid">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <ImageBrush ImageSource="B- Familia Blanco NNFIXED.png" Stretch="Fill"/>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-0.979"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed"/>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </ControlTemplate>
     </Window.Resources>
     <Grid Background="#FF302E2E">
         <DockPanel x:Name="dockPanel" HorizontalAlignment="Left" Height="581.889" LastChildFill="False" VerticalAlignment="Top" Width="236" Margin="0,0,0,-0.222">
             <DockPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1EA9A6" Offset="0"/>
-                    <GradientStop Color="#FF6D10F0" Offset="1"/>
+                    <GradientStop Color="#FF38002E" Offset="0"/>
+                    <GradientStop Color="#FF471404" Offset="1"/>
                 </LinearGradientBrush>
             </DockPanel.Background>
             <TabPanel Height="581.889" VerticalAlignment="Top" Width="236"/>
@@ -861,11 +920,6 @@
                 <ContextMenu/>
             </Rectangle.ContextMenu>
         </Rectangle>
-        <Button x:Name="btn_ImageCeiboIso" Content="" HorizontalAlignment="Left" Margin="82.84,50,0,0" VerticalAlignment="Top" Width="74.586" Height="74.586" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="ir a ceibosoftware.com">
-            <Button.Background>
-                <ImageBrush ImageSource="ceibo ss.png"/>
-            </Button.Background>
-        </Button>
         <Button x:Name="btnCategorias" Content="Categorias" HorizontalAlignment="Left" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource BotonStylePanel}" Background="{x:Null}" FontSize="14" Click="btnCategorias_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
@@ -877,6 +931,21 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Label.BorderBrush>
         </Label>
+        <Button x:Name="btn_ImageB_Blanco" Content="" HorizontalAlignment="Left" Margin="74.506,45.667,0,0" VerticalAlignment="Top" Width="86.587" Height="80.586" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="ir a ceibosoftware.com" Template="{DynamicResource ButtonB_B}">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="20"/>
+            </Button.Effect>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Frame x:Name="frameUsuarios" Content="" HorizontalAlignment="Left" Height="37.293" Margin="188,154.667,0,0" VerticalAlignment="Top" Width="48" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="frameProductos" Content="" HorizontalAlignment="Left" Height="37.293" Margin="188,191.96,0,0" VerticalAlignment="Top" Width="48" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="frameProveedores" Content="" HorizontalAlignment="Left" Height="37.293" Margin="188,229.253,0,0" VerticalAlignment="Top" Width="48" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="frameCategorias" Content="" HorizontalAlignment="Left" Height="37.293" Margin="188,378.425,0,0" VerticalAlignment="Top" Width="48" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>

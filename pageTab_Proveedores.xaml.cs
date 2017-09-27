@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace wpfFamiliaBlanco
 {
     /// <summary>
-    /// Interaction logic for pageProductosAgregar.xaml
+    /// Interaction logic for pageTab_Proveedores.xaml
     /// </summary>
-    public partial class pageProductosAgregar : Page
+    public partial class pageTab_Proveedores : Page
     {
-        public pageProductosAgregar()
+        public pageTab_Proveedores()
         {
             InitializeComponent();
         }

@@ -35,7 +35,7 @@
         </Style>
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
-        <Image Height="136" Width="668" Source="ceibo line not white.png" Margin="186.833,208.833,178.833,204.833"/>
+        <Image Source="Logo FAMILIA BLANCO raiz.png" Margin="254.833,122.834,286.833,146.833"/>
         <Label x:Name="lblInicio" Content="Inicio" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Image HorizontalAlignment="Left" Height="21.159" Margin="132.918,10,0,0" VerticalAlignment="Top" Width="24.159" Source="icons8-home.png"/>
     </Grid>

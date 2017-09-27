@@ -1,4 +1,4 @@
-﻿<Page x:Class="wpfFamiliaBlanco.pageProductosAgregar"
+﻿<Page x:Class="wpfFamiliaBlanco.pageTab_Productos"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:wpfFamiliaBlanco"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="pageProductosAgregar">
+      Title="pageTab_Productos" Height="37.293" Width="48">
 
     <Grid>
-        
+        <Ellipse Fill="#FFBD07C2" HorizontalAlignment="Left" Height="17.293" Margin="20.707,10,0,0" VerticalAlignment="Top" Width="17.293"/>
+
     </Grid>
 </Page>

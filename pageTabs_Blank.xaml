@@ -1,0 +1,14 @@
+﻿<Page x:Class="wpfFamiliaBlanco.pageTabs_Blank"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:wpfFamiliaBlanco"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="pageTabs_Blank" Height="37.293" Width="38">
+
+    <Grid>
+        
+    </Grid>
+</Page>
