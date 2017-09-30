@@ -22,6 +22,39 @@ namespace wpfFamiliaBlanco.Proveedores
         public windowAgregarProveedor()
         {
             InitializeComponent();
+            LlenarComboFiltro();
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (Valida())
+            {
+                DialogResult = true;
+            }
+     
+        }
+
+        private void LlenarComboFiltro()
+        {
+
+            cmbRazonSocial.Items.Add("Responsable Inscripto");
+            cmbRazonSocial.Items.Add("SA");
+            cmbRazonSocial.Items.Add("SRL");
+        }
+
+        public Boolean Valida()
+        {
+            if (txtCuit.Text != "" && txtDireccion.Text != "" && txtNombre.Text != "" && txtCP.Text != "" && txtLocalidad.Text != "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Faltan campos por completar");
+                return false;
+            }
+           
         }
     }
 }

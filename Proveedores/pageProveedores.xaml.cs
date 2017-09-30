@@ -30,6 +30,7 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             loadListaProveedores();
+            LlenarComboFiltro();
 
         }
 
@@ -41,8 +42,32 @@ namespace wpfFamiliaBlanco
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new windowAgregarProveedor();
-            newW.ShowDialog();
+            var newW2 = new windowAgregarProveedor();
+            newW2.ShowDialog();
+
+            if (newW2.DialogResult == true)
+            {
+
+                String nombre = newW2.txtNombre.Text;
+                String cuit = newW2.txtCuit.Text;
+                String razonSocial = newW2.cmbRazonSocial.Text;
+                String direccion = newW2.txtDireccion.Text;
+                String categoria = newW2.cmbCategoria.Text;
+                String codigoPostal = newW2.txtCP.Text;
+                String localidad = newW2.txtLocalidad.Text;
+
+                
+                //INSERTAR DATOS PRINCIPALES
+                String sql;
+                sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "');";
+
+
+                //INSERTAR CONTACTO PROVEEDOR
+
+                conexion.operaciones(sql);
+                loadListaProveedores();
+
+            }
         }
 
         
@@ -86,6 +111,16 @@ namespace wpfFamiliaBlanco
             {
 
             }
+        }
+
+
+
+        private void LlenarComboFiltro()
+        {
+
+            cmbFiltro.Items.Add("Nombre");
+            cmbFiltro.Items.Add("Categoria");
+           
         }
     }
 }
