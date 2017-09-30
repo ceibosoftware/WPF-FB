@@ -6,8 +6,12 @@
       xmlns:local="clr-namespace:wpfFamiliaBlanco"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="" Height="37.293" Width="48" ShowsNavigationUI="False" AllowDrop="False">
-    <Grid HorizontalAlignment="Left" Height="37.293" VerticalAlignment="Top" Width="48">
-        <Ellipse Fill="#FFCAA706" HorizontalAlignment="Left" Height="17.293" Margin="20.707,10,0,0" VerticalAlignment="Top" Width="17.293"/>
+      Title="" Height="37.293" Width="236" ShowsNavigationUI="False" AllowDrop="False">
+    <Grid HorizontalAlignment="Left" Height="37.293" VerticalAlignment="Top" Width="236" Background="#FF171717">
+        <Ellipse Fill="#FFCAA706" HorizontalAlignment="Left" Height="9.737" Margin="212.485,13.778,0,0" VerticalAlignment="Top" Width="9.737">
+            <Ellipse.Effect>
+                <DropShadowEffect BlurRadius="20"/>
+            </Ellipse.Effect>
+        </Ellipse>
     </Grid>
 </Page>

@@ -35,8 +35,12 @@
         </Style>
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
-        <Image Source="Logo FAMILIA BLANCO raiz.png" Margin="254.833,122.834,286.833,146.833"/>
         <Label x:Name="lblInicio" Content="Inicio" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Image HorizontalAlignment="Left" Height="21.159" Margin="132.918,10,0,0" VerticalAlignment="Top" Width="24.159" Source="icons8-home.png"/>
+        <Canvas x:Name="canvasfblanco" HorizontalAlignment="Left" Height="280" Margin="294.667,128.667,0,0" Width="438.143" Loaded="Canvas_Loaded" VerticalAlignment="Top">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Logo FAMILIA BLANCO raiz.png"/>
+            </Canvas.Background>
+        </Canvas>
     </Grid>
 </Page>

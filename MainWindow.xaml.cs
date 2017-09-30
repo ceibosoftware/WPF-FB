@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Animation;
 
 namespace wpfFamiliaBlanco
 {
@@ -20,9 +22,13 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class MainWindow : Window
     {
+       
+
         public MainWindow()
         {
             InitializeComponent();
+            
+
         }
 
         
@@ -35,11 +41,33 @@ namespace wpfFamiliaBlanco
             frameProductos.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
             frameCategorias.Content = new pageTabs_Blank();
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
         }
 
         private void cargar_pageInicio(object sender, EventArgs e)
         {
-            frameInicio.Content = new pageInicio(); // en este caso se carga la imagen de ceibo - software al inicializarse el programa
+            frameInicio.Content = new pageInicio(); // en este caso se carga la imagen bodega fblanco al inicializarse el programa
         }
 
         private void btnProductos_Click(object sender, RoutedEventArgs e)
@@ -49,15 +77,59 @@ namespace wpfFamiliaBlanco
             frameUsuarios.Content = new pageTabs_Blank();
             frameCategorias.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
         }
 
         private void btnProveedores_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageProveedores();
-            frameProveedores.Content = new pageTab_Proveedores(); //main tab
-            frameUsuarios.Content = new pageTabs_Blank();
+            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
+            frameUsuarios.Content = new pageTabs_Blank();// unload del resto de las tabs
             frameCategorias.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
         }
 
         private void btnEntradas_Click(object sender, RoutedEventArgs e)
@@ -77,6 +149,62 @@ namespace wpfFamiliaBlanco
             frameProveedores.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
             frameUsuarios.Content = new pageTabs_Blank();
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
         }
+
+        private void btn_ImageB_Blanco_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicio.Content = new pageInicio();
+            frameCategorias.Content = new pageTabs_Blank();
+            frameProveedores.Content = new pageTabs_Blank();
+            frameProductos.Content = new pageTabs_Blank();
+            frameUsuarios.Content = new pageTabs_Blank();
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
+
+        }
+
+        
     }
 }

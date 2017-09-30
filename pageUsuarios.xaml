@@ -399,8 +399,61 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonLogin" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" Background="#FF4B4848">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666">
+        <Border Height="235.67" Width="435.297" BorderThickness="1" BorderBrush="#FF00FF93" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="350.667,218.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="350.667,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
+        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="611.667,343.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" Click="btnSubmit_Click" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="350.667,181.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="351,241,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
         <Label x:Name="lblUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Image HorizontalAlignment="Left" Height="21.159" Margin="132.918,10,0,0" VerticalAlignment="Top" Width="24.159" Source="icons8-user.png"/>
+        <TextBlock HorizontalAlignment="Left" Margin="-82,343.778,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Button x:Name="btnPrueba" Content="TEST" HorizontalAlignment="Left" Margin="522.334,343.778,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FF707070" Foreground="White" Click="btnPrueba_Click" Background="#FF4B4848"/>
     </Grid>
 </Page>

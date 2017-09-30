@@ -775,8 +775,16 @@
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
         <Label x:Name="lblProductos" Content="Productos" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Border BorderBrush="#FF484848" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Left" Height="434.167" Margin="26,105.5,0,0" VerticalAlignment="Top" Width="911.223">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF232323" Offset="0"/>
+                    <GradientStop Color="Black" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="444.223,57.27,0,0" VerticalAlignment="Top" Width="391" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="txtFiltro" HorizontalAlignment="Left" Height="23" Margin="26,57.27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391" Style="{DynamicResource TextBoxStyle1}" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="White" FontSize="14" GotMouseCapture="txtFiltro_GotMouseCapture" TextChanged="txtFiltro_TextChanged"  />
+        <TextBox x:Name="txtFiltro" HorizontalAlignment="Left" Height="23" Margin="26,57.27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391" Style="{DynamicResource TextBoxStyle1}" BorderBrush="#FFBD07C2" Background="#FF4B4848" Foreground="White" FontSize="14" GotMouseCapture="txtFiltro_GotMouseCapture" TextChanged="txtFiltro_TextChanged" Padding="14,0,0,0" BorderThickness="2"  />
         <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="409.167" Margin="26,130.5,0,0" VerticalAlignment="Top" Width="391" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14" SelectionChanged="ltsProductos_SelectionChanged"/>
         <ListBox x:Name="ltsProveedores" HorizontalAlignment="Left" Height="165.667" Margin="444.223,130.5,0,0" VerticalAlignment="Top" Width="391" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14"/>
         <TextBox x:Name="txtCategoria" HorizontalAlignment="Left" Height="23" Margin="444.223,516.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391" Background="#FF4B4848" Foreground="White" BorderBrush="{x:Null}" FontSize="14"/>
@@ -784,10 +792,10 @@
         <Label x:Name="lblProveedores" Content="Proveedores" HorizontalAlignment="Left" Margin="703.23,105.5,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblDescripcion" Content="Descripción" HorizontalAlignment="Left" Margin="703.23,296.167,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblCategorias" Content="Categorías" HorizontalAlignment="Left" Margin="703.23,491.667,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="862.223,516.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnAgregar_Click"/>
-        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="862.223,468.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnModificar_Click"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="862.223,420.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Foreground="White"/>
-        <Rectangle Width="3.5" VerticalAlignment="Top" Margin="840.223,105.5,0,0" Height="434.167" HorizontalAlignment="Left" Fill="#FFBD07C2"/>
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="858.723,516.334,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnAgregar_Click"/>
+        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="858.723,468.334,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnModificar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="858.723,420.334,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Foreground="White"/>
+        <Rectangle Width="3.5" VerticalAlignment="Top" Margin="933.723,105.5,0,0" Height="434.167" HorizontalAlignment="Left" Fill="#FFBD07C2"/>
         <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="165.5" Margin="444.223,321.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391" Background="#FF4B4848" Foreground="White" BorderBrush="{x:Null}" FontSize="14"/>
         <Label x:Name="lblBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="285.007,32.27,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblFiltrar" Content="Filtrar" HorizontalAlignment="Left" Margin="703.23,32.27,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
