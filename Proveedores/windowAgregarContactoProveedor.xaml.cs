@@ -11,26 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using wpfFamiliaBlanco.Proveedores;
 
 namespace wpfFamiliaBlanco.Proveedores
 {
     /// <summary>
-    /// Interaction logic for windowAgregarProveedor.xaml
+    /// Interaction logic for windowAgregarContactoProveedor.xaml
     /// </summary>
-    public partial class windowAgregarProveedor : Window
+    public partial class windowAgregarContactoProveedor : Window
     {
-        public windowAgregarProveedor()
+        public windowAgregarContactoProveedor()
         {
             InitializeComponent();
-        }
-
-        private void btnNuevoContacto_Click(object sender, RoutedEventArgs e)
-        {
-            
-                var newW = new windowAgregarContactoProveedor();
-                newW.ShowDialog();
-            
         }
     }
 }
