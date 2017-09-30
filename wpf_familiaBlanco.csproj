@@ -84,6 +84,9 @@
     <Compile Include="Productos\windowModificarProducto.xaml.cs">
       <DependentUpon>windowModificarProducto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Proveedores\windowAgregarContactoProveedor.xaml.cs">
+      <DependentUpon>windowAgregarContactoProveedor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Proveedores\windowAgregarProveedor.xaml.cs">
       <DependentUpon>windowAgregarProveedor.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Productos\windowModificarProducto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Proveedores\windowAgregarContactoProveedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

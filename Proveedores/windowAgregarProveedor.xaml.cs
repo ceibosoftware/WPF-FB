@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wpfFamiliaBlanco.Proveedores;
 
 namespace wpfFamiliaBlanco.Proveedores
 {
@@ -55,6 +56,14 @@ namespace wpfFamiliaBlanco.Proveedores
                 return false;
             }
            
+        }
+
+        private void btnNuevoContacto_Click(object sender, RoutedEventArgs e)
+        {
+            
+                var newW = new windowAgregarContactoProveedor();
+                newW.ShowDialog();
+            
         }
     }
 }
