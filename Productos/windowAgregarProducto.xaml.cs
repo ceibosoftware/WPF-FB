@@ -20,7 +20,8 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowAgregarProducto : Window
     {
-        
+       public List<int> idProveedores = new List<int>();
+        public Boolean aceptar = false;
         CRUD conexion = new CRUD();
         public windowAgregarProducto()
         {
@@ -42,7 +43,7 @@ namespace wpfFamiliaBlanco
 
         private void txtBuscar_GotMouseCapture(object sender, MouseEventArgs e)
         {
-            txtCategoria.Text = "";
+            txtNombre.Text = "";
         }
 
         private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
@@ -60,7 +61,7 @@ namespace wpfFamiliaBlanco
         {
 
             String consulta = " Select * from proveedor ";
-            conexion.Consulta(consulta , ltsProveedores );
+            conexion.Consulta(consulta, ltsProveedores);
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
         }
@@ -95,26 +96,58 @@ namespace wpfFamiliaBlanco
 
         private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
         {
-            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
-            Console.WriteLine(ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()));
-            /*for (int i = ltsProvProductos.Items.Count; i <= 0; i++ )
+
+            Boolean existe = false;
+            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;         
+          
+            if (ltsProvProductos.Items.Count <= 0)
             {
-                Console.WriteLine(ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()));
-               /* if (selectedDataRow["nombre"].ToString() != (String)ltsProvProductos.FindName(selectedDataRow["nombre"].ToString()))
+                ltsProvProductos.Items.Add(selectedDataRow["nombre"].ToString());
+            
+            }
+            else
+            {
+                for (int i = 0; i < ltsProvProductos.Items.Count; i++)
+                {
+                    
+                    if (selectedDataRow["nombre"].ToString().CompareTo(ltsProvProductos.Items[i].ToString()) != 0)
+                    {                      
+                        existe = false;
+                      
+                    }
+                    else
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe)
                 {
                     ltsProvProductos.Items.Add(selectedDataRow["nombre"].ToString());
-                }*/
-
-
-
-
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Ese proveedor ya fue agregado");
+                }
+            }
 
         }
 
         private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(ltsProvProductos.SelectedValue.ToString());
             ltsProvProductos.Items.Remove(ltsProvProductos.SelectedItem);
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            aceptar = true;
+            this.Close();
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

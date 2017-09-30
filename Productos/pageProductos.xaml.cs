@@ -37,6 +37,19 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarProducto();
             newW.ShowDialog();
+            if (newW.aceptar)
+            {
+                String nombre = newW.txtNombre.Text;
+                String descripcion = newW.txtDescripcion.Text;
+                int idCategoria = (int)newW.cmbCategoria.SelectedValue;
+                String sql = "insert into productos(nombre, descripcion, FK_idCategorias) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "');";
+                conexion.operaciones(sql);
+         
+                foreach (var item in newW.idProveedores)
+                {
+                    Console.WriteLine(item);
+                }
+            }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
