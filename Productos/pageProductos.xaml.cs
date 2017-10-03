@@ -39,16 +39,23 @@ namespace wpfFamiliaBlanco
             newW.ShowDialog();
             if (newW.aceptar)
             {
+                //INSERTAR DATOS EN TABLA PRODUCTOS
                 String nombre = newW.txtNombre.Text;
                 String descripcion = newW.txtDescripcion.Text;
                 int idCategoria = (int)newW.cmbCategoria.SelectedValue;
                 String sql = "insert into productos(nombre, descripcion, FK_idCategorias) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "');";
                 conexion.operaciones(sql);
-         
-                foreach (var item in newW.idProveedores)
+
+                //INSERTAR PROVEEDORES DE PRODUCTO CARGADO                
+                string ultimoId = "Select last_insert_id()";
+                String id = conexion.ValorEnVariable(ultimoId);               
+                for(int i = 0; i < newW.Items.Count ; i++)
                 {
-                    Console.WriteLine(item);
+                    int idProveedor = newW.Items[i].id;
+                    string sql2 = "INSERT INTO productos_has_proveedor(FK_idProductos, FK_idProveedor) VALUES('" + id + "','" + idProveedor + "' )";
+                    conexion.operaciones(sql2);
                 }
+                loadListaProducto();
             }
         }
 
@@ -121,6 +128,21 @@ namespace wpfFamiliaBlanco
              
            cmbFiltro.Items.Add("Nombre");
            cmbFiltro.Items.Add("Categoria");
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
+            string nombre = selectedDataRow["nombre"].ToString();
+             MessageBoxResult dialog  = MessageBox.Show("Esta seguro que desea eliminar :" + nombre , "Advertencia", MessageBoxButton.YesNo);
+            if (dialog == MessageBoxResult.Yes)
+            {
+                int idSeleccionado = (int)ltsProductos.SelectedValue;
+                string sql = "delete from productos where idProductos = '" + idSeleccionado + "'";
+                conexion.operaciones(sql);
+                loadListaProducto();
+                
+            }
         }
     }
 }

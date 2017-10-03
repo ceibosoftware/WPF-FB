@@ -91,20 +91,35 @@ namespace wpfFamiliaBlanco
         {
             //abrimos conexion
             conexion.Open();
-            try
-            {
+          
                 //objeto command almacena las instrucciones  
                 MySqlCommand comando = new MySqlCommand(sql, conexion);
                 //ejecutamos instruccion
                 comando.ExecuteNonQuery();
-            }
-            catch
-            {
-
-            }
+            
+          
             //cerramos conexion
             conexion.Close();
         }
+        public string ValorEnVariable(String sql)
+        {
+            string valor;
+            //abrimos conexion
+            conexion.Open();
+           
+                //objeto command almacena las instrucciones  
+                MySqlCommand comando = new MySqlCommand(sql, conexion);
+                //ejecutamos instruccion
+                valor = comando.ExecuteScalar().ToString();
+         
+
+            //cerramos conexion
+            conexion.Close();
+            return valor;
+            
+
+        }
     }
 }
+
 

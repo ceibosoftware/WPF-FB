@@ -476,7 +476,7 @@
         <Label x:Name="lblProveedores" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.007,379.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedores"/>
         <ListBox x:Name="ltsProveedores" Width="386" VerticalAlignment="Top" Margin="31,404.159,0,0" Height="83.159" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblProvProductos" Width="177.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="655.007,379.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedores del producto"/>
-        <ListBox x:Name="ltsProvProductos" Width="391" VerticalAlignment="Top" Margin="463,404.159,0,0" Height="83.159" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SelectionMode="Multiple"/>
+        <ListBox x:Name="ltsProvProductos" Width="391" VerticalAlignment="Top" Margin="463,404.159,0,0" Height="83.159" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SelectionMode="Multiple" />
         <Rectangle Width="396" VerticalAlignment="Top" Margin="26,37.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF171717">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="20"/>

@@ -18,11 +18,24 @@ namespace wpfFamiliaBlanco
     /// <summary>
     /// Interaction logic for windowAgregarProducto.xaml
     /// </summary>
+    /// 
     public partial class windowAgregarProducto : Window
     {
-       public List<int> idProveedores = new List<int>();
+        public class elemento
+        {
+            public string nombre { get; set; }
+            public int id { get; set; }
+            public elemento(string nombre, int id)
+            {
+                this.nombre = nombre;
+                this.id = id;
+            }
+        }
+
+        public List<elemento> Items { get; set; } = new List<elemento>();
         public Boolean aceptar = false;
         CRUD conexion = new CRUD();
+
         public windowAgregarProducto()
         {
             InitializeComponent();
@@ -30,6 +43,8 @@ namespace wpfFamiliaBlanco
             LoadListaProveedor();
             cmbCategoria.SelectedIndex = 0;
             LlenarComboFiltro();
+            LoadListaProv();
+
         }
 
         private void LoadListaComboCategoria()
@@ -66,7 +81,12 @@ namespace wpfFamiliaBlanco
             ltsProveedores.SelectedValuePath = "idProveedor";
         }
 
-
+        private void LoadListaProv()
+        {
+            ltsProvProductos.ItemsSource = Items;
+            ltsProvProductos.DisplayMemberPath = "nombre";
+            ltsProvProductos.SelectedValuePath = "id";
+        }
         private void LlenarComboFiltro()
         {
             cmbFiltro.Items.Add("Nombre");
@@ -96,24 +116,24 @@ namespace wpfFamiliaBlanco
 
         private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
         {
-
+            int provIndex = 0;
             Boolean existe = false;
-            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;         
-          
+            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+
             if (ltsProvProductos.Items.Count <= 0)
             {
-                ltsProvProductos.Items.Add(selectedDataRow["nombre"].ToString());
-            
+                Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                ltsProvProductos.Items.Refresh();
             }
             else
             {
                 for (int i = 0; i < ltsProvProductos.Items.Count; i++)
                 {
-                    
-                    if (selectedDataRow["nombre"].ToString().CompareTo(ltsProvProductos.Items[i].ToString()) != 0)
-                    {                      
+
+                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                    {
                         existe = false;
-                      
+
                     }
                     else
                     {
@@ -123,8 +143,15 @@ namespace wpfFamiliaBlanco
                 }
                 if (!existe)
                 {
-                    ltsProvProductos.Items.Add(selectedDataRow["nombre"].ToString());
+
+                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                    ltsProvProductos.Items.Refresh();
+
                    
+                        Console.WriteLine("elementos" + Items.Count);
+                    
+
+
                 }
                 else
                 {
@@ -136,7 +163,8 @@ namespace wpfFamiliaBlanco
 
         private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
         {
-            ltsProvProductos.Items.Remove(ltsProvProductos.SelectedItem);
+            Items.Remove(Items.Find(item => item.id == (int)ltsProvProductos.SelectedValue));
+            ltsProvProductos.Items.Refresh();
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -149,5 +177,7 @@ namespace wpfFamiliaBlanco
         {
             this.Close();
         }
+
+    
     }
 }
