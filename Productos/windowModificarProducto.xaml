@@ -508,17 +508,14 @@
                 <SolidColorBrush Color="#FF171717"/>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBox x:Name="txtCategoria" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtNombre" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.007,37.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
-        <RichTextBox x:Name="rtxtDescripcion" Width="386" VerticalAlignment="Top" Margin="31,110.159,0,0" Height="97.448" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}">
-            <FlowDocument/>
-        </RichTextBox>
         <Label x:Name="lblDescripcion" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.007,85.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Descripción"/>
         <Button x:Name="btnProvNuevo" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="342,492.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnProvAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="422,404.159,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnProvEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="422,464.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="882.89,458.689,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="882.89,410.689,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnProvAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="422,404.159,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" Click="btnProvAgregar_Click"/>
+        <Button x:Name="btnProvEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="422,464.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" Click="btnProvEliminar_Click"/>
+        <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="882.89,458.689,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
+        <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="882.89,410.689,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="{x:Null}" Click="btnAceptar_Click"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="422,37.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FFD6C901"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="859,284.886,0,0" Height="262.448" HorizontalAlignment="Left" Fill="#FFDB820A"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="859,37.159,0,0" Height="174.448" HorizontalAlignment="Left" Fill="#FF06D2CC"/>
@@ -527,5 +524,6 @@
         <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="468,110.159,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
         <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="31,314.886,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
         <Image HorizontalAlignment="Left" Height="23" Margin="422,356.159,0,0" VerticalAlignment="Top" Width="23" Source="icons8-search.png" Opacity="0.5"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="95" Margin="35,105,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="375"/>
     </Grid>
 </Window>

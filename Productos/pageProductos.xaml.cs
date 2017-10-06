@@ -22,8 +22,8 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class pageProductos : Page
     {
-        CRUD conexion = new CRUD();
 
+        CRUD conexion = new CRUD();
         public pageProductos()
         {
 
@@ -37,7 +37,7 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarProducto();
             newW.ShowDialog();
-            if (newW.aceptar)
+            if (newW.Aceptar)
             {
                 //INSERTAR DATOS EN TABLA PRODUCTOS
                 String nombre = newW.txtNombre.Text;
@@ -61,10 +61,47 @@ namespace wpfFamiliaBlanco
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new windowModificarProducto();
-            newW.ShowDialog();
-        }
+            List<elemento> items = new List<elemento>();
+            int idProducto = (int)ltsProductos.SelectedValue;
+            // LLENAR DATOS PRODUCTOS.
+            String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
+            DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
+            
+            // LLENAR DATOS PROVEEDORES.
+            String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
+            DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProductos.SelectedValue);
+            for (int i = 0; i < proveedores.Rows.Count; i++)
+            {
+                elemento elemento = new elemento(proveedores.Rows[i].ItemArray[0].ToString(),(int)proveedores.Rows[i].ItemArray[1]);
+                items.Add(elemento);
+            }
+            //CONSTRUCTOR PAGINA MODIFICAR 
+            var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(),items);
 
+            newW.ShowDialog();
+            if (newW.Aceptar)
+            {
+                //ACTUALIZAR DATOS EN TABLA PRODUCTOS
+                String nombre = newW.txtNombre.Text;
+                String descripcion = newW.txtDescripcion.Text;
+                int idCategoria = (int)newW.cmbCategoria.SelectedValue;
+                String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "' WHERE productos.idProductos = '" + idProducto + "';";
+                conexion.operaciones(sql);
+                //ELIMINA REGISTRO DE TABLA INTERMEDIA
+                string sql2 = "delete  from productos_has_proveedor where FK_idProductos =  '" + idProducto + "'";
+                conexion.operaciones(sql2);
+                //INSERTO LOS NUEVOS DATOS DE LA TABLA INTERMEDIA                             
+                for (int i = 0; i < newW.Items.Count; i++)
+                {
+                    int idProveedor = newW.Items[i].id;
+                    string sql3 = "INSERT INTO productos_has_proveedor(FK_idProductos, FK_idProveedor) VALUES('" + idProducto + "','" + idProveedor + "' )";
+                    conexion.operaciones(sql3);
+                }
+                
+            }
+            loadListaProducto();
+        }
+        
         private void loadListaProducto()
         {
             String consulta = " Select * from productos ";
@@ -84,7 +121,7 @@ namespace wpfFamiliaBlanco
                 txtCategoria.Text = productos.Rows[0].ItemArray[3].ToString();
 
                 //consulta proveedores
-                String consultaProveedores = "SELECT proveedor.nombre from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
+                String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
                 DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProductos.SelectedValue);
                 ltsProveedores.ItemsSource = proveedores.AsDataView();
                 ltsProveedores.DisplayMemberPath = "nombre";
@@ -143,6 +180,10 @@ namespace wpfFamiliaBlanco
                 loadListaProducto();
                 
             }
+        }
+        public int Darvalor(int valor)
+        {
+            return valor;
         }
     }
 }

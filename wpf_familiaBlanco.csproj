@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CRUD.cs" />
+    <Compile Include="elemento.cs" />
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
     </Compile>

@@ -21,20 +21,14 @@ namespace wpfFamiliaBlanco
     /// 
     public partial class windowAgregarProducto : Window
     {
-        public class elemento
-        {
-            public string nombre { get; set; }
-            public int id { get; set; }
-            public elemento(string nombre, int id)
-            {
-                this.nombre = nombre;
-                this.id = id;
-            }
-        }
+       
 
-        public List<elemento> Items { get; set; } = new List<elemento>();
-        public Boolean aceptar = false;
+        private  List<elemento> items = new List<elemento>();
+        private Boolean aceptar = false;
         CRUD conexion = new CRUD();
+
+        public List<elemento> Items { get => items; set => items = value; }
+        public bool Aceptar { get => aceptar; set => aceptar = value; }
 
         public windowAgregarProducto()
         {
@@ -169,7 +163,7 @@ namespace wpfFamiliaBlanco
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            aceptar = true;
+            Aceptar = true;
             this.Close();
         }
 

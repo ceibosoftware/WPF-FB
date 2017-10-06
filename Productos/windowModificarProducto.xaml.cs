@@ -20,14 +20,33 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowModificarProducto : Window
     {
+        
+        private  List<elemento> items  = new List<elemento>();
+        private Boolean aceptar = false;
         CRUD conexion = new CRUD();
+
+        public bool Aceptar { get => aceptar; set => aceptar = value; }
+        public List<elemento> Items { get => items; set => items = value; }
+
         public windowModificarProducto()
+        {
+            
+            InitializeComponent();
+            LoadListaComboCategoria();
+            LoadListaProveedor();
+            LlenarComboFiltro();
+        }
+        public windowModificarProducto(int cmbValue, string nombre, string  descripcion, List<elemento> items)
         {
             InitializeComponent();
             LoadListaComboCategoria();
             LoadListaProveedor();
-            cmbCategoria.SelectedIndex = 0;
+            cmbCategoria.SelectedValue = cmbValue;
+            txtDescripcion.Text = descripcion;
+            txtNombre.Text = nombre;
             LlenarComboFiltro();
+            this.Items = items;
+            LoadListaProv();
         }
         private void LoadListaComboCategoria()
         {
@@ -40,7 +59,7 @@ namespace wpfFamiliaBlanco
 
         private void txtBuscar_GotMouseCapture(object sender, MouseEventArgs e)
         {
-            txtCategoria.Text = "";
+            txtNombre.Text = "";
         }
 
         
@@ -50,6 +69,7 @@ namespace wpfFamiliaBlanco
             conexion.Consulta(consulta, ltsProveedores);
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
+            
         }
 
 
@@ -70,7 +90,7 @@ namespace wpfFamiliaBlanco
             cmbCategoria.ItemsSource = categorias.AsDataView();
             cmbCategoria.SelectedIndex = 0;
         }
-
+     
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Busquedas de productos.
@@ -92,6 +112,76 @@ namespace wpfFamiliaBlanco
             ltsProveedores.ItemsSource = productos.AsDataView();
            
 
+        }
+
+        private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            int provIndex = 0;
+            Boolean existe = false;
+            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+             
+            if (ltsProvProductos.Items.Count <= 0)
+            {
+                Items.Add( new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                ltsProvProductos.Items.Refresh();
+            }
+            else
+            {
+                Console.WriteLine("cantidad " + ltsProvProductos.Items.Count);
+                for (int i = 0; i < ltsProvProductos.Items.Count; i++)
+                {
+
+                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                    {
+                        existe = false;
+
+                    }
+                    else
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe)
+                {
+
+                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                    ltsProvProductos.Items.Refresh();
+
+
+                    Console.WriteLine("elementos" + Items.Count);
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Ese proveedor ya fue agregado");
+                }
+            }
+        }
+
+        private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            Items.Remove(Items.Find(item => item.id == (int)ltsProvProductos.SelectedValue));
+            ltsProvProductos.Items.Refresh();
+        }
+        private void LoadListaProv()
+        {
+            ltsProvProductos.ItemsSource = Items;
+            ltsProvProductos.DisplayMemberPath = "nombre";
+            ltsProvProductos.SelectedValuePath = "id";
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            aceptar = true;
+            this.Close();
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
