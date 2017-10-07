@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,46 @@ namespace wpfFamiliaBlanco.Proveedores
     /// </summary>
     public partial class windowAgregarProveedor : Window
     {
+  
+        public class contacto
+        {
+
+            public  String NombreContacto { get; set; }
+            public  String Email { get; set; }
+            public  String NumeroTelefono { get; set; }
+           
+
+            public contacto (String nomContacto, String ema, String numTelefono)
+            {
+                NombreContacto = nomContacto;
+                Email = ema;
+                NumeroTelefono = numTelefono;
+
+            }
+        }
+
+
+        CRUD conexion = new CRUD();
+        public static String sqlContacto;
+      public static  List<contacto> lista = new List<contacto>();
+
         public windowAgregarProveedor()
         {
             InitializeComponent();
             LlenarComboFiltro();
+            EliminarDGVContacto();
+
+
         }
+
+      
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
 
             if (Valida())
             {
+                
                 DialogResult = true;
             }
      
@@ -64,6 +94,45 @@ namespace wpfFamiliaBlanco.Proveedores
                 var newW = new windowAgregarContactoProveedor();
                 newW.ShowDialog();
             
+        }
+
+        private void btnNuevoContacto_Click_1(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarContactoProveedor();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                Console.WriteLine("Entro");
+                String telefono1 = newW.txtTelefonoContacto.Text;
+                String nombreContacto1 = newW.txtNombreContacto.Text;
+                String mail1 = newW.txtMailContacto.Text;
+                contacto info =  new contacto(nombreContacto1, mail1, telefono1);
+                
+                
+                lista.Add(info);
+                LoadDGVContacto();
+               
+               
+
+               // conexion.operaciones(sql);
+               
+                
+            }
+
+           
+        }
+        public void LoadDGVContacto()
+        {
+            this.dgv.ItemsSource = lista;
+            dgv.Items.Refresh();
+          
+        }
+        public void EliminarDGVContacto()
+        {
+            this.dgv.Items.Remove(lista);
+            dgv.Items.Refresh();
+
         }
     }
 }

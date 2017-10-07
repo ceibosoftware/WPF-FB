@@ -18,14 +18,15 @@ using wpfFamiliaBlanco.Proveedores;
 
 namespace wpfFamiliaBlanco
 {
+
     /// <summary>
     /// Interaction logic for pageProveedores.xaml
     /// </summary>
     public partial class pageProveedores : Page
     {
-
+        public static String idProv;
         CRUD conexion = new CRUD();
-
+        private DataTable dt;
         public pageProveedores()
         {
             InitializeComponent();
@@ -37,9 +38,60 @@ namespace wpfFamiliaBlanco
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click
         {
             var newW = new windowModificarProveedor();
+            
+            String selectedValue = Convert.ToString(ltsProveedores.SelectedValue);
+            String sql = "SELECT nombre from proveedor WHERE idProveedor = '" + selectedValue + "'";
+            String nombre = conexion.ValorEnVariable(sql);
+            newW.txtCuit.Text = this.txtCuit.Text;
+            newW.txtCP.Text = this.txtCP.Text;
+            newW.txtCategoria.Text = nombre.ToString();
+            newW.txtDireccion.Text = this.txtDireccion.Text;
+            newW.cmbRazonSocial.Text = this.txtRazonSocial.Text;
+            newW.txtLocalidad.Text = this.txtLocalidad.Text;
+            newW.dgvContactom.ItemsSource = this.dgvContacto.ItemsSource;
+            
             newW.ShowDialog();
-        }
 
+            if (newW.DialogResult == true)
+            {
+                this.txtCuit.Text = newW.txtCuit.Text;
+                this.txtCP.Text = newW.txtCP.Text;
+                String nombreActu = newW.txtCategoria.Text;
+                this.txtDireccion.Text = newW.txtDireccion.Text;
+                this.txtRazonSocial.Text = newW.cmbRazonSocial.Text;
+                this.txtLocalidad.Text = newW.txtLocalidad.Text;
+                this.dgvContacto.ItemsSource = newW.dgvContactom.ItemsSource;
+                
+
+                String update;
+                update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.txtRazonSocial.Text + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
+                conexion.operaciones(update);
+                
+                String sqlContacto2;
+                String sqlContacto3;
+
+                sqlContacto2 = "DELETE  from contactoproveedor WHERE FK_idProveedor = '" + selectedValue + "'";
+                conexion.operaciones(sqlContacto2);
+
+                    int j = 0;
+                    for (int i = 0; i < dgvContacto.Items.Count - 1; i++)
+                    {
+                        var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
+                        j++;
+                        var email = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
+                        j++;
+                        var nombre2 = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
+                        j++;
+                        
+                        j = 0;
+                       sqlContacto3 = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefono + "', '" + email + "', '" + nombre2 + "', '" + selectedValue + "');";
+                       conexion.operaciones(sqlContacto3);
+                         loadListaProveedores();
+                }
+
+            }
+         }
+        
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW2 = new windowAgregarProveedor();
@@ -60,11 +112,29 @@ namespace wpfFamiliaBlanco
                 //INSERTAR DATOS PRINCIPALES
                 String sql;
                 sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "');";
+                conexion.operaciones(sql);
 
+
+                String sql2 = "Select idProveedor from proveedor order by idProveedor DESC LIMIT 1";
+                 idProv = conexion.ValorEnVariable(sql2);
+
+                Console.WriteLine("ULTIMO ID" + idProv);
 
                 //INSERTAR CONTACTO PROVEEDOR
+                String sqlContacto;
 
-                conexion.operaciones(sql);
+                string ultimoId = "Select last_insert_id()";
+                  String id = conexion.ValorEnVariable(ultimoId);
+                  for (int i = 0; i < windowAgregarProveedor.lista.Count; i++)
+                  {
+                      String nombreL = windowAgregarProveedor.lista[i].NombreContacto;
+                      String telefonoL = windowAgregarProveedor.lista[i].NumeroTelefono;
+                      String emailL = windowAgregarProveedor.lista[i].Email;
+                      sqlContacto = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefonoL + "', '" + emailL + "', '" + nombreL + "', '" + idProv + "');";
+                      conexion.operaciones(sqlContacto);
+                  }
+                // loadListaProducto();
+
                 loadListaProveedores();
 
             }
@@ -122,5 +192,32 @@ namespace wpfFamiliaBlanco
             cmbFiltro.Items.Add("Categoria");
            
         }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+            string nombre = selectedDataRow["nombre"].ToString();
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+            if (dialog == MessageBoxResult.Yes)
+            {
+                int idSeleccionado = (int)ltsProveedores.SelectedValue;
+                string sql = "delete from proveedor where idProveedor = '" + idSeleccionado + "'";
+                conexion.operaciones(sql);
+                loadListaProveedores();
+                ActualizaDGVContacto();
+
+            }
+        }
+
+        public void ActualizaDGVContacto()
+        {
+            String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto from contactoproveedor WHERE FK_idProveedor=@valor";
+            DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsProveedores.SelectedValue);
+            dgvContacto.ItemsSource = contacto.AsDataView();
+        }
+
+      
     }
+
+   
 }

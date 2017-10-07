@@ -605,7 +605,7 @@
         <Label x:Name="lblDireccion" Content="Dirección" HorizontalAlignment="Left" Margin="536.977,227.168,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtLocalidad" Width="224.747" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="444.223,156.834,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblLocalidad" Content="Localidad" HorizontalAlignment="Left" Margin="536.977,132.5,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="240.165" Margin="444.223,299.502,0,0" VerticalAlignment="Top" Width="391" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="Black" FontSize="14">
+        <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="240.165" Margin="444.223,299.502,0,0" VerticalAlignment="Top" Width="391" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="Black" FontSize="14" >
             <DataGrid.Effect>
                 <DropShadowEffect/>
             </DataGrid.Effect>
@@ -614,7 +614,7 @@
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="940.666,107.5,0,0" Height="434.167" HorizontalAlignment="Left" Fill="#FFCAA706"/>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="866,517,0,9.667" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnAgregar_Click"/>
         <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="865.666,468.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnModificar_Click"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="865.666,420.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="865.666,420.667,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Click="btnEliminar_Click"/>
 
     </Grid>
 </Page>

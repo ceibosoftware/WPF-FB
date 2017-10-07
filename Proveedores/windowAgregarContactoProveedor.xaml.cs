@@ -23,5 +23,10 @@ namespace wpfFamiliaBlanco.Proveedores
         {
             InitializeComponent();
         }
+
+        private void btnAceptar_Copy1_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

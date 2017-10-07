@@ -22,6 +22,24 @@ namespace wpfFamiliaBlanco
         public windowModificarProveedor()
         {
             InitializeComponent();
+            CargarCMB();
+        }
+
+        public windowModificarProveedor(String cuit, String nombre, String razonSocial, String direccion, String cp, String localidad, List list)
+        {
+           
+        }
+
+        public void CargarCMB()
+        {
+            cmbRazonSocial.Items.Add("SA");
+            cmbRazonSocial.Items.Add("Responsable Inscripto");
+            cmbRazonSocial.Items.Add("MOnotributista");
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
