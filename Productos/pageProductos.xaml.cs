@@ -37,7 +37,7 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarProducto();
             newW.ShowDialog();
-            if (newW.Aceptar)
+            if (newW.Aceptar && newW.validar())
             {
                 //INSERTAR DATOS EN TABLA PRODUCTOS
                 String nombre = newW.txtNombre.Text;

@@ -163,8 +163,12 @@ namespace wpfFamiliaBlanco
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            Aceptar = true;
-            this.Close();
+            if (validar())
+            {
+                Aceptar = true;
+                this.Close();
+            }
+         
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -172,6 +176,51 @@ namespace wpfFamiliaBlanco
             this.Close();
         }
 
-    
+        private void txtNombre_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+           
+         /*
+             if (char.IsLetter((char)e.Key))
+             {
+                 e.Handled = false;
+             }
+             else if (char.IsControl((char)e.Key))
+             {
+                 e.Handled = false;
+             }
+             else if (char.IsSeparator((char)e.Key))
+             {
+                 e.Handled = false;
+             }
+             else
+             {
+                 e.Handled = true;
+             }*/
+        }
+
+        public bool validar()
+        {
+
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Falta completar campo nombre");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                MessageBox.Show("falta completar campo descripcion");
+                return false;
+            }
+            else if (ltsProvProductos.Items.Count == 0)
+            {
+                MessageBox.Show("Es necesario ingresar algun proveedor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+          
+        }
     }
 }
