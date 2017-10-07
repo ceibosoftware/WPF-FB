@@ -135,6 +135,15 @@ namespace wpfFamiliaBlanco
                   }
                 // loadListaProducto();
 
+                //INSERTAR CATEGORIAS PROVEEDOR
+              
+           
+                for (int i = 0; i < newW2.Items.Count; i++)
+                {
+                    int idCategoria = newW2.Items[i].id;
+                    string sql3 = "INSERT INTO categorias_has_proveedor(FK_idProveedor, FK_idCategorias) VALUES('" + id+ "','" + idCategoria + "' )";
+                    conexion.operaciones(sql3);
+                }
                 loadListaProveedores();
 
             }

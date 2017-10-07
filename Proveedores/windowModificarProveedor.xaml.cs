@@ -19,15 +19,42 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowModificarProveedor : Window
     {
+        public class categoria
+        {
+            public string nombre { get; set; }
+            public int id { get; set; }
+            public categoria(string nombre, int id)
+            {
+                this.nombre = nombre;
+                this.id = id;
+            }
+        }
+        CRUD conexion = new CRUD();
+        private List<categoria> items = new List<categoria>();
+        public List<categoria> Items { get => items; set => items = value; }
         public windowModificarProveedor()
         {
             InitializeComponent();
             CargarCMB();
+            LoadListaProv();
+            LoadListaProveedor();
         }
 
-        public windowModificarProveedor(String cuit, String nombre, String razonSocial, String direccion, String cp, String localidad, List list)
+
+        private void LoadListaProveedor()
         {
-           
+
+            String consulta = " Select * from categorias ";
+            conexion.Consulta(consulta, ltsCategorias);
+            ltsCategorias.DisplayMemberPath = "nombre";
+            ltsCategorias.SelectedValuePath = "idCategorias";
+        }
+
+        private void LoadListaProv()
+        {
+            ltsCatProveedores.ItemsSource = Items;
+            ltsCatProveedores.DisplayMemberPath = "nombre";
+            ltsCatProveedores.SelectedValuePath = "id";
         }
 
         public void CargarCMB()

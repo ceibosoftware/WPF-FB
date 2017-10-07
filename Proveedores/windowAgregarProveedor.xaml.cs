@@ -21,7 +21,20 @@ namespace wpfFamiliaBlanco.Proveedores
     /// </summary>
     public partial class windowAgregarProveedor : Window
     {
-  
+        private List<categoria> items = new List<categoria>();
+        public List<categoria> Items { get => items; set => items = value; }
+    
+        public class categoria
+        {
+            public string nombre { get; set; }
+            public int id { get; set; }
+            public categoria(string nombre, int id)
+            {
+                this.nombre = nombre;
+                this.id = id;
+            }
+        }
+
         public class contacto
         {
 
@@ -42,18 +55,33 @@ namespace wpfFamiliaBlanco.Proveedores
 
         CRUD conexion = new CRUD();
         public static String sqlContacto;
-      public static  List<contacto> lista = new List<contacto>();
+        public static  List<contacto> lista = new List<contacto>();
 
         public windowAgregarProveedor()
         {
             InitializeComponent();
             LlenarComboFiltro();
             EliminarDGVContacto();
-
+            LoadListaProv();
+            LoadListaProveedor();
 
         }
 
-      
+        private void LoadListaProveedor()
+        {
+
+            String consulta = " Select * from categorias ";
+            conexion.Consulta(consulta, ltsCategorias);
+            ltsCategorias.DisplayMemberPath = "nombre";
+            ltsCategorias.SelectedValuePath = "idCategorias";
+        }
+
+        private void LoadListaProv()
+        {
+            ltsCatProveedores.ItemsSource = Items;
+            ltsCatProveedores.DisplayMemberPath = "nombre";
+            ltsCatProveedores.SelectedValuePath = "id";
+        }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
@@ -88,13 +116,7 @@ namespace wpfFamiliaBlanco.Proveedores
            
         }
 
-        private void btnNuevoContacto_Click(object sender, RoutedEventArgs e)
-        {
-            
-                var newW = new windowAgregarContactoProveedor();
-                newW.ShowDialog();
-            
-        }
+   
 
         private void btnNuevoContacto_Click_1(object sender, RoutedEventArgs e)
         {
@@ -122,12 +144,14 @@ namespace wpfFamiliaBlanco.Proveedores
 
            
         }
+
         public void LoadDGVContacto()
         {
             this.dgv.ItemsSource = lista;
             dgv.Items.Refresh();
           
         }
+
         public void EliminarDGVContacto()
         {
             this.dgv.Items.Remove(lista);
@@ -135,9 +159,52 @@ namespace wpfFamiliaBlanco.Proveedores
 
         }
 
-        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+   
+
+        private void btnCatAgregar_Click_1(object sender, RoutedEventArgs e)
         {
-        
+            int provIndex = 0;
+            Boolean existe = false;
+            DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
+
+            if (ltsCatProveedores.Items.Count <= 0)
+            {
+                Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                ltsCatProveedores.Items.Refresh();
+            }
+            else
+            {
+                for (int i = 0; i < ltsCatProveedores.Items.Count; i++)
+                {
+
+                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                    {
+                        existe = false;
+
+                    }
+                    else
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe)
+                {
+
+                    Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                    ltsCatProveedores.Items.Refresh();
+
+
+                    Console.WriteLine("categorias" + Items.Count);
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Esa categoria ya fue agregada");
+                }
+            }
         }
     }
 }
