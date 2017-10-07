@@ -993,7 +993,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Label.BorderBrush>
         </Label>
-        <Button x:Name="btn_ImageB_Blanco" Content="" HorizontalAlignment="Left" Margin="74.506,37.667,0,0" VerticalAlignment="Top" Width="86.587" Height="80.586" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="Ir a Inicio" Template="{DynamicResource ButtonB_B}" Click="btn_ImageB_Blanco_Click">
+        <Button x:Name="btn_ImageB_Blanco" Content="" HorizontalAlignment="Left" Margin="91.839,47,0,0" VerticalAlignment="Top" Width="51.921" Height="61.92" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="Ir a Inicio" Template="{DynamicResource ButtonB_B}" Click="btn_ImageB_Blanco_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="20" Opacity="0.8"/>
             </Button.Effect>

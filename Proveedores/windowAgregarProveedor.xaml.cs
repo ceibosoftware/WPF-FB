@@ -134,5 +134,10 @@ namespace wpfFamiliaBlanco.Proveedores
             dgv.Items.Refresh();
 
         }
+
+        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        
+        }
     }
 }
