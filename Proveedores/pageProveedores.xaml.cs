@@ -35,13 +35,24 @@ namespace wpfFamiliaBlanco
 
         }
 
+
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click
         {
-            var newW = new windowModificarProveedor();
-            
+
+            List<Categorias> items = new List<Categorias>();
             String selectedValue = Convert.ToString(ltsProveedores.SelectedValue);
             String sql = "SELECT nombre from proveedor WHERE idProveedor = '" + selectedValue + "'";
             String nombre = conexion.ValorEnVariable(sql);
+            
+            // LLENAR DATOS PROVEEDORES.
+            String consultaProveedores = "SELECT categorias.nombre, categorias.idCategorias from categorias , categorias_has_proveedor WHERE categorias_has_proveedor.FK_idProveedor = @valor  AND categorias_has_proveedor.FK_idCategorias = categorias.idCategorias";
+            DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProveedores.SelectedValue);
+            for (int i = 0; i < proveedores.Rows.Count; i++)
+            {
+                Categorias categoria = new Categorias(proveedores.Rows[i].ItemArray[0].ToString(), (int)proveedores.Rows[i].ItemArray[1]);
+                items.Add(categoria);
+            }
+            var newW = new windowModificarProveedor(items);
             newW.txtCuit.Text = this.txtCuit.Text;
             newW.txtCP.Text = this.txtCP.Text;
             newW.txtCategoria.Text = nombre.ToString();
@@ -50,6 +61,7 @@ namespace wpfFamiliaBlanco
             newW.txtLocalidad.Text = this.txtLocalidad.Text;
             newW.dgvContactom.ItemsSource = this.dgvContacto.ItemsSource;
             
+
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
@@ -87,8 +99,22 @@ namespace wpfFamiliaBlanco
                        sqlContacto3 = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefono + "', '" + email + "', '" + nombre2 + "', '" + selectedValue + "');";
                        conexion.operaciones(sqlContacto3);
                          loadListaProveedores();
-                }
+                     }
+              
+          
+                   
+                    //ELIMINA REGISTRO DE TABLA INTERMEDIA
+                    string sql2 = "delete  from categorias_has_proveedor where FK_idProveedor =  '" + selectedValue + "'";
+                    conexion.operaciones(sql2);
+                    //INSERTO LOS NUEVOS DATOS DE LA TABLA INTERMEDIA                             
+                    for (int i = 0; i < newW.Items.Count; i++)
+                    {
+                        int idCategoria = newW.Items[i].id;
+                        string sql3 = "INSERT INTO categorias_has_proveedor(FK_idCategorias, FK_idProveedor) VALUES('" + idCategoria + "','" + selectedValue + "' )";
+                        conexion.operaciones(sql3);
+                    }
 
+                
             }
          }
         
@@ -145,7 +171,7 @@ namespace wpfFamiliaBlanco
                     conexion.operaciones(sql3);
                 }
                 loadListaProveedores();
-
+                this.ltsCategorias.Items.Refresh();
             }
         }
 
@@ -154,6 +180,16 @@ namespace wpfFamiliaBlanco
         {
             String consulta = "SELECT * FROM Proveedor";
             conexion.Consulta(consulta, ltsProveedores);
+            ltsProveedores.DisplayMemberPath = "nombre";
+            ltsProveedores.SelectedValuePath = "idProveedor";
+
+        }
+
+
+        private void loadListaCategorias()
+        {
+            String consulta = "SELECT * FROM categorias";
+            conexion.Consulta(consulta, ltsCategorias);
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
 

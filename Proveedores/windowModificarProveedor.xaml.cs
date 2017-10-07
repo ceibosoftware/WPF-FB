@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +20,18 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowModificarProveedor : Window
     {
-        public class categoria
-        {
-            public string nombre { get; set; }
-            public int id { get; set; }
-            public categoria(string nombre, int id)
-            {
-                this.nombre = nombre;
-                this.id = id;
-            }
-        }
+
         CRUD conexion = new CRUD();
-        private List<categoria> items = new List<categoria>();
-        public List<categoria> Items { get => items; set => items = value; }
-        public windowModificarProveedor()
+        private List<Categorias> items;
+        public List<Categorias> Items { get => items; set => items = value; }
+        public windowModificarProveedor(List<Categorias> lista)
         {
             InitializeComponent();
             CargarCMB();
-            LoadListaProv();
+            LoadListaProv(lista);
             LoadListaProveedor();
+            LlenarComboFiltro();
+            
         }
 
 
@@ -50,9 +44,10 @@ namespace wpfFamiliaBlanco
             ltsCategorias.SelectedValuePath = "idCategorias";
         }
 
-        private void LoadListaProv()
+        private void LoadListaProv(List<Categorias> lista)
         {
-            ltsCatProveedores.ItemsSource = Items;
+            items = lista;
+            ltsCatProveedores.ItemsSource = items;
             ltsCatProveedores.DisplayMemberPath = "nombre";
             ltsCatProveedores.SelectedValuePath = "id";
         }
@@ -67,6 +62,60 @@ namespace wpfFamiliaBlanco
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void LlenarComboFiltro()
+        {
+
+            cmbFiltro.Items.Add("Nombre");
+            cmbFiltro.Items.Add("Categoria");
+
+        }
+
+        private void btnCatAgregar_Click(object sender, RoutedEventArgs e)
+        {
+           
+            Boolean existe = false;
+            DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
+
+            if (ltsCatProveedores.Items.Count <= 0)
+            {
+                items.Add(new Categorias(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                ltsCatProveedores.Items.Refresh();
+            }
+            else
+            {
+                for (int i = 0; i < ltsCatProveedores.Items.Count; i++)
+                {
+
+                    if (selectedDataRow["nombre"].ToString().CompareTo(items[i].nombre) != 0)
+                    {
+                        existe = false;
+
+                    }
+                    else
+                    {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe)
+                {
+
+                    items.Add(new Categorias(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                    ltsCatProveedores.Items.Refresh();
+
+
+                    Console.WriteLine("categorias" + Items.Count);
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Esa categoria ya fue agregada");
+                }
+            }
         }
     }
 }
