@@ -22,8 +22,15 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class pageUsuarios : Page
     {
+        
+        CRUD conexion = new CRUD();
+        MySqlConnection sqlCon = new MySqlConnection("Server = localhost; Port = 3306; Database = familiablanco; Uid = root; Pwd = ''");
+
         public pageUsuarios()
         {
+
+            MySqlConnection sqlCon = new MySqlConnection("Server = localhost; Port = 3306; Database = familiablanco; Uid = root; Pwd = ''");
+
             InitializeComponent();
         }
 
@@ -32,7 +39,22 @@ namespace wpfFamiliaBlanco
         public void btnPrueba_Click(object sender, RoutedEventArgs e)
         {
 
-            var newW = new windowTEST();
+
+            string usuario = txtUsername.Text;
+            string pass = txtPassword.Text;
+
+           if ( registro(usuario, pass))
+            {
+                MessageBox.Show($"Usuario {usuario} fue creado");
+            }
+            else
+            {
+                MessageBox.Show($"Usuario {usuario} no creado");
+            }
+
+
+
+           /* var newW = new windowTEST();
 
             newW.Owner = MainWindow.GetWindow(this);
 
@@ -43,48 +65,165 @@ namespace wpfFamiliaBlanco
             newW.ShowDialog();
 
 
-
+            */
 
 
 
 
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        public bool login(string usuario, string contra)
         {
-           /* MySqlConnection sqlCon = new MySqlConnection("Server = batta.ddns.net; Port = 8889; Database = familiablanco; Uid = root; Pwd = ''");
-            
+            string query = $"SELECT * FROM usuarios WHERE usuario = '{usuario}' AND pass='{contra}';";
+
 
             try
             {
-                if (sqlCon.State == MySqlConnection.Closed)
-                    sqlCon.Open();
-                String query = "SELECT COUNT(1) FROM tblUser WHERE Username=@Username AND Password=@Password";
-                MySqlCommand sqlCmd = new MySqlCommand(query, sqlCon);
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
-                sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Password);
-                int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                if (count == 1)
+                if (nuevaconexion())
                 {
-                    MainWindow dashboard = new MainWindow();
-                    dashboard.Show();
-                    this.Close();
+                    MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                    MySqlDataReader lector = cmd.ExecuteReader();
+
+                    if(lector.Read())
+                    {
+                        lector.Close();
+                        sqlCon.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        lector.Close();
+                        sqlCon.Close();
+                        return false;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Username or password is incorrect.");
+                    sqlCon.Close();
+                        return false;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
+            catch(Exception ex)
             {
                 sqlCon.Close();
+                return false;
             }
-            */
+
+        }
+
+        public bool registro (string usuario, string contra)
+        {
+
+
+            string query = $"INSERT INTO usuarios (idUsuarios, usuario,pass) VALUES ('','{usuario}','{contra}');";
+
+            try
+            {
+                if (nuevaconexion())
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch(Exception ex)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    sqlCon.Close();
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                sqlCon.Close();
+                return false;
+            }
+
+
+        }
+
+        private bool nuevaconexion()
+        {
+
+            try
+            {
+                sqlCon.Open();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                switch (ex.Number)
+                { 
+                    case 0:
+                        MessageBox.Show("Fallo la conexion");
+                        break;
+                    case 1045:
+                        MessageBox.Show("Usuario o contraseña incorrecto");
+                        break;
+                    
+                }
+                return false;
+            }
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            string usuario = txtUsername.Text;
+            string pass = txtUsername.Text;
+
+            if (login(usuario, pass))
+            {
+                MessageBox.Show($"Ingreso el usuario {usuario}");
+            }
+            else
+            {
+                MessageBox.Show($"{usuario} no ingreso, usuario o contraseña incorrecto ");
+            }
+
+
+
+
+            /* MySqlConnection sqlCon = new MySqlConnection("Server = batta.ddns.net; Port = 8889; Database = familiablanco; Uid = root; Pwd = ''");
+
+
+             try
+             {
+                 if (sqlCon.State == MySqlConnection.Closed)
+                     sqlCon.Open();
+                 String query = "SELECT COUNT(1) FROM tblUser WHERE Username=@Username AND Password=@Password";
+                 MySqlCommand sqlCmd = new MySqlCommand(query, sqlCon);
+                 sqlCmd.CommandType = CommandType.Text;
+                 sqlCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
+                 sqlCmd.Parameters.AddWithValue("@Password", txtPassword.Password);
+                 int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                 if (count == 1)
+                 {
+                     MainWindow dashboard = new MainWindow();
+                     dashboard.Show();
+                     this.Close();
+                 }
+                 else
+                 {
+                     MessageBox.Show("Username or password is incorrect.");
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show(ex.Message);
+             }
+             finally
+             {
+                 sqlCon.Close();
+             }
+             */
         }
     }
 }
