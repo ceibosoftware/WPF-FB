@@ -31,8 +31,8 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             loadListaCategoria();
-
-      
+            ltsCategorias.SelectedIndex = 1;
+          CargarTxtNombreCategoria();
 
         }
 
@@ -88,22 +88,41 @@ namespace wpfFamiliaBlanco
 
 
             String name = textnombre.Text.ToString();
-
             String sql;
-
-            if (name == "")
+            String nombreDB = "SELECT COUNT(*) FROM categorias WHERE nombre  = '" + name + "'";
+            String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAA" + nomCat);
+            try
             {
 
-               MessageBox.Show("Debe escribir el nombre de la categoria" , "Alerta", MessageBoxButton.OK);
-            }
-            else
-            {
-                sql = "insert into categorias(nombre) values('" + name + "');";
-                conexion.operaciones(sql);
-
-                this.loadListaCategoria();
-            }
            
+                if (name == "")
+                {
+
+                   MessageBox.Show("Debe escribir el nombre de la categoria" , "Alerta", MessageBoxButton.OK);
+                }
+                else if (nomCat == "0")
+                {
+
+                      sql = "insert into categorias(nombre) values('" + name + "');";
+                        conexion.operaciones(sql);
+
+                        this.loadListaCategoria();
+
+
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("La categoria ya existe");
+                }
+            }
+             catch
+                {
+                    MessageBox.Show("Ocurrio un error");
+                }
         }
 
 
@@ -132,15 +151,36 @@ namespace wpfFamiliaBlanco
             }
            
         }
+      
 
         private void ltsCategorias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-           // selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
-           // textnombre.Text = selectedDataRow["nombre"].ToString();
+            try
+            {
+               
+                CargarTxtNombreCategoria();
+            }
+            catch
+            {
+
+            }
+          
+          
 
         }
 
-        
+        private void CargarTxtNombreCategoria()
+        {
+
+            String consulta = "SELECT nombre FROM categorias WHERE idCategorias = @valor";
+            DataTable proveedor = conexion.ConsultaParametrizada(consulta, ltsCategorias.SelectedValue);
+
+            textnombre.Text = proveedor.Rows[0].ItemArray[0].ToString();
+          
+            
+        }
+
+      
     }
 }
