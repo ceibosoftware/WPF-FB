@@ -95,6 +95,9 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windowCrearUsuario.xaml.cs">
+      <DependentUpon>windowCrearUsuario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windowTEST.xaml.cs">
       <DependentUpon>windowTEST.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
     <Page Include="Proveedores\windowModificarProveedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="windowCrearUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windowTEST.xaml">
       <SubType>Designer</SubType>
