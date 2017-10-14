@@ -104,16 +104,47 @@ namespace wpfFamiliaBlanco.Proveedores
 
         public Boolean Valida()
         {
-            if (txtCuit.Text != "" && txtDireccion.Text != "" && txtNombre.Text != "" && txtCP.Text != "" && txtLocalidad.Text != "")
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Falta completar campo nombre");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtLocalidad.Text))
+            {
+                MessageBox.Show("falta completar campo localidad");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtDireccion.Text))
+            {
+                MessageBox.Show("falta completar campo dirección");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtCuit.Text))
+            {
+                MessageBox.Show("falta completar campo cuit");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtCP.Text))
+            {
+                MessageBox.Show("falta completar campo código postal");
+                return false;
+            }
+            else if (ltsCatProveedores.Items.Count == 0)
+            {
+                MessageBox.Show("Es necesario ingresar alguna categoria del proveedor");
+                return false;
+            }
+            else if (dgv.HasItems == false)
+            {
+                MessageBox.Show("Es necesario ingresar algun contacto al proveedor");
+                return false;
+            }
+            
+            else
             {
                 return true;
             }
-            else
-            {
-                MessageBox.Show("Faltan campos por completar");
-                return false;
-            }
-           
+
         }
 
    
@@ -205,6 +236,12 @@ namespace wpfFamiliaBlanco.Proveedores
                     MessageBox.Show("Esa categoria ya fue agregada");
                 }
             }
+        }
+
+        private void btnCatEliminar_Click(object sender, RoutedEventArgs e)
+        {
+      Items.Remove(Items.Find(item => item.id == (int)ltsCatProveedores.SelectedValue));
+              ltsCatProveedores.Items.Refresh();
         }
     }
 }
