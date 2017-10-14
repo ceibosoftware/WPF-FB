@@ -48,9 +48,12 @@ namespace wpfFamiliaBlanco
 
             
             splash.Close(TimeSpan.FromMilliseconds(SPLASH_FADE_TIME)); //show
-            main.Show();
+            //main.Show();
 
-            
+            var newW = new windowUsuarios();
+            newW.ShowDialog();
+
+
 
 
         }

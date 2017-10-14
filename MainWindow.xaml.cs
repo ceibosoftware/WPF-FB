@@ -27,8 +27,8 @@ namespace wpfFamiliaBlanco
         public MainWindow()
         {
             InitializeComponent();
-            
 
+           
         }
 
         

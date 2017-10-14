@@ -98,6 +98,9 @@
     <Compile Include="windowTEST.xaml.cs">
       <DependentUpon>windowTEST.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windowUsuarios.xaml.cs">
+      <DependentUpon>windowUsuarios.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="windowTEST.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windowUsuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
