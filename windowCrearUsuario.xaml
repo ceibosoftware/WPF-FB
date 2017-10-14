@@ -84,8 +84,8 @@
         <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="192,145.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="192,205,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
         <Label x:Name="lblPassword_Copy" Content="Tipo" HorizontalAlignment="Left" Margin="192,261,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <TextBox x:Name="txtTipo" HorizontalAlignment="Left" Height="23" Margin="192,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="453,343.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="453,343.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
+        <ComboBox x:Name="cmbTipoUsuario" HorizontalAlignment="Left" Margin="192,303,0,0" VerticalAlignment="Top" Width="336"/>
 
     </Grid>
 </Window>

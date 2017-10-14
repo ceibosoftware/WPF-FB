@@ -19,9 +19,46 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowCrearUsuario : Window
     {
+
+        CRUD conexion = new CRUD();
+
         public windowCrearUsuario()
         {
             InitializeComponent();
+            LlenarComboUsuario();
+        
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            String name = txtUsername.Text.ToString();
+            String nombreDB = "SELECT COUNT(*) FROM usuarios WHERE usuario  = '" + name + "'";
+            String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
+            MessageBox.Show("usuario: " + nomCat);
+            if (txtUsername.Text != "" && txtPassword.Text != "" && nomCat == "0")
+            {
+                this.DialogResult = true;
+            }
+            else if (txtUsername.Text == "")
+            {
+                MessageBox.Show("Debe ingresar el nombre de usuario");
+
+            }else if (txtPassword.Text == "")
+            {
+                MessageBox.Show("Debe ingresar una contraseña");
+            }else if (!nomCat.Equals("0"))
+            {
+                MessageBox.Show("El usuario ingresado ya existe");
+            }
+            
+        }
+
+        private void LlenarComboUsuario()
+        {
+
+            cmbTipoUsuario.Items.Add("basico");
+            cmbTipoUsuario.Items.Add("super");
+
         }
     }
 }

@@ -51,7 +51,7 @@ namespace wpfFamiliaBlanco
             //main.Show();
 
             var newW = new windowUsuarios();
-            newW.ShowDialog();
+            newW.Show();
 
 
 
