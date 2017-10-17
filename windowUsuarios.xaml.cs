@@ -61,7 +61,7 @@ namespace wpfFamiliaBlanco
 
                 if (usuarioTxt.Equals(usuarioDB) && passTxt.Equals(passDB)){
 
-                    MessageBox.Show("Tipo de Usuario: "+ tipoUsuarioDB);
+                   
                     var newW = new MainWindow();
                     newW.Show();
 

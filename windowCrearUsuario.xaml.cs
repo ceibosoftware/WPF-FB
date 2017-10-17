@@ -35,7 +35,7 @@ namespace wpfFamiliaBlanco
             String name = txtUsername.Text.ToString();
             String nombreDB = "SELECT COUNT(*) FROM usuarios WHERE usuario  = '" + name + "'";
             String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
-            MessageBox.Show("usuario: " + nomCat);
+    
 
             if (txtUsername.Text != "" && txtPassword.Text != "" && nomCat == "0" )
             {
