@@ -26,6 +26,7 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             LlenarComboUsuario();
+            cmbTipoUsuario.SelectedIndex = 1;
         
         }
 
@@ -35,7 +36,8 @@ namespace wpfFamiliaBlanco
             String nombreDB = "SELECT COUNT(*) FROM usuarios WHERE usuario  = '" + name + "'";
             String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
             MessageBox.Show("usuario: " + nomCat);
-            if (txtUsername.Text != "" && txtPassword.Text != "" && nomCat == "0")
+
+            if (txtUsername.Text != "" && txtPassword.Text != "" && nomCat == "0" )
             {
                 this.DialogResult = true;
             }
@@ -49,6 +51,9 @@ namespace wpfFamiliaBlanco
             }else if (!nomCat.Equals("0"))
             {
                 MessageBox.Show("El usuario ingresado ya existe");
+            }else if (cmbTipoUsuario.SelectedItem.ToString() == "")
+            {
+                MessageBox.Show("Debe seleccionar un tipo de usuario");
             }
             
         }
