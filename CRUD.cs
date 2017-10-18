@@ -14,8 +14,8 @@ namespace wpfFamiliaBlanco
     {
         MessageBoxButton buttons = MessageBoxButton.OK;
 
-       //MySqlConnection conexion = new MySqlConnection("Server=batta.ddns.net; Port=8889; Database=familiablanco; Uid=root; Pwd=''");
-       MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=familiablanco; Uid=root; Pwd=''");
+       MySqlConnection conexion = new MySqlConnection("Server=batta.ddns.net; Port=8889; Database=familiablanco; Uid=root; Pwd=''");
+       //MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=familiablanco; Uid=root; Pwd=''");
 
         public void Conexion()
         {
