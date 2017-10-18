@@ -175,13 +175,40 @@ namespace wpfFamiliaBlanco
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            aceptar = true;
-            this.Close();
+            if (validar())
+            {
+                Aceptar = true;
+                this.Close();
+            }
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        public bool validar()
+        {
+
+            if (string.IsNullOrEmpty(txtNombre.Text))
+            {
+                MessageBox.Show("Falta completar campo nombre");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                MessageBox.Show("falta completar campo descripcion");
+                return false;
+            }
+            else if (ltsProvProductos.Items.Count == 0)
+            {
+                MessageBox.Show("Es necesario ingresar algun proveedor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
     }
 }

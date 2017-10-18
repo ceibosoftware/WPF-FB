@@ -61,45 +61,53 @@ namespace wpfFamiliaBlanco
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            List<elemento> items = new List<elemento>();
-            int idProducto = (int)ltsProductos.SelectedValue;
-            // LLENAR DATOS PRODUCTOS.
-            String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
-            DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
-            
-            // LLENAR DATOS PROVEEDORES.
-            String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
-            DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProductos.SelectedValue);
-            for (int i = 0; i < proveedores.Rows.Count; i++)
+            try
             {
-                elemento elemento = new elemento(proveedores.Rows[i].ItemArray[0].ToString(),(int)proveedores.Rows[i].ItemArray[1]);
-                items.Add(elemento);
-            }
-            //CONSTRUCTOR PAGINA MODIFICAR 
-            var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(),items);
+                List<elemento> items = new List<elemento>();
+                int idProducto = (int)ltsProductos.SelectedValue;
+                // LLENAR DATOS PRODUCTOS.
+                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
+                DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
 
-            newW.ShowDialog();
-            if (newW.Aceptar)
-            {
-                //ACTUALIZAR DATOS EN TABLA PRODUCTOS
-                String nombre = newW.txtNombre.Text;
-                String descripcion = newW.txtDescripcion.Text;
-                int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "' WHERE productos.idProductos = '" + idProducto + "';";
-                conexion.operaciones(sql);
-                //ELIMINA REGISTRO DE TABLA INTERMEDIA
-                string sql2 = "delete  from productos_has_proveedor where FK_idProductos =  '" + idProducto + "'";
-                conexion.operaciones(sql2);
-                //INSERTO LOS NUEVOS DATOS DE LA TABLA INTERMEDIA                             
-                for (int i = 0; i < newW.Items.Count; i++)
+                // LLENAR DATOS PROVEEDORES.
+                String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
+                DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProductos.SelectedValue);
+                for (int i = 0; i < proveedores.Rows.Count; i++)
                 {
-                    int idProveedor = newW.Items[i].id;
-                    string sql3 = "INSERT INTO productos_has_proveedor(FK_idProductos, FK_idProveedor) VALUES('" + idProducto + "','" + idProveedor + "' )";
-                    conexion.operaciones(sql3);
+                    elemento elemento = new elemento(proveedores.Rows[i].ItemArray[0].ToString(), (int)proveedores.Rows[i].ItemArray[1]);
+                    items.Add(elemento);
                 }
-                
+                //CONSTRUCTOR PAGINA MODIFICAR 
+                var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(), items);
+
+                newW.ShowDialog();
+                if (newW.Aceptar)
+                {
+                    //ACTUALIZAR DATOS EN TABLA PRODUCTOS
+                    String nombre = newW.txtNombre.Text;
+                    String descripcion = newW.txtDescripcion.Text;
+                    int idCategoria = (int)newW.cmbCategoria.SelectedValue;
+                    String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "' WHERE productos.idProductos = '" + idProducto + "';";
+                    conexion.operaciones(sql);
+                    //ELIMINA REGISTRO DE TABLA INTERMEDIA
+                    string sql2 = "delete  from productos_has_proveedor where FK_idProductos =  '" + idProducto + "'";
+                    conexion.operaciones(sql2);
+                    //INSERTO LOS NUEVOS DATOS DE LA TABLA INTERMEDIA                             
+                    for (int i = 0; i < newW.Items.Count; i++)
+                    {
+                        int idProveedor = newW.Items[i].id;
+                        string sql3 = "INSERT INTO productos_has_proveedor(FK_idProductos, FK_idProveedor) VALUES('" + idProducto + "','" + idProveedor + "' )";
+                        conexion.operaciones(sql3);
+                    }
+
+                }
+                loadListaProducto();
             }
-            loadListaProducto();
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Es necesario seleccionar un producto a modificar");
+            }
+           
         }
         
         private void loadListaProducto()
@@ -169,17 +177,26 @@ namespace wpfFamiliaBlanco
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
-            string nombre = selectedDataRow["nombre"].ToString();
-             MessageBoxResult dialog  = MessageBox.Show("Esta seguro que desea eliminar :" + nombre , "Advertencia", MessageBoxButton.YesNo);
-            if (dialog == MessageBoxResult.Yes)
+            try
             {
-                int idSeleccionado = (int)ltsProductos.SelectedValue;
-                string sql = "delete from productos where idProductos = '" + idSeleccionado + "'";
-                conexion.operaciones(sql);
-                loadListaProducto();
-                
+                DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
+                string nombre = selectedDataRow["nombre"].ToString();
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    int idSeleccionado = (int)ltsProductos.SelectedValue;
+                    string sql = "delete from productos where idProductos = '" + idSeleccionado + "'";
+                    conexion.operaciones(sql);
+                    loadListaProducto();
+
+                }
             }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Es necesario seleccionar un producto a eliminar");
+            }
+     
         }
         public int Darvalor(int valor)
         {

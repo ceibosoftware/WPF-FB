@@ -178,25 +178,16 @@ namespace wpfFamiliaBlanco
 
         private void txtNombre_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-           
-         /*
-             if (char.IsLetter((char)e.Key))
-             {
-                 e.Handled = false;
-             }
-             else if (char.IsControl((char)e.Key))
-             {
-                 e.Handled = false;
-             }
-             else if (char.IsSeparator((char)e.Key))
-             {
-                 e.Handled = false;
-             }
-             else
-             {
-                 e.Handled = true;
-             }*/
-        }
+            if (Char.IsLetterOrDigit((Char)e.Key))
+            {
+
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+         }
 
         public bool validar()
         {
