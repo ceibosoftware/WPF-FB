@@ -543,10 +543,17 @@
         <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="942.89,461.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="#FF009D72" Click="btnAceptar_Click" Background="#FF4B4848" BorderThickness="0,0,3,0"/>
         <Label x:Name="lblAgregarProducto" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="26,0,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar producto" Background="{x:Null}"/>
         <Label x:Name="lblAgregarCategoria" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="463,0.159,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoría" Background="{x:Null}"/>
-        <Border Height="174.555" Width="440.186" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17.814,37,768.999,365.112" >
-            <Border.Effect>
-                <DropShadowEffect RenderingBias="Quality"/>
-            </Border.Effect>
+        <Label x:Name="lblAgregarProveedor" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="26,247.886,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar proveedor" Background="{x:Null}"/>
+        <Border Height="342.159" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF6B3100" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="927.89,37,113.833,197.508" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="322.159" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet lorem eu vulputate euismod. Maecenas lectus nisl, scelerisque tincidunt molestie sit amet, euismod in tortor. Vivamus fermentum sed diam ut euismod. Vivamus porttitor massa quis leo varius, eu pulvinar urna varius. Vestibulum elementum purus vel mauris iaculis iaculis. Donec sodales ex purus, vel feugiat nulla faucibus quis. Pellentesque eget interdum nulla. Vivamus lacinia dignissim risus nec euismod." VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
+        </Border>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="174.396" Margin="17.814,37.159,0,0" VerticalAlignment="Top" Width="436.186" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -557,8 +564,8 @@
         <TextBox x:Name="txtNombre" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"  PreviewKeyDown="txtNombre_PreviewKeyDown"   />
         <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293.674,37.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
         <Label x:Name="lblDescripcion" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293.674,85.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Descripción"/>
-        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="82.556" Margin="31,108.27,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="394.667" Template="{DynamicResource TextBoxControlTemplate1}" Foreground="White"/>
-        <Border Height="174.555" Width="440.185" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="470.814,37,316,365.112" >
+        <TextBox x:Name="txtDescripcion" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,108.27,0,0" Height="90.667" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"  PreviewKeyDown="txtNombre_PreviewKeyDown"   />
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="174.396" Margin="468,37.159,0,0" VerticalAlignment="Top" Width="436.186" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -570,11 +577,11 @@
         <Label x:Name="lblCategoria" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="744.34,83.27,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
         <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="801.333,136.27,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}" ToolTip="Agregar categoria"/>
         <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="481.666,108.27,0,0" VerticalAlignment="Top" Width="394.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
-        <Border Height="247.555" Width="893.185" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="17.814,284.763,0,44.349" >
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="247.555" Margin="17.814,289.886,0,0" VerticalAlignment="Top" Width="886.372" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2D" Offset="1"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
@@ -587,18 +594,8 @@
         <Button x:Name="btnProvNuevo" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="350.667,492.848,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}"/>
         <Button x:Name="btnProvAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="436,404.159,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" Click="btnProvAgregar_Click" />
         <Button x:Name="btnProvEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="436,464.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" Click="btnProvEliminar_Click"/>
-        <Label x:Name="lblAgregarProveedor" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="26,247.886,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar proveedor" Background="{x:Null}"/>
         <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="31,314.886,0,0" VerticalAlignment="Top" Width="394.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
         <Image HorizontalAlignment="Left" Height="23" Margin="431,356.159,0,0" VerticalAlignment="Top" Width="23" Source="icons8-search.png" Opacity="0.5"/>
-        <Border Height="342.159" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF6B3100" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="927.89,37,113.833,197.508" >
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="322.159" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet lorem eu vulputate euismod. Maecenas lectus nisl, scelerisque tincidunt molestie sit amet, euismod in tortor. Vivamus fermentum sed diam ut euismod. Vivamus porttitor massa quis leo varius, eu pulvinar urna varius. Vestibulum elementum purus vel mauris iaculis iaculis. Donec sodales ex purus, vel feugiat nulla faucibus quis. Pellentesque eget interdum nulla. Vivamus lacinia dignissim risus nec euismod." VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
-        </Border>
 
     </Grid>
 </Window>
