@@ -66,6 +66,7 @@ namespace wpfFamiliaBlanco
             {
                 List<elemento> items = new List<elemento>();
                 int idProducto = (int)ltsProductos.SelectedValue;
+                int index = (int)ltsProductos.SelectedIndex;
                 // LLENAR DATOS PRODUCTOS.
                 String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
                 DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
@@ -102,7 +103,7 @@ namespace wpfFamiliaBlanco
                     }
 
                 }
-                loadListaProducto();
+                loadListaProducto(index);
             }
             catch (NullReferenceException)
             {
@@ -117,7 +118,17 @@ namespace wpfFamiliaBlanco
             conexion.Consulta(consulta, ltsProductos);
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
+            ltsProductos.SelectedIndex = 0;
         }
+        private void loadListaProducto(int index)
+        {
+            String consulta = " Select * from productos ";
+            conexion.Consulta(consulta, ltsProductos);
+            ltsProductos.DisplayMemberPath = "nombre";
+            ltsProductos.SelectedValuePath = "idProductos";
+            ltsProductos.SelectedIndex = index;
+        }
+
 
         private void ltsProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

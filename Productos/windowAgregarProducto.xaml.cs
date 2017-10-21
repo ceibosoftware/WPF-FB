@@ -51,10 +51,7 @@ namespace wpfFamiliaBlanco
             cmbCategoria.SelectedIndex = 0;
         }
 
-        private void txtBuscar_GotMouseCapture(object sender, MouseEventArgs e)
-        {
-            txtNombre.Text = "";
-        }
+  
 
         private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -111,48 +108,57 @@ namespace wpfFamiliaBlanco
 
         private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
         {
-            int provIndex = 0;
-            Boolean existe = false;
-            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+            try
+            {
+                int provIndex = 0;
+                Boolean existe = false;
+                DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
 
-            if (ltsProvProductos.Items.Count <= 0)
-            {
-                Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
-                ltsProvProductos.Items.Refresh();
-            }
-            else
-            {
-                for (int i = 0; i < ltsProvProductos.Items.Count; i++)
+                if (ltsProvProductos.Items.Count <= 0)
                 {
-
-                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                    ltsProvProductos.Items.Refresh();
+                }
+                else
+                {
+                    for (int i = 0; i < ltsProvProductos.Items.Count; i++)
                     {
-                        existe = false;
+
+                        if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                        {
+                            existe = false;
+
+                        }
+                        else
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe)
+                    {
+
+                        Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                        ltsProvProductos.Items.Refresh();
+
+
+                        Console.WriteLine("elementos" + Items.Count);
+
+
 
                     }
                     else
                     {
-                        existe = true;
-                        break;
+                        MessageBox.Show("Ese proveedor ya fue agregado");
                     }
                 }
-                if (!existe)
-                {
-
-                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
-                    ltsProvProductos.Items.Refresh();
-
-                   
-                        Console.WriteLine("elementos" + Items.Count);
-                    
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Ese proveedor ya fue agregado");
-                }
             }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Es necesario seleccionar un proveedor a agregar");
+            }
+           
 
         }
 
@@ -196,6 +202,10 @@ namespace wpfFamiliaBlanco
             {
                 MessageBox.Show("Es necesario ingresar algun proveedor");
                 return false;
+            }else if(cmbCategoria.SelectedItem == null)
+            {
+                MessageBox.Show("Es necesario seleccionar categoria");
+                return false;
             }
             else
             {
@@ -225,14 +235,63 @@ namespace wpfFamiliaBlanco
 
    
 
-        private void txtDescripcion_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
-            {
-                e.Handled = true;
-            }
-        }
 
-        
+        private void btnProvNuevo_Click(object sender, RoutedEventArgs e)
+        {
+             String idProv;
+            Proveedores.windowAgregarProveedor newW2 = new Proveedores.windowAgregarProveedor();
+            newW2.ShowDialog();
+            if(newW2.DialogResult == true)
+            {
+                String nombre = newW2.txtNombre.Text;
+                String cuit = newW2.txtCuit.Text;
+                String razonSocial = newW2.cmbRazonSocial.Text;
+                String direccion = newW2.txtDireccion.Text;
+                String categoria = newW2.cmbCategoria.Text;
+                String codigoPostal = newW2.txtCP.Text;
+                String localidad = newW2.txtLocalidad.Text;
+
+
+                //INSERTAR DATOS PRINCIPALES
+                String sql;
+                sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "');";
+                conexion.operaciones(sql);
+
+
+                String sql2 = "Select idProveedor from proveedor order by idProveedor DESC LIMIT 1";
+                idProv = conexion.ValorEnVariable(sql2);
+
+                Console.WriteLine("ULTIMO ID" + idProv);
+
+                //INSERTAR CONTACTO PROVEEDOR
+                String sqlContacto;
+
+                string ultimoId = "Select last_insert_id()";
+                String id = conexion.ValorEnVariable(ultimoId);
+                for (int i = 0; i < Proveedores.windowAgregarProveedor.lista.Count; i++)
+                {
+                    String nombreL = Proveedores.windowAgregarProveedor.lista[i].NombreContacto;
+                    String telefonoL = Proveedores.windowAgregarProveedor.lista[i].NumeroTelefono;
+                    String emailL = Proveedores.windowAgregarProveedor.lista[i].Email;
+                    sqlContacto = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefonoL + "', '" + emailL + "', '" + nombreL + "', '" + idProv + "');";
+                    conexion.operaciones(sqlContacto);
+                }
+                // loadListaProducto();
+
+                //INSERTAR CATEGORIAS PROVEEDOR
+
+
+                for (int i = 0; i < newW2.Items.Count; i++)
+                {
+                    int idCategoria = newW2.Items[i].id;
+                    string sql3 = "INSERT INTO categorias_has_proveedor(FK_idProveedor, FK_idCategorias) VALUES('" + id + "','" + idCategoria + "' )";
+                    conexion.operaciones(sql3);
+                }
+                
+               
+            }
+            LoadListaProveedor();
+        }
     }
-}
+ }
+

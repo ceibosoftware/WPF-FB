@@ -54,7 +54,7 @@ namespace wpfFamiliaBlanco
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
-
+            cmbCategoria.SelectedIndex = 0;
         }
 
         private void txtBuscar_GotMouseCapture(object sender, MouseEventArgs e)
@@ -116,49 +116,58 @@ namespace wpfFamiliaBlanco
 
         private void btnProvAgregar_Click(object sender, RoutedEventArgs e)
         {
-            int provIndex = 0;
-            Boolean existe = false;
-            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
-             
-            if (ltsProvProductos.Items.Count <= 0)
+            try
             {
-                Items.Add( new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
-                ltsProvProductos.Items.Refresh();
-            }
-            else
-            {
-                Console.WriteLine("cantidad " + ltsProvProductos.Items.Count);
-                for (int i = 0; i < ltsProvProductos.Items.Count; i++)
-                {
+                int provIndex = 0;
+                Boolean existe = false;
+                DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
 
-                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                if (ltsProvProductos.Items.Count <= 0)
+                {
+                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                    ltsProvProductos.Items.Refresh();
+                }
+                else
+                {
+                    Console.WriteLine("cantidad " + ltsProvProductos.Items.Count);
+                    for (int i = 0; i < ltsProvProductos.Items.Count; i++)
                     {
-                        existe = false;
+
+                        if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                        {
+                            existe = false;
+
+                        }
+                        else
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe)
+                    {
+
+                        Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
+                        ltsProvProductos.Items.Refresh();
+
+
+                        Console.WriteLine("elementos" + Items.Count);
+
+
 
                     }
                     else
                     {
-                        existe = true;
-                        break;
+                        MessageBox.Show("Ese proveedor ya fue agregado");
                     }
                 }
-                if (!existe)
-                {
-
-                    Items.Add(new elemento(selectedDataRow["nombre"].ToString(), (int)ltsProveedores.SelectedValue));
-                    ltsProvProductos.Items.Refresh();
-
-
-                    Console.WriteLine("elementos" + Items.Count);
-
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Ese proveedor ya fue agregado");
-                }
             }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Es necesario seleccionar un proveedor a agregar");
+            }
+           
         }
 
         private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
@@ -224,6 +233,17 @@ namespace wpfFamiliaBlanco
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void btnCatNueva_Click(object sender, RoutedEventArgs e)
+        {
+            windowAgregarCategoria newW = new windowAgregarCategoria();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                LoadListaComboCategoria();
             }
         }
     }
