@@ -27,7 +27,8 @@ namespace wpfFamiliaBlanco
         public static String idProv2;
         public static String idProv;
         CRUD conexion = new CRUD();
-        private DataTable dt;
+        List<Contacto> listaContacto = new List<Contacto>();
+
         public pageProveedores()
         {
             InitializeComponent();
@@ -35,10 +36,33 @@ namespace wpfFamiliaBlanco
             LlenarComboFiltro();
 
         }
-
-
+   
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click
         {
+            int j=0;
+
+            listaContacto.Clear();
+          for (int i = 0; i < dgvContacto.Items.Count -1; i++)
+            {
+
+                var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                j++;
+
+                var email = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                j++;
+                var nombre2 = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                j++;
+
+                j = 0;
+
+                Contacto conA = new Contacto(nombre2, email, telefono);
+                listaContacto.Add(conA);
+
+     
+            }
+
+
+
             idProv2 = ltsProveedores.SelectedValue.ToString();
             List<Categorias> items = new List<Categorias>();
             String selectedValue = Convert.ToString(ltsProveedores.SelectedValue);
@@ -53,14 +77,18 @@ namespace wpfFamiliaBlanco
                 Categorias categoria = new Categorias(proveedores.Rows[i].ItemArray[0].ToString(), (int)proveedores.Rows[i].ItemArray[1]);
                 items.Add(categoria);
             }
-            var newW = new windowModificarProveedor(items);
+           
+        
+
+
+            var newW = new windowModificarProveedor(items, listaContacto);
             newW.txtCuit.Text = this.txtCuit.Text;
             newW.txtCP.Text = this.txtCP.Text;
             newW.txtCategoria.Text = nombre.ToString();
             newW.txtDireccion.Text = this.txtDireccion.Text;
             newW.cmbRazonSocial.Text = this.txtRazonSocial.Text;
             newW.txtLocalidad.Text = this.txtLocalidad.Text;
-            newW.dgvContactom.ItemsSource = this.dgvContacto.ItemsSource;
+     
             
 
             newW.ShowDialog();
@@ -80,29 +108,31 @@ namespace wpfFamiliaBlanco
                 update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.txtRazonSocial.Text + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
                 conexion.operaciones(update);
                 
-                String sqlContacto2;
+     
                 String sqlContacto3;
 
-                // sqlContacto2 = "DELETE  from contactoproveedor WHERE FK_idProveedor = '" + selectedValue + "'";
-                //   conexion.operaciones(sqlContacto2);
-
-
+     
                 String telefonoDB = "SELECT telefono from contactoproveedor WHERE FK_idProveedor = '" + selectedValue + "'";
                 String TelDb = conexion.ValorEnVariable(telefonoDB).ToString();
 
-                int j = 0;
+                int kj = 0;
+
+                try
+                {
+
+               
                 for (int i = 0; i < dgvContacto.Items.Count - 1; i++)
                     {
                  
-                        var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
-                        j++;
+                        var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[kj];
+                        kj++;
                     
-                        var email = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
-                        j++;
-                        var nombre2 = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j];
-                        j++;
+                        var email = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[kj];
+                        kj++;
+                        var nombre2 = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[kj];
+                        kj++;
 
-                        j = 0;
+                        kj = 0;
 
                     if (TelDb.Equals(telefono))
                     {
@@ -113,7 +143,12 @@ namespace wpfFamiliaBlanco
                     loadListaProveedores();
                 }
 
-                
+                }
+                catch (Exception)
+                {
+
+              
+                }
 
                 //ELIMINA REGISTRO DE TABLA INTERMEDIA
                 string sql2 = "delete  from categorias_has_proveedor where FK_idProveedor =  '" + selectedValue + "'";
@@ -223,7 +258,7 @@ namespace wpfFamiliaBlanco
                 txtCP.Text = proveedor.Rows[0].ItemArray[4].ToString();
 
                 //consulta contacto
-                String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto from contactoproveedor WHERE FK_idProveedor=@valor";
+                String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto,  contactoproveedor.idContactoProveedor from contactoproveedor WHERE FK_idProveedor=@valor";
                 DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsProveedores.SelectedValue);
                 dgvContacto.ItemsSource = contacto.AsDataView();
 

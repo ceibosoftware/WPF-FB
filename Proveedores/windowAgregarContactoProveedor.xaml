@@ -82,7 +82,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtTelefonoContacto" HorizontalAlignment="Left" Height="23" Margin="148.149,148.168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="txtTelefonoContacto" HorizontalAlignment="Left" Height="23" Margin="148.149,148.168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14" TextChanged="txtTelefonoContacto_TextChanged"/>
         <TextBox x:Name="txtNombreContacto" HorizontalAlignment="Left" Height="23" Margin="148.149,208.001,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
         <Button x:Name="btnCancelar_Copy1" Content="Cancelar" HorizontalAlignment="Left" Margin="409.149,332.446,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center"/>
         <Label x:Name="lblNombre_Copy1" Content="Telefono" HorizontalAlignment="Left" Margin="148.149,111.168,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

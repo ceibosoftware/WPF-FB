@@ -35,27 +35,11 @@ namespace wpfFamiliaBlanco.Proveedores
             }
         }
 
-        public class contacto
-        {
-
-            public  String NombreContacto { get; set; }
-            public  String Email { get; set; }
-            public  String NumeroTelefono { get; set; }
-           
-
-            public contacto (String nomContacto, String ema, String numTelefono)
-            {
-                NombreContacto = nomContacto;
-                Email = ema;
-                NumeroTelefono = numTelefono;
-
-            }
-        }
 
 
         CRUD conexion = new CRUD();
         public static String sqlContacto;
-        public static  List<contacto> lista = new List<contacto>();
+        public static  List<Contacto> lista = new List<Contacto>();
 
         public windowAgregarProveedor()
         {
@@ -157,10 +141,11 @@ namespace wpfFamiliaBlanco.Proveedores
             if (newW.DialogResult == true)
             {
                 Console.WriteLine("Entro");
+                 
                 String telefono1 = newW.txtTelefonoContacto.Text;
                 String nombreContacto1 = newW.txtNombreContacto.Text;
                 String mail1 = newW.txtMailContacto.Text;
-                contacto info =  new contacto(nombreContacto1, mail1, telefono1);
+                Contacto info =  new Contacto(nombreContacto1, mail1, telefono1);
                 
                 
                 lista.Add(info);

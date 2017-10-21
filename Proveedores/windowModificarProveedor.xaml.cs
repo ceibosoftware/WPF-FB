@@ -25,8 +25,10 @@ namespace wpfFamiliaBlanco
         CRUD conexion = new CRUD();
         private List<Categorias> items;
         public List<Categorias> Items { get => items; set => items = value; }
-        String id;
-        public windowModificarProveedor(List<Categorias> lista )
+        public List<Contacto> conActual = new List<Contacto>() ;
+   
+     
+        public windowModificarProveedor(List<Categorias> lista, List<Contacto> contactoActual)
         {
             InitializeComponent();
             CargarCMB();
@@ -34,25 +36,11 @@ namespace wpfFamiliaBlanco
             LoadListaProveedor();
             LlenarComboFiltro();
 
-
-        }
-        public class contacto
-        {
-
-            public String NombreContacto { get; set; }
-            public String Email { get; set; }
-            public String NumeroTelefono { get; set; }
-
-
-            public contacto(String nomContacto, String ema, String numTelefono)
-            {
-                NombreContacto = nomContacto;
-                Email = ema;
-                NumeroTelefono = numTelefono;
-
-            }
+            conActual = contactoActual;
+            dgvContactom.ItemsSource = conActual;
         }
   
+
 
         private void LoadListaProveedor()
         {
@@ -188,15 +176,15 @@ namespace wpfFamiliaBlanco
             String idpr = pageProveedores.idProv2;
             MessageBox.Show("id" + idpr);
             newW.ShowDialog();
-          
+
             if (newW.DialogResult == true)
             {
-                Console.WriteLine("Entro");
+               
                 String telefono12 = newW.txtTelefonoContacto.Text;
                 String nombreContacto12 = newW.txtNombreContacto.Text;
                 String mail12 = newW.txtMailContacto.Text;
-                contacto con = new contacto(nombreContacto12, mail12, telefono12);
-                
+                Contacto con = new Contacto(nombreContacto12, mail12, telefono12);
+
 
                 String sqlContacto;
 
@@ -206,12 +194,45 @@ namespace wpfFamiliaBlanco
                 sqlContacto = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefono12 + "', '" + mail12 + "', '" + nombreContacto12 + "', '" + idpr + "');";
                 conexion.operaciones(sqlContacto);
                 LoadListaProveedor();
-               
+
             }
         }
 
 
-        
+        private void btnEliminarContacto_Click_1(object sender, RoutedEventArgs e)
+        {
 
+
+            Contacto contacto = dgvContactom.SelectedItem as Contacto;
+
+          
+
+
+
+               for (int i = 0; i <= conActual.Count -1; i++)
+               {
+                
+              
+                if (contacto.NumeroTelefono.ToString().CompareTo(conActual[i].NumeroTelefono.ToString()) == 0)
+                {
+
+                    conActual.Remove(conActual[i]);
+                    dgvContactom.Items.Refresh();
+                    String update;
+                    update = "DELETE FROM contactoproveedor WHERE telefono = '"+contacto.NumeroTelefono+"'";
+                    conexion.operaciones(update);
+                    MessageBox.Show("Se eliminio");
+                    break;
+                } else
+                 {
+                    MessageBox.Show("conActual: "+conActual[i].NumeroTelefono);
+                    MessageBox.Show("No existe");
+                            
+                 }
+                    
+
+               }
+  
+        }
     }
 }
