@@ -34,9 +34,6 @@ namespace wpfFamiliaBlanco
         {
             String usuarioTxt;
             String passTxt;
-
-
-         
             String usuarioDB ;
             String passDB ;
 
@@ -66,6 +63,7 @@ namespace wpfFamiliaBlanco
                    
                     var newW = new MainWindow();
                     newW.Show();
+                    this.Close(); 
 
                     }else if (!usuarioTxt.Equals(usuarioDB)) {
 

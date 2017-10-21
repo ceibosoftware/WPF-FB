@@ -35,6 +35,12 @@ namespace wpfFamiliaBlanco
             loadListaProveedores();
             LlenarComboFiltro();
 
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnModificar.IsEnabled = false;
+                this.btnEliminar.IsEnabled = false;
+            }
+
         }
    
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click

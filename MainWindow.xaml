@@ -1036,7 +1036,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnAlertas" Content="Alertas" HorizontalAlignment="Left" Margin="0,341.132,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource BotonStylePanel}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnCerrarSesion" Content="Cerrar Sesión" HorizontalAlignment="Left" Margin="0,341.132,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource BotonStylePanel}" Background="{x:Null}" FontSize="14" Click="btnCerrarSesion_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -1047,6 +1047,7 @@
             </Button.BorderBrush>
         </Button>
         <Button x:Name="btnCeibo_Bottom_Right" Content="" HorizontalAlignment="Left" Margin="1231.999,549.667,0,0" VerticalAlignment="Top" Width="27.667" Style="{DynamicResource ButtonStyleCeibo_bottom_right}" Template="{DynamicResource ButtonCeibo_BR}" Height="22" Background="#FFDDDDDD" ToolTip="Ir a ceibosoftware.com"/>
+        <Button x:Name="btnCerrarSesion1" Content="Cerrar Sesión" HorizontalAlignment="Left" Margin="69,471,0,0" VerticalAlignment="Top" Width="92" Height="21" Click="btnCerrarSesion1_Click"/>
 
     </Grid>
 </Window>

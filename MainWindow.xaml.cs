@@ -28,7 +28,6 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
 
-           
         }
 
         
@@ -205,6 +204,18 @@ namespace wpfFamiliaBlanco
 
         }
 
-        
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCerrarSesion1_Click(object sender, RoutedEventArgs e)
+        {
+           
+            var usuarios = new windowUsuarios();
+
+            this.Close();
+            usuarios.Show();
+        }
     }
 }
