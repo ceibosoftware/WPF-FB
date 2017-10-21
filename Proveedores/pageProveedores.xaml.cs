@@ -183,7 +183,7 @@ namespace wpfFamiliaBlanco
                 String cuit = newW2.txtCuit.Text;
                 String razonSocial = newW2.cmbRazonSocial.Text;
                 String direccion = newW2.txtDireccion.Text;
-                String categoria = newW2.cmbCategoria.Text;
+               // String categoria = newW2.cmbCategoria.Text;
                 String codigoPostal = newW2.txtCP.Text;
                 String localidad = newW2.txtLocalidad.Text;
 
@@ -316,7 +316,28 @@ namespace wpfFamiliaBlanco
          
         }
 
-      
+        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            
+            // Busquedas de productos.
+            DataTable proveedores = new DataTable();
+            String consulta;
+
+            if (cmbFiltro.Text == "Nombre")
+            {   //Busca por nombre
+                consulta = "SELECT* FROM proveedor WHERE nombre LIKE '%' @valor '%'";
+                proveedores = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            }
+            else if (cmbFiltro.Text == "Categoria")
+            {
+                //busca por nombre de categoria (posibilidad de agregar combobox)
+                consulta = "SELECT proveedor.nombre ,categorias.idCategorias FROM categorias , proveedor WHERE categorias.nombre LIKE  '%' @valor '%'";
+                proveedores = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            }
+
+            ltsProveedores.ItemsSource = proveedores.AsDataView();
+        }
     }
 
    

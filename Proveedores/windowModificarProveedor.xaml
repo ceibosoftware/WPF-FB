@@ -567,7 +567,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF302E2E" Margin="0,0,-105.334,-2.333">
+    <Grid Background="#FF302E2E" Margin="0,0,-105.334,-2.333" Width="1350">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
@@ -597,17 +597,16 @@
             </Rectangle.Effect>
         </Rectangle>
         <Label x:Name="lblFiltrar" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="784.977,63,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Filtrar por"/>
-        <TextBox x:Name="txtFiltro" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="530.97,134.401,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" />
-        <Label x:Name="lblCategorias" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.97,157.401,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedores"/>
+        <TextBox x:Name="txtFiltro" Width="386" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="526,93,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" TextChanged="txtFiltro_TextChanged" />
+        <Label x:Name="lblCategorias" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.97,157.401,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categorias"/>
         <ListBox x:Name="ltsCategorias" Width="254.007" VerticalAlignment="Top" Margin="530.97,182.401,0,0" Height="83.159" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblCatProveedores" Width="177.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="921.977,152.401,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categorias de proveedor"/>
         <ListBox x:Name="ltsCatProveedores" Width="268.993" VerticalAlignment="Top" Margin="830.977,182.401,0,0" Height="83.159" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SelectionMode="Multiple" />
-        <Button x:Name="btnAgregarCategoria" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="530.97,270.56,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnAgregarCategoria" Width="95" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="530.97,270.56,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}" Click="btnAgregarCategoria_Click"/>
         <Button x:Name="btnCatAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="789.977,182.401,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" Click="btnCatAgregar_Click"  />
         <Button x:Name="btnCatEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="789.977,242.56,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" Click="btnCatEliminar_Click"/>
         <Label x:Name="lblAgregarCategoria1" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="525.97,26,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoria" Background="#FF171717"/>
-        <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="530.97,93,0,0" VerticalAlignment="Top" Width="386" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
-        <Image HorizontalAlignment="Left" Height="23" Margin="921.97,134.401,0,0" VerticalAlignment="Top" Width="23" Source="/wpfFamiliaBlanco;component/Productos/icons8-search.png" Opacity="0.5"/>
+        <Image HorizontalAlignment="Left" Height="23" Margin="922,93,0,0" VerticalAlignment="Top" Width="23" Source="/wpfFamiliaBlanco;component/Productos/icons8-search.png" Opacity="0.5"/>
         <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="948.666,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="{x:Null}" Click="btnCancelar_Click"/>
         <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="948.666,398.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="{x:Null}" Click="btnAceptar_Click"/>
         <Button x:Name="btnEditar" Content="Editar" HorizontalAlignment="Left" Margin="330,452,0,0" VerticalAlignment="Top" Width="75" Click="btnEditar_Click"/>

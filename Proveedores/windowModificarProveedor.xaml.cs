@@ -38,7 +38,9 @@ namespace wpfFamiliaBlanco
   
             conActual = contactoActual;
             dgvContactom.ItemsSource = conActual;
-           
+
+            ltsCatProveedores.SelectionMode = SelectionMode.Single;
+            ltsCategorias.SelectionMode = SelectionMode.Single;
         }
   
 
@@ -114,8 +116,6 @@ namespace wpfFamiliaBlanco
         private void LlenarComboFiltro()
         {
 
-            cmbFiltro.Items.Add("Nombre");
-            cmbFiltro.Items.Add("Categoria");
 
         }
 
@@ -221,12 +221,11 @@ namespace wpfFamiliaBlanco
                     String update;
                     update = "DELETE FROM contactoproveedor WHERE telefono = '"+contacto.NumeroTelefono+"'";
                     conexion.operaciones(update);
-                    MessageBox.Show("Se eliminio");
+                    MessageBox.Show("Se ha eliminado el contacto");
                     break;
                 } else
                  {
-                    MessageBox.Show("conActual: "+conActual[i].NumeroTelefono);
-                    MessageBox.Show("No existe");
+                    
                             
                  }
                     
@@ -270,6 +269,11 @@ namespace wpfFamiliaBlanco
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+            
             Contacto contacto2 = dgvContactom.SelectedItem as Contacto;
             var newW = new windowAgregarContactoProveedor();
             String telActual = contacto2.NumeroTelefono.ToString();
@@ -293,6 +297,50 @@ namespace wpfFamiliaBlanco
                 conexion.operaciones(update);
                 dgvContactom.Items.Refresh();
             }
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un contacto");
+            }
         }
+
+        private void cmbFiltro_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string consulta;
+            DataTable categorias = new DataTable();
+
+            //Busca por nombre
+            consulta = "SELECT * FROM categorias WHERE categorias.nombre LIKE '%' @valor '%'";
+            categorias = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            ltsCategorias.ItemsSource = categorias.AsDataView();
+            ltsCategorias.SelectedIndex = 0;
+        }
+
+        private void btnAgregarCategoria_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarCategoria();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                LoadListaComboCategoria();
+            }
+        }
+        public void LoadListaComboCategoria()
+        {
+            String consulta = "SELECT * FROM categorias";
+            conexion.Consulta(consulta, ltsCategorias);
+            ltsCategorias.DisplayMemberPath = "nombre";
+            ltsCategorias.SelectedValuePath = "idCategorias";
+            ltsCategorias.SelectedIndex = 0;
+        }
+       
     }
 }

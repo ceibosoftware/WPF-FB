@@ -48,7 +48,8 @@ namespace wpfFamiliaBlanco.Proveedores
             EliminarDGVContacto();
             LoadListaProv();
             LoadListaProveedor();
-
+            ltsCatProveedores.SelectionMode = SelectionMode.Single;
+            ltsCategorias.SelectionMode = SelectionMode.Single;
         }
 
         private void LoadListaProveedor()
@@ -179,54 +180,73 @@ namespace wpfFamiliaBlanco.Proveedores
 
         private void btnCatAgregar_Click_1(object sender, RoutedEventArgs e)
         {
-            int provIndex = 0;
-            Boolean existe = false;
-            DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
 
-            if (ltsCatProveedores.Items.Count <= 0)
+            try
             {
-                Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
-                ltsCatProveedores.Items.Refresh();
-            }
-            else
-            {
-                for (int i = 0; i < ltsCatProveedores.Items.Count; i++)
+                int provIndex = 0;
+                Boolean existe = false;
+                DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
+
+                if (ltsCatProveedores.Items.Count <= 0)
                 {
-
-                    if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                    Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                    ltsCatProveedores.Items.Refresh();
+                }
+                else
+                {
+                    for (int i = 0; i < ltsCatProveedores.Items.Count; i++)
                     {
-                        existe = false;
+
+                        if (selectedDataRow["nombre"].ToString().CompareTo(Items[i].nombre) != 0)
+                        {
+                            existe = false;
+
+                        }
+                        else
+                        {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe)
+                    {
+
+                        Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
+                        ltsCatProveedores.Items.Refresh();
+
+
+                        Console.WriteLine("categorias" + Items.Count);
+
+
 
                     }
                     else
                     {
-                        existe = true;
-                        break;
+                        MessageBox.Show("Esa categoria ya fue agregada");
                     }
                 }
-                if (!existe)
-                {
-
-                    Items.Add(new categoria(selectedDataRow["nombre"].ToString(), (int)ltsCategorias.SelectedValue));
-                    ltsCatProveedores.Items.Refresh();
-
-
-                    Console.WriteLine("categorias" + Items.Count);
-
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Esa categoria ya fue agregada");
-                }
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Debe seleccionar una categoria");
+            }
+           
         }
 
         private void btnCatEliminar_Click(object sender, RoutedEventArgs e)
         {
-      Items.Remove(Items.Find(item => item.id == (int)ltsCatProveedores.SelectedValue));
-              ltsCatProveedores.Items.Refresh();
+            try
+            {
+                Items.Remove(Items.Find(item => item.id == (int)ltsCatProveedores.SelectedValue));
+                ltsCatProveedores.Items.Refresh();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Debe seleccionar una categoria a eliminar");
+            }
+      
         }
 
         private void btnEliminarContacto_Click(object sender, RoutedEventArgs e)
@@ -247,15 +267,13 @@ namespace wpfFamiliaBlanco.Proveedores
                     lista.Remove(lista[i]);
                     dgv.Items.Refresh();
                     String update;
-                   // update = "DELETE FROM contactoproveedor WHERE telefono = '" + contacto.NumeroTelefono + "'";
-                    //conexion.operaciones(update);
-                    MessageBox.Show("Se eliminio");
+               
+                    MessageBox.Show("Se ha eliminado el contacto");
                     break;
                 }
                 else
                 {
-                    MessageBox.Show("conActual: " + lista[i].NumeroTelefono);
-                    MessageBox.Show("No existe");
+               
 
                 }
 
@@ -297,5 +315,75 @@ namespace wpfFamiliaBlanco.Proveedores
             this.Close();
 
         }
+
+        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string consulta;
+            DataTable categorias = new DataTable();
+
+            //Busca por nombre
+            consulta = "SELECT * FROM categorias WHERE categorias.nombre LIKE '%' @valor '%'";
+            categorias = conexion.ConsultaParametrizada(consulta, txtBuscar.Text);
+            ltsCategorias.ItemsSource = categorias.AsDataView();
+            ltsCategorias.SelectedIndex = 0;
+        }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+          
+            Contacto contacto2 = dgv.SelectedItem as Contacto;
+            var newW = new windowAgregarContactoProveedor();
+            String telActual = contacto2.NumeroTelefono.ToString();
+            newW.txtMailContacto.Text = contacto2.Email.ToString();
+            newW.txtNombreContacto.Text = contacto2.NombreContacto.ToString();
+            newW.txtTelefonoContacto.Text = contacto2.NumeroTelefono.ToString();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                String nombre = newW.txtNombreContacto.Text.ToString();
+                String tel = newW.txtTelefonoContacto.Text.ToString();
+                String mail = newW.txtMailContacto.Text.ToString();
+
+                contacto2.NombreContacto = nombre;
+                contacto2.NumeroTelefono = tel;
+                contacto2.Email = mail;
+
+                String update;
+                update = "update contactoproveedor set telefono  = '" + tel + "', email = '" + mail + "', nombreContacto = '" + nombre + "' where telefono ='" + telActual + "';";
+                conexion.operaciones(update);
+                dgv.Items.Refresh();
+            }
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un contacto");
+            }
+        }
+
+        private void btnAgregarCategoria_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarCategoria();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                LoadListaComboCategoria();
+            }
+        }
+        public void LoadListaComboCategoria()
+        {
+            String consulta = "SELECT * FROM categorias";
+            conexion.Consulta(consulta, ltsCategorias);
+            ltsCategorias.DisplayMemberPath = "nombre";
+            ltsCategorias.SelectedValuePath = "idCategorias";
+            ltsCategorias.SelectedIndex = 0;
+        }
+
     }
 }
