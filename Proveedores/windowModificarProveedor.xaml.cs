@@ -35,9 +35,10 @@ namespace wpfFamiliaBlanco
             LoadListaProv(lista);
             LoadListaProveedor();
             LlenarComboFiltro();
-
+  
             conActual = contactoActual;
             dgvContactom.ItemsSource = conActual;
+           
         }
   
 
@@ -174,7 +175,6 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarContactoProveedor();
             String idpr = pageProveedores.idProv2;
-            MessageBox.Show("id" + idpr);
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
@@ -184,18 +184,18 @@ namespace wpfFamiliaBlanco
                 String nombreContacto12 = newW.txtNombreContacto.Text;
                 String mail12 = newW.txtMailContacto.Text;
                 Contacto con = new Contacto(nombreContacto12, mail12, telefono12);
-
-
+                conActual.Add(con);
                 String sqlContacto;
 
-                Console.WriteLine("telefono" + telefono12);
-                Console.WriteLine("nombvre" + nombreContacto12);
-                Console.WriteLine("mail" + mail12);
                 sqlContacto = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefono12 + "', '" + mail12 + "', '" + nombreContacto12 + "', '" + idpr + "');";
                 conexion.operaciones(sqlContacto);
                 LoadListaProveedor();
+                dgvContactom.ItemsSource = conActual;
+                dgvContactom.Items.Refresh();
+                
 
             }
+                
         }
 
 

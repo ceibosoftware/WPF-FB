@@ -150,15 +150,15 @@ namespace wpfFamiliaBlanco.Proveedores
                 
                 lista.Add(info);
                 LoadDGVContacto();
-               
-               
-
-               // conexion.operaciones(sql);
+                dgv.ItemsSource = lista;
+                dgv.Items.Refresh();
+             
+                // conexion.operaciones(sql);
                
                 
             }
+         
 
-           
         }
 
         public void LoadDGVContacto()
@@ -227,6 +227,40 @@ namespace wpfFamiliaBlanco.Proveedores
         {
       Items.Remove(Items.Find(item => item.id == (int)ltsCatProveedores.SelectedValue));
               ltsCatProveedores.Items.Refresh();
+        }
+
+        private void btnEliminarContacto_Click(object sender, RoutedEventArgs e)
+        {
+            Contacto contacto = dgv.SelectedItem as Contacto;
+
+
+
+
+
+            for (int i = 0; i <= lista.Count - 1; i++)
+            {
+
+
+                if (contacto.NumeroTelefono.ToString().CompareTo(lista[i].NumeroTelefono.ToString()) == 0)
+                {
+
+                    lista.Remove(lista[i]);
+                    dgv.Items.Refresh();
+                    String update;
+                   // update = "DELETE FROM contactoproveedor WHERE telefono = '" + contacto.NumeroTelefono + "'";
+                    //conexion.operaciones(update);
+                    MessageBox.Show("Se eliminio");
+                    break;
+                }
+                else
+                {
+                    MessageBox.Show("conActual: " + lista[i].NumeroTelefono);
+                    MessageBox.Show("No existe");
+
+                }
+
+
+            }
         }
     }
 }

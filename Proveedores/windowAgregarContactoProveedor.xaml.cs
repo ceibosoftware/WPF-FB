@@ -27,7 +27,23 @@ namespace wpfFamiliaBlanco.Proveedores
 
         private void btnAceptar_Copy1_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (txtMailContacto.Text == "")
+            {
+                MessageBox.Show("Ingrese un email");
+            }
+            else if ( txtNombreContacto.Text == "")
+            {
+                MessageBox.Show("Ingrese un nombre de contacto");
+            }
+            else if (txtTelefonoContacto.Text == "")
+            {
+                MessageBox.Show("Ingrese un telefono");
+            }
+            else
+            {
+                DialogResult = true;
+            }
+         
         }
 
         private void txtTelefonoContacto_TextChanged(object sender, TextChangedEventArgs e)

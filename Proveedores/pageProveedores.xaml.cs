@@ -258,7 +258,7 @@ namespace wpfFamiliaBlanco
                 txtCP.Text = proveedor.Rows[0].ItemArray[4].ToString();
 
                 //consulta contacto
-                String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto,  contactoproveedor.idContactoProveedor from contactoproveedor WHERE FK_idProveedor=@valor";
+                String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto from contactoproveedor WHERE FK_idProveedor=@valor";
                 DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsProveedores.SelectedValue);
                 dgvContacto.ItemsSource = contacto.AsDataView();
 
@@ -307,6 +307,7 @@ namespace wpfFamiliaBlanco
             String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto from contactoproveedor WHERE FK_idProveedor=@valor";
             DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsProveedores.SelectedValue);
             dgvContacto.ItemsSource = contacto.AsDataView();
+         
         }
 
       

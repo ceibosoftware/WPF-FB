@@ -9,7 +9,7 @@ namespace wpfFamiliaBlanco
    public  class Contacto
     {
 
-        public int id { get; set; }
+      //  public int id { get; set; }
         public String NombreContacto { get; set; }
         public String Email { get; set; }
         public String NumeroTelefono { get; set; }

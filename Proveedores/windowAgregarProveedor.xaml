@@ -589,7 +589,7 @@
         <Label x:Name="lblContacto" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="353.477,178.002,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Contacto"/>
         <Rectangle Width="3.5" VerticalAlignment="Top" Margin="490.47,36,0,0" Height="443.367" HorizontalAlignment="Left" Fill="#FF5306CA"/>
         <Button x:Name="btnNuevoContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="410.47,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}" Click="btnNuevoContacto_Click_1"/>
-        <Button x:Name="btnEliminarContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="330.47,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="-" BorderBrush="{x:Null}"/>
+        <Button x:Name="btnEliminarContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="330.47,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="-" BorderBrush="{x:Null}" Click="btnEliminarContacto_Click"/>
         <ComboBox x:Name="cmbRazonSocial" HorizontalAlignment="Left" Height="23" Margin="19.47,113.334,0,0" VerticalAlignment="Top" Width="219" Style="{DynamicResource ComboBoxFlatStyle}" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
         <Rectangle Width="574" VerticalAlignment="Top" Margin="525.97,63,0,0" Height="406.367" HorizontalAlignment="Left" Fill="#FF171717">
             <Rectangle.Effect>
