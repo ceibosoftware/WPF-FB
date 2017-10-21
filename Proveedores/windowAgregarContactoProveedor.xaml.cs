@@ -23,6 +23,10 @@ namespace wpfFamiliaBlanco.Proveedores
         public windowAgregarContactoProveedor()
         {
             InitializeComponent();
+            txtNombreContacto.MaxLength = 25;
+            txtMailContacto.MaxLength = 30;
+            txtTelefonoContacto.MaxLength = 25;
+            txtTelefonoContacto.Focus();
         }
 
         private void btnAceptar_Copy1_Click(object sender, RoutedEventArgs e)
@@ -46,20 +50,26 @@ namespace wpfFamiliaBlanco.Proveedores
          
         }
 
-        private void txtTelefonoContacto_TextChanged(object sender, TextChangedEventArgs e)
-        {
-          
-        }
+      
 
-        private void txtTelefonoContacto_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
-        }
 
         private void btnCancelar_Copy1_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void txtTelefonoContacto_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        private void txtNombreContacto_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
