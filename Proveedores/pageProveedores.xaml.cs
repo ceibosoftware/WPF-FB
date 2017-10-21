@@ -332,8 +332,13 @@ namespace wpfFamiliaBlanco
             else if (cmbFiltro.Text == "Categoria")
             {
                 //busca por nombre de categoria (posibilidad de agregar combobox)
-                consulta = "SELECT proveedor.nombre ,categorias.idCategorias FROM categorias , proveedor WHERE categorias.nombre LIKE  '%' @valor '%'";
+                consulta = " select categorias.idCategorias,categorias_has_proveedor.FK_idProveedor,proveedor.nombre	from  categorias,categorias_has_proveedor,proveedor where categorias.nombre like @valor  and categorias.idCategorias = categorias_has_proveedor.FK_idCategorias and proveedor.idProveedor = categorias_has_proveedor.FK_idProveedor";
                 proveedores = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+                if (txtFiltro.Text == "")
+                {
+                    consulta = "SELECT* FROM proveedor WHERE nombre LIKE '%' @valor '%'";
+                    proveedores = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+                }
             }
 
             ltsProveedores.ItemsSource = proveedores.AsDataView();
