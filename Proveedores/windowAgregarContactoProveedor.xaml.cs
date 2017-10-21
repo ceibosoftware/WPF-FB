@@ -40,5 +40,10 @@ namespace wpfFamiliaBlanco.Proveedores
             var textBox = sender as TextBox;
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
+
+        private void btnCancelar_Copy1_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
