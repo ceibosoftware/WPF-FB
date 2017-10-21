@@ -21,8 +21,8 @@ namespace wpfFamiliaBlanco
     /// 
     public partial class windowAgregarProducto : Window
     {
-       
 
+       
         private  List<elemento> items = new List<elemento>();
         private Boolean aceptar = false;
         CRUD conexion = new CRUD();
@@ -35,19 +35,20 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             LoadListaComboCategoria();
             LoadListaProveedor();
-            cmbCategoria.SelectedIndex = 0;
+            
             LlenarComboFiltro();
             LoadListaProv();
+           // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
 
         }
 
-        private void LoadListaComboCategoria()
+        public void LoadListaComboCategoria()
         {
             String consulta = "SELECT * FROM categorias";
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
-
+            cmbCategoria.SelectedIndex = 0;
         }
 
         private void txtBuscar_GotMouseCapture(object sender, MouseEventArgs e)
@@ -176,18 +177,7 @@ namespace wpfFamiliaBlanco
             this.Close();
         }
 
-        private void txtNombre_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (Char.IsLetterOrDigit((Char)e.Key))
-            {
-
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-         }
+    
 
         public bool validar()
         {
@@ -213,5 +203,36 @@ namespace wpfFamiliaBlanco
             }
           
         }
+
+        private void btnCatNueva_Click(object sender, RoutedEventArgs e)
+        {
+            windowAgregarCategoria newW = new windowAgregarCategoria();
+            newW.ShowDialog();
+
+           if(newW.DialogResult == true)
+           {
+                LoadListaComboCategoria();
+           }
+        }
+
+        private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
+        }
+
+   
+
+        private void txtDescripcion_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
     }
 }

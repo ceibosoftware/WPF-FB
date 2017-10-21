@@ -210,5 +210,21 @@ namespace wpfFamiliaBlanco
             }
 
         }
+
+        private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDescripcion_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

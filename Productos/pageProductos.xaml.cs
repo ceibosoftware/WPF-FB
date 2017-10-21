@@ -36,6 +36,7 @@ namespace wpfFamiliaBlanco
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarProducto();
+      
             newW.ShowDialog();
             if (newW.Aceptar && newW.validar())
             {

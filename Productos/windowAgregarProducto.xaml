@@ -561,10 +561,10 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtNombre" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"  PreviewKeyDown="txtNombre_PreviewKeyDown"   />
+        <TextBox x:Name="txtNombre" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"   PreviewTextInput="txtNombre_PreviewTextInput"   />
         <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293.674,37.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
         <Label x:Name="lblDescripcion" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293.674,85.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Descripción"/>
-        <TextBox x:Name="txtDescripcion" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,108.27,0,0" Height="90.667" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"  PreviewKeyDown="txtNombre_PreviewKeyDown"   />
+        <TextBox x:Name="txtDescripcion" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Margin="31,108.27,0,0" Height="90.667" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" PreviewTextInput="txtDescripcion_PreviewTextInput"     />
         <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="174.396" Margin="468,37.159,0,0" VerticalAlignment="Top" Width="436.186" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -575,7 +575,7 @@
         </Border>
         <TextBox x:Name="txtBuscar" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="481.666,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" GotMouseCapture="txtBuscar_GotMouseCapture" TextChanged="txtBuscar_TextChanged"/>
         <Label x:Name="lblCategoria" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="744.34,83.27,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
-        <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="801.333,136.27,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}" ToolTip="Agregar categoria"/>
+        <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="801.333,136.27,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="+" BorderBrush="{x:Null}" ToolTip="Agregar categoria" Click="btnCatNueva_Click"/>
         <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="481.666,108.27,0,0" VerticalAlignment="Top" Width="394.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}"/>
         <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="247.555" Margin="17.814,289.886,0,0" VerticalAlignment="Top" Width="886.372" CornerRadius="5">
             <Border.Background>
