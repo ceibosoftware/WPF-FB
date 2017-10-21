@@ -42,7 +42,7 @@ namespace wpfFamiliaBlanco
             int j=0;
 
             listaContacto.Clear();
-          for (int i = 0; i < dgvContacto.Items.Count -1; i++)
+          for (int i = 0; i < dgvContacto.Items.Count ; i++)
             {
 
                 var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();

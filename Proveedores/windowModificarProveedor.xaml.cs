@@ -267,5 +267,32 @@ namespace wpfFamiliaBlanco
         {
             this.Close();
         }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+            Contacto contacto2 = dgvContactom.SelectedItem as Contacto;
+            var newW = new windowAgregarContactoProveedor();
+            String telActual = contacto2.NumeroTelefono.ToString();
+            newW.txtMailContacto.Text = contacto2.Email.ToString();
+            newW.txtNombreContacto.Text = contacto2.NombreContacto.ToString();
+            newW.txtTelefonoContacto.Text = contacto2.NumeroTelefono.ToString();
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                String nombre = newW.txtNombreContacto.Text.ToString();
+                String tel = newW.txtTelefonoContacto.Text.ToString();
+                String mail = newW.txtMailContacto.Text.ToString();
+
+                contacto2.NombreContacto = nombre;
+                contacto2.NumeroTelefono = tel;
+                contacto2.Email = mail;
+
+                String update;
+                update = "update contactoproveedor set telefono  = '" + tel + "', email = '" + mail + "', nombreContacto = '" + nombre + "' where telefono ='" + telActual + "';";
+                conexion.operaciones(update);
+                dgvContactom.Items.Refresh();
+            }
+        }
     }
 }
