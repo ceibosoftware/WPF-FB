@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
-        Title="windowUsuarios" Height="618.667" Width="986.667" WindowStartupLocation="CenterOwner">
+        Title="Iniciar sesión" Height="618.667" Width="986.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png">
     <Window.Resources>
         <Style x:Key="ButtonLogin" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -19,8 +19,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" Background="#FF4B4848">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true" Background="#FF4B4848" BorderThickness="0,0,3,0" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
@@ -69,9 +69,104 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="BotonStyle_crud" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" Background="#FF4B4848" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE4EAF0" Offset="0"/>
+                        <GradientStop Color="#FFECF0F4" Offset="0.16"/>
+                        <GradientStop Color="#FFFCFCFD" Offset="0.16"/>
+                        <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                        <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                        <GradientStop Color="#FF718597" Offset="0.375"/>
+                        <GradientStop Color="#FF617584" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <StackPanel x:Name="PART_Root" HorizontalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid Background="Black">
-        <Border Height="235.67" Width="435.298" BorderThickness="1" BorderBrush="#FF00FF93" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="301.851,163.167,242.851,190.497" >
+    <Grid Background="#FF232222">
+        <Calendar HorizontalAlignment="Left" Margin="43.166,166.167,0,0" VerticalAlignment="Top" Style="{DynamicResource CalendarStyle1}"/>
+        <Label x:Name="lblUsuarios_" Content="Usuarios" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="460" Margin="27,54.167,0,0" VerticalAlignment="Top" Width="929" Opacity="0.5" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -79,12 +174,35 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="350.667,218.167,-393.334,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="350.667,278,-393.334,-30.333" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="611.667,343.778,-393.334,-96.111" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
-        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="350.667,181.167,-282.081,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="351,241,-281.667,-7.333" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Button x:Name="btnPrueba" Content="CREA USUARIO" HorizontalAlignment="Left" Margin="496,344,0,0" VerticalAlignment="Top" Width="101" Height="23" BorderBrush="#FF707070" Foreground="White" Background="#FF4B4848" Click="btnPrueba_Click"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="274.779,166.167,0,0" VerticalAlignment="Top" Width="435.298" CornerRadius="5" Opacity="0.5">
+            <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Margin="504,-29.333,-206.695,0"/>
+        </Border>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="293,234.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="293,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="384.666" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="White" FontSize="14"/>
+        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="602.666,348.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72"/>
+        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="612.919,197.167,0,0" VerticalAlignment="Top" Width="64.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="589,257,0,0" VerticalAlignment="Top" Width="89" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+        <Button x:Name="btnPrueba" Content="Crear usuario" HorizontalAlignment="Left" Margin="478.889,348.778,0,0" VerticalAlignment="Top" Width="101" Height="23" BorderBrush="#FF707070" Foreground="White" Background="#FF4B4848" Click="btnPrueba_Click"/>
+        <Border BorderBrush="#FF024629" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="750.276,166.167,0,0" VerticalAlignment="Top" Width="160.724" CornerRadius="5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Label x:Name="lblUser_Copy" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="274.779,166.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="216.989" TextWrapping="Wrap" Text="Inicie sesión para administrar el programa. Puede acceder con su usuario o crear uno nuevo. Una vez haya completado sus datos haga click en &quot;Acceder&quot;. " VerticalAlignment="Top" Width="136.276" Margin="765.276,175.515,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="64.353,166.167,0,0" VerticalAlignment="Top" Width="160.724" CornerRadius="5" Opacity="0.5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Image HorizontalAlignment="Left" Height="67.256" Margin="107.001,249.744,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png"/>
+        <Label x:Name="lblUser_Copy1" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="792.609,477.167,0,0" VerticalAlignment="Top" Width="163.391" Foreground="White" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
     </Grid>
 </Window>

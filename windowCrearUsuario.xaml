@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
-        Title="windowCrearUsuario" Height="505.333" Width="736">
+        Title="Crear usuario" Height="505.333" Width="736" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="LabelStyle_HeaderPagina" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -70,8 +70,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="Black">
-        <Border Height="267.888" Width="403.278" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="161.334,119.052,164.721,89.06" >
+    <Grid Background="#FF171717">
+        <Border Height="426.008" Width="676.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="27.334,23.659,25.479,26.333" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -79,13 +79,22 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="192,182.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="192,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="192,145.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="192,205,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Label x:Name="lblPassword_Copy" Content="Tipo" HorizontalAlignment="Left" Margin="192,261,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="453,343.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
-        <ComboBox x:Name="cmbTipoUsuario" HorizontalAlignment="Left" Margin="192,303,0,0" VerticalAlignment="Top" Width="336"/>
+        <Border Height="267.888" Width="403.278" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="161.334,100.052,164.721,108.06" Opacity="0.5" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="178.667,163.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355.666" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="178.667,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355.666" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="White" FontSize="14"/>
+        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="466.253,126.167,0,0" VerticalAlignment="Top" Width="67.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="449,186,0,0" VerticalAlignment="Top" Width="85" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+        <Label x:Name="lblPassword_Copy" Content="Tipo" HorizontalAlignment="Left" Margin="490,242,0,0" VerticalAlignment="Top" Width="44" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+        <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="459.333,327.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
+        <ComboBox x:Name="cmbTipoUsuario" HorizontalAlignment="Left" Margin="178.667,284,0,0" VerticalAlignment="Top" Width="355.666" Foreground="White"/>
+        <Label x:Name="lblUser_Copy" Content="Crear usuario" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
     </Grid>
 </Window>

@@ -1004,18 +1004,9 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Frame x:Name="frameUsuarios" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,154.667,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="frameProductos" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,191.96,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="frameProveedores" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,229.253,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="frameCategorias" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
-        <Button x:Name="btnUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0,154.667,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource BotonStylePanel}" Click="btnUsuarios_Click" FontSize="14">
-            <Button.BorderBrush>
-                <SolidColorBrush Color="White" Opacity="0"/>
-            </Button.BorderBrush>
-            <Button.Background>
-                <SolidColorBrush Color="Black" Opacity="0.05"/>
-            </Button.Background>
-        </Button>
         <Button x:Name="btnProductos" Content="Productos" HorizontalAlignment="Left" Margin="0,191.96,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource BotonStylePanel}" Background="{x:Null}" Click="btnProductos_Click" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
@@ -1047,7 +1038,7 @@
             </Button.BorderBrush>
         </Button>
         <Button x:Name="btnCeibo_Bottom_Right" Content="" HorizontalAlignment="Left" Margin="1231.999,549.667,0,0" VerticalAlignment="Top" Width="27.667" Style="{DynamicResource ButtonStyleCeibo_bottom_right}" Template="{DynamicResource ButtonCeibo_BR}" Height="22" Background="#FFDDDDDD" ToolTip="Ir a ceibosoftware.com"/>
-        <Button x:Name="btnCerrarSesion1" Content="Cerrar Sesión" HorizontalAlignment="Left" Margin="69,471,0,0" VerticalAlignment="Top" Width="92" Height="21" Click="btnCerrarSesion1_Click"/>
+        <Button x:Name="btnCerrarSesion1" Content="Cerrar sesión" HorizontalAlignment="Left" Margin="75,152.5,0,0" VerticalAlignment="Top" Width="92" Height="21" Click="btnCerrarSesion1_Click" Foreground="White"/>
 
     </Grid>
 </Window>

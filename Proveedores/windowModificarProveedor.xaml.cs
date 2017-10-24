@@ -341,6 +341,10 @@ namespace wpfFamiliaBlanco
             ltsCategorias.SelectedValuePath = "idCategorias";
             ltsCategorias.SelectedIndex = 0;
         }
-       
+
+        private void btnNuevoContacto_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
