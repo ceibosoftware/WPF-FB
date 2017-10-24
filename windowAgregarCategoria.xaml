@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
-        Title="windowAgregarCategoria" Height="546" Width="1034">
+        Title="windowAgregarCategoria" Height="546" Width="1034" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="LabelStyle_HeaderPagina" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -254,7 +254,7 @@
         </Style>
     </Window.Resources>
     <Grid Height="550" Width="1034">
-        <Grid Background="#FF171717">
+        <Grid Background="#FF232222">
 
             <Label x:Name="lblCategorias" Content="Categorias" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Border Height="174.556" Width="440.187" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="451.167,79.218,142.646,296.226" Opacity="0.5" >

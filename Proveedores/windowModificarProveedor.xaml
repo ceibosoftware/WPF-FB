@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="wpfFamiliaBlanco.windowModificarProveedor"
         mc:Ignorable="d"
-        Title="windowModificarProveedor" Height="542.5" Width="1148" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" Icon="/wpfFamiliaBlanco;component/ceibo mini.png" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        Title="windowModificarProveedor" Height="542.5" Width="1148" WindowStartupLocation="CenterScreen" Icon="/wpfFamiliaBlanco;component/ceibo mini.png" ScrollViewer.HorizontalScrollBarVisibility="Visible" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="LabelStyle_HeaderPagina" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -784,27 +784,100 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="RowHeight" Value="22" />
+            <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource GridLinesBrush}"/>
+            <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource GridLinesBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource DataGridBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource DataGridHeaderBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                <ScrollViewer.Template>
+                                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Button Command="{x:Static DataGrid.SelectAllCommand}"
+                                                Focusable="false"
+                                                Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}"
+                                                Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
+                                                Grid.Column="1"
+                                                Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                Grid.ColumnSpan="2" Grid.Row="1"/>
+                                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}"
+                                                Orientation="Vertical" Grid.Row="1"
+                                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ViewportSize="{TemplateBinding ViewportHeight}"
+                                                Style="{StaticResource VerticalScrollBarStyle}"/>
+                                            <Grid Grid.Column="1" Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}"
+                                                    Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                    ViewportSize="{TemplateBinding ViewportWidth}" Style="{StaticResource HorisontalScrollBarStyle}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </ScrollViewer.Template>
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsGrouping" Value="true"/>
+                        <!--<Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>-->
+                    </MultiTrigger.Conditions>
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid Background="#FF232222" Margin="0,0,-6.667,-2.333">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <Border Height="457.008" Width="1097.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="19.47,33.526,31.343,25" Opacity="0.5" >
+
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="457.008" Margin="19.637,33.842,0,0" VerticalAlignment="Top" Width="1097.52" Opacity="0.5" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" Margin="471.493,25.778,17.323,139.508" Opacity="0.5" CornerRadius="5">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF323131" Offset="0"/>
-                        <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
         </Border>
 
         <Label x:Name="lblDetalle" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="13.723,-1,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Detalle" Background="{x:Null}"/>
@@ -819,7 +892,6 @@
         <Label x:Name="lblDireccion" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="106.477,130.668,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Dirección"/>
         <TextBox x:Name="txtLocalidad" Width="205.636" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="260.723,155.668,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" PreviewTextInput="txtLocalidad_PreviewTextInput"/>
         <Label x:Name="lblLocalidad" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="334.366,130.668,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Localidad"/>
-        <DataGrid x:Name="dgvContactom" Width="433.525" VerticalAlignment="Top" Margin="32.834,203.002,0,0" Height="229.032" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
         <Label x:Name="lblContacto" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="334.366,178.002,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Contacto"/>
         <Button x:Name="btnNuevoContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource agregar}" Margin="311.359,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Agregar" BorderBrush="{x:Null}" Click="btnNuevoContacto_Click"/>
         <Button x:Name="btnEliminarContacto" Width="75" VerticalAlignment="Top" Style="{DynamicResource eliminar_}" Margin="391.359,446.367,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Eliminar" BorderBrush="{x:Null}" Click="btnEliminarContacto_Click_1"/>
@@ -848,6 +920,7 @@
         </Border>
         <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="79.508" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet lorem eu vulputate euismod. Maecenas lectus nisl, scelerisque tincidunt molestie sit amet, euismod in tortor. Vivamus fermentum sed diam ut euismod. Vivamus porttitor massa quis leo varius, eu pulvinar urna varius. Vestibulum elementum purus vel mauris iaculis iaculis. Donec sodales ex purus, vel feugiat nulla faucibus quis. Pellentesque eget interdum nulla. Vivamus lacinia dignissim risus nec euismod." VerticalAlignment="Top" Width="294.474" Margin="503.193,381.7,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="683.674,349.367,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvContactom" HorizontalAlignment="Left" Height="224.831" Margin="32.834,203.002,0,0" VerticalAlignment="Top" Width="433.525"/>
 
     </Grid>
 </Window>
