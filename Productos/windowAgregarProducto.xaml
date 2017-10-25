@@ -808,7 +808,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="332" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet lorem eu vulputate euismod. Maecenas lectus nisl, scelerisque tincidunt molestie sit amet, euismod in tortor. Vivamus fermentum sed diam ut euismod. Vivamus porttitor massa quis leo varius, eu pulvinar urna varius. Vestibulum elementum purus vel mauris iaculis iaculis. Donec sodales ex purus, vel feugiat nulla faucibus quis. Pellentesque eget interdum nulla. Vivamus lacinia dignissim risus nec euismod." VerticalAlignment="Top" Width="136.276" Margin="9,9,0,-1" Foreground="#FFC9C5C5" FontSize="11"/>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="332" TextWrapping="Wrap" Text="En esta pantalla se agrega un producto con todas sus características. Se le asigna una categoría y los proveedores que manejan ese producto." VerticalAlignment="Top" Width="136.276" Margin="9,9,0,-1" Foreground="#FFC9C5C5" FontSize="11"/>
         </Border>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="966.173,7.159,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblNombre_Copy" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="740.673,37.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
