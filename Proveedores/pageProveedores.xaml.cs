@@ -39,6 +39,7 @@ namespace wpfFamiliaBlanco
             {
                 this.btnModificar.IsEnabled = false;
                 this.btnEliminar.IsEnabled = false;
+                this.dgvContacto.IsEnabled = false;
             }
 
         }

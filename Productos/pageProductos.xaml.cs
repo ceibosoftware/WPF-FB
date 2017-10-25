@@ -31,6 +31,7 @@ namespace wpfFamiliaBlanco
             loadListaProducto();
             LlenarComboFiltro();
            
+
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)

@@ -41,6 +41,7 @@ namespace wpfFamiliaBlanco
 
             ltsCatProveedores.SelectionMode = SelectionMode.Single;
             ltsCategorias.SelectionMode = SelectionMode.Single;
+            this.dgvContactom.IsReadOnly = true;
         }
   
 
