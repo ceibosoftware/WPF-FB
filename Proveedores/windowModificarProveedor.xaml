@@ -918,7 +918,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="79.508" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet lorem eu vulputate euismod. Maecenas lectus nisl, scelerisque tincidunt molestie sit amet, euismod in tortor. Vivamus fermentum sed diam ut euismod. Vivamus porttitor massa quis leo varius, eu pulvinar urna varius. Vestibulum elementum purus vel mauris iaculis iaculis. Donec sodales ex purus, vel feugiat nulla faucibus quis. Pellentesque eget interdum nulla. Vivamus lacinia dignissim risus nec euismod." VerticalAlignment="Top" Width="294.474" Margin="503.193,381.7,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
+        <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="79.508" TextWrapping="Wrap" Text="En esta pantalla se modifican los datos de los proveedores. Agregue o elimine categorías y/o datos de contacto, además puede modificar cualquier otro dato de proveedores." VerticalAlignment="Top" Width="294.474" Margin="503.193,381.7,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="683.674,349.367,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvContactom" HorizontalAlignment="Left" Height="224.831" Margin="32.834,203.002,0,0" VerticalAlignment="Top" Width="433.525"/>
 
