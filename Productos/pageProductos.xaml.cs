@@ -36,8 +36,26 @@ namespace wpfFamiliaBlanco
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarProducto();
-      
-            newW.ShowDialog();
+
+            /*System.Windows.Media.Effects.BlurEffect myBlur = new System.Windows.Media.Effects.BlurEffect();
+            myBlur.Radius = 20;
+
+            var mainW = new MainWindow
+            {
+                Effect = myBlur
+            };
+
+
+            
+            var wW = Window.GetWindow(this); 
+            
+
+            mainW.Show(); //mostrar ventana con desenfoque
+            wW.Close(); //cerrar ventana anterior (abuelo>padre>hijo)
+            */
+            newW.Show();
+            
+
             if (newW.Aceptar && newW.validar())
             {
                 //INSERTAR DATOS EN TABLA PRODUCTOS
@@ -214,6 +232,8 @@ namespace wpfFamiliaBlanco
         {
             return valor;
         }
+
+       
     }
 }
 

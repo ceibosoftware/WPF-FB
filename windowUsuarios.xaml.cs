@@ -80,7 +80,15 @@ namespace wpfFamiliaBlanco
         private void btnPrueba_Click(object sender, RoutedEventArgs e)
         {
             var newW2 = new windowCrearUsuario();
+            
+            System.Windows.Media.Effects.BlurEffect myBlur = new System.Windows.Media.Effects.BlurEffect();
+            myBlur.Radius = 20;
+
+            newW2.Owner = this;
+            this.Effect = myBlur;
             newW2.ShowDialog();
+            
+
             if (newW2.DialogResult == true)
             {
 

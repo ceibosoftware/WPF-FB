@@ -30,6 +30,12 @@ namespace wpfFamiliaBlanco
         public List<elemento> Items { get => items; set => items = value; }
         public bool Aceptar { get => aceptar; set => aceptar = value; }
 
+        //protected override void OnClosing(System.ComponentModel.CancelEventArgs args) //sacar desenfoque
+        //{
+        //    var wW = GetWindow(this).Owner.Effect;
+        //    base.OnClosing(args);
+        //}
+
         public windowAgregarProducto()
         {
             InitializeComponent();

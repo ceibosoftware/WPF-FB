@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         xmlns:Properties="clr-namespace:wpfFamiliaBlanco.Properties" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="wpfFamiliaBlanco.MainWindow"
         mc:Ignorable="d"
-        Title="Bodega Familia Blanco" Height="611" Width="1276.333" Initialized="cargar_pageInicio" WindowStartupLocation="CenterScreen">
+        Title="Bodega Familia Blanco" Height="611" Width="1276.333" Initialized="cargar_pageInicio" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">

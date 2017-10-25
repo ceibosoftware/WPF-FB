@@ -30,6 +30,12 @@ namespace wpfFamiliaBlanco
         
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs args)
+        {
+            this.Owner.Effect = null;
+            base.OnClosing(args);
+        }
+
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             String name = txtUsername.Text.ToString();
