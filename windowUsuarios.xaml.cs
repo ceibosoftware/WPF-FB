@@ -24,8 +24,8 @@ namespace wpfFamiliaBlanco
         public windowUsuarios()
         {
             InitializeComponent();
-            txtPassword.Text = "nico";
-            txtUsername.Text = "nico";
+            txtPassword.Password = "rober";
+            txtUsername.Text = "rober";
         }
 
 
@@ -38,7 +38,7 @@ namespace wpfFamiliaBlanco
             String passDB ;
 
             usuarioTxt = txtUsername.Text;          
-            passTxt = txtPassword.Text;
+            passTxt = txtPassword.Password.ToString();
 
  
             String sql3 = " SELECT COUNT(*) FROM usuarios WHERE usuario = '" + usuarioTxt + "'";
@@ -58,7 +58,8 @@ namespace wpfFamiliaBlanco
                 String sql4 = "SELECT tipoUsuario  FROM usuarios WHERE usuario = '" + usuarioTxt + "'";
                 tipoUsuarioDB = conexion.ValorEnVariable(sql4).ToString();
 
-                if (usuarioTxt.Equals(usuarioDB) && passTxt.Equals(passDB)){
+
+                if (usuarioTxt.Equals(usuarioDB) && passTxt.Equals(Seguridad.DesEncriptar(passDB))){
 
                    
                     var newW = new MainWindow();
@@ -92,11 +93,12 @@ namespace wpfFamiliaBlanco
             if (newW2.DialogResult == true)
             {
 
+
                 String NuevoUsuario = newW2.txtUsername.Text;
-                String NuevaContrasenia = newW2.txtPassword.Text;
                 String NuevoTipo = newW2.cmbTipoUsuario.SelectedItem.ToString();
 
-                String sql5 = "insert into usuarios(usuario, contrasenia, tipoUsuario) values('" + NuevoUsuario + "', '"+ NuevaContrasenia + "', '"+ NuevoTipo + "');";
+             
+                String sql5 = "insert into usuarios(usuario, contrasenia, tipoUsuario) values('" + NuevoUsuario + "', '"+ Seguridad.Encriptar(newW2.txtPassword.Password.ToString()) + "', '"+ NuevoTipo + "');";
                 conexion.operaciones(sql5);
 
                 MessageBox.Show("USUARIO CREADO CORRECTAMENTE");

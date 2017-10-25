@@ -219,10 +219,9 @@
             </Border.Background>
         </Border>
         <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="274.779,166.167,0,0" VerticalAlignment="Top" Width="435.298" CornerRadius="5" Opacity="0.5">
-            <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Margin="504,-29.333,-206.695,0"/>
+            <PasswordBox/>
         </Border>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="293,234.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="293,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="384.666" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF4B4848" Foreground="White" FontSize="14" Style="{DynamicResource TextBoxStyle1}"/>
         <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="602.666,348.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72"/>
         <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="612.919,197.167,0,0" VerticalAlignment="Top" Width="64.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="589,257,0,0" VerticalAlignment="Top" Width="89" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
@@ -247,6 +246,7 @@
         </Border>
         <Image HorizontalAlignment="Left" Height="67.256" Margin="107.001,249.744,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png"/>
         <Label x:Name="lblUser_Copy1" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="792.609,477.167,0,0" VerticalAlignment="Top" Width="163.391" Foreground="White" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="293,299,0,0" VerticalAlignment="Top" Height="23" Width="385"/>
 
     </Grid>
 </Window>

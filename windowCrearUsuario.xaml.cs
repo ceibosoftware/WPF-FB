@@ -43,7 +43,7 @@ namespace wpfFamiliaBlanco
             String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
     
 
-            if (txtUsername.Text != "" && txtPassword.Text != "" && nomCat == "0" )
+            if (txtUsername.Text != "" && txtPassword.Password.ToString() != "" && nomCat == "0" )
             {
                 this.DialogResult = true;
             }
@@ -51,7 +51,7 @@ namespace wpfFamiliaBlanco
             {
                 MessageBox.Show("Debe ingresar el nombre de usuario");
 
-            }else if (txtPassword.Text == "")
+            }else if (txtPassword.Password.ToString() == "")
             {
                 MessageBox.Show("Debe ingresar una contraseña");
             }else if (!nomCat.Equals("0"))
