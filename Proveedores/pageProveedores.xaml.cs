@@ -173,6 +173,7 @@ namespace wpfFamiliaBlanco
         
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
+            windowAgregarProveedor.lista.Clear();
             var newW2 = new windowAgregarProveedor();
             newW2.ShowDialog();
 
@@ -183,7 +184,6 @@ namespace wpfFamiliaBlanco
                 String cuit = newW2.txtCuit.Text;
                 String razonSocial = newW2.cmbRazonSocial.Text;
                 String direccion = newW2.txtDireccion.Text;
-               // String categoria = newW2.cmbCategoria.Text;
                 String codigoPostal = newW2.txtCP.Text;
                 String localidad = newW2.txtLocalidad.Text;
 
@@ -304,6 +304,16 @@ namespace wpfFamiliaBlanco
                 conexion.operaciones(sql);
                 loadListaProveedores();
                 ActualizaDGVContacto();
+
+                if(dgvContacto.Items == null)
+                {
+                    this.txtCuit.Text = "";
+                    this.txtCP.Text = "";   
+                    this.txtDireccion.Text = "";
+                    this.txtRazonSocial.Text = "";
+                    this.txtLocalidad.Text = "";
+        
+                }
 
             }
         }
