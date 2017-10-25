@@ -139,7 +139,7 @@
         <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="459.333,327.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
         <ComboBox x:Name="cmbTipoUsuario" HorizontalAlignment="Left" Margin="178.667,284,0,0" VerticalAlignment="Top" Width="355.666" Foreground="White"/>
         <Label x:Name="lblUser_Copy" Content="Crear usuario" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="179,225,0,0" VerticalAlignment="Top" Width="355" Height="23" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="179,225,0,0" VerticalAlignment="Top" Width="355" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
 
     </Grid>
 </Window>
