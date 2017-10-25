@@ -76,6 +76,8 @@ namespace wpfFamiliaBlanco
             //frameUsuarios.Content = new pageTabs_Blank();
             frameCategorias.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
 
             #region Fade in
             //animaciones
@@ -107,6 +109,9 @@ namespace wpfFamiliaBlanco
             //frameUsuarios.Content = new pageTabs_Blank();// unload del resto de las tabs
             frameCategorias.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
+            
 
             #region Fade in
             //animaciones
@@ -134,11 +139,25 @@ namespace wpfFamiliaBlanco
         private void btnEntradas_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageEntradas();
+            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
+            frameCategorias.Content = new pageTabs_Blank();
+            frameProductos.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameProveedores.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTab_Entradas();
         }
 
         private void btnSalidas_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageSalidas();
+
+           
+            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
+            frameCategorias.Content = new pageTabs_Blank();
+            frameProductos.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTab_Salidas();
+            frameProveedores.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
@@ -148,6 +167,8 @@ namespace wpfFamiliaBlanco
             frameProveedores.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
             //frameUsuarios.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
 
             #region Fade in
             //animaciones
@@ -179,6 +200,8 @@ namespace wpfFamiliaBlanco
             frameProveedores.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
             //frameUsuarios.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
 
             #region Fade in
             //animaciones

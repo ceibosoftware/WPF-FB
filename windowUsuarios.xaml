@@ -206,6 +206,48 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="password" TargetType="{x:Type PasswordBox}">
+            <Setter Property="PasswordChar" Value="●"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Foreground="White" BorderBrush="{x:Null}" Background="Transparent" FontSize="14"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid Background="#FF232222">
         <Calendar HorizontalAlignment="Left" Margin="43.166,166.167,0,0" VerticalAlignment="Top" Style="{DynamicResource CalendarStyle1}"/>
@@ -246,7 +288,7 @@
         </Border>
         <Image HorizontalAlignment="Left" Height="67.256" Margin="107.001,249.744,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png"/>
         <Label x:Name="lblUser_Copy1" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="792.609,477.167,0,0" VerticalAlignment="Top" Width="163.391" Foreground="White" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="293,299,0,0" VerticalAlignment="Top" Height="23" Width="385"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="293,294,0,0" VerticalAlignment="Top" Width="384.666" Height="23" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}"/>
 
     </Grid>
 </Window>

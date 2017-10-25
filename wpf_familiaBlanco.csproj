@@ -131,6 +131,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+	<Compile Include="pageTab_Salidas.xaml.cs"> <DependentUpon>pageTab_Salidas.xaml</DependentUpon> </Compile>
+<Compile Include="pageTab_Entradas.xaml.cs"> <DependentUpon>pageTab_Entradas.xaml</DependentUpon> </Compile>
+<Page Include="pageTab_Entradas.xaml"> <SubType>Designer</SubType> <Generator>MSBuild:Compile</Generator> </Page>
+<Page Include="pageTab_Salidas.xaml"> <SubType>Designer</SubType> <Generator>MSBuild:Compile</Generator> </Page>
     <Page Include="pageInicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
