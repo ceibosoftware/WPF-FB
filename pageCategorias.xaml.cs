@@ -141,7 +141,7 @@ namespace wpfFamiliaBlanco
                 selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
                 textnombre.Text =selectedDataRow["nombre"].ToString();
         
-               MessageBoxResult result = MessageBox.Show("Seguro quiere eliminar la categoría ? " + selectedDataRow["nombre"].ToString(), "Cuidado", MessageBoxButton.YesNo);
+               MessageBoxResult result = MessageBox.Show("Seguro quiere eliminar la categoría  " + selectedDataRow["nombre"].ToString() +"?", "Cuidado", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
