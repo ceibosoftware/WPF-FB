@@ -36,10 +36,12 @@ namespace wpfFamiliaBlanco
 
             frameInicio.Content = new pageUsuarios();  //frame inicio es el cuadro donde se actualizan las pantallas en la ventana
             //principal del programa
-            //frameUsuarios.Content = new pageTab_Usuario(); //main tab
+            frameUsuarios.Content = new pageTab_Usuario(); //main tab
             frameProductos.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
             frameCategorias.Content = new pageTabs_Blank();
+            frameSalidas.Content = new pageTabs_Blank();
+            frameEntradas.Content = new pageTabs_Blank();
 
             #region Fade in
             //animaciones
@@ -73,7 +75,7 @@ namespace wpfFamiliaBlanco
         {
             frameInicio.Content = new pageProductos();
             frameProductos.Content = new pageTab_Productos(); //main tab
-            //frameUsuarios.Content = new pageTabs_Blank();
+            frameUsuarios.Content = new pageTabs_Blank();
             frameCategorias.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
             frameSalidas.Content = new pageTabs_Blank();
@@ -106,7 +108,7 @@ namespace wpfFamiliaBlanco
         {
             frameInicio.Content = new pageProveedores();
             frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
-            //frameUsuarios.Content = new pageTabs_Blank();// unload del resto de las tabs
+            frameUsuarios.Content = new pageTabs_Blank();// unload del resto de las tabs
             frameCategorias.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
             frameSalidas.Content = new pageTabs_Blank();
@@ -145,6 +147,7 @@ namespace wpfFamiliaBlanco
             frameSalidas.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
             frameEntradas.Content = new pageTab_Entradas();
+            frameUsuarios.Content = new pageTabs_Blank();
         }
 
         private void btnSalidas_Click(object sender, RoutedEventArgs e)
@@ -158,6 +161,7 @@ namespace wpfFamiliaBlanco
             frameSalidas.Content = new pageTab_Salidas();
             frameProveedores.Content = new pageTabs_Blank();
             frameEntradas.Content = new pageTabs_Blank();
+            frameUsuarios.Content = new pageTabs_Blank();
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
@@ -166,7 +170,7 @@ namespace wpfFamiliaBlanco
             frameCategorias.Content = new pageTabs_Categorias(); //main tab
             frameProveedores.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
-            //frameUsuarios.Content = new pageTabs_Blank();
+            frameUsuarios.Content = new pageTabs_Blank();
             frameSalidas.Content = new pageTabs_Blank();
             frameEntradas.Content = new pageTabs_Blank();
 
@@ -199,7 +203,7 @@ namespace wpfFamiliaBlanco
             frameCategorias.Content = new pageTabs_Blank();
             frameProveedores.Content = new pageTabs_Blank();
             frameProductos.Content = new pageTabs_Blank();
-            //frameUsuarios.Content = new pageTabs_Blank();
+            frameUsuarios.Content = new pageTabs_Blank();
             frameSalidas.Content = new pageTabs_Blank();
             frameEntradas.Content = new pageTabs_Blank();
 

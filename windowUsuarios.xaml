@@ -267,7 +267,6 @@
         <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="602.666,348.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72"/>
         <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="612.919,197.167,0,0" VerticalAlignment="Top" Width="64.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="589,257,0,0" VerticalAlignment="Top" Width="89" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Button x:Name="btnPrueba" Content="Crear usuario" HorizontalAlignment="Left" Margin="478.889,348.778,0,0" VerticalAlignment="Top" Width="101" Height="23" BorderBrush="#FF707070" Foreground="White" Background="#FF4B4848" Click="btnPrueba_Click"/>
         <Border BorderBrush="#FF024629" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="750.276,166.167,0,0" VerticalAlignment="Top" Width="160.724" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

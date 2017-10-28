@@ -436,24 +436,82 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle1">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
-    <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666">
-        <Border Height="235.67" Width="435.297" BorderThickness="1" BorderBrush="#FF00FF93" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="350.667,218.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="23" Margin="350.667,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="#FFABADB3" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="611.667,343.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" Click="btnSubmit_Click" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="350.667,181.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="351,241,0,0" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+    <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
         <Label x:Name="lblUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Image HorizontalAlignment="Left" Height="21.159" Margin="132.918,10,0,0" VerticalAlignment="Top" Width="24.159" Source="icons8-user.png"/>
         <TextBlock HorizontalAlignment="Left" Margin="-82,343.778,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Button x:Name="btnPrueba" Content="TEST" HorizontalAlignment="Left" Margin="522.334,343.778,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FF707070" Foreground="White" Click="btnPrueba_Click" Background="#FF4B4848"/>
+        <Grid Background="#FF171717" Margin="158,54,145.666,19.001">
+            <Border Height="426.008" Width="676.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="27.334,23.659,25.479,26.333" Opacity="0.5" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF323131" Offset="0"/>
+                        <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="268.888" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="403.612" BorderBrush="#FF858585" Opacity="0.5" CornerRadius="5">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF323131" Offset="0"/>
+                        <GradientStop Color="#FF282727" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="178.667,163.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355.666" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
+            <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="466.253,126.167,0,0" VerticalAlignment="Top" Width="67.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="449,186,0,0" VerticalAlignment="Top" Width="85" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+            <Label x:Name="lblPassword_Copy" Content="Tipo" HorizontalAlignment="Left" Margin="490,242,0,0" VerticalAlignment="Top" Width="44" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
+            <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="459.333,327.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click"/>
+            <ComboBox x:Name="cmbTipoUsuario" HorizontalAlignment="Left" Margin="178.667,284,0,0" VerticalAlignment="Top" Width="355.666" Foreground="White"/>
+            <Label x:Name="lblUser_Copy" Content="Crear usuario" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="179,225,0,0" VerticalAlignment="Top" Width="355" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"/>
+
+        </Grid>
     </Grid>
 </Page>

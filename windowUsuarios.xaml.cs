@@ -77,36 +77,6 @@ namespace wpfFamiliaBlanco
      
         }
 
-        //CREAR USUARIO
-        private void btnPrueba_Click(object sender, RoutedEventArgs e)
-        {
-            var newW2 = new windowCrearUsuario();
-            
-            System.Windows.Media.Effects.BlurEffect myBlur = new System.Windows.Media.Effects.BlurEffect();
-            myBlur.Radius = 40;
-
-            newW2.Owner = this;
-            this.Effect = myBlur;
-            newW2.ShowDialog();
-            
-
-            if (newW2.DialogResult == true)
-            {
-
-
-                String NuevoUsuario = newW2.txtUsername.Text;
-                String NuevoTipo = newW2.cmbTipoUsuario.SelectedItem.ToString();
-
-             
-                String sql5 = "insert into usuarios(usuario, contrasenia, tipoUsuario) values('" + NuevoUsuario + "', '"+ Seguridad.Encriptar(newW2.txtPassword.Password.ToString()) + "', '"+ NuevoTipo + "');";
-                conexion.operaciones(sql5);
-
-                MessageBox.Show("USUARIO CREADO CORRECTAMENTE");
-            }
-
-      
-
-
-        }
+        
     }
 }
