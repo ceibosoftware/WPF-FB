@@ -34,6 +34,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProveedores();
             LlenarComboFiltro();
+  
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
@@ -114,7 +115,7 @@ namespace wpfFamiliaBlanco
                 String update;
                 update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.txtRazonSocial.Text + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
                 conexion.operaciones(update);
-                
+                loadListaProveedores();
      
                 String sqlContacto3;
 
