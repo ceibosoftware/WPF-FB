@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wpfFamiliaBlanco.Proveedores;
 
 namespace wpfFamiliaBlanco
 {
@@ -244,7 +245,8 @@ namespace wpfFamiliaBlanco
 
         private void btnProvNuevo_Click(object sender, RoutedEventArgs e)
         {
-             String idProv;
+            windowAgregarProveedor.lista.Clear();
+            String idProv;
             Proveedores.windowAgregarProveedor newW2 = new Proveedores.windowAgregarProveedor();
             newW2.ShowDialog();
             if(newW2.DialogResult == true)
