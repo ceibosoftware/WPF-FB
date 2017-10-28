@@ -30,7 +30,6 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProducto();
             LlenarComboFiltro();
-           
 
         }
 
@@ -38,25 +37,7 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarProducto();
 
-            /*System.Windows.Media.Effects.BlurEffect myBlur = new System.Windows.Media.Effects.BlurEffect();
-            myBlur.Radius = 20;
-
-            var mainW = new MainWindow
-            {
-                Effect = myBlur
-            };
-
-
-            
-            var wW = Window.GetWindow(this); 
-            
-
-            mainW.Show(); //mostrar ventana con desenfoque
-            wW.Close(); //cerrar ventana anterior (abuelo>padre>hijo)
-            */
-            newW.Show();
-            
-
+            newW.ShowDialog();
             if (newW.Aceptar && newW.validar())
             {
                 //INSERTAR DATOS EN TABLA PRODUCTOS
@@ -68,8 +49,8 @@ namespace wpfFamiliaBlanco
 
                 //INSERTAR PROVEEDORES DE PRODUCTO CARGADO                
                 string ultimoId = "Select last_insert_id()";
-                String id = conexion.ValorEnVariable(ultimoId);               
-                for(int i = 0; i < newW.Items.Count ; i++)
+                String id = conexion.ValorEnVariable(ultimoId);
+                for (int i = 0; i < newW.Items.Count; i++)
                 {
                     int idProveedor = newW.Items[i].id;
                     string sql2 = "INSERT INTO productos_has_proveedor(FK_idProductos, FK_idProveedor) VALUES('" + id + "','" + idProveedor + "' )";
@@ -128,9 +109,9 @@ namespace wpfFamiliaBlanco
             {
                 MessageBox.Show("Es necesario seleccionar un producto a modificar");
             }
-           
+
         }
-        
+
         private void loadListaProducto()
         {
             String consulta = " Select * from productos ";
@@ -201,9 +182,9 @@ namespace wpfFamiliaBlanco
 
         private void LlenarComboFiltro()
         {
-             
-           cmbFiltro.Items.Add("Nombre");
-           cmbFiltro.Items.Add("Categoria");
+
+            cmbFiltro.Items.Add("Nombre");
+            cmbFiltro.Items.Add("Categoria");
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -227,14 +208,12 @@ namespace wpfFamiliaBlanco
 
                 MessageBox.Show("Es necesario seleccionar un producto a eliminar");
             }
-     
+
         }
         public int Darvalor(int valor)
         {
             return valor;
         }
-
-       
     }
 }
 

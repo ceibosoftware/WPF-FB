@@ -20,8 +20,8 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class windowModificarProducto : Window
     {
-        
-        private  List<elemento> items  = new List<elemento>();
+
+        private List<elemento> items = new List<elemento>();
         private Boolean aceptar = false;
         CRUD conexion = new CRUD();
 
@@ -30,13 +30,13 @@ namespace wpfFamiliaBlanco
 
         public windowModificarProducto()
         {
-            
+
             InitializeComponent();
             LoadListaComboCategoria();
             LoadListaProveedor();
             LlenarComboFiltro();
         }
-        public windowModificarProducto(int cmbValue, string nombre, string  descripcion, List<elemento> items)
+        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items)
         {
             InitializeComponent();
             LoadListaComboCategoria();
@@ -62,14 +62,14 @@ namespace wpfFamiliaBlanco
             txtNombre.Text = "";
         }
 
-        
+
         private void LoadListaProveedor()
         {
             String consulta = " Select * from proveedor ";
             conexion.Consulta(consulta, ltsProveedores);
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
-            
+
         }
 
 
@@ -90,7 +90,7 @@ namespace wpfFamiliaBlanco
             cmbCategoria.ItemsSource = categorias.AsDataView();
             cmbCategoria.SelectedIndex = 0;
         }
-     
+
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Busquedas de productos.
@@ -110,7 +110,7 @@ namespace wpfFamiliaBlanco
             }
 
             ltsProveedores.ItemsSource = productos.AsDataView();
-           
+
 
         }
 
@@ -167,7 +167,7 @@ namespace wpfFamiliaBlanco
 
                 MessageBox.Show("Es necesario seleccionar un proveedor a agregar");
             }
-           
+
         }
 
         private void btnProvEliminar_Click(object sender, RoutedEventArgs e)

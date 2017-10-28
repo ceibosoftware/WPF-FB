@@ -296,7 +296,7 @@ namespace wpfFamiliaBlanco
                 
                
             }
-            LoadListaProveedor();
+            LoadListaProveedor(); //
         }
     }
  }
