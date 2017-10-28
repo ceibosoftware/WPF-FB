@@ -34,6 +34,13 @@ namespace wpfFamiliaBlanco
             ltsCategorias.SelectedIndex = 1;
           CargarTxtNombreCategoria();
 
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnModificar.Visibility = Visibility.Collapsed;
+                this.btnEliminar.Visibility = Visibility.Collapsed;
+
+            }
+
         }
 
         
@@ -129,31 +136,51 @@ namespace wpfFamiliaBlanco
         //ELIMINAR CATEGORIA
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-             selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
-            textnombre.Text =selectedDataRow["nombre"].ToString();
-        
-           MessageBoxResult result = MessageBox.Show("Seguro quiere eliminar la categoría ? " + selectedDataRow["nombre"].ToString(), "Cuidado", MessageBoxButton.YesNo);
-            switch (result)
-            {
-                case MessageBoxResult.Yes:
-                    id = ltsCategorias.SelectedValue.ToString();
-                    String name = textnombre.Text.ToString();
-                    String sql;
-
-                    sql = "delete from categorias where idCategorias='" + id + "'";
-                    conexion.operaciones(sql);
-                    this.loadListaCategoria();
-                    break;
-                case MessageBoxResult.No:
-                   
-                    break;
-                
-            }
            
-        }
-      
 
-        private void ltsCategorias_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
+                textnombre.Text =selectedDataRow["nombre"].ToString();
+        
+               MessageBoxResult result = MessageBox.Show("Seguro quiere eliminar la categoría ? " + selectedDataRow["nombre"].ToString(), "Cuidado", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                   
+                   
+                        id = ltsCategorias.SelectedValue.ToString();
+                        String name = textnombre.Text.ToString();
+                        String sql;
+                        String categoria;
+                        String sql2 = " SELECT COUNT(*) FROM categorias_has_proveedor WHERE FK_idCategorias = '" + id + "'";
+                        categoria = conexion.ValorEnVariable(sql2).ToString();
+
+                    if (categoria == "0"  )
+                    {
+                        sql = "delete from categorias where idCategorias='" + id + "'";
+                        conexion.operaciones(sql);
+                        MessageBox.Show("Categoría eliminada correctamente.");
+                        this.loadListaCategoria();
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se puede eliminar la categoría porque esta asignada a un proveedor.");
+                        break;
+                    }
+                    
+                
+                    case MessageBoxResult.No:
+                   
+                        break;
+                
+                }
+            
+          
+
+        }
+
+
+private void ltsCategorias_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             try

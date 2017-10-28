@@ -37,8 +37,8 @@ namespace wpfFamiliaBlanco
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
-                this.btnModificar.IsEnabled = false;
-                this.btnEliminar.IsEnabled = false;
+                this.btnModificar.Visibility = Visibility.Collapsed;
+                this.btnEliminar.Visibility = Visibility.Collapsed;
                 this.dgvContacto.IsEnabled = false;
             }
 

@@ -22,16 +22,34 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class pageUsuarios : Page
     {
-
+       public  int var = 0;
         CRUD conexion = new CRUD();
-        MySqlConnection sqlCon = new MySqlConnection("Server = localhost; Port = 3306; Database = familiablanco; Uid = root; Pwd = ''");
-        
+       
 
         public pageUsuarios()
         {
             InitializeComponent();
             LlenarComboUsuario();
-            cmbTipoUsuario.SelectedIndex = 1;
+     
+
+            
+            if (windowUsuarios.tipoUsuarioDB == "super")
+            {
+
+                this.lblTexto.Visibility = Visibility.Collapsed;
+                cmbTipoUsuario.SelectedIndex = 1;
+
+            }
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+
+                this.btnSubmit.IsEnabled = false;
+                this.txtPassword.IsEnabled = false;
+                this.txtUsername.IsEnabled = false;
+                this.cmbTipoUsuario.IsEnabled = false;
+               
+               
+            }
 
         }
 
@@ -46,7 +64,18 @@ namespace wpfFamiliaBlanco
 
             if (txtUsername.Text != "" && txtPassword.Password.ToString() != "" && nomCat == "0")
             {
-                //pageUsuarios.DialogResult = true;
+
+                //CREAR USUARIO
+                        String NuevoUsuario = txtUsername.Text;
+                        String NuevoTipo = cmbTipoUsuario.SelectedItem.ToString();
+
+
+                        String sql5 = "insert into usuarios(usuario, contrasenia, tipoUsuario) values('" + NuevoUsuario + "', '" + Seguridad.Encriptar(txtPassword.Password.ToString()) + "', '" + NuevoTipo + "');";
+                        conexion.operaciones(sql5);
+
+                        MessageBox.Show("USUARIO CREADO CORRECTAMENTE");
+                    
+         
             }
             else if (txtUsername.Text == "")
             {

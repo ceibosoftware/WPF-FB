@@ -31,6 +31,13 @@ namespace wpfFamiliaBlanco
             loadListaProducto();
             LlenarComboFiltro();
 
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnModificar.Visibility = Visibility.Collapsed;
+                this.btnEliminar.Visibility = Visibility.Collapsed;
+
+            }
+
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)

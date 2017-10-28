@@ -27,7 +27,13 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             LlenarComboUsuario();
             cmbTipoUsuario.SelectedIndex = 1;
-        
+
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+
+                this.btnSubmit.IsEnabled = false;
+            }
+
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs args)
