@@ -228,13 +228,7 @@ namespace wpfFamiliaBlanco
             }
         }
 
-        private void txtDescripcion_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
-            {
-                e.Handled = true;
-            }
-        }
+       
 
         private void btnCatNueva_Click(object sender, RoutedEventArgs e)
         {
@@ -245,6 +239,63 @@ namespace wpfFamiliaBlanco
             {
                 LoadListaComboCategoria();
             }
+        }
+
+        private void btnProvNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            String idProv;
+            Proveedores.windowAgregarProveedor newW2 = new Proveedores.windowAgregarProveedor();
+            newW2.ShowDialog();
+            if (newW2.DialogResult == true)
+            {
+                String nombre = newW2.txtNombre.Text;
+                String cuit = newW2.txtCuit.Text;
+                String razonSocial = newW2.cmbRazonSocial.Text;
+                String direccion = newW2.txtDireccion.Text;
+                // String categoria = newW2.cmbCategoria.Text;
+                String codigoPostal = newW2.txtCP.Text;
+                String localidad = newW2.txtLocalidad.Text;
+
+
+                //INSERTAR DATOS PRINCIPALES
+                String sql;
+                sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "');";
+                conexion.operaciones(sql);
+
+
+                String sql2 = "Select idProveedor from proveedor order by idProveedor DESC LIMIT 1";
+                idProv = conexion.ValorEnVariable(sql2);
+
+                Console.WriteLine("ULTIMO ID" + idProv);
+
+                //INSERTAR CONTACTO PROVEEDOR
+                String sqlContacto;
+
+                string ultimoId = "Select last_insert_id()";
+                String id = conexion.ValorEnVariable(ultimoId);
+                for (int i = 0; i < Proveedores.windowAgregarProveedor.lista.Count; i++)
+                {
+                    String nombreL = Proveedores.windowAgregarProveedor.lista[i].NombreContacto;
+                    String telefonoL = Proveedores.windowAgregarProveedor.lista[i].NumeroTelefono;
+                    String emailL = Proveedores.windowAgregarProveedor.lista[i].Email;
+                    sqlContacto = "insert into contactoproveedor(telefono, email, nombreContacto, FK_idProveedor) values('" + telefonoL + "', '" + emailL + "', '" + nombreL + "', '" + idProv + "');";
+                    conexion.operaciones(sqlContacto);
+                }
+                // loadListaProducto();
+
+                //INSERTAR CATEGORIAS PROVEEDOR
+
+
+                for (int i = 0; i < newW2.Items.Count; i++)
+                {
+                    int idCategoria = newW2.Items[i].id;
+                    string sql3 = "INSERT INTO categorias_has_proveedor(FK_idProveedor, FK_idCategorias) VALUES('" + id + "','" + idCategoria + "' )";
+                    conexion.operaciones(sql3);
+                }
+
+
+            }
+            LoadListaProveedor(); //
         }
     }
 }
