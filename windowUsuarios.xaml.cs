@@ -83,7 +83,7 @@ namespace wpfFamiliaBlanco
             var newW2 = new windowCrearUsuario();
             
             System.Windows.Media.Effects.BlurEffect myBlur = new System.Windows.Media.Effects.BlurEffect();
-            myBlur.Radius = 20;
+            myBlur.Radius = 40;
 
             newW2.Owner = this;
             this.Effect = myBlur;

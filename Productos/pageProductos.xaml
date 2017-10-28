@@ -1267,7 +1267,7 @@
         <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="165.5" Margin="438.223,289.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="285.007,64.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblFiltrar" Content="Filtrar" HorizontalAlignment="Left" Margin="670.23,64.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="438.223,89.992,0,0" VerticalAlignment="Top" Width="364" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF171616" BorderBrush="{x:Null}" Style="{DynamicResource combo_box}"/>
+        <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="438.223,89.992,0,0" VerticalAlignment="Top" Width="364" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C" Style="{DynamicResource combo_box}"/>
         <Border Height="256.508" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF64006B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="830.39,89.992,48,203.167" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
