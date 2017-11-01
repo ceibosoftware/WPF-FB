@@ -35,7 +35,7 @@ namespace wpfFamiliaBlanco
             LoadListaProv(lista);
             LoadListaProveedor();
             LlenarComboFiltro();
-  
+            LimitarCampos();
             conActual = contactoActual;
             dgvContactom.ItemsSource = conActual;
 
@@ -43,9 +43,26 @@ namespace wpfFamiliaBlanco
             ltsCategorias.SelectionMode = SelectionMode.Single;
             this.dgvContactom.IsReadOnly = true;
         }
-  
 
 
+
+        private void LimitarCampos()
+        {
+            ltsCatProveedores.SelectionMode = SelectionMode.Single;
+            ltsCategorias.SelectionMode = SelectionMode.Single;
+            txtFiltro.MaxLength = 10;
+            txtFiltro.MaxLines = 1;
+            txtCP.MaxLength = 10;
+            txtCP.MaxLines = 1;
+            txtCuit.MaxLength = 15;
+            txtCuit.MaxLines = 1;
+            txtDireccion.MaxLength = 20;
+            txtDireccion.MaxLength = 20;
+            txtLocalidad.MaxLength = 20;
+            txtLocalidad.MaxLines = 1;
+            txtCategoria.MaxLength = 20;
+            txtCategoria.MaxLines = 1;
+        }
         private void LoadListaProveedor()
         {
 
@@ -123,6 +140,11 @@ namespace wpfFamiliaBlanco
         private void btnCatAgregar_Click(object sender, RoutedEventArgs e)
         {
 
+            try
+            {
+
+           
+
             Boolean existe = false;
             DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
 
@@ -164,12 +186,27 @@ namespace wpfFamiliaBlanco
                     MessageBox.Show("Esa categoria ya fue agregada");
                 }
             }
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione una categoria");
+            }
         }
 
         private void btnCatEliminar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+        
             Items.Remove(Items.Find(item => item.id == (int)ltsCatProveedores.SelectedValue));
             ltsCatProveedores.Items.Refresh();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Seleccione una categoría");
+            }
         }
 
         private void btnNuevoContacto_Click(object sender, RoutedEventArgs e)

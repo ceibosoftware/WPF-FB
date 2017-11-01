@@ -42,7 +42,8 @@ namespace wpfFamiliaBlanco
                 this.btnEliminar.Visibility = Visibility.Collapsed;
                 this.dgvContacto.IsEnabled = false;
             }
-
+            txtFiltro.MaxLength = 25;
+            txtFiltro.MaxLines = 1;
         }
    
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click

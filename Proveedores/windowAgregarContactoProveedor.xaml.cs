@@ -24,8 +24,11 @@ namespace wpfFamiliaBlanco.Proveedores
         {
             InitializeComponent();
             txtNombreContacto.MaxLength = 25;
+            txtMailContacto.MaxLines = 1;
+            txtNombreContacto.MaxLines = 1;
+            txtTelefonoContacto.MaxLines = 1;
             txtMailContacto.MaxLength = 30;
-            txtTelefonoContacto.MaxLength = 25;
+            txtTelefonoContacto.MaxLength = 13;
             txtTelefonoContacto.Focus();
         }
 

@@ -48,8 +48,7 @@ namespace wpfFamiliaBlanco.Proveedores
             EliminarDGVContacto();
             LoadListaProv();
             LoadListaProveedor();
-            ltsCatProveedores.SelectionMode = SelectionMode.Single;
-            ltsCategorias.SelectionMode = SelectionMode.Single;
+            LimitarCampos();
         }
 
         private void LoadListaProveedor()
@@ -59,6 +58,24 @@ namespace wpfFamiliaBlanco.Proveedores
             conexion.Consulta(consulta, ltsCategorias);
             ltsCategorias.DisplayMemberPath = "nombre";
             ltsCategorias.SelectedValuePath = "idCategorias";
+        }
+
+        private void LimitarCampos()
+        {
+            ltsCatProveedores.SelectionMode = SelectionMode.Single;
+            ltsCategorias.SelectionMode = SelectionMode.Single;
+            txtBuscar.MaxLength = 20;
+            txtBuscar.MaxLines = 1;
+            txtCP.MaxLength = 10;
+            txtCP.MaxLines = 1;
+            txtCuit.MaxLength = 15;
+            txtCuit.MaxLines = 1;
+            txtDireccion.MaxLength = 20;
+            txtDireccion.MaxLength = 20;
+            txtLocalidad.MaxLength = 20;
+            txtLocalidad.MaxLines = 1;
+            txtNombre.MaxLength = 20;
+            txtNombre.MaxLines = 1;
         }
 
         private void LoadListaProv()
