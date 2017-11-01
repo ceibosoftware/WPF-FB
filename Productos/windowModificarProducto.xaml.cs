@@ -173,8 +173,16 @@ namespace wpfFamiliaBlanco
 
         private void btnProvEliminar_Click(object sender, RoutedEventArgs e)
         {
-            Items.Remove(Items.Find(item => item.id == (int)ltsProvProductos.SelectedValue));
-            ltsProvProductos.Items.Refresh();
+            try
+            {
+                Items.Remove(Items.Find(item => item.id == (int)ltsProvProductos.SelectedValue));
+                ltsProvProductos.Items.Refresh();
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Es necesario seleccionar un proveedor a eliminar");
+            }
         }
         private void LoadListaProv()
         {
