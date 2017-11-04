@@ -239,7 +239,10 @@ namespace wpfFamiliaBlanco
 
         private void btnEliminarContacto_Click_1(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+          
 
             Contacto contacto = dgvContactom.SelectedItem as Contacto;
 
@@ -269,7 +272,13 @@ namespace wpfFamiliaBlanco
                     
 
                }
-  
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleecione un contacto");
+            }
+
         }
 
         private void txtCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)

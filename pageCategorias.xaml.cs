@@ -150,21 +150,34 @@ namespace wpfFamiliaBlanco
                         id = ltsCategorias.SelectedValue.ToString();
                         String name = textnombre.Text.ToString();
                         String sql;
-                        String categoria;
+                        String proveedor;
                         String sql2 = " SELECT COUNT(*) FROM categorias_has_proveedor WHERE FK_idCategorias = '" + id + "'";
-                        categoria = conexion.ValorEnVariable(sql2).ToString();
+                    String producto;
+                    String sql3 = " SELECT COUNT(*) FROM productos WHERE FK_idCategorias = '" + id + "'";
+                    proveedor = conexion.ValorEnVariable(sql2).ToString();
+                    producto = conexion.ValorEnVariable(sql3).ToString();
 
-                    if (categoria == "0"  )
+                    if (proveedor == "0"   )
                     {
-                        sql = "delete from categorias where idCategorias='" + id + "'";
-                        conexion.operaciones(sql);
-                        MessageBox.Show("Categoría eliminada correctamente.");
-                        this.loadListaCategoria();
-                        break;
+                        if (producto == "0")
+                        {
+                            sql = "delete from categorias where idCategorias='" + id + "'";
+                            conexion.operaciones(sql);
+                            MessageBox.Show("Categoría eliminada correctamente.");
+                            this.loadListaCategoria();
+                            break;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se puede eliminar la categorìa porque pertenece a un producto.");
+                            break;
+                        }
+                      
                     }
+                
                     else
                     {
-                        MessageBox.Show("No se puede eliminar la categoría porque esta asignada a un proveedor.");
+                        MessageBox.Show("No se puede eliminar la categoría porque pertenece a un proveedor.");
                         break;
                     }
                     
