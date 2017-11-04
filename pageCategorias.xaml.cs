@@ -212,11 +212,19 @@ private void ltsCategorias_SelectionChanged(object sender, SelectionChangedEvent
 
         private void CargarTxtNombreCategoria()
         {
+            try
+            {
+                String consulta = "SELECT nombre FROM categorias WHERE idCategorias = @valor";
+                DataTable proveedor = conexion.ConsultaParametrizada(consulta, ltsCategorias.SelectedValue);
 
-            String consulta = "SELECT nombre FROM categorias WHERE idCategorias = @valor";
-            DataTable proveedor = conexion.ConsultaParametrizada(consulta, ltsCategorias.SelectedValue);
+                textnombre.Text = proveedor.Rows[0].ItemArray[0].ToString();
+            }
+            catch (Exception)
+            {
 
-            textnombre.Text = proveedor.Rows[0].ItemArray[0].ToString();
+
+            }
+          
           
             
         }

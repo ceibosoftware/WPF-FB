@@ -34,14 +34,14 @@ namespace wpfFamiliaBlanco
 
             InitializeComponent();
             LoadListaComboCategoria();
-            LoadListaProveedor();
+           
             LlenarComboFiltro();
         }
         public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items)
         {
             InitializeComponent();
             LoadListaComboCategoria();
-            LoadListaProveedor();
+            
             cmbCategoria.SelectedValue = cmbValue;
             txtDescripcion.Text = descripcion;
             txtNombre.Text = nombre;
@@ -68,6 +68,14 @@ namespace wpfFamiliaBlanco
         {
             String consulta = " Select * from proveedor ";
             conexion.Consulta(consulta, ltsProveedores);
+            ltsProveedores.DisplayMemberPath = "nombre";
+            ltsProveedores.SelectedValuePath = "idProveedor";
+
+        }
+        private void LoadListaProveedorCategoria()
+        {
+            String consulta = "SELECT proveedor.nombre ,proveedor.idProveedor FROM proveedor,categorias_has_proveedor  WHERE categorias_has_proveedor.FK_idCategorias =  @valor and  proveedor.idProveedor = categorias_has_proveedor.FK_idProveedor;";
+            ltsProveedores.ItemsSource = conexion.ConsultaParametrizada(consulta, cmbCategoria.SelectedValue).AsDataView();
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
 
@@ -306,6 +314,15 @@ namespace wpfFamiliaBlanco
 
             }
             LoadListaProveedor(); //
+        }
+
+        private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Items.Clear();
+            ltsProvProductos.Items.Refresh();
+            Console.WriteLine("aca estoy");
+            LoadListaProveedorCategoria();
+
         }
     }
 }
