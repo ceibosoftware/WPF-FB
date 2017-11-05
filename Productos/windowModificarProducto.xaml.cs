@@ -33,15 +33,14 @@ namespace wpfFamiliaBlanco
         {
 
             InitializeComponent();
-            LoadListaComboCategoria();
-           
+            LoadListaComboCategoria();           
             LlenarComboFiltro();
         }
         public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items)
         {
             InitializeComponent();
             LoadListaComboCategoria();
-            
+            LoadListaProveedorCategoria();
             cmbCategoria.SelectedValue = cmbValue;
             txtDescripcion.Text = descripcion;
             txtNombre.Text = nombre;
@@ -55,6 +54,7 @@ namespace wpfFamiliaBlanco
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
+            cmbCategoria.SelectedIndex = 1;
             cmbCategoria.SelectedIndex = 0;
         }
 
@@ -78,6 +78,7 @@ namespace wpfFamiliaBlanco
             ltsProveedores.ItemsSource = conexion.ConsultaParametrizada(consulta, cmbCategoria.SelectedValue).AsDataView();
             ltsProveedores.DisplayMemberPath = "nombre";
             ltsProveedores.SelectedValuePath = "idProveedor";
+           
 
         }
 
@@ -98,6 +99,7 @@ namespace wpfFamiliaBlanco
             categorias = conexion.ConsultaParametrizada(consulta, txtBuscar.Text);
             cmbCategoria.ItemsSource = categorias.AsDataView();
             cmbCategoria.SelectedIndex = 0;
+            
         }
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
@@ -313,15 +315,16 @@ namespace wpfFamiliaBlanco
 
 
             }
-            LoadListaProveedor(); //
+            LoadListaProveedorCategoria(); //
         }
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Console.WriteLine("aca entre");
+           
+            LoadListaProveedorCategoria();
             Items.Clear();
             ltsProvProductos.Items.Refresh();
-            Console.WriteLine("aca estoy");
-            LoadListaProveedorCategoria();
 
         }
     }

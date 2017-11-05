@@ -58,7 +58,14 @@ namespace wpfFamiliaBlanco
             cmbCategoria.SelectedIndex = 0;
         }
 
-  
+        private void LoadListaProveedorCategoria()
+        {
+            String consulta = "SELECT proveedor.nombre ,proveedor.idProveedor FROM proveedor,categorias_has_proveedor  WHERE categorias_has_proveedor.FK_idCategorias =  @valor and  proveedor.idProveedor = categorias_has_proveedor.FK_idProveedor;";
+            ltsProveedores.ItemsSource = conexion.ConsultaParametrizada(consulta, cmbCategoria.SelectedValue).AsDataView();
+            ltsProveedores.DisplayMemberPath = "nombre";
+            ltsProveedores.SelectedValuePath = "idProveedor";
+
+        }
 
         private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -307,6 +314,13 @@ namespace wpfFamiliaBlanco
                
             }
             LoadListaProveedor(); //
+        }
+
+        private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Items.Clear();
+            ltsProvProductos.Items.Refresh();        
+            LoadListaProveedorCategoria();
         }
     }
  }
