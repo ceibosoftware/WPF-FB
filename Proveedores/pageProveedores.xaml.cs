@@ -228,6 +228,9 @@ namespace wpfFamiliaBlanco
                 }
                 loadListaProveedores();
                 this.ltsCategorias.Items.Refresh();
+                InitializeComponent();
+                loadListaProveedores();
+                LlenarComboFiltro();
             }
         }
 
