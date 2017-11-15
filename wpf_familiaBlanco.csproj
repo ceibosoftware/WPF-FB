@@ -63,6 +63,30 @@
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
     <Compile Include="elemento.cs" />
+    <Compile Include="Entradas\Facturacion.xaml.cs">
+      <DependentUpon>Facturacion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\Ordenes.xaml.cs">
+      <DependentUpon>Ordenes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\Remito.xaml.cs">
+      <DependentUpon>Remito.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarClienteME.xaml.cs">
+      <DependentUpon>windowAgregarClienteME.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarFactura.xaml.cs">
+      <DependentUpon>windowAgregarFactura.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarOC.xaml.cs">
+      <DependentUpon>windowAgregarOC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarRemito.xaml.cs">
+      <DependentUpon>windowAgregarRemito.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowCuotas.xaml.cs">
+      <DependentUpon>windowCuotas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
     </Compile>
@@ -111,6 +135,34 @@
     <Compile Include="windowUsuarios.xaml.cs">
       <DependentUpon>windowUsuarios.xaml</DependentUpon>
     </Compile>
+    <Page Include="Entradas\Facturacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\Remito.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarClienteME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarFactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarOC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarRemito.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowCuotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,18 +175,32 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Entradas\Ordenes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pageCategorias.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="pageEntradas.xaml">
+    <Page Include="Entradas\pageEntradas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-	<Compile Include="pageTab_Salidas.xaml.cs"> <DependentUpon>pageTab_Salidas.xaml</DependentUpon> </Compile>
-<Compile Include="pageTab_Entradas.xaml.cs"> <DependentUpon>pageTab_Entradas.xaml</DependentUpon> </Compile>
-<Page Include="pageTab_Entradas.xaml"> <SubType>Designer</SubType> <Generator>MSBuild:Compile</Generator> </Page>
-<Page Include="pageTab_Salidas.xaml"> <SubType>Designer</SubType> <Generator>MSBuild:Compile</Generator> </Page>
+    <Compile Include="pageTab_Salidas.xaml.cs">
+      <DependentUpon>pageTab_Salidas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageTab_Entradas.xaml.cs">
+      <DependentUpon>pageTab_Entradas.xaml</DependentUpon>
+    </Compile>
+    <Page Include="pageTab_Entradas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageTab_Salidas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pageInicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,7 +287,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pageEntradas.xaml.cs">
+    <Compile Include="Entradas\pageEntradas.xaml.cs">
       <DependentUpon>pageEntradas.xaml</DependentUpon>
     </Compile>
     <Compile Include="pageInicio.xaml.cs">
@@ -307,5 +373,6 @@
   <ItemGroup>
     <Resource Include="ceibo ss small.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

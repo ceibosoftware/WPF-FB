@@ -13,16 +13,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace wpfFamiliaBlanco
+namespace wpfFamiliaBlanco.Entradas
 {
     /// <summary>
-    /// Interaction logic for pageEntradas.xaml
+    /// Interaction logic for Remito.xaml
     /// </summary>
-    public partial class pageEntradas : Page
+    public partial class Remito : Page
     {
-        public pageEntradas()
+        public Remito()
         {
             InitializeComponent();
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarRemito();
+            newW.ShowDialog();
+        }
+
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarRemito();
+            newW.ShowDialog();
         }
     }
 }
