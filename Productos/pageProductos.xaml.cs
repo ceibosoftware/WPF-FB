@@ -50,8 +50,11 @@ namespace wpfFamiliaBlanco
                 //INSERTAR DATOS EN TABLA PRODUCTOS
                 String nombre = newW.txtNombre.Text;
                 String descripcion = newW.txtDescripcion.Text;
+                String unidad = newW.txtUnidad.Text;
+                String existencias = newW.txtExistenciaMinima.Text;
+                String precioUnitario = newW.txtPrecioUnitario.Text;
                 int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                String sql = "insert into productos(nombre, descripcion, FK_idCategorias) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "');";
+                String sql = "insert into productos(nombre, descripcion, FK_idCategorias, existenciaMinima, unidad, precioUnitario) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "', '" + existencias + "', '" + unidad + "','" + precioUnitario + "');";
                 conexion.operaciones(sql);
 
                 //INSERTAR PROVEEDORES DE PRODUCTO CARGADO                
@@ -75,7 +78,7 @@ namespace wpfFamiliaBlanco
                 int idProducto = (int)ltsProductos.SelectedValue;
                 int index = (int)ltsProductos.SelectedIndex;
                 // LLENAR DATOS PRODUCTOS.
-                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
+                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias"; 
                 DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
 
                 // LLENAR DATOS PROVEEDORES.
@@ -87,7 +90,7 @@ namespace wpfFamiliaBlanco
                     items.Add(elemento);
                 }
                 //CONSTRUCTOR PAGINA MODIFICAR 
-                var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(), items);
+                var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(), items, (float)productos.Rows[0].ItemArray[6], productos.Rows[0].ItemArray[7].ToString(), (float)productos.Rows[0].ItemArray[8]);
 
                 newW.ShowDialog();
                 if (newW.Aceptar)
@@ -95,8 +98,11 @@ namespace wpfFamiliaBlanco
                     //ACTUALIZAR DATOS EN TABLA PRODUCTOS
                     String nombre = newW.txtNombre.Text;
                     String descripcion = newW.txtDescripcion.Text;
+                    String unidad = newW.txtUnidad.Text;
+                    String existencias = newW.txtExistenciaMinima.Text;
+                    String precioUnitario = newW.txtPrecioUnitario.Text;
                     int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                    String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "' WHERE productos.idProductos = '" + idProducto + "';";
+                    String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "',precioUnitario = '" + precioUnitario + "',unidad = '" + unidad + "',existenciaMinima = '" + existencias + "' WHERE productos.idProductos = '" + idProducto + "';";
                     conexion.operaciones(sql);
                     //ELIMINA REGISTRO DE TABLA INTERMEDIA
                     string sql2 = "delete  from productos_has_proveedor where FK_idProductos =  '" + idProducto + "'";
@@ -142,10 +148,13 @@ namespace wpfFamiliaBlanco
             try
             {
                 //consulta categoria, descripcion
-                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
+                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
                 DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
                 txtDescripcion.Text = productos.Rows[0].ItemArray[2].ToString();
                 txtCategoria.Text = productos.Rows[0].ItemArray[3].ToString();
+                txtExistenciaMinima.Text = productos.Rows[0].ItemArray[6].ToString();
+                txtUnidad.Text = productos.Rows[0].ItemArray[7].ToString();
+                txtPrecioUnitario.Text = productos.Rows[0].ItemArray[8].ToString();
 
                 //consulta proveedores
                 String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
@@ -200,7 +209,7 @@ namespace wpfFamiliaBlanco
             {
                 DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
                 string nombre = selectedDataRow["nombre"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar : " + nombre, "Advertencia", MessageBoxButton.YesNo);
                 if (dialog == MessageBoxResult.Yes)
                 {
                     int idSeleccionado = (int)ltsProductos.SelectedValue;

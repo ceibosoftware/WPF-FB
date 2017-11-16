@@ -36,7 +36,7 @@ namespace wpfFamiliaBlanco
             LoadListaComboCategoria();           
             LlenarComboFiltro();
         }
-        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items)
+        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario)
         {
             InitializeComponent();
             LoadListaComboCategoria();
@@ -44,6 +44,9 @@ namespace wpfFamiliaBlanco
             cmbCategoria.SelectedValue = cmbValue;
             txtDescripcion.Text = descripcion;
             txtNombre.Text = nombre;
+            txtExistenciaMinima.Text = existencia.ToString();
+            txtPrecioUnitario.Text = precioUnitario.ToString();
+            txtUnidad.Text = unidad;
             LlenarComboFiltro();
             this.Items = items;
             LoadListaProv();
@@ -220,6 +223,21 @@ namespace wpfFamiliaBlanco
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 MessageBox.Show("Falta completar campo nombre");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtExistenciaMinima.Text))
+            {
+                MessageBox.Show("falta completar campo existencias minimas");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtUnidad.Text))
+            {
+                MessageBox.Show("falta completar campo unidad");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
+            {
+                MessageBox.Show("falta completar campo precio unitario");
                 return false;
             }
             else if (string.IsNullOrEmpty(txtDescripcion.Text))

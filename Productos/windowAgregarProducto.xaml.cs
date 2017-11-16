@@ -215,6 +215,21 @@ namespace wpfFamiliaBlanco
                 MessageBox.Show("Falta completar campo nombre");
                 return false;
             }
+            else if (string.IsNullOrEmpty(txtExistenciaMinima.Text))
+            {
+                MessageBox.Show("falta completar campo existencias minimas");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtUnidad.Text))
+            {
+                MessageBox.Show("falta completar campo unidad");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
+            {
+                MessageBox.Show("falta completar campo precio unitario");
+                return false;
+            }
             else if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 MessageBox.Show("falta completar campo descripcion");
@@ -313,7 +328,8 @@ namespace wpfFamiliaBlanco
                 
                
             }
-            LoadListaProveedor(); //
+           // LoadListaProveedor(); //
+            LoadListaProveedorCategoria();
         }
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
