@@ -157,5 +157,15 @@
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="936,427.184,0,23.031" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click"/>
         <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="935.666,382.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="935.666,334.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
+        <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="45,162,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
+        <Label x:Name="lblProveedor" Width="150" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="290,142,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nro Orden de compra"/>
+        <DatePicker HorizontalAlignment="Left" Margin="45,113,0,0" VerticalAlignment="Top" Width="395"/>
+        <Label x:Name="lblFecha" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="308,88,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha"/>
+        <DataGrid x:Name="dgvNumOC" HorizontalAlignment="Left" Height="148" Margin="508,64,0,0" VerticalAlignment="Top" Width="395"/>
+        <Label x:Name="lblNumOC" Width="230" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="210,190,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nro remito"/>
+        <DataGrid x:Name="dgvProducto" HorizontalAlignment="Left" Height="148" Margin="45,215,0,0" VerticalAlignment="Top" Width="395"/>
+        <ComboBox x:Name="cmbFiltro_Copy" HorizontalAlignment="Left" Height="23" Margin="45,60,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
+        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="308,30,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <Label x:Name="lblNumOC_Copy" Width="230" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="673,34,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos remitos"/>
     </Grid>
 </Page>
