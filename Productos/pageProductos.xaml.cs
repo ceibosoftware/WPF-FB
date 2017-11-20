@@ -125,13 +125,13 @@ namespace wpfFamiliaBlanco
 
         }
 
-        private void loadListaProducto()
+        public  void loadListaProducto()
         {
             String consulta = " Select * from productos ";
             conexion.Consulta(consulta, ltsProductos);
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
-            ltsProductos.SelectedIndex = 0;
+          
         }
         private void loadListaProducto(int index)
         {

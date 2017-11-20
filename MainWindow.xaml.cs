@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace wpfFamiliaBlanco
 {
@@ -22,12 +23,12 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        pageProductos productos = new pageProductos();
 
         public MainWindow()
         {
             InitializeComponent();
-
+            //loadTimer();
         }
 
         
@@ -244,5 +245,21 @@ namespace wpfFamiliaBlanco
             this.Close();
             usuarios.Show();
         }
+        private void loadTimer()
+        {
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
+            dispatcherTimer.Start();
+        }
+
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            productos.loadListaProducto();
+            Console.WriteLine("aca estoy soy el timer"); 
+           
+        }
+
     }
 }

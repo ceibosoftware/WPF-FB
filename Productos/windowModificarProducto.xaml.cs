@@ -345,5 +345,25 @@ namespace wpfFamiliaBlanco
             ltsProvProductos.Items.Refresh();
 
         }
+
+        private void txtUnidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtExistenciaMinima_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        private void txtPrecioUnitario_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 }
