@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="618.667" Width="986.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png">
+        Title="Iniciar sesión" Height="618.667" Width="986.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png" Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="ButtonLogin" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
