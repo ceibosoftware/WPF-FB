@@ -20,15 +20,26 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class Facturacion : Page
     {
+        CRUD conexion = new CRUD();
         public Facturacion()
         {
             InitializeComponent();
+            LoadListaComboProveedor();
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarFactura();
             newW.ShowDialog();
+        }
+
+        public void LoadListaComboProveedor()
+        {
+            String consulta = "SELECT * FROM proveedor";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            cmbProveedores.SelectedIndex = 0;
         }
     }
 }

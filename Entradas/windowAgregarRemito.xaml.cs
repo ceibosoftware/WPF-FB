@@ -19,11 +19,24 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarRemito : Window
     {
+
+
+        CRUD conexion = new CRUD();
         public windowAgregarRemito()
         {
             InitializeComponent();
+            LoadListaComboProveedor();
         }
 
-      
+        public void LoadListaComboProveedor()
+        {
+            String consulta = "SELECT * FROM proveedor";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            cmbProveedores.SelectedIndex = 0;
+        }
     }
+
+
 }

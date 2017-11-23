@@ -20,9 +20,13 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class Remito : Page
     {
+
+        CRUD conexion = new CRUD();
         public Remito()
         {
             InitializeComponent();
+            LoadListaComboProveedor();
+            
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -36,5 +40,16 @@ namespace wpfFamiliaBlanco.Entradas
             var newW = new windowAgregarRemito();
             newW.ShowDialog();
         }
+
+        public void LoadListaComboProveedor()
+        {
+            String consulta = "SELECT * FROM proveedor";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            cmbProveedores.SelectedIndex = 0;
+        }
     }
+
+ 
 }

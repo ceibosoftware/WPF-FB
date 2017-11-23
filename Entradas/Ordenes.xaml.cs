@@ -21,19 +21,45 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class Ordenes : Page
     {
+
+        CRUD conexion = new CRUD();
         public Ordenes()
         {
             InitializeComponent();
+            LoadListaComboProveedor();
+            LlenarCmbIVA();
+            LlenarCmbTipoCambio();
         }
 
-       
 
-      
+        public void LoadListaComboProveedor()
+        {
+            String consulta = "SELECT * FROM proveedor";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            cmbProveedores.SelectedIndex = 0;
+        }
+
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarOC();
             newW.ShowDialog();
+        }
+
+        private void LlenarCmbIVA()
+        {
+            cmbIVA.Items.Add("0");
+            cmbIVA.Items.Add("21");
+            cmbIVA.Items.Add("10,5");
+        }
+
+        private void LlenarCmbTipoCambio()
+        {
+            cmbTipoCambio_Copy.Items.Add("$");
+            cmbTipoCambio_Copy.Items.Add("u$d");
+            cmbTipoCambio_Copy.Items.Add("€");
         }
     }
 }

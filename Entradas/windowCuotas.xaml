@@ -157,14 +157,14 @@
             </Border.Background>
         </Border>
 
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="284.024,163.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250.309" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
+        <TextBox x:Name="txtCuota1" HorizontalAlignment="Left" Height="23" Margin="284.024,163.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250.309" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
         <Label x:Name="lblDias" Content="Días" HorizontalAlignment="Left" Margin="466.253,126.167,0,0" VerticalAlignment="Top" Width="67.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="459.333,327.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblCuotas" Content="Crear usuario" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="284.024,225,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
+        <Label x:Name="lblCuotas" Content="Cuotas" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <PasswordBox x:Name="txtCuota2" HorizontalAlignment="Left" Margin="284.024,225,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
         <Label x:Name="lblCuota1" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,163.167,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 1"/>
         <Label x:Name="lblCuota2" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,225,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 2"/>
-        <PasswordBox x:Name="txtPassword_Copy" HorizontalAlignment="Left" Margin="284.357,280.357,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
+        <PasswordBox x:Name="txtCuota3" HorizontalAlignment="Left" Margin="284.357,280.357,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
         <Label x:Name="lblCuota3" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,278.357,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 3"/>
 
     </Grid>
