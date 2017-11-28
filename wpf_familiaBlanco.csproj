@@ -60,6 +60,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Categorias.cs" />
+    <Compile Include="Clientes\ME.xaml.cs" />
+    <Compile Include="Clientes\MI.xaml.cs" />
+    <Compile Include="Clientes\pageClientes.xaml.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
     <Compile Include="elemento.cs" />
@@ -135,6 +138,18 @@
     <Compile Include="windowUsuarios.xaml.cs">
       <DependentUpon>windowUsuarios.xaml</DependentUpon>
     </Compile>
+    <Page Include="Clientes\ME.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\MI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\pageClientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Entradas\Facturacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

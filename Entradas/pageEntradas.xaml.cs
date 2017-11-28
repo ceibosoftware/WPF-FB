@@ -30,16 +30,28 @@ namespace wpfFamiliaBlanco
         private void btnFacturas_Click(object sender, RoutedEventArgs e)
         {
             frameInicioEntradas.Content = new Facturacion();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTabPressed") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
         }
 
         private void btnOrdenes_Click(object sender, RoutedEventArgs e)
         {
             frameInicioEntradas.Content = new Ordenes();
+            btnOrdenes.Style = FindResource("botonTabPressed") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
         }
 
         private void btnRemitos_Click(object sender, RoutedEventArgs e)
         {
             frameInicioEntradas.Content = new Remito();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTabPressed") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
         }
     }
 }

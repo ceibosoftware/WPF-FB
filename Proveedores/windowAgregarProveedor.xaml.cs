@@ -200,7 +200,9 @@ namespace wpfFamiliaBlanco.Proveedores
 
             try
             {
+#pragma warning disable CS0219 // The variable 'provIndex' is assigned but its value is never used
                 int provIndex = 0;
+#pragma warning restore CS0219 // The variable 'provIndex' is assigned but its value is never used
                 Boolean existe = false;
                 DataRow selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
 
@@ -283,7 +285,9 @@ namespace wpfFamiliaBlanco.Proveedores
 
                     lista.Remove(lista[i]);
                     dgv.Items.Refresh();
+#pragma warning disable CS0168 // The variable 'update' is declared but never used
                     String update;
+#pragma warning restore CS0168 // The variable 'update' is declared but never used
                
                     MessageBox.Show("Se ha eliminado el contacto");
                     break;

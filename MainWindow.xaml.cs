@@ -37,12 +37,13 @@ namespace wpfFamiliaBlanco
 
             frameInicio.Content = new pageUsuarios();  //frame inicio es el cuadro donde se actualizan las pantallas en la ventana
             //principal del programa
-            frameUsuarios.Content = new pageTab_Usuario(); //main tab
-            frameProductos.Content = new pageTabs_Blank();
-            frameProveedores.Content = new pageTabs_Blank();
-            frameCategorias.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
+            btnUsuarios.Style = FindResource("BotonStylePanel") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
 
             #region Fade in
             //animaciones
@@ -75,12 +76,13 @@ namespace wpfFamiliaBlanco
         private void btnProductos_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageProductos();
-            frameProductos.Content = new pageTab_Productos(); //main tab
-            frameUsuarios.Content = new pageTabs_Blank();
-            frameCategorias.Content = new pageTabs_Blank();
-            frameProveedores.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("BotonStylePanel") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
 
             #region Fade in
             //animaciones
@@ -108,13 +110,14 @@ namespace wpfFamiliaBlanco
         private void btnProveedores_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageProveedores();
-            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
-            frameUsuarios.Content = new pageTabs_Blank();// unload del resto de las tabs
-            frameCategorias.Content = new pageTabs_Blank();
-            frameProductos.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
-            
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("BotonStylePanel") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
+
 
             #region Fade in
             //animaciones
@@ -142,38 +145,77 @@ namespace wpfFamiliaBlanco
         private void btnEntradas_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageEntradas();
-            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
-            frameCategorias.Content = new pageTabs_Blank();
-            frameProductos.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameProveedores.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTab_Entradas();
-            frameUsuarios.Content = new pageTabs_Blank();
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("BotonStylePanel") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
         }
 
         private void btnSalidas_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageSalidas();
 
-           
-            frameProveedores.Content = new pageTab_Proveedores(); //main tab load punto de color
-            frameCategorias.Content = new pageTabs_Blank();
-            frameProductos.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTab_Salidas();
-            frameProveedores.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
-            frameUsuarios.Content = new pageTabs_Blank();
+
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("BotonStylePanel") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageCategorias();
-            frameCategorias.Content = new pageTabs_Categorias(); //main tab
-            frameProveedores.Content = new pageTabs_Blank();
-            frameProductos.Content = new pageTabs_Blank();
-            frameUsuarios.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("BotonStylePanel") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
+        }
+
+        private void btnClientes_Click_1(object sender, RoutedEventArgs e)
+        {
+#pragma warning disable CS0246 // The type or namespace name 'pageClientes' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning disable CS0246 // The type or namespace name 'pageClientes' could not be found (are you missing a using directive or an assembly reference?)
+            frameInicio.Content = new pageClientes();
+#pragma warning restore CS0246 // The type or namespace name 'pageClientes' could not be found (are you missing a using directive or an assembly reference?)
+#pragma warning restore CS0246 // The type or namespace name 'pageClientes' could not be found (are you missing a using directive or an assembly reference?)
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("BotonStylePanel") as Style;
 
             #region Fade in
             //animaciones
@@ -201,12 +243,7 @@ namespace wpfFamiliaBlanco
         private void btn_ImageB_Blanco_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageInicio();
-            frameCategorias.Content = new pageTabs_Blank();
-            frameProveedores.Content = new pageTabs_Blank();
-            frameProductos.Content = new pageTabs_Blank();
-            frameUsuarios.Content = new pageTabs_Blank();
-            frameSalidas.Content = new pageTabs_Blank();
-            frameEntradas.Content = new pageTabs_Blank();
+            
 
             #region Fade in
             //animaciones
@@ -265,5 +302,9 @@ namespace wpfFamiliaBlanco
         {
             Environment.Exit(0);
         }
+
+       
+
+        
     }
 }

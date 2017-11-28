@@ -132,7 +132,9 @@ namespace wpfFamiliaBlanco
         {
             try
             {
+#pragma warning disable CS0219 // The variable 'provIndex' is assigned but its value is never used
                 int provIndex = 0;
+#pragma warning restore CS0219 // The variable 'provIndex' is assigned but its value is never used
                 Boolean existe = false;
                 DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
 

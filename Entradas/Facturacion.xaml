@@ -153,8 +153,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="#FF232222">
-        <Image HorizontalAlignment="Left" Height="23" Margin="482,52,0,0" VerticalAlignment="Top" Width="23" Source="Productos/icons8-search.png" Opacity="0.5"/>
+    <Grid Background="#FF171717">
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="936,427.184,0,23.031" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click"/>
         <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="935.666,382.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="935.666,334.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
