@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,12 +27,31 @@ namespace wpfFamiliaBlanco
         public Ordenes()
         {
             InitializeComponent();
-            LoadListaComboProveedor();
-            LlenarCmbIVA();
-            LlenarCmbTipoCambio();
+            LoadListaComboProveedor();      
+            loadlistaOC();  
+            fechaActual();
+            loadlistaOC();
         }
 
+        private void loadlistaOC()
+        {
+            try
+            {
+                String consulta = " Select * from ordencompra ";
+                conexion.Consulta(consulta, ltsNumeroOC);
+                ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
+                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
+                ltsNumeroOC.SelectedIndex = 0;
+            }
+            catch (NullReferenceException)
+            {
 
+               
+            }
+              
+
+        }
+ 
         public void LoadListaComboProveedor()
         {
             String consulta = "SELECT * FROM proveedor";
@@ -48,18 +68,45 @@ namespace wpfFamiliaBlanco
             newW.ShowDialog();
         }
 
-        private void LlenarCmbIVA()
+    
+
+    
+       private void fechaActual()
         {
-            cmbIVA.Items.Add("0");
-            cmbIVA.Items.Add("21");
-            cmbIVA.Items.Add("10,5");
+
+            dpFecha.SelectedDate = DateTime.Now;
         }
 
-        private void LlenarCmbTipoCambio()
+        private void ltsNumeroOC_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cmbTipoCambio_Copy.Items.Add("$");
-            cmbTipoCambio_Copy.Items.Add("u$d");
-            cmbTipoCambio_Copy.Items.Add("€");
+            try
+            {
+                //consulta productos
+                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
+                DataTable productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
+                dgvProductos.ItemsSource = productos.AsDataView();
+                //llenar datos de oc
+                String consulta2 = "SELECT * FROM ordencompra t1 where t1.idOrdenCompra = @valor";
+                DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsNumeroOC.SelectedValue);
+                txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
+                txtIva.Text = OC.Rows[0].ItemArray[5].ToString();
+                txtFormaPago.Text = OC.Rows[0].ItemArray[7].ToString();
+                txtTipoCambio.Text = OC.Rows[0].ItemArray[6].ToString();
+                txtTotal.Text = OC.Rows[0].ItemArray[4].ToString();
+                txtDescripcion.Text = OC.Rows[0].ItemArray[2].ToString();
+            }
+            catch (Exception)
+            {
+
+               
+            }
+      
+         
+        }
+
+        private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

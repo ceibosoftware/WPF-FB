@@ -58,5 +58,9 @@ namespace wpfFamiliaBlanco.Entradas
             cmbTipoCambio.Items.Add("€");
         }
 
+        private void dgvProductosFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -194,32 +194,72 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+        <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
+        <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsGrouping" Value="true"/>
+                                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid Width="1033.666" Background="#FF171717">
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="936,427.184,0,23.031" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click"/>
         <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="935.666,382.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="935.666,334.517,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
-        <ComboBox x:Name="cmbProveedores" HorizontalAlignment="Left" Height="23" Margin="30,55,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
+        <ComboBox x:Name="cmbProveedores" HorizontalAlignment="Left" Height="23" Margin="30,55,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged"/>
         <Label x:Name="lblProveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293,33,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
-        <DatePicker HorizontalAlignment="Left" Margin="30,103,0,0" VerticalAlignment="Top" Width="395"/>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="30,103,0,0" VerticalAlignment="Top" Width="395" Style="{DynamicResource datePicker}"/>
         <Label x:Name="lblFecha" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="293,78,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha"/>
-        <DataGrid x:Name="dgvNumOC" HorizontalAlignment="Left" Height="148" Margin="470,157,0,0" VerticalAlignment="Top" Width="395"/>
+        <DataGrid x:Name="dgvProductos" HorizontalAlignment="Left" Height="148" Margin="470,157,0,0" VerticalAlignment="Top" Width="395"/>
         <Label x:Name="lblNumOC" Width="230" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="195,132,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Numero de orden de compra"/>
-        <TextBox x:Name="txtFiltro" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,55,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
-        <Label x:Name="lblCuotas" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="733,30,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuotas a pagar"/>
-        <TextBox x:Name="txtFiltro_Copy" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,103,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <TextBox x:Name="txtFormaPago" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,103,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
         <Label x:Name="lblFormaPago" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="733,78,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de pago"/>
-        <DataGrid x:Name="dgvProducto" HorizontalAlignment="Left" Height="148" Margin="30,157,0,0" VerticalAlignment="Top" Width="395"/>
         <Label x:Name="lblProducto" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="733,131,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Producto"/>
-        <TextBox x:Name="txtFiltro_Copy2" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,361,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <TextBox x:Name="txtSubtotal" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,361,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
         <Label x:Name="lblSubtotal_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="533,331,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Subtotal"/>
         <Label x:Name="lblTotal_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="733,331,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total"/>
-        <ComboBox x:Name="cmbIVA" HorizontalAlignment="Left" Height="23" Margin="470,409,0,0" VerticalAlignment="Top" Width="195" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
-        <ComboBox x:Name="cmbTipoCambio_Copy" HorizontalAlignment="Left" Height="23" Margin="671,409,0,0" VerticalAlignment="Top" Width="194" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="txtFiltro_Copy3" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="671,361,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <TextBox x:Name="txtTotal" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="671,361,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
         <Label x:Name="lblIVA_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="533,384,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="IVA"/>
         <Label x:Name="lblTipoCambio_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="733,384,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Tipo de cambio"/>
+        <ListBox x:Name="ltsNumeroOC" HorizontalAlignment="Left" Height="143" Margin="30,162,0,0" VerticalAlignment="Top" Width="395" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14"  IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle1}" SelectionChanged="ltsNumeroOC_SelectionChanged"/>
+        <TextBox x:Name="txtIva" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="470,409,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <TextBox x:Name="txtTipoCambio" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="670,409,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <Label x:Name="lblDescripcion" Content="Descripción" HorizontalAlignment="Left" Margin="262,306,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="103" Margin="30,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
 
     </Grid>
 </Page>
