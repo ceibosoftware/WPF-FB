@@ -116,13 +116,13 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <ListBox x:Name="ltsProveedor" HorizontalAlignment="Left" Height="303.867" Margin="60.641,95.652,0,0" VerticalAlignment="Top" Width="280.663"/>
-        <Label x:Name="lblProveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="209.304,66.652,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
-        <Label x:Name="lblAgregarProducto" Width="97.193" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="27.668,23.826,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar producto"/>
+        <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="303.867" Margin="60.641,95.652,0,0" VerticalAlignment="Top" Width="280.663" SelectionChanged="ltsProductos_SelectionChanged"/>
+        <Label x:Name="lblProveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="209.304,66.652,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos"/>
+        <Label x:Name="lblAgregarProducto" Width="124" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="28,24,0,0" Height="27" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar producto"/>
         <Label x:Name="lblNombre" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,66.652,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="378.763,95.652,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088"/>
         <Label x:Name="lblCantidad" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,121.348,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cantidad"/>
-        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="378.763,150.348,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088"/>
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="378.763,150.348,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088" TextChanged="txtCantidad_TextChanged"/>
         <Label x:Name="lblPrecioUnitario" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,177.702,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Precio unitario"/>
         <TextBox x:Name="txtPrecioUnitario" HorizontalAlignment="Left" Height="23" Margin="378.763,206.702,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088"/>
         <Label x:Name="lblTotal" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,232.398,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total"/>

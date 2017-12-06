@@ -106,7 +106,39 @@ namespace wpfFamiliaBlanco
 
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                String consulta = " Select * from ordencompra t1 where t1.FK_idProveedor = @valor ";
+                DataTable OCProveedor = conexion.ConsultaParametrizada(consulta,cmbProveedores.SelectedValue);
+                ltsNumeroOC.ItemsSource = OCProveedor.AsDataView();
+                ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
+                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
+                ltsNumeroOC.SelectedIndex = 0;
+            }
+            catch (NullReferenceException)
+            {
 
+
+            }
+
+        }
+
+        private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                String consulta = " Select * from ordencompra t1 where t1.fecha = @valor ";
+                DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
+                ltsNumeroOC.ItemsSource = OCFecha.AsDataView();
+                ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
+                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
+                ltsNumeroOC.SelectedIndex = 0;
+            }
+            catch (NullReferenceException)
+            {
+
+
+            }
         }
     }
 }
