@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,11 +33,11 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void LoadListaComboProveedor()
         {
-            String consulta = "SELECT * FROM proveedor";
+            String consulta = "SELECT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idProveedor";
-            cmbProveedores.SelectedIndex = 0;
+            cmbProveedores.SelectedIndex = 1;
         }
     public void LlenarComboFiltro()
         {
@@ -61,6 +62,27 @@ namespace wpfFamiliaBlanco.Entradas
         private void dgvProductosFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+       
+            try
+            {
+                String id = cmbProveedores.SelectedValue.ToString();
+                String nombreProv = cmbProveedores.Text;
+
+                String sql = "SELECT * FROM productos_has_ordencompra, proveedor WHERE ordencompra.FK_idProveedor = proveedor.idProveedor";
+
+          
+            }
+            catch (Exception)
+            {
+
+                
+            }
+          
         }
     }
 }

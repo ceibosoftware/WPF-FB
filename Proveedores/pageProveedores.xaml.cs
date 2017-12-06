@@ -359,6 +359,8 @@ namespace wpfFamiliaBlanco
 
             ltsProveedores.ItemsSource = proveedores.AsDataView();
         }
+
+    
     }
 
    

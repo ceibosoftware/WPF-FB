@@ -26,37 +26,13 @@ namespace wpfFamiliaBlanco.Entradas
         {
             InitializeComponent();
 
-            AgregarCuotasCmbCuotas();
             LoadListaComboProveedor();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
                   
         }
 
-        private void cmbCuotas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var newW = new windowCuotas();
-            if (cmbCuotas.SelectedItem.Equals("1"))
-            {
-                newW.lblCuota2.Visibility = Visibility.Collapsed;
-                newW.txtCuota2.Visibility = Visibility.Collapsed;
-
-                newW.lblCuota3.Visibility = Visibility.Collapsed;
-                newW.txtCuota3.Visibility = Visibility.Collapsed;
-            }else if (cmbCuotas.SelectedItem.Equals("2"))
-            {
-                newW.lblCuota3.Visibility = Visibility.Collapsed;
-                newW.txtCuota3.Visibility = Visibility.Collapsed;
-            }
-            newW.ShowDialog();
-        }
-
-        public void AgregarCuotasCmbCuotas()
-        {
-            cmbCuotas.Items.Add("1");
-            cmbCuotas.Items.Add("2");
-            cmbCuotas.Items.Add("3");
-        }
+       
         private void lblAgregarRemito_Copy_Click(object sender, RoutedEventArgs e)
         {
             

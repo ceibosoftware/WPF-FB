@@ -108,6 +108,7 @@
     <Compile Include="pageTab_Usuario.xaml.cs">
       <DependentUpon>pageTab_Usuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="producto.cs" />
     <Compile Include="Productos\windowAgregarProducto.xaml.cs">
       <DependentUpon>windowAgregarProducto.xaml</DependentUpon>
     </Compile>
