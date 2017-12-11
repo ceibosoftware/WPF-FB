@@ -77,7 +77,7 @@ namespace wpfFamiliaBlanco.Entradas
                 int.TryParse(newW.txtCantidad.Text, out int cantidad);
                 decimal.TryParse(newW.txtTotal.Text, out decimal total);
                 decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
-                producto p = new producto(newW.idProducto, newW.txtNombre.Text, cantidad,precioU,total);
+                producto p = new producto( newW.txtNombre.Text, newW.idProducto, cantidad,precioU,total);
                 productos.Add(p);
                 loadDgvProductos();
                 dgvProductos.Items.Refresh();

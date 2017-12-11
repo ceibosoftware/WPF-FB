@@ -126,7 +126,7 @@
                                                 Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                                 Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                 ViewportSize="{TemplateBinding ViewportHeight}"
-                                                Style="{StaticResource VerticalScrollBarStyle}"/>
+                                                />
                                             <Grid Grid.Column="1" Grid.Row="2">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
@@ -135,7 +135,7 @@
                                                 <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}"
                                                     Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                                     Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    ViewportSize="{TemplateBinding ViewportWidth}" Style="{StaticResource HorisontalScrollBarStyle}"/>
+                                                    ViewportSize="{TemplateBinding ViewportWidth}" />
                                             </Grid>
                                         </Grid>
                                     </ControlTemplate>
