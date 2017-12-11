@@ -75,8 +75,8 @@
     <Compile Include="Entradas\Remito.xaml.cs">
       <DependentUpon>Remito.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Entradas\windowAgregarClienteME.xaml.cs">
-      <DependentUpon>windowAgregarClienteME.xaml</DependentUpon>
+    <Compile Include="Entradas\windowAgregarProcductoOC.xaml.cs">
+      <DependentUpon>windowAgregarProcductoOC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entradas\windowAgregarFactura.xaml.cs">
       <DependentUpon>windowAgregarFactura.xaml</DependentUpon>
@@ -163,7 +163,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Entradas\windowAgregarClienteME.xaml">
+    <Page Include="Entradas\windowAgregarProcductoOC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
