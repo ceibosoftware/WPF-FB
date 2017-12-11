@@ -836,7 +836,7 @@
             </Border.Background>
             <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="214.175" TextWrapping="Wrap" Text="En esta pantalla se muestran los proveedores y todos los datos de los mismos, junto con una tabla de los distintos contactos por proveedor. Se pueden agregar, modificar y eliminar proveedores desde los botones del borde inferior derecho. Se puede buscar rápidamente un proveedor por nombre como así también filtrar por nombre o categoría." VerticalAlignment="Top" Width="136.276" Margin="9,8,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
         </Border>
-        <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvContacto" HorizontalAlignment="Left" Height="171.831" Margin="444.223,329.502,0,0" VerticalAlignment="Top" Width="364.778"/>
+        <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvContacto" HorizontalAlignment="Left" Height="171.831" Margin="444.223,329.502,0,0" VerticalAlignment="Top" Width="364.778" SelectionChanged="dgvContacto_SelectionChanged"/>
         <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="444.223,82.5,0,0" VerticalAlignment="Top" Width="364.778" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" Style="{DynamicResource combo_box}" />
         <Label x:Name="lblProveedores_lts_Copy" Content="Guía" HorizontalAlignment="Left" Margin="855.007,57.5,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
     </Grid>

@@ -360,7 +360,10 @@ namespace wpfFamiliaBlanco
             ltsProveedores.ItemsSource = proveedores.AsDataView();
         }
 
-    
+        private void dgvContacto_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
    

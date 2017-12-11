@@ -22,6 +22,11 @@ namespace wpfFamiliaBlanco.Entradas
     {
 
         CRUD conexion = new CRUD();
+        public List<producto> items = new List<producto>();
+        public  List<producto> itemsFact = new List<producto>();
+        producto producto;
+        public producto prod;
+
         public windowAgregarFactura()
         {
             InitializeComponent();
@@ -29,6 +34,9 @@ namespace wpfFamiliaBlanco.Entradas
             LlenarComboFiltro();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
+            LoadDgvProducto();
+            LoadDgvFactura();
+            LlenarCmbTipoCuota();
         }
 
         public void LoadListaComboProveedor()
@@ -39,7 +47,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedValuePath = "idProveedor";
             cmbProveedores.SelectedIndex = 1;
         }
-    public void LlenarComboFiltro()
+        public void LlenarComboFiltro()
         {
             cmbFiltro.Items.Add("Proveedor");
 
@@ -59,6 +67,13 @@ namespace wpfFamiliaBlanco.Entradas
             cmbTipoCambio.Items.Add("€");
         }
 
+        private void LlenarCmbTipoCuota()
+        {
+            cmbCuotas.Items.Add("1");
+            cmbCuotas.Items.Add("2");
+            cmbCuotas.Items.Add("3");
+        }
+
         private void dgvProductosFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -67,22 +82,104 @@ namespace wpfFamiliaBlanco.Entradas
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-       
+            itemsFact.Clear();
+            dgvProductosFactura.Items.Refresh();
             try
             {
                 String id = cmbProveedores.SelectedValue.ToString();
                 String nombreProv = cmbProveedores.Text;
 
-                String sql = "SELECT * FROM productos_has_ordencompra, proveedor WHERE ordencompra.FK_idProveedor = proveedor.idProveedor";
-
-          
+                String sql = "SELECT * FROM ordencompra WHERE FK_idProveedor =  '" + id + "'";
+                conexion.Consulta(sql, combo: cmbOrden);
+                cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                cmbOrden.SelectedValuePath = "idOrdenCompra";
+                cmbOrden.SelectedIndex = 0;
             }
             catch (Exception)
             {
 
+                MessageBox.Show("error");
+            }
+
+        }
+
+        private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            items.Clear();
+
+            try
+            {
+                String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+
+                DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
+                for (int i = 0; i < productos.Rows.Count; i++)
+                {
+                    producto = new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1],(int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
+                    items.Add(producto);
+
+                }
+
+                dgvProductosOC.Items.Refresh();
+            }
+            catch (NullReferenceException)
+            {
+
+
+            }
+
+        }
+        private void LoadDgvProducto()
+        {
+            dgvProductosOC.ItemsSource = items;
+        }
+
+        private void LoadDgvFactura()
+        {
+            dgvProductosFactura.ItemsSource = itemsFact;
+        }
+
+        private void btnProdAgregar_Click(object sender, RoutedEventArgs e)
+        {
+
+            prod = dgvProductosOC.SelectedItem as producto;
+            
+            var newW = new WindowAgregarProductoFactura();
+            newW.txtCantidad.Text = prod.cantidad.ToString();
+                newW.can = prod.cantidad;
+            newW.ShowDialog();
+
+            if (newW.DialogResult == true)
+            {
+                prod.cantidad = int.Parse(newW.txtCantidad.Text);
+                itemsFact.Add(prod);
+                dgvProductosFactura.Items.Refresh();
                 
             }
-          
+      
+
+            
+        }
+
+        private void btnProdEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                prod = dgvProductosFactura.SelectedItem as producto;
+                itemsFact.Remove(prod);
+                dgvProductosFactura.Items.Refresh();
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un producto");
+            }
+            
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
+
 }

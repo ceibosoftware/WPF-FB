@@ -12,14 +12,16 @@ namespace wpfFamiliaBlanco
         public String nombre { get; set; }
         public int cantidad { get; set; }
         public decimal total { get; set; }
-        public float precioUnitario { get; set; }
+        public decimal precioUnitario { get; set; }
+        public int id { get; set; }
 
-        public producto(String nombre, int cantidad, decimal total, float precioUnitario)
+        public producto(String nombre, int id, int cantidad, decimal total, decimal precioUnitario)
         {
-            nombre = this.nombre;
-            cantidad = this.cantidad;
-            total = this.total;
-            precioUnitario = this.precioUnitario;
+            this.nombre = nombre;
+            this.id = id;
+            this.cantidad = cantidad;
+            this.total = total;
+            this.precioUnitario = precioUnitario;
         }
 
 

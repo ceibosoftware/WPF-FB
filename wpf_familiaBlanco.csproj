@@ -90,6 +90,7 @@
     <Compile Include="Entradas\windowCuotas.xaml.cs">
       <DependentUpon>windowCuotas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="factura.cs" />
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
     </Compile>
@@ -129,6 +130,9 @@
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
     <Compile Include="windowAgregarCategoria.xaml.cs">
       <DependentUpon>windowAgregarCategoria.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowAgregarProductoFactura.xaml.cs">
+      <DependentUpon>WindowAgregarProductoFactura.xaml</DependentUpon>
     </Compile>
     <Compile Include="windowCrearUsuario.xaml.cs">
       <DependentUpon>windowCrearUsuario.xaml</DependentUpon>
@@ -286,6 +290,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="windowAgregarCategoria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowAgregarProductoFactura.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
