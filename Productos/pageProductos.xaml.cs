@@ -22,7 +22,7 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class pageProductos : Page
     {
-
+     
         CRUD conexion = new CRUD();
         public pageProductos()
         {
@@ -115,7 +115,7 @@ namespace wpfFamiliaBlanco
                         conexion.operaciones(sql3);
                     }
 
-                }
+                }              
                 loadListaProducto(index);
             }
             catch (NullReferenceException)

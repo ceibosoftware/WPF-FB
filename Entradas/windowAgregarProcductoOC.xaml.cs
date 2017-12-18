@@ -81,13 +81,21 @@ namespace wpfFamiliaBlanco.Entradas
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+            try
+            {
+                decimal cantidad;
+                decimal precioU;
+                Decimal.TryParse(txtCantidad.Text, out cantidad);
+                Decimal.TryParse(txtPrecioUnitario.Text, out precioU);
+                txtTotal.Text = (cantidad * precioU).ToString();
+            }
+            catch (OverflowException)
+            {
 
+                MessageBox.Show("No puede ingresar un numero tan grande");
+            }
                 
-            decimal cantidad;
-            decimal precioU;
-            Decimal.TryParse(txtCantidad.Text, out cantidad);
-            Decimal.TryParse(txtPrecioUnitario.Text, out precioU);
-            txtTotal.Text = (cantidad * precioU).ToString();
+           
 
         }
 
@@ -131,5 +139,10 @@ namespace wpfFamiliaBlanco.Entradas
 
         }
 
+        private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 }
