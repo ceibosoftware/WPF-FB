@@ -21,6 +21,8 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class windowAgregarFactura : Window
     {
 
+        Decimal subtotal;
+        Decimal total;
         CRUD conexion = new CRUD();
         public List<producto> items = new List<producto>();
         public  List<producto> itemsFact = new List<producto>();
@@ -37,6 +39,23 @@ namespace wpfFamiliaBlanco.Entradas
             LoadDgvProducto();
             LoadDgvFactura();
             LlenarCmbTipoCuota();
+        }
+
+        public windowAgregarFactura(int numFactura, String proveedor, List<producto> pOC, List<producto> pFA, DateTime fechafactura, int numeroOC, Decimal subtotal, Decimal total, String IVA, String tipoCambio)
+        {
+
+            this.txtNroFactura.Text = numFactura.ToString();
+            this.cmbProveedores.Text = proveedor;
+            dgvProductosOC.ItemsSource = pOC;
+            dgvProductosFactura.ItemsSource = pFA;
+            dtFactura.SelectedDate = fechafactura;
+            cmbOrden.Text = numeroOC.ToString();
+            txtSubtotal.Text = subtotal.ToString();
+            txtTotal.Text = total.ToString();
+            cmbIVA.Text = IVA.ToString();
+            cmbTipoCambio.Text = tipoCambio.ToString();
+
+
         }
 
         public void LoadListaComboProveedor()
@@ -110,7 +129,7 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
-
+          
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
@@ -142,21 +161,32 @@ namespace wpfFamiliaBlanco.Entradas
         {
 
             prod = dgvProductosOC.SelectedItem as producto;
-            
+
             var newW = new WindowAgregarProductoFactura();
-            newW.txtCantidad.Text = prod.cantidad.ToString();
+            if (prod.cantidad >=1)
+            {
+                
+                newW.txtCantidad.Text = prod.cantidad.ToString();
                 newW.can = prod.cantidad;
-            newW.ShowDialog();
+                newW.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("El producto ya fue facturado");
+            }
+            
 
             if (newW.DialogResult == true)
             {
                 prod.cantidad = int.Parse(newW.txtCantidad.Text);
                 itemsFact.Add(prod);
                 dgvProductosFactura.Items.Refresh();
-                
+                subtotal += prod.precioUnitario * prod.cantidad;
+                txtSubtotal.Text = subtotal.ToString();
+                calculaTotal();
             }
-      
 
+      
             
         }
 
@@ -165,6 +195,9 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 prod = dgvProductosFactura.SelectedItem as producto;
+                subtotal = subtotal - prod.cantidad * prod.precioUnitario;
+                txtSubtotal.Text = subtotal.ToString();
+                calculaTotal();
                 itemsFact.Remove(prod);
                 dgvProductosFactura.Items.Refresh();
             }
@@ -179,6 +212,36 @@ namespace wpfFamiliaBlanco.Entradas
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+           
+        }
+
+        public void calculaTotal()
+        {
+      
+            if (cmbIVA.SelectedIndex == 0)
+            {
+                txtTotal.Text = subtotal.ToString();
+            }
+            else if (cmbIVA.SelectedIndex == 1)
+            {
+                total = subtotal * (decimal)1.21;
+                txtTotal.Text = total.ToString();
+            }
+            else if (cmbIVA.SelectedIndex == 2)
+            {
+                total = subtotal * (decimal)1.105;
+                txtTotal.Text = total.ToString();
+            }
+        }
+
+        private void cmbTipoCambio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+        }
+
+        private void cmbIVA_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            calculaTotal();
         }
     }
 
