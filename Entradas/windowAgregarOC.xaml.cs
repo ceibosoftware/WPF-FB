@@ -80,6 +80,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnAgregar_Copy_Click(object sender, RoutedEventArgs e)
         {
+            bool existe = false;
             var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue);
             newW.ShowDialog();
            
@@ -88,14 +89,33 @@ namespace wpfFamiliaBlanco.Entradas
                 int.TryParse(newW.txtCantidad.Text, out int cantidad);
                 decimal.TryParse(newW.txtTotal.Text, out decimal total);
                 decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
-                producto p = new producto( newW.txtNombre.Text, newW.idProducto, cantidad, total,precioU);
-                productos.Add(p);
-                loadDgvProductos();
-                dgvProductos.Items.Refresh();
-                decimal.TryParse(txtSubtotal.Text, out  subtotal);
-                subtotal += p.total;
-                txtSubtotal.Text = (subtotal).ToString() ;
-                calculaTotal();
+                for (int i = 0; i < productos.Count; i++)
+                {
+                    if (productos[i].nombre == newW.txtNombre.Text)
+                    {
+                        existe = true;
+                    }
+                    else
+                    {
+                        existe = false;
+                    }
+                }
+                if (!existe)
+                {
+                    producto p = new producto(newW.txtNombre.Text, newW.idProducto, cantidad, total, precioU);
+                    productos.Add(p);
+                    loadDgvProductos();
+                    dgvProductos.Items.Refresh();
+                    decimal.TryParse(txtSubtotal.Text, out subtotal);
+                    subtotal += p.total;
+                    txtSubtotal.Text = (subtotal).ToString();
+                    calculaTotal();
+                }
+                else
+                {
+                    MessageBox.Show("El producto ya fue agregado a la orden de compra","Advertencia",MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                }
+
             }
         }
 

@@ -23,9 +23,16 @@ namespace wpfFamiliaBlanco
             this.total = total;
             this.precioUnitario = precioUnitario;
         }
+        public producto(String nombre, int id, int cantidad)
+        {
+            this.nombre = nombre;
+            this.id = id;
+            this.cantidad = cantidad;
+         
+        }
 
 
 
-     
+
     }
 }

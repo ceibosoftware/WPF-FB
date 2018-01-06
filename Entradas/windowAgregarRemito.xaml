@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
         mc:Ignorable="d"
-        Title="windowAgregarRemito" Height="605.334" Width="1225" WindowStartupLocation="CenterScreen">
+        Title="windowAgregarRemito" Height="605.334" Width="1226.999" Background="#FF232222" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -151,33 +151,43 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF232222" Height="605.334">
-
-        <Label x:Name="lblNumero" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="299.674,27.156,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de remito"/>
-        <TextBox x:Name="txtNumero_Copy" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="37,52.156,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
-        <Label x:Name="lblFecha" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="752.674,27.156,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha Remito&#xD;&#xA;"/>
-        <Label x:Name="lblProveedor1" Width="79" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="36,80,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
-        <TextBox x:Name="txtFiltro" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="35,170,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
-        <Label x:Name="lblFiltrar" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="299.674,102.656,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Filtrar por"/>
-        <ComboBox x:Name="cmbProveedores" HorizontalAlignment="Left" Height="23" Margin="35,217,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
-        <Label x:Name="lblProveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="295,195,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
-        <ComboBox x:Name="cmbFiltro_Copy1" HorizontalAlignment="Left" Height="23" Margin="37,127.656,0,0" VerticalAlignment="Top" Width="394.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
-        <Label x:Name="lblOrden" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="482,80,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Orden de compra"/>
-        <ComboBox x:Name="cmbProveedor_Copy" HorizontalAlignment="Left" Height="23" Margin="490,170,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
-        <DataGrid HorizontalAlignment="Left" Height="160" Margin="32,300,0,0" VerticalAlignment="Top" Width="395"/>
-        <DataGrid HorizontalAlignment="Left" Height="160" Margin="491,300,0,0" VerticalAlignment="Top" Width="395"/>
-        <Label x:Name="lblFiltrar_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="749,275,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos Remito&#xD;&#xA;"/>
-        <DatePicker HorizontalAlignment="Left" Margin="491,128,0,0" VerticalAlignment="Top" Width="395"/>
-        <Button x:Name="btnProvAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="440,340,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" />
-        <Button x:Name="btnProvEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="439,415,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}"/>
-        <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="925,510,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="#FFB90909" Background="#FF4B4848" BorderThickness="0,0,3,0"/>
-        <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="925,460,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="#FF009D72" Background="#FF4B4848" BorderThickness="0,0,3,0" />
-        <DatePicker HorizontalAlignment="Left" Margin="490.999,51.156,0,0" VerticalAlignment="Top" Width="394.667"/>
-        <Label x:Name="lblFecha_Copy1" Width="151" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="734,152,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nro oden de compra"/>
-        <Label x:Name="lblFecha_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="745,103,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha de emision&#xA;"/>
-        <Label x:Name="lblFiltrar_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="295,275,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos OC"/>
+    <Grid>
+        <Label x:Name="lblNumero" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="303,17,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de factura"/>
+        <TextBox x:Name="txtNroRemito" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="40,39,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <Label x:Name="lblFecha" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="779,8,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha remito"/>
+        <Label x:Name="lblNumero_Copy1" Width="79" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="43,67,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <TextBox x:Name="txtFiltro" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="45,103,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" TextChanged="txtFiltro_TextChanged" />
+        <ComboBox x:Name="cmbProveedores" HorizontalAlignment="Left" Height="24" Margin="45,151,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged" />
+        <DatePicker x:Name="dtRemito" HorizontalAlignment="Left" Margin="516,32,0,0" VerticalAlignment="Top" Width="395"/>
+        <Label x:Name="lblOrden" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="516,61,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Orden de compra"/>
+        <ComboBox x:Name="cmbOrden" HorizontalAlignment="Left" Height="23" Margin="515,151,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbOrden_SelectionChanged" />
+        <Label x:Name="lblOrden1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="778,64,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha emision"/>
+        <DataGrid x:Name="dgvProductosOC" HorizontalAlignment="Left" Height="133" Margin="43,232,0,0" VerticalAlignment="Top" Width="395"/>
+        <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="530,227,0,0" VerticalAlignment="Top" Width="394" />
+        <Button x:Name="btnProdEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="465,320,0,0" Height="24" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminar_Click" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnProdAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="469,268,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregar_Click" AutomationProperties.IsOffscreenBehavior="Onscreen" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="955,533,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="#FFB90909" Background="#FF4B4848" BorderThickness="0,0,3,0"/>
+        <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="955,485,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="#FF009D72" Background="#FF4B4848" BorderThickness="0,0,3,0" RenderTransformOrigin="0.5,0.5" Click="btnAceptar_Click" />
+        <Label x:Name="lblFecha_Copy1" Width="151" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="760,121,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nro oden de compra"/>
+        <ComboBox x:Name="cmbFechas" HorizontalAlignment="Left" Height="23" Margin="515,89,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbFechas_SelectionChanged" />
 
     </Grid>
-
-
 </Window>
