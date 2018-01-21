@@ -65,6 +65,8 @@
     <Compile Include="Clientes\pageClientes.xaml.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
+    <Compile Include="cuotas.cs" />
+    <Compile Include="cuotas2.cs" />
     <Compile Include="elemento.cs" />
     <Compile Include="Entradas\Facturacion.xaml.cs">
       <DependentUpon>Facturacion.xaml</DependentUpon>

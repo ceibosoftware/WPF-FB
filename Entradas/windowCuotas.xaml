@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
-        Title="Crear usuario" Height="505.333" Width="736" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
+        Title="Crear usuario" Height="646.333" Width="424" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
     <Window.Resources>
         <Style x:Key="LabelStyle_HeaderPagina" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -140,32 +140,44 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FF232222">
-        <Border Height="426.008" Width="676.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="27.334,23.659,25.479,26.333" Opacity="0.5" >
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Border BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="268.888" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="403.612" BorderBrush="#FF858585" Opacity="0.5" CornerRadius="5">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF282727" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-
-        <TextBox x:Name="txtCuota1" HorizontalAlignment="Left" Height="23" Margin="284.024,163.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250.309" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
-        <Label x:Name="lblDias" Content="Días" HorizontalAlignment="Left" Margin="466.253,126.167,0,0" VerticalAlignment="Top" Width="67.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnSubmit" Content="Crear" HorizontalAlignment="Left" Margin="459.333,327.94,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblCuotas" Content="Cuotas" HorizontalAlignment="Left" Margin="161.334,100.052,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <PasswordBox x:Name="txtCuota2" HorizontalAlignment="Left" Margin="284.024,225,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
-        <Label x:Name="lblCuota1" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,163.167,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 1"/>
-        <Label x:Name="lblCuota2" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,225,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 2"/>
-        <PasswordBox x:Name="txtCuota3" HorizontalAlignment="Left" Margin="284.357,280.357,0,0" VerticalAlignment="Top" Width="249.976" Height="23" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White"/>
-        <Label x:Name="lblCuota3" Width="83.779" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="161.334,278.357,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cuota 3"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="106,538,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="22" VerticalContentAlignment="Center" Click="btnAceptar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="220,538,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="22" VerticalContentAlignment="Center" Click="btnCancelar_Click"/>
+        <Label x:Name="lbl1" Content="cuota 1" HorizontalAlignment="Left" Margin="42,54,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias1" Content="dias" HorizontalAlignment="Left" Margin="106,54,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="106,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl2" Content="cuota 2" HorizontalAlignment="Left" Margin="42,118,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias2" Content="dias" HorizontalAlignment="Left" Margin="106,118,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt2" HorizontalAlignment="Left" Height="22" Margin="106,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl3" Content="cuota 3" HorizontalAlignment="Left" Margin="42,190,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias3" Content="dias" HorizontalAlignment="Left" Margin="106,190,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt3" HorizontalAlignment="Left" Height="22" Margin="106,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl4" Content="cuota 4" HorizontalAlignment="Left" Margin="42,264,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias4" Content="dias" HorizontalAlignment="Left" Margin="106,264,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt4" HorizontalAlignment="Left" Height="22" Margin="106,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl5" Content="cuota 5" HorizontalAlignment="Left" Margin="42,352,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias5" Content="dias" HorizontalAlignment="Left" Margin="106,352,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt5" HorizontalAlignment="Left" Height="22" Margin="106,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl6" Content="cuota 6" HorizontalAlignment="Left" Margin="42,432,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias6" Content="dias" HorizontalAlignment="Left" Margin="106,432,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt6" HorizontalAlignment="Left" Height="22" Margin="106,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <Label x:Name="lbl7" Content="cuota 7" HorizontalAlignment="Left" Margin="220,54,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias7" Content="dias" HorizontalAlignment="Left" Margin="284,54,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt7" HorizontalAlignment="Left" Height="23" Margin="284,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <Label x:Name="lbl8" Content="cuota 8" HorizontalAlignment="Left" Margin="220,118,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias8" Content="dias" HorizontalAlignment="Left" Margin="284,118,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt8" HorizontalAlignment="Left" Height="22" Margin="284,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <Label x:Name="lbl9" Content="cuota 9" HorizontalAlignment="Left" Margin="220,190,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias9" Content="dias" HorizontalAlignment="Left" Margin="284,190,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt9" HorizontalAlignment="Left" Height="22" Margin="284,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <Label x:Name="lbl10" Content="cuota 10" HorizontalAlignment="Left" Margin="220,264,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias10" Content="dias" HorizontalAlignment="Left" Margin="284,264,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt10" HorizontalAlignment="Left" Height="22" Margin="284,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <Label x:Name="lbl11" Content="cuota 11" HorizontalAlignment="Left" Margin="220,352,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias11" Content="dias" HorizontalAlignment="Left" Margin="284,352,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt11" HorizontalAlignment="Left" Height="22" Margin="284,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <Label x:Name="lbl12" Content="cuota 12" HorizontalAlignment="Left" Margin="220,432,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dias12" Content="dias" HorizontalAlignment="Left" Margin="284,432,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt12" HorizontalAlignment="Left" Height="22" Margin="284,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
 
     </Grid>
 </Window>

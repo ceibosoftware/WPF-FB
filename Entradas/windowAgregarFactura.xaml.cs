@@ -21,16 +21,22 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class windowAgregarFactura : Window
     {
 
-        Decimal subtotal;
+        Decimal subtotali =0;
         Decimal total;
         CRUD conexion = new CRUD();
         public List<producto> items = new List<producto>();
-        public  List<producto> itemsFact = new List<producto>();
+        public List<producto> itemsFact = new List<producto>();
+        public List<cuotas> todaslascuotas = new List<cuotas>();
         producto producto;
         public producto prod;
+        bool bandera = false;
+        DateTime dt = DateTime.Now;
 
         public windowAgregarFactura()
         {
+            itemsFact.Clear();
+            items.Clear();
+            todaslascuotas.Clear();
             InitializeComponent();
             LoadListaComboProveedor();
             LlenarComboFiltro();
@@ -38,24 +44,51 @@ namespace wpfFamiliaBlanco.Entradas
             LlenarCmbTipoCambio();
             LoadDgvProducto();
             LoadDgvFactura();
+            loadDGVCuotas();
             LlenarCmbTipoCuota();
+          
+           
+       bandera = true;
         }
 
-        public windowAgregarFactura(int numFactura, String proveedor, List<producto> pOC, List<producto> pFA, DateTime fechafactura, int numeroOC, Decimal subtotal, Decimal total, String IVA, String tipoCambio)
+        public windowAgregarFactura(int numFactura, String proveedor, List<producto> pOC, List<producto> pFA, DateTime fechafactura, int numeroOC, Decimal subtotal, Decimal total, int IVA, int tipoCambio, decimal subtotal2, String cuotas, List<cuotas> lCU)
         {
+            InitializeComponent();
+            try
+            {
+                itemsFact.Clear();
+                items.Clear();
+                todaslascuotas.Clear();
+                LoadListaComboProveedor();
+                LlenarComboFiltro();
+                LlenarCmbIVA();
+                LlenarCmbTipoCambio();
+                LoadDgvProducto();
+                LoadDgvFactura(pFA);
+                LlenarCmbTipoCuota();
+                loadDGVCuotas(lCU);
 
-            this.txtNroFactura.Text = numFactura.ToString();
-            this.cmbProveedores.Text = proveedor;
-            dgvProductosOC.ItemsSource = pOC;
-            dgvProductosFactura.ItemsSource = pFA;
-            dtFactura.SelectedDate = fechafactura;
-            cmbOrden.Text = numeroOC.ToString();
-            txtSubtotal.Text = subtotal.ToString();
-            txtTotal.Text = total.ToString();
-            cmbIVA.Text = IVA.ToString();
-            cmbTipoCambio.Text = tipoCambio.ToString();
+                this.txtNroFactura.Text = numFactura.ToString();
+                this.cmbProveedores.Text = proveedor;
+                this.items = pOC;
+                this.cmbCuotas.Text = cuotas;
+                dtFactura.SelectedDate = fechafactura;
+                cmbOrden.Text = numeroOC.ToString();
+                this.subtotali = subtotal;
+                txtSubtotal.Text = subtotal.ToString();
+                cmbIVA.SelectedIndex = IVA;
+                cmbTipoCambio.SelectedIndex = tipoCambio;
+                txtTotal.Text = total.ToString();
+                dt = fechafactura.Date;
+                this.itemsFact = pFA;
+                this.todaslascuotas = lCU;
+       
+                bandera = true;
+            }
+            catch (Exception)
+            {
 
-
+            }
         }
 
         public void LoadListaComboProveedor()
@@ -66,6 +99,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedValuePath = "idProveedor";
             cmbProveedores.SelectedIndex = 1;
         }
+
         public void LlenarComboFiltro()
         {
             cmbFiltro.Items.Add("Proveedor");
@@ -91,6 +125,15 @@ namespace wpfFamiliaBlanco.Entradas
             cmbCuotas.Items.Add("1");
             cmbCuotas.Items.Add("2");
             cmbCuotas.Items.Add("3");
+            cmbCuotas.Items.Add("4");
+            cmbCuotas.Items.Add("5");
+            cmbCuotas.Items.Add("6");
+            cmbCuotas.Items.Add("7");
+            cmbCuotas.Items.Add("8");
+            cmbCuotas.Items.Add("9");
+            cmbCuotas.Items.Add("10");
+            cmbCuotas.Items.Add("11");
+            cmbCuotas.Items.Add("12");
         }
 
         private void dgvProductosFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -129,16 +172,17 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
-          
+
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    producto = new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1],(int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
+                    producto = new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
                     items.Add(producto);
 
                 }
 
                 dgvProductosOC.Items.Refresh();
+                
             }
             catch (NullReferenceException)
             {
@@ -147,6 +191,7 @@ namespace wpfFamiliaBlanco.Entradas
             }
 
         }
+
         private void LoadDgvProducto()
         {
             dgvProductosOC.ItemsSource = items;
@@ -155,39 +200,53 @@ namespace wpfFamiliaBlanco.Entradas
         private void LoadDgvFactura()
         {
             dgvProductosFactura.ItemsSource = itemsFact;
+            dgvProductosFactura.SelectedIndex = 0;
+        }
+
+        private void LoadDgvFactura(List<producto> listproductosfactura)
+        {
+            dgvProductosFactura.ItemsSource = listproductosfactura;
         }
 
         private void btnProdAgregar_Click(object sender, RoutedEventArgs e)
         {
 
-            prod = dgvProductosOC.SelectedItem as producto;
-
-            var newW = new WindowAgregarProductoFactura();
-            if (prod.cantidad >=1)
+            try
             {
-                
-                newW.txtCantidad.Text = prod.cantidad.ToString();
-                newW.can = prod.cantidad;
-                newW.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("El producto ya fue facturado");
-            }
-            
+                prod = dgvProductosOC.SelectedItem as producto;
 
-            if (newW.DialogResult == true)
+                var newW = new WindowAgregarProductoFactura();
+                if (prod.cantidad >= 1)
+                {
+
+                    newW.txtCantidad.Text = prod.cantidad.ToString();
+                    newW.can = prod.cantidad;
+                    newW.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("El producto ya fue facturado");
+                }
+
+
+                if (newW.DialogResult == true)
+                {
+                    prod.cantidad = int.Parse(newW.txtCantidad.Text);
+                    itemsFact.Add(prod);
+                    dgvProductosFactura.Items.Refresh();
+                    subtotali += prod.precioUnitario * prod.cantidad;
+                    txtSubtotal.Text = subtotali.ToString();
+                    calculaTotal();
+                }
+
+            }
+            catch (Exception)
             {
-                prod.cantidad = int.Parse(newW.txtCantidad.Text);
-                itemsFact.Add(prod);
-                dgvProductosFactura.Items.Refresh();
-                subtotal += prod.precioUnitario * prod.cantidad;
-                txtSubtotal.Text = subtotal.ToString();
-                calculaTotal();
+
+                MessageBox.Show("Seleccione un producto a agregar");
             }
 
-      
-            
+
         }
 
         private void btnProdEliminar_Click(object sender, RoutedEventArgs e)
@@ -195,53 +254,212 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 prod = dgvProductosFactura.SelectedItem as producto;
-                subtotal = subtotal - prod.cantidad * prod.precioUnitario;
-                txtSubtotal.Text = subtotal.ToString();
+                subtotali = subtotali - prod.cantidad * prod.precioUnitario;
+                txtSubtotal.Text = subtotali.ToString();
                 calculaTotal();
                 itemsFact.Remove(prod);
                 dgvProductosFactura.Items.Refresh();
+                if (dgvProductosFactura.HasItems == false)
+                {
+                    txtSubtotal.Text = "0";
+                    txtTotal.Text = "0";
+                    subtotali = 0;
+                }
             }
             catch (NullReferenceException)
             {
 
                 MessageBox.Show("Seleccione un producto");
             }
-            
+
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
-           
+            bandera = false;
+            if (Valida())
+            {
+                DialogResult = true;
+            }
         }
 
         public void calculaTotal()
         {
-      
+
             if (cmbIVA.SelectedIndex == 0)
             {
-                txtTotal.Text = subtotal.ToString();
+                txtTotal.Text = subtotali.ToString();
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
-                total = subtotal * (decimal)1.21;
+                total = subtotali * (decimal)1.21;
                 txtTotal.Text = total.ToString();
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
-                total = subtotal * (decimal)1.105;
+                total = subtotali * (decimal)1.105;
                 txtTotal.Text = total.ToString();
             }
         }
 
         private void cmbTipoCambio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          
+
         }
 
         private void cmbIVA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             calculaTotal();
+        }
+
+        private void calcularvalores()
+        {
+                int j = 0;
+                for (int i = 0; i < dgvProductosFactura.Items.Count - 1; i++)
+                {
+
+                    var cantidad = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                    j++;
+
+                    var total = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                    j++;
+
+                    var nombre = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                    j++;
+
+
+                    var precioU = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                    j++;
+
+
+                    var id = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                    j++;
+                    j = 0;
+
+           
+                    producto conA = new producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
+                    subtotali = subtotali + conA.precioUnitario * conA.cantidad;
+                    MessageBox.Show("preciou" + conA.precioUnitario);
+                    MessageBox.Show("cantidad" + conA.cantidad);
+                    MessageBox.Show("subtotal" + subtotali);
+                }
+        }
+
+        private void dgvProductosFactura_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+           
+        }
+
+        private void dgvProductosFactura_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+
+        private void cmbCuotas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+         
+            int cuotass = cmbCuotas.SelectedIndex+1;
+      
+            if (bandera == true)
+            {
+
+                todaslascuotas.Clear();
+        
+                var newW = new windowCuotas(cuotass, dt);
+           
+                newW.ShowDialog();
+                if (newW.DialogResult == true)
+                {
+                    todaslascuotas.Clear();
+                    foreach (cuotas cuot in newW.listacuotas)
+                    {
+                 
+                        int id = cuot.cuota;
+                        int dias = cuot.dias;
+                        DateTime fecha = cuot.fechadepago;
+              
+                        cuotas cu = new cuotas(id, dias, fecha);
+                        todaslascuotas.Add(cu);
+
+                    }
+                    loadDGVCuotas();
+                }
+            }
+            
+        }
+
+        public void loadDGVCuotas()
+        {
+
+            DgvCuotas.ItemsSource = todaslascuotas;
+            DgvCuotas.Items.Refresh();
+        }
+
+        public void loadDGVCuotas(List<cuotas>l)
+        {
+
+            DgvCuotas.ItemsSource = l;
+            DgvCuotas.Items.Refresh();
+        }
+        public Boolean Valida()
+        {
+
+            String nombreDB = "SELECT COUNT(*) FROM factura WHERE numeroFactura  = '" + txtNroFactura.Text + "'";
+            String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
+            if (dtFactura.SelectedDate == null )
+            {
+                MessageBox.Show("Ingrese fecha de la factura");
+                return false;
+            }
+           
+            else if (dgvProductosFactura.HasItems == false)
+            {
+                MessageBox.Show("Es necesario ingresar productos a la factura");
+                return false;
+            } else if (cmbCuotas.Text == "") {
+
+                MessageBox.Show("Selecciona cantidad de cuotas");
+                return false;
+            }
+            else if (cmbIVA.Text == "")
+            {
+
+                MessageBox.Show("Seleccione IVA");
+                return false;
+            }
+            else if (cmbTipoCambio.Text == "")
+            {
+
+                MessageBox.Show("Seleccione tipo de cambio");
+                return false;
+            }
+            else if (cmbProveedores.Text == "")
+            {
+
+                MessageBox.Show("Seleccione un proveedor");
+                return false;
+            }
+            else if (bandera == true && nomCat !="0")
+            {
+               
+                    MessageBox.Show("El numero de factura ya existe");
+                    return false;
+                
+            
+
+            }
+         
+            else if (txtNroFactura.Text == "")
+            {
+                MessageBox.Show("Ingrese numero de factura");
+                return false;
+
+            }
+            else
+            {
+                return true;
+            }
+
         }
     }
 
