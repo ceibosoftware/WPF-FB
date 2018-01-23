@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wpfFamiliaBlanco
 {
-   public class producto
+   public class Producto
     {
 
         public String nombre { get; set; }
@@ -15,7 +15,7 @@ namespace wpfFamiliaBlanco
         public decimal precioUnitario { get; set; }
         public int id { get; set; }
 
-        public producto(String nombre, int id, int cantidad, decimal total, decimal precioUnitario)
+        public Producto(String nombre, int id, int cantidad, decimal total, decimal precioUnitario)
         {
             this.nombre = nombre;
             this.id = id;
@@ -23,7 +23,7 @@ namespace wpfFamiliaBlanco
             this.total = total;
             this.precioUnitario = precioUnitario;
         }
-        public producto(String nombre, int id, int cantidad)
+        public Producto(String nombre, int id, int cantidad)
         {
             this.nombre = nombre;
             this.id = id;
