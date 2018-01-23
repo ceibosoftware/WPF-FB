@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace wpfFamiliaBlanco.Entradas
 {
     /// <summary>
@@ -22,13 +23,13 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class Facturacion : Page
     {
         CRUD conexion = new CRUD();
-        public List<producto> itemsFactura = new List<producto>();
-        public List<producto> itemsdb = new List<producto>();
-        public List<producto> itemsFacturaDB = new List<producto>();
-        public List<producto> itemsFacdb = new List<producto>();
-        public List<producto> produ = new List<producto>();
+        public List<Producto> itemsFactura = new List<Producto>();
+        public List<Producto> itemsdb = new List<Producto>();
+        public List<Producto> itemsFacturaDB = new List<Producto>();
+        public List<Producto> itemsFacdb = new List<Producto>();
+        public List<Producto> produ = new List<Producto>();
         public List<factura> items = new List<factura>();
-        public List<cuotas> cuotasAinsertar = new List<cuotas>();
+        public List<Cuotas> cuotasAinsertar = new List<Cuotas>();
         factura fa;
         Decimal subtotal;
         public Facturacion()
@@ -73,7 +74,7 @@ namespace wpfFamiliaBlanco.Entradas
 
 
                 //inserto cuotas
-                foreach (cuotas cuot in newW.todaslascuotas)
+                foreach (Cuotas cuot in newW.todaslascuotas)
                 {
 
                     int id2 = cuot.cuota;
@@ -88,14 +89,14 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 
                 //INSERTO LOS PRODUCTOS DE LA FACTURA
-                foreach (producto p in newW.itemsFact)
+                foreach (Producto p in newW.itemsFact)
                 {
                     String nombre = p.nombre;
                     int cantidad = p.cantidad;
                     decimal totalp = p.total;
                     decimal precioUni = p.precioUnitario;
           
-                    producto pr = new producto(nombre, 1, cantidad, totalp, precioUni);
+                    Producto pr = new Producto(nombre, 1, cantidad, totalp, precioUni);
                    itemsFacturaDB.Add(p);
 
                     
@@ -322,11 +323,11 @@ namespace wpfFamiliaBlanco.Entradas
 
  
                 subtotal = subtotal + decimal.Parse(precioU) * decimal.Parse(total);
-                producto conA = new producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
+                Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
                 itemsFacdb.Add(conA);
                 }
 
-            cuotas cuota;
+            Cuotas cuota;
             cuotasAinsertar.Clear();
             try
             {
@@ -336,7 +337,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable cuotass = conexion.ConsultaParametrizada(sql2, numerofacturaID);
                 for (int i = 0; i < cuotass.Rows.Count; i++)
                 {
-                    cuota = new cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2]);
+                    cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2]);
                     cuotasAinsertar.Add(cuota);
                   
                 }
@@ -350,7 +351,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             }
 
-            producto producto;
+            Producto producto;
             try
             {
                 String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + int.Parse(cmbordenCompra.Text) + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
@@ -358,7 +359,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable productos = conexion.ConsultaParametrizada(sql2, int.Parse(cmbordenCompra.Text));
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    producto = new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
+                    producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
                     itemsdb.Add(producto);
 
                 }
@@ -431,7 +432,7 @@ namespace wpfFamiliaBlanco.Entradas
 
 
                 //inserto cuotas en la factura
-                foreach (cuotas cc in newW.todaslascuotas)
+                foreach (Cuotas cc in newW.todaslascuotas)
                 {
                     int id2 = cc.cuota;
                     int dias12 = cc.dias;
@@ -449,7 +450,7 @@ namespace wpfFamiliaBlanco.Entradas
                 conexion.operaciones(deleteproducto);
 
                 //INSERTO LOS PRODUCTOS DE LA FACTURA
-                foreach (producto p in newW.itemsFact)
+                foreach (Producto p in newW.itemsFact)
                 {
                     String nombre = p.nombre;
                     int cantidad = p.cantidad;
@@ -457,7 +458,7 @@ namespace wpfFamiliaBlanco.Entradas
                     decimal precioUni = p.precioUnitario;
                     int idProducto = p.id;
 
-                    producto pr = new producto(nombre, idProducto, cantidad, totalp, precioUni);
+                    Producto pr = new Producto(nombre, idProducto, cantidad, totalp, precioUni);
                     itemsFacturaDB.Add(pr);
 
              

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace wpfFamiliaBlanco
 {
-    public class cuotas2
+    public class Cuotas2
     {
 
         public int id { get; set; }
         public int dias { get; set; }
         public String fecha { get; set; }
 
-        public cuotas2(int id, int dias, String fecha)
+        public Cuotas2(int id, int dias, String fecha)
         {
             this.id = id;
             this.dias = dias;

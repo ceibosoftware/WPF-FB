@@ -24,11 +24,11 @@ namespace wpfFamiliaBlanco.Entradas
         Decimal subtotali =0;
         Decimal total;
         CRUD conexion = new CRUD();
-        public List<producto> items = new List<producto>();
-        public List<producto> itemsFact = new List<producto>();
-        public List<cuotas> todaslascuotas = new List<cuotas>();
-        producto producto;
-        public producto prod;
+        public List<Producto> items = new List<Producto>();
+        public List<Producto> itemsFact = new List<Producto>();
+        public List<Cuotas> todaslascuotas = new List<Cuotas>();
+        Producto producto;
+        public Producto prod;
         bool bandera = false;
         DateTime dt = DateTime.Now;
 
@@ -51,7 +51,7 @@ namespace wpfFamiliaBlanco.Entradas
        bandera = true;
         }
 
-        public windowAgregarFactura(int numFactura, String proveedor, List<producto> pOC, List<producto> pFA, DateTime fechafactura, int numeroOC, Decimal subtotal, Decimal total, int IVA, int tipoCambio, decimal subtotal2, String cuotas, List<cuotas> lCU)
+        public windowAgregarFactura(int numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, Decimal subtotal, Decimal total, int IVA, int tipoCambio, decimal subtotal2, String cuotas, List<Cuotas> lCU)
         {
             InitializeComponent();
             try
@@ -176,7 +176,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    producto = new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
+                    producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
                     items.Add(producto);
 
                 }
@@ -203,7 +203,7 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductosFactura.SelectedIndex = 0;
         }
 
-        private void LoadDgvFactura(List<producto> listproductosfactura)
+        private void LoadDgvFactura(List<Producto> listproductosfactura)
         {
             dgvProductosFactura.ItemsSource = listproductosfactura;
         }
@@ -213,7 +213,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             try
             {
-                prod = dgvProductosOC.SelectedItem as producto;
+                prod = dgvProductosOC.SelectedItem as Producto;
 
                 var newW = new WindowAgregarProductoFactura();
                 if (prod.cantidad >= 1)
@@ -253,7 +253,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-                prod = dgvProductosFactura.SelectedItem as producto;
+                prod = dgvProductosFactura.SelectedItem as Producto;
                 subtotali = subtotali - prod.cantidad * prod.precioUnitario;
                 txtSubtotal.Text = subtotali.ToString();
                 calculaTotal();
@@ -337,7 +337,7 @@ namespace wpfFamiliaBlanco.Entradas
                     j = 0;
 
            
-                    producto conA = new producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
+                    Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
                     subtotali = subtotali + conA.precioUnitario * conA.cantidad;
                     MessageBox.Show("preciou" + conA.precioUnitario);
                     MessageBox.Show("cantidad" + conA.cantidad);
@@ -371,14 +371,14 @@ namespace wpfFamiliaBlanco.Entradas
                 if (newW.DialogResult == true)
                 {
                     todaslascuotas.Clear();
-                    foreach (cuotas cuot in newW.listacuotas)
+                    foreach (Cuotas cuot in newW.listacuotas)
                     {
                  
                         int id = cuot.cuota;
                         int dias = cuot.dias;
                         DateTime fecha = cuot.fechadepago;
               
-                        cuotas cu = new cuotas(id, dias, fecha);
+                        Cuotas cu = new Cuotas(id, dias, fecha);
                         todaslascuotas.Add(cu);
 
                     }
@@ -395,7 +395,7 @@ namespace wpfFamiliaBlanco.Entradas
             DgvCuotas.Items.Refresh();
         }
 
-        public void loadDGVCuotas(List<cuotas>l)
+        public void loadDGVCuotas(List<Cuotas>l)
         {
 
             DgvCuotas.ItemsSource = l;

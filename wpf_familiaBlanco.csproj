@@ -65,8 +65,8 @@
     <Compile Include="Clientes\pageClientes.xaml.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
-    <Compile Include="cuotas.cs" />
-    <Compile Include="cuotas2.cs" />
+    <Compile Include="Cuotas.cs" />
+    <Compile Include="Cuotas2.cs" />
     <Compile Include="elemento.cs" />
     <Compile Include="Entradas\Facturacion.xaml.cs">
       <DependentUpon>Facturacion.xaml</DependentUpon>
@@ -111,7 +111,7 @@
     <Compile Include="pageTab_Usuario.xaml.cs">
       <DependentUpon>pageTab_Usuario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="producto.cs" />
+    <Compile Include="Producto.cs" />
     <Compile Include="Productos\windowAgregarProducto.xaml.cs">
       <DependentUpon>windowAgregarProducto.xaml</DependentUpon>
     </Compile>
