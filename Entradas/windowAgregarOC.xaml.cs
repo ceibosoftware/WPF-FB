@@ -12,13 +12,13 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class windowAgregarOC : Window
     {
         int contador = 0;
-       public List<producto> productos = new List<producto>() ;
-       public decimal subtotal;
+        public List<Producto> productos = new List<Producto>();
+        public decimal subtotal;
         decimal total;
         public DateTime fecha;
         CRUD conexion = new CRUD();
 
-        public List<producto> Productos { get => productos; set => productos = value; }
+        public List<Producto> Productos { get => Productos; set => productos = value; }
 
         public windowAgregarOC()
         {
@@ -26,10 +26,10 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedIndex = 0;
             cmbDireccion.SelectedIndex = 0;
             cmbTelefono.SelectedIndex = 0;
-            dpFecha.SelectedDate = DateTime.Now; 
-                  
+            dpFecha.SelectedDate = DateTime.Now;
+
         }
-        public windowAgregarOC(DateTime fecha, String observaciones, Decimal subtotal,   int iva , int tipoCambio, String formaPago , int telefono, int proveedor, int direccion, List<producto> producto)
+        public windowAgregarOC(DateTime fecha, String observaciones, Decimal subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto)
         {
             this.productos = producto;
             loadGeneral();
@@ -42,22 +42,22 @@ namespace wpfFamiliaBlanco.Entradas
             txtFormaPago.Text = formaPago;
             cmbTelefono.SelectedValue = telefono;
             cmbDireccion.SelectedValue = direccion;
-            cmbProveedores.SelectedValue = proveedor;     
+            cmbProveedores.SelectedValue = proveedor;
             calculaTotal();
 
         }
 
-       
+
         private void lblAgregarRemito_Copy_Click(object sender, RoutedEventArgs e)
         {
-            
+
             var newW = new windowAgregarRemito();
-           var resultado = MessageBox.Show("Desea agregar la orden de compra? ","Advertencia",MessageBoxButton.YesNo,MessageBoxImage.Question);
+            var resultado = MessageBox.Show("Desea agregar la orden de compra? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resultado == MessageBoxResult.Yes)
             {
                 newW.ShowDialog();
             }
-            
+
 
         }
 
@@ -69,7 +69,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 newW.ShowDialog();
             }
-           
+
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
@@ -80,45 +80,55 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnAgregar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            bool existe = false;
-            var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue);
-            newW.ShowDialog();
-           
-            if (newW.DialogResult == true)
+            if (cmbProveedores.SelectedIndex != -1)
             {
-                int.TryParse(newW.txtCantidad.Text, out int cantidad);
-                decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
-                for (int i = 0; i < productos.Count; i++)
+                bool existe = false;
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue);
+                newW.ShowDialog();
+                if (newW.DialogResult == true)
                 {
-                    if (productos[i].nombre == newW.txtNombre.Text)
+                    int.TryParse(newW.txtCantidad.Text, out int cantidad);
+                    decimal.TryParse(newW.txtTotal.Text, out decimal total);
+                    decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
+                    for (int i = 0; i < productos.Count; i++)
                     {
-                        existe = true;
+                        if (productos[i].nombre == newW.txtNombre.Text)
+                        {
+                            existe = true;
+                        }
+                        else
+                        {
+                            existe = false;
+                        }
+                    }
+                    if (!existe)
+                    {
+                        Producto p = new Producto(newW.txtNombre.Text, newW.idProducto, cantidad, total, precioU);
+                        productos.Add(p);
+                        loadDgvProductos();
+                        dgvProductos.Items.Refresh();
+                        decimal.TryParse(txtSubtotal.Text, out subtotal);
+                        subtotal += p.total;
+                        txtSubtotal.Text = (subtotal).ToString();
+                        calculaTotal();
                     }
                     else
                     {
-                        existe = false;
+                        MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     }
                 }
-                if (!existe)
-                {
-                    producto p = new producto(newW.txtNombre.Text, newW.idProducto, cantidad, total, precioU);
-                    productos.Add(p);
-                    loadDgvProductos();
-                    dgvProductos.Items.Refresh();
-                    decimal.TryParse(txtSubtotal.Text, out subtotal);
-                    subtotal += p.total;
-                    txtSubtotal.Text = (subtotal).ToString();
-                    calculaTotal();
-                }
-                else
-                {
-                    MessageBox.Show("El producto ya fue agregado a la orden de compra","Advertencia",MessageBoxButton.OK,MessageBoxImage.Exclamation);
-                }
+
+
+
+
 
             }
+            else
+            {
+                MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto");
+            }
         }
-
+    
 
         public void LoadListaComboProveedor()
         {
@@ -203,7 +213,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnEliminar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            producto prod = dgvProductos.SelectedItem as producto;
+            Producto prod = dgvProductos.SelectedItem as Producto;
             subtotal -= prod.total;
             calculaTotal();
             txtSubtotal.Text = (subtotal).ToString();
@@ -215,12 +225,15 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-                producto prod = dgvProductos.SelectedItem as producto;
+                bool existe = false;
+                Producto prod = dgvProductos.SelectedItem as Producto;
                 decimal.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
                 newW.txtCantidad.Text = prod.cantidad.ToString();
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
+                newW.txtNombre.Text = prod.nombre;
+
                 newW.ShowDialog();
 
                 if (newW.DialogResult == true)
@@ -228,15 +241,49 @@ namespace wpfFamiliaBlanco.Entradas
                     int.TryParse(newW.txtCantidad.Text, out int cantidad);
                     decimal.TryParse(newW.txtTotal.Text, out decimal total);
                     decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
-                    prod.cantidad = cantidad;
-                    prod.total = total;
-                    prod.precioUnitario = precioU;
-                    prod.nombre = newW.txtNombre.Text;
-                    prod.id = newW.idProducto;
-                    dgvProductos.Items.Refresh();
-                    subtotal += prod.total;
-                    txtSubtotal.Text = (subtotal).ToString();
-                    calculaTotal();
+                    if (prod.nombre != newW.txtNombre.Text)
+                    {
+                        for (int i = 0; i < productos.Count; i++)
+                        {
+                            if (productos[i].nombre == newW.txtNombre.Text)
+                            {
+                                existe = true;
+                                break;
+                            }
+                            else
+                            {
+                                existe = false;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            prod.cantidad = cantidad;
+                            prod.total = total;
+                            prod.precioUnitario = precioU;
+                            prod.nombre = newW.txtNombre.Text;
+                            prod.id = newW.idProducto;
+                            dgvProductos.Items.Refresh();
+                            subtotal += prod.total;
+                            txtSubtotal.Text = (subtotal).ToString();
+                            calculaTotal();
+                        }
+                        else
+                        {
+                            MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        }
+                    }
+                    else
+                    {
+                        prod.cantidad = cantidad;
+                        prod.total = total;
+                        prod.precioUnitario = precioU;
+                        prod.nombre = newW.txtNombre.Text;
+                        prod.id = newW.idProducto;
+                        dgvProductos.Items.Refresh();
+                        subtotal += prod.total;
+                        txtSubtotal.Text = (subtotal).ToString();
+                        calculaTotal();
+                    }
                 }
             }
             catch (NullReferenceException)

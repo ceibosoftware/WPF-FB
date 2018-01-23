@@ -22,12 +22,12 @@ namespace wpfFamiliaBlanco.Entradas
     {
        public int idRemito;
         bool ejecuta = true;
-        private List<producto> prodRemito = new List<producto>();
-        private List<producto> productos = new List<producto>();
+        private List<Producto> prodRemito = new List<Producto>();
+        private List<Producto> productos = new List<Producto>();
         CRUD conexion = new CRUD();
 
-        public List<producto> ProdRemito { get => prodRemito; set => prodRemito = value; }
-        public List<producto> Productos { get => productos; set => productos = value; }
+        public List<Producto> ProdRemito { get => prodRemito; set => prodRemito = value; }
+        public List<Producto> Productos { get => productos; set => productos = value; }
 
         public windowAgregarRemito()
         {
@@ -37,7 +37,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadDgvProdRemito();
             dtRemito.SelectedDate = DateTime.Now;
         }
-        public windowAgregarRemito(int proveedor, int numeroOC, List<producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
+        public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
             InitializeComponent();
             loadcmbProveedores(proveedor);
@@ -88,7 +88,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             dgvProductosRemito.ItemsSource = prodRemito;
         }
-        public void loadDgvProdRemito(List<producto> prodRemito)
+        public void loadDgvProdRemito(List<Producto> prodRemito)
         {
             dgvProductosRemito.ItemsSource = prodRemito;
         }
@@ -145,7 +145,7 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 bool existe = false;
-                producto prod = dgvProductosOC.SelectedItem as producto;
+                Producto prod = dgvProductosOC.SelectedItem as Producto;
                 if (prod.cantidad > 0)
                 {
                     var newW = new WindowAgregarProductoFactura();
@@ -165,7 +165,6 @@ namespace wpfFamiliaBlanco.Entradas
 
                         newW.txtCantidad.Text = prod.cantidad.ToString();
                         newW.can = prod.cantidad;
-                        newW.lblCantidad.Content = "Cantidad en el remito";
                         newW.ShowDialog();
                     }
                     else
@@ -177,7 +176,7 @@ namespace wpfFamiliaBlanco.Entradas
                     if (newW.DialogResult == true)
                     {
 
-                        producto productoremito = new producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
+                        Producto productoremito = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
                         prodRemito.Add(productoremito);
                         dgvProductosRemito.Items.Refresh();
                         prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
@@ -201,7 +200,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-                producto prod = dgvProductosRemito.SelectedItem as producto;
+                Producto prod = dgvProductosRemito.SelectedItem as Producto;
                 for (int i = 0; i < productos.Count; i++)
                 {
                     if (productos[i].nombre == prod.nombre)
@@ -285,7 +284,7 @@ namespace wpfFamiliaBlanco.Entradas
                 decimal subtotal = (decimal)prod.Rows[i].ItemArray[2];
                 string nombre = prod.Rows[i].ItemArray[3].ToString();
                 decimal PUpagado = (decimal)prod.Rows[i].ItemArray[4];
-                productos.Add(new producto(nombre, idProductos, cantidad, subtotal, PUpagado));
+                productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
             }
             dgvProductosOC.Items.Refresh();
         }
@@ -301,7 +300,7 @@ namespace wpfFamiliaBlanco.Entradas
                 decimal subtotal = (decimal)prod.Rows[i].ItemArray[2];
                 string nombre = prod.Rows[i].ItemArray[3].ToString();
                 decimal PUpagado = (decimal)prod.Rows[i].ItemArray[4];
-                productos.Add(new producto(nombre, idProductos, cantidad, subtotal, PUpagado));
+                productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
             }
             dgvProductosOC.Items.Refresh();
         }

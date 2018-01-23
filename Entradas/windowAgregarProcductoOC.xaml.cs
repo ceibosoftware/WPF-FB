@@ -28,10 +28,10 @@ namespace wpfFamiliaBlanco.Entradas
             loadListaProducto(idProveedor);
 
         }
-        public windowAgregarClienteME(int idProveedor, int idProducto)
+        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre)
         {
             InitializeComponent();
-            loadListaProducto(idProveedor, idProducto);
+            loadListaProducto(idProveedor, idProducto,nombre);
 
         }
 
@@ -44,15 +44,18 @@ namespace wpfFamiliaBlanco.Entradas
             ltsProductos.SelectedIndex = 0;
 
         }
-        public void loadListaProducto(int idProveedor, int idProducto)
+        public void loadListaProducto(int idProveedor, int idProducto,string nombre)
         {
-            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor =" + idProveedor.ToString() + " and p.idProductos = t2.FK_idProductos";
-            conexion.Consulta(consulta, ltsProductos);
+            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor = @valor  and p.idProductos = t2.FK_idProductos";
+           ltsProductos.ItemsSource= conexion.ConsultaParametrizada(consulta, idProveedor).AsDataView() ;
+            
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
-            ltsProductos.SelectedIndex = 0;
-            ltsProductos.SelectedValue = idProducto;
-            
+            for (int i = 0; i < ltsProductos.Items.Count; i++)
+            {
+                Console.WriteLine(ltsProductos.Items[i].ToString());
+            }
+
         }
 
    

@@ -21,7 +21,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class Remito : Page
     {
-        List<producto> productosparametro = new List<producto>();
+        List<Producto> productosparametro = new List<Producto>();
         DataTable productos;
         bool ejecutar = true;
         DateTime fecha;
@@ -73,6 +73,7 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 LoadListaComboProveedor();
                 loadLtsRemitos();
+                seleccioneParaFiltrar();
             }
 
         }
@@ -203,7 +204,7 @@ namespace wpfFamiliaBlanco.Entradas
                 productosparametro.Clear();
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    productosparametro.Add(new producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
+                    productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
                 }
                 dgvProductos.ItemsSource = productos.AsDataView();
 
