@@ -44,7 +44,7 @@ namespace wpfFamiliaBlanco
             conexion.Consulta(consulta, tabla: ltsNumeroOC);
             ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
             ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
-
+            ltsNumeroOC.SelectedIndex = 0;
 
         }
         private void loadlistaOC(int index)
@@ -112,7 +112,9 @@ namespace wpfFamiliaBlanco
                 ejecutar = false;
                 loadlistaOC();
                 LoadListaComboProveedor();
+                ltsNumeroOC.Items.MoveCurrentToLast();
                 ejecutar = true;
+                seleccioneParaFiltrar();
             }
             
         }
@@ -261,7 +263,7 @@ namespace wpfFamiliaBlanco
                 DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                 DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
                 String observaciones = OC.Rows[0].ItemArray[2].ToString();
-                Decimal subtotal = (Decimal)OC.Rows[0].ItemArray[3];
+                float subtotal = (float)OC.Rows[0].ItemArray[3];
                 int iva = (int)OC.Rows[0].ItemArray[5];
                 int tipoCambio = (int)OC.Rows[0].ItemArray[6];
                 String formaPago = OC.Rows[0].ItemArray[7].ToString();
@@ -280,14 +282,14 @@ namespace wpfFamiliaBlanco
 
                     int idProducto = (int)productos.Rows[i].ItemArray[0];
                     int cantitad = (int)productos.Rows[i].ItemArray[1];
-                    Decimal sub = (Decimal)productos.Rows[i].ItemArray[2];
+                    float sub = (float)productos.Rows[i].ItemArray[2];
                     String nombre = productos.Rows[i].ItemArray[3].ToString();
-                    float PU = (float)productos.Rows[i].ItemArray[4];
-                    decimal PU2;
-                    decimal.TryParse(PU.ToString(), out PU2);
+                    Decimal PU = (Decimal)productos.Rows[i].ItemArray[4];
+                    float PU2;
+                    float.TryParse(PU.ToString(), out PU2);
                     listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU2));
                 }
-                var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd);
+                var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC);
 
                 newW.Title = "Modificar OC";
                 newW.ShowDialog();

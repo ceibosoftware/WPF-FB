@@ -51,9 +51,9 @@
             <ColumnDefinition Width="141*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Cantidad Facturada" HorizontalAlignment="Left" Margin="25,50,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.184,-0.154"/>
-        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="160,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="160,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="txtCantidad_PreviewTextInput"/>
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="20.5,41,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1" Click="btnAceptar_Click"/>
-        <Button x:Name="btncancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="21.5,77,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <Button x:Name="btncancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="21.5,77,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btncancelar_Click"/>
 
     </Grid>
 </Window>

@@ -72,8 +72,9 @@ namespace wpfFamiliaBlanco.Entradas
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
-                loadLtsRemitos();
+                loadLtsRemitos();            
                 seleccioneParaFiltrar();
+             
             }
 
         }
@@ -148,17 +149,18 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, tabla: ltsremitos);
             ltsremitos.DisplayMemberPath = "numeroRemito";
             ltsremitos.SelectedValuePath = "idremitos";
-            ltsremitos.SelectedIndex = 0;
+            //ltsremitos.SelectedIndex = 0;
         }
-        public void loadLtsRemitos(int idRemito)
+        public void loadLtsRemitos(int index)
         {
             seleccioneParaFiltrar();
             String consulta = "select * from remito";
             conexion.Consulta(consulta, tabla: ltsremitos);
             ltsremitos.DisplayMemberPath = "numeroRemito";
             ltsremitos.SelectedValuePath = "idremitos";
-            ltsremitos.SelectedIndex = idRemito;
+            ltsremitos.SelectedIndex = index;
         }
+    
         public void loadLtsRemitosProv()
         {
            
@@ -185,7 +187,7 @@ namespace wpfFamiliaBlanco.Entradas
         private void ltsremitos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
           
-                Console.WriteLine(ltsremitos.SelectedValue);
+               
                 //Datos Remito
 
                 String sql = "Select  t3.nombre,t1.fecha ,t2.idOrdenCompra from remito t1 , ordencompra t2, proveedor t3 where idremitos = @valor and t1.FK_idOC = t2.idOrdenCompra and t2.FK_idProveedor = t3.idProveedor";
@@ -265,12 +267,11 @@ namespace wpfFamiliaBlanco.Entradas
             string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
             string consulta = "select t2.FK_idProveedor from  ordencompra t2 where idOrdenCompra = @valor";
             int.TryParse(lblNroOCR.Content.ToString(), out int OC);
-            Console.WriteLine(OC);
             DataTable idprov = conexion.ConsultaParametrizada(consulta, OC);
             int index = ltsremitos.SelectedIndex;
-            var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], int.Parse(lblNroOCR.Content.ToString()), productosparametro,fecha, numeroR, (int)ltsremitos.SelectedValue);
-          
-      
+            var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro,fecha, numeroR, (int)ltsremitos.SelectedValue);
+            Console.WriteLine(OC);
+
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
@@ -284,7 +285,7 @@ namespace wpfFamiliaBlanco.Entradas
                 
                 string consultasql = "UPDATE  remito SET numeroRemito = '" + numeroRemito + "', fecha ='" + fecha.ToString("yyyy/MM/dd") + "', FK_idOC ='" + idOC + "' where idremitos ='" + idRemito + "' ";
                 conexion.operaciones(consultasql);
-                Console.WriteLine(idRemito);
+               
                 //ELIMINAR PRODUCTOS
 
                 String sqlElim = "delete from productos_has_remitos where FK_idRemito = '" + idRemito + "'";
@@ -305,7 +306,7 @@ namespace wpfFamiliaBlanco.Entradas
                 }
            
                 
-                loadLtsRemitos(idRemito);
+                loadLtsRemitos(index);
             }
 
         }

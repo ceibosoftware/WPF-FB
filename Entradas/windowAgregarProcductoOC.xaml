@@ -124,11 +124,11 @@
         <Label x:Name="lblCantidad" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,121.348,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cantidad"/>
         <TextBox x:Name="txtCantidad" HorizontalAlignment="Left" Height="23" Margin="378.763,150.348,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088" TextChanged="txtCantidad_TextChanged" PreviewTextInput="txtCantidad_PreviewTextInput"/>
         <Label x:Name="lblPrecioUnitario" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,177.702,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Precio unitario"/>
-        <TextBox x:Name="txtPrecioUnitario" HorizontalAlignment="Left" Height="23" Margin="378.763,206.702,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088"/>
+        <TextBox x:Name="txtPrecioUnitario" HorizontalAlignment="Left" Height="23" Margin="378.763,206.702,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088" TextChanged="txtPrecioUnitario_TextChanged" PreviewTextInput="txtPrecioUnitario_PreviewTextInput"/>
         <Label x:Name="lblTotal" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="530.851,232.398,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total"/>
         <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="23" Margin="378.763,261.398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284.088" IsReadOnly="True"/>
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="587.851,334.519,0,0" VerticalAlignment="Top" Width="75" Height="22" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAceptar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="587.851,376.519,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="587.851,376.519,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" Click="btnCancelar_Click"/>
 
     </Grid>
 </Window>

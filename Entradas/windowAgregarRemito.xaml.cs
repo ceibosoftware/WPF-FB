@@ -40,20 +40,23 @@ namespace wpfFamiliaBlanco.Entradas
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
             InitializeComponent();
-            loadcmbProveedores(proveedor);
+
+            loadCmbOrdenes(numeroOC);
             loadDgvProd();
             prodRemito = productosRemito;
             loadDgvProdRemito(prodRemito);
-            loadCmbOrdenes(numeroOC);
             loadProductosOC(numeroOC);
             loadFechaEmision();
             dtRemito.SelectedDate =fecha ;
             txtNroRemito.Text = numeroRemito;
-            this.idRemito = idRemito;
-            cmbOrden.SelectedValue = numeroOC;
+            this.idRemito = idRemito;      
             cmbProveedores.IsEnabled = false;
             cmbOrden.IsEnabled = false;
+            txtFiltro.IsEnabled = false;
             cmbFechas.IsEnabled = false;
+            ejecuta = false;
+            loadcmbProveedores();
+            ejecuta = true;
         }
         /*public void fechas()
         {
@@ -65,21 +68,24 @@ namespace wpfFamiliaBlanco.Entradas
         }*/
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            prodRemito.Clear();
-            dgvProductosRemito.Items.Refresh() ;
-            try
+            if (ejecuta)
             {
-                loadCmbOrdenes();
-                ejecuta = false;
-                loadFechaEmision();
-                ejecuta = true;
-            }
-            catch (Exception)
-            {
+                prodRemito.Clear();
+                dgvProductosRemito.Items.Refresh();
+                try
+                {
+                  
+                    ejecuta = false;
+                      loadCmbOrdenes();
+                    loadFechaEmision();
+                    ejecuta = true;
+                }
+                catch (Exception)
+                {
 
-               
+
+                }
             }
-          
         }
         public void loadDgvProd() {
             dgvProductosOC.ItemsSource = productos;
@@ -95,26 +101,26 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void loadcmbProveedores()
         {
-           
-                String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where o.FK_idProveedor = p.idProveedor ";
-                conexion.Consulta(consulta, combo: cmbProveedores);
-                cmbProveedores.DisplayMemberPath = "nombre";
-                cmbProveedores.SelectedValuePath = "idProveedor";
-                cmbProveedores.SelectedIndex = 0;
+
+            String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where o.FK_idProveedor = p.idProveedor ";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            cmbProveedores.SelectedIndex = 0;
             
 
         }
 
         public void loadcmbProveedores(int proveedor)
         {
-
+            ejecuta = false;
             String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where o.FK_idProveedor = p.idProveedor ";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idProveedor";
             cmbProveedores.SelectedValue= proveedor;
 
-
+            ejecuta = true;
         }
 
         private void cmbFechas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -175,12 +181,18 @@ namespace wpfFamiliaBlanco.Entradas
 
                     if (newW.DialogResult == true)
                     {
-
-                        Producto productoremito = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
-                        prodRemito.Add(productoremito);
-                        dgvProductosRemito.Items.Refresh();
-                        prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
-                        dgvProductosOC.Items.Refresh();
+                        if (int.Parse(newW.txtCantidad.Text) > 0)
+                        {
+                            Producto productoremito = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
+                            prodRemito.Add(productoremito);
+                            dgvProductosRemito.Items.Refresh();
+                            prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
+                            dgvProductosOC.Items.Refresh();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La cantidad no puede ser cero");
+                        }
                     }
                 }
                 else
@@ -227,7 +239,7 @@ namespace wpfFamiliaBlanco.Entradas
             // Busquedas de proveedor.
             DataTable productos = new DataTable();
             String consulta;
-            consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
+            consulta = "SELECT  DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where p.nombre LIKE '%' @valor '%' and o.FK_idProveedor = p.idProveedor ";
             productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             cmbProveedores.ItemsSource = productos.AsDataView();
             cmbProveedores.SelectedIndex = 0;
@@ -253,14 +265,21 @@ namespace wpfFamiliaBlanco.Entradas
         }
         public void loadCmbOrdenes(int orden)
         {
-            String consulta = " Select * from ordencompra t1 where t1.FK_idProveedor = @valor ";
-            DataTable OCProveedor = conexion.ConsultaParametrizada(consulta, cmbProveedores.SelectedValue);
-            cmbOrden.ItemsSource = OCProveedor.AsDataView();
+            String consulta = " Select idOrdenCompra from ordencompra ";
+            conexion.Consulta(consulta, combo: cmbOrden);
             cmbOrden.DisplayMemberPath = "idOrdenCompra";
             cmbOrden.SelectedValuePath = "idOrdenCompra";
-
-    
             cmbOrden.SelectedValue = orden;
+            /*for (int i = 0; i < cmbOrden.Items.Count; i++)
+            {
+                cmbOrden.SelectedIndex = i;
+
+                if (cmbOrden.SelectedValue.ToString() == orden.ToString())
+                {
+                    break;
+                }
+            }*/
+               
         }
          public void loadFechaEmision()
         {
@@ -281,9 +300,9 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 int idProductos = (int)prod.Rows[i].ItemArray[0];
                 int cantidad = (int)prod.Rows[i].ItemArray[1];
-                decimal subtotal = (decimal)prod.Rows[i].ItemArray[2];
+                float subtotal = (float)prod.Rows[i].ItemArray[2];
                 string nombre = prod.Rows[i].ItemArray[3].ToString();
-                decimal PUpagado = (decimal)prod.Rows[i].ItemArray[4];
+                float PUpagado = (float)prod.Rows[i].ItemArray[4];
                 productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
             }
             dgvProductosOC.Items.Refresh();
@@ -297,9 +316,9 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 int idProductos = (int)prod.Rows[i].ItemArray[0];
                 int cantidad = (int)prod.Rows[i].ItemArray[1];
-                decimal subtotal = (decimal)prod.Rows[i].ItemArray[2];
+                float subtotal = (float)prod.Rows[i].ItemArray[2];
                 string nombre = prod.Rows[i].ItemArray[3].ToString();
-                decimal PUpagado = (decimal)prod.Rows[i].ItemArray[4];
+                float PUpagado = (float)prod.Rows[i].ItemArray[4];
                 productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
             }
             dgvProductosOC.Items.Refresh();
@@ -328,6 +347,11 @@ namespace wpfFamiliaBlanco.Entradas
                 return true;
             }
 
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 

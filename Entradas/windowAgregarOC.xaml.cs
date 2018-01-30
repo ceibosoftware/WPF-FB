@@ -11,10 +11,12 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarOC : Window
     {
+        int idOC;
+        bool modifica = false;
         int contador = 0;
         public List<Producto> productos = new List<Producto>();
-        public decimal subtotal;
-        decimal total;
+        public float subtotal;
+        float total;
         public DateTime fecha;
         CRUD conexion = new CRUD();
 
@@ -29,8 +31,9 @@ namespace wpfFamiliaBlanco.Entradas
             dpFecha.SelectedDate = DateTime.Now;
 
         }
-        public windowAgregarOC(DateTime fecha, String observaciones, Decimal subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto)
+        public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
         {
+            modifica = true;
             this.productos = producto;
             loadGeneral();
             dpFecha.SelectedDate = fecha;
@@ -44,7 +47,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbDireccion.SelectedValue = direccion;
             cmbProveedores.SelectedValue = proveedor;
             calculaTotal();
-
+            this.idOC = idOC;
         }
 
 
@@ -88,13 +91,14 @@ namespace wpfFamiliaBlanco.Entradas
                 if (newW.DialogResult == true)
                 {
                     int.TryParse(newW.txtCantidad.Text, out int cantidad);
-                    decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                    decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
+                    float.TryParse(newW.txtTotal.Text, out float total);
+                    float.TryParse(newW.txtPrecioUnitario.Text, out float precioU);
                     for (int i = 0; i < productos.Count; i++)
                     {
                         if (productos[i].nombre == newW.txtNombre.Text)
                         {
                             existe = true;
+                            break;
                         }
                         else
                         {
@@ -107,7 +111,7 @@ namespace wpfFamiliaBlanco.Entradas
                         productos.Add(p);
                         loadDgvProductos();
                         dgvProductos.Items.Refresh();
-                        decimal.TryParse(txtSubtotal.Text, out subtotal);
+                        float.TryParse(txtSubtotal.Text, out subtotal);
                         subtotal += p.total;
                         txtSubtotal.Text = (subtotal).ToString();
                         calculaTotal();
@@ -171,7 +175,8 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void loadDgvProductos()
         {      
-            dgvProductos.ItemsSource = productos;                     
+            dgvProductos.ItemsSource = productos;
+            
         }
       
 
@@ -188,12 +193,12 @@ namespace wpfFamiliaBlanco.Entradas
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
-                total = subtotal * (decimal)1.21;
+                total = subtotal * (float)1.21;
                 txtTotal.Text = total.ToString();
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
-                total = subtotal * (decimal)1.105;
+                total = subtotal * (float)1.105;
                 txtTotal.Text = total.ToString();
             }
         }
@@ -213,12 +218,20 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnEliminar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            Producto prod = dgvProductos.SelectedItem as Producto;
-            subtotal -= prod.total;
-            calculaTotal();
-            txtSubtotal.Text = (subtotal).ToString();
-            productos.Remove(prod);
-            dgvProductos.Items.Refresh();
+            try
+            {
+                Producto prod = dgvProductos.SelectedItem as Producto;
+                subtotal -= prod.total;
+                calculaTotal();
+                txtSubtotal.Text = (subtotal).ToString();
+                productos.Remove(prod);
+                dgvProductos.Items.Refresh();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("No se ha seleccionado ningun producto");
+            }
+           
         }
 
         private void btnModificar_Copy1_Click(object sender, RoutedEventArgs e)
@@ -227,20 +240,21 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 bool existe = false;
                 Producto prod = dgvProductos.SelectedItem as Producto;
-                decimal.TryParse(txtSubtotal.Text, out subtotal);
+                float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC);
+              
                 newW.txtCantidad.Text = prod.cantidad.ToString();
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
                 newW.txtNombre.Text = prod.nombre;
-
+                newW.CalculaTotal();
                 newW.ShowDialog();
 
                 if (newW.DialogResult == true)
                 {
                     int.TryParse(newW.txtCantidad.Text, out int cantidad);
-                    decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                    decimal.TryParse(newW.txtPrecioUnitario.Text, out decimal precioU);
+                    float.TryParse(newW.txtTotal.Text, out float total);
+                    float.TryParse(newW.txtPrecioUnitario.Text, out float precioU);
                     if (prod.nombre != newW.txtNombre.Text)
                     {
                         for (int i = 0; i < productos.Count; i++)
@@ -349,12 +363,13 @@ namespace wpfFamiliaBlanco.Entradas
             LoadListaComboProveedor();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
-            
             LoadListaComboDireccion();
             LoadListaComboTelefonos();
-           
-        }
+    
 
+        }
+     
+        
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (contador > 2)
