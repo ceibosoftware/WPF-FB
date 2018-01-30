@@ -30,8 +30,8 @@ namespace wpfFamiliaBlanco.Entradas
         public List<Producto> produ = new List<Producto>();
         public List<factura> items = new List<factura>();
         public List<Cuotas> cuotasAinsertar = new List<Cuotas>();
-        factura fa;
-        Decimal subtotal;
+        float subtotal;
+        int fkOrden;
         public Facturacion()
         {
     
@@ -57,7 +57,7 @@ namespace wpfFamiliaBlanco.Entradas
                 String iva = newW.cmbIVA.SelectedIndex.ToString();
                 String tipoCambio = newW.cmbTipoCambio.SelectedIndex.ToString();
                 String cuotas = newW.cmbCuotas.Text;
-                int fkOrden = int.Parse(newW.cmbOrden.Text);
+                 fkOrden = int.Parse(newW.cmbOrden.Text);
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtFactura.SelectedDate.Value;
 
@@ -93,8 +93,8 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     String nombre = p.nombre;
                     int cantidad = p.cantidad;
-                    decimal totalp = p.total;
-                    decimal precioUni = p.precioUnitario;
+                    float totalp = p.total;
+                    float precioUni = p.precioUnitario;
           
                     Producto pr = new Producto(nombre, 1, cantidad, totalp, precioUni);
                    itemsFacturaDB.Add(p);
@@ -148,6 +148,7 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbordenCompra.DisplayMemberPath = "idOrdenCompra";
                 cmbordenCompra.SelectedValuePath = "idOrdenCompra";
                 cmbordenCompra.SelectedIndex = 0;
+                ltsFactura.SelectedIndex = 0;
             }
             catch (Exception)
             {
@@ -190,7 +191,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             try
             {
-                String productosFatura = "SELECT t1.cantidad ,t1.subtotal, t2.nombre ,t2.precioUnitario ,t2.idProductos from productos_has_facturas t1 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura =  '" + ltsFactura.SelectedValue + "'";
+                String productosFatura = "SELECT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos, t3.CrFactura from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = " + ltsFactura.SelectedValue+" and FK_idOC = "+ cmbordenCompra.Text + "";
+
                 DataTable productos = conexion.ConsultaParametrizada(productosFatura, ltsFactura.SelectedValue);
                 dgvProductosFactura.ItemsSource = productos.AsDataView();
 
@@ -286,6 +288,8 @@ namespace wpfFamiliaBlanco.Entradas
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
             itemsFacturaDB.Clear();
+            itemsFacdb.Clear();
+            itemsdb.Clear();
             int numerofacturaID = (int)this.ltsFactura.SelectedValue;
 
             String proveedor = cmbProveedores.Text;
@@ -298,13 +302,9 @@ namespace wpfFamiliaBlanco.Entradas
             int iva;
             int tipocambio;
 
-            itemsFacdb.Clear();
             int j = 0;
             for (int i = 0; i < dgvProductosFactura.Items.Count - 1; i++)
             {
-
-                var cantidad = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                j++;
 
                 var total = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
                 j++;
@@ -312,18 +312,21 @@ namespace wpfFamiliaBlanco.Entradas
                 var nombre = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
                 j++;
 
-
                 var precioU = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
                 j++;
 
 
                 var id = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
                 j++;
+
+
+                var cantidadrestante = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                j++;
                 j = 0;
 
- 
-                subtotal = subtotal + decimal.Parse(precioU) * decimal.Parse(total);
-                Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidad), decimal.Parse(total), decimal.Parse(precioU));
+     
+                subtotal = subtotal + float.Parse(precioU) * float.Parse(total);
+                Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidadrestante), float.Parse(total), float.Parse(precioU));
                 itemsFacdb.Add(conA);
                 }
 
@@ -352,14 +355,15 @@ namespace wpfFamiliaBlanco.Entradas
             }
 
             Producto producto;
+            itemsdb.Clear();
             try
             {
-                String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + int.Parse(cmbordenCompra.Text) + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+                String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + int.Parse(cmbordenCompra.Text) + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
                 DataTable productos = conexion.ConsultaParametrizada(sql2, int.Parse(cmbordenCompra.Text));
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (decimal)productos.Rows[i].ItemArray[3], (decimal)productos.Rows[i].ItemArray[4]);
+                    producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
                     itemsdb.Add(producto);
 
                 }
@@ -398,7 +402,7 @@ namespace wpfFamiliaBlanco.Entradas
                 tipocambio = 2;
             }
 
-            var newW = new windowAgregarFactura((int)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(cmbordenCompra.Text), decimal.Parse(txtSubTotal.Text), decimal.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
+            var newW = new windowAgregarFactura((int)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(cmbordenCompra.Text), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
             newW.Title = "Modificar Factura";
             newW.ShowDialog();
             
@@ -449,13 +453,17 @@ namespace wpfFamiliaBlanco.Entradas
                 String deleteproducto = "DELETE FROM productos_has_facturas WHERE FK_idfactura = '"+numerofacturaID+"'";
                 conexion.operaciones(deleteproducto);
 
+                //     String deleteoc = "DELETE FROM productos_has_ordencompra WHERE FK_idfactura = '" + fkOrden2 + "'";
+                //    conexion.operaciones(deleteoc);
+
                 //INSERTO LOS PRODUCTOS DE LA FACTURA
+                itemsFacturaDB.Clear();
                 foreach (Producto p in newW.itemsFact)
                 {
                     String nombre = p.nombre;
                     int cantidad = p.cantidad;
-                    decimal totalp = p.total;
-                    decimal precioUni = p.precioUnitario;
+                    float totalp = p.total;
+                    float precioUni = p.precioUnitario;
                     int idProducto = p.id;
 
                     Producto pr = new Producto(nombre, idProducto, cantidad, totalp, precioUni);

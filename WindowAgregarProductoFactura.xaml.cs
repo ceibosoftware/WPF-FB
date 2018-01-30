@@ -19,6 +19,7 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class WindowAgregarProductoFactura : Window
     {
+        public string canpararestar;
         public int can;
         public WindowAgregarProductoFactura()
         {
