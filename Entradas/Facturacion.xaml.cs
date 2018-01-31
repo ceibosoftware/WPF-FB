@@ -480,12 +480,13 @@ namespace wpfFamiliaBlanco.Entradas
                     String crfact3 = "SELECT CrFactura FROM productos_has_ordencompra WHERE FK_idOC = '" + fkOrden2 + "'";
                    String crfactura = conexion.ValorEnVariable(crfact3);
 
-                    int cantidadrestanteFact = Int32.Parse(crfactura);
+                    int cantidadrestanteFact=0;
+                    cantidadrestanteFact = Int32.Parse(crfactura);
                    cantidadrestanteFact = cantidadrestanteFact - cantidad;
                
 
                     //INSERTO VALOR NUEVO DE CANTIDAD RESTANTE
-                  String updateCR = "UPDATE productos_has_ordencompra SET CrFactura = '" + cantidadrestanteFact + "' WHERE FK_idOC = '" + fkOrden2 + "'";
+                  String updateCR = "UPDATE productos_has_ordencompra SET CrFactura = '" + cantidadrestanteFact + "' WHERE FK_idOC = '" + fkOrden2 + "' AND FK_idProducto = '"+idProducto+"'";
                    conexion.operaciones(updateCR);
                     cantidadrestanteFact = 0;
 

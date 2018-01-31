@@ -284,7 +284,7 @@ namespace wpfFamiliaBlanco
                     int cantitad = (int)productos.Rows[i].ItemArray[1];
                     float sub = (float)productos.Rows[i].ItemArray[2];
                     String nombre = productos.Rows[i].ItemArray[3].ToString();
-                    Decimal PU = (Decimal)productos.Rows[i].ItemArray[4];
+                    float PU = (float)productos.Rows[i].ItemArray[4];
                     float PU2;
                     float.TryParse(PU.ToString(), out PU2);
                     listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU2));
