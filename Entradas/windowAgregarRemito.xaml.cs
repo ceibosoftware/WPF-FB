@@ -353,6 +353,12 @@ namespace wpfFamiliaBlanco.Entradas
         {
             this.Close();
         }
+
+        private void txtNroRemito_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 
   

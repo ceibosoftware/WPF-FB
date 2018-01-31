@@ -354,7 +354,7 @@ namespace wpfFamiliaBlanco
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
+            Regex regex = new Regex("^[0-9]{2},[0-9]{4}$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
