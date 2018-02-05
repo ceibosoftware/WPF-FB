@@ -19,7 +19,7 @@ namespace wpfFamiliaBlanco.Entradas
         float total;
         public DateTime fecha;
         CRUD conexion = new CRUD();
-
+        int cantidadAntigua;
         public List<Producto> Productos { get => Productos; set => productos = value; }
 
         public windowAgregarOC()
@@ -245,6 +245,7 @@ namespace wpfFamiliaBlanco.Entradas
                 var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC);
               
                 newW.txtCantidad.Text = prod.cantidad.ToString();
+                cantidadAntigua = prod.cantidad;
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
                 newW.txtNombre.Text = prod.nombre;
                 newW.CalculaTotal();
@@ -272,6 +273,7 @@ namespace wpfFamiliaBlanco.Entradas
                         if (!existe)
                         {
                             prod.cantidad = cantidad;
+        
                             prod.total = total;
                             prod.precioUnitario = precioU;
                             prod.nombre = newW.txtNombre.Text;

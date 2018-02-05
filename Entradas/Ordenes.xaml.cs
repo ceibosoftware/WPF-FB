@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
+//using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfFamiliaBlanco.Entradas;
+//PARA PDF
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace wpfFamiliaBlanco
 {
@@ -23,6 +27,7 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class Ordenes : Page
     {
+        DataTable productos;
         bool ejecutar = true;
         CRUD conexion = new CRUD();
         public Ordenes()
@@ -133,8 +138,8 @@ namespace wpfFamiliaBlanco
             try
             {
                 //consulta productos
-                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
-                DataTable productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
+                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
+                productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                 dgvProductos.ItemsSource = productos.AsDataView();
                 //llenar datos de oc
                 String consulta2 = "SELECT * FROM ordencompra t1 where t1.idOrdenCompra = @valor";
@@ -256,77 +261,87 @@ namespace wpfFamiliaBlanco
         {
             try
             {
+
                 int idOC = (int)ltsNumeroOC.SelectedValue;
                 int index = (int)ltsNumeroOC.SelectedIndex;
-                //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
-                String consulta = "SELECT * FROM ordencompra where idOrdenCompra = @valor";
-                DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
-                DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
-                String observaciones = OC.Rows[0].ItemArray[2].ToString();
-                float subtotal = (float)OC.Rows[0].ItemArray[3];
-                int iva = (int)OC.Rows[0].ItemArray[5];
-                int tipoCambio = (int)OC.Rows[0].ItemArray[6];
-                String formaPago = OC.Rows[0].ItemArray[7].ToString();
-                int telefono = (int)OC.Rows[0].ItemArray[8];
-                int proveedor = (int)OC.Rows[0].ItemArray[10];
-                int direccion = (int)OC.Rows[0].ItemArray[9];
-
-                //PRODUCTOS DE LA ORDEN DE COMPRA
-                String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
-                DataTable productos = conexion.ConsultaParametrizada(consultaProductos, ltsNumeroOC.SelectedValue);
-                List<Producto> listaProd = new List<Producto>();
-
-
-                for (int i = 0; i < productos.Rows.Count; i++)
+                string existeRemito = "select idremitos from remito where FK_idOC = " + idOC + " ";
+                string existeFactura = "select idremitos from remito where FK_idOC = " + idOC + " ";
+                Console.WriteLine(conexion.ValorEnVariable(existeRemito));
+                if (conexion.ValorEnVariable(existeRemito) == null)
                 {
+                    //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
+                    String consulta = "SELECT * FROM ordencompra where idOrdenCompra = @valor";
+                    DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
+                    DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
+                    String observaciones = OC.Rows[0].ItemArray[2].ToString();
+                    float subtotal = (float)OC.Rows[0].ItemArray[3];
+                    int iva = (int)OC.Rows[0].ItemArray[5];
+                    int tipoCambio = (int)OC.Rows[0].ItemArray[6];
+                    String formaPago = OC.Rows[0].ItemArray[7].ToString();
+                    int telefono = (int)OC.Rows[0].ItemArray[8];
+                    int proveedor = (int)OC.Rows[0].ItemArray[10];
+                    int direccion = (int)OC.Rows[0].ItemArray[9];
 
-                    int idProducto = (int)productos.Rows[i].ItemArray[0];
-                    int cantitad = (int)productos.Rows[i].ItemArray[1];
-                    float sub = (float)productos.Rows[i].ItemArray[2];
-                    String nombre = productos.Rows[i].ItemArray[3].ToString();
-                    float PU = (float)productos.Rows[i].ItemArray[4];
-                    float PU2;
-                    float.TryParse(PU.ToString(), out PU2);
-                    listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU2));
-                }
-                var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC);
-
-                newW.Title = "Modificar OC";
-                newW.ShowDialog();
-
-                if (newW.DialogResult == true)
-                {
-                    //INSERTAR OC
-                    int Proveedor = (int)newW.cmbProveedores.SelectedValue;
-                    fecha = newW.fecha;
-                    Console.WriteLine(fecha);
-                    decimal.TryParse(newW.txtSubtotal.Text, out decimal sub);
-                    decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                    direccion = (int)newW.cmbDireccion.SelectedValue;
-                    telefono = (int)newW.cmbTelefono.SelectedValue;
-                    observaciones = newW.txtObservaciones.Text;
-                    formaPago = newW.txtFormaPago.Text;
-                    iva = newW.cmbIVA.SelectedIndex;
-                    tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                    String sql = "UPDATE ordencompra SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',FK_idContacto = '" + telefono + "',FK_idDireccion = '" + direccion + "',FK_idProveedor = '" + Proveedor + "' WHERE ordencompra.idOrdenCompra = '" + idOC + "';";
-                    conexion.operaciones(sql);
-                    //ELIMINA REGISTRO DE TABLA INTERMEDIA
-                    string sql2 = "delete  from productos_has_ordencompra where FK_idOC =  '" + idOC + "'";
-                    conexion.operaciones(sql2);
+                    //PRODUCTOS DE LA ORDEN DE COMPRA
+                    String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
+                    DataTable productos = conexion.ConsultaParametrizada(consultaProductos, ltsNumeroOC.SelectedValue);
+                    List<Producto> listaProd = new List<Producto>();
 
 
-                    foreach (var producto in newW.productos)
+                    for (int i = 0; i < productos.Rows.Count; i++)
                     {
-                        //string CantidadAntigua = "select cantidad from productos_has_ordencompra where FK_idOC = '" + idOC + "' and FK_idProducto =  '" + producto.id + "'";
-                        //int.TryParse(conexion.ValorEnVariable(CrRemito), out int CRR);
-                        //CRR = producto.cantidad - CRR;
-                        String productosActualizar = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "');";
-                        conexion.operaciones(productosActualizar);
+
+                        int idProducto = (int)productos.Rows[i].ItemArray[0];
+                        int cantitad = (int)productos.Rows[i].ItemArray[1];
+                        float sub = (float)productos.Rows[i].ItemArray[2];
+                        String nombre = productos.Rows[i].ItemArray[3].ToString();
+                        float PU = (float)productos.Rows[i].ItemArray[4];
+                        listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
                     }
-                    ejecutar = false;
-                    loadlistaOC(index);
-                    LoadListaComboProveedor();
-                    ejecutar = true;
+                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC);
+
+                    newW.Title = "Modificar OC";
+                    newW.ShowDialog();
+
+                    if (newW.DialogResult == true)
+                    {
+                        //INSERTAR OC
+                        int Proveedor = (int)newW.cmbProveedores.SelectedValue;
+                        fecha = newW.fecha;
+                        Console.WriteLine(fecha);
+                        decimal.TryParse(newW.txtSubtotal.Text, out decimal sub);
+                        decimal.TryParse(newW.txtTotal.Text, out decimal total);
+                        direccion = (int)newW.cmbDireccion.SelectedValue;
+                        telefono = (int)newW.cmbTelefono.SelectedValue;
+                        observaciones = newW.txtObservaciones.Text;
+                        formaPago = newW.txtFormaPago.Text;
+                        iva = newW.cmbIVA.SelectedIndex;
+                        tipoCambio = newW.cmbTipoCambio.SelectedIndex;
+                        String sql = "UPDATE ordencompra SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',FK_idContacto = '" + telefono + "',FK_idDireccion = '" + direccion + "',FK_idProveedor = '" + Proveedor + "' WHERE ordencompra.idOrdenCompra = '" + idOC + "';";
+                        conexion.operaciones(sql);
+
+                        //ELIMINA REGISTRO DE TABLA INTERMEDIA
+                        string sql2 = "delete  from productos_has_ordencompra where FK_idOC =  '" + idOC + "'";
+                        conexion.operaciones(sql2);
+
+
+                        foreach (var producto in newW.productos)
+                        {
+                            //string CantidadAntigua = "select cantidad from productos_has_ordencompra where FK_idOC = '" + idOC + "' and FK_idProducto =  '" + producto.id + "'";
+                            //int.TryParse(conexion.ValorEnVariable(CrRemito), out int CRR);
+                            //CRR = producto.cantidad - CRR;
+                            String productosActualizar = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC, PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario + "');";
+                            conexion.operaciones(productosActualizar);
+                        }
+                        ejecutar = false;
+                        loadlistaOC(index);
+                        LoadListaComboProveedor();
+                        ejecutar = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se puede modificar una Orden que tiene remitos");
                 }
             }
             catch (NullReferenceException)
@@ -377,6 +392,46 @@ namespace wpfFamiliaBlanco
         {
             cmbProveedores.Text = "--Seleccione para filtrar--";
             cmbFechas.Text = "--Seleccione para filtrar--";
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
+            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
+            doc.Open();
+            var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
+            Paragraph fb = new Paragraph(" FAMILIA BLANCO", titleFont);
+            Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
+            Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
+            Paragraph telefono = new Paragraph("Numero de contacto: 4554554 " );
+            Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");
+            Paragraph prod = new Paragraph("Productos de la orden \n \n");
+
+            doc.Add(fb);
+            doc.Add(proveedor);
+            doc.Add(fecha);
+            doc.Add(telefono);
+            doc.Add(Direccion);
+            doc.Add(prod);
+            PdfPTable table1 = new PdfPTable(1);
+            table1.AddCell("Productos");
+            PdfPTable table = new PdfPTable(4);
+            table.AddCell("Cantidad");
+            table.AddCell("               Producto              ");
+            table.AddCell("Precio Unitario");
+            table.AddCell("Total");
+            PdfPTable producto = new PdfPTable(4);
+            for (int i = 0; i < this.productos.Rows.Count; i++)
+            {
+                producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[2].ToString());
+            }
+            doc.Add(table1);
+            doc.Add(table);
+            doc.Add(producto);
+            doc.Close();
         }
     }
 }

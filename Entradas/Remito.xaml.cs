@@ -72,9 +72,10 @@ namespace wpfFamiliaBlanco.Entradas
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
-                loadLtsRemitos();            
+                loadLtsRemitos();
+            
                 seleccioneParaFiltrar();
-             
+                ltsremitos.Items.MoveCurrentToLast();
             }
 
         }
@@ -125,10 +126,7 @@ namespace wpfFamiliaBlanco.Entradas
                     loadLtsRemitos();
                 }
             }
-            else
-            {
-                cmbProveedores.Text = "hola puto";
-            }
+          
          
 
         }
@@ -241,7 +239,10 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+  
             DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
             string numeroRemito = selectedDataRow["numeroRemito"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito numero: " + numeroRemito, "Advertencia", MessageBoxButton.YesNo);
@@ -259,11 +260,19 @@ namespace wpfFamiliaBlanco.Entradas
                 loadLtsRemitos();
                 LoadListaComboProveedor();
             }
+            }
+            catch (NullReferenceException)
+            {
 
+                MessageBox.Show("Seleccione un remito a eliminar");
+            }
         }
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+             
             string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
             string consulta = "select t2.FK_idProveedor from  ordencompra t2 where idOrdenCompra = @valor";
             int.TryParse(lblNroOCR.Content.ToString(), out int OC);
@@ -308,7 +317,12 @@ namespace wpfFamiliaBlanco.Entradas
                 
                 loadLtsRemitos(index);
             }
+            }
+            catch (NullReferenceException)
+            {
 
+                MessageBox.Show("Seleccione un remito a modificar");
+            }
         }
     }
 }

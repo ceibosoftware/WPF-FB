@@ -265,6 +265,8 @@
         <ComboBox x:Name="cmbFechas" HorizontalAlignment="Left" Height="23" Margin="25,140,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbFechas_SelectionChanged" IsEditable="True"/>
         <TextBox x:Name="txtFiltro" Width="395" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="25,25,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" TextChanged="txtFiltro_TextChanged" />
         <Button Content="VER TODO" HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="PDF" HorizontalAlignment="Left" Margin="935,300,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="Button_Click_1"/>
+        <Label x:Name="lblFecha_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="560,35,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
 
     </Grid>
 </Page>

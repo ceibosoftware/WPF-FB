@@ -178,7 +178,7 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Falta completar campo nombre");
                 return false;
             }
-            else if (string.IsNullOrEmpty(txtCantidad.Text))
+            else if (string.IsNullOrEmpty(txtCantidad.Text) )
             {
                 MessageBox.Show("falta completar campo cantidad");
                 return false;
@@ -225,7 +225,10 @@ namespace wpfFamiliaBlanco.Entradas
         private void txtPrecioUnitario_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
+            {
                 e.Handled = true;
+            }
+
             Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
