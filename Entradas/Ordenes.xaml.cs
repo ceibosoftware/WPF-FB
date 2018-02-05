@@ -259,15 +259,15 @@ namespace wpfFamiliaBlanco
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
+            int idOC = (int)ltsNumeroOC.SelectedValue;
+            int index = (int)ltsNumeroOC.SelectedIndex;
+            string existeRemito = "select count(idremitos) from remito where FK_idOC = " + idOC + " ";
+            string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + idOC + " ";
+
             try
             {
-
-                int idOC = (int)ltsNumeroOC.SelectedValue;
-                int index = (int)ltsNumeroOC.SelectedIndex;
-                string existeRemito = "select idremitos from remito where FK_idOC = " + idOC + " ";
-                string existeFactura = "select idremitos from remito where FK_idOC = " + idOC + " ";
-                Console.WriteLine(conexion.ValorEnVariable(existeRemito));
-                if (conexion.ValorEnVariable(existeRemito) == null)
+                          
+                if (conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0")
                 {
                     //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
                     String consulta = "SELECT * FROM ordencompra where idOrdenCompra = @valor";
@@ -341,7 +341,7 @@ namespace wpfFamiliaBlanco
                 }
                 else
                 {
-                    MessageBox.Show("No se puede modificar una Orden que tiene remitos");
+                    MessageBox.Show("No se puede modificar una Orden que tiene remitos o facturas");
                 }
             }
             catch (NullReferenceException)
@@ -400,14 +400,24 @@ namespace wpfFamiliaBlanco
             PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
             doc.Open();
             var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
-            Paragraph fb = new Paragraph(" FAMILIA BLANCO", titleFont);
+            
+            string imageURL = "C:\\Users\\maria\\Desktop\\proyectos\\WPF-FB\\logo.png";
+            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
+            jpg.Alignment = Element.ALIGN_CENTER;
+            //Resize image depend upon your need 
+            jpg.ScaleToFit(140f, 120f);
+            //Give space before image 
+            jpg.SpacingBefore = 10f;
+            //Give some space after the image 
+            jpg.SpacingAfter = 1f;
+            doc.Add(jpg);
             Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
             Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
             Paragraph telefono = new Paragraph("Numero de contacto: 4554554 " );
             Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");
             Paragraph prod = new Paragraph("Productos de la orden \n \n");
 
-            doc.Add(fb);
+           
             doc.Add(proveedor);
             doc.Add(fecha);
             doc.Add(telefono);
@@ -416,8 +426,9 @@ namespace wpfFamiliaBlanco
             PdfPTable table1 = new PdfPTable(1);
             table1.AddCell("Productos");
             PdfPTable table = new PdfPTable(4);
+            
             table.AddCell("Cantidad");
-            table.AddCell("               Producto              ");
+            table.AddCell("Producto");
             table.AddCell("Precio Unitario");
             table.AddCell("Total");
             PdfPTable producto = new PdfPTable(4);
