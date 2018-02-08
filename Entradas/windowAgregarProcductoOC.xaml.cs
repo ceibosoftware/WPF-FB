@@ -39,6 +39,13 @@ namespace wpfFamiliaBlanco.Entradas
             this.idOC = idOC;
             lblPrecioUnitario.Content = "Precio unitario pagado";
         }
+        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre)
+        {
+           
+            InitializeComponent();
+            loadListaProducto(idProveedor, idProducto, nombre);
+            
+        }
 
         public void loadListaProducto(int idProveedor)
         {
@@ -115,15 +122,16 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 decimal cantidad;
                 decimal precioU;
-                Decimal.TryParse(txtCantidad.Text, out cantidad);
-                Decimal.TryParse(txtPrecioUnitario.Text, out precioU);
+                decimal.TryParse(txtCantidad.Text, out cantidad);
+                decimal.TryParse(txtPrecioUnitario.Text, out precioU);
                 txtTotal.Text = (cantidad * precioU).ToString();
             }
             catch (OverflowException)
             {
                 txtCantidad.Text = "0";
                 txtCantidad.Focus();
-                MessageBox.Show("Total demaciado grande , vueva a ingresar cantidad","gato refugiado",MessageBoxButton.OK,MessageBoxImage.Hand);
+                MessageBox.Show("Total demaciado grande , vueva a ingresar cantidad","Error" ,MessageBoxButton.OK, MessageBoxImage.Hand);
+                
             }
             
         }
@@ -145,12 +153,11 @@ namespace wpfFamiliaBlanco.Entradas
             consulta= "select p.precioUnitario from productos p where p.idProductos = "+ ltsProductos.SelectedValue +" ";
             else
             consulta = "SELECT t1.PUPagado FROM productos_has_ordencompra t1 where FK_idOC = "+idOC+ " and t1.FK_idProducto = " + ltsProductos.SelectedValue + " ";
-
+            Console.WriteLine(ltsProductos.SelectedValue);
+            Console.WriteLine(idOC);
             String valor = conexion.ValorEnVariable(consulta);
-            Decimal.TryParse(txtPrecioUnitario.Text, out decimal PU);
-            Decimal.TryParse(valor, out decimal PUOriginal);
-            Console.WriteLine("valor del text" + PU);
-            Console.WriteLine("valor del PU" + PUOriginal);
+            float.TryParse(txtPrecioUnitario.Text, out float PU);
+            float.TryParse(valor, out float PUOriginal);
             if (PUOriginal != PU)
             {
                 if (!modifica)

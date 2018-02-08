@@ -249,6 +249,17 @@ namespace wpfFamiliaBlanco
                     loadlistaOC();
 
                 }
+                if (ltsNumeroOC.Items.Count <= 0)
+                {
+                    txtDescripcion.Text = "";
+                    txtFiltro.Text = "";
+                    txtFormaPago.Text = "";
+                    txtIva.Text = "";
+                    txtSubtotal.Text = "";
+                    txtTipoCambio.Text = "";
+                    txtTotal.Text = "";
+                    lblFechaOC.Content = "";
+                }
             }
             catch (NullReferenceException)
             {
@@ -259,14 +270,15 @@ namespace wpfFamiliaBlanco
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            int idOC = (int)ltsNumeroOC.SelectedValue;
-            int index = (int)ltsNumeroOC.SelectedIndex;
-            string existeRemito = "select count(idremitos) from remito where FK_idOC = " + idOC + " ";
-            string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + idOC + " ";
+ 
 
             try
             {
-                          
+                int idOC = (int)ltsNumeroOC.SelectedValue;
+                int index = (int)ltsNumeroOC.SelectedIndex;
+                string existeRemito = "select count(idremitos) from remito where FK_idOC = " + idOC + " ";
+                string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + idOC + " ";
+
                 if (conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0")
                 {
                     //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
@@ -386,7 +398,7 @@ namespace wpfFamiliaBlanco
             cmbFechas.SelectedIndex = -1;
             loadlistaOC();
             seleccioneParaFiltrar();
-        
+           
         }
         private void seleccioneParaFiltrar()
         {

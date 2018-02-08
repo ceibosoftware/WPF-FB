@@ -259,6 +259,12 @@ namespace wpfFamiliaBlanco.Entradas
                 conexion.operaciones(sql);
                 loadLtsRemitos();
                 LoadListaComboProveedor();
+                    if(ltsremitos.Items.Count <= 0)
+                    {
+                        lblProvR.Content = "";
+                        lblNroOCR.Content = "";
+                        lblFechaR.Content = "";
+                    }
             }
             }
             catch (NullReferenceException)
