@@ -31,7 +31,7 @@ namespace wpfFamiliaBlanco.Entradas
         public Producto prod;
         bool bandera = false;
         DateTime dt = DateTime.Now;
-
+        public int id = 0;
         public windowAgregarFactura()
         {
             itemsFact.Clear();
@@ -46,7 +46,12 @@ namespace wpfFamiliaBlanco.Entradas
             LoadDgvFactura();
             loadDGVCuotas();
             LlenarCmbTipoCuota();
-          
+            txtNroFactura.MaxLines = 1;
+            txtNroFactura.MaxLength = 10;
+            txtTotal.IsReadOnly = true;
+            txtSubtotal.IsReadOnly = true;
+            dgvProductosFactura.IsReadOnly = true;
+            dgvProductosOC.IsReadOnly = true;
            
        bandera = true;
         }
@@ -56,6 +61,9 @@ namespace wpfFamiliaBlanco.Entradas
             InitializeComponent();
             try
             {
+
+                txtNroFactura.MaxLines = 1;
+                txtNroFactura.MaxLength = 10;
                 itemsFact.Clear();
                 items.Clear();
                 todaslascuotas.Clear();
@@ -84,6 +92,12 @@ namespace wpfFamiliaBlanco.Entradas
                 this.todaslascuotas = lCU;
        
                 bandera = true;
+
+                txtTotal.IsReadOnly = true;
+                txtSubtotal.IsReadOnly = true;
+                dgvProductosFactura.IsReadOnly = true;
+                dgvProductosOC.IsReadOnly = true;
+          
             }
             catch (Exception)
             {
@@ -93,11 +107,11 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void LoadListaComboProveedor()
         {
-            String consulta = "SELECT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor";
+            String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idProveedor";
-            cmbProveedores.SelectedIndex = 1;
+            cmbProveedores.SelectedIndex = 0;
         }
 
         public void LlenarComboFiltro()
@@ -171,7 +185,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             try
             {
-                String sql2 = "SELECT productos.nombre, productos.idProductos, cantidad, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+                String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
                 for (int i = 0; i < productos.Rows.Count; i++)
@@ -217,6 +231,8 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 bool existe = false;
                 Producto prod = dgvProductosOC.SelectedItem as Producto;
+               
+                id = prod.id;
                 if (prod.cantidad > 0)
                 {
                     var newW = new WindowAgregarProductoFactura();
@@ -266,7 +282,7 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 else
                 {
-                    MessageBox.Show("Ya se entregaron todos los remitos de este producto");
+                    MessageBox.Show("Ya se entregaron todos las facturas de este producto");
                 }
             }
             catch (NullReferenceException)
@@ -334,6 +350,9 @@ namespace wpfFamiliaBlanco.Entradas
                     if (items[i].nombre == prod.nombre)
                     {
                         items[i].cantidad += prod.cantidad;
+                        /*
+                        String updateCantidad = "UPDATE productos_has_ordencompra SET CrFactura = '" + items[i].cantidad + "' WHERE FK_idOC = '" + cmbOrden.Text + "' AND FK_idProducto = '"+items[i].id+"'";
+                        conexion.operaciones(updateCantidad);*/
                     }
 
                 }
@@ -372,16 +391,17 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (cmbIVA.SelectedIndex == 0)
             {
-                txtTotal.Text = subtotal.ToString();
+        
+                txtTotal.Text = txtSubtotal.Text.ToString();
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
-                total = subtotal * (float)1.21;
+                total = int.Parse(txtSubtotal.Text) * (float)1.21;
                 txtTotal.Text = total.ToString();
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
-                total = subtotal * (float)1.105;
+                total = int.Parse(txtSubtotal.Text) * (float)1.105;
                 txtTotal.Text = total.ToString();
             }
         }
@@ -513,6 +533,17 @@ namespace wpfFamiliaBlanco.Entradas
                 return true;
             }
 
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtNroFactura_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
         }
     }
 
