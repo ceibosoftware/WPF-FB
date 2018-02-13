@@ -161,9 +161,9 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void LlenarCmbIVA()
         {
-            cmbIVA.Items.Add((decimal)0);
-            cmbIVA.Items.Add((decimal)21);
-            cmbIVA.Items.Add((decimal)10.5);
+            cmbIVA.Items.Add((float)0);
+            cmbIVA.Items.Add((float)21);
+            cmbIVA.Items.Add((float)10.5);
             
         }
 
@@ -242,10 +242,10 @@ namespace wpfFamiliaBlanco.Entradas
                 Producto prod = dgvProductos.SelectedItem as Producto;
                 float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
               
                 newW.txtCantidad.Text = prod.cantidad.ToString();
-                cantidadAntigua = prod.cantidad;
+             
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
                 newW.txtNombre.Text = prod.nombre;
                 newW.CalculaTotal();
