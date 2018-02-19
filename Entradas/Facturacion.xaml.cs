@@ -53,6 +53,13 @@ namespace wpfFamiliaBlanco.Entradas
             LoadListfactura();
             cmbordenCompra.SelectedIndex = -1;
             seleccioneParaFiltrar();
+
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnModificar_Copy.Visibility = Visibility.Collapsed;
+                this.btnEliminar.Visibility = Visibility.Collapsed;
+                
+            }
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
