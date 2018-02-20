@@ -30,9 +30,12 @@ namespace wpfFamiliaBlanco
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(txtCantidad.Text, out int cantidad);
-            if (can >= cantidad)
+            if (can >= cantidad &&  !string.IsNullOrEmpty(txtCantidad.Text))
             {
                 DialogResult = true;
+            }else if (string.IsNullOrEmpty(txtCantidad.Text))
+            {
+                MessageBox.Show("Ingrese una cantidad");
             }
             else
             {

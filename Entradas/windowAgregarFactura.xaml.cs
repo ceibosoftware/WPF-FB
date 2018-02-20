@@ -39,7 +39,6 @@ namespace wpfFamiliaBlanco.Entradas
             todaslascuotas.Clear();
             InitializeComponent();
             LoadListaComboProveedor();
-            LlenarComboFiltro();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
             LoadDgvProducto();
@@ -52,8 +51,10 @@ namespace wpfFamiliaBlanco.Entradas
             txtSubtotal.IsReadOnly = true;
             dgvProductosFactura.IsReadOnly = true;
             dgvProductosOC.IsReadOnly = true;
-           
-       bandera = true;
+            seleccionefecha();
+            dtFactura.SelectedDate = DateTime.Now;
+
+            bandera = true;
         }
 
         public windowAgregarFactura(int numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
@@ -68,15 +69,17 @@ namespace wpfFamiliaBlanco.Entradas
                 items.Clear();
                 todaslascuotas.Clear();
                 LoadListaComboProveedor();
-                LlenarComboFiltro();
                 LlenarCmbIVA();
                 LlenarCmbTipoCambio();
                 LoadDgvProducto(pOC);
                 LoadDgvFactura(pFA);
                 LlenarCmbTipoCuota();
                 loadDGVCuotas(lCU);
+                cmbProveedores.IsEnabled = false;
+                cmbCuotas.IsEnabled = false;
+                txtFiltro.IsEnabled = false;
 
-                this.txtNroFactura.Text = numFactura.ToString();
+            this.txtNroFactura.Text = numFactura.ToString();
                 this.cmbProveedores.Text = proveedor;
                 this.items = pOC;
                 this.cmbCuotas.Text = cuotas;
@@ -104,7 +107,11 @@ namespace wpfFamiliaBlanco.Entradas
 
             //}
         }
+        private void seleccionefecha()
+        {
+            cmbCuotas.Text = "--Seleccione fecha factura--";
 
+        }
         public void LoadListaComboProveedor()
         {
             String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor";
@@ -114,11 +121,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedIndex = 0;
         }
 
-        public void LlenarComboFiltro()
-        {
-            cmbFiltro.Items.Add("Proveedor");
-
-        }
+    
 
         private void LlenarCmbIVA()
         {
@@ -160,8 +163,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             itemsFact.Clear();
             dgvProductosFactura.Items.Refresh();
-          //  try
-            //{
+            try
+            {
                 String id = cmbProveedores.SelectedValue.ToString();
                 String nombreProv = cmbProveedores.Text;
 
@@ -170,12 +173,12 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbOrden.DisplayMemberPath = "idOrdenCompra";
                 cmbOrden.SelectedValuePath = "idOrdenCompra";
                 cmbOrden.SelectedIndex = 0;
-         //   }
-           // catch (Exception)
-            //{
+            }
+            catch (NullReferenceException)
+            {
 
-                //MessageBox.Show("error");
-//            }
+           
+           }
 
         }
 
@@ -269,7 +272,7 @@ namespace wpfFamiliaBlanco.Entradas
                             dgvProductosFactura.Items.Refresh();
                             float.TryParse(txtSubtotal.Text, out subtotal);
                             subtotal += productoFactura.total;
-                            txtSubtotal.Text = (subtotal).ToString();                          
+                            txtSubtotal.Text = (productoFactura.cantidad * productoFactura.precioUnitario).ToString();                          
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();
                             calculaTotal();
@@ -456,6 +459,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                     }
                     loadDGVCuotas();
+                    bandera = false;
                 }
             }
             
@@ -544,6 +548,27 @@ namespace wpfFamiliaBlanco.Entradas
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
+        }
+
+        private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Busquedas de productos.
+            DataTable facturas = new DataTable();
+            String consulta;
+            consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor AND p.nombre LIKE '%' @valor '%' ";
+            facturas = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            cmbProveedores.ItemsSource = facturas.AsDataView();
+            cmbProveedores.SelectedIndex = 0;
+        }
+
+        private void dtFactura_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+       
+            
+                    todaslascuotas.Clear();
+                    DgvCuotas.Items.Refresh();
+                cmbCuotas.Text = "Seleccione cantidad de cuotas";
+            bandera = true;
         }
     }
 

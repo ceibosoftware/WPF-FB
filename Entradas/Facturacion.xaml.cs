@@ -60,6 +60,8 @@ namespace wpfFamiliaBlanco.Entradas
                 this.btnEliminar.Visibility = Visibility.Collapsed;
                 
             }
+
+            ltsFactura.SelectedIndex = 0;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -137,18 +139,16 @@ namespace wpfFamiliaBlanco.Entradas
                         String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
                         conexion.operaciones(sql);
                     }
-                
-                  
+
+                   
                 }
 
 
               
             }
-            ltsFactura.Items.Refresh();
             LoadListfactura();
-            ltsFactura.SelectedIndex = ltsFactura.Items.Count;
-
-
+            ltsFactura.Items.Refresh();
+            ltsFactura.Items.MoveCurrentToLast();
         }
 
         public void LoadListaComboProveedor()
@@ -280,6 +280,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
                 string numeroFactura = selectedDataRow["numeroFactura"].ToString();
+                string idFactura = selectedDataRow["idfacturas"].ToString();
                 MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la factura numero :" + numeroFactura, "Advertencia", MessageBoxButton.YesNo);
 
 
@@ -289,9 +290,11 @@ namespace wpfFamiliaBlanco.Entradas
                 int idSeleccionado = (int)ltsFactura.SelectedValue;
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
+                        String orden = "SELECT FK_idOC FROM factura WHERE idfacturas = '" + idFactura + "' ";
+                        String valororden = conexion.ValorEnVariable(orden);
 
-                    String consulta = "UPDATE productos_has_ordencompra SET CrFactura = CrFactura + '" + (int)productos.Rows[i].ItemArray[4] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[3] + "' and FK_idOC = '" + cmbordenCompra.Text + "'";
-                    conexion.operaciones(consulta);
+                    String consulta = "UPDATE productos_has_ordencompra SET CrFactura = CrFactura + '" + (int)productos.Rows[i].ItemArray[4] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[3] + "' and FK_idOC = '" + valororden + "'";
+                     conexion.operaciones(consulta);
                 }
                 string sql2 = "DELETE  FROM factura WHERE idfacturas = '" + ltsFactura.SelectedValue + "'";
                 conexion.operaciones(sql2);
@@ -589,7 +592,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, ltsFactura);
             ltsFactura.DisplayMemberPath = "numeroFactura";
             ltsFactura.SelectedValuePath = "idfacturas";
-            ltsFactura.SelectedIndex = 0;
+            
         }
 
         private void seleccioneParaFiltrar()

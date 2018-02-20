@@ -315,382 +315,477 @@ namespace wpfFamiliaBlanco.Entradas
             listacuotas.Clear();
             if (cantidadCuota == 1)
             {
-           
-                int dias = int.Parse(txt1.Text);
-                DateTime answer = fechafactura.AddDays(dias); 
-                Cuotas cuota = new Cuotas(1, dias, answer);          
-                listacuotas.Add(cuota);             
-                DialogResult = true;
+                if (string.IsNullOrEmpty(txt1.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+
+
+
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+
+                    listacuotas.Add(cuota);
+                    DialogResult = true;
+                }
+               
             }
             else if (cantidadCuota == 2)
             {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-               
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-             
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                DialogResult = true;
+
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+                  }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 3)
       {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-     
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-               
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                DialogResult = true;
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) &&  string.IsNullOrEmpty(txt3.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 4)
             {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-           
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-         
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                DialogResult = true;
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 5)
             {
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text))
+                {
 
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-      
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-         
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 6)
             {
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text))
+                {
 
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-   
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-             
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
 
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 7)
             {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-              
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text))
+                {
 
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 8)
             {
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text))
+                {
 
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                int dias8 = int.Parse(txt8.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-                DateTime answer8 = fechafactura.AddDays(dias8);
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
-                Cuotas cuota8 = new Cuotas(8, dias8, answer8);
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                listacuotas.Add(cuota8);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    int dias8 = int.Parse(txt8.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+                    DateTime answer8 = fechafactura.AddDays(dias8);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8);
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    listacuotas.Add(cuota8);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 9)
             {
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text))
+                {
 
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                int dias8 = int.Parse(txt8.Text);
-                int dias9 = int.Parse(txt9.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-                DateTime answer8 = fechafactura.AddDays(dias8);
-                DateTime answer9 = fechafactura.AddDays(dias9);
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
-                Cuotas cuota8 = new Cuotas(8, dias8, answer8);
-                Cuotas cuota9 = new Cuotas(9, dias9, answer9);
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                listacuotas.Add(cuota8);
-                listacuotas.Add(cuota9);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    int dias8 = int.Parse(txt8.Text);
+                    int dias9 = int.Parse(txt9.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+                    DateTime answer8 = fechafactura.AddDays(dias8);
+                    DateTime answer9 = fechafactura.AddDays(dias9);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9);
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    listacuotas.Add(cuota8);
+                    listacuotas.Add(cuota9);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 10)
             {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                int dias8 = int.Parse(txt8.Text);
-                int dias9 = int.Parse(txt9.Text);
-                int dias10 = int.Parse(txt10.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-                DateTime answer8 = fechafactura.AddDays(dias8);
-                DateTime answer9 = fechafactura.AddDays(dias9);
-                DateTime answer10 = fechafactura.AddDays(dias10);
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
-                Cuotas cuota8 = new Cuotas(8, dias8, answer8);
-                Cuotas cuota9 = new Cuotas(9, dias9, answer9);
-                Cuotas cuota10 = new Cuotas(10, dias10, answer10);
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                listacuotas.Add(cuota8);
-                listacuotas.Add(cuota9);
-                listacuotas.Add(cuota10);
-                DialogResult = true;
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    int dias8 = int.Parse(txt8.Text);
+                    int dias9 = int.Parse(txt9.Text);
+                    int dias10 = int.Parse(txt10.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+                    DateTime answer8 = fechafactura.AddDays(dias8);
+                    DateTime answer9 = fechafactura.AddDays(dias9);
+                    DateTime answer10 = fechafactura.AddDays(dias10);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10);
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    listacuotas.Add(cuota8);
+                    listacuotas.Add(cuota9);
+                    listacuotas.Add(cuota10);
+                    DialogResult = true;
+                }
             }
             else if (cantidadCuota == 11)
             {
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text) && string.IsNullOrEmpty(txt11.Text))
+                {
 
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                int dias8 = int.Parse(txt8.Text);
-                int dias9 = int.Parse(txt9.Text);
-                int dias10 = int.Parse(txt10.Text);
-                int dias11 = int.Parse(txt11.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-                DateTime answer8 = fechafactura.AddDays(dias8);
-                DateTime answer9 = fechafactura.AddDays(dias9);
-                DateTime answer10 = fechafactura.AddDays(dias10);
-                DateTime answer11 = fechafactura.AddDays(dias11);
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
-                Cuotas cuota8 = new Cuotas(8, dias8, answer8);
-                Cuotas cuota9 = new Cuotas(9, dias9, answer9);
-                Cuotas cuota10 = new Cuotas(10, dias10, answer10);
-                Cuotas cuota11 = new Cuotas(11, dias11, answer11);
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                listacuotas.Add(cuota8);
-                listacuotas.Add(cuota9);
-                listacuotas.Add(cuota10);
-                listacuotas.Add(cuota11);
-                DialogResult = true;
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    int dias8 = int.Parse(txt8.Text);
+                    int dias9 = int.Parse(txt9.Text);
+                    int dias10 = int.Parse(txt10.Text);
+                    int dias11 = int.Parse(txt11.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+                    DateTime answer8 = fechafactura.AddDays(dias8);
+                    DateTime answer9 = fechafactura.AddDays(dias9);
+                    DateTime answer10 = fechafactura.AddDays(dias10);
+                    DateTime answer11 = fechafactura.AddDays(dias11);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10);
+                    Cuotas cuota11 = new Cuotas(11, dias11, answer11);
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    listacuotas.Add(cuota8);
+                    listacuotas.Add(cuota9);
+                    listacuotas.Add(cuota10);
+                    listacuotas.Add(cuota11);
+                    DialogResult = true;
+                }
             }
             else
             {
-                int dias = int.Parse(txt1.Text);
-                int dias2 = int.Parse(txt2.Text);
-                int dias3 = int.Parse(txt3.Text);
-                int dias4 = int.Parse(txt4.Text);
-                int dias5 = int.Parse(txt5.Text);
-                int dias6 = int.Parse(txt6.Text);
-                int dias7 = int.Parse(txt7.Text);
-                int dias8 = int.Parse(txt8.Text);
-                int dias9 = int.Parse(txt9.Text);
-                int dias10 = int.Parse(txt10.Text);
-                int dias11 = int.Parse(txt11.Text);
-                int dias12 = int.Parse(txt12.Text);
-                DateTime answer = fechafactura.AddDays(dias);
-                DateTime answer2 = fechafactura.AddDays(dias2);
-                DateTime answer3 = fechafactura.AddDays(dias3);
-                DateTime answer4 = fechafactura.AddDays(dias4);
-                DateTime answer5 = fechafactura.AddDays(dias5);
-                DateTime answer6 = fechafactura.AddDays(dias6);
-                DateTime answer7 = fechafactura.AddDays(dias7);
-                DateTime answer8 = fechafactura.AddDays(dias8);
-                DateTime answer9 = fechafactura.AddDays(dias9);
-                DateTime answer10 = fechafactura.AddDays(dias10);
-                DateTime answer11 = fechafactura.AddDays(dias11);
-                DateTime answer12 = fechafactura.AddDays(dias12);
-                Cuotas cuota = new Cuotas(1, dias, answer);
-                Cuotas cuota2 = new Cuotas(2, dias2, answer2);
-                Cuotas cuota3 = new Cuotas(3, dias3, answer3);
-                Cuotas cuota4 = new Cuotas(4, dias4, answer4);
-                Cuotas cuota5 = new Cuotas(5, dias5, answer5);
-                Cuotas cuota6 = new Cuotas(6, dias6, answer6);
-                Cuotas cuota7 = new Cuotas(7, dias7, answer7);
-                Cuotas cuota8 = new Cuotas(8, dias8, answer8);
-                Cuotas cuota9 = new Cuotas(9, dias9, answer9);
-                Cuotas cuota10 = new Cuotas(10, dias10, answer10);
-                Cuotas cuota11 = new Cuotas(11, dias11, answer11);
-                Cuotas cuota12 = new Cuotas(12, dias12, answer12);
-                listacuotas.Add(cuota);
-                listacuotas.Add(cuota2);
-                listacuotas.Add(cuota3);
-                listacuotas.Add(cuota4);
-                listacuotas.Add(cuota5);
-                listacuotas.Add(cuota6);
-                listacuotas.Add(cuota7);
-                listacuotas.Add(cuota8);
-                listacuotas.Add(cuota9);
-                listacuotas.Add(cuota10);
-                listacuotas.Add(cuota11);
-                listacuotas.Add(cuota12);
-                DialogResult = true;
+                if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text) && string.IsNullOrEmpty(txt11.Text) && string.IsNullOrEmpty(txt12.Text))
+                {
+
+                    MessageBox.Show("ingrese dias");
+                }
+                else
+                {
+                    int dias = int.Parse(txt1.Text);
+                    int dias2 = int.Parse(txt2.Text);
+                    int dias3 = int.Parse(txt3.Text);
+                    int dias4 = int.Parse(txt4.Text);
+                    int dias5 = int.Parse(txt5.Text);
+                    int dias6 = int.Parse(txt6.Text);
+                    int dias7 = int.Parse(txt7.Text);
+                    int dias8 = int.Parse(txt8.Text);
+                    int dias9 = int.Parse(txt9.Text);
+                    int dias10 = int.Parse(txt10.Text);
+                    int dias11 = int.Parse(txt11.Text);
+                    int dias12 = int.Parse(txt12.Text);
+                    DateTime answer = fechafactura.AddDays(dias);
+                    DateTime answer2 = fechafactura.AddDays(dias2);
+                    DateTime answer3 = fechafactura.AddDays(dias3);
+                    DateTime answer4 = fechafactura.AddDays(dias4);
+                    DateTime answer5 = fechafactura.AddDays(dias5);
+                    DateTime answer6 = fechafactura.AddDays(dias6);
+                    DateTime answer7 = fechafactura.AddDays(dias7);
+                    DateTime answer8 = fechafactura.AddDays(dias8);
+                    DateTime answer9 = fechafactura.AddDays(dias9);
+                    DateTime answer10 = fechafactura.AddDays(dias10);
+                    DateTime answer11 = fechafactura.AddDays(dias11);
+                    DateTime answer12 = fechafactura.AddDays(dias12);
+                    Cuotas cuota = new Cuotas(1, dias, answer);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10);
+                    Cuotas cuota11 = new Cuotas(11, dias11, answer11);
+                    Cuotas cuota12 = new Cuotas(12, dias12, answer12);
+                    listacuotas.Add(cuota);
+                    listacuotas.Add(cuota2);
+                    listacuotas.Add(cuota3);
+                    listacuotas.Add(cuota4);
+                    listacuotas.Add(cuota5);
+                    listacuotas.Add(cuota6);
+                    listacuotas.Add(cuota7);
+                    listacuotas.Add(cuota8);
+                    listacuotas.Add(cuota9);
+                    listacuotas.Add(cuota10);
+                    listacuotas.Add(cuota11);
+                    listacuotas.Add(cuota12);
+                    DialogResult = true;
+                }
             }
         }
 
