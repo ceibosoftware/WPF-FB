@@ -59,8 +59,8 @@ namespace wpfFamiliaBlanco.Entradas
         public windowAgregarFactura(int numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
         {
             InitializeComponent();
-            try
-            {
+           // try
+            //{
 
                 txtNroFactura.MaxLines = 1;
                 txtNroFactura.MaxLength = 10;
@@ -98,11 +98,11 @@ namespace wpfFamiliaBlanco.Entradas
                 dgvProductosFactura.IsReadOnly = true;
                 dgvProductosOC.IsReadOnly = true;
           
-            }
-            catch (Exception)
-            {
+            //}
+            //catch (Exception)
+          //  {
 
-            }
+            //}
         }
 
         public void LoadListaComboProveedor()
@@ -160,8 +160,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             itemsFact.Clear();
             dgvProductosFactura.Items.Refresh();
-            try
-            {
+          //  try
+            //{
                 String id = cmbProveedores.SelectedValue.ToString();
                 String nombreProv = cmbProveedores.Text;
 
@@ -170,12 +170,12 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbOrden.DisplayMemberPath = "idOrdenCompra";
                 cmbOrden.SelectedValuePath = "idOrdenCompra";
                 cmbOrden.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
+         //   }
+           // catch (Exception)
+            //{
 
-                MessageBox.Show("error");
-            }
+                //MessageBox.Show("error");
+//            }
 
         }
 
@@ -183,9 +183,9 @@ namespace wpfFamiliaBlanco.Entradas
         {
             items.Clear();
 
-            try
-            {
-                String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + cmbOrden.SelectedValue.ToString() + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+         //   try
+           // {
+                String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
                 for (int i = 0; i < productos.Rows.Count; i++)
@@ -198,13 +198,13 @@ namespace wpfFamiliaBlanco.Entradas
                 dgvProductosOC.Items.Refresh();
                 
             }
-            catch (NullReferenceException)
-            {
+           // catch (NullReferenceException)
+            //{
 
 
-            }
+          //  }
 
-        }
+        
 
         private void LoadDgvProducto(List<Producto> pOC)
         {
@@ -262,7 +262,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                     if (newW.DialogResult == true)
                     {
-                        if (int.Parse(newW.txtCantidad.Text) > 0)
+                        if (int.Parse(newW.txtCantidad.Text) > 0 )
                         {
                             Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
                             itemsFact.Add(productoFactura);
@@ -396,12 +396,12 @@ namespace wpfFamiliaBlanco.Entradas
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
-                total = int.Parse(txtSubtotal.Text) * (float)1.21;
+                total = float.Parse(txtSubtotal.Text) * (float)1.21;
                 txtTotal.Text = total.ToString();
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
-                total = int.Parse(txtSubtotal.Text) * (float)1.105;
+                total = float.Parse(txtSubtotal.Text) * (float)1.105;
                 txtTotal.Text = total.ToString();
             }
         }

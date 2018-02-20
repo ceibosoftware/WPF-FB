@@ -31,11 +31,13 @@ namespace wpfFamiliaBlanco.Entradas
 
         public windowAgregarRemito()
         {
-            InitializeComponent();      
+            InitializeComponent(); 
+            
             loadcmbProveedores();
             loadDgvProd();
             loadDgvProdRemito();
             dtRemito.SelectedDate = DateTime.Now;
+            
         }
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
@@ -88,15 +90,18 @@ namespace wpfFamiliaBlanco.Entradas
             }
         }
         public void loadDgvProd() {
-            dgvProductosOC.ItemsSource = productos;
+            dgvProductosOC.ItemsSource = Productos;
         }
         public void loadDgvProdRemito()
         {
+            
             dgvProductosRemito.ItemsSource = prodRemito;
+            
         }
         public void loadDgvProdRemito(List<Producto> prodRemito)
         {
             dgvProductosRemito.ItemsSource = prodRemito;
+            //dgvProductosRemito.Columns[1].Visibility = Visibility.Collapsed;
         }
 
         public void loadcmbProveedores()
@@ -183,7 +188,7 @@ namespace wpfFamiliaBlanco.Entradas
                     {
                         if (int.Parse(newW.txtCantidad.Text) > 0)
                         {
-                            Producto productoremito = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
+                            Producto productoremito = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text));
                             prodRemito.Add(productoremito);
                             dgvProductosRemito.Items.Refresh();
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
@@ -294,32 +299,31 @@ namespace wpfFamiliaBlanco.Entradas
         public void loadProductosOC()
         {
             productos.Clear();
-            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
+            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
             DataTable prod = conexion.ConsultaParametrizada(consulta, cmbOrden.SelectedValue);
+
             for (int i = 0; i < prod.Rows.Count; i++)
             {
                 int idProductos = (int)prod.Rows[i].ItemArray[0];
-                int cantidad = (int)prod.Rows[i].ItemArray[1];
-                float subtotal = (float)prod.Rows[i].ItemArray[2];
-                string nombre = prod.Rows[i].ItemArray[3].ToString();
-                float PUpagado = (float)prod.Rows[i].ItemArray[4];
-                productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
+                int cantidad = (int)prod.Rows[i].ItemArray[1];           
+                string nombre = prod.Rows[i].ItemArray[2].ToString();
+                Producto produc = new Producto(nombre, idProductos, cantidad);
+                    productos.Add(produc);
             }
             dgvProductosOC.Items.Refresh();
         }
         public void loadProductosOC(int Orden)
         {
             productos.Clear();
-            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
+            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
             DataTable prod = conexion.ConsultaParametrizada(consulta, Orden);
             for (int i = 0; i < prod.Rows.Count; i++)
             {
                 int idProductos = (int)prod.Rows[i].ItemArray[0];
                 int cantidad = (int)prod.Rows[i].ItemArray[1];
-                float subtotal = (float)prod.Rows[i].ItemArray[2];
-                string nombre = prod.Rows[i].ItemArray[3].ToString();
-                float PUpagado = (float)prod.Rows[i].ItemArray[4];
-                productos.Add(new Producto(nombre, idProductos, cantidad, subtotal, PUpagado));
+                string nombre = prod.Rows[i].ItemArray[2].ToString();
+
+                productos.Add(new Producto(nombre, idProductos, cantidad));
             }
             dgvProductosOC.Items.Refresh();
         }

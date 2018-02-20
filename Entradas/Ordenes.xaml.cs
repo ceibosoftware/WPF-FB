@@ -137,7 +137,7 @@ namespace wpfFamiliaBlanco
         {
             try
             {
-                //consulta productos
+                //consulta s
                 String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
                 productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                 dgvProductos.ItemsSource = productos.AsDataView();

@@ -145,9 +145,10 @@ namespace wpfFamiliaBlanco.Entradas
               
             }
             ltsFactura.Items.Refresh();
-            LoadDgvFactura();
-            
-           
+            LoadListfactura();
+            ltsFactura.SelectedIndex = ltsFactura.Items.Count;
+
+
         }
 
         public void LoadListaComboProveedor()
@@ -427,7 +428,7 @@ namespace wpfFamiliaBlanco.Entradas
                  
 
               
-                    String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.precioUnitario  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + FKoc + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+                    String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + FKoc + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
                 DataTable productos = conexion.ConsultaParametrizada(sql2, int.Parse(idOC));
                 for (int i = 0; i < productos.Rows.Count; i++)
