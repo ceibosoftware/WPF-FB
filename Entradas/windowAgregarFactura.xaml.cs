@@ -76,7 +76,7 @@ namespace wpfFamiliaBlanco.Entradas
                 LlenarCmbTipoCuota();
                 loadDGVCuotas(lCU);
                 cmbProveedores.IsEnabled = false;
-                cmbCuotas.IsEnabled = false;
+                cmbOrden.IsEnabled = false;
                 txtFiltro.IsEnabled = false;
 
             this.txtNroFactura.Text = numFactura.ToString();
