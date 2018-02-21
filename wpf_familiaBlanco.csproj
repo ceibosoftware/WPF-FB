@@ -72,6 +72,9 @@
     <Compile Include="Clientes\ME.xaml.cs" />
     <Compile Include="Clientes\MI.xaml.cs" />
     <Compile Include="Clientes\pageClientes.xaml.cs" />
+    <Compile Include="Clientes\windowAgregarClienteme.xaml.cs" />
+    <Compile Include="Clientes\windowAgregarClientemi.xaml.cs" />
+    <Compile Include="Clientes\WindowAgregarContactoCliente.xaml.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
     <Compile Include="Cuotas.cs" />
@@ -163,6 +166,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Clientes\pageClientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\windowAgregarClienteme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\windowAgregarClientemi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\WindowAgregarContactoCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -408,6 +423,8 @@
   <ItemGroup>
     <Resource Include="ceibo ss small.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="clientes prueba\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

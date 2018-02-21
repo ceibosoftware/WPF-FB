@@ -37,7 +37,10 @@ namespace wpfFamiliaBlanco
         {
             btnMI.Style = FindResource("botonTab") as Style;
             btnME.Style = FindResource("botonTabPressed") as Style;
+            frameInicioClientes.Content = new ME();
 
         }
+
+       
     }
 }
