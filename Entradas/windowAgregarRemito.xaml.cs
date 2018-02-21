@@ -90,16 +90,42 @@ namespace wpfFamiliaBlanco.Entradas
             }
         }
         public void loadDgvProd() {
-            dgvProductosOC.ItemsSource = Productos;
+            dgvProductosOC.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductosOC.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductosOC.Columns.Add(textColumn2);
+            dgvProductosOC.ItemsSource = productos;
         }
         public void loadDgvProdRemito()
         {
-            
+            dgvProductosRemito.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductosRemito.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductosRemito.Columns.Add(textColumn2);
             dgvProductosRemito.ItemsSource = prodRemito;
             
         }
         public void loadDgvProdRemito(List<Producto> prodRemito)
         {
+            dgvProductosRemito.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductosRemito.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductosRemito.Columns.Add(textColumn2);
             dgvProductosRemito.ItemsSource = prodRemito;
             //dgvProductosRemito.Columns[1].Visibility = Visibility.Collapsed;
         }
@@ -301,15 +327,16 @@ namespace wpfFamiliaBlanco.Entradas
             productos.Clear();
             string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
             DataTable prod = conexion.ConsultaParametrizada(consulta, cmbOrden.SelectedValue);
-
+            
             for (int i = 0; i < prod.Rows.Count; i++)
             {
                 int idProductos = (int)prod.Rows[i].ItemArray[0];
                 int cantidad = (int)prod.Rows[i].ItemArray[1];           
                 string nombre = prod.Rows[i].ItemArray[2].ToString();
                 Producto produc = new Producto(nombre, idProductos, cantidad);
-                    productos.Add(produc);
+                productos.Add(produc);
             }
+ 
             dgvProductosOC.Items.Refresh();
         }
         public void loadProductosOC(int Orden)
@@ -325,6 +352,8 @@ namespace wpfFamiliaBlanco.Entradas
 
                 productos.Add(new Producto(nombre, idProductos, cantidad));
             }
+  
+          
             dgvProductosOC.Items.Refresh();
         }
         public bool validar()

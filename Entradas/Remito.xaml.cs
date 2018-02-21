@@ -31,8 +31,9 @@ namespace wpfFamiliaBlanco.Entradas
             InitializeComponent();
             loadLtsRemitos();
             LoadListaComboProveedor();
+            loadProductosRemitos();
             seleccioneParaFiltrar();
-
+            
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,19 @@ namespace wpfFamiliaBlanco.Entradas
             var newW = new windowAgregarRemito();
             newW.ShowDialog();
         }
-
+        private void loadProductosRemitos()
+        {
+            dgvProductos.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductos.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductos.Columns.Add(textColumn2);
+            dgvProductos.ItemsSource = productosparametro;
+        }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarRemito();
@@ -195,7 +208,7 @@ namespace wpfFamiliaBlanco.Entradas
                     lblProvR.Content = datos.Rows[0].ItemArray[0].ToString();
                     DateTime fecha = (DateTime)datos.Rows[0].ItemArray[1];
                     this.fecha = (DateTime)datos.Rows[0].ItemArray[1];
-                lblFechaR.Content = fecha.ToString("dd/MM/yyyy");
+                    lblFechaR.Content = fecha.ToString("dd/MM/yyyy");
                     lblNroOCR.Content = datos.Rows[0].ItemArray[2].ToString();
                 }
                 //consulta productos
@@ -206,9 +219,10 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
                 }
-                dgvProductos.ItemsSource = productos.AsDataView();
+         
+            dgvProductos.Items.Refresh();
 
-            
+
         }
 
         private void cmbOrdenes_SelectionChanged(object sender, SelectionChangedEventArgs e)
