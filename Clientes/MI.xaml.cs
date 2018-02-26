@@ -48,6 +48,9 @@ namespace wpfFamiliaBlanco.Clientes
 
         public void ActualizaDGVContacto()
         {
+            try
+            {
+
             
             String consultaContacto = "SELECT contactocliente.telefono, contactocliente.email, contactocliente.nombrecontacto from contactocliente WHERE FK_idClientemi=@valor";
             DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsClientes.SelectedValue);
@@ -59,7 +62,12 @@ namespace wpfFamiliaBlanco.Clientes
             
             dgvContacto.ItemsSource = listaContacto;
             dgvContacto.Items.Refresh();
-            
+            }
+            catch (Exception)
+            {
+
+               
+            }
 
         }
 
@@ -115,9 +123,10 @@ namespace wpfFamiliaBlanco.Clientes
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+            int idSeleccionado = (int)ltsClientes.SelectedValue;
             if (dialog == MessageBoxResult.Yes)
             {
-                int idSeleccionado = (int)ltsClientes.SelectedValue;
+                
                 string sql = "delete from clientesmi where idClientemi = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
                 loadListaClientes();

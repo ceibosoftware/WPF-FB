@@ -30,6 +30,7 @@ namespace wpfFamiliaBlanco.Clientes
         public ME()
         {
             InitializeComponent();
+            
             loadListaClientes();
             ActualizaDGVContacto();
             ltsClientes.SelectedIndex = 0;
@@ -39,19 +40,35 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void loadListaClientes()
         {
+            try
+            {
             String consult = "SELECT * FROM clientesme";
             conexion.Consulta(consult, ltsClientes);
             ltsClientes.DisplayMemberPath = "nombre";
             ltsClientes.SelectedValuePath = "idClienteme";
-            
+            }
+            catch (NullReferenceException)
+            {
+
+              
+            }
 
         }
 
         public void ActualizaDGVContacto()
         {
-            String consultaContacto = "SELECT contactocliente.telefono, contactocliente.email, contactocliente.nombrecontacto from contactocliente WHERE FK_idClienteme=@valor";
-            DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsClientes.SelectedValue);
-            dgvContacto.ItemsSource = contacto.AsDataView();
+            try
+            {
+                String consultaContacto = "SELECT contactocliente.telefono, contactocliente.email, contactocliente.nombrecontacto from contactocliente WHERE FK_idClienteme=@valor";
+                DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsClientes.SelectedValue);
+                dgvContacto.ItemsSource = contacto.AsDataView();
+            }
+            catch (NullReferenceException)
+            {
+
+                
+            }
+    
 
         }
 
