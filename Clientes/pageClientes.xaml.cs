@@ -41,6 +41,11 @@ namespace wpfFamiliaBlanco
 
         }
 
-       
+        private void btnLP_Click(object sender, RoutedEventArgs e)
+        {
+            btnLP.Style = FindResource("botonTab") as Style;
+            btnLP.Style = FindResource("botonTabPressed") as Style;
+            frameInicioClientes.Content = new LP();
+        }
     }
 }

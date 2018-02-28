@@ -154,5 +154,10 @@
             </Button.BorderBrush>
         </Button>
         <Frame x:Name="frameInicioClientes" Content="" HorizontalAlignment="Left" Height="473.215" Margin="0,76.452,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717"/>
+        <Button x:Name="btnLP" Content="Lista de Precios" HorizontalAlignment="Left" Margin="472,34,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnLP_Click">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
     </Grid>
 </Page>

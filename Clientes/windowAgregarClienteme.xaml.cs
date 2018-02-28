@@ -250,5 +250,11 @@ namespace wpfFamiliaBlanco.Clientes
             }
 
         }
+
+        private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsLetter(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 }

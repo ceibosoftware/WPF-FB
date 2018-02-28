@@ -248,5 +248,23 @@ namespace wpfFamiliaBlanco.Clientes
         {
             this.Close();
         }
+
+        private void txtCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        private void txtTelt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsLetter(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 }

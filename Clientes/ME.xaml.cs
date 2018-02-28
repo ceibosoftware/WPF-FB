@@ -67,7 +67,30 @@ namespace wpfFamiliaBlanco.Clientes
                 String consulta = "SELECT * from clientesme WHERE idClienteme = @valor";
                 DataTable clienteme = conexion.ConsultaParametrizada(consulta, ltsClientes.SelectedValue);
                 txtPais.Text = clienteme.Rows[0].ItemArray[2].ToString();
-                txtt.Text = clienteme.Rows[0].ItemArray[5].ToString();
+
+                if (clienteme.Rows[0].ItemArray[5].ToString()=="0")
+                {
+                    txtt.Text = "CIF";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString()=="1")
+                {
+                    txtt.Text = "Ex-Works";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString()=="2")
+                {
+                    txtt.Text = "FAS";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString() == "3")
+                {
+                    txtt.Text = "FOB";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString() == "4")
+                {
+                    txtt.Text = "FCA";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString() == "5")
+                {
+                    txtt.Text = "C&F";
+                }else if (clienteme.Rows[0].ItemArray[5].ToString() == "6")
+                {
+                    txtt.Text = "CIP";
+                }
+
                 txtDireccion.Text = clienteme.Rows[0].ItemArray[1].ToString();
                 txtweb.Text = clienteme.Rows[0].ItemArray[3].ToString();
 

@@ -88,5 +88,17 @@ namespace wpfFamiliaBlanco.Clientes
         {
             this.Close();
         }
+
+        private void txtTelefonoContacto_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        private void txtNombreContacto_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsLetter(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
     }
 }
