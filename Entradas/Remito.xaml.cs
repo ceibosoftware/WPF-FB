@@ -271,15 +271,17 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 string sql = "delete from remito where idremitos = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
-                loadLtsRemitos();
-                LoadListaComboProveedor();
+                
                     if(ltsremitos.Items.Count <= 0)
                     {
                         lblProvR.Content = "";
                         lblNroOCR.Content = "";
                         lblFechaR.Content = "";
                     }
-            }
+                    seleccioneParaFiltrar();
+                    loadLtsRemitos();
+                    LoadListaComboProveedor();
+                }
             }
             catch (NullReferenceException)
             {
@@ -344,5 +346,7 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione un remito a modificar");
             }
         }
+
+      
     }
 }
