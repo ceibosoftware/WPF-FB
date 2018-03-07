@@ -80,14 +80,32 @@
     <Compile Include="Cuotas.cs" />
     <Compile Include="Cuotas2.cs" />
     <Compile Include="elemento.cs" />
+    <Compile Include="Entradas\DevolucionFactura.xaml.cs">
+      <DependentUpon>DevolucionFactura.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\DevolucionProductos.xaml.cs">
+      <DependentUpon>DevolucionProductos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\DevolucionRemito.xaml.cs">
+      <DependentUpon>DevolucionRemito.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entradas\Facturacion.xaml.cs">
       <DependentUpon>Facturacion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entradas\Ordenes.xaml.cs">
       <DependentUpon>Ordenes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entradas\PagoProveedores.xaml.cs">
+      <DependentUpon>PagoProveedores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entradas\Remito.xaml.cs">
       <DependentUpon>Remito.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarNCFactura.xaml.cs">
+      <DependentUpon>windowAgregarNCFactura.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\windowAgregarPagoProveedor.xaml.cs">
+      <DependentUpon>windowAgregarPagoProveedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entradas\windowAgregarProcductoOC.xaml.cs">
       <DependentUpon>windowAgregarProcductoOC.xaml</DependentUpon>
@@ -181,11 +199,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Entradas\DevolucionFactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\DevolucionProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\DevolucionRemito.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Entradas\Facturacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Entradas\PagoProveedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Entradas\Remito.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarNCFactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowAgregarPagoProveedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

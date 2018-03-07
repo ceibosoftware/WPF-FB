@@ -186,8 +186,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             items.Clear();
 
-         //   try
-           // {
+       
                 String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
                 DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
@@ -199,13 +198,13 @@ namespace wpfFamiliaBlanco.Entradas
                 }
 
                 dgvProductosOC.Items.Refresh();
-                
-            }
-           // catch (NullReferenceException)
-            //{
+                todaslascuotas.Clear();
+                DgvCuotas.Items.Refresh();
+            itemsFact.Clear();
+            dgvProductosFactura.Items.Refresh();
 
-
-          //  }
+        }
+     
 
         
 
@@ -233,7 +232,7 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 bool existe = false;
-                Producto prod = dgvProductosOC.SelectedItem as Producto;
+                Producto prod = dgvProductosFactura.SelectedItem as Producto;
                
                 id = prod.id;
                 if (prod.cantidad > 0)
@@ -353,9 +352,7 @@ namespace wpfFamiliaBlanco.Entradas
                     if (items[i].nombre == prod.nombre)
                     {
                         items[i].cantidad += prod.cantidad;
-                        /*
-                        String updateCantidad = "UPDATE productos_has_ordencompra SET CrFactura = '" + items[i].cantidad + "' WHERE FK_idOC = '" + cmbOrden.Text + "' AND FK_idProducto = '"+items[i].id+"'";
-                        conexion.operaciones(updateCantidad);*/
+                
                     }
 
                 }
@@ -370,6 +367,8 @@ namespace wpfFamiliaBlanco.Entradas
                     txtSubtotal.Text = "0";
                     txtTotal.Text = "0";
                     subtotali = 0;
+                    todaslascuotas.Clear();
+                    DgvCuotas.Items.Refresh();
                 }
             }
             catch (NullReferenceException)
@@ -440,27 +439,36 @@ namespace wpfFamiliaBlanco.Entradas
             {
 
                 todaslascuotas.Clear();
-        
-                var newW = new windowCuotas(cuotass, dt);
-           
-                newW.ShowDialog();
-                if (newW.DialogResult == true)
+                if (txtTotal.Text == "")
                 {
-                    todaslascuotas.Clear();
-                    foreach (Cuotas cuot in newW.listacuotas)
-                    {
-                 
-                        int id = cuot.cuota;
-                        int dias = cuot.dias;
-                        DateTime fecha = cuot.fechadepago;
-              
-                        Cuotas cu = new Cuotas(id, dias, fecha);
-                        todaslascuotas.Add(cu);
-
-                    }
-                    loadDGVCuotas();
-                    bandera = false;
+                    MessageBox.Show("Primero cargue productos a la factura");
                 }
+                else
+                {
+                    var newW = new windowCuotas(cuotass, dt, float.Parse(txtTotal.Text));
+
+                    newW.ShowDialog();
+
+                    if (newW.DialogResult == true)
+                    {
+                        todaslascuotas.Clear();
+                        foreach (Cuotas cuot in newW.listacuotas)
+                        {
+
+                            int id = cuot.cuota;
+                            int dias = cuot.dias;
+                            DateTime fecha = cuot.fechadepago;
+                            float totalPagar = cuot.montoCuota;
+
+                            Cuotas cu = new Cuotas(id, dias, fecha, totalPagar);
+                            todaslascuotas.Add(cu);
+
+                        }
+                        loadDGVCuotas();
+                        bandera = false;
+                    }
+                }
+              
             }
             
         }

@@ -102,8 +102,9 @@ namespace wpfFamiliaBlanco.Entradas
                     int id2 = cuot.cuota;
                     int dias = cuot.dias;
                     DateTime fecha = cuot.fechadepago;
+                    float montocuota = cuot.montoCuota;
 
-                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + id + "')";
+                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, montoCuota ,FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "','"+ montocuota + "' ,'" + id + "')";
                     conexion.operaciones(sqlProductoHas);
 
                 }
@@ -409,7 +410,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable cuotass = conexion.ConsultaParametrizada(sql2, numerofacturaID);
                 for (int i = 0; i < cuotass.Rows.Count; i++)
                 {
-                    cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2]);
+                    cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[3]);
                     cuotasAinsertar.Add(cuota);
                   
                 }
@@ -519,9 +520,10 @@ namespace wpfFamiliaBlanco.Entradas
                     int id2 = cc.cuota;
                     int dias12 = cc.dias;
                     DateTime fecha21 = cc.fechadepago;
+                    float montoCuota = cc.montoCuota;
 
 
-                    String insertcuotas = "INSERT INTO cuotas ( dias, fecha, FK_idFacturas) VALUES ('" + dias12 + "', '" + fecha21.ToString("yyyy/MM/dd") + "', '" + numerofacturaID + "')";
+                    String insertcuotas = "INSERT INTO cuotas ( dias, fecha, montoCuota, FK_idFacturas) VALUES ('" + dias12 + "', '" + fecha21.ToString("yyyy/MM/dd") + "','"+ montoCuota + "', '" + numerofacturaID + "')";
                     conexion.operaciones(insertcuotas);
 
 

@@ -12,12 +12,14 @@ namespace wpfFamiliaBlanco
         public int cuota { get; set; }
         public int dias { get; set; }
         public DateTime fechadepago { get; set; }
+        public float montoCuota { get; set; }
 
-        public  Cuotas(int id, int dias, DateTime fecha)
+        public  Cuotas(int id, int dias, DateTime fecha, float montoCuota)
         {
             this.cuota = id;
             this.dias = dias;
             this.fechadepago = fecha;
+            this.montoCuota = montoCuota;
         }
     }
 }
