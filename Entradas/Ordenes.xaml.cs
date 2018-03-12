@@ -88,7 +88,7 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAgregarOC();
             newW.ShowDialog();
-            if (newW.DialogResult == true)
+            if (newW.DialogResult == true && !newW.agregado)
             {
                 //INSERTAR OC
                 int Proveedor = (int)newW.cmbProveedores.SelectedValue;
@@ -114,14 +114,14 @@ namespace wpfFamiliaBlanco
                     String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" +producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
                     conexion.operaciones(productos);
                 }
-                ejecutar = false;
-                loadlistaOC();
-                LoadListaComboProveedor();
-                ltsNumeroOC.Items.MoveCurrentToLast();
-                ejecutar = true;
-                seleccioneParaFiltrar();
-            }
             
+            }
+            ejecutar = false;
+            loadlistaOC();
+            LoadListaComboProveedor();
+            ltsNumeroOC.Items.MoveCurrentToLast();
+            ejecutar = true;
+            seleccioneParaFiltrar();
         }
 
     

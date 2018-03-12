@@ -342,6 +342,8 @@
         <ComboBox x:Name="cmbDireccion" HorizontalAlignment="Left" Height="24" Margin="542,178,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged"/>
         <TextBox x:Name="txtObservaciones" Width="396" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="542,228,0,0" Height="148" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
         <Label x:Name="lblFormaPago_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="804,207,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Observaciones"/>
+        <Button x:Name="btnRemito" Content="Remito" HorizontalAlignment="Left" Margin="773,405,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnRemito_Click" />
+        <Button x:Name="btnFactura" Content="Factura" HorizontalAlignment="Left" Margin="855,405,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White" Click="btnFactura_Click" />
 
     </Grid>
 </Window>

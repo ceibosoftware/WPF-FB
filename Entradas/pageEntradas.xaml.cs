@@ -43,6 +43,7 @@ namespace wpfFamiliaBlanco
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;
             btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
         }
 
         private void btnRemitos_Click(object sender, RoutedEventArgs e)
@@ -51,7 +52,38 @@ namespace wpfFamiliaBlanco
             btnOrdenes.Style = FindResource("botonTab") as Style;
             btnRemitos.Style = FindResource("botonTabPressed") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
             btnPagoProveedor.Style = FindResource("botonTab") as Style;
+        }
+
+        private void btnPagoProveedor_Click(object sender, RoutedEventArgs e)
+        {
+   
+        }
+
+        private void btnPagoProveedor_Click_1(object sender, RoutedEventArgs e)
+        {
+            frameInicioEntradas.Content = new PagoProveedores();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTabPressed") as Style;
+        }
+
+        private void btnDevolucionProductos_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void btnDevolucion_Click_1(object sender, RoutedEventArgs e)
+        {
+            frameInicioEntradas.Content = new DevolucionProductos();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTabPressed") as Style;
         }
     }
 }

@@ -37,7 +37,10 @@ namespace wpfFamiliaBlanco.Entradas
             loadDgvProd();
             loadDgvProdRemito();
             dtRemito.SelectedDate = DateTime.Now;
-            
+            txtNroRemito.MaxLength = 10;
+            dgvProductosOC.IsReadOnly = true;
+            dgvProductosRemito.IsReadOnly = true;
+
         }
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
@@ -59,6 +62,8 @@ namespace wpfFamiliaBlanco.Entradas
             ejecuta = false;
             loadcmbProveedores();
             ejecuta = true;
+            dgvProductosOC.IsReadOnly = true;
+            dgvProductosRemito.IsReadOnly = true;
         }
         /*public void fechas()
         {

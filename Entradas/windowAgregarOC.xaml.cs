@@ -12,6 +12,7 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class windowAgregarOC : Window
     {
         int idOC;
+        public bool agregado = false;
         bool modifica = false;
         int contador = 0;
         public List<Producto> productos = new List<Producto>();
@@ -132,7 +133,7 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto");
             }
         }
-    
+
 
         public void LoadListaComboProveedor()
         {
@@ -140,7 +141,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idProveedor";
-           
+
         }
         public void LoadListaComboTelefonos()
         {
@@ -148,7 +149,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, combo: cmbTelefono);
             cmbTelefono.DisplayMemberPath = "telefono";
             cmbTelefono.SelectedValuePath = "idTelefono";
-            
+
         }
         public void LoadListaComboDireccion()
         {
@@ -156,7 +157,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, combo: cmbDireccion);
             cmbDireccion.DisplayMemberPath = "direccion";
             cmbDireccion.SelectedValuePath = "idDireccion";
-            
+
         }
 
         private void LlenarCmbIVA()
@@ -164,7 +165,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbIVA.Items.Add((float)0);
             cmbIVA.Items.Add((float)21);
             cmbIVA.Items.Add((float)10.5);
-            
+
         }
 
         private void LlenarCmbTipoCambio()
@@ -174,16 +175,16 @@ namespace wpfFamiliaBlanco.Entradas
             cmbTipoCambio.Items.Add("€");
         }
         private void loadDgvProductos()
-        {      
+        {
             dgvProductos.ItemsSource = productos;
-            
+
         }
-      
+
 
         private void cmbIVA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             calculaTotal();
-              
+
         }
         public void calculaTotal()
         {
@@ -214,7 +215,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedIndex = 0;
         }
 
-    
+
 
         private void btnEliminar_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -231,7 +232,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 MessageBox.Show("No se ha seleccionado ningun producto");
             }
-           
+
         }
 
         private void btnModificar_Copy1_Click(object sender, RoutedEventArgs e)
@@ -243,9 +244,9 @@ namespace wpfFamiliaBlanco.Entradas
                 float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
                 var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
-              
+
                 newW.txtCantidad.Text = prod.cantidad.ToString();
-             
+
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
                 newW.txtNombre.Text = prod.nombre;
                 newW.CalculaTotal();
@@ -273,7 +274,7 @@ namespace wpfFamiliaBlanco.Entradas
                         if (!existe)
                         {
                             prod.cantidad = cantidad;
-        
+
                             prod.total = total;
                             prod.precioUnitario = precioU;
                             prod.nombre = newW.txtNombre.Text;
@@ -306,14 +307,14 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 MessageBox.Show("No se ha seleccionado ningun producto");
             }
-  
-        
+
+
 
         }
 
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -367,11 +368,11 @@ namespace wpfFamiliaBlanco.Entradas
             LlenarCmbTipoCambio();
             LoadListaComboDireccion();
             LoadListaComboTelefonos();
-    
+
 
         }
-     
-        
+
+
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (contador > 2)
@@ -389,5 +390,168 @@ namespace wpfFamiliaBlanco.Entradas
         {
             this.Close();
         }
+
+        private void btnRemito_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (validar())
+            {
+                MessageBoxResult dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    this.agregaOC();
+                    agregado = true;
+
+
+                    var newW = new windowAgregarRemito();
+                    newW.ShowDialog();
+                    if (newW.DialogResult == true)
+                    {
+                        //DATOS REMITO.
+                        int numeroRemito = int.Parse(newW.txtNroRemito.Text);
+                        DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
+
+                        int idOC = (int)newW.cmbOrden.SelectedValue;
+                        string consulta = "insert into remito( numeroRemito, fecha, FK_idOC) values( '" + numeroRemito + "', '" + fecha.ToString("yyyy/MM/dd") + "','" + idOC + "')";
+                        conexion.operaciones(consulta);
+
+                        //PRODUCTOS REMITO
+                        string ultimoId = "Select last_insert_id()";
+
+                        String id = conexion.ValorEnVariable(ultimoId);
+                        foreach (var producto in newW.ProdRemito)
+                        {
+                            String productos = "insert into productos_has_remitos(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + id + "' )";
+                            conexion.operaciones(productos);
+                        }
+                        //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
+                        int idOrden = (int)newW.cmbOrden.SelectedValue;
+                        foreach (var producto in newW.Productos)
+                        {
+                            String sql = "UPDATE productos_has_ordencompra SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
+                            conexion.operaciones(sql);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void agregaOC()
+        {
+            int Proveedor = (int)this.cmbProveedores.SelectedValue;
+            Console.WriteLine(Proveedor);
+            DateTime fecha = this.fecha;
+            fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
+            Console.WriteLine(fecha);
+            decimal.TryParse(this.txtSubtotal.Text, out decimal subtotal);
+            decimal.TryParse(this.txtTotal.Text, out decimal total);
+            int direccion = (int)this.cmbDireccion.SelectedValue;
+            int telefono = (int)this.cmbTelefono.SelectedValue;
+            String observacion = this.txtObservaciones.Text;
+            String formaPago = this.txtFormaPago.Text;
+            int iva = this.cmbIVA.SelectedIndex;
+            int tipoCambio = this.cmbTipoCambio.SelectedIndex;
+            String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "');";
+            conexion.operaciones(sql);
+
+            string ultimoId = "Select last_insert_id()";
+            String id = conexion.ValorEnVariable(ultimoId);
+            foreach (var producto in this.productos)
+            {
+                String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                conexion.operaciones(productos);
+            }
+        }
+
+        private void btnFactura_Click(object sender, RoutedEventArgs e)
+        {
+            if (validar())
+            {
+                MessageBoxResult dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    this.agregaOC();
+                    agregado = true;
+
+                    var newW = new windowAgregarFactura();
+                    newW.ShowDialog();
+
+
+                    //INSERTO DATOS FACTURA
+                    if (newW.DialogResult == true)
+                    {
+                        String idPRove = newW.cmbProveedores.SelectedValue.ToString();
+                        Console.WriteLine("idPRove : " + idPRove);
+                        decimal subtotal = decimal.Parse(newW.txtSubtotal.Text);
+                        Console.WriteLine("subtotal : " + subtotal);
+                        decimal total = decimal.Parse(newW.txtTotal.Text);
+                        Console.WriteLine("total : " + total);
+                        int numeroFact = int.Parse(newW.txtNroFactura.Text);
+                        Console.WriteLine("numeroFact : " + numeroFact);
+                        String iva = newW.cmbIVA.SelectedIndex.ToString();
+                        Console.WriteLine("iva : " + iva);
+                        String tipoCambio = newW.cmbTipoCambio.SelectedIndex.ToString();
+                        Console.WriteLine("tipoCambio : " + tipoCambio);
+                        String cuotas = newW.cmbCuotas.Text;
+                        Console.WriteLine("cuotas : " + cuotas);
+                        //string ultimoId = "Select last_insert_id()";
+                        //String id = conexion.ValorEnVariable(ultimoId);
+                     
+                        // fk orden de compra agregado
+                       int fkOrden = int.Parse(newW.cmbOrden.Text);
+                        DateTime dtp = System.DateTime.Now;
+                        dtp = newW.dtFactura.SelectedDate.Value;
+
+                        String sqlFactura = "INSERT INTO factura ( subtotal, numeroFactura, total, iva, tipoCambio, cuotas, FK_idOC, fecha )VALUES ('" + subtotal + "','" + numeroFact + "','" + total + "','" + iva + "','" + tipoCambio + "','" + cuotas + "','" + fkOrden + "','" + dtp.ToString("yyyy/MM/dd") + "')";
+                        conexion.operaciones(sqlFactura);
+
+
+                        //CREAR CONSULTA PARA TRAER ID FACTURA
+                        int idProducto = newW.id;
+                        string idOC = "Select last_insert_id()";
+                        String idOrden = conexion.ValorEnVariable(idOC);
+
+
+                        //inserto cuotas
+                        foreach (Cuotas cuot in newW.todaslascuotas)
+                        {
+
+                            int id2 = cuot.cuota;
+                            int dias = cuot.dias;
+                            DateTime fecha = cuot.fechadepago;
+
+                            String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + fkOrden + "')";
+                            conexion.operaciones(sqlProductoHas);
+
+                        }
+                        // imprentapanello@gmail.com
+                        // lis_olivas@hotmail.com.ar
+                        //INSERTO LOS PRODUCTOS DE LA FACTURA
+                        foreach (Producto p in newW.itemsFact)
+                        {
+                            String nombre = p.nombre;
+                            int cantidad = p.cantidad;
+                            float totalp = p.total;
+                            float precioUni = p.precioUnitario;
+
+                            String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + fkOrden + "')";
+                            conexion.operaciones(sqlProductoHas);
+
+                            //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
+                         
+                            foreach (var producto in newW.items)
+                            {
+                                String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
+                                conexion.operaciones(sql);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
     }
 }
+
