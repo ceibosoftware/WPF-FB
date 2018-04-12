@@ -20,8 +20,9 @@ namespace wpfFamiliaBlanco.Clientes
     public partial class windowAgregarClienteme : Window
     {
 
-        public List<Contacto> lista = new List<Contacto>();
+        
         CRUD conexion = new CRUD();
+        public List<Contacto> lista = new List<Contacto>();
         int idcliente;
         Contacto info;
 
@@ -32,6 +33,7 @@ namespace wpfFamiliaBlanco.Clientes
             llenarcmbpais();
             llenarcmbtc();
             LoadDGVContacto();
+            CampLimit();
         }
 
         public windowAgregarClienteme(string nombre, string direccion, string pais, int terminocomercial, string web, List<Contacto> lista, int id)
@@ -45,9 +47,20 @@ namespace wpfFamiliaBlanco.Clientes
             llenarcmbtc();
             llenarcmbpais();
             this.lista = lista;
+            loaddgvcontacto(this.lista);
             LoadDGVContacto();
             idcliente = id;
+            CampLimit();
 
+
+        }
+
+        private void CampLimit()
+        {
+            txtDireccion.MaxLength = 50;
+            txtdireccionweb.MaxLength = 40;
+            txtNombre.MaxLength = 30;
+           
 
         }
 
@@ -145,6 +158,10 @@ namespace wpfFamiliaBlanco.Clientes
 
             }
 
+        }
+        private void loaddgvcontacto(List<Contacto> l)
+        {
+            dgvContacto.ItemsSource = l;
         }
 
         public void LoadDGVContacto()

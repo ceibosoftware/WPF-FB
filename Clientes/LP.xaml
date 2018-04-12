@@ -73,35 +73,15 @@
     </Page.Resources>
 
     <Grid Margin="-1,0,1,0">
-        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="930,418,0,32" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" />
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="930,418,0,32" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" />
         <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="928,374,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="928,326,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
-        <ListBox x:Name="ltsClientes" HorizontalAlignment="Left" Height="184" Margin="53,140,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14"/>
-        <Label x:Name="lbllp" Content="Listas de Precios" HorizontalAlignment="Left" Margin="285,110,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="574,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,337,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="775,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="69"/>
-        <Label Content="Malbec V" HorizontalAlignment="Left" Margin="481,110,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bonarda V" HorizontalAlignment="Left" Margin="481,161,0,0" VerticalAlignment="Top"/>
-        <Label Content="Sauvignon Blanc" HorizontalAlignment="Left" Margin="481,219,0,0" VerticalAlignment="Top"/>
-        <Label Content="Torrontes" HorizontalAlignment="Left" Margin="481,278,0,0" VerticalAlignment="Top"/>
-        <Label Content="Malbec R" HorizontalAlignment="Left" Margin="481,335,0,0" VerticalAlignment="Top"/>
-        <Label Content="Blend R" HorizontalAlignment="Left" Margin="481,379,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bonarda D" HorizontalAlignment="Left" Margin="652,112,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bonarda R" HorizontalAlignment="Left" Margin="652,163,0,0" VerticalAlignment="Top"/>
-        <Label Content="Espumante" HorizontalAlignment="Left" Margin="652,221,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rose" HorizontalAlignment="Left" Margin="652,280,0,0" VerticalAlignment="Top"/>
-        <Label Content="Familia Blanco" HorizontalAlignment="Left" Margin="652,337,0,0" VerticalAlignment="Top"/>
-        <Label Content="Cabernet Sauvignon" HorizontalAlignment="Left" Margin="652,381,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="ltsLp" HorizontalAlignment="Left" Height="184" Margin="53,71,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsLp_SelectionChanged"/>
+        <Label x:Name="lbllp" Content="Listas de Precios" HorizontalAlignment="Left" Margin="285,41,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="53,260,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblfecha" Content="" HorizontalAlignment="Left" Margin="99,260,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblnlp" Content="" HorizontalAlignment="Left" Margin="874,40,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="345" Margin="458,71,0,0" VerticalAlignment="Top" Width="426"/>
 
     </Grid>
 </Page>

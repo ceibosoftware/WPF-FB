@@ -33,9 +33,20 @@ namespace wpfFamiliaBlanco.Clientes
             ActualizaDGVContacto();
             ltsClientes.SelectedIndex = 0;
             LlenarComboFiltro();
+            CampLimit();
 
         }
 
+        private void CampLimit()
+        {
+            dgvContacto.IsReadOnly = true;
+            txtCuit.IsReadOnly = true;
+            txtDireccion.IsReadOnly = true;
+            txtrs.IsReadOnly = true;
+            txtTelt.IsReadOnly = true;
+            txtTransporte.IsReadOnly = true;
+
+        }
         private void loadListaClientes()
         {
             String consulta = "SELECT * FROM clientesmi";
@@ -50,8 +61,6 @@ namespace wpfFamiliaBlanco.Clientes
         {
             try
             {
-
-            
             String consultaContacto = "SELECT contactocliente.telefono, contactocliente.email, contactocliente.nombrecontacto from contactocliente WHERE FK_idClientemi=@valor";
             DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsClientes.SelectedValue);
             listaContacto.Clear();
@@ -144,6 +153,7 @@ namespace wpfFamiliaBlanco.Clientes
                 }
 
             }
+            ltsClientes.SelectedIndex = 0;
         }
 
 
@@ -229,12 +239,13 @@ namespace wpfFamiliaBlanco.Clientes
                 loadListaClientes();
 
             }
-
+            ltsClientes.SelectedIndex = ltsClientes.Items.Count - 1;
         }
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
-
+            int modificado;
+            modificado = ltsClientes.SelectedIndex;
             idcliente = (int)ltsClientes.SelectedValue;
             String consulta = "SELECT * FROM clientesmi where idclientemi=@valor";
             DataTable cliente = conexion.ConsultaParametrizada(consulta, ltsClientes.SelectedValue);
@@ -274,18 +285,18 @@ namespace wpfFamiliaBlanco.Clientes
                 conexion.operaciones(contact);
 
 
-                MessageBox.Show(newW.lista.Count.ToString());
+                
 
                 foreach (var contacto in newW.lista)
                 {
                     string sql;
-                    MessageBox.Show(contacto.NombreContacto);
                     sql = "INSERT INTO contactocliente (telefono,email,nombrecontacto,FK_idClientemi) values('" + contacto.NumeroTelefono + "', '" + contacto.Email + "', '" + contacto.NombreContacto + "', '" + idcliente + "')";
                     conexion.operaciones(sql);
                 }
 
                 loadListaClientes();
             }
+            ltsClientes.SelectedIndex = modificado;
         }
     }
     }

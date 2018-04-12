@@ -35,6 +35,18 @@ namespace wpfFamiliaBlanco.Clientes
             ActualizaDGVContacto();
             ltsClientes.SelectedIndex = 0;
             LlenarComboFiltro();
+            CampLimit();
+        }
+
+        private void CampLimit()
+        {
+            txtcp.IsReadOnly = true;
+            txtDireccion.IsReadOnly = true;
+            txtPais.IsReadOnly = true;
+            txtt.IsReadOnly = true;
+            txtweb.IsReadOnly = true;
+            dgvContacto.IsReadOnly = true;
+
         }
 
 
@@ -62,7 +74,17 @@ namespace wpfFamiliaBlanco.Clientes
                 String consultaContacto = "SELECT contactocliente.telefono, contactocliente.email, contactocliente.nombrecontacto from contactocliente WHERE FK_idClienteme=@valor";
                 DataTable contacto = conexion.ConsultaParametrizada(consultaContacto, ltsClientes.SelectedValue);
                 dgvContacto.ItemsSource = contacto.AsDataView();
+                listaContacto.Clear();
+                for (int i = 0; i < contacto.Rows.Count; i++)
+                {
+                    listaContacto.Add(new Contacto(contacto.Rows[i].ItemArray[2].ToString(), contacto.Rows[i].ItemArray[1].ToString(), contacto.Rows[i].ItemArray[0].ToString()));
+                }
+
+                dgvContacto.ItemsSource = listaContacto;
+                dgvContacto.Items.Refresh();
+            
             }
+
             catch (NullReferenceException)
             {
 
@@ -76,7 +98,7 @@ namespace wpfFamiliaBlanco.Clientes
         private void ltsClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActualizaDGVContacto();
-
+            
 
             try
             {
@@ -153,6 +175,7 @@ namespace wpfFamiliaBlanco.Clientes
 
                 }
             }
+            ltsClientes.SelectedIndex = 0;
         }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
@@ -212,11 +235,15 @@ namespace wpfFamiliaBlanco.Clientes
                 loadListaClientes();
 
             }
+            ltsClientes.SelectedIndex = ltsClientes.Items.Count - 1;
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
+            
+            int modificado;
             idcliente = (int)ltsClientes.SelectedValue;
+            modificado = ltsClientes.SelectedIndex;
             String consulta = "SELECT * FROM clientesme where idclienteme=@valor";
             DataTable cliente = conexion.ConsultaParametrizada(consulta, ltsClientes.SelectedValue);
             string direccion = cliente.Rows[0].ItemArray[1].ToString();
@@ -224,29 +251,13 @@ namespace wpfFamiliaBlanco.Clientes
             string web = cliente.Rows[0].ItemArray[3].ToString();
             string nombre = cliente.Rows[0].ItemArray[4].ToString();
             int terminocomercial = (int)cliente.Rows[0].ItemArray[5];
-            int idCliente = (int)ltsClientes.SelectedValue;
+            
 
-            int j = 0;
+            
 
-            listaContacto.Clear();
-            for (int i = 0; i < dgvContacto.Items.Count - 1; i++)
-            {
+           
 
-                var telefono = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                j++;
-
-                var email = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                j++;
-                var nombre2 = (dgvContacto.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                j++;
-
-                j = 0;
-
-                Contacto conA = new Contacto(nombre2, email, telefono);
-                listaContacto.Add(conA);
-
-
-            }
+           
 
             var newW = new windowAgregarClienteme(nombre, direccion, pais, terminocomercial, web, listaContacto,idcliente);
 
@@ -267,21 +278,12 @@ namespace wpfFamiliaBlanco.Clientes
                 
 
                 String update;
-                update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '"  + termino + "' where idClienteme ='" + ltsClientes.SelectedValue + "';";
+                update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '"  + termino + "' where idClienteme ='" + idcliente + "';";
                 conexion.operaciones(update);
 
 
 
-                loadListaClientes();
-
-
-
-
-
-
-
-
-                String contact = "delete  from contactocliente where FK_idClienteme= '" + id  + "'";
+                String contact = "delete  from contactocliente where FK_idClienteme= '" + idcliente  + "'";
                 conexion.operaciones(contact);
 
                
@@ -289,18 +291,15 @@ namespace wpfFamiliaBlanco.Clientes
                
                     foreach (var contacto in newW.lista)
                     {
-
-             
-                    string sql;
-                        sql= "INSERT INTO contactocliente (telefono,email,nombrecontacto,FK_idClienteme) values('"+contacto.NumeroTelefono+"', '"+contacto.Email+"', '"+contacto.NombreContacto+"', '"+id+"')";
+                        string sql;
+                        sql= "INSERT INTO contactocliente (telefono,email,nombrecontacto,FK_idClienteme) values('"+contacto.NumeroTelefono+"', '"+contacto.Email+"', '"+contacto.NombreContacto+"', '"+idcliente+"')";
                         conexion.operaciones(sql);
                     }
-
-                    
-
-    
-
+                loadListaClientes();
             }
+            
+
+            ltsClientes.SelectedIndex = modificado;
         }
 
         private void LlenarComboFiltro()

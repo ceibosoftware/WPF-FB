@@ -32,7 +32,7 @@ namespace wpfFamiliaBlanco.Clientes
             lista.Clear();
             llenarcmbrs();
             LoadDGVContacto();
-            
+            CampLimit();
 
         }
 
@@ -49,7 +49,17 @@ namespace wpfFamiliaBlanco.Clientes
             this.lista = lista;
             loaddgvcontacto(this.lista);
             idcliente = id;
+            CampLimit();
 
+        }
+
+        private void CampLimit()
+        {
+            txtCuit.MaxLength = 20;
+            txtDireccion.MaxLength = 40;
+            txtNombre.MaxLength = 30;
+            txtTelt.MaxLength = 20;
+            txtTransporte.MaxLength = 20;
         }
 
         private void loaddgvcontacto(List<Contacto> l)
@@ -266,5 +276,6 @@ namespace wpfFamiliaBlanco.Clientes
             if (!char.IsLetter(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }
+
     }
 }

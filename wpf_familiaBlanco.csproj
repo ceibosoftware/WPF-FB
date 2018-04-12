@@ -78,6 +78,12 @@
     <Compile Include="Clientes\windowAgregarClienteme.xaml.cs" />
     <Compile Include="Clientes\windowAgregarClientemi.xaml.cs" />
     <Compile Include="Clientes\WindowAgregarContactoCliente.xaml.cs" />
+    <Compile Include="Clientes\windowAgregarLp.xaml.cs">
+      <DependentUpon>windowAgregarLp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes\windowAgregarProducto.xaml.cs">
+      <DependentUpon>windowAgregarProducto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Contacto.cs" />
     <Compile Include="CRUD.cs" />
     <Compile Include="Cuotas.cs" />
@@ -205,6 +211,14 @@
     <Page Include="Clientes\WindowAgregarContactoCliente.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\windowAgregarLp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clientes\windowAgregarProducto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Entradas\DevolucionFactura.xaml">
       <SubType>Designer</SubType>

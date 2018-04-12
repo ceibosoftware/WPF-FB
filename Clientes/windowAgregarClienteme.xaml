@@ -319,14 +319,16 @@
         <TextBox x:Name="txtDireccion" Width="176" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,140,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
         <Label x:Name="lblDireccion" Content="Dirección" HorizontalAlignment="Left" Margin="97,112,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblpais" Content="País" HorizontalAlignment="Left" Margin="285,112,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <TextBox x:Name="txtdireccionweb" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,196,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
-        <Label x:Name="lblweb" Content="Web" HorizontalAlignment="Left" Margin="285,171,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtdireccionweb" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,264,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
+        <Label x:Name="lblweb" Content="Web" HorizontalAlignment="Left" Margin="285,233,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label Content="MERCADO EXTERNO" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbtc" HorizontalAlignment="Left" Margin="241,78,0,0" VerticalAlignment="Top" Width="176"/>
         <Label x:Name="lblTermino" Content="Término Comercial" HorizontalAlignment="Left" Margin="308,49,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbpais" HorizontalAlignment="Left" Margin="241,140,0,0" VerticalAlignment="Top" Width="176"/>
         <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="100" Margin="442,29,0,0" VerticalAlignment="Top" Width="367"/>
         <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="100" Margin="442,293,0,0" VerticalAlignment="Top" Width="367"/>
+        <TextBox x:Name="txtcp" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,197,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
+        <Label x:Name="lblcp" Content="Cuit Pais" HorizontalAlignment="Left" Margin="285,171,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 
