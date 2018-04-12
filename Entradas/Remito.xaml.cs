@@ -74,7 +74,7 @@ namespace wpfFamiliaBlanco.Entradas
                 String id = conexion.ValorEnVariable(ultimoId);
                 foreach (var producto in newW.ProdRemito)
                 {
-                    String productos = "insert into productos_has_remitos(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + id + "' )";
+                    String productos = "insert into productos_has_remitos(cantidad, CrNotaCredito,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '"+producto.cantidad+ "','" + producto.id + "','" + id + "' )";
                     conexion.operaciones(productos);
                 }
                 //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC

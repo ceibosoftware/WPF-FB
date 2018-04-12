@@ -41,7 +41,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
     
             InitializeComponent();
-       
+            lblNC.Visibility = Visibility.Collapsed;
             LoadListaComboProveedor();
              
             LoadDgvFactura();
@@ -116,12 +116,13 @@ namespace wpfFamiliaBlanco.Entradas
                     int cantidad = p.cantidad;
                     float totalp = p.total;
                     float precioUni = p.precioUnitario;
-          
-                    Producto pr = new Producto(nombre, 1, cantidad, totalp, precioUni);
-                   itemsFacturaDB.Add(p);
+                    int idp = p.id;
+                    Producto pr = new Producto(nombre ,idp, cantidad, totalp, precioUni);
+             
+                    itemsFacturaDB.Add(p);
 
                     
-                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + id + "')";
+                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal,CrNotaCredito ,FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '"+cantidad+"','" + idp + "', '" + id + "')";
                     conexion.operaciones(sqlProductoHas);
 
 
@@ -219,7 +220,7 @@ namespace wpfFamiliaBlanco.Entradas
         private void ltsFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-    
+            lblNC.Visibility = Visibility.Collapsed;
 
             try
             {
@@ -258,8 +259,15 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 txtSubTotal.Text = OC.Rows[0].ItemArray[1].ToString();
                 txtTotal1.Text = OC.Rows[0].ItemArray[3].ToString();
-        
-            
+
+
+                String tieneNC = "SELECT COUNT(*) FROM notacredito WHERE FK_idFactura  = '" + OC.Rows[0].ItemArray[0] + "'";
+                String NC = conexion.ValorEnVariable(tieneNC).ToString();
+
+                if (NC != "0")
+                {
+                    lblNC.Visibility =  Visibility.Visible;
+                }
 
             }
             catch (Exception)
@@ -410,7 +418,12 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable cuotass = conexion.ConsultaParametrizada(sql2, numerofacturaID);
                 for (int i = 0; i < cuotass.Rows.Count; i++)
                 {
-                    cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[3]);
+                        Console.WriteLine(""+ cuotass.Rows[i].ItemArray[0]);
+                        Console.WriteLine("" + cuotass.Rows[i].ItemArray[1]);
+                        Console.WriteLine("" + cuotass.Rows[i].ItemArray[2]);
+                        Console.WriteLine("" + cuotass.Rows[i].ItemArray[3]);
+
+                        cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[4]);
                     cuotasAinsertar.Add(cuota);
                   
                 }

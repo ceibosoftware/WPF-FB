@@ -180,6 +180,7 @@
         <ListBox x:Name="ltsFactura" HorizontalAlignment="Left" Height="156" Margin="45,220,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsFactura_SelectionChanged" Grid.ColumnSpan="2"/>
         <DataGrid x:Name="dgvProductosFactura" Grid.Column="1" HorizontalAlignment="Left" Height="148" Margin="300,67,0,0" VerticalAlignment="Top" Width="381"/>
         <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="45,192,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
+        <Label x:Name="lblNC" Content="Esta factura tiene NC" Grid.Column="1" HorizontalAlignment="Left" Margin="685,67,0,0" VerticalAlignment="Top" Foreground="#FFFFE800"/>
 
     </Grid>
 </Page>

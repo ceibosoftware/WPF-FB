@@ -39,7 +39,7 @@ namespace wpfFamiliaBlanco.Entradas
             this.cantidadCuota = cantidadcuotas;
             this.fechafactura = fechaFactura;
             this.total = totalApagar;
-            MessageBox.Show("" + total);
+    
 
             if (cantidadCuota == 1)
             {

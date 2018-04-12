@@ -31,6 +31,7 @@ namespace wpfFamiliaBlanco.Entradas
         public Producto prod;
         bool bandera = false;
         DateTime dt = DateTime.Now;
+      public  float totalSubtotal = 0;
         public int id = 0;
         public windowAgregarFactura()
         {
@@ -232,7 +233,7 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
                 bool existe = false;
-                Producto prod = dgvProductosFactura.SelectedItem as Producto;
+                Producto prod = dgvProductosOC.SelectedItem as Producto;
                
                 id = prod.id;
                 if (prod.cantidad > 0)
@@ -266,12 +267,14 @@ namespace wpfFamiliaBlanco.Entradas
                     {
                         if (int.Parse(newW.txtCantidad.Text) > 0 )
                         {
+                            
                             Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
                             itemsFact.Add(productoFactura);
+                            totalSubtotal = totalSubtotal + (prod.cantidad * prod.precioUnitario);
                             dgvProductosFactura.Items.Refresh();
-                            float.TryParse(txtSubtotal.Text, out subtotal);
+                           // float.TryParse(txtSubtotal.Text, out subtotal);
                             subtotal += productoFactura.total;
-                            txtSubtotal.Text = (productoFactura.cantidad * productoFactura.precioUnitario).ToString();                          
+                            txtSubtotal.Text = (totalSubtotal).ToString();                          
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();
                             calculaTotal();
@@ -292,48 +295,7 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione un producto para agregar");
 
             }
-            /* try
-             {
-                 prod = dgvProductosOC.SelectedItem as Producto;
-
-                 var newW = new WindowAgregarProductoFactura();
-                 if (prod.cantidad >= 1)
-                 {
-
-                     newW.txtCantidad.Text = prod.cantidad.ToString();
-                     newW.can = prod.cantidad;
-                     newW.ShowDialog();
-                 }
-                 else
-                 {
-                     MessageBox.Show("El producto ya fue facturado");
-                 }
-
-
-                 if (newW.DialogResult == true)
-                 {
-
-                     int cantidadactual = 0;
-                     cantidadactual = int.Parse(newW.canpararestar);
-
-                     prod.cantidad = prod.cantidad- int.Parse(newW.txtCantidad.Text);
-                     Producto productoAfacturar = new Producto(prod.nombre, prod.id,cantidadactual, prod.total, prod.precioUnitario);
-                     itemsFact.Add(productoAfacturar);
-
-                     dgvProductosFactura.Items.Refresh();
-                     dgvProductosOC.Items.Refresh();
-                     subtotali += prod.precioUnitario * prod.cantidad;
-                     txtSubtotal.Text = subtotali.ToString();
-                     calculaTotal();
-                 }
-
-             }
-             catch (NullReferenceException)
-             {
-
-                 MessageBox.Show("Seleccione un producto a agregar");
-             }
-             */
+    
 
         }
 

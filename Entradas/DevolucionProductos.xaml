@@ -9,12 +9,12 @@
       Title="DevolucionProductos" Width="1033.66" Height="470">
 
     <Grid>
-        <Button x:Name="btnRemito" Content="Remito" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemito_Click">
+        <Button x:Name="btnRemito" Content="Devolución remitos" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemito_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnFactura" Content="Factura" HorizontalAlignment="Left" Margin="236,10,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFactura_Click">
+        <Button x:Name="btnFactura" Content="Devolución facturas" HorizontalAlignment="Left" Margin="236,10,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFactura_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
