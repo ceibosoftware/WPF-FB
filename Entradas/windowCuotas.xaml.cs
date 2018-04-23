@@ -332,7 +332,7 @@ namespace wpfFamiliaBlanco.Entradas
                     float aPagar = total / 1;
                  
                     DateTime answer = fechafactura.AddDays(dias);
-                    Cuotas cuota = new Cuotas(1, dias, answer, aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer, aPagar,1);
 
                     listacuotas.Add(cuota);
                     aPagar = 0;
@@ -356,8 +356,8 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer = fechafactura.AddDays(dias);
                     DateTime answer2 = fechafactura.AddDays(dias2);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -382,9 +382,9 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer2 = fechafactura.AddDays(dias2);
                     DateTime answer3 = fechafactura.AddDays(dias3);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer, aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer, aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -412,10 +412,10 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer3 = fechafactura.AddDays(dias3);
                     DateTime answer4 = fechafactura.AddDays(dias4);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -445,11 +445,11 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer4 = fechafactura.AddDays(dias4);
                     DateTime answer5 = fechafactura.AddDays(dias5);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -482,12 +482,12 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer5 = fechafactura.AddDays(dias5);
                     DateTime answer6 = fechafactura.AddDays(dias6);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -523,13 +523,13 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer6 = fechafactura.AddDays(dias6);
                     DateTime answer7 = fechafactura.AddDays(dias7);
 
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
 
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
@@ -567,14 +567,14 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer6 = fechafactura.AddDays(dias6);
                     DateTime answer7 = fechafactura.AddDays(dias7);
                     DateTime answer8 = fechafactura.AddDays(dias8);
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
-                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar,8);
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
                     listacuotas.Add(cuota3);
@@ -614,15 +614,15 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer7 = fechafactura.AddDays(dias7);
                     DateTime answer8 = fechafactura.AddDays(dias8);
                     DateTime answer9 = fechafactura.AddDays(dias9);
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
-                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar);
-                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar,8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar,9);
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
                     listacuotas.Add(cuota3);
@@ -665,16 +665,16 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer8 = fechafactura.AddDays(dias8);
                     DateTime answer9 = fechafactura.AddDays(dias9);
                     DateTime answer10 = fechafactura.AddDays(dias10);
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
-                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar);
-                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar);
-                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar,8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar,9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar,10);
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
                     listacuotas.Add(cuota3);
@@ -720,17 +720,17 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer9 = fechafactura.AddDays(dias9);
                     DateTime answer10 = fechafactura.AddDays(dias10);
                     DateTime answer11 = fechafactura.AddDays(dias11);
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
-                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar);
-                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar);
-                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar);
-                    Cuotas cuota11 = new Cuotas(11, dias11, answer11,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar,8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar,9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar,10);
+                    Cuotas cuota11 = new Cuotas(11, dias11, answer11,aPagar,11);
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
                     listacuotas.Add(cuota3);
@@ -779,18 +779,18 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime answer10 = fechafactura.AddDays(dias10);
                     DateTime answer11 = fechafactura.AddDays(dias11);
                     DateTime answer12 = fechafactura.AddDays(dias12);
-                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar);
-                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar);
-                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar);
-                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar);
-                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar);
-                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar);
-                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar);
-                    Cuotas cuota8 = new Cuotas(8, dias8, answer8,aPagar);
-                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar);
-                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar);
-                    Cuotas cuota11 = new Cuotas(11, dias11, answer11,aPagar);
-                    Cuotas cuota12 = new Cuotas(12, dias12, answer12,aPagar);
+                    Cuotas cuota = new Cuotas(1, dias, answer,aPagar,1);
+                    Cuotas cuota2 = new Cuotas(2, dias2, answer2,aPagar,2);
+                    Cuotas cuota3 = new Cuotas(3, dias3, answer3,aPagar,3);
+                    Cuotas cuota4 = new Cuotas(4, dias4, answer4,aPagar,4);
+                    Cuotas cuota5 = new Cuotas(5, dias5, answer5,aPagar,5);
+                    Cuotas cuota6 = new Cuotas(6, dias6, answer6,aPagar,6);
+                    Cuotas cuota7 = new Cuotas(7, dias7, answer7,aPagar,7);
+                    Cuotas cuota8 = new Cuotas(8, dias8, answer8, aPagar,8);
+                    Cuotas cuota9 = new Cuotas(9, dias9, answer9,aPagar,9);
+                    Cuotas cuota10 = new Cuotas(10, dias10, answer10,aPagar,10);
+                    Cuotas cuota11 = new Cuotas(11, dias11, answer11,aPagar,11);
+                    Cuotas cuota12 = new Cuotas(12, dias12, answer12,aPagar,12);
                     listacuotas.Add(cuota);
                     listacuotas.Add(cuota2);
                     listacuotas.Add(cuota3);

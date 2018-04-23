@@ -116,6 +116,12 @@
     <Compile Include="Entradas\windowAgregarPagoProveedor.xaml.cs">
       <DependentUpon>windowAgregarPagoProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entradas\WindowAgregarPagoProveedorCheque.xaml.cs">
+      <DependentUpon>WindowAgregarPagoProveedorCheque.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Entradas\WindowAgregarPagoProveedorCtaBancaria.xaml.cs">
+      <DependentUpon>WindowAgregarPagoProveedorCtaBancaria.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entradas\windowAgregarProcductoOC.xaml.cs">
       <DependentUpon>windowAgregarProcductoOC.xaml</DependentUpon>
     </Compile>
@@ -171,6 +177,9 @@
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
     <Compile Include="windowAgregarCategoria.xaml.cs">
       <DependentUpon>windowAgregarCategoria.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowAgregarNCRemito.xaml.cs">
+      <DependentUpon>WindowAgregarNCRemito.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowAgregarProductoFactura.xaml.cs">
       <DependentUpon>WindowAgregarProductoFactura.xaml</DependentUpon>
@@ -249,6 +258,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Entradas\windowAgregarPagoProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\WindowAgregarPagoProveedorCheque.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\WindowAgregarPagoProveedorCtaBancaria.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -379,6 +396,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="windowAgregarCategoria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowAgregarNCRemito.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,23 +9,46 @@
       Title="PagoProveedores" Width="1033.66" Height="473.215">
 
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="133" Margin="50,52,0,0" VerticalAlignment="Top" Width="395"/>
-        <Label Content="Pagos realizados" HorizontalAlignment="Left" Margin="330,25,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="btnAgregarPago" Content="Agregar" HorizontalAlignment="Left" Margin="908,344,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23"/>
-        <Button x:Name="btnModificarPago" Content="Modificar" HorizontalAlignment="Left" Margin="908,386,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Height="23"/>
-        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="908,428,0,0" VerticalAlignment="Top" Width="75" Height="22"/>
-        <Label Content="Datos del pago" HorizontalAlignment="Left" Margin="635,30,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtNumeroCuota" HorizontalAlignment="Left" Height="24" Margin="492,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Nº cuota" HorizontalAlignment="Left" Margin="622,70,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="24" Margin="492,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="616,142,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtTotalCuota" HorizontalAlignment="Left" Height="24" Margin="492,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Total cuota" HorizontalAlignment="Left" Margin="612,217,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtTotalFactura" HorizontalAlignment="Left" Height="24" Margin="492,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Total factura" HorizontalAlignment="Left" Margin="602,294,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Fecha acordada" HorizontalAlignment="Left" Margin="810,70,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <DatePicker x:Name="dtpFechaAcordada" HorizontalAlignment="Left" Margin="722,99,0,0" VerticalAlignment="Top" Width="195"/>
-        <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="24" Margin="719,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Estado" HorizontalAlignment="Left" Margin="863,142,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="333*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ltsProximospagos" HorizontalAlignment="Left" Height="133" Margin="18,61,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsProximospagos_SelectionChanged" Grid.ColumnSpan="2"/>
+        <Label Content="Próximos pagos" HorizontalAlignment="Left" Margin="307,34,0,0" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAgregarPago" Content="Pagar" HorizontalAlignment="Left" Margin="540,324,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Grid.Column="1"/>
+        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="540,354,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" Click="btnEliminarPago_Click"/>
+        <Label Content="Datos del pago" HorizontalAlignment="Left" Margin="222,21,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtNumeroCuota" HorizontalAlignment="Left" Height="24" Margin="79,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="lbl1" Content="Nº cuota" HorizontalAlignment="Left" Margin="209,61,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="24" Margin="79,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="lbl2" Content="Proveedor" HorizontalAlignment="Left" Margin="203,133,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtTotalCuota" HorizontalAlignment="Left" Height="24" Margin="304,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Grid.Column="1"/>
+        <Label x:Name="lbl4" Content="Total cuota" HorizontalAlignment="Left" Margin="424,69,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-3.691"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.935"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBox x:Name="txtTotalFactura" HorizontalAlignment="Left" Height="24" Margin="306,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="lbl5" Content="Total factura" HorizontalAlignment="Left" Margin="416,201,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="24" Margin="81,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label Content="Estado" HorizontalAlignment="Left" Margin="226,196,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" RenderTransformOrigin="-0.647,-0.345"/>
+        <ListBox x:Name="ltsPagosReaizados" HorizontalAlignment="Left" Height="133" Margin="18,253,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsPagosReaizados_SelectionChanged" Grid.ColumnSpan="2"/>
+        <Label Content="Pagos realizados" HorizontalAlignment="Left" Margin="301,226,0,0" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtNumeroFactura" HorizontalAlignment="Left" Height="24" Margin="305,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="lbl3" Content="Numero Factura" HorizontalAlignment="Left" Margin="393,132,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtTotalPAgo" HorizontalAlignment="Left" Height="24" Margin="79,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label Content="Total pagado" HorizontalAlignment="Left" Margin="186,272,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtTipoPago" HorizontalAlignment="Left" Height="24" Margin="306,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label Content="Forma de Pago" HorizontalAlignment="Left" Margin="399,271,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="24" Margin="81,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="fec" Content="fecha del pago" HorizontalAlignment="Left" Margin="179,328,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <TextBox x:Name="txtnumerocuotapaga" HorizontalAlignment="Left" Height="24" Margin="302,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
+        <Label x:Name="fec_Copy" Content="N° de cuota paga" HorizontalAlignment="Left" Margin="383,328,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
+        <Label x:Name="lbldias" Content="" HorizontalAlignment="Left" Margin="20,190,0,0" VerticalAlignment="Top" Width="284"/>
     </Grid>
 </Page>

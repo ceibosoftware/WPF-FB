@@ -103,8 +103,9 @@ namespace wpfFamiliaBlanco.Entradas
                     int dias = cuot.dias;
                     DateTime fecha = cuot.fechadepago;
                     float montocuota = cuot.montoCuota;
+                    int cuota = cuot.cuota;
 
-                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, montoCuota ,FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "','"+ montocuota + "' ,'" + id + "')";
+                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, montoCuota ,FK_idFacturas,numCuota,estado) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "','"+ montocuota + "' ,'" + id + "' ,'" + cuota + "','" + 0 + "')";
                     conexion.operaciones(sqlProductoHas);
 
                 }
@@ -423,7 +424,7 @@ namespace wpfFamiliaBlanco.Entradas
                         Console.WriteLine("" + cuotass.Rows[i].ItemArray[2]);
                         Console.WriteLine("" + cuotass.Rows[i].ItemArray[3]);
 
-                        cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[4]);
+                        cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[4], (int)cuotass.Rows[i].ItemArray[5]);
                     cuotasAinsertar.Add(cuota);
                   
                 }

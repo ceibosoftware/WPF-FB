@@ -45,8 +45,10 @@ namespace wpfFamiliaBlanco.Entradas
             txtTipoCambio.IsReadOnly = true;
             txtSubtotal.IsReadOnly = true;
             LoadDgvNC();
-
+            dgvProductosNC.IsReadOnly = true;
+            DgvProductosFactur.IsReadOnly = true;
             itemsFact.Clear();
+            txtTotal.IsReadOnly = true;
         }
 
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
@@ -270,7 +272,7 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 else
                 {
-                    MessageBox.Show("Ya se entregaron todos las facturas de este producto");
+                    MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto");
                 }
             }
             catch (NullReferenceException)
@@ -287,10 +289,35 @@ namespace wpfFamiliaBlanco.Entradas
             idFactura = ltsfacturas.SelectedValue.ToString();
             subtotalmodificar = txtSubtotal.Text;
             totalmodificar = txtTotal.Text;
+            if (Valida())
+            {
+                DialogResult = true;
+            }
            
-            DialogResult = true;
+ 
         }
 
+
+        public Boolean Valida()
+        {
+
+            if (DgvProductosFactur.HasItems == false)
+            {
+                MessageBox.Show("Agregue productos a la Nota de Crédito");
+                return false;
+            }
+            else if (dgvProductosNC.HasItems == false)
+            {
+                MessageBox.Show("Agregue productos a la Nota de Crédito");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+
+        }
         private void btnEliminarProductoNC_Click(object sender, RoutedEventArgs e)
         {
          
@@ -318,7 +345,7 @@ namespace wpfFamiliaBlanco.Entradas
                 itemsNC.Remove(prod);
                 itemsAmodificar.Remove(prod);
                 dgvProductosNC.Items.Refresh();
-                Console.WriteLine("subtotali= " + subtotali);
+           
         
                 if (dgvProductosNC.HasItems == false)
                 {
@@ -335,6 +362,8 @@ namespace wpfFamiliaBlanco.Entradas
             }
 
         }
+
+
     }
           
     }

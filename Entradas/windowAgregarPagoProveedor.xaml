@@ -5,34 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
         mc:Ignorable="d"
-        Title="windowAgregarPagoProveedor" Height="605.334" Width="1227" Background="#FF232222">
+        Title="windowAgregarPagoProveedor" Height="319.334" Width="251" Background="#FF232222" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="71*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Nº factura" Grid.Column="1" HorizontalAlignment="Left" Margin="370,45,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtNumeroFactura" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="49,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="394"/>
-        <ListBox x:Name="ltsProximosPagos" Grid.Column="1" HorizontalAlignment="Left" Height="133" Margin="48,142,0,0" VerticalAlignment="Top" Width="395"/>
-        <Label Content="Próximos pagos" Grid.Column="1" HorizontalAlignment="Left" Margin="334,114,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Todos los pagos" Grid.Column="1" HorizontalAlignment="Left" Margin="334,300,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <ListBox x:Name="ltsTodoslosPagos" Grid.Column="1" HorizontalAlignment="Left" Height="133" Margin="49,330,0,0" VerticalAlignment="Top" Width="395"/>
-        <Label Content="Datos del pago" Grid.Column="1" HorizontalAlignment="Left" Margin="721,45,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtNumeroCuota" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="578,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Nº cuota" Grid.Column="1" HorizontalAlignment="Left" Margin="708,85,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="578,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Proveedor" Grid.Column="1" HorizontalAlignment="Left" Margin="702,157,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtTotalCuota" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="578,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Total cuota" Grid.Column="1" HorizontalAlignment="Left" Margin="698,232,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="txtTotalFactura" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="578,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Total factura" Grid.Column="1" HorizontalAlignment="Left" Margin="688,309,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Fecha acordada" Grid.Column="1" HorizontalAlignment="Left" Margin="896,85,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <DatePicker x:Name="dtpFechaAcordada" Grid.Column="1" HorizontalAlignment="Left" Margin="808,114,0,0" VerticalAlignment="Top" Width="195"/>
-        <TextBox x:Name="txtEstado" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="805,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
-        <Label Content="Estado" Grid.Column="1" HorizontalAlignment="Left" Margin="947,157,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="btnEfectivo" Content="Efectivo" Grid.Column="1" HorizontalAlignment="Left" Margin="1047,436,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="23"/>
-        <Button x:Name="btnCheque" Content="Cheque" Grid.Column="1" HorizontalAlignment="Left" Margin="1047,470,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Button x:Name="btnCtaBancaria" Content="Cta Bancaria" Grid.Column="1" HorizontalAlignment="Left" Margin="1047,504,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <Label Content="Formas de Pago" Grid.Column="1" HorizontalAlignment="Left" Margin="57,45,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="btnEfectivo" Content="Efectivo" Grid.Column="1" HorizontalAlignment="Left" Margin="75,106,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="23" Click="btnEfectivo_Click"/>
+        <Button x:Name="btnCheque" Content="Cheque" Grid.Column="1" HorizontalAlignment="Left" Margin="75,140,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCheque_Click"/>
+        <Button x:Name="btnCtaBancaria" Content="Cta Bancaria" Grid.Column="1" HorizontalAlignment="Left" Margin="75,174,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCtaBancaria_Click"/>
 
     </Grid>
 </Window>

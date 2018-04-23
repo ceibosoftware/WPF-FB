@@ -14,7 +14,7 @@
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="408,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
         <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="55,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
         <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top" Height="22" Width="395"/>
-        <ListBox x:Name="ltsNC" HorizontalAlignment="Left" Height="133" Margin="55,194,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsNC_SelectionChanged"/>
+        <ListBox x:Name="ltsNC" HorizontalAlignment="Left" Height="133" Margin="55,194,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsNC_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
         <Label Content="Notas de Crédito" HorizontalAlignment="Left" Margin="338,165,0,0" VerticalAlignment="Top" Height="37" Width="116" FontSize="14"/>
         <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="133" Margin="496,63,0,0" VerticalAlignment="Top" Width="414"/>
         <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="763,36,0,0" VerticalAlignment="Top" Height="39" Width="156" FontSize="14"/>

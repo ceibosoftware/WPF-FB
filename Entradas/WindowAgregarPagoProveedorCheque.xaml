@@ -1,0 +1,27 @@
+﻿<Window x:Class="wpfFamiliaBlanco.Entradas.WindowAgregarPagoProveedorCheque"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
+        mc:Ignorable="d"
+        Title="WindowAgregarPagoProveedorCheque" Height="392.602" Width="423.469" Background="#FF232222" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Datos del Cheque" HorizontalAlignment="Left" Margin="162,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.618,0.497"/>
+        <TextBox x:Name="txtImporte" HorizontalAlignment="Left" Height="23" Margin="61,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <Label Content="Banco" HorizontalAlignment="Left" Margin="60,74,0,0" VerticalAlignment="Top"/>
+        <Label Content="Importe" HorizontalAlignment="Left" Margin="60,128,0,0" VerticalAlignment="Top"/>
+        <Label Content="Destinatario" HorizontalAlignment="Left" Margin="60,185,0,0" VerticalAlignment="Top"/>
+        <Label Content="N° del cheque" HorizontalAlignment="Left" Margin="308,76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="353,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.593,0.572"/>
+        <Label Content="Fecha de cobro" HorizontalAlignment="Left" Margin="302,184,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDestinatario" HorizontalAlignment="Left" Height="23" Margin="61,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="txtnumeroCheque" HorizontalAlignment="Left" Height="23" Margin="249,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" PreviewTextInput="txtnumeroCheque_PreviewTextInput"/>
+        <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Margin="250,147,0,0" VerticalAlignment="Top" Width="144"/>
+        <DatePicker x:Name="dtpFechaCobro" HorizontalAlignment="Left" Margin="249,206,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbBanco" HorizontalAlignment="Left" Margin="61,100,0,0" VerticalAlignment="Top" Width="141"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="308,271,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="23" Click="btnAceptar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="308,313,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCancelar_Click"/>
+
+    </Grid>
+</Window>
