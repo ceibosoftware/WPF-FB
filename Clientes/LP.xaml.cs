@@ -99,7 +99,7 @@ namespace wpfFamiliaBlanco.Clientes
             String nombre = conexion.ValorEnVariable(consulta2);
 
 
-                lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
+            lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
             lblnombre.Content = nombre;
             ActualizaDGVlp();
             }
