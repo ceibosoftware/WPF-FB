@@ -54,7 +54,7 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductosOC.IsReadOnly = true;
             seleccionefecha();
             dtFactura.SelectedDate = DateTime.Now;
-
+            //ANTONITO
             bandera = true;
         }
 
@@ -108,6 +108,26 @@ namespace wpfFamiliaBlanco.Entradas
 
             //}
         }
+        public windowAgregarFactura(string idOC, String proveedor)
+        {
+            InitializeComponent();
+            LoadListaComboProveedor();
+            LlenarCmbIVA();
+            LlenarCmbTipoCambio();
+            LoadDgvProducto();
+            LoadDgvFactura();
+            LlenarCmbTipoCuota();
+            loadDGVCuotas();
+            cmbOrden.Text = idOC;
+            cmbProveedores.Text = proveedor;
+            txtTotal.IsReadOnly = true;
+            txtSubtotal.IsReadOnly = true;
+            dgvProductosFactura.IsReadOnly = true;
+            dgvProductosOC.IsReadOnly = true;
+            seleccionefecha();
+            dtFactura.SelectedDate = DateTime.Now;
+        }
+
         private void seleccionefecha()
         {
             cmbCuotas.Text = "--Seleccione fecha factura--";
@@ -421,8 +441,8 @@ namespace wpfFamiliaBlanco.Entradas
                             int dias = cuot.dias;
                             DateTime fecha = cuot.fechadepago;
                             float totalPagar = cuot.montoCuota;
-
-                            Cuotas cu = new Cuotas(id, dias, fecha, totalPagar);
+                            int cuota = cuot.cuota;
+                            Cuotas cu = new Cuotas(id, dias, fecha, totalPagar,cuota);
                             todaslascuotas.Add(cu);
 
                         }

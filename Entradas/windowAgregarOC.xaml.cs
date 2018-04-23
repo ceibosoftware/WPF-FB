@@ -393,17 +393,38 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnRemito_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult dialog;
 
             if (validar())
             {
-                MessageBoxResult dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                string ultimoId;
+                if (!agregado)
+                {
+                    dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                }
+                else
+                {
+                    dialog = MessageBoxResult.Yes;
+                }
                 if (dialog == MessageBoxResult.Yes)
                 {
-                    this.agregaOC();
-                    agregado = true;
+                    if (!agregado){
+                        this.agregaOC();
+                        agregado = true;
+                        ultimoId = "Select last_insert_id()";
+                        int idOr = int.Parse(conexion.ValorEnVariable(ultimoId));
+                      
+                    }
+                    else
+                    {
+                        string consulta = "select idOrdenCompra from ordencompra order by idOrdenCompra desc LIMIT 1 ";
+                        int idOr = int.Parse(conexion.ValorEnVariable(consulta));
+                       
+                    }
+                    int idProveedor = (int)cmbProveedores.SelectedValue;
 
+                    var newW = new windowAgregarRemito(idProveedor,idOC);
 
-                    var newW = new windowAgregarRemito();
                     newW.ShowDialog();
                     if (newW.DialogResult == true)
                     {
@@ -416,7 +437,7 @@ namespace wpfFamiliaBlanco.Entradas
                         conexion.operaciones(consulta);
 
                         //PRODUCTOS REMITO
-                        string ultimoId = "Select last_insert_id()";
+                         ultimoId = "Select last_insert_id()";
 
                         String id = conexion.ValorEnVariable(ultimoId);
                         foreach (var producto in newW.ProdRemito)
@@ -437,7 +458,7 @@ namespace wpfFamiliaBlanco.Entradas
             }
         }
 
-        private void agregaOC()
+        private String agregaOC()
         {
             int Proveedor = (int)this.cmbProveedores.SelectedValue;
             Console.WriteLine(Proveedor);
@@ -456,28 +477,56 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.operaciones(sql);
 
             string ultimoId = "Select last_insert_id()";
-            String id = conexion.ValorEnVariable(ultimoId);
+            String idOC = conexion.ValorEnVariable(ultimoId);
             foreach (var producto in this.productos)
             {
-                String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario + "');";
                 conexion.operaciones(productos);
             }
+            return idOC;
         }
 
         private void btnFactura_Click(object sender, RoutedEventArgs e)
         {
             if (validar())
             {
-                MessageBoxResult dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                MessageBoxResult dialog;
+              
+                string fkOrden;
+                if (!agregado)
+                {
+                    dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                }
+                else
+                {
+                    dialog = MessageBoxResult.Yes;
+                }
                 if (dialog == MessageBoxResult.Yes)
                 {
-                    this.agregaOC();
+                    if (!agregado)
+                    {
+                        fkOrden = this.agregaOC();
+                        agregado = true;
+                   
+
+                    }
+                    else
+                    {
+                        string consulta = "select idOrdenCompra from ordencompra order by idOrdenCompra desc LIMIT 1 ";
+                        fkOrden = conexion.ValorEnVariable(consulta);
+
+                    }
+                    int idProveedor = (int)cmbProveedores.SelectedValue;
+
+
+                
+                    Console.WriteLine("idPRove : " + fkOrden);
                     agregado = true;
-
-                    var newW = new windowAgregarFactura();
+                  
+                    var newW = new windowAgregarFactura(fkOrden,cmbProveedores.Text);
                     newW.ShowDialog();
-
-
+           
+                    
                     //INSERTO DATOS FACTURA
                     if (newW.DialogResult == true)
                     {
@@ -495,11 +544,10 @@ namespace wpfFamiliaBlanco.Entradas
                         Console.WriteLine("tipoCambio : " + tipoCambio);
                         String cuotas = newW.cmbCuotas.Text;
                         Console.WriteLine("cuotas : " + cuotas);
-                        //string ultimoId = "Select last_insert_id()";
-                        //String id = conexion.ValorEnVariable(ultimoId);
+                     
                      
                         // fk orden de compra agregado
-                       int fkOrden = int.Parse(newW.cmbOrden.Text);
+                      
                         DateTime dtp = System.DateTime.Now;
                         dtp = newW.dtFactura.SelectedDate.Value;
 
@@ -521,12 +569,11 @@ namespace wpfFamiliaBlanco.Entradas
                             int dias = cuot.dias;
                             DateTime fecha = cuot.fechadepago;
 
-                            String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + fkOrden + "')";
+                            String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, FK_idFacturas) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + idOrden + "')";
                             conexion.operaciones(sqlProductoHas);
 
                         }
-                        // imprentapanello@gmail.com
-                        // lis_olivas@hotmail.com.ar
+                      
                         //INSERTO LOS PRODUCTOS DE LA FACTURA
                         foreach (Producto p in newW.itemsFact)
                         {
@@ -535,14 +582,14 @@ namespace wpfFamiliaBlanco.Entradas
                             float totalp = p.total;
                             float precioUni = p.precioUnitario;
 
-                            String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + fkOrden + "')";
+                            String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + idOrden + "')";
                             conexion.operaciones(sqlProductoHas);
 
                             //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
                          
                             foreach (var producto in newW.items)
                             {
-                                String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
+                                String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + fkOrden + "'";
                                 conexion.operaciones(sql);
                             }
                         }

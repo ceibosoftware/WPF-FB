@@ -22,6 +22,8 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class Remito : Page
     {
         List<Producto> productosparametro = new List<Producto>();
+        //para guardar valores en el modificar y asi manejar el stock
+        List<Producto> productosStock = new List<Producto>();
         DataTable productos;
         bool ejecutar = true;
         DateTime fecha;
@@ -82,6 +84,14 @@ namespace wpfFamiliaBlanco.Entradas
                 foreach (var producto in newW.Productos)
                 {
                     String sql = "UPDATE productos_has_ordencompra SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
+                    conexion.operaciones(sql);
+                }
+                //CARGAR STOCK EN PRODUCTO
+                foreach (var producto in newW.ProdRemito)
+                {
+                    Console.WriteLine("id " + producto.id);
+                    Console.WriteLine("id " + producto.cantidad);
+                    String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
@@ -218,8 +228,9 @@ namespace wpfFamiliaBlanco.Entradas
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
                     productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
-                }
-         
+                    
+            }
+            productosStock = productosparametro;
             dgvProductos.Items.Refresh();
 
 
@@ -265,10 +276,13 @@ namespace wpfFamiliaBlanco.Entradas
                 int idSeleccionado = (int)ltsremitos.SelectedValue;
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-
                     String consulta = "UPDATE productos_has_ordencompra SET CrRemito = CrRemito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[2] + "' and FK_idOC = '" + lblNroOCR.Content.ToString() + "'";
                     conexion.operaciones(consulta);
-                }
+                        
+                        //Console.Write();
+                        String sql2 = "UPDATE productos SET stock = stock-'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + productos.Rows[i].ItemArray[2] + "' ";
+                        conexion.operaciones(sql2);
+                    }
                 string sql = "delete from remito where idremitos = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
                 
@@ -325,6 +339,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 foreach (var producto in newW.ProdRemito)
                 {
+                    Console.Write("stock nuevo :" + producto.cantidad);
                     String productos = "insert into productos_has_remitos(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + idRemito + "' )";
                     conexion.operaciones(productos);
                 }
@@ -335,9 +350,23 @@ namespace wpfFamiliaBlanco.Entradas
                     String sql = "UPDATE productos_has_ordencompra SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
                     conexion.operaciones(sql);
                 }
-           
-                
-                loadLtsRemitos(index);
+                //RESTO CANTIDAD STOCK VIEJA
+                foreach (var producto in newW.ProdRemitoStock)
+                {
+                    //MessageBox.Show("stock viejo :" + producto.cantidad);
+                    
+                    String sql = "UPDATE productos SET stock = stock-'"+ producto.cantidad +"' where idProductos = '" + producto.id + "' ";
+                    conexion.operaciones(sql);
+                }
+                //SUMO CANTIDAD NUEVA STOCK EN PRODUCTO
+                foreach (var producto in newW.ProdRemito)
+                {
+                        //MessageBox.Show("stock nuevo :" + producto.cantidad);
+                        String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                     conexion.operaciones(sql);
+                }
+
+                    loadLtsRemitos(index);
             }
             }
             catch (NullReferenceException)

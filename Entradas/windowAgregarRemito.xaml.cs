@@ -24,11 +24,11 @@ namespace wpfFamiliaBlanco.Entradas
         bool ejecuta = true;
         private List<Producto> prodRemito = new List<Producto>();
         private List<Producto> productos = new List<Producto>();
+        private List<Producto> prodRemitoStock = new List<Producto>();
         CRUD conexion = new CRUD();
-
         public List<Producto> ProdRemito { get => prodRemito; set => prodRemito = value; }
         public List<Producto> Productos { get => productos; set => productos = value; }
-
+        public List<Producto> ProdRemitoStock { get => prodRemitoStock; set => prodRemitoStock = value; }
         public windowAgregarRemito()
         {
             InitializeComponent(); 
@@ -42,6 +42,23 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductosRemito.IsReadOnly = true;
 
         }
+        //Agregar remito desde OC
+        public windowAgregarRemito(int proveedor, int numeroOC)
+        {
+            InitializeComponent();
+            loadcmbProveedores();
+            loadDgvProd();
+            loadDgvProdRemito();
+     
+            loadcmbProveedores(proveedor);
+            loadCmbOrdenes(numeroOC);
+            dtRemito.SelectedDate = DateTime.Now;
+            txtNroRemito.MaxLength = 10;
+            dgvProductosOC.IsReadOnly = true;
+            dgvProductosRemito.IsReadOnly = true;
+
+        }
+        //MODIFICAR
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
             InitializeComponent();
@@ -49,6 +66,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadCmbOrdenes(numeroOC);
             loadDgvProd();
             prodRemito = productosRemito;
+            backupStock(productosRemito);
             loadDgvProdRemito(prodRemito);
             loadProductosOC(numeroOC);
             loadFechaEmision();
@@ -64,6 +82,14 @@ namespace wpfFamiliaBlanco.Entradas
             ejecuta = true;
             dgvProductosOC.IsReadOnly = true;
             dgvProductosRemito.IsReadOnly = true;
+           
+        }
+        private void backupStock(List<Producto> productosRemito)
+        {
+            foreach (Producto producto in productosRemito)
+            {
+                prodRemitoStock.Add(producto);
+            }
         }
         /*public void fechas()
         {
@@ -305,8 +331,8 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, combo: cmbOrden);
             cmbOrden.DisplayMemberPath = "idOrdenCompra";
             cmbOrden.SelectedValuePath = "idOrdenCompra";
-            cmbOrden.SelectedValue = orden;
-            /*for (int i = 0; i < cmbOrden.Items.Count; i++)
+  
+            for (int i = 0; i < cmbOrden.Items.Count; i++)
             {
                 cmbOrden.SelectedIndex = i;
 
@@ -314,7 +340,7 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     break;
                 }
-            }*/
+            }
                
         }
          public void loadFechaEmision()
