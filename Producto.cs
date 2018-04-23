@@ -14,6 +14,7 @@ namespace wpfFamiliaBlanco
         public float   total { get; set; }
         public float precioUnitario { get; set; }
         public int id { get; set; }
+        public float preciolista { get; set; }
 
         public Producto(String nombre, int id, int cantidad, float total, float precioUnitario)
         {
@@ -30,7 +31,22 @@ namespace wpfFamiliaBlanco
             this.cantidad = cantidad;
          
         }
+        public Producto (int id, String nombre, float precioUnitario)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.precioUnitario = precioUnitario;
 
+
+        }
+        public Producto(int id, float preciolista, String nombre)
+        {
+            this.id = id;
+            this.nombre = nombre;
+            this.preciolista = preciolista;
+
+
+        }
 
 
 

@@ -22,10 +22,14 @@ namespace wpfFamiliaBlanco.Clientes
         public windowAgregarProducto()
         {
             InitializeComponent();
+            txtnombre.IsReadOnly = true;
+            txtpreciou.IsReadOnly = true;
         }
 
         private Boolean validacion() {
 
+
+            
             if (string.IsNullOrEmpty(txtpreciolista.Text))
             {
                 MessageBox.Show("Complete el precio de lista");
@@ -37,12 +41,19 @@ namespace wpfFamiliaBlanco.Clientes
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             if (validacion())
             {
+                
                 DialogResult = true;
             }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            
+            this.Close();
         }
     }
 }

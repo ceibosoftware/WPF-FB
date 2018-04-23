@@ -73,15 +73,26 @@
     </Page.Resources>
 
     <Grid Margin="-1,0,1,0">
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="421" Margin="27,25,0,0" VerticalAlignment="Top" Width="868" Opacity="0.5" CornerRadius="5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF282727" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="930,418,0,32" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" />
-        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="928,374,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="928,326,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848"/>
+        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="928,374,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnModificar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="928,326,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnEliminar_Click"/>
         <ListBox x:Name="ltsLp" HorizontalAlignment="Left" Height="184" Margin="53,71,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsLp_SelectionChanged"/>
         <Label x:Name="lbllp" Content="Listas de Precios" HorizontalAlignment="Left" Margin="285,41,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="53,260,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblfecha" Content="" HorizontalAlignment="Left" Margin="99,260,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblnlp" Content="" HorizontalAlignment="Left" Margin="874,40,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="345" Margin="458,71,0,0" VerticalAlignment="Top" Width="426"/>
+        <Label x:Name="lblultima" Content="Ultima modificacion" HorizontalAlignment="Left" Margin="53,260,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblultimam" Content="" HorizontalAlignment="Left" Margin="203,260,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lista: " HorizontalAlignment="Left" Margin="775,40,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblnombre" Content="" HorizontalAlignment="Left" Margin="820,40,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnPdf" Content="PDF" HorizontalAlignment="Left" Margin="930,269,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btnPdf_Click"/>
 
     </Grid>
 </Page>

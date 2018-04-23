@@ -57,6 +57,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         }
 
+
         public void ActualizaDGVContacto()
         {
             try
