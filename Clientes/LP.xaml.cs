@@ -112,9 +112,9 @@ namespace wpfFamiliaBlanco.Clientes
             bandera = true;
             var newW = new windowAgregarLp();
             string nombre;
-            newW.lblpreciolista.Visibility = Visibility.Hidden;
-            newW.txtPreciolista.Visibility = Visibility.Hidden;
-            newW.btnModpl.Visibility = Visibility.Hidden;
+           // newW.lblpreciolista.Visibility = Visibility.Hidden;
+            //newW.txtPreciolista.Visibility = Visibility.Hidden;
+            //newW.btnModpl.Visibility = Visibility.Hidden;
             newW.ShowDialog();
 
             if (newW.DialogResult==true)
