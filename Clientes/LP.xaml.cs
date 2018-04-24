@@ -65,7 +65,7 @@ namespace wpfFamiliaBlanco.Clientes
        
         private void cargalp()
         {
-            dgvLp.AutoGenerateColumns = false;
+           /* dgvLp.AutoGenerateColumns = false;
             DataGridTextColumn textColumn = new DataGridTextColumn();
             textColumn.Header = "Nombre";
             textColumn.Binding = new Binding("nombre");
@@ -73,7 +73,7 @@ namespace wpfFamiliaBlanco.Clientes
             DataGridTextColumn textColumn2 = new DataGridTextColumn();
             textColumn2.Header = "Precio de Lista";
             textColumn2.Binding = new Binding("preciolista");
-            dgvLp.Columns.Add(textColumn2);
+            dgvLp.Columns.Add(textColumn2);*/
         }
         private void loadlp()
         {

@@ -62,7 +62,7 @@ namespace wpfFamiliaBlanco.Clientes
         private void loadlistadeprecios(DataTable lp)
         {
 
-            dgvLp.AutoGenerateColumns = false;
+           /* dgvLp.AutoGenerateColumns = false;
             DataGridTextColumn textColumn = new DataGridTextColumn();
             textColumn.Header = "Nombre";
             textColumn.Binding = new Binding("nombre");
@@ -71,7 +71,7 @@ namespace wpfFamiliaBlanco.Clientes
             textColumn2.Header = "Precio de Lista";
             textColumn2.Binding = new Binding("preciolista");
             dgvLp.Columns.Add(textColumn2);
-
+            */
             for (int i = 0; i < lp.Rows.Count; i++)
             {
 
@@ -187,7 +187,7 @@ namespace wpfFamiliaBlanco.Clientes
                 DataTable productos = conexion.ConsultaParametrizada(consultaProducto);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    item = new Producto((int)productos.Rows[i].ItemArray[0], productos.Rows[i].ItemArray[1].ToString(), (float)productos.Rows[i].ItemArray[5]);
+                   // item = new Producto((int)productos.Rows[i].ItemArray[0], productos.Rows[i].ItemArray[1].ToString(), (float)productos.Rows[i].ItemArray[5]);
                     items.Add(item);
                 }
 
@@ -223,7 +223,7 @@ namespace wpfFamiliaBlanco.Clientes
                 DataTable productos = conexion.ConsultaParametrizada(consultalp);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    item = new Producto((int)productos.Rows[i].ItemArray[0], productos.Rows[i].ItemArray[1].ToString(), (float)productos.Rows[i].ItemArray[5]);
+                    //item = new Producto((int)productos.Rows[i].ItemArray[0], productos.Rows[i].ItemArray[1].ToString(), (float)productos.Rows[i].ItemArray[5]);
                     itemslp.Add(item);
                 }
 
@@ -271,8 +271,8 @@ namespace wpfFamiliaBlanco.Clientes
 
                 itemslp.Remove(prod);
                 dgvLp.Items.Refresh();
-                Producto p = new Producto(prod.id,prod.nombre,precio);
-                items.Add(p);
+               // Producto p = new Producto(prod.id,prod.nombre,precio);
+               // items.Add(p);
                 dgvProductos.Items.Refresh();
 
             

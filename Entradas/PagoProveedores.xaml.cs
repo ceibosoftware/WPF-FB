@@ -267,7 +267,7 @@ namespace wpfFamiliaBlanco.Entradas
                 String FK_ctaBco = pagado.Rows[0].ItemArray[4].ToString();
                 txtfecha.Text = pagado.Rows[0].ItemArray[1].ToString();
                 txtnumerocuotapaga.Text = pagado.Rows[0].ItemArray[12].ToString();
-                Boolean estado1 = Boolean.Parse(pagado.Rows[0].ItemArray[13].ToString());
+               String estado1 = pagado.Rows[0].ItemArray[13].ToString();
 
                 if (FK_idCheque != "")
                 {
@@ -294,7 +294,7 @@ namespace wpfFamiliaBlanco.Entradas
                 txtTipoPago.Text = "Efectivo";
                 }
                  
-                if (estado1 )
+                if (estado1 == "1" )
                 {
           
                 txtEstado.Text = "PAGADO";
