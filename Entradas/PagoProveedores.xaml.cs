@@ -211,7 +211,7 @@ namespace wpfFamiliaBlanco.Entradas
                
 
                 String estado = porPagar.Rows[0].ItemArray[5].ToString();
-                    MessageBox.Show("" + estado);
+                 
                 if (estado == "False")
                 {
                     txtEstado.Text = "NO PAGADO";
@@ -268,7 +268,7 @@ namespace wpfFamiliaBlanco.Entradas
                 txtfecha.Text = pagado.Rows[0].ItemArray[1].ToString();
                 txtnumerocuotapaga.Text = pagado.Rows[0].ItemArray[12].ToString();
                String estado1 = pagado.Rows[0].ItemArray[13].ToString();
-                MessageBox.Show("" + estado1);
+              
 
                 if (FK_idCheque != "")
                 {
