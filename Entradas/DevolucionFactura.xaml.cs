@@ -43,10 +43,23 @@ namespace wpfFamiliaBlanco.Entradas
             txtSubtotal.IsReadOnly = true;
             txtTipoCambio.IsReadOnly = true;
             txtTotal.IsReadOnly = true;
+            LoadDgvNC();
+            SetearColumnas();
 
         }
 
-
+        public void SetearColumnas()
+        {
+            dgvProductosNC.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Cantidad";
+            textColumn.Binding = new Binding("cantidad");
+            dgvProductosNC.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio Unitario";
+            textColumn2.Binding = new Binding("precioUnitario");
+            dgvProductosNC.Columns.Add(textColumn2);
+        }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
@@ -110,12 +123,13 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void LoadDgvNC()
         {
+    
             dgvProductosNC.ItemsSource = itemsNC;
             dgvProductosNC.Items.Refresh();
         }
         public void loadLtsNotaCredito()
         {
-            String consulta = "select * from notacredito";
+            String consulta = "select * from notacredito FK_idfactura";
             conexion.Consulta(consulta, tabla: ltsNC);
             ltsNC.DisplayMemberPath = "idNotaCredito";
             ltsNC.SelectedValuePath = "idNotaCredito";
@@ -372,6 +386,31 @@ namespace wpfFamiliaBlanco.Entradas
             }
         }
 
-      
+        private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                String consulta = " Select * from notacredito t1, factura t2  where  t2.fecha = @valor and t1.FK_idfactura = t2.idfacturas ";
+                DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
+                ltsNC.ItemsSource = OCFecha.AsDataView();
+                ltsNC.DisplayMemberPath = "idNotaCredito";
+                ltsNC.SelectedValuePath = "idNotaCredito";
+                ltsNC.SelectedIndex = 0;
+            }
+            catch (NullReferenceException)
+            {
+
+           
+            }
+        }
+
+        private void btnVertodo_Click(object sender, RoutedEventArgs e)
+        {
+            String consulta = "select * from notacredito";
+            conexion.Consulta(consulta, tabla: ltsNC);
+            ltsNC.DisplayMemberPath = "idNotaCredito";
+            ltsNC.SelectedValuePath = "idNotaCredito";
+            ltsNC.SelectedIndex = 0;
+        }
     }
 }

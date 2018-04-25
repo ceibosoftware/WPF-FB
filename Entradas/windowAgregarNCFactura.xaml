@@ -11,10 +11,8 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="363,32,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="390,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="24" Width="44" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="39,124,0,0" VerticalAlignment="Top" Height="24" Width="395"/>
+        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="363,80,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
         <ListBox x:Name="ltsfacturas" HorizontalAlignment="Left" Height="133" Margin="38,190,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsfacturas_SelectionChanged"/>
         <Label Content="Facturas" HorizontalAlignment="Left" Margin="376,159,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
         <DataGrid x:Name="DgvProductosFactur" HorizontalAlignment="Left" Height="110" Margin="474,64,0,0" VerticalAlignment="Top" Width="293"/>

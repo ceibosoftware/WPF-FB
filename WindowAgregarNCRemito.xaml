@@ -7,12 +7,10 @@
         mc:Ignorable="d"
         Title="WindowAgregarNCRemito" Height="450" Width="1252.86">
     <Grid Background="#FF232222">
-        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="363,32,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="390,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="30" Width="44" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="39,124,0,0" VerticalAlignment="Top" Height="24" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
-        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="133" Margin="38,190,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
-        <Label Content="Remitos" HorizontalAlignment="Left" Margin="376,159,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
+        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="367,48,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="42,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
+        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="133" Margin="41,159,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
+        <Label Content="Remitos" HorizontalAlignment="Left" Margin="379,128,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
         <DataGrid x:Name="DgvProductosRemitos" HorizontalAlignment="Left" Height="110" Margin="474,64,0,0" VerticalAlignment="Top" Width="293"/>
         <Label Content="Productos Remito" HorizontalAlignment="Left" Margin="647,32,0,0" VerticalAlignment="Top" Height="39" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
         <DataGrid x:Name="dgvProductosNCRemito" HorizontalAlignment="Left" Height="110" Margin="851,64,-352,0" VerticalAlignment="Top" Width="293"/>

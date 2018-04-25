@@ -14,7 +14,7 @@
             <ColumnDefinition Width="56*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="406,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="53,62,0,0" VerticalAlignment="Top" Height="22" Width="395"/>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="53,62,0,0" VerticalAlignment="Top" Height="22" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
         <Label Content="Remitos" HorizontalAlignment="Left" Margin="390,100,0,0" VerticalAlignment="Top" Height="36" Width="80" FontSize="14"/>
         <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="134" Margin="53,124,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
         <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="496,63,0,0" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
@@ -23,5 +23,6 @@
         <Button x:Name="btnAgregar" Content="Agregar NC" HorizontalAlignment="Left" Margin="282,248,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="23" Grid.Column="1" Style="{DynamicResource agregar}"/>
         <Button x:Name="btnModificar" Content="Modificar NC" HorizontalAlignment="Left" Margin="282,299,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnModificar_Click"/>
         <Button x:Name="btnEliminar" Content="Eliminar NC" HorizontalAlignment="Left" Margin="282,348,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnEliminar_Click"/>
+        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="53,100,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
     </Grid>
 </Page>

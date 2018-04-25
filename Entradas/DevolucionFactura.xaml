@@ -13,7 +13,7 @@
         <Label Content="Proveedor" HorizontalAlignment="Left" Margin="378,36,0,0" VerticalAlignment="Top" Height="33" Width="88" FontSize="14" RenderTransformOrigin="1.469,1"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="408,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
         <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="55,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top" Height="22" Width="395"/>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top" Height="22" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
         <ListBox x:Name="ltsNC" HorizontalAlignment="Left" Height="133" Margin="55,194,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsNC_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
         <Label Content="Notas de Crédito" HorizontalAlignment="Left" Margin="338,165,0,0" VerticalAlignment="Top" Height="37" Width="116" FontSize="14"/>
         <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="133" Margin="496,63,0,0" VerticalAlignment="Top" Width="414"/>
@@ -28,5 +28,6 @@
         <Label Content="IVA" HorizontalAlignment="Left" Margin="883,279,0,0" VerticalAlignment="Top" Height="31" Width="92" FontSize="14"/>
         <Button x:Name="btnModificarNC" Content="Modificar NC" HorizontalAlignment="Left" Margin="803,360,0,0" VerticalAlignment="Top" Width="81" Height="24" Style="{DynamicResource agregar}" Click="btnModificarNC_Click"/>
         <Button x:Name="btnEliminarNC" Content="Eliminar NC" HorizontalAlignment="Left" Margin="906,360,0,0" VerticalAlignment="Top" Width="82" Height="24" Style="{DynamicResource agregar}" Click="btnEliminarNC_Click"/>
+        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="55,165,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
     </Grid>
 </Page>

@@ -225,5 +225,32 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione una Nota de Crédito a eliminar");
             }
         }
+
+        private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                String consulta = " Select * from notacredito t1, remito t2  where  t2.fecha = @valor and t1.FK_idremitos = t2.idremitos  ";
+                DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
+                ltsRemitos.ItemsSource = OCFecha.AsDataView();
+                ltsRemitos.DisplayMemberPath = "idNotaCredito";
+                ltsRemitos.SelectedValuePath = "idNotaCredito";
+                ltsRemitos.SelectedIndex = 0;
+            }
+            catch (NullReferenceException)
+            {
+
+
+            }
+        }
+
+        private void btnVertodo_Click(object sender, RoutedEventArgs e)
+        {
+            String consulta = "select * from notacredito  WHERE FK_idremitos IS NOT NULL";
+            conexion.Consulta(consulta, tabla: ltsRemitos);
+            ltsRemitos.DisplayMemberPath = "idNotaCredito";
+            ltsRemitos.SelectedValuePath = "idNotaCredito";
+            ltsRemitos.SelectedIndex = 0;
+        }
     }
 }

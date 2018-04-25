@@ -49,6 +49,7 @@ namespace wpfFamiliaBlanco.Entradas
             DgvProductosFactur.IsReadOnly = true;
             itemsFact.Clear();
             txtTotal.IsReadOnly = true;
+            LoadDgvProdFactura();
         }
 
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
@@ -63,14 +64,13 @@ namespace wpfFamiliaBlanco.Entradas
             ltsfacturas.IsEnabled = false;
             idnota = idnotac;
             itemsNC = ProdAmodificar;
-
             txtSubtotal.Text = subtotal;
             txtTotal.Text = total;
             txtIVA.Text = iva;
             txtTipoCambio.Text = cambio;
 
             LoadDgvNC(itemsNC);
-
+            LoadDgvProdFactura();
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -80,11 +80,56 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void LoadDgvNC()
         {
+            dgvProductosNC.AutoGenerateColumns = false;
+            DataGridTextColumn textColum1n = new DataGridTextColumn();
+            textColum1n.Header = "Nombre";
+            textColum1n.Binding = new Binding("nombre");
+            dgvProductosNC.Columns.Add(textColum1n);
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Cantidad";
+            textColumn.Binding = new Binding("cantidad");
+            dgvProductosNC.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio Unitario";
+            textColumn2.Binding = new Binding("precioUnitario");
+            dgvProductosNC.Columns.Add(textColumn2);
             dgvProductosNC.ItemsSource = itemsNC;
+        }
+
+
+        public void LoadDgvProdFactura()
+        {
+            DgvProductosFactur.AutoGenerateColumns = false;
+            DataGridTextColumn textColum1n = new DataGridTextColumn();
+            textColum1n.Header = "Nombre";
+            textColum1n.Binding = new Binding("nombre");
+            DgvProductosFactur.Columns.Add(textColum1n);
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Cantidad";
+            textColumn.Binding = new Binding("cantidad");
+            DgvProductosFactur.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio Unitario";
+            textColumn2.Binding = new Binding("precioUnitario");
+            DgvProductosFactur.Columns.Add(textColumn2);
+      
         }
 
         public void LoadDgvNC(List<Producto> p)
         {
+            dgvProductosNC.AutoGenerateColumns = false;
+            DataGridTextColumn textColum1n = new DataGridTextColumn();
+            textColum1n.Header = "Nombre";
+            textColum1n.Binding = new Binding("nombre");
+            dgvProductosNC.Columns.Add(textColum1n);
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Cantidad";
+            textColumn.Binding = new Binding("cantidad");
+            dgvProductosNC.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio Unitario";
+            textColumn2.Binding = new Binding("precioUnitario");
+            dgvProductosNC.Columns.Add(textColumn2);
             dgvProductosNC.ItemsSource = p;
         }
         public void loadLtsfactura()
