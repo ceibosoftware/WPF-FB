@@ -241,23 +241,7 @@ namespace wpfFamiliaBlanco
       
         }
 
-        private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                String consulta = " Select * from remito t1 where t1.fecha = @valor ";
-                DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
-                ltsRemitos.ItemsSource = OCFecha.AsDataView();
-                ltsRemitos.DisplayMemberPath = "numeroRemito";
-                ltsRemitos.SelectedValuePath = "idremitos";
-                ltsRemitos.SelectedIndex = 0;
-            }
-            catch (NullReferenceException)
-            {
-
-
-            }
-        }
+      
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
