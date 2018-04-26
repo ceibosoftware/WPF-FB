@@ -20,7 +20,7 @@
         <Label Content="Precio Unitario" HorizontalAlignment="Left" Margin="104,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtpreciou" HorizontalAlignment="Left" Height="23" Margin="197,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Precio de Lista" HorizontalAlignment="Left" Margin="104,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.002,0.556"/>
-        <TextBox x:Name="txtpreciolista" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="197,166,0,0" PreviewTextInput="txtpreciolista_PreviewTextInput"/>
+        <TextBox x:Name="txtpreciolista" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="197,166,0,0" PreviewTextInput="txtpreciolista_PreviewTextInput" TextChanged="txtpreciolista_TextChanged"/>
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="376,176,0,0" VerticalAlignment="Top" Width="75" Click="btnAceptar_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="376,197,0,0" VerticalAlignment="Top" Width="75" Click="btnCancelar_Click"/>
 

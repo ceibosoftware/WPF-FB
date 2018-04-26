@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,11 +20,14 @@ namespace wpfFamiliaBlanco.Clientes
     /// </summary>
     public partial class windowAgregarProducto : Window
     {
+        String dika;
         public windowAgregarProducto()
         {
             InitializeComponent();
             txtnombre.IsReadOnly = true;
             txtpreciou.IsReadOnly = true;
+            txtpreciolista.MaxLines = 1;
+
         }
 
         private Boolean validacion() {
@@ -60,6 +64,13 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
+            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+        }
+
+        private void txtpreciolista_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
