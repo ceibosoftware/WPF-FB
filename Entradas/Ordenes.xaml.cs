@@ -426,8 +426,8 @@ namespace wpfFamiliaBlanco
         }
         private void seleccioneParaFiltrar()
         {
-            cmbProveedores.Text = "--Seleccione para filtrar--";
-            cmbFechas.Text = "--Seleccione para filtrar--";
+            cmbProveedores.Text = "Seleccione para filtrar";
+            cmbFechas.Text = "Seleccione para filtrar--";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
