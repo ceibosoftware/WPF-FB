@@ -137,9 +137,10 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            compararPrecioUnitario();
+     
             if (validar())
             {
+                compararPrecioUnitario();
                 DialogResult = true;
             }
            

@@ -215,11 +215,11 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable datos = conexion.ConsultaParametrizada(sql, ltsremitos.SelectedValue);
                 if (datos.Rows.Count > 0)
                 {
-                    lblProvR.Content = datos.Rows[0].ItemArray[0].ToString();
+                    txtProveedor.Text = datos.Rows[0].ItemArray[0].ToString();
                     DateTime fecha = (DateTime)datos.Rows[0].ItemArray[1];
                     this.fecha = (DateTime)datos.Rows[0].ItemArray[1];
-                    lblFechaR.Content = fecha.ToString("dd/MM/yyyy");
-                    lblNroOCR.Content = datos.Rows[0].ItemArray[2].ToString();
+                    txtFecha.Text = fecha.ToString("dd/MM/yyyy");
+                    txtOC.Text = datos.Rows[0].ItemArray[2].ToString();
                 }
                 //consulta productos
                 String consulta = "  SELECT t2.nombre , t1.cantidad, t2.idProductos from productos_has_remitos t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idRemito = @valor";
@@ -276,7 +276,7 @@ namespace wpfFamiliaBlanco.Entradas
                 int idSeleccionado = (int)ltsremitos.SelectedValue;
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {
-                    String consulta = "UPDATE productos_has_ordencompra SET CrRemito = CrRemito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[2] + "' and FK_idOC = '" + lblNroOCR.Content.ToString() + "'";
+                    String consulta = "UPDATE productos_has_ordencompra SET CrRemito = CrRemito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[2] + "' and FK_idOC = '" + txtOC.Text.ToString() + "'";
                     conexion.operaciones(consulta);
                         
                         //Console.Write();
@@ -288,9 +288,9 @@ namespace wpfFamiliaBlanco.Entradas
                 
                     if(ltsremitos.Items.Count <= 0)
                     {
-                        lblProvR.Content = "";
-                        lblNroOCR.Content = "";
-                        lblFechaR.Content = "";
+                        txtProveedor.Text = "";
+                        txtOC.Text = "";
+                        txtFecha.Text = "";
                     }
                     seleccioneParaFiltrar();
                     loadLtsRemitos();
@@ -311,7 +311,7 @@ namespace wpfFamiliaBlanco.Entradas
              
             string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
             string consulta = "select t2.FK_idProveedor from  ordencompra t2 where idOrdenCompra = @valor";
-            int.TryParse(lblNroOCR.Content.ToString(), out int OC);
+            int.TryParse(txtOC.Text.ToString(), out int OC);
             DataTable idprov = conexion.ConsultaParametrizada(consulta, OC);
             int index = ltsremitos.SelectedIndex;
             var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro,fecha, numeroR, (int)ltsremitos.SelectedValue);

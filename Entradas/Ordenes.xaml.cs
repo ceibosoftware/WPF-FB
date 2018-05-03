@@ -142,12 +142,13 @@ namespace wpfFamiliaBlanco
                 productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                 dgvProductos.ItemsSource = productos.AsDataView();
                 //llenar datos de oc
-                String consulta2 = "SELECT * FROM ordencompra t1 where t1.idOrdenCompra = @valor";
+                String consulta2 = "SELECT * FROM ordencompra t1 inner join proveedor where t1.idOrdenCompra = @valor and FK_idProveedor = idProveedor";
                 DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsNumeroOC.SelectedValue);
                 DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
-                lblFechaOC.Content = fecha.ToString("dd/MM/yyyy");
+                txtFecha.Text = fecha.ToString("dd/MM/yyyy");
                 txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
-                if((int)OC.Rows[0].ItemArray[5] == 0)
+                txtProveedor.Text = OC.Rows[0].ItemArray[12].ToString();
+                if ((int)OC.Rows[0].ItemArray[5] == 0)
                 {
                     txtIva.Text = "0";
                 }else if((int)OC.Rows[0].ItemArray[5] == 1)
@@ -234,6 +235,13 @@ namespace wpfFamiliaBlanco
             }
         }
         */
+        private void eliminarOC()
+        {
+            int idSeleccionado = (int)ltsNumeroOC.SelectedValue;
+            string sql = "delete from ordencompra where idOrdenCompra = '" + idSeleccionado + "'";
+            conexion.operaciones(sql);
+            loadlistaOC();
+        }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -241,14 +249,30 @@ namespace wpfFamiliaBlanco
                 DataRow selectedDataRow = ((DataRowView)ltsNumeroOC.SelectedItem).Row;
                 string OC = selectedDataRow["idOrdenCompra"].ToString();
                 MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la orden de compra numero : " + OC, "Advertencia", MessageBoxButton.YesNo);
+                string existeRemito = "select count(idremitos) from remito where FK_idOC = " + OC + " ";
+                string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + OC + " ";
                 if (dialog == MessageBoxResult.Yes)
                 {
-                    int idSeleccionado = (int)ltsNumeroOC.SelectedValue;
-                    string sql = "delete from ordencompra where idOrdenCompra = '" + idSeleccionado + "'";
-                    conexion.operaciones(sql);
-                    loadlistaOC();
+                    if (conexion.ValorEnVariable(existeRemito) != "0" && conexion.ValorEnVariable(existeFactura) != "0")
+                    {
+                        MessageBox.Show("No se puede eliminar la orden  tiene remitos y facturas asociados");
+                    }
+                    else if (conexion.ValorEnVariable(existeRemito) != "0")
+                    {
+                        MessageBox.Show("No se puede eliminar la orden  tiene remitos asociados");
+                    }
+                    else if (conexion.ValorEnVariable(existeFactura) != "0")
+                    {
+                     MessageBox.Show("No se puede eliminar la orden  tiene facturas asociadas");
+                        
+                    }
+                    else
+                    {
+                        eliminarOC();
+                    }      
+                }  
 
-                }
+                
                 if (ltsNumeroOC.Items.Count <= 0)
                 {
                     txtDescripcion.Text = "";
