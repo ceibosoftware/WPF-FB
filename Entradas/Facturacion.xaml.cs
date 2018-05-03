@@ -258,10 +258,13 @@ namespace wpfFamiliaBlanco.Entradas
                 DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsFactura.SelectedValue);
 
                 DateTime fecha = (DateTime)OC.Rows[0].ItemArray[8];
-                lblFecha1.Content = "Fecha: "+fecha.ToString("dd/MM/yyyy");
-                lblOC.Content = "Orden de Compra: " + OC.Rows[0].ItemArray[7].ToString();
-          
+               txtfecha.Text= fecha.ToString("dd/MM/yyyy");
+               txtoc.Text= OC.Rows[0].ItemArray[7].ToString();
 
+                String pr = "select p.nombre from factura f, ordencompra o, proveedor p where f.FK_idOC = o.idOrdenCompra and o.FK_idProveedor = p.idProveedor and f.idfacturas  = '" +ltsFactura.SelectedValue + "'";
+                String p = conexion.ValorEnVariable(pr).ToString();
+
+                txtproveedor.Text = p;
                 if (OC.Rows[0].ItemArray[4].ToString() == "0")
                 {
                     txtIVA.Text = "0";
