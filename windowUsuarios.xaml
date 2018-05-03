@@ -1,11 +1,12 @@
-﻿<Window x:Class="wpfFamiliaBlanco.windowUsuarios"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="wpfFamiliaBlanco.windowUsuarios"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="618.667" Width="986.667" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png" Closed="Window_Closed">
+        Title="Iniciar sesión" Height="611" Width="1276.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png" Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="ButtonLogin" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -180,7 +181,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Padding="2" UseLayoutRounding="True"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
@@ -249,10 +250,17 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF232222">
+    <Grid Background="#FF151515" Margin="0,0,0,-18.5" Width="1276.333" Height="611">
+        <Image HorizontalAlignment="Left" Height="615.95" Margin="0,-4.95,0,0" VerticalAlignment="Top" Width="1276.333" Source="fondoBlur.png"/>
+
         <Calendar HorizontalAlignment="Left" Margin="43.166,166.167,0,0" VerticalAlignment="Top" Style="{DynamicResource CalendarStyle1}"/>
-        <Label x:Name="lblUsuarios_" Content="Usuarios" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Height="460" Margin="27,54.167,0,0" VerticalAlignment="Top" Width="929" Opacity="0.5" CornerRadius="5">
+        <Border BorderBrush="#FF3E3E3E" BorderThickness="1,0,1,1" HorizontalAlignment="Right" Height="431.667" Margin="0,0,377.167,0" VerticalAlignment="Top" Width="525.5" CornerRadius="5" Padding="20,0,100,0" Background="#FF232222">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="60" Opacity="0.15" BlurRadius="50"/>
+            </Border.Effect>
+        </Border>
+        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="598.666,344.278,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72"/>
+        <Border BorderBrush="#FF024629" BorderThickness="1" HorizontalAlignment="Left" Height="47.992" Margin="425.276,21.497,0,0" VerticalAlignment="Top" Width="425.779" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -260,34 +268,13 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="274.779,166.167,0,0" VerticalAlignment="Top" Width="435.298" CornerRadius="5" Opacity="0.5">
-            <PasswordBox/>
-        </Border>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" Margin="293,234.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="385" Background="#FF4B4848" Foreground="White" FontSize="14" BorderBrush="{x:Null}" Style="{DynamicResource TextBoxStyle1}"/>
-        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="602.666,348.778,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72"/>
-        <Label x:Name="lblUser" Content="Usuario" HorizontalAlignment="Left" Margin="612.919,197.167,0,0" VerticalAlignment="Top" Width="64.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblPassword" Content="Contraseña" HorizontalAlignment="Left" Margin="589,257,0,0" VerticalAlignment="Top" Width="89" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Border BorderBrush="#FF024629" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="750.276,166.167,0,0" VerticalAlignment="Top" Width="160.724" CornerRadius="5">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Label x:Name="lblUser_Copy" Content="Iniciar sesión" HorizontalAlignment="Left" Margin="274.779,166.167,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="216.989" TextWrapping="Wrap" Text="Inicie sesión para administrar el programa. Puede acceder con su usuario o crear uno nuevo. Una vez haya completado sus datos haga click en &quot;Acceder&quot;. " VerticalAlignment="Top" Width="136.276" Margin="765.276,175.515,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="235.67" Margin="64.353,166.167,0,0" VerticalAlignment="Top" Width="160.724" CornerRadius="5" Opacity="0.5">
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF323131" Offset="0"/>
-                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
-        <Image HorizontalAlignment="Left" Height="67.256" Margin="107.001,249.744,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png"/>
-        <Label x:Name="lblUser_Copy1" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="792.609,477.167,0,0" VerticalAlignment="Top" Width="163.391" Foreground="White" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="293,294,0,0" VerticalAlignment="Top" Width="384.666" Height="23" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}"/>
+        <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="35.489" TextWrapping="Wrap" Text="Inicie sesión para administrar el programa. Puede acceder con su usuario o crear uno nuevo. Una vez haya completado sus datos haga click en &quot;Acceder&quot;. " VerticalAlignment="Top" Width="409.276" Margin="434.279,31,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
+        <Label x:Name="lblUser_Copy1" Content="fb1.1" HorizontalAlignment="Left" Margin="613.775,394.667,0,0" VerticalAlignment="Top" Width="53.891" Foreground="White" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.8"/>
+        <Image HorizontalAlignment="Left" Height="24.62" Margin="624.646,460.05,0,0" VerticalAlignment="Top" Width="27.354" gif:ImageBehavior.AnimatedSource="ceibo ss small.png" Opacity="0.9"/>
+        <Label Content="ceibo software" HorizontalAlignment="Left" Margin="595.59,484.67,0,0" VerticalAlignment="Top" Opacity="0.8" Height="27.74" Width="90.076"/>
+        <Image HorizontalAlignment="Left" Height="67.256" Margin="598.59,116.911,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png" Opacity="0.9"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left"  Height="23" Margin="482,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" Background="{x:Null}" Foreground="White" FontSize="14"  BorderBrush="#FF303030" Style="{DynamicResource txtLogin}" UseLayoutRounding="True" Padding="5,1" SelectionBrush="#FF666A6C"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="482,273,0,0" VerticalAlignment="Top" Width="308" Height="23" BorderBrush="#FF303030" Foreground="White" FontSize="14" Padding="5,1" SelectionBrush="#FF666A6C" Style="{DynamicResource password}" Background="{x:Null}"/>
 
     </Grid>
 </Window>

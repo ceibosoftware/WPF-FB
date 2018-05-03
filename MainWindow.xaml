@@ -1004,22 +1004,11 @@
                 <ContextMenu/>
             </Rectangle.ContextMenu>
         </Rectangle>
-        <Label x:Name="lblFamiliaBlanco" Content="Bodega Familia Blanco v1.0" HorizontalAlignment="Left" Margin="0,549.667,0,-0.222" Width="236" Foreground="#FFFEFEFE" Background="{x:Null}" Style="{DynamicResource LabelStyle}">
+        <Label x:Name="lblFamiliaBlanco" Content="fb1.1" HorizontalAlignment="Left" Margin="0,549.667,0,-0.222" Width="236" Foreground="#FFFEFEFE" Background="{x:Null}" Style="{DynamicResource LabelStyle}">
             <Label.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Label.BorderBrush>
         </Label>
-        <Button x:Name="btn_ImageB_Blanco" Content="" HorizontalAlignment="Left" Margin="91.839,51,0,0" VerticalAlignment="Top" Width="51.921" Height="61.92" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="Ir a Inicio" Template="{DynamicResource ButtonB_B}" Click="btn_ImageB_Blanco_Click">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="20" Opacity="0.8"/>
-            </Button.Effect>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
         <Frame x:Name="frameProductos" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,191.96,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="frameProveedores" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,229.253,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Frame x:Name="frameCategorias" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,341.132,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
@@ -1039,7 +1028,7 @@
             </Button.BorderBrush>
         </Button>
         <Button x:Name="btnCeibo_Bottom_Right" Content="" HorizontalAlignment="Left" Margin="1231.999,549.667,0,0" VerticalAlignment="Top" Width="27.667" Style="{DynamicResource ButtonStyleCeibo_bottom_right}" Template="{DynamicResource ButtonCeibo_BR}" Height="22" Background="#FFDDDDDD" ToolTip="Ir a ceibosoftware.com"/>
-        <Button x:Name="btnCerrarSesion1" Content="Cerrar sesión" Margin="65,146.946,1093.333,0" VerticalAlignment="Top" Height="21" Click="btnCerrarSesion1_Click" Foreground="White" Style="{DynamicResource botonCerrarSesion}" Padding="1"/>
+        <Button x:Name="btnCerrarSesion1" Content="Salir" Margin="167.76,91,1067.573,0" VerticalAlignment="Top" Height="21" Click="btnCerrarSesion1_Click" Foreground="White" Style="{DynamicResource botonCerrarSesion}" Padding="1"/>
         <Frame x:Name="frameSalidas" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
         <Button x:Name="btnSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" Click="btnSalidas_Click" FontSize="14">
             <Button.BorderBrush>
@@ -1063,6 +1052,20 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
+        <Ellipse HorizontalAlignment="Left" Height="97.52" Margin="70.24,51.24,0,0" VerticalAlignment="Top" Width="97.52" Stroke="#FFCFCFCF" StrokeThickness="0.5" Opacity="0.4"/>
+        <Button x:Name="btn_ImageB_Blanco" Content="" HorizontalAlignment="Left" Margin="91.839,71,0,0" VerticalAlignment="Top" Width="51.921" Height="61.92" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyleCeiboIsoDock}" ToolTip="Ir a Inicio" Template="{DynamicResource ButtonB_B}" Click="btn_ImageB_Blanco_Click">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="20" Opacity="0.3"/>
+            </Button.Effect>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Ellipse HorizontalAlignment="Left" Height="19.5" Margin="394,19.75,0,0" StrokeThickness="0.5" VerticalAlignment="Top" Width="19.5" Fill="#FF171717"/>
+        <Ellipse HorizontalAlignment="Left" Height="22.25" Margin="401,9.75,0,0" StrokeThickness="0.5" VerticalAlignment="Top" Width="23.75" Fill="#FF302E2E"/>
 
 
     </Grid>

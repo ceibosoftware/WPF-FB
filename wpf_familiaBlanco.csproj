@@ -510,5 +510,23 @@
   <ItemGroup>
     <Folder Include="clientes prueba\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo line not gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ceibo line not white - Copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8-categorize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8-search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="fondoBlur.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
