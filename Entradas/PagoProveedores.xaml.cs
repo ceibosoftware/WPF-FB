@@ -100,6 +100,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadLtsProximosPagos();
             loadLtsPagosRealizadosMOve();
             bandera = false;
+            //MainWindow.notificaciones();
         }
 
         public void loadLtsProximosPagos()
@@ -118,7 +119,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, tabla: ltsPagosReaizados);
             ltsPagosReaizados.DisplayMemberPath = "idPago";
             ltsPagosReaizados.SelectedValuePath = "idPago";
-            ltsPagosReaizados.SelectedIndex = 0;
+            
         
         
         }
@@ -129,7 +130,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, tabla: ltsPagosReaizados);
             ltsPagosReaizados.DisplayMemberPath = "idPago";
             ltsPagosReaizados.SelectedValuePath = "idPago";
-            ltsPagosReaizados.Items.MoveCurrentToLast();
+           
 
         }
 
@@ -176,7 +177,7 @@ namespace wpfFamiliaBlanco.Entradas
                 int differenceInDays = ts.Days;
 
                 Console.WriteLine("diferencia de dias " + differenceInDays);
-                    lbldias.Content = "Faltan " + differenceInDays + " días para su vencimiento";
+             
                 if (differenceInDays<=0)
                 {
                     Console.WriteLine("DIAS "+differenceInDays + " VENCIDO");
@@ -186,7 +187,8 @@ namespace wpfFamiliaBlanco.Entradas
                     txtfecha.BorderBrush = Brushes.Red;
                     txtnumerocuotapaga.BorderBrush = Brushes.Red;
                     txtEstado.BorderBrush = Brushes.Red;
-                }
+                        lbldias.Content = "Venció hace " + differenceInDays*-1 + " días";
+                    }
                 else if (differenceInDays <= 10)
                 {
                     Console.WriteLine("DIAS " + differenceInDays + " PROXIMO A VENCER");
@@ -196,7 +198,8 @@ namespace wpfFamiliaBlanco.Entradas
                     txtfecha.BorderBrush = Brushes.Orange;
                     txtnumerocuotapaga.BorderBrush = Brushes.Orange;
                     txtEstado.BorderBrush = Brushes.Orange;
-                }
+                        lbldias.Content = "Faltan " + differenceInDays + " días para su vencimiento";
+                    }
 
                 else if(differenceInDays>=11 )
                 {
@@ -207,7 +210,8 @@ namespace wpfFamiliaBlanco.Entradas
                     txtfecha.BorderBrush = Brushes.Yellow;
                     txtnumerocuotapaga.BorderBrush = Brushes.Yellow;
                     txtEstado.BorderBrush = Brushes.Yellow;
-                }
+                    lbldias.Content = "Faltan " + differenceInDays + " días para su vencimiento";
+                    }
                
 
                 String estado = porPagar.Rows[0].ItemArray[5].ToString();
@@ -231,8 +235,9 @@ namespace wpfFamiliaBlanco.Entradas
                 txtTipoPago.Text = "El pago no se ha realizado";
                 txtfecha.Text = "El pago no se ha realizado";
                 txtnumerocuotapaga.Text = "El pago no se ha realizado";
-
+                 
             }
+                ltsPagosReaizados.SelectedIndex = -1;
             }
             catch (Exception)
             {

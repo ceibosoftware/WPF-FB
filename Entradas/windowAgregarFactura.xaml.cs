@@ -56,9 +56,11 @@ namespace wpfFamiliaBlanco.Entradas
             dtFactura.SelectedDate = DateTime.Now;
             //ANTONITO
             bandera = true;
+            SetearColumnas();
+            SetearColumnas2();
         }
 
-        public windowAgregarFactura(int numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
+        public windowAgregarFactura(Int64 numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
         {
             InitializeComponent();
            // try
@@ -101,7 +103,8 @@ namespace wpfFamiliaBlanco.Entradas
                 txtSubtotal.IsReadOnly = true;
                 dgvProductosFactura.IsReadOnly = true;
                 dgvProductosOC.IsReadOnly = true;
-          
+            SetearColumnas();
+            
             //}
             //catch (Exception)
           //  {
@@ -126,8 +129,60 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductosOC.IsReadOnly = true;
             seleccionefecha();
             dtFactura.SelectedDate = DateTime.Now;
+            SetearColumnas();
         }
 
+        public void SetearColumnas()
+        {
+
+            //DGV FACTURA
+            dgvProductosFactura.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductosFactura.Columns.Add(textColumn);
+
+            DataGridTextColumn textColumn1 = new DataGridTextColumn();
+            textColumn1.Header = "Cantidad";
+            textColumn1.Binding = new Binding("cantidad");
+            dgvProductosFactura.Columns.Add(textColumn1);
+
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio Unitario";
+            textColumn2.Binding = new Binding("precioUnitario");
+            dgvProductosFactura.Columns.Add(textColumn2);
+
+          /*  DataGridTextColumn textColumn3 = new DataGridTextColumn();
+            textColumn3.Header = "Subtotal";
+            textColumn3.Binding = new Binding("subtotal");
+            dgvProductosFactura.Columns.Add(textColumn3);*/
+
+                       //DGV OC
+            dgvProductosOC.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn4 = new DataGridTextColumn();
+            textColumn4.Header = "Nombre";
+            textColumn4.Binding = new Binding("nombre");
+            dgvProductosOC.Columns.Add(textColumn4);
+
+            DataGridTextColumn textColumn14 = new DataGridTextColumn();
+            textColumn14.Header = "Cantidad";
+            textColumn14.Binding = new Binding("cantidad");
+            dgvProductosOC.Columns.Add(textColumn14);
+
+            DataGridTextColumn textColumn24 = new DataGridTextColumn();
+            textColumn24.Header = "Precio Unitario";
+            textColumn24.Binding = new Binding("precioUnitario");
+            dgvProductosOC.Columns.Add(textColumn24);
+
+          /*  DataGridTextColumn textColumn34 = new DataGridTextColumn();
+            textColumn34.Header = "Subtotal";
+            textColumn34.Binding = new Binding("subtotal");
+            dgvProductosOC.Columns.Add(textColumn34);*/
+        }
+        private void SetearColumnas2()
+        {
+
+        }
         private void seleccionefecha()
         {
             cmbCuotas.Text = "--Seleccione fecha factura--";
@@ -421,14 +476,14 @@ namespace wpfFamiliaBlanco.Entradas
             {
 
                 todaslascuotas.Clear();
-                if (txtTotal.Text == "")
+                if (dgvProductosFactura.Items.Count ==0)
                 {
                     MessageBox.Show("Primero cargue productos a la factura");
                 }
                 else
                 {
                     var newW = new windowCuotas(cuotass, dt, float.Parse(txtTotal.Text));
-
+                    newW.Title = "Agregar Cuotas";
                     newW.ShowDialog();
 
                     if (newW.DialogResult == true)
@@ -444,15 +499,22 @@ namespace wpfFamiliaBlanco.Entradas
                             int cuota = cuot.cuota;
                             Cuotas cu = new Cuotas(id, dias, fecha, totalPagar,cuota);
                             todaslascuotas.Add(cu);
-
+                           
                         }
                         loadDGVCuotas();
-                        bandera = false;
+
                     }
+                    else
+                    {
+                        bandera = false;
+                      cmbCuotas.SelectedIndex = -1;
+                        bandera = true;
+                    }
+                  
                 }
               
             }
-            
+      
         }
 
         public void loadDGVCuotas()

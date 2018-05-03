@@ -21,6 +21,7 @@ namespace wpfFamiliaBlanco
     {
         public string canpararestar;
         public int can;
+        public String cantidadmensaje;
         public WindowAgregarProductoFactura()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace wpfFamiliaBlanco
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(txtCantidad.Text, out int cantidad);
+       
             if (can >= cantidad &&  !string.IsNullOrEmpty(txtCantidad.Text))
             {
                 DialogResult = true;
@@ -39,7 +41,7 @@ namespace wpfFamiliaBlanco
             }
             else
             {
-                MessageBox.Show("La cantidad es mayor a la OC");
+                MessageBox.Show("La cantidad no puede ser mayor a "+can);
             }
           
         }
