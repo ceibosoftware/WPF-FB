@@ -668,8 +668,8 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void seleccioneParaFiltrar()
         {
-            cmbProveedores.Text = "--Seleccione para filtrar--";
-            cmbordenCompra.Text = "--Seleccione para filtrar--";
+            cmbProveedores.Text = "Seleccione para filtrar";
+            cmbordenCompra.Text = "Seleccione para filtrar";
         }
 
         private void Vertodo(int index)

@@ -427,7 +427,7 @@ namespace wpfFamiliaBlanco
         private void seleccioneParaFiltrar()
         {
             cmbProveedores.Text = "Seleccione para filtrar";
-            cmbFechas.Text = "Seleccione para filtrar--";
+            cmbFechas.Text = "Seleccione para filtrar";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -449,8 +449,8 @@ namespace wpfFamiliaBlanco
             doc.Add(jpg);
             Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
             Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
-            Paragraph telefono = new Paragraph("Numero de contacto: 4554554 " );
-            Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");
+            Paragraph telefono = new Paragraph("Numero de contacto: 0303456 " );
+            Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");   //buena mari
             Paragraph prod = new Paragraph("Productos de la orden \n \n");
 
            

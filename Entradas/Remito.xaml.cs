@@ -258,9 +258,9 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void seleccioneParaFiltrar()
         {
-            cmbProveedores.Text = "--Seleccione para filtrar--";
-            cmbOrdenes.Text = "--Seleccione para filtrar--";
-            cmbFechas.Text = "--Seleccione para filtrar--";
+            cmbProveedores.Text = "Seleccione para filtrar";
+            cmbOrdenes.Text = "Seleccione para filtrar";
+            cmbFechas.Text = "Seleccione para filtrar";
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {

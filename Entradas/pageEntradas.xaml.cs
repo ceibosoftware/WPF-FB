@@ -25,6 +25,7 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             frameInicioEntradas.Content = new Ordenes();
+            btnOrdenes.Style = FindResource("botonTabPressed") as Style;
         }
 
         private void btnFacturas_Click(object sender, RoutedEventArgs e)
@@ -34,6 +35,7 @@ namespace wpfFamiliaBlanco
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTabPressed") as Style;
             btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
         }
 
         private void btnOrdenes_Click(object sender, RoutedEventArgs e)

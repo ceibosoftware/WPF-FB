@@ -999,7 +999,7 @@
         </DockPanel>
 
         <Frame x:Name="frameInicio" Content="Inicio" HorizontalAlignment="Left" Height="549.667" Margin="236,0,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717" Foreground="White" Style="{DynamicResource FrameStyle}" NavigationUIVisibility="Hidden"/>
-        <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="32" Margin="401,0,0,0" VerticalAlignment="Top" Width="868.666">
+        <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="32" Margin="401,0,0,0" VerticalAlignment="Top" Width="868.666" RadiusX="7" RadiusY="7">
             <Rectangle.ContextMenu>
                 <ContextMenu/>
             </Rectangle.ContextMenu>
@@ -1064,6 +1064,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="25" Margin="401,0,0,0" VerticalAlignment="Top" Width="10.125"/>
+        <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="32" Margin="1259.541,0,0,0" VerticalAlignment="Top" Width="10.125"/>
 
 
     </Grid>
