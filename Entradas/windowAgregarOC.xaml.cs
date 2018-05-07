@@ -49,6 +49,10 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.SelectedValue = proveedor;
             calculaTotal();
             this.idOC = idOC;
+            //Cambios de Diseño batta
+            lblWindowTitle.Content = "Modificar Orden de Compra"; 
+            lblWindowTitle.Width = 176;
+           
         }
 
 

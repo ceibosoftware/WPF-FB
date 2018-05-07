@@ -104,12 +104,9 @@ namespace wpfFamiliaBlanco.Entradas
                 dgvProductosFactura.IsReadOnly = true;
                 dgvProductosOC.IsReadOnly = true;
             SetearColumnas();
-            
-            //}
-            //catch (Exception)
-          //  {
 
-            //}
+            //cambios diseño batta
+            lblWindowTitle.Content = "Modificar Factura";
         }
         public windowAgregarFactura(string idOC, String proveedor)
         {

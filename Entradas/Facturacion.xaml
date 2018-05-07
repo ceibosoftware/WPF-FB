@@ -197,6 +197,16 @@
         <Label x:Name="lblFecha_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="458.572,73.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Orden de Compra" Grid.Column="1"/>
         <Label x:Name="lblFecha_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="458.572,122.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha" Grid.Column="1"/>
         <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="66.072,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor" Grid.Column="1"/>
+        <Border Height="229.508" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF004E6B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="608.462,51.992,48,191.715" Grid.Column="1" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="631.738,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
 
     </Grid>
 </Page>
