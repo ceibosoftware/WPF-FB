@@ -30,14 +30,24 @@ namespace wpfFamiliaBlanco.Entradas
         String lastid;
         public Producto producto;
         DataTable productos;
+        Boolean bandera = false;
+ 
         public DevolucionRemito()
         {
             InitializeComponent();
+        
             loadLtsNCRemitos();
             loadDGVproductosRemitos();
             loadLtsNCRemitos();
             loadProductosNCRemitos();
             dgvProductosRemito.IsReadOnly = true;
+            LoadComboProveedor();
+            seleccioneParaFiltrar();
+            bandera = true;
+            ltsRemitos.SelectedIndex = 0;
+            txtfecha.IsReadOnly = true;
+            txtproveedor.IsReadOnly = true;
+            txtremito.IsReadOnly = true;
         }
 
         public void loadLtsNCRemitos()
@@ -46,8 +56,9 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, tabla: ltsRemitos);
             ltsRemitos.DisplayMemberPath = "idNotaCredito";
             ltsRemitos.SelectedValuePath = "idNotaCredito";
-            ltsRemitos.SelectedIndex = 1;
-            ltsRemitos.SelectedIndex = 0;
+            ltsRemitos.SelectedIndex = -1;
+      
+
         }
 
         public void loadDGVproductosRemitos()
@@ -61,11 +72,11 @@ namespace wpfFamiliaBlanco.Entradas
             var newW = new WindowAgregarNCRemito();
             newW.ShowDialog();
 
-
+            DateTime dtp2 = System.DateTime.Now;
             if (newW.DialogResult == true)
             {
 
-                String insertNCR = "INSERT INTO notacredito (FK_idremitos) VALUES ('" + newW.idRemito + "')";
+                String insertNCR = "INSERT INTO notacredito (FK_idremitos, fecha) VALUES ('" + newW.idRemito + "','"+ dtp2.ToString("yyyy/MM/dd") + "')";
                 conexion.operaciones(insertNCR);
 
                 string ultimoId = "Select last_insert_id()";
@@ -91,15 +102,28 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     String updateCRremito = "UPDATE productos_has_remitos SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idRemito = '" + newW.idRemito + "'";
                     conexion.operaciones(updateCRremito);
+
+                 
                 }
+
+                foreach (var item in newW.itemsNC)
+                {
+                    String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                    conexion.operaciones(updatestock);
+                }
+                loadLtsNCRemitos();
             }
-            loadLtsNCRemitos();
-            ltsRemitos.Items.MoveCurrentToLast();
+        
+
+
          }
 
         private void ltsRemitos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
 
+           
             String productosFatura = "SELECT DISTINCT n.idProductoNC,n.FK_idNotaCredito,n.FK_idProductos,n.cantidad,n.precioUnitario, p.nombre FROM productos_has_notacredito n,  productos p WHERE n.FK_idNotaCredito ='"+ltsRemitos.SelectedValue+"' AND n.FK_idProductos = p.idProductos";
 
             productos = conexion.ConsultaParametrizada(productosFatura, ltsRemitos.SelectedValue);
@@ -110,7 +134,30 @@ namespace wpfFamiliaBlanco.Entradas
                 productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
             }
 
+            String consulta2 = "SELECT * FROM notacredito n where n.idNotaCredito ='" + ltsRemitos.SelectedValue + "'";
+            DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsRemitos.SelectedValue);
+
+          
+
+                DateTime fecha = (DateTime)OC.Rows[0].ItemArray[5];
+                txtfecha.Text = fecha.ToString("dd/MM/yyyy");
+            
+
+
+            String c = " select p.nombre from remito r, ordencompra o, proveedor p, notacredito n where r.FK_idOC = o.idOrdenCompra and o.FK_idProveedor = p.idProveedor and r.idremitos = n.FK_idremitos and n.idNotacredito = '"+ltsRemitos.SelectedValue+"'";
+            String p = conexion.ValorEnVariable(c).ToString();
+
+            txtproveedor.Text = p;
            
+            txtremito.Text = OC.Rows[0].ItemArray[4].ToString();
+
+               
+            }
+            catch (Exception)
+            {
+
+             
+            }
         }
         private void loadProductosNCRemitos()
         {
@@ -127,11 +174,17 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+          
             int idnotacredito = (int)ltsRemitos.SelectedValue;
+            
             productosAmodificar.Clear();
 
 
-            String idr = "SELECT FK_idremitos FROM notacredito WHERE idNotaCredito = '" + ltsRemitos.SelectedValue + "'";
+            String idr = "SELECT FK_idremitos FROM notacredito WHERE idNotaCredito = '" + idnotacredito + "'";
             String idRem = conexion.ValorEnVariable(idr);
 
             String productosRemito = "SELECT DISTINCT  t2.nombre,t2.idProductos,t3.cantidad from productos_has_remitos t1, productos_has_notacredito t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idRemito = '" + idRem + "' and  t3.FK_idNotaCredito = '" + ltsRemitos.SelectedValue + "'";
@@ -142,8 +195,9 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2]);
                 productosAmodificar.Add(producto);
-
-            }
+             
+         
+                }
 
             var newW = new WindowAgregarNCRemito(productosAmodificar, int.Parse(idRem), idnotacredito);
             newW.Title = "Modificar Nota de Crédito";
@@ -174,19 +228,34 @@ namespace wpfFamiliaBlanco.Entradas
                     foreach (var producto in newW.productosparametro)
                     {
                         String sql = "UPDATE productos_has_remitos SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idRemito = '" + idRemito + "'";
-                        conexion.operaciones(sql);
+                            conexion.operaciones(sql);
                     }
 
+                    //update stock
+                        foreach (var item in newW.itemsNC)
+                        {
+                            String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                            conexion.operaciones(updatestock);
+                        }
 
-                }
+
+                    }
                 loadLtsNCRemitos();
+            }
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione una nota de credito a modificar");
             }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            try
+                try
             {
+                DataRow selectedDataRow = ((DataRowView)ltsRemitos.SelectedItem).Row;
                 String idremi="";
 
 
@@ -203,6 +272,10 @@ namespace wpfFamiliaBlanco.Entradas
 
                         String consulta = "UPDATE productos_has_remitos SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[3] + "' where FK_idProducto = '" + (int)productos.Rows[i].ItemArray[2] + "' and FK_idRemito = '" + idremi + "'";
                         conexion.operaciones(consulta);
+
+
+                        String updatestock = "UPDATE productos SET stock = stock +'" + (int)productos.Rows[i].ItemArray[3] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[2] + "'";
+                        conexion.operaciones(updatestock);
                     }
           
 
@@ -216,6 +289,13 @@ namespace wpfFamiliaBlanco.Entradas
                     ltsRemitos.Items.Refresh();
                    loadLtsNCRemitos();
                     ltsRemitos.SelectedIndex = 0;
+                }
+
+                if (ltsRemitos.Items.Count <= 0)
+                {
+                    txtfecha.Text = "";
+                    txtnroremito.Text = "";
+                    txtproveedor.Text = "";
                 }
 
             }
@@ -251,6 +331,58 @@ namespace wpfFamiliaBlanco.Entradas
             ltsRemitos.DisplayMemberPath = "idNotaCredito";
             ltsRemitos.SelectedValuePath = "idNotaCredito";
             ltsRemitos.SelectedIndex = 0;
+            bandera = false;
+            seleccioneParaFiltrar();
+            bandera = true;
+        }
+
+        private void LoadComboProveedor()
+        {
+            String consulta4 = "SELECT nombre, idProveedor FROM proveedor";
+            conexion.Consulta(consulta4, combo: cmbProveedores1);
+            cmbProveedores1.DisplayMemberPath = "nombre";
+            cmbProveedores1.SelectedValuePath = "idProveedor";
+            cmbProveedores1.SelectedIndex = -1;
+  
+        }
+
+        private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            if (bandera == true) 
+            {
+             
+                String id = cmbProveedores1.SelectedValue.ToString();
+                MessageBox.Show("" + id);
+                String sql = "select distinct n.idNotaCredito from remito r, ordencompra o, proveedor p, notacredito n where   o.FK_idProveedor = '" + id + "' and o.idOrdenCompra = r.FK_idOC   and n.FK_idremitos  = r.idremitos";
+                conexion.Consulta(sql, ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "idNotaCredito";
+                ltsRemitos.SelectedValuePath = "idNotaCredito";
+                ltsRemitos.SelectedIndex = 0;
+                // loadDGVproductosRemitos();
+            }
+
+
+
+        }
+
+        private void seleccioneParaFiltrar()
+        {
+            cmbProveedores1.Text = "--Seleccione para filtrar--";
+            
+        }
+
+        private void txtnroremito_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Busquedas de productos.
+            DataTable productos = new DataTable();
+            String consulta;
+            consulta = "SELECT * FROM notacredito WHERE idNotaCredito LIKE '%' @valor '%' and FK_idremitos IS NOT NULL";
+            productos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
+            ltsRemitos.ItemsSource = productos.AsDataView();
+           
+
+        
         }
     }
 }

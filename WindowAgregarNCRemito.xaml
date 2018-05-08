@@ -6,19 +6,51 @@
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         mc:Ignorable="d"
         Title="WindowAgregarNCRemito" Height="450" Width="1252.86">
+    <Window.Resources>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FF232222">
-        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="367,48,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="42,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
-        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="133" Margin="41,159,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
-        <Label Content="Remitos" HorizontalAlignment="Left" Margin="379,128,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
-        <DataGrid x:Name="DgvProductosRemitos" HorizontalAlignment="Left" Height="110" Margin="474,64,0,0" VerticalAlignment="Top" Width="293"/>
-        <Label Content="Productos Remito" HorizontalAlignment="Left" Margin="647,32,0,0" VerticalAlignment="Top" Height="39" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
-        <DataGrid x:Name="dgvProductosNCRemito" HorizontalAlignment="Left" Height="110" Margin="851,64,-352,0" VerticalAlignment="Top" Width="293"/>
-        <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="997,32,-356,0" VerticalAlignment="Top" Height="39" Width="151" FontSize="14"/>
-        <Button x:Name="btnEliminarProductoNC" Content="&lt;" HorizontalAlignment="Left" Margin="790,132,-34,0" VerticalAlignment="Top" Width="36" Height="22" Style="{DynamicResource botonCerrarSesion}" Click="btnEliminarProductoNC_Click"/>
-        <Button x:Name="btnAgregarProductoNC" Content="&gt;" HorizontalAlignment="Left" Margin="790,80,-34,0" VerticalAlignment="Top" Width="36" Height="22" Background="Black" Style="{DynamicResource botonCerrarSesion}" Click="btnAgregarProductoNC_Click"/>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="1069,246,-352,0" VerticalAlignment="Top" Width="75" Height="23" Style="{DynamicResource agregar}" Click="btnAceptar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="1069,295,-352,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCancelar_Click"/>
+        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="133" Margin="38,212,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
+        <Label Content="Remitos" HorizontalAlignment="Left" Margin="376,188,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
+        <DataGrid x:Name="DgvProductosRemitos" HorizontalAlignment="Left" Height="110" Margin="472,156,0,0" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Productos Remito" HorizontalAlignment="Left" Margin="645,124,0,0" VerticalAlignment="Top" Height="39" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
+        <DataGrid x:Name="dgvProductosNCRemito" HorizontalAlignment="Left" Height="110" Margin="849,156,0,0" VerticalAlignment="Top" Width="293"/>
+        <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="995,124,0,0" VerticalAlignment="Top" Height="39" Width="151" FontSize="14"/>
+        <Button x:Name="btnEliminarProductoNC" Content="&lt;" HorizontalAlignment="Left" Margin="788,224,0,0" VerticalAlignment="Top" Width="36" Height="22" Style="{DynamicResource botonCerrarSesion}" Click="btnEliminarProductoNC_Click"/>
+        <Button x:Name="btnAgregarProductoNC" Content="&gt;" HorizontalAlignment="Left" Margin="788,172,0,0" VerticalAlignment="Top" Width="36" Height="22" Background="Black" Style="{DynamicResource botonCerrarSesion}" Click="btnAgregarProductoNC_Click"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="1071,302,0,0" VerticalAlignment="Top" Width="75" Height="23" Style="{DynamicResource agregar}" Click="btnAceptar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="1071,348,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCancelar_Click"/>
+        <ComboBox x:Name="cmbProveedores1" HorizontalAlignment="Left" Height="23" Margin="41,76,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged" IsEditable="True"/>
+        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="41,188,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
+        <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,125,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° remito"/>
+        <TextBox x:Name="txtnroremito" HorizontalAlignment="Left" Height="23" Margin="41,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395" TextChanged="txtnroremito_TextChanged"/>
+        <Label x:Name="lblProveedor_Copy2" Width="93" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="675,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha remito"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="23" Margin="472,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293"/>
 
     </Grid>
 </Window>
