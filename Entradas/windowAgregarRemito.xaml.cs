@@ -82,7 +82,10 @@ namespace wpfFamiliaBlanco.Entradas
             ejecuta = true;
             dgvProductosOC.IsReadOnly = true;
             dgvProductosRemito.IsReadOnly = true;
-           
+
+            //cambios diseño batta
+            lblWindowTitle.Content = "Modificar Remito";
+
         }
         private void backupStock(List<Producto> productosRemito)
         {
