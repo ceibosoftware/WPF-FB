@@ -186,6 +186,7 @@ namespace wpfFamiliaBlanco
          
         }
 
+
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -482,3 +483,5 @@ namespace wpfFamiliaBlanco
         }
     }
 }
+
+

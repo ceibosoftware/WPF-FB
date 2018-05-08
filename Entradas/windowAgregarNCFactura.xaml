@@ -5,32 +5,120 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
         mc:Ignorable="d"
-        Title="windowAgregarNCFactura" Height="394.4" Width="1226.999">
-    <Grid Background="#FF171717" Width="1227" Margin="0,0,-8,-5">
+        Title="windowAgregarNCFactura" Height="490" Width="1030">
+    <Window.Resources>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FF232222" Width="1090" Margin="0,0,-8,-5" Height="650">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="363,80,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="396"/>
-        <ListBox x:Name="ltsfacturas" HorizontalAlignment="Left" Height="133" Margin="38,190,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsfacturas_SelectionChanged"/>
-        <Label Content="Facturas" HorizontalAlignment="Left" Margin="376,159,0,0" VerticalAlignment="Top" Height="37" Width="62" FontSize="14"/>
-        <DataGrid x:Name="DgvProductosFactur" HorizontalAlignment="Left" Height="110" Margin="474,64,0,0" VerticalAlignment="Top" Width="293"/>
-        <Label Content="Productos Factura" HorizontalAlignment="Left" Margin="647,32,0,0" VerticalAlignment="Top" Height="39" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
-        <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="110" Margin="851,64,0,0" VerticalAlignment="Top" Width="293"/>
-        <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="997,32,0,0" VerticalAlignment="Top" Height="39" Width="151" FontSize="14"/>
-        <Button x:Name="btnEliminarProductoNC" Content="&lt;" HorizontalAlignment="Left" Margin="790,132,0,0" VerticalAlignment="Top" Width="36" Height="22" Style="{DynamicResource botonCerrarSesion}" Click="btnEliminarProductoNC_Click"/>
-        <Button x:Name="btnAgregarProductoNC" Content="&gt;" HorizontalAlignment="Left" Margin="790,80,0,0" VerticalAlignment="Top" Width="36" Height="22" Click="btnAgregarProductoNC_Click" Background="Black" Style="{DynamicResource botonCerrarSesion}"/>
-        <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="24" Margin="700,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
-        <Label Content="Total NC" HorizontalAlignment="Left" Margin="832,204,0,0" VerticalAlignment="Top" Height="30" Width="64" FontSize="14"/>
-        <TextBox x:Name="txtTipoCambio" HorizontalAlignment="Left" Height="24" Margin="480,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
-        <Label Content="Tipo Cambio" HorizontalAlignment="Left" Margin="590,268,0,0" VerticalAlignment="Top" Height="28" Width="92" FontSize="14"/>
-        <TextBox x:Name="txtIVA" HorizontalAlignment="Left" Height="24" Margin="700,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
-        <Label Content="IVA" HorizontalAlignment="Left" Margin="864,268,0,0" VerticalAlignment="Top" Height="32" Width="32" FontSize="14"/>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="1069,246,0,0" VerticalAlignment="Top" Width="75" Height="23" Style="{DynamicResource agregar}" Click="btnAceptar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="1069,295,0,0" VerticalAlignment="Top" Width="75" Click="btnCancelar_Click" Height="23"/>
-        <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="24" Margin="480,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
-        <Label Content="Subtotal NC" HorizontalAlignment="Left" Margin="590,206,0,0" VerticalAlignment="Top" Height="30" Width="90" FontSize="14"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="391.528" Margin="18,37,0,0" VerticalAlignment="Top" Width="992.5" CornerRadius="5" Opacity="0.5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Label Content="Proveedor" HorizontalAlignment="Left" Margin="354,49,0,0" VerticalAlignment="Top" Height="27" Width="74" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390"/>
+        <ListBox x:Name="ltsfacturas" HorizontalAlignment="Left" Height="133" Margin="38,125,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="ltsfacturas_SelectionChanged"/>
+        <Label Content="Facturas" HorizontalAlignment="Left" Margin="366,98,0,0" VerticalAlignment="Top" Height="27" Width="62" FontSize="14" RenderTransformOrigin="0.499,0.547"/>
+        <DataGrid x:Name="DgvProductosFactur" HorizontalAlignment="Left" Height="110" Margin="38,288.5,0,0" VerticalAlignment="Top" Width="390"/>
+        <Label Content="Productos Factura" HorizontalAlignment="Left" Margin="38,258,0,0" VerticalAlignment="Top" Height="27" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
+        <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="110" Margin="486.008,288.5,0,0" VerticalAlignment="Top" Width="390"/>
+        <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="723.008,258,0,0" VerticalAlignment="Top" Height="27" Width="151" FontSize="14"/>
+        <Button x:Name="btnEliminarProductoNC" Content="&lt;" HorizontalAlignment="Left" Margin="438.504,356.206,0,0" VerticalAlignment="Top" Width="36" Height="22" Style="{DynamicResource botonCerrarSesion}" Click="btnEliminarProductoNC_Click" Foreground="White"/>
+        <Button x:Name="btnAgregarProductoNC" Content="&gt;" HorizontalAlignment="Left" Margin="438.504,304.206,0,0" VerticalAlignment="Top" Width="36" Height="22" Click="btnAgregarProductoNC_Click" Background="Black" Style="{DynamicResource botonCerrarSesion}" Foreground="White"/>
+        <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="24" Margin="486.008,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+        <Label Content="Total NC" HorizontalAlignment="Left" Margin="617.008,149,0,0" VerticalAlignment="Top" Height="27" Width="64" FontSize="14"/>
+        <TextBox x:Name="txtTipoCambio" HorizontalAlignment="Left" Height="24" Margin="487.008,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+        <Label Content="Tipo Cambio" HorizontalAlignment="Left" Margin="589.008,99.107,0,0" VerticalAlignment="Top" Height="28" Width="92" FontSize="14"/>
+        <TextBox x:Name="txtIVA" HorizontalAlignment="Left" Height="24" Margin="487.008,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+        <Label Content="IVA" HorizontalAlignment="Left" Margin="649.008,200,0,0" VerticalAlignment="Top" Height="27" Width="32" FontSize="14"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="904.765,324.5,0,0" VerticalAlignment="Top" Width="75" Height="23" Style="{DynamicResource agregar}" Click="btnAceptar_Click" Foreground="White"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="904.765,373.5,0,0" VerticalAlignment="Top" Width="75" Click="btnCancelar_Click" Height="23" Style="{DynamicResource Cancelar}" Foreground="White"/>
+        <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="24" Margin="487.008,76.107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+        <Label Content="Subtotal NC" HorizontalAlignment="Left" Margin="591.008,46,0,0" VerticalAlignment="Top" Height="30" Width="90" FontSize="14"/>
+        <Label Content="Agregar Nota de Crédito " HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="27" Width="170" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <Border Height="175.008" Width="175.618" BorderThickness="1,1,5,1" BorderBrush="#FF004E6B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="698.39,75.992,215.992,399" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="155.008" TextWrapping="Wrap" VerticalAlignment="Top" Width="155.618" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="742.008,49,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
 
     </Grid>
 </Window>
