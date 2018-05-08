@@ -7,22 +7,59 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="DevolucionRemito" Width="1014" Height="405">
+    <Page.Resources>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="89*"/>
             <ColumnDefinition Width="56*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="406,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="53,62,0,0" VerticalAlignment="Top" Height="22" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
-        <Label Content="Remitos" HorizontalAlignment="Left" Margin="390,100,0,0" VerticalAlignment="Top" Height="36" Width="80" FontSize="14"/>
-        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="134" Margin="53,124,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
-        <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="496,63,0,0" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
-        <Label x:Name="Productos_Remito" Content="" HorizontalAlignment="Left" Margin="203,28,0,0" VerticalAlignment="Top" Height="34" Width="72" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
-        <Label Content="Productos remito" HorizontalAlignment="Left" Margin="175,34,0,0" VerticalAlignment="Top" Height="34" Width="130" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="396,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="41,179,0,0" VerticalAlignment="Top" Height="22" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
+        <Label Content="Notas de crédito" HorizontalAlignment="Left" Margin="327,227,0,0" VerticalAlignment="Top" Height="36" Width="114" FontSize="14"/>
+        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="134" Margin="41,251,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
+        <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="459,252,0,0" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
+        <Label x:Name="Productos_Remito" Content="" HorizontalAlignment="Left" Margin="166,217,0,0" VerticalAlignment="Top" Height="34" Width="72" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
+        <Label Content="Productos NC remito" HorizontalAlignment="Left" Margin="114,227,0,0" VerticalAlignment="Top" Height="34" Width="153" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
         <Button x:Name="btnAgregar" Content="Agregar NC" HorizontalAlignment="Left" Margin="282,248,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="23" Grid.Column="1" Style="{DynamicResource agregar}"/>
         <Button x:Name="btnModificar" Content="Modificar NC" HorizontalAlignment="Left" Margin="282,299,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnModificar_Click"/>
         <Button x:Name="btnEliminar" Content="Eliminar NC" HorizontalAlignment="Left" Margin="282,348,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnEliminar_Click"/>
-        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="53,100,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
+        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="41,218,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
+        <ComboBox x:Name="cmbProveedores1" HorizontalAlignment="Left" Height="23" Margin="41,76,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged" IsEditable="True"/>
+        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,104,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° remito"/>
+        <TextBox x:Name="txtnroremito" HorizontalAlignment="Left" Height="23" Margin="41,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395" TextChanged="txtnroremito_TextChanged"/>
+        <Label x:Name="lblProveedor_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="114,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy3" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="119,108,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy4" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="119,159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Remito" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="459,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414"/>
+        <TextBox x:Name="txtproveedor" HorizontalAlignment="Left" Height="23" Margin="459,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtremito" HorizontalAlignment="Left" Height="23" Margin="459,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>
