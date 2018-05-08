@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace wpfFamiliaBlanco.Entradas
 {
     /// <summary>
@@ -28,6 +29,7 @@ namespace wpfFamiliaBlanco.Entradas
         DataTable Pagadocheque;
         DateTime fecha;
         bool bandera = false;
+        pageEntradas pe = new pageEntradas();
         public PagoProveedores()
         {
             InitializeComponent();
@@ -68,13 +70,18 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (newW.DialogResult == true)
             {
+
                 String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idCuota)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + 0  + "','" + totalCuota + "','" + idcuota + "')";
                 conexion.operaciones(sql);
 
                 String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
                 conexion.operaciones(sq2l);
 
+          
                 MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK);
+                pageEntradas pe = new pageEntradas();
+                
+                
 
 
             }

@@ -23,16 +23,41 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class MainWindow : Window
     {
+        CRUD conexion = new CRUD();
         pageProductos productos = new pageProductos();
 
         public MainWindow()
         {
             InitializeComponent();
             //loadTimer();
+            notificaciones();
         }
 
-        
-        private void btnUsuarios_Click(object sender, RoutedEventArgs e)
+        public void notificaciones()
+        {
+            String valor = "SELECT COUNT(*) FROM cuotas WHERE estado = '" + 0 + "'";
+            String CantidadPagos = "";
+
+            CantidadPagos = conexion.ValorEnVariable(valor).ToString();
+
+            if (CantidadPagos == "")
+            {
+                lblnotificaciones.Visibility = Visibility.Collapsed;
+            }
+            else if (CantidadPagos != "")
+            {
+                lblnotificaciones.Visibility = Visibility.Visible;
+                lblnotificaciones.Content = "";
+                lblnotificaciones.Content = CantidadPagos;
+
+                ToolTip tt = new ToolTip();
+                tt.FontSize = 15;
+
+                tt.Content = CantidadPagos + " pagos próximos a vencer.";
+                lblnotificaciones.ToolTip = tt;
+            }
+        }
+                private void btnUsuarios_Click(object sender, RoutedEventArgs e)
         {
 
             frameInicio.Content = new pageUsuarios();  //frame inicio es el cuadro donde se actualizan las pantallas en la ventana
@@ -83,6 +108,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
 
             #region Fade in
             //animaciones
@@ -117,6 +144,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
 
 
             #region Fade in
@@ -152,6 +181,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Collapsed;
+            lblnotificaciones.Visibility = Visibility.Collapsed;
         }
 
         private void btnSalidas_Click(object sender, RoutedEventArgs e)
@@ -166,6 +197,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("BotonStylePanel") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
@@ -178,7 +211,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("BotonStylePanel") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
-
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();
@@ -216,7 +250,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("BotonStylePanel") as Style;
-
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();

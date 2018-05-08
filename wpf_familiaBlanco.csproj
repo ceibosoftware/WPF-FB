@@ -528,5 +528,8 @@
   <ItemGroup>
     <Resource Include="fondoBlur.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Entradas\notificaton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

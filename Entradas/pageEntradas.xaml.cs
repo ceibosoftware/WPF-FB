@@ -21,11 +21,46 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class pageEntradas : Page
     {
+    
+         CRUD conexion = new CRUD();
+        MainWindow mw = new MainWindow();
         public pageEntradas()
         {
             InitializeComponent();
             frameInicioEntradas.Content = new Ordenes();
             btnOrdenes.Style = FindResource("botonTabPressed") as Style;
+            notificaciones();
+        }
+
+      
+        public void refrescarpagina()
+        {
+          
+
+        }
+        public void notificaciones()
+        {
+            String valor = "SELECT COUNT(*) FROM cuotas WHERE estado = '" + 0 + "'";
+            String CantidadPagos = "";
+
+            CantidadPagos = this.conexion.ValorEnVariable(valor).ToString();
+
+            if (CantidadPagos == "")
+            {
+                lblbotificaciones.Content = 0;
+            }
+            else if (CantidadPagos != "")
+            {
+                lblbotificaciones.Visibility = Visibility.Visible;
+                lblbotificaciones.Content = "";
+                lblbotificaciones.Content = CantidadPagos;
+
+                ToolTip tt = new ToolTip();
+                tt.FontSize = 15;
+
+                tt.Content = CantidadPagos + " pagos próximos a vencer.";
+                lblbotificaciones.ToolTip = tt;
+            }
         }
 
         private void btnFacturas_Click(object sender, RoutedEventArgs e)

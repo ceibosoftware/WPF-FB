@@ -45,6 +45,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.IsReadOnly = true;
             LoadDgvNC();
             SetearColumnas();
+            ltsNC.SelectedIndex = 0;
 
         }
 
@@ -129,11 +130,11 @@ namespace wpfFamiliaBlanco.Entradas
         }
         public void loadLtsNotaCredito()
         {
-            String consulta = "select * from notacredito FK_idfactura";
+            String consulta = "select * from notacredito where FK_idfactura IS NOT NULL";
             conexion.Consulta(consulta, tabla: ltsNC);
             ltsNC.DisplayMemberPath = "idNotaCredito";
             ltsNC.SelectedValuePath = "idNotaCredito";
-            ltsNC.SelectedIndex = 0;
+            ltsNC.SelectedIndex = 1;
         }
 
 

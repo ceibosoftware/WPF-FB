@@ -132,5 +132,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="17" Margin="778,45,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5"/>
+        <Label x:Name="lblbotificaciones" Content="" HorizontalAlignment="Left" Margin="775,40,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black"/>
     </Grid>
 </Page>

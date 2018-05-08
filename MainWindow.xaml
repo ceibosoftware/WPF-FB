@@ -1066,6 +1066,9 @@
         </Button>
         <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="25" Margin="401,0,0,0" VerticalAlignment="Top" Width="10.125"/>
         <Rectangle Fill="#FF302E2E" HorizontalAlignment="Left" Height="32" Margin="1259.541,0,0,0" VerticalAlignment="Top" Width="10.125"/>
+        <Border x:Name="nube" BorderThickness="1" HorizontalAlignment="Left" Height="18" Margin="151,278,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5">
+            <Label x:Name="lblnotificaciones" Content="" HorizontalAlignment="Left" Margin="-4,-5" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black"/>
+        </Border>
 
 
     </Grid>
