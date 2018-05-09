@@ -19,6 +19,7 @@ using wpfFamiliaBlanco.Entradas;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Windows.Media.Effects;
 
 namespace wpfFamiliaBlanco
 {
@@ -86,8 +87,12 @@ namespace wpfFamiliaBlanco
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
+          
+           
             var newW = new windowAgregarOC();
+          
             newW.ShowDialog();
+
             if (newW.DialogResult == true && !newW.agregado)
             {
                 //INSERTAR OC

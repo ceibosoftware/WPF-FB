@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         xmlns:Properties="clr-namespace:wpfFamiliaBlanco.Properties" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="wpfFamiliaBlanco.MainWindow"
         mc:Ignorable="d"
-        Title="Bodega Familia Blanco" Height="611" Width="1276.333" Initialized="cargar_pageInicio" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed">
+        Title="Bodega Familia Blanco" Height="611" Width="1276.333" Initialized="cargar_pageInicio" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closed="Window_Closed" Icon="B- Familia Blanco NNFIXED.png">
+
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -1070,7 +1071,7 @@
             <Border.Effect>
                 <DropShadowEffect Opacity="0.4"/>
             </Border.Effect>
-            <Label x:Name="lblnotificaciones" Content="" HorizontalAlignment="Left" Margin="-1.5,-5,-9,-5" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black" Width="23.5"/>
+            <Label x:Name="lblnotificaciones" Content="" HorizontalAlignment="Center" Margin="-7.25,-5.98,-6.75,-5.98" VerticalAlignment="Center" Background="{x:Null}" Foreground="Black" Width="27" FontWeight="Bold" Height="25.96" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Border>
 
 

@@ -132,11 +132,11 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Border BorderThickness="2" HorizontalAlignment="Left" Height="17" Margin="778,45,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5" BorderBrush="#FFC1C0C0">
+        <Border BorderThickness="2" HorizontalAlignment="Left" Height="17" Margin="787,45,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5" BorderBrush="#FFC1C0C0">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.3"/>
             </Border.Effect>
         </Border>
-        <Label x:Name="lblbotificaciones" Content="" HorizontalAlignment="Left" Margin="778,40,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black"/>
+        <Label x:Name="lblbotificaciones" Content="" HorizontalAlignment="Left" Margin="782,40.5,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black" Width="27" FontWeight="Bold" FontStretch="SemiCondensed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
     </Grid>
 </Page>

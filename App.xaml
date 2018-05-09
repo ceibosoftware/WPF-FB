@@ -68,6 +68,8 @@
                 </Setter>
             </Style>
 
+            
+
             <Style x:Key="agregar" TargetType="{x:Type Button}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
                 <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
