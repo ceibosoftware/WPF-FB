@@ -368,7 +368,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void seleccioneParaFiltrar()
         {
-            cmbProveedores1.Text = "--Seleccione para filtrar--";
+            cmbProveedores1.Text = "Seleccione para filtrar";
             
         }
 

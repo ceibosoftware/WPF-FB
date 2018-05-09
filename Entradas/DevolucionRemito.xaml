@@ -35,31 +35,49 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Background="#FF171717">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="89*"/>
             <ColumnDefinition Width="56*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Fecha" HorizontalAlignment="Left" Margin="396,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.739,0.249" Height="36" Width="62" FontSize="14"/>
-        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="41,179,0,0" VerticalAlignment="Top" Height="22" Width="395" SelectedDateChanged="dpFecha_SelectedDateChanged"/>
-        <Label Content="Notas de crédito" HorizontalAlignment="Left" Margin="327,227,0,0" VerticalAlignment="Top" Height="36" Width="114" FontSize="14"/>
-        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="134" Margin="41,251,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsRemitos_SelectionChanged"/>
-        <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="459,252,0,0" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="372.833" Margin="16,17.667,0,0" VerticalAlignment="Top" Width="980.719" CornerRadius="5" Opacity="0.5" Grid.ColumnSpan="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="237,109.667,0,0" VerticalAlignment="Top" Height="22" Width="171" SelectedDateChanged="dpFecha_SelectedDateChanged" Style="{DynamicResource DatePickerCambioForeground}"/>
+        <ListBox x:Name="ltsRemitos" HorizontalAlignment="Left" Height="165" Margin="41,158,0,0" VerticalAlignment="Top" Width="367" SelectionChanged="ltsRemitos_SelectionChanged"/>
+        <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="165" Margin="432,157.667,0,0" VerticalAlignment="Top" Width="365" Grid.ColumnSpan="2"/>
         <Label x:Name="Productos_Remito" Content="" HorizontalAlignment="Left" Margin="166,217,0,0" VerticalAlignment="Top" Height="34" Width="72" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
-        <Label Content="Productos NC remito" HorizontalAlignment="Left" Margin="114,227,0,0" VerticalAlignment="Top" Height="34" Width="153" FontSize="14" RenderTransformOrigin="1.469,1" Grid.Column="1"/>
-        <Button x:Name="btnAgregar" Content="Agregar NC" HorizontalAlignment="Left" Margin="282,248,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="23" Grid.Column="1" Style="{DynamicResource agregar}"/>
-        <Button x:Name="btnModificar" Content="Modificar NC" HorizontalAlignment="Left" Margin="282,299,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnModificar_Click"/>
-        <Button x:Name="btnEliminar" Content="Eliminar NC" HorizontalAlignment="Left" Margin="282,348,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Click="btnEliminar_Click"/>
-        <Button x:Name="btnVertodo" Content="VER TODO" HorizontalAlignment="Left" Margin="41,218,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click"/>
-        <ComboBox x:Name="cmbProveedores1" HorizontalAlignment="Left" Height="23" Margin="41,76,0,0" VerticalAlignment="Top" Width="395" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged" IsEditable="True"/>
-        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
-        <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="306,104,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° remito"/>
-        <TextBox x:Name="txtnroremito" HorizontalAlignment="Left" Height="23" Margin="41,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="395" TextChanged="txtnroremito_TextChanged"/>
-        <Label x:Name="lblProveedor_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="114,57,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha" Grid.Column="1"/>
-        <Label x:Name="lblProveedor_Copy3" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="119,108,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor" Grid.Column="1"/>
-        <Label x:Name="lblProveedor_Copy4" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="119,159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Remito" Grid.Column="1"/>
-        <TextBox x:Name="txtfecha" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="459,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414"/>
-        <TextBox x:Name="txtproveedor" HorizontalAlignment="Left" Height="23" Margin="459,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtremito" HorizontalAlignment="Left" Height="23" Margin="459,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAgregar" Content="+ NC" HorizontalAlignment="Left" Margin="273,257.331,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="23" Grid.Column="1" Style="{DynamicResource agregar}" Foreground="White" ToolTip="Agregar Nota de Crédito"/>
+        <Button x:Name="btnModificar" Content="/ NC" HorizontalAlignment="Left" Margin="273,301.667,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource Modificar}" Click="btnModificar_Click" Foreground="White" ToolTip="Modificar Nota de Crédito"/>
+        <Button x:Name="btnEliminar" Content="- NC" HorizontalAlignment="Left" Margin="273,344,0,0" VerticalAlignment="Top" Width="75" Height="23" Grid.Column="1" Style="{DynamicResource Cancelar}" Click="btnEliminar_Click" Foreground="White" ToolTip="Eliminar Nota de Crédito"/>
+        <Button x:Name="btnVertodo" Content="Ver todo" HorizontalAlignment="Left" Margin="41,334,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click" ToolTip="Ver todo (Actualizar)" Foreground="White"/>
+        <ComboBox x:Name="cmbProveedores1" HorizontalAlignment="Left" Height="23" Margin="41,63.5,0,0" VerticalAlignment="Top" Width="365" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged" IsEditable="True"/>
+        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="274,38.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="80,86.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° remito"/>
+        <TextBox x:Name="txtnroremito" HorizontalAlignment="Left" Height="23" Margin="41,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" TextChanged="txtnroremito_TextChanged"/>
+        <Label x:Name="lblProveedor_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="42.614,38.5,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy3" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="471,39.167,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
+        <Label x:Name="lblProveedor_Copy4" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="42.614,85.167,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Remito" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="23" Margin="3.614,63.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtproveedor" HorizontalAlignment="Left" Height="23" Margin="432,63.167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <TextBox x:Name="txtremito" HorizontalAlignment="Left" Height="23" Margin="432,109.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblProveedor_Copy5" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="274,85.167,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha"/>
+        <Label x:Name="lblProveedor_Copy6" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="274,133,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nota de Crédito"/>
+        <Label x:Name="lblProveedor_Copy7" Width="331.886" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="465.114,132.667,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos de Nota de Crédito de Remito" Grid.ColumnSpan="2"/>
+        <Border Height="170.5" Width="149.276" BorderThickness="1,1,5,1" BorderBrush="#FF006B3F" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="198.004,63.167,44.334,171.333" Grid.Column="1" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="150.5" TextWrapping="Wrap" VerticalAlignment="Top" Width="129.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="216,38.167,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
     </Grid>
 </Page>

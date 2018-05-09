@@ -50,6 +50,7 @@ namespace wpfFamiliaBlanco.Entradas
             itemsFact.Clear();
             txtTotal.IsReadOnly = true;
             LoadDgvProdFactura();
+            txtProveedor.IsReadOnly = true;
         }
 
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
@@ -68,7 +69,9 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.Text = total;
             txtIVA.Text = iva;
             txtTipoCambio.Text = cambio;
-
+            dgvProductosNC.IsReadOnly = true;
+            DgvProductosFactur.IsReadOnly = true;
+            txtProveedor.IsReadOnly = true;
             LoadDgvNC(itemsNC);
             LoadDgvProdFactura();
         }

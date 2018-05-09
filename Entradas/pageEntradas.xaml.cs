@@ -115,12 +115,16 @@ namespace wpfFamiliaBlanco
 
         private void btnDevolucion_Click_1(object sender, RoutedEventArgs e)
         {
+           
+
             frameInicioEntradas.Content = new DevolucionProductos();
             btnOrdenes.Style = FindResource("botonTab") as Style;
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;
             btnPagoProveedor.Style = FindResource("botonTab") as Style;
             btnDevolucionProductos.Style = FindResource("botonTabPressed") as Style;
+            
+          
         }
     }
 }

@@ -23,6 +23,8 @@ namespace wpfFamiliaBlanco.Entradas
         public DevolucionProductos()
         {
             InitializeComponent();
+            frameDevoluciones.Content = new DevolucionRemito();
+            btnRemito.Style = FindResource("botonTabPressed") as Style;
         }
 
     
