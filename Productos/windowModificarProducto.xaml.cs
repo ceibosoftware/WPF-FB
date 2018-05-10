@@ -26,7 +26,7 @@ namespace wpfFamiliaBlanco
         private List<elemento> items = new List<elemento>();
         private Boolean aceptar = false;
         CRUD conexion = new CRUD();
-
+        public bool venta;
         public bool Aceptar { get => aceptar; set => aceptar = value; }
         public List<elemento> Items { get => items; set => items = value; }
 
@@ -37,7 +37,7 @@ namespace wpfFamiliaBlanco
             LoadListaComboCategoria();           
             LlenarComboFiltro();
         }
-        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario)
+        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario, bool venta)
         {
             InitializeComponent();
             LoadListaComboCategoria();
@@ -51,6 +51,14 @@ namespace wpfFamiliaBlanco
             LlenarComboFiltro();
             this.Items = items;
             LoadListaProv();
+            if (venta)
+            {
+                chkVenta.IsChecked = true;
+            }
+            else
+            {
+                chkVenta.IsChecked = false;
+            }
         }
         private void LoadListaComboCategoria()
         {
@@ -211,6 +219,14 @@ namespace wpfFamiliaBlanco
         {
             if (validar())
             {
+                if ((bool)chkVenta.IsChecked)
+                {
+                    venta = true;
+                }
+                else
+                {
+                    venta = false;
+                }
                 Aceptar = true;
                 this.Close();
             }

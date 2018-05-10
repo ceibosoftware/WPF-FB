@@ -1253,6 +1253,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+            <CheckBox x:Name="chkVenta" Content="Producto para venta" Margin="803,303,25,142"/>
         </Border>
         <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="363.167" Margin="52.222,139.833,0,0" VerticalAlignment="Top" Width="364.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsProductos_SelectionChanged" Style="{DynamicResource ListBoxStyle1}"/>
         <ListBox x:Name="ltsProveedores" HorizontalAlignment="Left" Height="124.667" Margin="438.223,139.833,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14"/>
