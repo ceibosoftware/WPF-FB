@@ -40,8 +40,9 @@ namespace wpfFamiliaBlanco
             LoadListaComboProveedor();
             ejecutar = true;
             seleccioneParaFiltrar();
-           
-           
+            ColumnasDGVProductos();
+
+
         }
 
         private void loadlistaOC()
@@ -83,7 +84,28 @@ namespace wpfFamiliaBlanco
             cmbProveedores.SelectedValuePath = "idProveedor";
             cmbProveedores.SelectedIndex = -1;
         }
+        private void ColumnasDGVProductos()
+        {
+            
+            dgvProductos.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductos.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductos.Columns.Add(textColumn2);
+            DataGridTextColumn textColumn3 = new DataGridTextColumn();
+            textColumn3.Header = "Precio Unitario";
+            textColumn3.Binding = new Binding("PUPagado");
+            dgvProductos.Columns.Add(textColumn3);
+            DataGridTextColumn textColumn4 = new DataGridTextColumn();
+            textColumn4.Header = "Subtotal";
+            textColumn4.Binding = new Binding("subtotal");
+            dgvProductos.Columns.Add(textColumn4);
 
+        }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {

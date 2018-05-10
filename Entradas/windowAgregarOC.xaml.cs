@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace wpfFamiliaBlanco.Entradas
 {
@@ -20,7 +21,6 @@ namespace wpfFamiliaBlanco.Entradas
         float total;
         public DateTime fecha;
         CRUD conexion = new CRUD();
-        int cantidadAntigua;
         public List<Producto> Productos { get => Productos; set => productos = value; }
 
         public windowAgregarOC()
@@ -30,7 +30,7 @@ namespace wpfFamiliaBlanco.Entradas
             cmbDireccion.SelectedIndex = 0;
             cmbTelefono.SelectedIndex = 0;
             dpFecha.SelectedDate = DateTime.Now;
-
+            ColumnasDGVProductos();
         }
         public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
         {
@@ -52,7 +52,7 @@ namespace wpfFamiliaBlanco.Entradas
             //Cambios de Diseño batta
             lblWindowTitle.Content = "Modificar Orden de Compra"; 
             lblWindowTitle.Width = 176;
-           
+            ColumnasDGVProductos();
         }
 
 
@@ -328,6 +328,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DialogResult = true;
             }
         }
+
         public bool validar()
         {
 
@@ -375,7 +376,6 @@ namespace wpfFamiliaBlanco.Entradas
 
 
         }
-
 
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -603,6 +603,30 @@ namespace wpfFamiliaBlanco.Entradas
 
 
         }
+
+        private void ColumnasDGVProductos()
+        {
+
+            dgvProductos.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvProductos.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Cantidad";
+            textColumn2.Binding = new Binding("cantidad");
+            dgvProductos.Columns.Add(textColumn2);
+            DataGridTextColumn textColumn3 = new DataGridTextColumn();
+            textColumn3.Header = "Precio Unitario";
+            textColumn3.Binding = new Binding("precioUnitario");
+            dgvProductos.Columns.Add(textColumn3);
+            DataGridTextColumn textColumn4 = new DataGridTextColumn();
+            textColumn4.Header = "Subtotal";
+            textColumn4.Binding = new Binding("total");
+            dgvProductos.Columns.Add(textColumn4);
+
+        }
     }
+
 }
 
