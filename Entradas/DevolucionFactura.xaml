@@ -44,15 +44,15 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="btnAgregar" Content="+ NC" HorizontalAlignment="Left" Margin="895.386,257.331,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="24" Style="{DynamicResource agregar}" Foreground="White"/>
+        <Button x:Name="btnAgregar" Content="+ NC" HorizontalAlignment="Left" Margin="895.386,257.331,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="24" Style="{DynamicResource agregar}" Foreground="White" ToolTip="Agregar Nota de Crédito"/>
         <ListBox x:Name="ltsNC" HorizontalAlignment="Left" Height="144.224" Margin="41,174,0,0" VerticalAlignment="Top" Width="365" SelectionChanged="ltsNC_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
         <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="152.224" Margin="432,63,0,0" VerticalAlignment="Top" Width="365"/>
         <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="24" Margin="432,245.224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="24" Margin="626,245.224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <TextBox x:Name="txtTipoCambio" HorizontalAlignment="Left" Height="24" Margin="432,294.224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" RenderTransformOrigin="0.488,0.583"/>
         <TextBox x:Name="txtIVA" HorizontalAlignment="Left" Height="24" Margin="626,294.224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
-        <Button x:Name="btnModificarNC" Content="/ NC" HorizontalAlignment="Left" Margin="895.386,301.667,0,0" VerticalAlignment="Top" Width="75" Height="24" Style="{DynamicResource Modificar}" Click="btnModificarNC_Click" Foreground="White"/>
-        <Button x:Name="btnEliminarNC" Content="- NC" HorizontalAlignment="Left" Margin="895.386,343,0,0" VerticalAlignment="Top" Width="75" Height="24" Style="{DynamicResource Cancelar}" Click="btnEliminarNC_Click" Foreground="White"/>
+        <Button x:Name="btnModificarNC" Content="/ NC" HorizontalAlignment="Left" Margin="895.386,301.667,0,0" VerticalAlignment="Top" Width="75" Height="24" Style="{DynamicResource Modificar}" Click="btnModificarNC_Click" Foreground="White" ToolTip="Modificar Nota de Crédito"/>
+        <Button x:Name="btnEliminarNC" Content="- NC" HorizontalAlignment="Left" Margin="895.386,343,0,0" VerticalAlignment="Top" Width="75" Height="24" Style="{DynamicResource Cancelar}" Click="btnEliminarNC_Click" Foreground="White" ToolTip="Eliminar Nota de Crédito"/>
         <Button x:Name="btnVertodo" Content="Ver todo" HorizontalAlignment="Left" Margin="41,334,0,0" VerticalAlignment="Top" Width="75" Click="btnVertodo_Click" Foreground="White"/>
         <Label x:Name="lblProveedor_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="274,149,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Notas de Crédito"/>
         <Label x:Name="lblProveedor_Copy3" Width="213" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="584,38.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos de Nota de Crédito"/>
