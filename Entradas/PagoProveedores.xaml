@@ -7,48 +7,163 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="PagoProveedores" Width="1033.66" Height="473.215">
+    <Page.Resources>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BotonStyle_crud" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true" Background="#FF4B4848" BorderThickness="0,0,3,0" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid>
+    <Grid Background="#FF171717">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="184*"/>
             <ColumnDefinition Width="333*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="ltsProximospagos" HorizontalAlignment="Left" Height="133" Margin="18,61,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsProximospagos_SelectionChanged" Grid.ColumnSpan="2"/>
-        <Label Content="Próximos pagos" HorizontalAlignment="Left" Margin="307,34,0,0" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnAgregarPago" Content="Pagar" HorizontalAlignment="Left" Margin="540,324,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Grid.Column="1"/>
-        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="540,354,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" Click="btnEliminarPago_Click"/>
-        <Label Content="Datos del pago" HorizontalAlignment="Left" Margin="222,21,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtNumeroCuota" HorizontalAlignment="Left" Height="24" Margin="79,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="lbl1" Content="Nº cuota" HorizontalAlignment="Left" Margin="209,61,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="24" Margin="79,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="lbl2" Content="Proveedor" HorizontalAlignment="Left" Margin="203,133,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtTotalCuota" HorizontalAlignment="Left" Height="24" Margin="304,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Grid.Column="1"/>
-        <Label x:Name="lbl4" Content="Total cuota" HorizontalAlignment="Left" Margin="424,69,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="-3.691"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-0.935"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <TextBox x:Name="txtTotalFactura" HorizontalAlignment="Left" Height="24" Margin="306,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="lbl5" Content="Total factura" HorizontalAlignment="Left" Margin="416,201,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="24" Margin="81,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label Content="Estado" HorizontalAlignment="Left" Margin="226,196,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1" RenderTransformOrigin="-0.647,-0.345"/>
-        <ListBox x:Name="ltsPagosReaizados" HorizontalAlignment="Left" Height="133" Margin="18,253,0,0" VerticalAlignment="Top" Width="395" SelectionChanged="ltsPagosReaizados_SelectionChanged" Grid.ColumnSpan="2"/>
-        <Label Content="Pagos realizados" HorizontalAlignment="Left" Margin="301,226,0,0" VerticalAlignment="Top" FontSize="14" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtNumeroFactura" HorizontalAlignment="Left" Height="24" Margin="305,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="lbl3" Content="Numero Factura" HorizontalAlignment="Left" Margin="393,132,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtTotalPAgo" HorizontalAlignment="Left" Height="24" Margin="79,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label Content="Total pagado" HorizontalAlignment="Left" Margin="186,272,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtTipoPago" HorizontalAlignment="Left" Height="24" Margin="306,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label Content="Forma de Pago" HorizontalAlignment="Left" Margin="399,271,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="24" Margin="81,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="fec" Content="fecha del pago" HorizontalAlignment="Left" Margin="179,328,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <TextBox x:Name="txtnumerocuotapaga" HorizontalAlignment="Left" Height="24" Margin="302,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <Label x:Name="fec_Copy" Content="N° de cuota paga" HorizontalAlignment="Left" Margin="383,328,0,0" VerticalAlignment="Top" FontSize="14" Grid.Column="1"/>
-        <Label x:Name="lbldias" Content="" HorizontalAlignment="Left" Margin="20,190,0,0" VerticalAlignment="Top" Width="284"/>
+        <Border Height="431.957" Width="979.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="26.48,18.043,27.66,23.215" Opacity="0.5" Grid.ColumnSpan="2" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <ListBox x:Name="ltsProximospagos" HorizontalAlignment="Left" Height="133" Margin="57.379,50.686,0,0" VerticalAlignment="Top" Width="360.5" SelectionChanged="ltsProximospagos_SelectionChanged" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnAgregarPago" Content="Pagar" HorizontalAlignment="Left" Margin="536.121,308.469,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Grid.Column="1" Foreground="White"/>
+        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="536.121,353.835,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" Click="btnEliminarPago_Click" Style="{DynamicResource Cancelar}" Foreground="White"/>
+        <ListBox x:Name="ltsPagosReaizados" HorizontalAlignment="Left" Height="133" Margin="57.379,211.5,0,0" VerticalAlignment="Top" Width="360.5" SelectionChanged="ltsPagosReaizados_SelectionChanged" Grid.ColumnSpan="2"/>
+        <Label x:Name="lbldias" Content="" HorizontalAlignment="Left" Margin="57,182.5,0,0" VerticalAlignment="Top" Width="284"/>
+        <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.879,23.393,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Próximos pagos" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblProveedor_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.879,186.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Pagos realizados" Grid.ColumnSpan="2"/>
+        <Border Height="326" Width="384.61" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="65,21,216.171,126.215" Opacity="0.5" Grid.Column="1" />
+        <TextBox x:Name="txtNumeroCuota" HorizontalAlignment="Left" Height="24" Margin="77,113.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="24" Margin="77,162.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtTotalCuota" HorizontalAlignment="Left" Height="24" Margin="266,113.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtTotalFactura" HorizontalAlignment="Left" Height="24" Margin="266,211.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="24" Margin="77,211.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtNumeroFactura" HorizontalAlignment="Left" Height="24" Margin="266,162.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtTotalPAgo" HorizontalAlignment="Left" Height="24" Margin="77,260.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtTipoPago" HorizontalAlignment="Left" Height="24" Margin="266,260.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="24" Margin="77,309.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtnumerocuotapaga" HorizontalAlignment="Left" Height="24" Margin="266,309.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy2" Width="360" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="77,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Datos de pago" Grid.Column="1" Background="{x:Null}" BorderBrush="#FF363535"/>
+        <Label x:Name="lbl4" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,88.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total cuota" Grid.Column="1"/>
+        <Label x:Name="lbl1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,88.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de Cuota" Grid.Column="1"/>
+        <Label x:Name="lbl2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,137.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy6" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,186.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Estado" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy7" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,235.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total pagado" Grid.Column="1"/>
+        <Label x:Name="fec" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,284.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha de pago" Grid.Column="1"/>
+        <Label x:Name="lbl3" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,137.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de factura" Grid.Column="1"/>
+        <Label x:Name="lbl5" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,186.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de factura" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy11" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,235.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de pago" Grid.Column="1"/>
+        <Label x:Name="lblProveedor_Copy12" Width="157" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="280,284.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de cuota paga" Grid.Column="1"/>
+        <Border Height="229.508" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF006B13" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="462.511,51.992,47.994,191.715" Grid.Column="1" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="485.787,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
     </Grid>
 </Page>
