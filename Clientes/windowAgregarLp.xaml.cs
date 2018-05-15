@@ -31,8 +31,8 @@ namespace wpfFamiliaBlanco.Clientes
         public windowAgregarLp()
         {
             InitializeComponent();
-         loaddgvp();
-           loaddgvlp();
+            loaddgvp();
+            loaddgvlp();
             camplimit();
             
             
@@ -183,7 +183,7 @@ namespace wpfFamiliaBlanco.Clientes
             
             try
             {
-                String consultaProducto = "SELECT * from productos";
+                String consultaProducto = "SELECT * from productos where venta = true";
                 DataTable productos = conexion.ConsultaParametrizada(consultaProducto);
                 for (int i = 0; i < productos.Rows.Count; i++)
                 {

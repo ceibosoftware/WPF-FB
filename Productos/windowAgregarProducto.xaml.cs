@@ -28,7 +28,7 @@ namespace wpfFamiliaBlanco
         private  List<elemento> items = new List<elemento>();
         private Boolean aceptar = false;
         CRUD conexion = new CRUD();
-
+        public bool venta;
         public List<elemento> Items { get => items; set => items = value; }
         public bool Aceptar { get => aceptar; set => aceptar = value; }
 
@@ -197,6 +197,14 @@ namespace wpfFamiliaBlanco
         {
             if (validar())
             {
+                if ((bool)chkVenta.IsChecked)
+                {
+                    venta = true;
+                }
+                else
+                {
+                    venta = false;
+                }
                 Aceptar = true;
                 this.Close();
             }

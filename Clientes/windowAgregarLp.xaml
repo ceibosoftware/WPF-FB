@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Clientes"
         mc:Ignorable="d"
-         Title="windowAgregarLp" Height="473" Width="1034">
+         Title="windowAgregarLp" Height="473" Width="1034" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="BotonStyle_crud2" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -46,7 +46,11 @@
         </Style>
     </Window.Resources>
     <Grid Background="Black">
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="27,25,0,0" Width="958" Opacity="0.5" CornerRadius="5" Height="376" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="49*"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="27,25,0,0" Width="958" Opacity="0.5" CornerRadius="5" Height="376" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -55,7 +59,7 @@
             </Border.Background>
         </Border>
         <Label Content="Productos" HorizontalAlignment="Left" Margin="247,137,0,0" VerticalAlignment="Top"/>
-        <Label Content="Lista de Precios" HorizontalAlignment="Left" Margin="581,134,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lista de Precios" HorizontalAlignment="Left" Margin="581,134,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Button x:Name="btnEliminarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="351,281,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnEliminarp_Click">
             <Button.RenderTransform>
                 <TransformGroup>
@@ -76,14 +80,14 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="892,321,0,0" VerticalAlignment="Top" Width="75" Click="btnAceptar_Click"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="892,348,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="307,321,0,0" VerticalAlignment="Top" Width="75" Click="btnAceptar_Click" Grid.Column="1"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="307,348,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1"/>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="87,79,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="169,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="191" Margin="436,165,0,0" VerticalAlignment="Top" Width="236" SelectionChanged="dgvLp_SelectionChanged"/>
+        <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="191" Margin="436,165,0,0" VerticalAlignment="Top" Width="236" SelectionChanged="dgvLp_SelectionChanged" Grid.ColumnSpan="2"/>
         <DataGrid x:Name="dgvProductos" HorizontalAlignment="Left" Height="198" Margin="87,163,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="dgvProductos_SelectionChanged"/>
-        <TextBox x:Name="txtPreciolista" HorizontalAlignment="Left" Height="23" Margin="734,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="txtPreciolista_PreviewTextInput"/>
-        <Label x:Name="lblpreciolista" Content="Precio de lista" HorizontalAlignment="Left" Margin="770,194,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnModpl" Content="Modificar" HorizontalAlignment="Left" Margin="779,265,0,0" VerticalAlignment="Top" Width="75" Click="btnModpl_Click"/>
+        <TextBox x:Name="txtPreciolista" HorizontalAlignment="Left" Height="23" Margin="149,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="txtPreciolista_PreviewTextInput" Grid.Column="1"/>
+        <Label x:Name="lblpreciolista" Content="Precio de lista" HorizontalAlignment="Left" Margin="185,194,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="btnModpl" Content="Modificar" HorizontalAlignment="Left" Margin="194,265,0,0" VerticalAlignment="Top" Width="75" Click="btnModpl_Click" Grid.Column="1"/>
     </Grid>
 </Window>
