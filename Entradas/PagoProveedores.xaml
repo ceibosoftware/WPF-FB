@@ -128,7 +128,7 @@
         </Border>
         <ListBox x:Name="ltsProximospagos" HorizontalAlignment="Left" Height="171" Margin="57.379,50.686,0,0" VerticalAlignment="Top" Width="360.5" SelectionChanged="ltsProximospagos_SelectionChanged" Grid.ColumnSpan="2"/>
         <Button x:Name="btnAgregarPago" Content="Pagar" HorizontalAlignment="Left" Margin="536.121,308.469,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Grid.Column="1" Foreground="White"/>
-        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="536.121,353.835,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" Click="btnEliminarPago_Click" Style="{DynamicResource Cancelar}" Foreground="White"/>
+        <Button x:Name="btnEliminarPago" Content="Eliminar" HorizontalAlignment="Left" Margin="536,309,0,0" VerticalAlignment="Top" Width="75" Height="22" Grid.Column="1" Click="btnEliminarPago_Click" Style="{DynamicResource Cancelar}" Foreground="White"/>
         <ListBox x:Name="ltsPagosReaizados" HorizontalAlignment="Left" Height="171" Margin="57.379,251.5,0,0" VerticalAlignment="Top" Width="360.5" SelectionChanged="ltsPagosReaizados_SelectionChanged" Grid.ColumnSpan="2"/>
         <Label x:Name="lbldias" Content="" HorizontalAlignment="Left" Margin="57,223.5,0,0" VerticalAlignment="Top" Width="284"/>
         <Label x:Name="lblProveedor_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="285.879,23.393,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Próximos pagos" Grid.ColumnSpan="2"/>

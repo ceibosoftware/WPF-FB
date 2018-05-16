@@ -12,9 +12,9 @@
             <ColumnDefinition Width="71*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Formas de Pago" Grid.Column="1" HorizontalAlignment="Left" Margin="57,45,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="btnEfectivo" Content="Efectivo" Grid.Column="1" HorizontalAlignment="Left" Margin="75,106,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="23" Click="btnEfectivo_Click"/>
-        <Button x:Name="btnCheque" Content="Cheque" Grid.Column="1" HorizontalAlignment="Left" Margin="75,140,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCheque_Click"/>
-        <Button x:Name="btnCtaBancaria" Content="Cta Bancaria" Grid.Column="1" HorizontalAlignment="Left" Margin="75,174,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCtaBancaria_Click"/>
+        <Button x:Name="btnEfectivo" Content="Efectivo" Grid.Column="1" HorizontalAlignment="Left" Margin="75,106,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="23" Click="btnEfectivo_Click" Foreground="White"/>
+        <Button x:Name="btnCheque" Content="Cheque" Grid.Column="1" HorizontalAlignment="Left" Margin="75,140,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCheque_Click" Foreground="White" Style="{DynamicResource agregar}"/>
+        <Button x:Name="btnCtaBancaria" Content="Cta Bancaria" Grid.Column="1" HorizontalAlignment="Left" Margin="75,174,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCtaBancaria_Click" Foreground="White" Style="{DynamicResource agregar}"/>
 
     </Grid>
 </Window>
