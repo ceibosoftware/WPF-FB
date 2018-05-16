@@ -178,6 +178,15 @@
     <Compile Include="Salidas\Facturacion\windowAgregarFacturaSalidas.xaml.cs">
       <DependentUpon>windowAgregarFacturaSalidas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Salidas\Ordenes\OrdenesSalida.xaml.cs">
+      <DependentUpon>OrdenesSalida.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Salidas\Ordenes\windowAgregarOCSalida.xaml.cs">
+      <DependentUpon>windowAgregarOCSalida.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Salidas\Ordenes\windowAgregarProductoOCSalida.xaml.cs">
+      <DependentUpon>windowAgregarProductoOCSalida.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Seguridad.cs" />
     <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
@@ -400,6 +409,18 @@
     <Page Include="Salidas\Facturacion\windowAgregarFacturaSalidas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Salidas\Ordenes\OrdenesSalida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Salidas\Ordenes\windowAgregarOCSalida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Salidas\Ordenes\windowAgregarProductoOCSalida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>

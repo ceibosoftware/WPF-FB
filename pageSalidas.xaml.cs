@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfFamiliaBlanco.Salidas;
 using wpfFamiliaBlanco.Salidas.Facturacion;
+using wpfFamiliaBlanco.Salidas.Ordenes;
 
 namespace wpfFamiliaBlanco
 {
@@ -29,7 +30,12 @@ namespace wpfFamiliaBlanco
 
         private void btnOrdenes_Click(object sender, RoutedEventArgs e)
         {
-
+            frameInicioSalida.Content = new OrdenesSalida();
+            btnOrdenes.Style = FindResource("botonTabPressed") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
         }
 
         private void btnFacturas_Click(object sender, RoutedEventArgs e)
