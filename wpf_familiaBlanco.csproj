@@ -175,6 +175,9 @@
     <Compile Include="Salidas\Facturacion\FacturacionSalida.xaml.cs">
       <DependentUpon>FacturacionSalida.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Salidas\Facturacion\windowAgregarFacturaSalidas.xaml.cs">
+      <DependentUpon>windowAgregarFacturaSalidas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Seguridad.cs" />
     <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
@@ -391,6 +394,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Salidas\Facturacion\FacturacionSalida.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Salidas\Facturacion\windowAgregarFacturaSalidas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

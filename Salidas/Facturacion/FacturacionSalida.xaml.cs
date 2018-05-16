@@ -545,7 +545,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 }
 
 
-                var newW = new windowAgregarFactura((Int64)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
+                var newW = new windowAgregarFacturaSalidas((Int64)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
                 newW.Title = "Modificar Factura";
                 newW.ShowDialog();
 
@@ -700,4 +700,4 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
         }
     }
 }
-}
+
