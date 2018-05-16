@@ -61,7 +61,7 @@ namespace wpfFamiliaBlanco
             DgvProductosRemitos.IsReadOnly = true;
             bandera = true;
             loadLtsRemitos(idremito);
-            lblWindowTitle.Content = "Modificar Remito";
+            lblWindowTitle.Content = "Modificar Nota de Crédito";
         }
 
         private void LoadComboProveedor()

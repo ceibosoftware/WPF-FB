@@ -37,12 +37,12 @@
 
     <Grid Background="#FF171717">
         <Label x:Name="lblSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnOrdenes" Content="Órdenes" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnOrdenes" Content="Órdenes" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnOrdenes_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFacturas_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>

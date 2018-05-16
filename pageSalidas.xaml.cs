@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfFamiliaBlanco.Salidas;
+using wpfFamiliaBlanco.Salidas.Facturacion;
 
 namespace wpfFamiliaBlanco
 {
@@ -23,6 +25,21 @@ namespace wpfFamiliaBlanco
         public pageSalidas()
         {
             InitializeComponent();
+        }
+
+        private void btnOrdenes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnFacturas_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicioSalida.Content = new FacturacionSalida();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTabPressed") as Style;
+            btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
         }
     }
 }

@@ -172,6 +172,9 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Salidas\Facturacion\FacturacionSalida.xaml.cs">
+      <DependentUpon>FacturacionSalida.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Seguridad.cs" />
     <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
@@ -387,6 +390,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Salidas\Facturacion\FacturacionSalida.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -507,10 +514,7 @@
   <ItemGroup>
     <Resource Include="ceibo ss small.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="clientes prueba\" />
-    <Folder Include="Salidas\Ordenes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="ceibo line not gray.png" />
   </ItemGroup>
