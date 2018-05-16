@@ -509,6 +509,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="clientes prueba\" />
+    <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ceibo line not gray.png" />

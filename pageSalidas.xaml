@@ -37,6 +37,32 @@
 
     <Grid Background="#FF171717">
         <Label x:Name="lblSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnOrdenes" Content="Órdenes" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button x:Name="btnPagoProveedor" Content="Pago a proveedor" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button x:Name="btnDevolucionProductos" Content="Devolución de productos" HorizontalAlignment="Left" Margin="820,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Frame x:Name="frameInicioSalida" Content="" HorizontalAlignment="Left" Height="473.215" Margin="0,76.452,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717"/>
 
     </Grid>
 </Page>
