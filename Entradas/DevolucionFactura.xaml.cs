@@ -407,7 +407,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnVertodo_Click(object sender, RoutedEventArgs e)
         {
-            String consulta = "select * from notacredito";
+            String consulta = "select * from notacredito where FK_idfactura IS NOT NULL";
             conexion.Consulta(consulta, tabla: ltsNC);
             ltsNC.DisplayMemberPath = "idNotaCredito";
             ltsNC.SelectedValuePath = "idNotaCredito";
