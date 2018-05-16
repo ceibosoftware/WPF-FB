@@ -108,7 +108,7 @@
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="904.765,373.5,0,0" VerticalAlignment="Top" Width="75" Click="btnCancelar_Click" Height="23" Style="{DynamicResource Cancelar}" Foreground="White"/>
         <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="24" Margin="487.008,76.107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
         <Label Content="Subtotal NC" HorizontalAlignment="Left" Margin="591.008,46,0,0" VerticalAlignment="Top" Height="30" Width="90" FontSize="14"/>
-        <Label Content="Agregar Nota de Crédito " HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="27" Width="170" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <Label x:Name="lblWindowTitle" Content="Agregar Nota de Crédito " HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="27" Width="170" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
         <Border Height="175.008" Width="175.618" BorderThickness="1,1,5,1" BorderBrush="#FF004E6B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="698.39,75.992,215.992,399" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

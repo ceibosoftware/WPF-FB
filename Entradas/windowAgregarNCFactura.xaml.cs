@@ -74,6 +74,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtProveedor.IsReadOnly = true;
             LoadDgvNC(itemsNC);
             LoadDgvProdFactura();
+            lblWindowTitle.Content = "Modificar Nota de Crédito";
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
