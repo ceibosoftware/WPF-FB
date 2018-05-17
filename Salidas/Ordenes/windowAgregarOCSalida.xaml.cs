@@ -38,7 +38,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbDireccion.SelectedIndex = 0;
             cmbTelefono.SelectedIndex = 0;
             dpFecha.SelectedDate = DateTime.Now;
-            ColumnasDGVProductos();
+            
         }
         public windowAgregarOCSalida(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
         {
@@ -99,7 +99,12 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             if (cmbProveedores.SelectedIndex != -1)
             {
                 bool existe = false;
-                var newW = new windowsAgregarProductoOCSalida((int)cmbProveedores.SelectedValue);
+                int cliente = 0;
+                if(chkMI.IsChecked == true)
+                {
+                    cliente = 1;
+                }
+                var newW = new windowsAgregarProductoOCSalida((int)cmbProveedores.SelectedValue,cliente);
                 newW.ShowDialog();
                 if (newW.DialogResult == true)
                 {
@@ -147,28 +152,70 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         }
 
 
-        public void LoadListaComboProveedor()
+        public void LoadListaComboClienteMI()
         {
-            String consulta = "SELECT  distinct t1.nombre , t1.idProveedor FROM proveedor t1 inner join productos_has_proveedor t2 on t1.idProveedor = t2.FK_idProveedor";
+            String consulta = "SELECT  distinct t1.nombre , t1.idClientemi FROM clientesMI t1";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
-            cmbProveedores.SelectedValuePath = "idProveedor";
-
+            cmbProveedores.SelectedValuePath = "idClientemi";
+            cmbProveedores.SelectedIndex = 0;
+        }
+        public void LoadListaComboClienteME()
+        {
+            String consulta = "SELECT  distinct t1.nombre , t1.idClienteme FROM clientesME t1";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idClienteme";
+            cmbProveedores.SelectedIndex = 0;
         }
         public void LoadListaComboTelefonos()
         {
-            String consulta = "SELECT * FROM telefonocontacto";
-            conexion.Consulta(consulta, combo: cmbTelefono);
-            cmbTelefono.DisplayMemberPath = "telefono";
-            cmbTelefono.SelectedValuePath = "idTelefono";
+           
+                String consulta;
+                if (chkMI.IsChecked == true && (int)cmbProveedores.SelectedValue > 0)
+                {
+                    
+                    consulta = "SELECT telefono FROM contactocliente where FK_idClientemi = " + cmbProveedores.SelectedValue + "";
+                    conexion.Consulta(consulta, combo: cmbTelefono);
+                }
+                else if((int)cmbProveedores.SelectedValue > 0)
+                {
+                    consulta = "SELECT telefono FROM contactocliente where FK_idClienteme = " + cmbProveedores.SelectedValue + "";
+                    conexion.Consulta(consulta, combo: cmbTelefono);
+                }
+
+               
+                cmbTelefono.DisplayMemberPath = "telefono";
+                cmbTelefono.SelectedValuePath = "telefono";
+                cmbTelefono.SelectedIndex = 0;
+            
+                
+            
+           
 
         }
         public void LoadListaComboDireccion()
         {
-            String consulta = "SELECT * FROM direcciones";
-            conexion.Consulta(consulta, combo: cmbDireccion);
-            cmbDireccion.DisplayMemberPath = "direccion";
-            cmbDireccion.SelectedValuePath = "idDireccion";
+            String consulta;
+            if (chkMI.IsChecked == true && (int)cmbProveedores.SelectedValue > 0)
+            {
+
+                consulta = "SELECT direccionentrega FROM clientesMI where idClientemi = " + cmbProveedores.SelectedValue + "";
+                conexion.Consulta(consulta, combo: cmbDireccion);
+                cmbDireccion.DisplayMemberPath = "direccionentrega";
+                cmbDireccion.SelectedValuePath = "direccionentrega";
+            }
+            else if ((int)cmbProveedores.SelectedValue > 0)
+            {
+                consulta = "SELECT direccion FROM clientesME where idClienteme = " + cmbProveedores.SelectedValue + "";
+                conexion.Consulta(consulta, combo: cmbDireccion);
+                cmbDireccion.DisplayMemberPath = "direccion";
+                cmbDireccion.SelectedValuePath = "direccion";
+            }
+
+
+
+            cmbDireccion.SelectedIndex = 0;
 
         }
 
@@ -221,7 +268,14 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             // Busquedas de proveedor.
             DataTable productos = new DataTable();
             String consulta;
-            consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
+            if(chkMI.IsChecked == true)
+            {
+                consulta = "SELECT * FROM clientesMI WHERE nombre LIKE '%' @valor '%'";
+            }
+            else
+            {
+                consulta = "SELECT * FROM clientesME WHERE nombre LIKE '%' @valor '%'";
+            }
             productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             cmbProveedores.ItemsSource = productos.AsDataView();
             cmbProveedores.SelectedIndex = 0;
@@ -376,7 +430,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             InitializeComponent();
             loadDgvProductos();
-            LoadListaComboProveedor();
+            chkMI.IsChecked = true;
+            LoadListaComboClienteMI();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
             LoadListaComboDireccion();
@@ -387,15 +442,24 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (contador > 2)
+            try
             {
                 productos.Clear();
                 dgvProductos.Items.Refresh();
                 subtotal = 0;
                 txtSubtotal.Text = subtotal.ToString();
                 calculaTotal();
+                LoadListaComboTelefonos();
+                LoadListaComboDireccion();
+
             }
-            contador++;
+            catch (Exception)
+            {
+
+                
+            }
+            
+           
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -634,6 +698,20 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             textColumn4.Binding = new Binding("total");
             dgvProductos.Columns.Add(textColumn4);
 
+        }
+
+        private void chkMI_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFiltro.Text = "";
+            chkME.IsChecked = false;
+            LoadListaComboClienteMI();
+        }
+
+        private void chkME_Checked(object sender, RoutedEventArgs e)
+        {
+            txtFiltro.Text = "";
+            chkMI.IsChecked = false;
+            LoadListaComboClienteME();
         }
     }
 }

@@ -38,19 +38,29 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             ejecutar = true;
             seleccioneParaFiltrar();
             ColumnasDGVProductos();
-
+            chkMI.IsChecked = true;
 
         }
 
         private void loadlistaOC()
         {
-            String consulta = " Select * from ordencompra ";
+            String consulta;
+            if (chkMI.IsChecked == true)
+            {
+                 consulta = " Select * from ordencompraSalida where FK_idClientemi > 0";
+            }
+            else
+            {
+                consulta = " Select * from ordencompraSalida where FK_idClienteme > 0";
+            }
+         
             conexion.Consulta(consulta, tabla: ltsNumeroOC);
             ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
             ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
             ltsNumeroOC.SelectedIndex = 0;
 
         }
+
         private void loadlistaOC(int index)
         {
             try
@@ -115,27 +125,36 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             if (newW.DialogResult == true && !newW.agregado)
             {
                 //INSERTAR OC
-                int Proveedor = (int)newW.cmbProveedores.SelectedValue;
-                Console.WriteLine(Proveedor);
+                int cliente = (int)newW.cmbProveedores.SelectedValue;
+               
                 DateTime fecha = newW.fecha;
                 fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
                 Console.WriteLine(fecha);
                 decimal.TryParse(newW.txtSubtotal.Text, out decimal subtotal);
                 decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                int direccion = (int)newW.cmbDireccion.SelectedValue;
-                int telefono = (int)newW.cmbTelefono.SelectedValue;
+                string direccion = newW.cmbDireccion.Text;
+                int telefono = int.Parse(newW.cmbTelefono.Text);
                 String observacion = newW.txtObservaciones.Text;
                 String formaPago = newW.txtFormaPago.Text;
                 int iva = newW.cmbIVA.SelectedIndex;
                 int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "');";
+                String sql;
+                if (newW.chkMI.IsChecked == true)
+                {
+                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClientemi) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
+                }
+                else
+                {
+                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClientme) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
+                }
+             
                 conexion.operaciones(sql);
 
                 string ultimoId = "Select last_insert_id()";
                 String id = conexion.ValorEnVariable(ultimoId);
                 foreach (var producto in newW.productos)
                 {
-                    String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                    String productos = "insert into productos_has_ordencompraSalida(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOrdenCompra,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
                     conexion.operaciones(productos);
                 }
 
@@ -161,47 +180,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             try
             {
-                //consulta s
-                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
-                productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
-                dgvProductos.ItemsSource = productos.AsDataView();
-                //llenar datos de oc
-                String consulta2 = "SELECT * FROM ordencompra t1 inner join proveedor where t1.idOrdenCompra = @valor and FK_idProveedor = idProveedor";
-                DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsNumeroOC.SelectedValue);
-                DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
-                txtFecha.Text = fecha.ToString("dd/MM/yyyy");
-                txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
-                txtProveedor.Text = OC.Rows[0].ItemArray[12].ToString();
-                if ((int)OC.Rows[0].ItemArray[5] == 0)
-                {
-                    txtIva.Text = "0";
-                }
-                else if ((int)OC.Rows[0].ItemArray[5] == 1)
-                {
-                    txtIva.Text = "21";
-                }
-                else
-                {
-                    txtIva.Text = "10,5";
-                }
-
-                txtFormaPago.Text = OC.Rows[0].ItemArray[7].ToString();
-                //simbolo segun tipo cambio
-                if ((int)OC.Rows[0].ItemArray[6] == 0)
-                {
-                    txtTipoCambio.Text = "$";
-                }
-                else if ((int)OC.Rows[0].ItemArray[6] == 1)
-                {
-                    txtTipoCambio.Text = "u$d";
-                }
-                else
-                {
-                    txtTipoCambio.Text = "€";
-                }
-
-                txtTotal.Text = OC.Rows[0].ItemArray[4].ToString();
-                txtDescripcion.Text = OC.Rows[0].ItemArray[2].ToString();
+                llenarDatosOC();
             }
             catch (Exception)
             {
@@ -212,7 +191,59 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         }
 
+        private void llenarDatosOC()
+        {
+            //consulta s
+            String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado from productos_has_ordencompraSalida t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOrdenCompra = @valor";
+            productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
+            dgvProductos.ItemsSource = productos.AsDataView();
+            //llenar datos de oc
+            String consulta2;
+            if (chkMI.IsChecked == true)
+            {
+                consulta2 = "SELECT * FROM ordencompraSalida t1 inner join clientesMI t2 where t1.idOrdenCompra = @valor and FK_idClientemi = t2.idClientemi";
+            }
+            else
+            {
+                consulta2 = "SELECT * FROM ordencompraSalida t1 inner join clientesME t2 where t1.idOrdenCompra = @valor and FK_idClienteme = t2.idClienteme";
 
+            }
+            DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsNumeroOC.SelectedValue);
+            DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
+            txtFecha.Text = fecha.ToString("dd/MM/yyyy");
+            txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
+            txtProveedor.Text = OC.Rows[0].ItemArray[19].ToString();
+            if ((int)OC.Rows[0].ItemArray[5] == 0)
+            {
+                txtIva.Text = "0";
+            }
+            else if ((int)OC.Rows[0].ItemArray[5] == 1)
+            {
+                txtIva.Text = "21";
+            }
+            else
+            {
+                txtIva.Text = "10,5";
+            }
+
+            txtFormaPago.Text = OC.Rows[0].ItemArray[7].ToString();
+            //simbolo segun tipo cambio
+            if ((int)OC.Rows[0].ItemArray[6] == 0)
+            {
+                txtTipoCambio.Text = "$";
+            }
+            else if ((int)OC.Rows[0].ItemArray[6] == 1)
+            {
+                txtTipoCambio.Text = "u$d";
+            }
+            else
+            {
+                txtTipoCambio.Text = "€";
+            }
+
+            txtTotal.Text = OC.Rows[0].ItemArray[4].ToString();
+            txtDescripcion.Text = OC.Rows[0].ItemArray[2].ToString();
+        }
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -333,7 +364,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 if (conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0")
                 {
                     //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
-                    String consulta = "SELECT * FROM ordencompra where idOrdenCompra = @valor";
+                    String consulta = "SELECT * FROM ordencompraSalida where idOrdenCompra = @valor";
                     DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                     DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
                     String observaciones = OC.Rows[0].ItemArray[2].ToString();
@@ -506,6 +537,18 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             doc.Add(producto);
             doc.Close();
              */
+        }
+
+        private void chkMI_Checked(object sender, RoutedEventArgs e)
+        {
+            chkME.IsChecked = false;
+            loadlistaOC();
+        }
+
+        private void chkME_Checked(object sender, RoutedEventArgs e)
+        {
+            chkMI.IsChecked = false;
+            loadlistaOC();
         }
     }
 }

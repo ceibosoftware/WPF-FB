@@ -26,11 +26,14 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         int idOC;
         bool modifica = false;
         public int idProducto;
+        string idLista;
         CRUD conexion = new CRUD();
-        public windowsAgregarProductoOCSalida(int idProveedor)
+        public windowsAgregarProductoOCSalida(int idProveedor, int cliente)
         {
             InitializeComponent();
-            loadListaProducto(idProveedor);
+            ListaCliente(idProveedor, cliente);
+            loadListaProducto(idProveedor,cliente);
+            
 
         }
         public windowsAgregarProductoOCSalida(int idProveedor, int idProducto, string nombre, int idOC)
@@ -49,14 +52,37 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         }
 
-        public void loadListaProducto(int idProveedor)
+        public void loadListaProducto(int idProveedor, int cliente)
         {
-            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor =" + idProveedor.ToString() + " and p.idProductos = t2.FK_idProductos";
+            String consulta;
+            if (cliente == 1)
+            {
+               consulta = "Select p.nombre , p.idProductos from productos p , productos_has_listadeprecios t2 , clientesMI MI where MI.idClientemi = "+ idProveedor + "  and MI.FK_idLista = t2.FK_idLista and t2.FK_idProductos = p.idProductos";
+            }
+            else
+            {
+               consulta = " Select p.nombre , p.idProductos from productos p , productos_has_listadeprecios t2 , clientesME ME where ME.idClienteme = " + idProveedor + "  and ME.FK_idLista = t2.FK_idLista and t2.FK_idProductos = p.idProductos";
+            }
             conexion.Consulta(consulta, ltsProductos);
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
             ltsProductos.SelectedIndex = 0;
 
+        }
+        private void ListaCliente(int idCliente, int tipoCliente)
+        {
+            string consulta;
+            
+            if (tipoCliente == 1)
+            {
+                consulta = "select FK_idLista from clientesMI where idClienteMI = "+idCliente+"";
+            }
+            else
+            {
+                consulta = "select FK_idLista from clientesME where idClienteME = " + idCliente + "";
+            }
+            idLista = conexion.ValorEnVariable(consulta);
+           
         }
         public void loadListaProducto(int idProveedor, int idProducto, string nombre)
         {
@@ -85,8 +111,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         private void ltsProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            String consulta = "SELECT p.nombre , p.precioUnitario , p.idProductos from productos p where p.idProductos  = @valor";
+           
+            String consulta = "SELECT p.nombre, lp.precioLista , p.idProductos from productos p inner join productos_has_listadeprecios lp where p.idProductos  = @valor and lp.FK_idLista = "+idLista+" and p.idProductos = lp.FK_idProductos  ";
 
 
             DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
@@ -142,42 +168,40 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
             if (validar())
             {
-                compararPrecioUnitario();
+                compararPrecioLista();
                 DialogResult = true;
             }
 
 
         }
-        private void compararPrecioUnitario()
+        private void compararPrecioLista()
         {
-            var resultado = MessageBoxResult.No;
-            String consulta;
-            if (modifica == false)
-                consulta = "select p.precioUnitario from productos p where p.idProductos = " + ltsProductos.SelectedValue + " ";
-            else
-                consulta = "SELECT t1.PUPagado FROM productos_has_ordencompra t1 where FK_idOC = " + idOC + " and t1.FK_idProducto = " + ltsProductos.SelectedValue + " ";
-            Console.WriteLine(ltsProductos.SelectedValue);
-            Console.WriteLine(idOC);
-            String valor = conexion.ValorEnVariable(consulta);
-            float.TryParse(txtPrecioUnitario.Text, out float PU);
-            float.TryParse(valor, out float PUOriginal);
-            if (PUOriginal != PU)
-            {
-                if (!modifica)
-                    resultado = MessageBox.Show("¿Quiere actualizar el precio unitario en el producto?", "Actualizar PU", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                else
-                    resultado = MessageBoxResult.Yes;
+            //var resultado = MessageBoxResult.No;
+            //String consulta;
+            //if (modifica == false)
+            //    consulta = "select p.precioUnitario from productos p where p.idProductos = " + ltsProductos.SelectedValue + " ";
+            //else
+            //    consulta = "SELECT t1.PUPagado FROM productos_has_ordencompra t1 where FK_idOC = " + idOC + " and t1.FK_idProducto = " + ltsProductos.SelectedValue + " ";           
+            //String valor = conexion.ValorEnVariable(consulta);
+            //float.TryParse(txtPrecioUnitario.Text, out float PU);
+            //float.TryParse(valor, out float PUOriginal);
+            //if (PUOriginal != PU)
+            //{
+            //    if (!modifica)
+            //        resultado = MessageBox.Show("¿Quiere actualizar el precio unitario en el producto?", "Actualizar PU", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            //    else
+            //        resultado = MessageBoxResult.Yes;
 
-                if (resultado == MessageBoxResult.Yes)
-                {
-                    if (modifica != true)
-                        consulta = "UPDATE productos SET precioUnitario = '" + PU + "' where idProductos = " + ltsProductos.SelectedValue + " ";
-                    else
-                        consulta = "UPDATE productos_has_ordencompra SET PUPagado = '" + PU + "' where FK_idOC = " + idOC + " and FK_idProducto = " + ltsProductos.SelectedValue + " ";
+            //    if (resultado == MessageBoxResult.Yes)
+            //    {
+            //        if (modifica != true)
+            //            consulta = "UPDATE productos SET precioUnitario = '" + PU + "' where idProductos = " + ltsProductos.SelectedValue + " ";
+            //        else
+            //            consulta = "UPDATE productos_has_ordencompra SET PUPagado = '" + PU + "' where FK_idOC = " + idOC + " and FK_idProducto = " + ltsProductos.SelectedValue + " ";
 
-                    conexion.operaciones(consulta);
-                }
-            }
+            //        conexion.operaciones(consulta);
+            //    }
+            //}
         }
         public bool validar()
         {
