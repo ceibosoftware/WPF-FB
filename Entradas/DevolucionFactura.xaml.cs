@@ -70,15 +70,15 @@ namespace wpfFamiliaBlanco.Entradas
             Console.WriteLine("idindex parametro  " + index);
             var newW = new windowAgregarNCFactura();
             newW.ShowDialog();
+            DateTime hoy = DateTime.Today;
 
 
-          
             if (newW.DialogResult == true)
             {
                 idFactura = newW.idFactura;
                 String totall = newW.txtTotal.Text;
                 String subtotall = newW.txtSubtotal.Text;
-                String insertNC = "INSERT INTO notacredito (total, subtotal,FK_idFactura) VALUES ( '" + totall + "', '"+ subtotall + "','" + idFactura + "')";
+                String insertNC = "INSERT INTO notacredito (total, subtotal,FK_idFactura, fecha) VALUES ( '" + totall + "', '"+ subtotall + "','" + idFactura + "','"+hoy.ToString("yyyy/MM/dd") + "')";
                 conexion.operaciones(insertNC);
                   
 
