@@ -34,15 +34,17 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
         DateTime dt = DateTime.Now;
         public float totalSubtotal = 0;
         public int id = 0;
+        public int tipoCliente;
 
 
         public windowAgregarFacturaSalidas()
         {
+           
             itemsFact.Clear();
             items.Clear();
             todaslascuotas.Clear();
             InitializeComponent();
-            LoadListaComboProveedor();
+          //  LoadListaComboProveedor();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
             LoadDgvProducto();
@@ -61,36 +63,42 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             bandera = true;
             SetearColumnas();
             SetearColumnas2();
+            rbInterno.IsChecked = true;
+            txtordenn.Visibility = Visibility.Collapsed;
+            txtcliente.Visibility = Visibility.Collapsed;
         }
 
-        public windowAgregarFacturaSalidas(Int64 numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
+        public windowAgregarFacturaSalidas(Int64 numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU, int tipoCliente)
         {
             InitializeComponent();
-            // try
-            //{
+
+            cmbOrden.Visibility = Visibility.Collapsed;
+            cmbCliente.Visibility = Visibility.Collapsed;
 
             txtNroFactura.MaxLines = 1;
             txtNroFactura.MaxLength = 10;
             itemsFact.Clear();
             items.Clear();
             todaslascuotas.Clear();
-            LoadListaComboProveedor();
+            //LoadListaComboProveedor();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
             LoadDgvProducto(pOC);
             LoadDgvFactura(pFA);
             LlenarCmbTipoCuota();
             loadDGVCuotas(lCU);
-            cmbProveedores.IsEnabled = false;
-            cmbOrden.IsEnabled = false;
+            cmbCliente.IsEnabled = false;
+            txtordenn.IsEnabled = false;
             txtFiltro.IsEnabled = false;
 
             this.txtNroFactura.Text = numFactura.ToString();
-            this.cmbProveedores.Text = proveedor;
+            this.txtcliente.Text = proveedor;
             this.items = pOC;
             this.cmbCuotas.Text = cuotas;
             dtFactura.SelectedDate = fechafactura;
-            cmbOrden.Text = numeroOC.ToString();
+
+       
+            txtordenn.Text = numeroOC.ToString();
             this.subtotali = subtotal;
             txtSubtotal.Text = subtotal.ToString();
             cmbIVA.SelectedIndex = IVA;
@@ -106,15 +114,31 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             txtSubtotal.IsReadOnly = true;
             dgvProductosFactura.IsReadOnly = true;
             dgvProductosOC.IsReadOnly = true;
-            SetearColumnas();
+
+
+            bandera = false;
+            if (tipoCliente == 1)
+            {
+                  rbInterno.IsChecked = true;
+            }
+            else
+            {
+                  rbExterno.IsChecked = true;
+            }
+
+            bandera = true;
+            // SetearColumnas();
 
             //cambios diseño batta
             lblWindowTitle.Content = "Modificar Factura";
+
+
+          
         }
         public windowAgregarFacturaSalidas(string idOC, String proveedor)
         {
             InitializeComponent();
-            LoadListaComboProveedor();
+           // LoadListaComboProveedor();
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
             LoadDgvProducto();
@@ -122,7 +146,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             LlenarCmbTipoCuota();
             loadDGVCuotas();
             cmbOrden.Text = idOC;
-            cmbProveedores.Text = proveedor;
+            cmbCliente.Text = proveedor;
             txtTotal.IsReadOnly = true;
             txtSubtotal.IsReadOnly = true;
             dgvProductosFactura.IsReadOnly = true;
@@ -130,6 +154,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             seleccionefecha();
             dtFactura.SelectedDate = DateTime.Now;
             SetearColumnas();
+           // rbInterno.IsChecked = true;
         }
 
         public void SetearColumnas()
@@ -188,17 +213,45 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             cmbCuotas.Text = "--Seleccione fecha factura--";
 
         }
-        public void LoadListaComboProveedor()
+   
+
+        public void LoadListaCMI()
         {
-            String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor";
-            conexion.Consulta(consulta, combo: cmbProveedores);
-            cmbProveedores.DisplayMemberPath = "nombre";
-            cmbProveedores.SelectedValuePath = "idProveedor";
-            cmbProveedores.SelectedIndex = 0;
+            String consulta = "SELECT * FROM clientesmi";
+            conexion.Consulta(consulta, combo: cmbCliente);
+            cmbCliente.DisplayMemberPath = "nombre";
+            cmbCliente.SelectedValuePath = "idClientemi";
+            cmbCliente.SelectedIndex = 0;
         }
 
+        public void LoadListaCME()
+        {
+            String consulta = "SELECT * FROM clientesme";
+            conexion.Consulta(consulta, combo: cmbCliente);
+            cmbCliente.DisplayMemberPath = "nombre";
+            cmbCliente.SelectedValuePath = "idClienteme";
+            cmbCliente.SelectedIndex = 0;
+        }
 
+        private void rbExterno_Checked(object sender, RoutedEventArgs e)
+        {
+            if (bandera == true)
+            {
+                Console.WriteLine("ME");
+                LoadListaCME();
+            }
+          
+        }
 
+        private void rbInterno_Checked(object sender, RoutedEventArgs e)
+        {
+            if (bandera == true)
+            {
+                Console.WriteLine("MI");
+                LoadListaCMI();
+            }
+          
+        }
         private void LlenarCmbIVA()
         {
             cmbIVA.Items.Add("0");
@@ -241,14 +294,30 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             dgvProductosFactura.Items.Refresh();
             try
             {
-                String id = cmbProveedores.SelectedValue.ToString();
-                String nombreProv = cmbProveedores.Text;
+                String id = cmbCliente.SelectedValue.ToString();
+                String nombreProv = cmbCliente.Text;
 
-                String sql = "SELECT * FROM ordencompra WHERE FK_idProveedor =  '" + id + "'";
-                conexion.Consulta(sql, combo: cmbOrden);
-                cmbOrden.DisplayMemberPath = "idOrdenCompra";
-                cmbOrden.SelectedValuePath = "idOrdenCompra";
-                cmbOrden.SelectedIndex = 0;
+                if (rbInterno.IsChecked == true)
+                {
+                    String sql = "SELECT * FROM ordencomprasalida WHERE FK_idClientemi =  '" + id + "'";
+                    conexion.Consulta(sql, combo: cmbOrden);
+                    cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                    cmbOrden.SelectedValuePath = "idOrdenCompra";
+                    cmbOrden.SelectedIndex = 0;
+                   // ltsFactura.SelectedIndex = 0;
+                   // LoadDgvFactura();
+                }
+                else
+                {
+                    String sql = "SELECT * FROM ordencomprasalida WHERE FK_idClienteme =  '" + id + "'";
+                    conexion.Consulta(sql, combo: cmbOrden);
+                    cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                    cmbOrden.SelectedValuePath = "idOrdenCompra";
+                    cmbOrden.SelectedIndex = 0;
+                   // ltsFactura.SelectedIndex = 0;
+                   // LoadDgvFactura();
+                }
+
             }
             catch (NullReferenceException)
             {
@@ -263,7 +332,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             items.Clear();
 
 
-            String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+            String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencomprasalida.CrFactura, subtotal, productos_has_ordencomprasalida.PUPagado  FROM productos_has_ordencomprasalida, productos WHERE FK_idOrdenCompra = @valor AND productos.idProductos = productos_has_ordencomprasalida.FK_idProducto";
 
             DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
             for (int i = 0; i < productos.Rows.Count; i++)
@@ -280,9 +349,6 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             dgvProductosFactura.Items.Refresh();
 
         }
-
-
-
 
         private void LoadDgvProducto(List<Producto> pOC)
         {
@@ -564,7 +630,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 MessageBox.Show("Seleccione tipo de cambio");
                 return false;
             }
-            else if (cmbProveedores.Text == "")
+            else if (cmbCliente.Text == "")
             {
 
                 MessageBox.Show("Seleccione un proveedor");
@@ -611,8 +677,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             String consulta;
             consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p INNER JOIN ordencompra o ON p.idProveedor = o.FK_idProveedor AND p.nombre LIKE '%' @valor '%' ";
             facturas = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            cmbProveedores.ItemsSource = facturas.AsDataView();
-            cmbProveedores.SelectedIndex = 0;
+            cmbCliente.ItemsSource = facturas.AsDataView();
+            cmbCliente.SelectedIndex = 0;
         }
 
         private void dtFactura_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
