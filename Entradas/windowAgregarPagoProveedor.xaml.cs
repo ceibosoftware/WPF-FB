@@ -24,18 +24,20 @@ namespace wpfFamiliaBlanco.Entradas
         public String banco;
         public String destinatario;
         public int numCheque;
-        public int importe;
+        public float importe;
         public DateTime fecha;
         public DateTime fechaCobro;
         public String idCheque;
         public String idCtaBcria;
         float totalc;
         CRUD conexion = new CRUD();
+        public int tipo ;
         public int tipopago= -1;
-        public windowAgregarPagoProveedor(float totalcuot)
+        public windowAgregarPagoProveedor(float totalcuot, int tipo2)
         {
             InitializeComponent();
             totalc = totalcuot;
+            tipo = tipo2;
         }
 
         private void btnEfectivo_Click(object sender, RoutedEventArgs e)
@@ -45,7 +47,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnCheque_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new WindowAgregarPagoProveedorCheque(totalc);
+            var newW = new WindowAgregarPagoProveedorCheque(totalc, this.tipo);
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
@@ -53,12 +55,22 @@ namespace wpfFamiliaBlanco.Entradas
                 banco = newW.cmbBanco.SelectedItem.ToString();
                 destinatario = newW.txtDestinatario.Text;
                 numCheque = int.Parse(newW.txtnumeroCheque.Text);
-                importe = int.Parse(newW.txtImporte.Text);
+                importe = float.Parse(newW.txtImporte.Text);
                 fecha = newW.dtpFecha.SelectedDate.Value.Date;
                 fechaCobro = newW.dtpFechaCobro.SelectedDate.Value.Date;
+                tipo = newW.tipo;
 
-                String sql = "INSERT INTO cheque (banco, importe,destinatario,numeroCheque, fecha, fechaCobro)VALUES ('" + banco+ "','" + importe + "','" + destinatario + "','" + numCheque + "','" + fecha.ToString("yyyy/MM/dd") + "','" + fechaCobro.ToString("yyyy/MM/dd") + "')";
-                conexion.operaciones(sql);
+                if (tipo == 1)
+                {
+                    String sql = "INSERT INTO chequesalida (banco, importe,destinatario,numeroCheque, fecha, fechaCobro)VALUES ('" + banco + "','" + importe + "','" + destinatario + "','" + numCheque + "','" + fecha.ToString("yyyy/MM/dd") + "','" + fechaCobro.ToString("yyyy/MM/dd") + "')";
+                    conexion.operaciones(sql);
+                }
+                else
+                {
+                    String sql = "INSERT INTO cheque (banco, importe,destinatario,numeroCheque, fecha, fechaCobro)VALUES ('" + banco + "','" + importe + "','" + destinatario + "','" + numCheque + "','" + fecha.ToString("yyyy/MM/dd") + "','" + fechaCobro.ToString("yyyy/MM/dd") + "')";
+                    conexion.operaciones(sql);
+                }
+              
 
                 string ultimoId = "Select last_insert_id()";
                 idCheque = conexion.ValorEnVariable(ultimoId);
@@ -69,15 +81,24 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnCtaBancaria_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new WindowAgregarPagoProveedorCtaBancaria(totalc);
+            var newW = new WindowAgregarPagoProveedorCtaBancaria(totalc, tipo);
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
             {
                 cbu = newW.cbuu;
                 nombreTitular = newW.nombreT;
-                String sql = "INSERT INTO cuentaBanco (cbu, nombreTitular, montoPagado)VALUES ('" + cbu + "','" + nombreTitular + "','" + float.Parse(newW.txtMonto.Text) + "')";
-                conexion.operaciones(sql);
+
+                if (tipo == 1)
+                {
+                    String sql = "INSERT INTO cuentabancosalida (cbu, nombreTitular, montoPagado)VALUES ('" + cbu + "','" + nombreTitular + "','" + float.Parse( newW.txtMonto.Text )+ "')";
+                    conexion.operaciones(sql);
+                }
+                else {
+                    String sql = "INSERT INTO cuentabanco (cbu, nombreTitular, montoPagado)VALUES ('" + cbu + "','" + nombreTitular + "','" + float.Parse(newW.txtMonto.Text) + "')";
+                    conexion.operaciones(sql);
+                }
+            
 
                 string ultimoId = "Select last_insert_id()";
                 idCtaBcria = conexion.ValorEnVariable(ultimoId);

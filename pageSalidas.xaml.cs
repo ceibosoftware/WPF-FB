@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfFamiliaBlanco.Salidas;
 using wpfFamiliaBlanco.Salidas.Facturacion;
 using wpfFamiliaBlanco.Salidas.Ordenes;
+using wpfFamiliaBlanco.Salidas.Pagos;
 
 namespace wpfFamiliaBlanco
 {
@@ -45,6 +46,16 @@ namespace wpfFamiliaBlanco
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTabPressed") as Style;
             btnPagoProveedor.Style = FindResource("botonTab") as Style;
+            btnDevolucionProductos.Style = FindResource("botonTab") as Style;
+        }
+
+        private void btnPagoProveedor_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicioSalida.Content = new PagoClientes();
+            btnOrdenes.Style = FindResource("botonTab") as Style;
+            btnRemitos.Style = FindResource("botonTab") as Style;
+            btnFacturas.Style = FindResource("botonTab") as Style;
+            btnPagoProveedor.Style = FindResource("botonTabPressed") as Style;
             btnDevolucionProductos.Style = FindResource("botonTab") as Style;
         }
     }

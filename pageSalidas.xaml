@@ -52,7 +52,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnPagoProveedor" Content="Pago a proveedor" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnPagoProveedor" Content="Pago a proveedor" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnPagoProveedor_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>

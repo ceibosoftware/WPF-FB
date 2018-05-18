@@ -22,12 +22,13 @@ namespace wpfFamiliaBlanco.Entradas
         public String banco;
         public String destinatario;
         public int numCheque;
-        public int importe;
+        public float importe;
         public DateTime fecha;
         public DateTime fechaCobro;
         public float totc;
+        public int tipo;
 
-        public WindowAgregarPagoProveedorCheque(float totalcu)
+        public WindowAgregarPagoProveedorCheque(float totalcu, int tipo3)
         {
             InitializeComponent();
             LlenarCmbBanco();
@@ -38,6 +39,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtDestinatario.MaxLength = 25;
             txtnumeroCheque.MaxLines = 1;
             txtnumeroCheque.MaxLength = 20;
+            tipo = tipo3;
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -62,12 +64,14 @@ namespace wpfFamiliaBlanco.Entradas
           
             else if (txtnumeroCheque.Text != "" && txtDestinatario.Text != "" && dtpFechaCobro.SelectedDate != null && dtpFecha.SelectedDate != null)
             {
+                MessageBox.Show("impoirte" +txtImporte.Text);
                 banco = cmbBanco.SelectedItem.ToString();
                 destinatario = txtDestinatario.Text;
                 numCheque = int.Parse(txtnumeroCheque.Text);
-                importe = int.Parse(txtImporte.Text);
+                importe = float.Parse(txtImporte.Text);
                 fecha = dtpFecha.SelectedDate.Value.Date;
                 fechaCobro = dtpFechaCobro.SelectedDate.Value.Date;
+                
                 DialogResult = true;
             }
          

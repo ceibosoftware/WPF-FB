@@ -23,7 +23,8 @@ namespace wpfFamiliaBlanco.Entradas
         public long cbuu;
         public String nombreT;
         public float toc;
-        public WindowAgregarPagoProveedorCtaBancaria(float totalc)
+        public int tipo ;
+        public WindowAgregarPagoProveedorCtaBancaria(float totalc, int tipo4)
         {
             InitializeComponent();
             toc = totalc;
@@ -33,6 +34,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtNombreTitular.MaxLength = 25;
             txtCbu.MaxLines = 1;
             txtCbu.MaxLength = 22;
+            tipo = tipo4;
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
