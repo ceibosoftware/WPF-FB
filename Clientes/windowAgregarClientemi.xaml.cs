@@ -21,8 +21,10 @@ namespace wpfFamiliaBlanco.Clientes
     public partial class windowAgregarClientemi : Window
     {
         CRUD conexion = new CRUD();
+        public int idlp;
         //List<Contacto> listaContacto = new List<Contacto>();
         public List<Contacto> lista = new List<Contacto>();
+        DataTable listadeprecios;
         int idcliente;
 
 
@@ -31,12 +33,14 @@ namespace wpfFamiliaBlanco.Clientes
             InitializeComponent();
             lista.Clear();
             llenarcmbrs();
+            loadcmblp();
+            ActualizarDGVPrecios();
             LoadDGVContacto();
             CampLimit();
 
         }
 
-       public windowAgregarClientemi(string nombre,string cuit,string trasnporte,string teltransporte,string direccionentrega,string razonsocial,List<Contacto>lista, int id)
+       public windowAgregarClientemi(string nombre,string cuit,string trasnporte,string teltransporte,string direccionentrega,string razonsocial,List<Contacto>lista, int id, int idlista)
         {
             InitializeComponent();
             txtNombre.Text = nombre;
@@ -45,6 +49,9 @@ namespace wpfFamiliaBlanco.Clientes
             txtTelt.Text = teltransporte;
             txtDireccion.Text = direccionentrega;
             cmbRs.Text = razonsocial;
+            loadcmblp();
+            cmbPrecios.SelectedValue = idlista;
+            ActualizarDGVPrecios();
             llenarcmbrs();
             this.lista = lista;
             loaddgvcontacto(this.lista);
@@ -60,6 +67,7 @@ namespace wpfFamiliaBlanco.Clientes
             txtNombre.MaxLength = 30;
             txtTelt.MaxLength = 20;
             txtTransporte.MaxLength = 20;
+            dgvPrecios.IsReadOnly = true;
         }
 
         private void loaddgvcontacto(List<Contacto> l)
@@ -74,11 +82,38 @@ namespace wpfFamiliaBlanco.Clientes
             cmbRs.Items.Add("Categoria");
         }
 
+        private void loadcmblp()
+        {
+            String consulta = "SELECT * from listadeprecios";
+            conexion.Consulta(consulta, combo: cmbPrecios);
+            cmbPrecios.DisplayMemberPath = "nombre";
+            cmbPrecios.SelectedValuePath = "idLista";
+
+        }
+
+        private void ActualizarDGVPrecios()
+        {
+            dgvPrecios.Items.Refresh();
+
+            String consultalp = "SELECT p.nombre, plp.preciolista, plp.FK_idProductos from productos p,productos_has_listadeprecios plp where FK_idLista = @valor and FK_idProductos=p.idProductos";
+            listadeprecios = conexion.ConsultaParametrizada(consultalp, cmbPrecios.SelectedValue);
+
+
+            dgvPrecios.ItemsSource = listadeprecios.AsDataView();
+
+        
+
+
+
+        dgvPrecios.Items.Refresh();
+
+        }
 
 
 
 
-        public Boolean Validacion()
+
+    public Boolean Validacion()
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
@@ -113,8 +148,23 @@ namespace wpfFamiliaBlanco.Clientes
                 MessageBox.Show("Agregue un contacto");
                 return false;
             }
-            return true;
+            else if (cmbPrecios.Text == "")
+            {
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea agregar el cliente sin lista de precios?" + txtNombre.Text, "Advertencia", MessageBoxButton.YesNo);
+                if (dialog==MessageBoxResult.Yes)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+                return true;
         }
+        
+       
+
 
         private void btnAgregarc_Click(object sender, RoutedEventArgs e)
         {
@@ -167,7 +217,18 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (Validacion())
             {
-                DialogResult = true;
+
+
+                try
+                {
+                    idlp = (int)cmbPrecios.SelectedValue;
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("Agregue lista de precios");
+                }
+                    DialogResult = true;
+                
             }
         }
 
@@ -277,5 +338,9 @@ namespace wpfFamiliaBlanco.Clientes
                 e.Handled = true;
         }
 
+        private void cmbPrecios_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ActualizarDGVPrecios();
+        }
     }
 }

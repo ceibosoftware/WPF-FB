@@ -576,13 +576,13 @@
         <Label x:Name="lblTransporte" Content="Transporte" HorizontalAlignment="Left" Margin="490,136,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblTeltrasporte" Content="Telefono Transporte" HorizontalAlignment="Left" Margin="678,136,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtTelt" Width="176" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="634,161,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
-        <ListBox x:Name="ltsPrecios" HorizontalAlignment="Left" Height="148" Margin="446,261,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14"/>
-        <ComboBox x:Name="cmbPrecios" Width="364" VerticalAlignment="Top" SelectedIndex="0" Style="{DynamicResource combo_box}" Margin="446,214,0,0" IsReadOnly="True" Height="23" HorizontalAlignment="Left" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C"/>
         <Label x:Name="lblClientes_Copy1" Content="Lista de precios" HorizontalAlignment="Left" Margin="677,189,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="123" Margin="53,286,0,0" VerticalAlignment="Top" Width="364"/>
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="930,418,0,32" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" />
         <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="929,374,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnModificar_Copy_Click"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="929,326,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnEliminar_Click"/>
+        <TextBox x:Name="txtlp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="175" Margin="634,219,0,0"/>
+        <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="148" VerticalAlignment="Top" Width="363" Margin="446,261,0,0"/>
 
     </Grid>
 </Page>

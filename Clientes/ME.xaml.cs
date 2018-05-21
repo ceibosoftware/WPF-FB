@@ -26,6 +26,7 @@ namespace wpfFamiliaBlanco.Clientes
         CRUD conexion = new CRUD();
         public List<Contacto> listaContacto = new List<Contacto>();
         public int idcliente;
+        DataTable listadeprecios;
 
         public ME()
         {
@@ -33,6 +34,7 @@ namespace wpfFamiliaBlanco.Clientes
             
             loadListaClientes();
             ActualizaDGVContacto();
+            ActualizaDGVPrecios();
             ltsClientes.SelectedIndex = 0;
             LlenarComboFiltro();
             CampLimit();
@@ -46,6 +48,29 @@ namespace wpfFamiliaBlanco.Clientes
             txtt.IsReadOnly = true;
             txtweb.IsReadOnly = true;
             dgvContacto.IsReadOnly = true;
+            dgvPrecios.IsReadOnly = true;
+            txtlp.IsReadOnly = true;
+        }
+
+
+        private void ActualizaDGVPrecios()
+        {
+            dgvPrecios.Items.Refresh();
+
+            String consultalp = "Select lp.nombre,p.nombre,plp.preciolista, c.idclienteme FROM listadeprecios lp, productos_has_listadeprecios plp, clientesme c, productos p WHERE c.FK_idLista = plp.FK_idLista AND lp.idLista = plp.FK_idLista AND p.idProductos = plp.FK_idProductos AND c.idClienteme = @valor ";
+
+
+            listadeprecios = conexion.ConsultaParametrizada(consultalp, ltsClientes.SelectedValue);
+
+
+            dgvPrecios.ItemsSource = listadeprecios.AsDataView();
+
+
+
+
+
+            dgvPrecios.Items.Refresh();
+
 
         }
 
@@ -98,7 +123,7 @@ namespace wpfFamiliaBlanco.Clientes
         private void ltsClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActualizaDGVContacto();
-            
+            ActualizaDGVPrecios();
 
             try
             {
@@ -133,6 +158,19 @@ namespace wpfFamiliaBlanco.Clientes
                 txtDireccion.Text = clienteme.Rows[0].ItemArray[1].ToString();
                 txtweb.Text = clienteme.Rows[0].ItemArray[3].ToString();
 
+
+                if (clienteme.Rows[0].ItemArray[6].ToString() == "")
+                {
+                    txtlp.Text = "No tiene lista de precios";
+                }
+                else
+                {
+                    int id = (int)clienteme.Rows[0].ItemArray[6];
+                    String consultan = "Select nombre from listadeprecios where idLista='" + id + "'";
+                    String nombre = conexion.ValorEnVariable(consultan);
+                    txtlp.Text = nombre;
+                }
+
             }
             catch (Exception)
             {
@@ -163,6 +201,7 @@ namespace wpfFamiliaBlanco.Clientes
                 conexion.operaciones(sql);
                 loadListaClientes();
                 ActualizaDGVContacto();
+                ActualizaDGVPrecios();
 
                 if (dgvContacto.Items == null)
                 {
@@ -197,12 +236,20 @@ namespace wpfFamiliaBlanco.Clientes
 
 
                 //INSERTAR DATOS PRINCIPALES
-                String sql;
-                sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "')";
-                conexion.operaciones(sql);
+                
+                if (newW.cmbPrecios.Text == "")
+                {
+                    String sql;
+                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "')";
+                    conexion.operaciones(sql);
 
-
-
+                }
+                else
+                {
+                    String sql;
+                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, FK_idLista) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" + newW.idlp + "')";
+                    conexion.operaciones(sql);
+                }
 
                 String sql2 = "Select idClienteme from clientesme order by idClienteme DESC LIMIT 1";
                 idclientme = conexion.ValorEnVariable(sql2);
@@ -251,15 +298,24 @@ namespace wpfFamiliaBlanco.Clientes
             string web = cliente.Rows[0].ItemArray[3].ToString();
             string nombre = cliente.Rows[0].ItemArray[4].ToString();
             int terminocomercial = (int)cliente.Rows[0].ItemArray[5];
-            
 
-            
+            int listadeprecios;
+            if (cliente.Rows[0].ItemArray[6].ToString() == "")
+            {
+                listadeprecios = 0;
+            }
+            else
+            {
+                listadeprecios = (int)cliente.Rows[0].ItemArray[6];
 
-           
+            }
 
-           
 
-            var newW = new windowAgregarClienteme(nombre, direccion, pais, terminocomercial, web, listaContacto,idcliente);
+
+
+
+
+            var newW = new windowAgregarClienteme(nombre, direccion, pais, terminocomercial, web, listaContacto,idcliente,listadeprecios);
 
             newW.ShowDialog();
             
@@ -277,9 +333,20 @@ namespace wpfFamiliaBlanco.Clientes
                 this.dgvContacto.ItemsSource = newW.dgvContacto.ItemsSource;
                 
 
-                String update;
-                update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '"  + termino + "' where idClienteme ='" + idcliente + "';";
-                conexion.operaciones(update);
+              
+                if (newW.cmbPrecios.Text == "")
+                {
+                    String update;
+                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "' where idClienteme ='" + idcliente + "';";
+                    conexion.operaciones(update);
+                }
+                else
+                {
+                    
+                    String update;
+                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "', FK_idLista = '" + newW.idlp + "' where idClienteme='"+idcliente+"';";
+                    conexion.operaciones(update);
+                }
 
 
 

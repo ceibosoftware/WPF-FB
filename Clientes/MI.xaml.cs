@@ -24,6 +24,7 @@ namespace wpfFamiliaBlanco.Clientes
         public static String idclientmi;
         CRUD conexion = new CRUD();
         List<Contacto> listaContacto = new List<Contacto>();
+        DataTable listadeprecios;
         public int idcliente;
 
         public MI()
@@ -31,6 +32,7 @@ namespace wpfFamiliaBlanco.Clientes
             InitializeComponent();
             loadListaClientes();
             ActualizaDGVContacto();
+            ActualizaDGVPrecios();
             ltsClientes.SelectedIndex = 0;
             LlenarComboFiltro();
             CampLimit();
@@ -45,7 +47,8 @@ namespace wpfFamiliaBlanco.Clientes
             txtrs.IsReadOnly = true;
             txtTelt.IsReadOnly = true;
             txtTransporte.IsReadOnly = true;
-
+            dgvPrecios.IsReadOnly = true;
+            txtlp.IsReadOnly = true;
         }
         private void loadListaClientes()
         {
@@ -89,11 +92,34 @@ namespace wpfFamiliaBlanco.Clientes
 
 
         }
+        private void ActualizaDGVPrecios()
+        {
+            dgvPrecios.Items.Refresh();
+
+            String consultalp = "Select lp.nombre,p.nombre,plp.preciolista, c.idclientemi FROM listadeprecios lp, productos_has_listadeprecios plp, clientesmi c, productos p WHERE c.FK_idLista = plp.FK_idLista AND lp.idLista = plp.FK_idLista AND p.idProductos = plp.FK_idProductos AND c.idClientemi = @valor ";
+
+
+            listadeprecios = conexion.ConsultaParametrizada(consultalp,ltsClientes.SelectedValue);
+
+
+            dgvPrecios.ItemsSource = listadeprecios.AsDataView();
+
+
+
+
+
+            dgvPrecios.Items.Refresh();
+
+
+        }
+
+
 
         private void ltsClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
             ActualizaDGVContacto();
+            ActualizaDGVPrecios();
 
             try
             {
@@ -106,6 +132,26 @@ namespace wpfFamiliaBlanco.Clientes
                 txtDireccion.Text = clientemi.Rows[0].ItemArray[4].ToString();
                 txtTelt.Text = clientemi.Rows[0].ItemArray[3].ToString();
                 txtTransporte.Text = clientemi.Rows[0].ItemArray[2].ToString();
+               
+
+                if (clientemi.Rows[0].ItemArray[7].ToString() == "")
+                {
+                    txtlp.Text = "No tiene lista de precios";
+                }
+                else
+                {
+                    int id = (int)clientemi.Rows[0].ItemArray[7];
+                    String consultan = "Select nombre from listadeprecios where idLista='" + id + "'";
+                    String nombre = conexion.ValorEnVariable(consultan);
+                    txtlp.Text = nombre;
+                }
+
+
+
+
+
+
+
 
                 //consulta contacto
 
@@ -125,6 +171,7 @@ namespace wpfFamiliaBlanco.Clientes
             {
 
             }
+            
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -141,7 +188,7 @@ namespace wpfFamiliaBlanco.Clientes
                 conexion.operaciones(sql);
                 loadListaClientes();
                 ActualizaDGVContacto();
-
+                ActualizaDGVPrecios();
                 if (dgvContacto.Items == null)
                 {
 
@@ -202,9 +249,21 @@ namespace wpfFamiliaBlanco.Clientes
 
 
                 //INSERTAR DATOS PRINCIPALES
-                String sql;
-                sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "')";
-                conexion.operaciones(sql);
+
+                if (newW.cmbPrecios.Text == "") 
+                {
+                    String sql;
+                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "')";
+                    conexion.operaciones(sql);
+
+                }
+                else
+                {
+                    String sql;
+                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, FK_idLista) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','" + newW.idlp + "')";
+                    conexion.operaciones(sql);
+                }
+               
 
 
 
@@ -256,9 +315,20 @@ namespace wpfFamiliaBlanco.Clientes
             string teltransporte = cliente.Rows[0].ItemArray[3].ToString();
             string direccionentrega = cliente.Rows[0].ItemArray[4].ToString();
             string razonsocial = cliente.Rows[0].ItemArray[5].ToString();
-           
-            
-            var newW = new windowAgregarClientemi(nombre, cuit, transporte, teltransporte, direccionentrega, razonsocial, listaContacto, idcliente);
+            int listadeprecios;
+            if (cliente.Rows[0].ItemArray[7].ToString() == "")
+            {
+                listadeprecios = 0;
+            }
+            else
+            {
+                listadeprecios = (int)cliente.Rows[0].ItemArray[7];
+               
+            }
+
+
+
+            var newW = new windowAgregarClientemi(nombre, cuit, transporte, teltransporte, direccionentrega, razonsocial, listaContacto, idcliente, listadeprecios);
             
             newW.ShowDialog();
             
@@ -274,11 +344,21 @@ namespace wpfFamiliaBlanco.Clientes
 
                 
 
-                String update;
-                update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "' where idClientemi ='" + idcliente + "';";
-                conexion.operaciones(update);
-               
+              
 
+
+                if (newW.cmbPrecios.Text == "")
+                {
+                    String update;
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "' where idClientemi ='" + idcliente + "';";
+                    conexion.operaciones(update);
+                }
+                else
+                {
+                    String update;
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', FK_idLista = '"+newW.idlp+ "' where idClientemi ='" + idcliente + "';";
+                    conexion.operaciones(update);
+                }
 
 
 
