@@ -24,12 +24,15 @@ namespace wpfFamiliaBlanco
         public pageClientes()
         {
             InitializeComponent();
+            btnMI.Style = FindResource("botonTabPressed") as Style;
+            frameInicioClientes.Content = new MI();
         }
 
         private void btnMI_Click(object sender, RoutedEventArgs e)
         {
             btnMI.Style = FindResource("botonTabPressed") as Style;
             btnME.Style = FindResource("botonTab") as Style;
+            btnLP.Style = FindResource("botonTab") as Style;
             frameInicioClientes.Content = new MI();
         }
 
@@ -37,13 +40,15 @@ namespace wpfFamiliaBlanco
         {
             btnMI.Style = FindResource("botonTab") as Style;
             btnME.Style = FindResource("botonTabPressed") as Style;
+            btnLP.Style = FindResource("botonTab") as Style;
             frameInicioClientes.Content = new ME();
 
         }
 
         private void btnLP_Click(object sender, RoutedEventArgs e)
         {
-            btnLP.Style = FindResource("botonTab") as Style;
+            btnMI.Style = FindResource("botonTab") as Style;
+            btnME.Style = FindResource("botonTab") as Style;
             btnLP.Style = FindResource("botonTabPressed") as Style;
             frameInicioClientes.Content = new LP();
         }
