@@ -287,14 +287,14 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
             if (!bandera)
             {
 
-                String sql = "SELECT DISTINCT * FROM pagosalida p , cuotassalida c  WHERE p.idPago = '" + ltsPagosReaizados.SelectedValue + "' AND p.FK_idCuota = c.idCuota";
+                String sql = "SELECT DISTINCT p.FK_idcheque ,p.FK_idCuentaBco,p.fecha,c.idCuota,c.estado,p.efectivo,formaPago FROM pagosalida p , cuotassalida c  WHERE p.idPago = @valor AND p.FK_idCuota = c.idCuota";
                 pagado = conexion.ConsultaParametrizada(sql, ltsPagosReaizados.SelectedValue);
 
-                String FK_idCheque = pagado.Rows[0].ItemArray[4].ToString();
-                String FK_ctaBco = pagado.Rows[0].ItemArray[6].ToString();
-                txtfecha.Text = pagado.Rows[0].ItemArray[1].ToString();
-                txtnumerocuotapaga.Text = pagado.Rows[0].ItemArray[11].ToString();
-                String estado1 = pagado.Rows[0].ItemArray[12].ToString();
+                String FK_idCheque = pagado.Rows[0].ItemArray[0].ToString();
+                String FK_ctaBco = pagado.Rows[0].ItemArray[1].ToString();
+                txtfecha.Text = pagado.Rows[0].ItemArray[2].ToString();
+                txtnumerocuotapaga.Text = pagado.Rows[0].ItemArray[3].ToString();
+                String estado1 = pagado.Rows[0].ItemArray[4].ToString();
 
 
                 if (FK_idCheque != "")
@@ -314,10 +314,10 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
                 }
                 else
                 {
-                    txtTotalPAgo.Text = pagado.Rows[0].ItemArray[3].ToString();
+                    txtTotalPAgo.Text = pagado.Rows[0].ItemArray[5].ToString();
                 }
 
-                if (pagado.Rows[0].ItemArray[2].ToString() == "0")
+                if (pagado.Rows[0].ItemArray[6].ToString() == "0")
                 {
                     txtTipoPago.Text = "Efectivo";
                 }
