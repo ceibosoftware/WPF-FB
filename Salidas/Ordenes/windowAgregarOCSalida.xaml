@@ -306,18 +306,22 @@
         </Style>
     </Window.Resources>
     <Grid Height="604" Background="#FF232222">
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="482.03" Margin="18,50.334,0,0" VerticalAlignment="Top" Width="1040" CornerRadius="5" Opacity="0.5">
+        <Border BorderBrush="#FF858585" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="110" Margin="33,56,0,0" VerticalAlignment="Top" Width="389" Opacity="0.5" CornerRadius="5">
+
+        </Border>
+
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="482" Margin="18,56,0,0" VerticalAlignment="Top" Width="1040" CornerRadius="5" Opacity="0.5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <CheckBox x:Name="chkME" Content="ME" Margin="111,50,847,411" Checked="chkME_Checked"/>
+            <CheckBox x:Name="chkME" Content="ME" Margin="111,48,847,413" Checked="chkME_Checked"/>
+
         </Border>
 
         <Label x:Name="lblProductos" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,162.31,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos"/>
-        <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvProductos" HorizontalAlignment="Left" Height="148" Margin="44.333,191.31,0,0" VerticalAlignment="Top" Width="366" IsReadOnly="True" SelectionMode="Single" SelectedIndex="0"/>
         <ComboBox x:Name="cmbIVA" HorizontalAlignment="Left" Height="22" Margin="44.333,455.667,0,0" VerticalAlignment="Top" Width="177.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbIVA_SelectionChanged"/>
         <ComboBox x:Name="cmbTipoCambio" HorizontalAlignment="Left" Height="22" Margin="235,455.667,0,0" VerticalAlignment="Top" Width="175.333" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}"/>
         <Label x:Name="lblSubtotal_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="90,385.667,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Subtotal"/>
@@ -352,9 +356,8 @@
         <ComboBox x:Name="cmbProveedores" HorizontalAlignment="Left" Height="24" Margin="45.333,123,0,0" VerticalAlignment="Top" Width="365" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbProveedores_SelectionChanged_1"/>
         <Label x:Name="lblCliente" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,99,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cliente"/>
         <Label x:Name="lblBuscar" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,52,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
-        <Border BorderBrush="#FF858585" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="110" Margin="33,54,0,0" VerticalAlignment="Top" Width="389" Opacity="0.5" CornerRadius="5">
-            <CheckBox x:Name="chkMI" Content="MI" Margin="15,48,291,38" Checked="chkMI_Checked"/>
-        </Border>
+        <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvProductos" HorizontalAlignment="Left" Height="148" Margin="44.333,191.31,0,0" VerticalAlignment="Top" Width="366" IsReadOnly="True" SelectionMode="Single" SelectedIndex="0" />
+        <CheckBox x:Name="chkMI" Content="MI" Margin="65,104,960,486" Checked="chkMI_Checked"/>
 
     </Grid>
 </Window>

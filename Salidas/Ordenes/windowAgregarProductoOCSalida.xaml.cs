@@ -27,6 +27,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         bool modifica = false;
         public int idProducto;
         string idLista;
+        int cliente;
         CRUD conexion = new CRUD();
         public windowsAgregarProductoOCSalida(int idProveedor, int cliente)
         {
@@ -36,19 +37,21 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             
 
         }
-        public windowsAgregarProductoOCSalida(int idProveedor, int idProducto, string nombre, int idOC)
+        public windowsAgregarProductoOCSalida(int idProveedor, int idProducto, string nombre, int idOC, int cliente)
         {
             modifica = true;
             InitializeComponent();
-            loadListaProducto(idProveedor, idProducto, nombre);
+            ListaCliente(idProveedor, cliente);
+            loadListaProducto(idProveedor, idProducto,nombre,cliente);
             this.idOC = idOC;
             lblPrecioUnitario.Content = "Precio unitario pagado";
+            modifica = false;
         }
         public windowsAgregarProductoOCSalida(int idProveedor, int idProducto, string nombre)
         {
 
             InitializeComponent();
-            loadListaProducto(idProveedor, idProducto, nombre);
+            loadListaProducto(idProveedor, idProducto,nombre,cliente);
 
         }
 
@@ -84,13 +87,24 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             idLista = conexion.ValorEnVariable(consulta);
            
         }
-        public void loadListaProducto(int idProveedor, int idProducto, string nombre)
+        public void loadListaProducto(int idProveedor, int idProducto, string nombre, int cliente)
         {
-            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor = @valor  and p.idProductos = t2.FK_idProductos";
-            ltsProductos.ItemsSource = conexion.ConsultaParametrizada(consulta, idProveedor).AsDataView();
+            MessageBox.Show(idProveedor.ToString());
+            String consulta;
+            if (cliente == 1)
+            {
+                consulta = "Select p.nombre , p.idProductos from productos p , productos_has_listadeprecios t2 , clientesMI MI where MI.idClientemi = " + idProveedor + "  and MI.FK_idLista = t2.FK_idLista and t2.FK_idProductos = p.idProductos";
+            }
+            else
+            {
+                consulta = " Select p.nombre , p.idProductos from productos p , productos_has_listadeprecios t2 , clientesME ME where ME.idClienteme = " + idProveedor + "  and ME.FK_idLista = t2.FK_idLista and t2.FK_idProductos = p.idProductos";
+            }
+            conexion.Consulta(consulta, ltsProductos);
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
-            //BUSCAR ITEM EN LISTBOX
+            
+            MessageBox.Show(ltsProductos.Items.Count.ToString());
+            ////BUSCAR ITEM EN LISTBOX
             for (int i = 0; i < ltsProductos.Items.Count; i++)
             {
                 ltsProductos.SelectedIndex = i;
@@ -111,21 +125,22 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         private void ltsProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            String consulta = "SELECT p.nombre, lp.precioLista , p.idProductos from productos p inner join productos_has_listadeprecios lp where p.idProductos  = @valor and lp.FK_idLista = "+idLista+" and p.idProductos = lp.FK_idProductos  ";
+            
 
+                String consulta = "SELECT p.nombre, lp.precioLista , p.idProductos from productos p inner join productos_has_listadeprecios lp where p.idProductos  = @valor and lp.FK_idLista = " + idLista + " and p.idProductos = lp.FK_idProductos  ";
+               
 
-            DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
+                DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
 
-            txtNombre.Text = productos.Rows[0].ItemArray[0].ToString();
-            txtPrecioUnitario.Text = productos.Rows[0].ItemArray[1].ToString();
-            idProducto = (int)productos.Rows[0].ItemArray[2];
-            if (txtCantidad.Text != "")
-            {
-                txtTotal.Text = 0.ToString();
-                txtCantidad.Text = 0.ToString();
-            }
-
+                txtNombre.Text = productos.Rows[0].ItemArray[0].ToString();
+                txtPrecioUnitario.Text = productos.Rows[0].ItemArray[1].ToString();
+                idProducto = (int)productos.Rows[0].ItemArray[2];
+                if (txtCantidad.Text != "")
+                {
+                    txtTotal.Text = 0.ToString();
+                    txtCantidad.Text = 0.ToString();
+                }
+            
         }
 
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)

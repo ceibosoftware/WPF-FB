@@ -244,7 +244,8 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-          
+            <RadioButton x:Name="chkMI" Content="MI" Margin="33,123,856,282" Checked="chkMI_Checked_1"/>
+
         </Border>
 
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="904,399,0,51.215" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click"/>
@@ -290,7 +291,6 @@
         <ComboBox x:Name="cmbFechas" HorizontalAlignment="Left" Height="23" Margin="248.333,99.992,0,0" VerticalAlignment="Top" Width="171.667" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbFechas_SelectionChanged" IsEditable="True"/>
         <TextBox x:Name="txtFiltro" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="55,51.992,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" TextChanged="txtFiltro_TextChanged" />
         <Label x:Name="lblFecha_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="288,25.203,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
-        <CheckBox Content="MI" Name="chkMI" HorizontalAlignment="Left" Margin="55,146,0,0" VerticalAlignment="Top" Checked="chkMI_Checked"/>
-        <CheckBox Content="ME" Name="chkME" Margin="125,146,848.666,305" RenderTransformOrigin="0.831,0.455" Checked="chkME_Checked"/>
+        <RadioButton x:Name="chkME" Content="ME" HorizontalAlignment="Left" Margin="165,142,0,0" VerticalAlignment="Top" Checked="chkME_Checked_1"/>
     </Grid>
 </Page>

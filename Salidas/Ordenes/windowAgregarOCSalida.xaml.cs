@@ -40,11 +40,11 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             dpFecha.SelectedDate = DateTime.Now;
             
         }
-        public windowAgregarOCSalida(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
+        public windowAgregarOCSalida(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, string telefono, int proveedor, string direccion, List<Producto> producto, int idOC,int chk)
         {
             modifica = true;
             this.productos = producto;
-            loadGeneral();
+            loadModificar(chk);
             dpFecha.SelectedDate = fecha;
             txtObservaciones.Text = observaciones;
             this.subtotal = subtotal;
@@ -52,15 +52,18 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbIVA.SelectedIndex = iva;
             cmbTipoCambio.SelectedIndex = tipoCambio;
             txtFormaPago.Text = formaPago;
-            cmbTelefono.SelectedValue = telefono;
-            cmbDireccion.SelectedValue = direccion;
+            cmbTelefono.Text = telefono;
+            cmbDireccion.Text = direccion;
             cmbProveedores.SelectedValue = proveedor;
             calculaTotal();
+            chkMI.IsEnabled = false;
+            chkME.IsEnabled = false;
             this.idOC = idOC;
             //Cambios de Diseño batta
             lblWindowTitle.Content = "Modificar Orden de Compra";
             lblWindowTitle.Width = 176;
             ColumnasDGVProductos();
+            modifica = false;
         }
 
 
@@ -235,8 +238,10 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         }
         private void loadDgvProductos()
         {
+          
             dgvProductos.ItemsSource = productos;
-
+          
+         
         }
 
 
@@ -307,12 +312,21 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 bool existe = false;
                 Producto prod = dgvProductos.SelectedItem as Producto;
+                
                 float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowsAgregarProductoOCSalida((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
+
+                int cliente;
+                if(chkMI.IsChecked == true)
+                {
+                    cliente = 1;
+                }else
+                {
+                  cliente = 2;
+                }
+                var newW = new windowsAgregarProductoOCSalida((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC, cliente);
 
                 newW.txtCantidad.Text = prod.cantidad.ToString();
-
                 newW.txtPrecioUnitario.Text = prod.precioUnitario.ToString();
                 newW.txtNombre.Text = prod.nombre;
                 newW.CalculaTotal();
@@ -439,19 +453,39 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
 
         }
+        private void loadModificar(int chk)
+        {
+            InitializeComponent();
+            loadDgvProductos();
+            if(chk == 1)
+            {
+                chkMI.IsChecked = true;
+            }
+            else
+            {
+                chkME.IsChecked = true;
+            }
+            LlenarCmbIVA();
+            LlenarCmbTipoCambio();
+            LoadListaComboDireccion();
+            LoadListaComboTelefonos();
+
+        }
 
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                productos.Clear();
-                dgvProductos.Items.Refresh();
-                subtotal = 0;
-                txtSubtotal.Text = subtotal.ToString();
-                calculaTotal();
-                LoadListaComboTelefonos();
-                LoadListaComboDireccion();
-
+                if (!modifica)
+                {
+                    productos.Clear();
+                    dgvProductos.Items.Refresh();
+                    subtotal = 0;
+                    txtSubtotal.Text = subtotal.ToString();
+                    calculaTotal();
+                    LoadListaComboTelefonos();
+                    LoadListaComboDireccion();
+                }
             }
             catch (Exception)
             {
@@ -705,13 +739,36 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             txtFiltro.Text = "";
             chkME.IsChecked = false;
             LoadListaComboClienteMI();
+            if (!modifica)
+            {
+                productos.Clear();
+                dgvProductos.Items.Refresh();
+                subtotal = 0;
+                txtSubtotal.Text = subtotal.ToString();
+                calculaTotal();
+                LoadListaComboTelefonos();
+                LoadListaComboDireccion();
+            }
+
         }
 
         private void chkME_Checked(object sender, RoutedEventArgs e)
         {
+           
             txtFiltro.Text = "";
             chkMI.IsChecked = false;
             LoadListaComboClienteME();
+            if (!modifica)
+            {
+                productos.Clear();
+                dgvProductos.Items.Refresh();
+                subtotal = 0;
+                txtSubtotal.Text = subtotal.ToString();
+                calculaTotal();
+                LoadListaComboTelefonos();
+                LoadListaComboDireccion();
+            }
+            
         }
     }
 }

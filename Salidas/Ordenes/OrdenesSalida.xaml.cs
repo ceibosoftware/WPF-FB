@@ -65,7 +65,16 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             try
             {
-                String consulta = " Select * from ordencompra ";
+                String consulta;
+                if (chkMI.IsChecked == true)
+                {
+                    consulta = " Select * from ordencompraSalida where FK_idClientemi > 0";
+                }
+                else
+                {
+                    consulta = " Select * from ordencompraSalida where FK_idClienteme > 0";
+                }
+            
                 conexion.Consulta(consulta, ltsNumeroOC);
                 ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
                 ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
@@ -83,12 +92,22 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         public void LoadListaComboProveedor()
         {
-
-
-            String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where o.FK_idProveedor = p.idProveedor ";
+            String consulta;
+            if (chkMI.IsChecked == true)
+            {
+                consulta = "SELECT DISTINCT c.nombre, c.idClientemi FROM clientesMI c inner join ordencompraSalida o where o.FK_idClientemi = c.idClientemi";
+                cmbProveedores.DisplayMemberPath = "nombre";
+                cmbProveedores.SelectedValuePath = "idClientemi";
+            }
+            else
+            {
+                consulta = "SELECT DISTINCT c.nombre, c.idClienteme FROM clientesME c inner join ordencompraSalida o where o.FK_idClienteme = c.idClienteme";
+                cmbProveedores.DisplayMemberPath = "nombre";
+                cmbProveedores.SelectedValuePath = "idClienteme";
+            }
+            
             conexion.Consulta(consulta, combo: cmbProveedores);
-            cmbProveedores.DisplayMemberPath = "nombre";
-            cmbProveedores.SelectedValuePath = "idProveedor";
+            
             cmbProveedores.SelectedIndex = -1;
         }
         private void ColumnasDGVProductos()
@@ -145,7 +164,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 }
                 else
                 {
-                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClientme) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
+                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClienteme) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
                 }
              
                 conexion.operaciones(sql);
@@ -201,23 +220,23 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             String consulta2;
             if (chkMI.IsChecked == true)
             {
-                consulta2 = "SELECT * FROM ordencompraSalida t1 inner join clientesMI t2 where t1.idOrdenCompra = @valor and FK_idClientemi = t2.idClientemi";
+                consulta2 = "SELECT fecha , subtotal, nombre, iva, formaPago, tipoCambio ,total, observaciones FROM ordencompraSalida t1 inner join clientesMI t2 where t1.idOrdenCompra = @valor and FK_idClientemi = t2.idClientemi";
             }
             else
             {
-                consulta2 = "SELECT * FROM ordencompraSalida t1 inner join clientesME t2 where t1.idOrdenCompra = @valor and FK_idClienteme = t2.idClienteme";
+                consulta2 = "SELECT  fecha , subtotal, nombre, iva, formaPago, tipoCambio ,total, observaciones FROM ordencompraSalida t1 inner join clientesME t2 where t1.idOrdenCompra = @valor and FK_idClienteme = t2.idClienteme";
 
             }
             DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsNumeroOC.SelectedValue);
-            DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
+            DateTime fecha = (DateTime)OC.Rows[0].ItemArray[0];
             txtFecha.Text = fecha.ToString("dd/MM/yyyy");
-            txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
-            txtProveedor.Text = OC.Rows[0].ItemArray[19].ToString();
-            if ((int)OC.Rows[0].ItemArray[5] == 0)
+            txtSubtotal.Text = OC.Rows[0].ItemArray[1].ToString();
+            txtProveedor.Text = OC.Rows[0].ItemArray[2].ToString();
+            if ((int)OC.Rows[0].ItemArray[3] == 0)
             {
                 txtIva.Text = "0";
             }
-            else if ((int)OC.Rows[0].ItemArray[5] == 1)
+            else if ((int)OC.Rows[0].ItemArray[3] == 1)
             {
                 txtIva.Text = "21";
             }
@@ -226,9 +245,9 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 txtIva.Text = "10,5";
             }
 
-            txtFormaPago.Text = OC.Rows[0].ItemArray[7].ToString();
+            txtFormaPago.Text = OC.Rows[0].ItemArray[4].ToString();
             //simbolo segun tipo cambio
-            if ((int)OC.Rows[0].ItemArray[6] == 0)
+            if ((int)OC.Rows[0].ItemArray[5] == 0)
             {
                 txtTipoCambio.Text = "$";
             }
@@ -241,23 +260,34 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 txtTipoCambio.Text = "€";
             }
 
-            txtTotal.Text = OC.Rows[0].ItemArray[4].ToString();
-            txtDescripcion.Text = OC.Rows[0].ItemArray[2].ToString();
+            txtTotal.Text = OC.Rows[0].ItemArray[6].ToString();
+            txtDescripcion.Text = OC.Rows[0].ItemArray[7].ToString();
         }
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+          {
             try
             {
                 if (ejecutar)
                 {
-                    String consulta = " Select * from ordencompra t1 where t1.FK_idProveedor = @valor ";
+                    String consulta;
+                    String sql;
+                    if (tipoCliente())
+                    {
+                        consulta = " Select * from ordencompraSalida t1 where t1.FK_idClientemi = @valor ";
+                        sql = "Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencompraSalida t1 where t1.FK_idClientemi = @valor ";
+                    }
+                    else
+                    {
+                       consulta = "Select * from ordencompraSalida t1 where t1.FK_idClienteme = @valor ";
+                       sql = "Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencompraSalida t1 where t1.FK_idClienteme = @valor ";
+                    }
+                    
                     DataTable OCProveedor = conexion.ConsultaParametrizada(consulta, cmbProveedores.SelectedValue);
                     ltsNumeroOC.ItemsSource = OCProveedor.AsDataView();
                     ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
                     ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
                     ltsNumeroOC.SelectedIndex = 0;
-                    ejecutar = false;
-                    String sql = "   Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencompra t1 where t1.FK_idProveedor = @valor ";
+                    ejecutar = false;  
                     DataTable fechas = conexion.ConsultaParametrizada(sql, cmbProveedores.SelectedValue);
                     cmbFechas.ItemsSource = fechas.AsDataView();
                     cmbFechas.DisplayMemberPath = "fecha";
@@ -296,7 +326,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         private void eliminarOC()
         {
             int idSeleccionado = (int)ltsNumeroOC.SelectedValue;
-            string sql = "delete from ordencompra where idOrdenCompra = '" + idSeleccionado + "'";
+            string sql = "delete from ordencompraSalida where idOrdenCompra = '" + idSeleccionado + "'";
             conexion.operaciones(sql);
             loadlistaOC();
         }
@@ -340,7 +370,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                     txtSubtotal.Text = "";
                     txtTipoCambio.Text = "";
                     txtTotal.Text = "";
-                    lblFechaOC.Content = "";
+                    txtFecha.Text = "";
+                    txtProveedor.Text = "";
                 }
             }
             catch (NullReferenceException)
@@ -360,11 +391,16 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 int index = (int)ltsNumeroOC.SelectedIndex;
                 string existeRemito = "select count(idremitos) from remito where FK_idOC = " + idOC + " ";
                 string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + idOC + " ";
-
-                if (conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0")
+                //conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0"
+                if (true)
                 {
                     //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
+
+
+
                     String consulta = "SELECT * FROM ordencompraSalida where idOrdenCompra = @valor";
+                  
+                    
                     DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                     DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
                     String observaciones = OC.Rows[0].ItemArray[2].ToString();
@@ -372,12 +408,21 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                     int iva = (int)OC.Rows[0].ItemArray[5];
                     int tipoCambio = (int)OC.Rows[0].ItemArray[6];
                     String formaPago = OC.Rows[0].ItemArray[7].ToString();
-                    int telefono = (int)OC.Rows[0].ItemArray[8];
-                    int proveedor = (int)OC.Rows[0].ItemArray[10];
-                    int direccion = (int)OC.Rows[0].ItemArray[9];
+                    string telefono = OC.Rows[0].ItemArray[8].ToString();
+                    int proveedor;
+                    if (chkMI.IsChecked == true)
+                    {
+                        proveedor = (int)OC.Rows[0].ItemArray[10];
+                    }
+                    else
+                    {
+                         proveedor = (int)OC.Rows[0].ItemArray[11];
+                    }
+                   
+                    string direccion = OC.Rows[0].ItemArray[9].ToString();
 
                     //PRODUCTOS DE LA ORDEN DE COMPRA
-                    String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
+                    String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompraSalida t1 inner join productos t2 where FK_idOrdenCompra = @valor and t1.FK_idProducto = t2.idProductos";
                     DataTable productos = conexion.ConsultaParametrizada(consultaProductos, ltsNumeroOC.SelectedValue);
                     List<Producto> listaProd = new List<Producto>();
 
@@ -390,9 +435,19 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                         float sub = (float)productos.Rows[i].ItemArray[2];
                         String nombre = productos.Rows[i].ItemArray[3].ToString();
                         float PU = (float)productos.Rows[i].ItemArray[4];
+                       
                         listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
                     }
-                    var newW = new windowAgregarOCSalida(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC);
+                    int chk;
+                    if(chkMI.IsChecked == true)
+                    {
+                       chk =1;
+                    }
+                    else
+                    {
+                        chk = 2;
+                    }
+                    var newW = new windowAgregarOCSalida(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC,chk);
 
                     newW.Title = "Modificar OC";
                     newW.ShowDialog();
@@ -402,20 +457,29 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                         //INSERTAR OC
                         int Proveedor = (int)newW.cmbProveedores.SelectedValue;
                         fecha = newW.fecha;
-                        Console.WriteLine(fecha);
                         decimal.TryParse(newW.txtSubtotal.Text, out decimal sub);
                         decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                        direccion = (int)newW.cmbDireccion.SelectedValue;
-                        telefono = (int)newW.cmbTelefono.SelectedValue;
+                        direccion = newW.cmbDireccion.Text;
+                        telefono = newW.cmbTelefono.Text;
                         observaciones = newW.txtObservaciones.Text;
                         formaPago = newW.txtFormaPago.Text;
                         iva = newW.cmbIVA.SelectedIndex;
                         tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                        String sql = "UPDATE ordencompra SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',FK_idContacto = '" + telefono + "',FK_idDireccion = '" + direccion + "',FK_idProveedor = '" + Proveedor + "' WHERE ordencompra.idOrdenCompra = '" + idOC + "';";
+                        String sql;
+                        if (newW.chkMI.IsChecked == true)
+                        {
+                            sql = "UPDATE ordencompraSalida SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',telefono = '" + telefono + "',direccion = '" + direccion + "',FK_idClientemi = '" + Proveedor + "' WHERE ordencompraSalida.idOrdenCompra = '" + idOC + "';";
+
+                        }
+                        else
+                        {
+                            sql = "UPDATE ordencompraSalida SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',telefono = '" + telefono + "',direccion = '" + direccion + "',FK_idClienteme = '" + Proveedor + "' WHERE ordencompraSalida.idOrdenCompra = '" + idOC + "';";
+
+                        }
                         conexion.operaciones(sql);
 
                         //ELIMINA REGISTRO DE TABLA INTERMEDIA
-                        string sql2 = "delete  from productos_has_ordencompra where FK_idOC =  '" + idOC + "'";
+                        string sql2 = "delete  from productos_has_ordencompraSalida where FK_idOrdenCompra =  '" + idOC + "'";
                         conexion.operaciones(sql2);
 
 
@@ -424,7 +488,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                             //string CantidadAntigua = "select cantidad from productos_has_ordencompra where FK_idOC = '" + idOC + "' and FK_idProducto =  '" + producto.id + "'";
                             //int.TryParse(conexion.ValorEnVariable(CrRemito), out int CRR);
                             //CRR = producto.cantidad - CRR;
-                            String productosActualizar = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC, PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario + "');";
+                           
+                            String productosActualizar = "insert into productos_has_ordencompraSalida(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOrdenCompra,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario + "');";
                             conexion.operaciones(productosActualizar);
                         }
                         ejecutar = false;
@@ -440,7 +505,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             catch (NullReferenceException)
             {
-
+                
                 MessageBox.Show("Es necesario seleccionar una Orden para modificar ");
             }
 
@@ -450,8 +515,17 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             if (ejecutar)
             {
+                String consulta;
+                if (tipoCliente())
+                {
+                    consulta = " Select * from ordencompraSalida t1 where t1.fecha = @valor and FK_idClientemi = '" + cmbProveedores.SelectedValue + "'";
+                }
+                else
+                {
+                    consulta = " Select * from ordencompraSalida t1 where t1.fecha = @valor and FK_idClienteme = '" + cmbProveedores.SelectedValue + "'";
+                }
 
-                String consulta = " Select * from ordencompra t1 where t1.fecha = @valor and FK_idProveedor = '" + cmbProveedores.SelectedValue + "'";
+              
                 DateTime fecha;
                 DateTime.TryParse(cmbFechas.SelectedValue.ToString(), out fecha);
                 fecha.ToString("yyyy-MM-dd");
@@ -468,7 +542,15 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             // Busquedas de productos.
             DataTable productos = new DataTable();
             String consulta;
-            consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
+            if (tipoCliente())
+            {
+                consulta = "SELECT * FROM clientesMI WHERE clientesMI.nombre LIKE '%' @valor '%'";
+            }
+            else
+            {
+                consulta = "SELECT * FROM clientesME WHERE clientesME.nombre LIKE'%' @valor '%'";
+            }
+            
             productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             cmbProveedores.ItemsSource = productos.AsDataView();
             cmbProveedores.SelectedIndex = 0;
@@ -539,17 +621,40 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
              */
         }
 
-        private void chkMI_Checked(object sender, RoutedEventArgs e)
+
+
+        private void chkMI_Checked_1(object sender, RoutedEventArgs e)
         {
             chkME.IsChecked = false;
             loadlistaOC();
-        }
-
-        private void chkME_Checked(object sender, RoutedEventArgs e)
-        {
-            chkMI.IsChecked = false;
+            LoadListaComboProveedor();
+            //cmbProveedores.SelectedIndex = -1;
+            //cmbFechas.SelectedIndex = -1;
+            seleccioneParaFiltrar();
             loadlistaOC();
         }
+
+        private void chkME_Checked_1(object sender, RoutedEventArgs e)
+        {
+            chkMI.IsChecked = false;
+            LoadListaComboProveedor();
+            //cmbProveedores.SelectedIndex = -1;
+            //cmbFechas.SelectedIndex = -1;
+            seleccioneParaFiltrar();
+            loadlistaOC();
+        }
+        private bool tipoCliente()
+        {
+            if (chkMI.IsChecked == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
+   
 }
 
