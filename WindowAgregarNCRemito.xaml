@@ -143,6 +143,8 @@
         <Border BorderBrush="#FF006B49" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="186.008" Margin="875.39,75,0,0" VerticalAlignment="Top" Width="155.276" Background="#FF2D2C2C" CornerRadius="5">
             <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
         </Border>
+        <RadioButton x:Name="RbInterno" Content="Mercado Interno" HorizontalAlignment="Left" Margin="57,51,0,0" VerticalAlignment="Top" Checked="RbInterno_Checked"/>
+        <RadioButton x:Name="RbExterno" Content="Mercado Externo" HorizontalAlignment="Left" Margin="177,51,0,0" VerticalAlignment="Top" Checked="RbExterno_Checked"/>
 
     </Grid>
 </Window>

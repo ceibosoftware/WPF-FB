@@ -36,6 +36,7 @@ namespace wpfFamiliaBlanco.Entradas
         public String subtotalmodificar;
         public int idnota;
         public String totalmodificar;
+        public int tipo;
         public windowAgregarNCFactura()
         {
             InitializeComponent();
@@ -51,6 +52,25 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.IsReadOnly = true;
             LoadDgvProdFactura();
             txtProveedor.IsReadOnly = true;
+        }
+
+        public windowAgregarNCFactura(int tipo1)
+        {
+            InitializeComponent();
+            tipo = tipo1;
+            loadLtsfacturaSalida();
+            txtIVA.IsReadOnly = true;
+            //  txtTotal.IsReadOnly = true;
+            txtTipoCambio.IsReadOnly = true;
+            txtSubtotal.IsReadOnly = true;
+            LoadDgvNC();
+            dgvProductosNC.IsReadOnly = true;
+            DgvProductosFactur.IsReadOnly = true;
+            itemsFact.Clear();
+            txtTotal.IsReadOnly = true;
+            LoadDgvProdFactura();
+            txtProveedor.IsReadOnly = true;
+        
         }
 
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
@@ -76,6 +96,35 @@ namespace wpfFamiliaBlanco.Entradas
             LoadDgvProdFactura();
             lblWindowTitle.Content = "Modificar Nota de Crédito";
         }
+
+        public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto> ProdAmodificar, String idfactura1, int idnotac, int tipo3)
+        {
+            InitializeComponent();
+            tipo = tipo3;
+            MessageBox.Show("id factura" + idfactura1);
+           // loadLtsfacturaSalida();
+            loadLtsfacturaSalida(idfactura1);
+            txtIVA.IsReadOnly = true;
+            txtTotal.IsReadOnly = true;
+            txtTipoCambio.IsReadOnly = true;
+            txtSubtotal.IsReadOnly = true;
+   //         loadLtsfacturaSalida(idfactura1);
+            ltsfacturas.IsEnabled = false;
+            idnota = idnotac;
+            itemsNC = ProdAmodificar;
+            txtSubtotal.Text = subtotal;
+            txtTotal.Text = total;
+            txtIVA.Text = iva;
+            txtTipoCambio.Text = cambio;
+            dgvProductosNC.IsReadOnly = true;
+            DgvProductosFactur.IsReadOnly = true;
+            txtProveedor.IsReadOnly = true;
+            LoadDgvNC(itemsNC);
+            LoadDgvProdFactura();
+            lblWindowTitle.Content = "Modificar Nota de Crédito";
+
+        }
+
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -145,6 +194,15 @@ namespace wpfFamiliaBlanco.Entradas
             ltsfacturas.SelectedIndex = 0;
         }
 
+        public void loadLtsfacturaSalida()
+        {
+            String consulta = "SELECT idfacturas,numeroFactura FROM facturasalida  ";
+            conexion.Consulta(consulta, ltsfacturas);
+            ltsfacturas.DisplayMemberPath = "numeroFactura";
+            ltsfacturas.SelectedValuePath = "idfacturas";
+            ltsfacturas.SelectedIndex = 0;
+        }
+
         public void loadLtsfactura(String idfacturas)
         {
             String consulta = "SELECT idfacturas,numeroFactura FROM factura WHERE idfacturas = '"+idfacturas+"'  ";
@@ -154,6 +212,17 @@ namespace wpfFamiliaBlanco.Entradas
             ltsfacturas.SelectedIndex = 0;
            
         }
+        public void loadLtsfacturaSalida(String idfac)
+        {
+            MessageBox.Show("asdsa" + idfac);
+            String consulta2 = "SELECT idfacturas, numeroFactura FROM facturasalida WHERE idfacturas = '" + idfac + "'";
+            conexion.Consulta(consulta2, ltsfacturas);
+            ltsfacturas.DisplayMemberPath = "numeroFactura";
+            ltsfacturas.SelectedValuePath = "idfacturas";
+            ltsfacturas.SelectedIndex = 0;
+
+        }
+
         public void calculaTotal()
         {
             if (txtIVA.Text == "0")
@@ -174,90 +243,163 @@ namespace wpfFamiliaBlanco.Entradas
         private void ltsfacturas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            try
-            {
+            //try
+            //{
                 itemsFact.Clear();
 
                 iva = "";
                 cambio = "";
-             
-                String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos,t1.CrNotaCredito from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '" + ltsfacturas.SelectedValue + "'";
 
-                productos = conexion.ConsultaParametrizada(productosFatura, ltsfacturas.SelectedValue);
-                //DgvProductosFactur.ItemsSource = productos.AsDataView();
-
-                for (int i = 0; i < productos.Rows.Count; i++)
+                if (tipo == 1)
                 {
-                    producto = new Producto(productos.Rows[i].ItemArray[1].ToString(), (int)productos.Rows[i].ItemArray[3], (int)productos.Rows[i].ItemArray[4], (float)productos.Rows[i].ItemArray[0], (float)productos.Rows[i].ItemArray[2]);
-               
-                    itemsFact.Add(producto);
+                    String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos,t1.CrNotaCredito from productos_has_facturassalida t1, productos_has_ordencomprasalida t3 inner join productos t2 where t1.FK_idProductos = t2.idProductos and t1.FK_idfacturas = '" + ltsfacturas.SelectedValue + "'";
 
-                }
+                    productos = conexion.ConsultaParametrizada(productosFatura, ltsfacturas.SelectedValue);
+                    DgvProductosFactur.ItemsSource = productos.AsDataView();
 
-                DgvProductosFactur.ItemsSource = itemsFact;
-                DgvProductosFactur.Items.Refresh();
+                    for (int i = 0; i < productos.Rows.Count; i++)
+                    {
+                        producto = new Producto(productos.Rows[i].ItemArray[1].ToString(), (int)productos.Rows[i].ItemArray[3], (int)productos.Rows[i].ItemArray[4], (float)productos.Rows[i].ItemArray[0], (float)productos.Rows[i].ItemArray[2]);
 
-                String consulta2 = "SELECT * FROM factura f where f.idfacturas ='" + ltsfacturas.SelectedValue + "'";
-                DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsfacturas.SelectedValue);
+                        itemsFact.Add(producto);
 
-                String idOC = "SELECT FK_idOC FROM factura WHERE idfacturas = '" + ltsfacturas.SelectedValue + "' ";
-                String idorc = conexion.ValorEnVariable(idOC);
+                    }
+
+                    DgvProductosFactur.ItemsSource = itemsFact;
+                    DgvProductosFactur.Items.Refresh();
+
+                    String consulta2 = "SELECT * FROM facturasalida f where f.idfacturas ='" + ltsfacturas.SelectedValue + "'";
+                    DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsfacturas.SelectedValue);
+
+                    String idOC = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas = '" + ltsfacturas.SelectedValue + "' ";
+                    String idorc = conexion.ValorEnVariable(idOC);
 
 
-                String idprov = "SELECT FK_idProveedor FROM ordencompra WHERE idOrdenCompra = '" +idorc + "' ";
-                String idprove = conexion.ValorEnVariable(idprov);
+                    //String idprov = "SELECT FK_idProveedor FROM ordencomprasalida WHERE idOrdenCompra = '" + idorc + "' ";
+                    //String idprove = conexion.ValorEnVariable(idprov);
 
-                String nombreprove = "SELECT nombre FROM proveedor WHERE idProveedor = '" + idprove + "' ";
-                String nombrepv = conexion.ValorEnVariable(nombreprove);
+                    //String nombreprove = "SELECT nombre FROM proveedor WHERE idProveedor = '" + idprove + "' ";
+                    //String nombrepv = conexion.ValorEnVariable(nombreprove);
 
-                if (OC.Rows[0].ItemArray[4].ToString() == "0")
-                {
-                    iva = "0";
-                }
-                else if (OC.Rows[0].ItemArray[4].ToString() == "1")
-                {
-                    iva = "21";
+                    if (OC.Rows[0].ItemArray[4].ToString() == "0")
+                    {
+                        iva = "0";
+                    }
+                    else if (OC.Rows[0].ItemArray[4].ToString() == "1")
+                    {
+                        iva = "21";
+                    }
+                    else
+                    {
+                        iva = "10,5";
+                    }
+
+                    if (OC.Rows[0].ItemArray[5].ToString() == "0")
+                    {
+                        cambio = "$";
+                    }
+                    else if (OC.Rows[0].ItemArray[5].ToString() == "1")
+                    {
+                        cambio = "u$d";
+                    }
+                    else
+                    {
+                        cambio = "€";
+                    }
+
+                    //txtProveedor.Text = nombrepv;
+
+                    DgvProductosFactur.SelectedIndex = 0;
+
+                    txtIVA.Text = iva;
+                    txtTipoCambio.Text = cambio;
+                    txtSubtotal.Text = "0";
+                    txtTotal.Text = "0";
+
+
+
                 }
                 else
                 {
-                    iva = "10,5";
+                    String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos,t1.CrNotaCredito from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '" + ltsfacturas.SelectedValue + "'";
+
+                    productos = conexion.ConsultaParametrizada(productosFatura, ltsfacturas.SelectedValue);
+                    //DgvProductosFactur.ItemsSource = productos.AsDataView();
+
+                    for (int i = 0; i < productos.Rows.Count; i++)
+                    {
+                        producto = new Producto(productos.Rows[i].ItemArray[1].ToString(), (int)productos.Rows[i].ItemArray[3], (int)productos.Rows[i].ItemArray[4], (float)productos.Rows[i].ItemArray[0], (float)productos.Rows[i].ItemArray[2]);
+
+                        itemsFact.Add(producto);
+
+                    }
+
+                    DgvProductosFactur.ItemsSource = itemsFact;
+                    DgvProductosFactur.Items.Refresh();
+
+                    String consulta2 = "SELECT * FROM factura f where f.idfacturas ='" + ltsfacturas.SelectedValue + "'";
+                    DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsfacturas.SelectedValue);
+
+                    String idOC = "SELECT FK_idOC FROM factura WHERE idfacturas = '" + ltsfacturas.SelectedValue + "' ";
+                    String idorc = conexion.ValorEnVariable(idOC);
+
+
+                    String idprov = "SELECT FK_idProveedor FROM ordencompra WHERE idOrdenCompra = '" + idorc + "' ";
+                    String idprove = conexion.ValorEnVariable(idprov);
+
+                    String nombreprove = "SELECT nombre FROM proveedor WHERE idProveedor = '" + idprove + "' ";
+                    String nombrepv = conexion.ValorEnVariable(nombreprove);
+
+                    if (OC.Rows[0].ItemArray[4].ToString() == "0")
+                    {
+                        iva = "0";
+                    }
+                    else if (OC.Rows[0].ItemArray[4].ToString() == "1")
+                    {
+                        iva = "21";
+                    }
+                    else
+                    {
+                        iva = "10,5";
+                    }
+
+                    if (OC.Rows[0].ItemArray[5].ToString() == "0")
+                    {
+                        cambio = "$";
+                    }
+                    else if (OC.Rows[0].ItemArray[5].ToString() == "1")
+                    {
+                        cambio = "u$d";
+                    }
+                    else
+                    {
+                        cambio = "€";
+                    }
+
+                    txtProveedor.Text = nombrepv;
+
+                    DgvProductosFactur.SelectedIndex = 0;
+
+                    txtIVA.Text = iva;
+                    txtTipoCambio.Text = cambio;
+                    txtSubtotal.Text = "0";
+                    txtTotal.Text = "0";
+
+
+
                 }
 
-                if (OC.Rows[0].ItemArray[5].ToString() == "0")
-                {
-                    cambio = "$";
-                }
-                else if (OC.Rows[0].ItemArray[5].ToString() == "1")
-                {
-                    cambio = "u$d";
-                }
-                else
-                {
-                    cambio = "€";
-                }
-
-                txtProveedor.Text = nombrepv;
-
-                DgvProductosFactur.SelectedIndex = 0;
-
-                txtIVA.Text = iva;
-                txtTipoCambio.Text = cambio;
-                txtSubtotal.Text = "0";
-                txtTotal.Text = "0";
-         
-              
-               
-           
-              
-            
-                 
-
-            }
-            catch (Exception)
-            {
 
 
-            }
+
+
+
+            //}
+            //catch (Exception)
+            //{
+
+
+            //}
 
         }
 

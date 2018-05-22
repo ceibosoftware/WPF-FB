@@ -29,13 +29,33 @@ namespace wpfFamiliaBlanco.Entradas
         public List<Producto> ProdRemito { get => prodRemito; set => prodRemito = value; }
         public List<Producto> Productos { get => productos; set => productos = value; }
         public List<Producto> ProdRemitoStock { get => prodRemitoStock; set => prodRemitoStock = value; }
+        int tipo;
         public windowAgregarRemito()
         {
-            InitializeComponent(); 
-            
+            InitializeComponent();
+            RbExterno.Visibility = Visibility.Collapsed;
+            RbInterno.Visibility = Visibility.Collapsed;
             loadcmbProveedores();
             loadDgvProd();
             loadDgvProdRemito();
+            dtRemito.SelectedDate = DateTime.Now;
+            txtNroRemito.MaxLength = 10;
+            dgvProductosOC.IsReadOnly = true;
+            dgvProductosRemito.IsReadOnly = true;
+
+        }
+        //AGREGAR REMITO DESDE SALIDAS
+        public windowAgregarRemito(int tipo1)
+        {
+            InitializeComponent();
+            RbExterno.Visibility = Visibility.Visible;
+            RbInterno.Visibility = Visibility.Visible;
+            RbInterno.IsChecked = true;
+            tipo = tipo1;
+            loadcmbProveedoresSalida();
+            loadDgvProd();
+            loadDgvProdRemito();
+          //  loadCmbOrdenesSalida();
             dtRemito.SelectedDate = DateTime.Now;
             txtNroRemito.MaxLength = 10;
             dgvProductosOC.IsReadOnly = true;
@@ -46,6 +66,8 @@ namespace wpfFamiliaBlanco.Entradas
         public windowAgregarRemito(int proveedor, int numeroOC)
         {
             InitializeComponent();
+            RbExterno.Visibility = Visibility.Collapsed;
+            RbInterno.Visibility = Visibility.Collapsed;
             loadcmbProveedores();
             loadDgvProd();
             loadDgvProdRemito();
@@ -62,7 +84,8 @@ namespace wpfFamiliaBlanco.Entradas
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
             InitializeComponent();
-
+            RbExterno.Visibility = Visibility.Collapsed;
+            RbInterno.Visibility = Visibility.Collapsed;
             loadCmbOrdenes(numeroOC);
             loadDgvProd();
             prodRemito = productosRemito;
@@ -83,6 +106,46 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductosOC.IsReadOnly = true;
             dgvProductosRemito.IsReadOnly = true;
 
+            //cambios diseño batta
+            lblWindowTitle.Content = "Modificar Remito";
+
+        }
+
+        //MODIFICAR DESDE SALIDAS
+        public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito, DateTime fecha, string numeroRemito, int idRemito, int tipo6)
+        {
+            InitializeComponent();
+            tipo = tipo6;
+            if (tipo == 1)
+            {
+                RbInterno.IsChecked = true;
+            }
+            else
+            {
+                RbExterno.IsChecked = true;
+            }
+  
+            loadCmbOrdenesSalida(numeroOC);
+            loadDgvProd();
+            prodRemito = productosRemito;
+            backupStock(productosRemito);
+            loadDgvProdRemito(prodRemito);
+            loadProductosOCSalida(numeroOC);
+            loadFechaEmisionSalida();
+            dtRemito.SelectedDate = fecha;
+            txtNroRemito.Text = numeroRemito;
+            this.idRemito = idRemito;
+            cmbProveedores.IsEnabled = false;
+            cmbOrden.IsEnabled = false;
+            txtFiltro.IsEnabled = false;
+            cmbFechas.IsEnabled = false;
+            ejecuta = false;
+            loadcmbProveedoresSalida();
+            ejecuta = true;
+            dgvProductosOC.IsReadOnly = true;
+            dgvProductosRemito.IsReadOnly = true;
+            RbInterno.IsEnabled = false;
+            RbExterno.IsEnabled = false;
             //cambios diseño batta
             lblWindowTitle.Content = "Modificar Remito";
 
@@ -108,19 +171,56 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 prodRemito.Clear();
                 dgvProductosRemito.Items.Refresh();
-                try
+
+                if (RbInterno.IsChecked == true)
                 {
-                  
-                    ejecuta = false;
-                      loadCmbOrdenes();
-                    loadFechaEmision();
-                    ejecuta = true;
-                }
-                catch (Exception)
-                {
+                    try
+                    {
+
+                        ejecuta = false;
+                        loadCmbOrdenesSalida();
+                       // loadFechaEmision();
+                        ejecuta = true;
+                    }
+                    catch (Exception)
+                    {
 
 
+                    }
                 }
+                else if(RbExterno.IsChecked == true)
+                {
+                    try
+                    {
+
+                        ejecuta = false;
+                        loadCmbOrdenesSalida();
+                       // loadFechaEmision();
+                        ejecuta = true;
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+
+                        ejecuta = false;
+                        loadCmbOrdenes();
+                        loadFechaEmision();
+                        ejecuta = true;
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                }
+               
             }
         }
         public void loadDgvProd() {
@@ -176,6 +276,32 @@ namespace wpfFamiliaBlanco.Entradas
 
         }
 
+        public void loadcmbProveedoresSalida()
+        {
+
+            if (RbInterno.IsChecked == true)
+            {
+                String consulta = "SELECT DISTINCT p.nombre, p.idClientemi FROM clientesmi p inner join ordencomprasalida o where o.FK_idClientemi = p.idClientemi ";
+                conexion.Consulta(consulta, combo: cmbProveedores);
+                cmbProveedores.DisplayMemberPath = "nombre";
+                cmbProveedores.SelectedValuePath = "idClientemi";
+                cmbProveedores.SelectedIndex = 0;
+                loadCmbOrdenesSalida();
+            }
+            else
+            {
+                String consulta = "SELECT DISTINCT p.nombre, p.idClienteme FROM clientesme p inner join ordencomprasalida o where o.FK_idClienteme = p.idClienteme";
+                conexion.Consulta(consulta, combo: cmbProveedores);
+                cmbProveedores.DisplayMemberPath = "nombre";
+                cmbProveedores.SelectedValuePath = "idClienteme";
+                cmbProveedores.SelectedIndex = 0;
+                loadCmbOrdenesSalida();
+            }
+
+
+
+        }
+
         public void loadcmbProveedores(int proveedor)
         {
             ejecuta = false;
@@ -206,7 +332,19 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            loadProductosOC();
+            if (RbInterno.IsChecked == true)
+            {
+                loadProductosOCSalida();
+            }
+            else if (RbExterno.IsChecked == true)
+            {
+                loadProductosOCSalida();
+            }
+            else
+            {
+                loadProductosOC();
+            }
+        
 
         }
 
@@ -328,6 +466,33 @@ namespace wpfFamiliaBlanco.Entradas
             cmbOrden.SelectedIndex = -1;
             cmbOrden.SelectedIndex = 0;
         }
+
+
+        public void loadCmbOrdenesSalida()
+        {
+
+            if (RbInterno.IsChecked == true)
+            {
+                String consulta = " Select * from ordencomprasalida t1 where t1.FK_idClientemi = @valor ";
+                DataTable OCProveedor = conexion.ConsultaParametrizada(consulta, cmbProveedores.SelectedValue);
+                cmbOrden.ItemsSource = OCProveedor.AsDataView();
+                cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                cmbOrden.SelectedValuePath = "idOrdenCompra";
+                cmbOrden.SelectedIndex = -1;
+                cmbOrden.SelectedIndex = 0;
+            }
+            else
+            {
+                String consulta = " Select * from ordencomprasalida t1 where t1.FK_idClienteme = @valor ";
+                DataTable OCProveedor = conexion.ConsultaParametrizada(consulta, cmbProveedores.SelectedValue);
+                cmbOrden.ItemsSource = OCProveedor.AsDataView();
+                cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                cmbOrden.SelectedValuePath = "idOrdenCompra";
+                cmbOrden.SelectedIndex = -1;
+                cmbOrden.SelectedIndex = 0;
+            }
+      
+        }
         public void loadCmbOrdenes(int orden)
         {
             String consulta = " Select idOrdenCompra from ordencompra ";
@@ -346,7 +511,26 @@ namespace wpfFamiliaBlanco.Entradas
             }
                
         }
-         public void loadFechaEmision()
+
+        public void loadCmbOrdenesSalida(int orden)
+        {
+            String consulta = " Select idOrdenCompra from ordencomprasalida ";
+            conexion.Consulta(consulta, combo: cmbOrden);
+            cmbOrden.DisplayMemberPath = "idOrdenCompra";
+            cmbOrden.SelectedValuePath = "idOrdenCompra";
+
+            for (int i = 0; i < cmbOrden.Items.Count; i++)
+            {
+                cmbOrden.SelectedIndex = i;
+
+                if (cmbOrden.SelectedValue.ToString() == orden.ToString())
+                {
+                    break;
+                }
+            }
+
+        }
+        public void loadFechaEmision()
         {
             String sql = "   Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencompra t1 where t1.FK_idProveedor = @valor ";
             DataTable fechas = conexion.ConsultaParametrizada(sql, cmbProveedores.SelectedValue);
@@ -354,6 +538,30 @@ namespace wpfFamiliaBlanco.Entradas
             cmbFechas.DisplayMemberPath = "fecha";
             cmbFechas.SelectedValuePath = "fecha";
             cmbFechas.SelectedIndex = 0;
+        }
+
+        public void loadFechaEmisionSalida()
+        {
+
+            if (RbInterno.IsChecked == true)
+            {
+                String sql = "   Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencomprasalida t1 where t1.FK_idClientemi = @valor ";
+                DataTable fechas = conexion.ConsultaParametrizada(sql, cmbProveedores.SelectedValue);
+                cmbFechas.ItemsSource = fechas.AsDataView();
+                cmbFechas.DisplayMemberPath = "fecha";
+                cmbFechas.SelectedValuePath = "fecha";
+                cmbFechas.SelectedIndex = 0;
+            }
+            else
+            {
+                String sql = "   Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencomprasalida t1 where t1.FK_idClienteme = @valor ";
+                DataTable fechas = conexion.ConsultaParametrizada(sql, cmbProveedores.SelectedValue);
+                cmbFechas.ItemsSource = fechas.AsDataView();
+                cmbFechas.DisplayMemberPath = "fecha";
+                cmbFechas.SelectedValuePath = "fecha";
+                cmbFechas.SelectedIndex = 0;
+            }
+   
         }
 
         public void loadProductosOC()
@@ -373,6 +581,24 @@ namespace wpfFamiliaBlanco.Entradas
  
             dgvProductosOC.Items.Refresh();
         }
+
+        public void loadProductosOCSalida()
+        {
+            productos.Clear();
+            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencomprasalida t1 inner join productos t2 where FK_idOrdenCompra = @valor and t1.FK_idProducto = t2.idProductos";
+            DataTable prod = conexion.ConsultaParametrizada(consulta, cmbOrden.SelectedValue);
+
+            for (int i = 0; i < prod.Rows.Count; i++)
+            {
+                int idProductos = (int)prod.Rows[i].ItemArray[0];
+                int cantidad = (int)prod.Rows[i].ItemArray[1];
+                string nombre = prod.Rows[i].ItemArray[2].ToString();
+                Producto produc = new Producto(nombre, idProductos, cantidad);
+                productos.Add(produc);
+            }
+
+            dgvProductosOC.Items.Refresh();
+        }
         public void loadProductosOC(int Orden)
         {
             productos.Clear();
@@ -388,6 +614,24 @@ namespace wpfFamiliaBlanco.Entradas
             }
   
           
+            dgvProductosOC.Items.Refresh();
+        }
+
+        public void loadProductosOCSalida(int Orden)
+        {
+            productos.Clear();
+            string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencomprasalida t1 inner join productos t2 where FK_idOrdenCompra = @valor and t1.FK_idProducto = t2.idProductos";
+            DataTable prod = conexion.ConsultaParametrizada(consulta, Orden);
+            for (int i = 0; i < prod.Rows.Count; i++)
+            {
+                int idProductos = (int)prod.Rows[i].ItemArray[0];
+                int cantidad = (int)prod.Rows[i].ItemArray[1];
+                string nombre = prod.Rows[i].ItemArray[2].ToString();
+
+                productos.Add(new Producto(nombre, idProductos, cantidad));
+            }
+
+
             dgvProductosOC.Items.Refresh();
         }
         public bool validar()
@@ -425,6 +669,28 @@ namespace wpfFamiliaBlanco.Entradas
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
+        }
+
+        private void RbInterno_Checked(object sender, RoutedEventArgs e)
+        {
+            String consulta = "SELECT DISTINCT p.nombre, p.idClientemi FROM clientesmi p inner join ordencomprasalida o where o.FK_idClientemi = p.idClientemi ";
+                conexion.Consulta(consulta, combo: cmbProveedores);
+                cmbProveedores.DisplayMemberPath = "nombre";
+                cmbProveedores.SelectedValuePath = "idClientemi";
+                cmbProveedores.SelectedIndex = 0;
+            
+           
+            
+            
+        }
+
+        private void RbExterno_Checked(object sender, RoutedEventArgs e)
+        {
+            String consulta = "SELECT DISTINCT p.nombre, p.idClienteme FROM clientesme p inner join ordencomprasalida o where o.FK_idClienteme = p.idClienteme";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idClienteme";
+            cmbProveedores.SelectedIndex = 0;
         }
     }
 

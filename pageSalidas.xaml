@@ -47,7 +47,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemitos_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -57,7 +57,7 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnDevolucionProductos" Content="Devolución de productos" HorizontalAlignment="Left" Margin="820,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
+        <Button x:Name="btnDevolucionProductos" Content="Devolución de productos" HorizontalAlignment="Left" Margin="820,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnDevolucionProductos_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>

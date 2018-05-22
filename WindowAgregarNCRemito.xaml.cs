@@ -29,10 +29,12 @@ namespace wpfFamiliaBlanco
         public int idNotaCred;
         public int id;
         Boolean bandera = false;
+        int tipo;
         public WindowAgregarNCRemito()
         {
             InitializeComponent();
-      
+            RbInterno.Visibility = Visibility.Collapsed;
+            RbExterno.Visibility = Visibility.Collapsed;
             loadProductosRemitos();
             loadProductosNCRemitos();
             LoadDgvNCRemito();
@@ -42,6 +44,27 @@ namespace wpfFamiliaBlanco
             seleccioneParaFiltrar();
             bandera = true;
             loadLtsRemitos();
+
+        }
+
+        //NC remitos desde salidas
+        public WindowAgregarNCRemito(int tipo7)
+        {
+            InitializeComponent();
+            RbInterno.Visibility = Visibility.Visible;
+            RbExterno.Visibility = Visibility.Visible;
+            tipo = tipo7;
+     
+            RbInterno.IsChecked = true;
+            loadProductosRemitos();
+            loadProductosNCRemitos();
+            LoadDgvNCRemito();
+            dgvProductosNCRemito.IsReadOnly = true;
+            DgvProductosRemitos.IsReadOnly = true;
+            LoadComboProveedorSalida();
+            seleccioneParaFiltrar();
+            bandera = true;
+            loadLtsRemitosSalida();
 
         }
 
@@ -63,7 +86,34 @@ namespace wpfFamiliaBlanco
             loadLtsRemitos(idremito);
             lblWindowTitle.Content = "Modificar Nota de Crédito";
         }
-
+        public WindowAgregarNCRemito(List<Producto> ProdAmodificar, int idremito, int idNotaCredito, int tipo8)
+        {
+            InitializeComponent();
+            tipo = tipo8;
+            if (tipo == 1)
+            {
+                RbInterno.IsChecked = true;
+            }
+            else
+            {
+                RbExterno.IsChecked = true;
+            }
+            loadProductosRemitos();
+            itemsNC = ProdAmodificar;
+            LoadDgvNCRemito();
+            ltsRemitos.IsEnabled = false;
+            idNotaCred = idNotaCredito;
+            cmbProveedores1.IsEnabled = false;
+            txtnroremito.IsEnabled = false;
+            loadProductosNCRemitos();
+            dgvProductosNCRemito.IsReadOnly = true;
+            DgvProductosRemitos.IsReadOnly = true;
+            bandera = true;
+            loadLtsRemitosSalida(idremito);
+            RbInterno.IsEnabled = false;
+            RbExterno.IsEnabled = false;
+            lblWindowTitle.Content = "Modificar Nota de Crédito";
+        }
         private void LoadComboProveedor()
         {
             String consulta4 = "SELECT nombre, idProveedor FROM proveedor";
@@ -73,9 +123,50 @@ namespace wpfFamiliaBlanco
             cmbProveedores1.SelectedIndex = -1;
 
         }
+
+        private void LoadComboProveedorSalida()
+        {
+
+            if (RbInterno.IsChecked == true)
+            {
+                String consulta4 = "SELECT nombre, idClientemi FROM clientesmi";
+                conexion.Consulta(consulta4, combo: cmbProveedores1);
+                cmbProveedores1.DisplayMemberPath = "nombre";
+                cmbProveedores1.SelectedValuePath = "idClientemi";
+                cmbProveedores1.SelectedIndex = -1;
+            }
+            else
+            {
+                String consulta4 = "SELECT nombre, idClienteme FROM clientesme";
+                conexion.Consulta(consulta4, combo: cmbProveedores1);
+                cmbProveedores1.DisplayMemberPath = "nombre";
+                cmbProveedores1.SelectedValuePath = "idClienteme";
+                cmbProveedores1.SelectedIndex = -1;
+            }
+        
+
+        }
         public void loadLtsRemitos()
         {
             String consulta = "select * from remito";
+            conexion.Consulta(consulta, tabla: ltsRemitos);
+            ltsRemitos.DisplayMemberPath = "numeroRemito";
+            ltsRemitos.SelectedValuePath = "idremitos";
+            ltsRemitos.SelectedIndex = 0;
+        }
+
+        public void loadLtsRemitosSalida()
+        {
+            String consulta = "select * from remitosalidas";
+            conexion.Consulta(consulta, tabla: ltsRemitos);
+            ltsRemitos.DisplayMemberPath = "numeroRemito";
+            ltsRemitos.SelectedValuePath = "idremitos";
+            ltsRemitos.SelectedIndex = 0;
+        }
+
+        public void loadLtsRemitosSalida(int index)
+        {
+            String consulta = "select * from remitosalidas WHERE idremitos = '" + index + "' ";
             conexion.Consulta(consulta, tabla: ltsRemitos);
             ltsRemitos.DisplayMemberPath = "numeroRemito";
             ltsRemitos.SelectedValuePath = "idremitos";
@@ -93,29 +184,80 @@ namespace wpfFamiliaBlanco
         {
             if (bandera == true)
             {
+                if (RbInterno.IsChecked == true)
+                {
+                    //Datos Remito
 
-            //Datos Remito
+                    String sql = "Select t3.nombre,t1.fecha ,t2.idOrdenCompra from remitosalidas t1, ordencomprasalida t2, clientesmi t3 where idremitos = '" + ltsRemitos.SelectedValue + "' and t1.FK_idOrdenCompra = t2.idOrdenCompra and t2.FK_idClientemi = t3.idClientemi";
+                    DataTable datos = conexion.ConsultaParametrizada(sql, ltsRemitos.SelectedValue);
 
-            String sql = "Select  t3.nombre,t1.fecha ,t2.idOrdenCompra from remito t1 , ordencompra t2, proveedor t3 where idremitos = '"+ltsRemitos.SelectedValue+"' and t1.FK_idOC = t2.idOrdenCompra and t2.FK_idProveedor = t3.idProveedor";
-            DataTable datos = conexion.ConsultaParametrizada(sql, ltsRemitos.SelectedValue);
+                    String sq = "Select fecha from remitosalidas where idremitos = '" + ltsRemitos.SelectedValue + "'";
+                    String fecha = conexion.ValorEnVariable(sq).ToString();
 
 
-            String sq = "Select fecha from remito where idremitos = '" + ltsRemitos.SelectedValue + "'";
-            String fecha = conexion.ValorEnVariable(sq).ToString();
-                
-    
-            txtfecha.Text = fecha;
+                    txtfecha.Text = fecha;
 
-            //consulta productos
-            String consulta = "  SELECT t2.nombre , t1.CrNotaCredito, t2.idProductos from productos_has_remitos t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idRemito = @valor";
-            productos = conexion.ConsultaParametrizada(consulta, ltsRemitos.SelectedValue);
-            productosparametro.Clear();
-            for (int i = 0; i < productos.Rows.Count; i++)
-            {
-                productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
-            }
+                    //consulta productos
+                    String consulta = "  SELECT t2.nombre , t1.CrNotaCredito, t2.idProductos from productos_has_remitossalida t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idRemito = @valor";
+                    productos = conexion.ConsultaParametrizada(consulta, ltsRemitos.SelectedValue);
+                    productosparametro.Clear();
+                    for (int i = 0; i < productos.Rows.Count; i++)
+                    {
+                        productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
+                    }
 
-            DgvProductosRemitos.Items.Refresh();
+                    DgvProductosRemitos.Items.Refresh();
+                } else if (RbExterno.IsChecked == true)
+                {
+                    //Datos Remito
+                    
+                    String sql = "Select t3.nombre,t1.fecha ,t2.idOrdenCompra from remitosalidas t1, ordencomprasalida t2, clientesme t3 where idremitos = '" + ltsRemitos.SelectedValue + "' and t1.FK_idOrdenCompra = t2.idOrdenCompra and t2.FK_idClienteme = t3.idClienteme";
+                    DataTable datos = conexion.ConsultaParametrizada(sql, ltsRemitos.SelectedValue);
+
+
+                    String sq = "Select fecha from remitosalidas where idremitos = '" + ltsRemitos.SelectedValue + "'";
+                    String fecha = conexion.ValorEnVariable(sq).ToString();
+
+
+                    txtfecha.Text = fecha;
+
+                    //consulta productos
+                    String consulta = "  SELECT t2.nombre , t1.CrNotaCredito, t2.idProductos from productos_has_remitossalida t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idRemito = @valor";
+                    productos = conexion.ConsultaParametrizada(consulta, ltsRemitos.SelectedValue);
+                    productosparametro.Clear();
+                    for (int i = 0; i < productos.Rows.Count; i++)
+                    {
+                        productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
+                    }
+
+                    DgvProductosRemitos.Items.Refresh();
+                }
+                else
+                {
+                    //Datos Remito
+
+                    String sql = "Select  t3.nombre,t1.fecha ,t2.idOrdenCompra from remito t1 , ordencompra t2, proveedor t3 where idremitos = '" + ltsRemitos.SelectedValue + "' and t1.FK_idOC = t2.idOrdenCompra and t2.FK_idProveedor = t3.idProveedor";
+                    DataTable datos = conexion.ConsultaParametrizada(sql, ltsRemitos.SelectedValue);
+
+
+                    String sq = "Select fecha from remito where idremitos = '" + ltsRemitos.SelectedValue + "'";
+                    String fecha = conexion.ValorEnVariable(sq).ToString();
+
+
+                    txtfecha.Text = fecha;
+
+                    //consulta productos
+                    String consulta = "  SELECT t2.nombre , t1.CrNotaCredito, t2.idProductos from productos_has_remitos t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idRemito = @valor";
+                    productos = conexion.ConsultaParametrizada(consulta, ltsRemitos.SelectedValue);
+                    productosparametro.Clear();
+                    for (int i = 0; i < productos.Rows.Count; i++)
+                    {
+                        productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
+                    }
+
+                    DgvProductosRemitos.Items.Refresh();
+                }
+         
             }
         }
         private void loadProductosRemitos()
@@ -272,14 +414,40 @@ namespace wpfFamiliaBlanco
         private void btnVertodo_Click(object sender, RoutedEventArgs e)
         {
             bandera = false;
-            String consulta = "select * from remito";
-            conexion.Consulta(consulta, tabla: ltsRemitos);
-            ltsRemitos.DisplayMemberPath = "numeroRemito";
-            ltsRemitos.SelectedValuePath = "idremitos";
-          
-            ltsRemitos.SelectedIndex = 0;
-           
-            seleccioneParaFiltrar();
+
+            if (RbInterno.IsChecked == true)
+            {
+                String consulta = "select * from remitosalidas";
+                conexion.Consulta(consulta, tabla: ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "numeroRemito";
+                ltsRemitos.SelectedValuePath = "idremitos";
+
+                ltsRemitos.SelectedIndex = 0;
+
+                seleccioneParaFiltrar();
+            } else if (RbExterno.IsChecked == true)
+            {
+                String consulta = "select * from remitosalidas";
+                conexion.Consulta(consulta, tabla: ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "numeroRemito";
+                ltsRemitos.SelectedValuePath = "idremitos";
+
+                ltsRemitos.SelectedIndex = 0;
+
+                seleccioneParaFiltrar();
+            }
+            else
+            {
+                String consulta = "select * from remito";
+                conexion.Consulta(consulta, tabla: ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "numeroRemito";
+                ltsRemitos.SelectedValuePath = "idremitos";
+
+                ltsRemitos.SelectedIndex = 0;
+
+                seleccioneParaFiltrar();
+            }
+        
             bandera = true;
         }
         private void seleccioneParaFiltrar()
@@ -292,17 +460,51 @@ namespace wpfFamiliaBlanco
           
             if (bandera == true)
             {
-                String id = cmbProveedores1.SelectedValue.ToString();
-              
-                bandera = false;
-                String sql = " select distinct r.numeroRemito, r.idremitos from remito r, ordencompra o, proveedor p where   o.FK_idProveedor = '" + id + "' and o.idOrdenCompra = r.FK_idOC ";
 
-                conexion.Consulta(sql, tabla: ltsRemitos);
-                ltsRemitos.DisplayMemberPath = "numeroRemito";
-                ltsRemitos.SelectedValuePath = "idremitos";
-                bandera = true;
-                ltsRemitos.SelectedIndex = 1;
-                ltsRemitos.SelectedIndex = 0;
+                if (RbInterno.IsChecked == true)
+                {
+                    //String id = cmbProveedores1.SelectedValue.ToString();
+                   // MessageBox.Show("id" + id);
+                    bandera = false;
+                    String sql = " select distinct r.numeroRemito, r.idremitos from remitosalidas r, ordencomprasalida o, clientesmi p where   o.FK_idClientemi IS NOT NULL and o.idOrdenCompra = r.FK_idOrdenCompra ";
+
+                    conexion.Consulta(sql, tabla: ltsRemitos);
+                    ltsRemitos.DisplayMemberPath = "numeroRemito";
+                    ltsRemitos.SelectedValuePath = "idremitos";
+                    bandera = true;
+                  //  ltsRemitos.SelectedIndex = 1;
+                    ltsRemitos.SelectedIndex = 0;
+                }
+                else if(RbExterno.IsChecked == true)
+                {
+
+                    //String id = cmbProveedores1.SelectedValue.ToString();
+                   // MessageBox.Show("id" + id);
+                    bandera = false;
+                    String sql = " select distinct r.numeroRemito, r.idremitos from remitosalidas r, ordencomprasalida o, clientesme p where   o.FK_idClienteme IS NOT NULL and o.idOrdenCompra = r.FK_idOrdenCompra ";
+
+                    conexion.Consulta(sql, tabla: ltsRemitos);
+                    ltsRemitos.DisplayMemberPath = "numeroRemito";
+                    ltsRemitos.SelectedValuePath = "idremitos";
+                    bandera = true;
+            //        ltsRemitos.SelectedIndex = 1;
+                    ltsRemitos.SelectedIndex = 0;
+                }
+                else
+                {
+                    String id = cmbProveedores1.SelectedValue.ToString();
+
+                    bandera = false;
+                    String sql = " select distinct r.numeroRemito, r.idremitos from remito r, ordencompra o, proveedor p where   o.FK_idProveedor = '" + id + "' and o.idOrdenCompra = r.FK_idOC ";
+
+                    conexion.Consulta(sql, tabla: ltsRemitos);
+                    ltsRemitos.DisplayMemberPath = "numeroRemito";
+                    ltsRemitos.SelectedValuePath = "idremitos";
+                    bandera = true;
+                    ltsRemitos.SelectedIndex = 1;
+                    ltsRemitos.SelectedIndex = 0;
+                }
+
                
                 // LoadDgvNCRemito();
             }
@@ -310,14 +512,62 @@ namespace wpfFamiliaBlanco
         }
         private void txtnroremito_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Busquedas de remitos
-            DataTable remitos = new DataTable(); 
-            String consulta = "SELECT * FROM remito WHERE numeroRemito LIKE '%' @valor '%'";
-            remitos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
-            MessageBox.Show("" + remitos);
-            ltsRemitos.ItemsSource = remitos.AsDataView();
-            ltsRemitos.SelectedIndex = 0;
+            try
+            {
 
+         
+            if (RbExterno.IsChecked == true || RbInterno.IsChecked == true)
+            {
+                // Busquedas de remitos
+                DataTable remitos = new DataTable();
+                String consulta = "SELECT * FROM remitosalidas WHERE numeroRemito LIKE '%' @valor '%'";
+                remitos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
+                MessageBox.Show("" + remitos);
+                ltsRemitos.ItemsSource = remitos.AsDataView();
+                ltsRemitos.SelectedIndex = 0;
+
+            }
+            else
+            {
+                // Busquedas de remitos
+                DataTable remitos = new DataTable();
+                String consulta = "SELECT * FROM remito WHERE numeroRemito LIKE '%' @valor '%'";
+                remitos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
+                MessageBox.Show("" + remitos);
+                ltsRemitos.ItemsSource = remitos.AsDataView();
+                ltsRemitos.SelectedIndex = 0;
+
+            }
+            }
+            catch (NullReferenceException)
+            {
+
+            
+            }
+        }
+
+        private void RbInterno_Checked(object sender, RoutedEventArgs e)
+        {
+            String consulta = "SELECT DISTINCT p.nombre, p.idclientemi FROM clientesmi p ,ordencomprasalida o, remitosalidas r where o.FK_idClientemi = p.idClientemi and r.FK_idOrdenCompra = o.idOrdenCompra";
+            conexion.Consulta(consulta, combo: cmbProveedores1);
+           // ejecutar = false;
+            cmbProveedores1.DisplayMemberPath = "nombre";
+            cmbProveedores1.SelectedValuePath = "idClientemi";
+           // ejecutar = true;
+            cmbProveedores1.SelectedIndex = 0;
+        }
+
+        private void RbExterno_Checked(object sender, RoutedEventArgs e)
+        {
+            String consulta = "SELECT DISTINCT p.nombre, p.idClienteme FROM clientesme p ,ordencomprasalida o, remitosalidas r where o.FK_idClienteme = p.idClienteme and r.FK_idOrdenCompra = o.idOrdenCompra";
+            conexion.Consulta(consulta, combo: cmbProveedores1);
+            //   ejecutar = false;
+            cmbProveedores1.DisplayMemberPath = "nombre";
+            cmbProveedores1.SelectedValuePath = "idClienteme";
+            //  ejecutar = true;
+            cmbProveedores1.SelectedIndex = 0;
+           // LoadListaComboProveedor();
+           
         }
     }
 }
