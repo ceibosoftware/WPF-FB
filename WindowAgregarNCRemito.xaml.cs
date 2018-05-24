@@ -25,6 +25,7 @@ namespace wpfFamiliaBlanco
         DataTable productos;
         public List<Producto> productosparametro = new List<Producto>();
         public List<Producto> itemsNC = new List<Producto>();
+        public List<Producto> itemsNCAntiguos = new List<Producto>();
         public int idRemito;
         public int idNotaCred;
         public int id;
@@ -74,6 +75,7 @@ namespace wpfFamiliaBlanco
         
             loadProductosRemitos();
             itemsNC = ProdAmodificar;
+            backupproductos(ProdAmodificar);
             LoadDgvNCRemito();
             ltsRemitos.IsEnabled = false;
             idNotaCred = idNotaCredito;
@@ -85,6 +87,14 @@ namespace wpfFamiliaBlanco
             bandera = true;
             loadLtsRemitos(idremito);
             lblWindowTitle.Content = "Modificar Nota de Crédito";
+        }
+
+        private void backupproductos(List<Producto> productosNC)
+        {
+            foreach (Producto producto in productosNC)
+            {
+                itemsNCAntiguos.Add(producto);
+            }
         }
         public WindowAgregarNCRemito(List<Producto> ProdAmodificar, int idremito, int idNotaCredito, int tipo8)
         {

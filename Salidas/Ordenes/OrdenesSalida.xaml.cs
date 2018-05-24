@@ -389,10 +389,10 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 int idOC = (int)ltsNumeroOC.SelectedValue;
                 int index = (int)ltsNumeroOC.SelectedIndex;
-                string existeRemito = "select count(idremitos) from remito where FK_idOC = " + idOC + " ";
-                string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + idOC + " ";
-                //conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0"
-                if (true)
+                string existeRemito = "select count(idremitos) from remitoSalidas where FK_idOrdenCompra = " + idOC + " ";
+                string existeFactura = "select count(idFacturas) from facturaSalida where FK_idOrdenCompra = " + idOC + " ";
+                
+                if (conexion.ValorEnVariable(existeRemito) == "0" && conexion.ValorEnVariable(existeFactura) == "0")
                 {
                     //VALORES NECESARIOS PARA LLENAR CONSTRUCTOR
 
