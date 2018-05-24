@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Clientes"
         mc:Ignorable="d"
-        Title="WindowAgregarContactoCliente" Height="467" Width="633">
+        Title="WindowAgregarContactoCliente" Height="273.99" Width="526.117" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="BotonStyle_crud" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -71,8 +71,8 @@
         </Style>
 
     </Window.Resources>
-    <Grid Background="#FF232222" Margin="0,10,-8,-2">
-        <Border Height="296" Width="435" BorderThickness="1,1,3,1" BorderBrush="Gray" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="101,86,97,46" Opacity="0.5" >
+    <Grid Background="#FF232222" Margin="0,0,-8,-2">
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="179" Margin="18,37,0,0" VerticalAlignment="Top" Width="478" CornerRadius="5" Opacity="0.5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -80,14 +80,14 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtTelefonoContacto" HorizontalAlignment="Left" Height="23" Margin="148,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14" BorderBrush="{x:Null}" PreviewTextInput="txtTelefonoContacto_PreviewTextInput"/>
-        <TextBox x:Name="txtNombreContacto" HorizontalAlignment="Left" Height="23" Margin="148,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF686868" Foreground="White" FontSize="14" PreviewTextInput="txtNombreContacto_PreviewTextInput_1"/>
-        <Button x:Name="btnCancelar_Copy1" Content="Cancelar" HorizontalAlignment="Left" Margin="409,321,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource BotonStyle_crud}" Height="23" VerticalContentAlignment="Center" BorderBrush="#FFB90909" Click="btnCancelar_Copy1_Click_1"/>
-        <Label x:Name="lblNombre_Copy1" Content="Telefono" HorizontalAlignment="Left" Margin="414,111,0,0" VerticalAlignment="Top" Width="70" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblNombreContacto_Copy1" Content="Nombre de contacto" HorizontalAlignment="Left" Margin="340,171,0,0" VerticalAlignment="Top" Width="144" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True"/>
-        <Button x:Name="btnAceptar_Copy1" Content="Aceptar" HorizontalAlignment="Left" Margin="312,321,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center" Click="btnAceptar_Copy1_Click_1"/>
-        <Label x:Name="lblMail_Copy1" Content="Mail" HorizontalAlignment="Left" Margin="442,231,0,0" VerticalAlignment="Top" Width="42" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="True" RenderTransformOrigin="0.683,0.518"/>
-        <TextBox x:Name="txtMailContacto" HorizontalAlignment="Left" Height="23" Margin="148,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF686868" Foreground="White" FontSize="14"/>
-        <Label x:Name="lblNombre_Copy" Content="Agregar contacto" HorizontalAlignment="Left" Margin="101,86,0,0" VerticalAlignment="Top" Width="133" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtTelefonoContacto" HorizontalAlignment="Left" Height="23" Margin="38,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Background="#FF686868" Foreground="White" FontSize="14" BorderBrush="{x:Null}" PreviewTextInput="txtTelefonoContacto_PreviewTextInput"/>
+        <TextBox x:Name="txtNombreContacto" HorizontalAlignment="Left" Height="23" Margin="38,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF686868" Foreground="White" FontSize="14" PreviewTextInput="txtNombreContacto_PreviewTextInput_1"/>
+        <Button x:Name="btnCancelar_Copy1" Content="Cancelar" HorizontalAlignment="Left" Margin="396,170,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource BotonStyle_crud}" Height="23" VerticalContentAlignment="Center" BorderBrush="#FFB90909" Click="btnCancelar_Copy1_Click_1"/>
+        <Button x:Name="btnAceptar_Copy1" Content="Aceptar" HorizontalAlignment="Left" Margin="396,120,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="23" VerticalContentAlignment="Center" Click="btnAceptar_Copy1_Click_1"/>
+        <TextBox x:Name="txtMailContacto" HorizontalAlignment="Left" Height="23" Margin="38,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" VerticalContentAlignment="Center" BorderBrush="{x:Null}" Background="#FF686868" Foreground="White" FontSize="14"/>
+        <Label x:Name="lblWindowTitle" Content="Agregar Contacto" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="32" Width="170" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <Label Content="Teléfono" HorizontalAlignment="Left" Margin="312,43,0,0" VerticalAlignment="Top" Height="27" Width="62" FontSize="14" RenderTransformOrigin="0.499,0.547"/>
+        <Label Content="Nombre del Contacto" HorizontalAlignment="Left" Margin="231,93,0,0" VerticalAlignment="Top" Height="27" Width="143" FontSize="14" RenderTransformOrigin="0.499,0.547"/>
+        <Label Content="Mail" HorizontalAlignment="Left" Margin="338,143,0,0" VerticalAlignment="Top" Height="27" Width="36" FontSize="14" RenderTransformOrigin="0.499,0.547"/>
     </Grid>
 </Window>

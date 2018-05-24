@@ -57,6 +57,7 @@ namespace wpfFamiliaBlanco.Clientes
             loaddgvcontacto(this.lista);
             idcliente = id;
             CampLimit();
+            lblWindowTitle.Content = "Modificar Cliente de Mercado Interno";
 
         }
 

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace wpfFamiliaBlanco.Clientes
+namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 {
     /// <summary>
     /// Lógica de interacción para windowAgregarCliente.xaml
@@ -61,7 +61,7 @@ namespace wpfFamiliaBlanco.Clientes
             LoadDGVContacto();
             idcliente = id;
             CampLimit();
-
+            lblWindowTitle.Content = "Modificar Cliente de Mercado Externo";
 
         }
 

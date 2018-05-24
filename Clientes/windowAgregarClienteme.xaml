@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Clientes"
         mc:Ignorable="d"
-        Title="windowAgregarClienteme" Height="473" Width="1034">
+        Title="windowAgregarClienteme" Height="490" Width="1041" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
@@ -297,34 +297,48 @@
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
-    <Grid Background="Black">
-        <Button x:Name="btnEliminarc" Content="Eliminar" HorizontalAlignment="Left" Margin="733,134,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" Click="btnEliminarc_Click"/>
-        <Button x:Name="btnModificarc" Content="Modificar" HorizontalAlignment="Left" Margin="653,134,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White" Click="btnModificarc_Click"/>
-        <Button x:Name="btnAgregarc" Content="Agregar" HorizontalAlignment="Left" Margin="571,134,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAgregarc_Click"/>
+    <Grid Background="#FF232222">
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="391.528" Margin="18,37,0,0" VerticalAlignment="Top" Width="992.5" CornerRadius="5" Opacity="0.5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Button x:Name="btnEliminarc" Content="Eliminar" HorizontalAlignment="Left" Margin="340,371.53,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" Click="btnEliminarc_Click"/>
+        <Button x:Name="btnModificarc" Content="Modificar" HorizontalAlignment="Left" Margin="260,371.53,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White" Click="btnModificarc_Click"/>
+        <Button x:Name="btnAgregarc" Content="Agregar" HorizontalAlignment="Left" Margin="178,371.53,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAgregarc_Click"/>
         <ComboBox x:Name="cmbRazonS" Width="180" VerticalAlignment="Top" SelectedIndex="0" Style="{DynamicResource combo_box}" Margin="237,201,0,0" IsReadOnly="True" Height="23" HorizontalAlignment="Left" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C" Visibility="Hidden"/>
         <Label x:Name="lblCuit" Content="Cuit" HorizontalAlignment="Left" Margin="97,176,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Visibility="Hidden"/>
         <Label x:Name="lblRs" Content="Razón social" HorizontalAlignment="Left" Margin="285,171,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Visibility="Hidden"/>
         <Label x:Name="lblDireccionentrega" Content="Dirección de entrega" HorizontalAlignment="Left" Margin="234,235,0,0" VerticalAlignment="Top" Height="25" Width="183" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Visibility="Hidden"/>
-        <Label x:Name="lblContactoLista" Content="Contacto" HorizontalAlignment="Left" Margin="674,10,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <ComboBox x:Name="cmbPrecios" Width="364" VerticalAlignment="Top" SelectedIndex="0" Style="{DynamicResource combo_box}" Margin="442,195,0,0" IsReadOnly="True" Height="23" HorizontalAlignment="Left" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C" SelectionChanged="cmbPrecios_SelectionChanged"/>
-        <Label x:Name="lblprecios" Content="Lista de precios" HorizontalAlignment="Left" Margin="674,167,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <TextBox x:Name="txtNombre" Width="176" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,78,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2" PreviewTextInput="txtNombre_PreviewTextInput"/>
-        <Label x:Name="lblnombre" Content="Nombre" HorizontalAlignment="Left" Margin="97,50,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="844,391,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAceptar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="941,391,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" Click="btnCancelar_Click"/>
-        <TextBox x:Name="txtDireccion" Width="176" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,140,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
-        <Label x:Name="lblDireccion" Content="Dirección" HorizontalAlignment="Left" Margin="97,112,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label x:Name="lblpais" Content="País" HorizontalAlignment="Left" Margin="285,112,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <TextBox x:Name="txtdireccionweb" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,264,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
-        <Label x:Name="lblweb" Content="Web" HorizontalAlignment="Left" Margin="285,233,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label Content="MERCADO EXTERNO" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbtc" HorizontalAlignment="Left" Margin="241,78,0,0" VerticalAlignment="Top" Width="176"/>
-        <Label x:Name="lblTermino" Content="Término Comercial" HorizontalAlignment="Left" Margin="308,49,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbpais" HorizontalAlignment="Left" Margin="241,140,0,0" VerticalAlignment="Top" Width="176"/>
-        <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="100" Margin="442,29,0,0" VerticalAlignment="Top" Width="367"/>
-        <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="153" Margin="442,231,0,0" VerticalAlignment="Top" Width="364"/>
-        <TextBox x:Name="txtcp" Width="365" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="52,197,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="2"/>
-        <Label x:Name="lblcp" Content="Cuit Pais" HorizontalAlignment="Left" Margin="285,171,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblContactoLista" Content="Contacto" HorizontalAlignment="Left" Margin="284,237.853,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <ComboBox x:Name="cmbPrecios" Width="364" VerticalAlignment="Top" SelectedIndex="0" Style="{DynamicResource combo_box}" Margin="442,78,0,0" IsReadOnly="True" Height="19.96" HorizontalAlignment="Left" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C" SelectionChanged="cmbPrecios_SelectionChanged"/>
+        <Label x:Name="lblprecios" Content="Lista de precios" HorizontalAlignment="Left" Margin="674,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtNombre" Width="175" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="38,76.843,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1" PreviewTextInput="txtNombre_PreviewTextInput"/>
+        <Label x:Name="lblnombre" Content="Nombre" HorizontalAlignment="Left" Margin="81,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="910.765,324.5,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAceptar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="910.765,374.53,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" Click="btnCancelar_Click"/>
+        <TextBox x:Name="txtDireccion" Width="378" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="38,166.853,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
+        <Label x:Name="lblDireccion" Content="Dirección" HorizontalAlignment="Left" Margin="284,141.853,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblpais" Content="País" HorizontalAlignment="Left" Margin="284,99.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtdireccionweb" Width="378" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="38,214.853,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
+        <Label x:Name="lblweb" Content="Web" HorizontalAlignment="Left" Margin="284,189.853,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <ComboBox x:Name="cmbtc" HorizontalAlignment="Left" Margin="241,78,0,0" VerticalAlignment="Top" Width="175"/>
+        <ComboBox x:Name="cmbpais" HorizontalAlignment="Left" Margin="241,122.96,0,0" VerticalAlignment="Top" Width="175"/>
+        <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="97" Margin="38,262.853,0,0" VerticalAlignment="Top" Width="378"/>
+        <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="272.637" Margin="442,121.893,0,0" VerticalAlignment="Top" Width="364"/>
+        <TextBox x:Name="txtcp" Width="175" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="38,122.96,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
+        <Label x:Name="lblcp" Content="CUIT País" HorizontalAlignment="Left" Margin="81,99.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblWindowTitle" Content="Agregar Cliente de Mercado Externo" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="27" Width="253.333" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <Label x:Name="lblnombre_Copy" Content="Término Comercial" HorizontalAlignment="Left" Margin="284,53,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblprecios_Copy" Content="Items" HorizontalAlignment="Left" Margin="674,96.893,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="853.765,51,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
+        <Border x:Name="rectanguloGuia" BorderBrush="#FF616B00" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="222.47" Margin="830.489,75,0,0" VerticalAlignment="Top" Width="155.276" Background="#FF2D2C2C" CornerRadius="5">
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
 
     </Grid>
 

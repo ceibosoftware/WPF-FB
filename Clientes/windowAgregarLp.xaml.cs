@@ -56,7 +56,8 @@ namespace wpfFamiliaBlanco.Clientes
             loadlistadeprecios(itemslp);
             idlistadb = id;
             camplimit();
-            
+            lblWindowTitle.Content = "Modificar Lista de Precios";
+
         }
 
         private void loadlistadeprecios(DataTable lp)
@@ -335,15 +336,17 @@ namespace wpfFamiliaBlanco.Clientes
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+     
 
         private void txtPreciolista_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

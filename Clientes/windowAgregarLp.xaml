@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Clientes"
         mc:Ignorable="d"
-         Title="windowAgregarLp" Height="473" Width="1034" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
+         Title="windowAgregarLp" Height="410" Width="875" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen" BorderBrush="Black" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="BotonStyle_crud2" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -44,13 +44,75 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Height="25" Margin="0,-5">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BotonStyle_crud" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true" Background="#FF4B4848" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid Background="Black">
+    <Grid Background="#FF232222">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*"/>
-            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="589*"/>
+            <ColumnDefinition Width="281*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="27,25,0,0" Width="958" Opacity="0.5" CornerRadius="5" Height="376" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="27,37,0,0" Width="811" Opacity="0.5" CornerRadius="5" Height="311" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -58,9 +120,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Label Content="Productos" HorizontalAlignment="Left" Margin="247,137,0,0" VerticalAlignment="Top"/>
-        <Label Content="Lista de Precios" HorizontalAlignment="Left" Margin="581,134,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnEliminarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="351,281,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnEliminarp_Click">
+        <Button x:Name="btnEliminarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="287,249,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnEliminarp_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -70,7 +130,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnAgregarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="351,221,0,0" Height="24" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnAgregarp_Click" >
+        <Button x:Name="btnAgregarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="287,189,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnAgregarp_Click" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -80,14 +140,22 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="307,321,0,0" VerticalAlignment="Top" Width="75" Click="btnAceptar_Click" Grid.Column="1"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="307,348,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Margin="87,79,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="169,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="191" Margin="436,165,0,0" VerticalAlignment="Top" Width="236" SelectionChanged="dgvLp_SelectionChanged" Grid.ColumnSpan="2"/>
-        <DataGrid x:Name="dgvProductos" HorizontalAlignment="Left" Height="198" Margin="87,163,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="dgvProductos_SelectionChanged"/>
-        <TextBox x:Name="txtPreciolista" HorizontalAlignment="Left" Height="23" Margin="149,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="txtPreciolista_PreviewTextInput" Grid.Column="1"/>
-        <Label x:Name="lblpreciolista" Content="Precio de lista" HorizontalAlignment="Left" Margin="185,194,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button x:Name="btnModpl" Content="Modificar" HorizontalAlignment="Left" Margin="194,265,0,0" VerticalAlignment="Top" Width="75" Click="btnModpl_Click" Grid.Column="1"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="153.455,253.128,0,0" VerticalAlignment="Top" Width="75" Click="btnAceptar_Click" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource agregar}"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="153.455,299.843,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource Cancelar}" Click="btnCancelar_Click"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="51,76.843,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224" FontSize="14"/>
+        <DataGrid x:Name="dgvProductos" HorizontalAlignment="Left" Height="198" Margin="51,124.843,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="dgvProductos_SelectionChanged"/>
+        <Label x:Name="lblWindowTitle" Content="Agregar Lista de Precios" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="32" Width="253.333" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
+        <Label x:Name="lblnombre" Content="Nombre" HorizontalAlignment="Left" Margin="139.333,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblnombre_Copy" Content="Productos" HorizontalAlignment="Left" Margin="143,99.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Border BorderBrush="#FF858585" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="299.96" Margin="335.5,37,0,0" VerticalAlignment="Top" Width="336" Opacity="0.5" CornerRadius="5" Grid.ColumnSpan="2"/>
+        <DataGrid x:Name="dgvLp" HorizontalAlignment="Left" Height="198" Margin="348,124.843,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="dgvLp_SelectionChanged"/>
+        <TextBox x:Name="txtPreciolista" HorizontalAlignment="Left" Height="23" Margin="348,76.843,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224" PreviewTextInput="txtPreciolista_PreviewTextInput"/>
+        <Button x:Name="btnModpl" Content="Modificar" HorizontalAlignment="Left" Margin="584,76.843,0,0" VerticalAlignment="Top" Width="75" Click="btnModpl_Click" Height="23" Foreground="White" ToolTip="Modificar Precio de Lista" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblnombre_Copy1" Content="Lista de Precios" HorizontalAlignment="Left" Margin="440,99.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblnombre_Copy2" Content="Precio de Lista" HorizontalAlignment="Left" Margin="440,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="96.455,47.513,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
+        <Border BorderBrush="#FF00586B" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="155.008" Margin="107.179,72.62,0,0" VerticalAlignment="Top" Width="121.276" Background="#FF2D2C2C" CornerRadius="5" Grid.Column="1">
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="135.008" TextWrapping="Wrap" VerticalAlignment="Top" Width="101.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+        </Border>
     </Grid>
 </Window>
