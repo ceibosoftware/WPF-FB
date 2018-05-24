@@ -266,8 +266,9 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-
-  
+            string consulta1 = "SELECT count(FK_idremitos) FROM notacredito where FK_idremitos = "+ltsremitos.SelectedValue+"";
+              
+            if(conexion.ValorEnVariable(consulta1) == "0") { 
             DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
             string numeroRemito = selectedDataRow["numeroRemito"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito numero: " + numeroRemito, "Advertencia", MessageBoxButton.YesNo);
@@ -296,6 +297,11 @@ namespace wpfFamiliaBlanco.Entradas
                     loadLtsRemitos();
                     LoadListaComboProveedor();
                 }
+                }
+                else
+                {
+                    MessageBox.Show("Este remito tiene notas de credito y no se puede eliminar");
+                }
             }
             catch (NullReferenceException)
             {
@@ -308,18 +314,21 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-               string consultaNC = "select count(fk_idremitos) from notacredito where fk_idremitos = " + ltsremitos.SelectedValue + "";
-                if (conexion.ValorEnVariable(consultaNC) == "")
-                {
-                    string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
-                    string consulta = "select t2.FK_idProveedor from  ordencompra t2 where idOrdenCompra = @valor";
-                    int.TryParse(txtOC.Text.ToString(), out int OC);
-                    DataTable idprov = conexion.ConsultaParametrizada(consulta, OC);
-                    int index = ltsremitos.SelectedIndex;
-                    var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro, fecha, numeroR, (int)ltsremitos.SelectedValue);
-                    Console.WriteLine(OC);
 
-                    newW.ShowDialog();
+                string consulta1 = "SELECT count(FK_idremitos) FROM notacredito where FK_idremitos = " + ltsremitos.SelectedValue + "";
+                
+                if (conexion.ValorEnVariable(consulta1) == "0")
+                {
+
+                    string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
+                        string consulta = "select t2.FK_idProveedor from  ordencompra t2 where idOrdenCompra = @valor";
+                        int.TryParse(txtOC.Text.ToString(), out int OC);
+                        DataTable idprov = conexion.ConsultaParametrizada(consulta, OC);
+                        int index = ltsremitos.SelectedIndex;
+                        var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro, fecha, numeroR, (int)ltsremitos.SelectedValue);
+                        Console.WriteLine(OC);
+
+                        newW.ShowDialog();
 
                     if (newW.DialogResult == true)
                     {
@@ -370,19 +379,20 @@ namespace wpfFamiliaBlanco.Entradas
 
                         loadLtsRemitos(index);
                     }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El remito no se puede modificar porque tiene notas de credito");
+                    }
                 }
-                else{
-                    MessageBox.Show("El remito no se puede modificar porque tiene notas de credito");
-                }
-            }
-
             catch (NullReferenceException)
             {
 
                 MessageBox.Show("Seleccione un remito a modificar");
             }
         }
+            
+        }
 
       
     }
-}
