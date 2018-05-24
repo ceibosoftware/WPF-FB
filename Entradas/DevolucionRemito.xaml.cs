@@ -224,14 +224,22 @@ namespace wpfFamiliaBlanco.Entradas
 
                     String updateProductosNC = "UPDATE productos_has_notacredito SET FK_idNotaCredito = '" + newW.idNotaCred + "', FK_idProductos = '" + idp + "', cantidad = '" + cantidad + "' WHERE FK_idNotaCredito = '" + newW.idNotaCred + "' AND FK_idProductos = '" + idp + "'";
                     conexion.operaciones(updateProductosNC);
+                   
 
+                  
                     foreach (var producto in newW.productosparametro)
                     {
                         String sql = "UPDATE productos_has_remitos SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idRemito = '" + idRemito + "'";
                             conexion.operaciones(sql);
                     }
 
-                    //update stock
+                        foreach (var item in newW.itemsNCAntiguos)
+                        {
+                            MessageBox.Show("items antiguos :" + item.cantidad);
+                            String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                            conexion.operaciones(updatestock);
+                        }
+                        //update stock
                         foreach (var item in newW.itemsNC)
                         {
                             String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
