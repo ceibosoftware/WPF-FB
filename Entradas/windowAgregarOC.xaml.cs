@@ -12,6 +12,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarOC : Window
     {
+        
         int idOC;
         public bool agregado = false;
         bool modifica = false;
@@ -34,7 +35,9 @@ namespace wpfFamiliaBlanco.Entradas
         }
         public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
         {
+           
             modifica = true;
+       
             this.productos = producto;
             loadGeneral();
             dpFecha.SelectedDate = fecha;
@@ -53,6 +56,8 @@ namespace wpfFamiliaBlanco.Entradas
             lblWindowTitle.Content = "Modificar Orden de Compra"; 
             lblWindowTitle.Width = 176;
             ColumnasDGVProductos();
+            btnRemito.Visibility = Visibility.Collapsed;
+            btnFactura.Visibility = Visibility.Collapsed;
         }
 
 
@@ -428,7 +433,9 @@ namespace wpfFamiliaBlanco.Entradas
                     int idProveedor = (int)cmbProveedores.SelectedValue;
 
                     var newW = new windowAgregarRemito(idProveedor,idOC);
-
+                    newW.cmbProveedores.IsEnabled = false;
+                    newW.cmbOrden.IsEnabled = false;
+                    newW.txtFiltro.IsEnabled = false;
                     newW.ShowDialog();
                     if (newW.DialogResult == true)
                     {
@@ -456,7 +463,15 @@ namespace wpfFamiliaBlanco.Entradas
                             String sql = "UPDATE productos_has_ordencompra SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + idOrden + "'";
                             conexion.operaciones(sql);
                         }
-
+                        //CARGAR STOCK EN PRODUCTO
+                        foreach (var producto in newW.ProdRemito)
+                        {
+                            Console.WriteLine("id " + producto.id);
+                            Console.WriteLine("id " + producto.cantidad);
+                            String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                            conexion.operaciones(sql);
+                        }
+                        MessageBox.Show("El remito se agrego correctamente");
                     }
                 }
             }
@@ -528,8 +543,12 @@ namespace wpfFamiliaBlanco.Entradas
                     agregado = true;
                   
                     var newW = new windowAgregarFactura(fkOrden,cmbProveedores.Text);
+                    newW.cmbOrden.IsEnabled = false;
+                    newW.cmbProveedores.IsEnabled = false;
+                    newW.txtFiltro.IsEnabled = false;
+                  
                     newW.ShowDialog();
-           
+                   
                     
                     //INSERTO DATOS FACTURA
                     if (newW.DialogResult == true)
@@ -596,6 +615,7 @@ namespace wpfFamiliaBlanco.Entradas
                                 String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + fkOrden + "'";
                                 conexion.operaciones(sql);
                             }
+                            MessageBox.Show("Se agregó la factura correctamente");
                         }
                     }
                 }

@@ -30,6 +30,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProducto();
             LlenarComboFiltro();
+            cmbFiltro.IsEnabled = false;
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
@@ -226,17 +227,27 @@ namespace wpfFamiliaBlanco
         {
             try
             {
-                DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
-                string nombre = selectedDataRow["nombre"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar : " + nombre, "Advertencia", MessageBoxButton.YesNo);
-                if (dialog == MessageBoxResult.Yes)
-                {
-                    int idSeleccionado = (int)ltsProductos.SelectedValue;
-                    string sql = "delete from productos where idProductos = '" + idSeleccionado + "'";
-                    conexion.operaciones(sql);
-                    loadListaProducto();
 
+                String consulta = "SELECT count(FK_idProducto) FROM productos_has_ordencompra WHERE FK_idProducto ='"+ltsProductos.SelectedValue+"' ";
+                if (conexion.ValorEnVariable(consulta) == "0")
+                {
+                    DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
+                    string nombre = selectedDataRow["nombre"].ToString();
+                    MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar : " + nombre, "Advertencia", MessageBoxButton.YesNo);
+                    if (dialog == MessageBoxResult.Yes)
+                    {
+                        int idSeleccionado = (int)ltsProductos.SelectedValue;
+                        string sql = "delete from productos where idProductos = '" + idSeleccionado + "'";
+                        conexion.operaciones(sql);
+                        loadListaProducto();
+
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("El producto no se puede eliminar porque pertenece a una orden de compra");
+                }
+             
             }
             catch (NullReferenceException)
             {

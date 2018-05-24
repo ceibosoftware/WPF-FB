@@ -92,7 +92,7 @@
         <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="38,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390"/>
         <ListBox x:Name="ltsfacturas" HorizontalAlignment="Left" Height="133" Margin="38,125,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="ltsfacturas_SelectionChanged"/>
         <Label Content="Facturas" HorizontalAlignment="Left" Margin="366,98,0,0" VerticalAlignment="Top" Height="27" Width="62" FontSize="14" RenderTransformOrigin="0.499,0.547"/>
-        <DataGrid x:Name="DgvProductosFactur" HorizontalAlignment="Left" Height="110" Margin="38,288.5,0,0" VerticalAlignment="Top" Width="390"/>
+        <DataGrid x:Name="DgvProductosFactur" HorizontalAlignment="Left" Height="110" Margin="38,288.5,0,0" VerticalAlignment="Top" Width="390" SelectionChanged="DgvProductosFactur_SelectionChanged"/>
         <Label Content="Productos Factura" HorizontalAlignment="Left" Margin="38,258,0,0" VerticalAlignment="Top" Height="27" Width="125" RenderTransformOrigin="0.53,-0.008" FontSize="14"/>
         <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="110" Margin="486.008,288.5,0,0" VerticalAlignment="Top" Width="390"/>
         <Label Content="Productos nota crédito" HorizontalAlignment="Left" Margin="723.008,258,0,0" VerticalAlignment="Top" Height="27" Width="151" FontSize="14"/>

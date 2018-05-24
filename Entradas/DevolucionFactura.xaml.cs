@@ -105,8 +105,18 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     String sql = "UPDATE productos_has_facturas SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idfactura = '" + idFactura + "'";
                     conexion.operaciones(sql);
+               
                 }
-                
+
+
+
+                foreach (var item in newW.itemsNC)
+                {
+                    String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                    conexion.operaciones(updatestock);
+                }
+
+
                 LoadDgvNC();
                 loadLtsNotaCredito();
                 
@@ -320,9 +330,21 @@ namespace wpfFamiliaBlanco.Entradas
                     {
                         String sql = "UPDATE productos_has_facturas SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idfactura = '" + idFactura + "'";
                         conexion.operaciones(sql);
+                    
                     }
-             
 
+                    foreach (var item in newW.itemsNCAntiguos)
+                    {
+                        MessageBox.Show("items antiguos :" + item.cantidad);
+                        String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
+                    //update stock
+                    foreach (var item in newW.itemsNC)
+                    {
+                        String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
                 }
                 LoadDgvNC();
                 loadLtsNotaCredito();
@@ -355,6 +377,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                         String consulta = "UPDATE productos_has_facturas SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[3] + "' where FK_idProducto = '" + (int)productos.Rows[i].ItemArray[2] + "' and FK_idfactura= '" + idFactura + "'";
                         conexion.operaciones(consulta);
+                    
                     }
         
 
@@ -364,6 +387,12 @@ namespace wpfFamiliaBlanco.Entradas
                     string sql3 = " DELETE  FROM productos_has_notacredito WHERE FK_idNotaCredito =  '" + ltsNC.SelectedValue + "'";
                     conexion.operaciones(sql3);
 
+
+                    foreach (var item in itemsNC)
+                    {
+                        String updatestock = "UPDATE productos SET stock = stock +'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
                     txtIVA.Text = "";
                     txtSubtotal.Text = "";
                     txtTipoCambio.Text = "";

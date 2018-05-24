@@ -181,13 +181,30 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
 
-            if (validar())
+            if (validar() && CompararStock())
             {
+                
                 compararPrecioLista();
                 DialogResult = true;
             }
 
 
+        }
+
+        private Boolean CompararStock()
+        {
+            String consulta = "SELECT stock FROM productos WHERE idProductos = '" + ltsProductos.SelectedValue + "'";
+            int stock = int.Parse(conexion.ValorEnVariable(consulta));
+
+            if (stock >= int.Parse(txtCantidad.Text))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("La cantidad ingresada es mayor al stock");
+                return false;
+            }
         }
         private void compararPrecioLista()
         {

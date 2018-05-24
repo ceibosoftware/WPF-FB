@@ -20,7 +20,7 @@ namespace wpfFamiliaBlanco.Entradas
     public partial class WindowAgregarPagoProveedorCtaBancaria : Window
     {
 
-        public long cbuu;
+        public Int64 cbuu;
         public String nombreT;
         public float toc;
         public int tipo ;
@@ -49,7 +49,7 @@ namespace wpfFamiliaBlanco.Entradas
             }
             else if (txtCbu.Text != "" && txtNombreTitular.Text != "")
             {
-                cbuu = long.Parse(txtCbu.Text);
+                cbuu = Int64.Parse(txtCbu.Text);
                 nombreT = txtNombreTitular.Text;
                 DialogResult = true;
             }

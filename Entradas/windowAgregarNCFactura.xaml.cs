@@ -25,6 +25,7 @@ namespace wpfFamiliaBlanco.Entradas
         public List<Producto> itemsNC = new List<Producto>();
         public List<Producto> itemsFact = new List<Producto>();
         public List<Producto> itemsAmodificar = new List<Producto>();
+        public List<Producto> itemsNCAntiguos = new List<Producto>();
         public int id = 0;
         float subtotal=0;
         public Producto prod;
@@ -37,6 +38,7 @@ namespace wpfFamiliaBlanco.Entradas
         public int idnota;
         public String totalmodificar;
         public int tipo;
+        Boolean modifica;
         public windowAgregarNCFactura()
         {
             InitializeComponent();
@@ -76,7 +78,8 @@ namespace wpfFamiliaBlanco.Entradas
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
         {
             InitializeComponent();
-            loadLtsfactura();
+            // loadLtsfactura();
+            
             txtIVA.IsReadOnly = true;
             txtTotal.IsReadOnly = true;
             txtTipoCambio.IsReadOnly = true;
@@ -94,9 +97,21 @@ namespace wpfFamiliaBlanco.Entradas
             txtProveedor.IsReadOnly = true;
             LoadDgvNC(itemsNC);
             LoadDgvProdFactura();
+            modifica = true;
             lblWindowTitle.Content = "Modificar Nota de Crédito";
+            backupproductos(ProdAmodificar);
+            modifica = false;
+
         }
 
+        private void backupproductos(List<Producto> productosNC)
+        {
+            foreach (Producto producto in productosNC)
+            {
+                itemsNCAntiguos.Add(producto);
+            }
+        }
+        //desde salidas
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto> ProdAmodificar, String idfactura1, int idnotac, int tipo3)
         {
             InitializeComponent();
@@ -165,7 +180,7 @@ namespace wpfFamiliaBlanco.Entradas
             textColumn2.Header = "Precio Unitario";
             textColumn2.Binding = new Binding("precioUnitario");
             DgvProductosFactur.Columns.Add(textColumn2);
-      
+           
         }
 
         public void LoadDgvNC(List<Producto> p)
@@ -191,6 +206,9 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, ltsfacturas);
             ltsfacturas.DisplayMemberPath = "numeroFactura";
             ltsfacturas.SelectedValuePath = "idfacturas";
+            ltsfacturas.SelectedIndex = -1;
+            ltsfacturas.SelectedIndex = 0;
+            ltsfacturas.SelectedIndex = 1;
             ltsfacturas.SelectedIndex = 0;
         }
 
@@ -205,6 +223,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void loadLtsfactura(String idfacturas)
         {
+
             String consulta = "SELECT idfacturas,numeroFactura FROM factura WHERE idfacturas = '"+idfacturas+"'  ";
             conexion.Consulta(consulta, ltsfacturas);
             ltsfacturas.DisplayMemberPath = "numeroFactura";
@@ -245,6 +264,10 @@ namespace wpfFamiliaBlanco.Entradas
 
             //try
             //{
+            if (!modifica)
+            {
+
+            
                 itemsFact.Clear();
 
                 iva = "";
@@ -394,12 +417,14 @@ namespace wpfFamiliaBlanco.Entradas
 
 
 
-            //}
-            //catch (Exception)
-            //{
+                //}
+                //catch (Exception)
+                //{
 
 
-            //}
+                //}
+
+            }
 
         }
 
@@ -554,7 +579,10 @@ namespace wpfFamiliaBlanco.Entradas
 
         }
 
+        private void DgvProductosFactur_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
           
     }

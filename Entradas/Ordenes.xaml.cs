@@ -297,6 +297,8 @@ namespace wpfFamiliaBlanco
                     else
                     {
                         eliminarOC();
+
+                        MessageBox.Show("La orden se ha eliminado correctamente");
                     }      
                 }  
 

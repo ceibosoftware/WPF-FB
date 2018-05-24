@@ -133,7 +133,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                     productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
                 }
 
-                String consulta2 = "SELECT * FROM notacreditosalida n where n.idNotaCredito ='" + ltsRemitos.SelectedValue + "'";
+                String consulta2 = "SELECT * FROM notacreditosalida n, remitosalidas r where n.idNotaCredito = '"+ ltsRemitos.SelectedValue + "'and n.FK_idremitos = r.idremitos";
                 DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsRemitos.SelectedValue);
 
 
@@ -157,7 +157,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 //    txtproveedor.Text = p;
                 //}
        
-              txtremito.Text= OC.Rows[0].ItemArray[5].ToString() ;
+              txtremito.Text= OC.Rows[0].ItemArray[7].ToString() ;
 
 
             }

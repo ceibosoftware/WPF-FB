@@ -19,7 +19,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarPagoProveedor : Window
     {
-        public long cbu;
+        public Int64 cbu;
         public String nombreTitular;
         public String banco;
         public String destinatario;

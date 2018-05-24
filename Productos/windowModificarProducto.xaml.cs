@@ -278,10 +278,7 @@ namespace wpfFamiliaBlanco
 
         private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
-            {
-                e.Handled = true;
-            }
+        
         }
 
        
@@ -353,6 +350,7 @@ namespace wpfFamiliaBlanco
 
             }
             LoadListaProveedorCategoria(); //
+            LoadListaComboCategoria();
         }
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)

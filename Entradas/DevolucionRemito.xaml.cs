@@ -103,7 +103,8 @@ namespace wpfFamiliaBlanco.Entradas
                     String updateCRremito = "UPDATE productos_has_remitos SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idRemito = '" + newW.idRemito + "'";
                     conexion.operaciones(updateCRremito);
 
-                 
+                  
+
                 }
 
                 foreach (var item in newW.itemsNC)
@@ -134,8 +135,8 @@ namespace wpfFamiliaBlanco.Entradas
                 productosparametro.Add(new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[2], (int)productos.Rows[i].ItemArray[1]));
             }
 
-            String consulta2 = "SELECT * FROM notacredito n where n.idNotaCredito ='" + ltsRemitos.SelectedValue + "'";
-            DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsRemitos.SelectedValue);
+                String consulta2 = "SELECT * FROM notacredito n, remito r where n.idNotaCredito = '" + ltsRemitos.SelectedValue + "'and n.FK_idremitos = r.idremitos";
+                DataTable OC = conexion.ConsultaParametrizada(consulta2, ltsRemitos.SelectedValue);
 
           
 
@@ -148,10 +149,10 @@ namespace wpfFamiliaBlanco.Entradas
             String p = conexion.ValorEnVariable(c).ToString();
 
             txtproveedor.Text = p;
-           
-            txtremito.Text = OC.Rows[0].ItemArray[4].ToString();
 
-               
+                txtremito.Text = OC.Rows[0].ItemArray[7].ToString();
+
+
             }
             catch (Exception)
             {
@@ -231,24 +232,24 @@ namespace wpfFamiliaBlanco.Entradas
                     {
                         String sql = "UPDATE productos_has_remitos SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idRemito = '" + idRemito + "'";
                             conexion.operaciones(sql);
-                    }
 
-                        foreach (var item in newW.itemsNCAntiguos)
-                        {
-                            MessageBox.Show("items antiguos :" + item.cantidad);
-                            String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
-                            conexion.operaciones(updatestock);
-                        }
-                        //update stock
-                        foreach (var item in newW.itemsNC)
-                        {
-                            String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
-                            conexion.operaciones(updatestock);
+                      
                         }
 
-
                     }
-                loadLtsNCRemitos();
+                    foreach (var item in newW.itemsNCAntiguos)
+                    {
+                        MessageBox.Show("items antiguos :" + item.cantidad);
+                        String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
+                    //update stock
+                    foreach (var item in newW.itemsNC)
+                    {
+                        String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
+                    loadLtsNCRemitos();
             }
 
             }
@@ -280,7 +281,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                         String consulta = "UPDATE productos_has_remitos SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[3] + "' where FK_idProducto = '" + (int)productos.Rows[i].ItemArray[2] + "' and FK_idRemito = '" + idremi + "'";
                         conexion.operaciones(consulta);
-
+                    
 
                         String updatestock = "UPDATE productos SET stock = stock +'" + (int)productos.Rows[i].ItemArray[3] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[2] + "'";
                         conexion.operaciones(updatestock);

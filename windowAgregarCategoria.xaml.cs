@@ -32,7 +32,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaCategoria();
             ltsCategorias.SelectedIndex = 1;
-            CargarTxtNombreCategoria();
+           // CargarTxtNombreCategoria();
 
         }
 
@@ -172,12 +172,20 @@ namespace wpfFamiliaBlanco
 
         private void CargarTxtNombreCategoria()
         {
+            try
+            {
 
+           
             String consulta = "SELECT nombre FROM categorias WHERE idCategorias = @valor";
             DataTable proveedor = conexion.ConsultaParametrizada(consulta, ltsCategorias.SelectedValue);
 
             textnombre.Text = proveedor.Rows[0].ItemArray[0].ToString();
+            }
+            catch (NullReferenceException)
+            {
 
+                MessageBox.Show("Escriba el nombre de la categoría");
+            }
 
         }
 

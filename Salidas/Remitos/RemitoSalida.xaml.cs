@@ -95,7 +95,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                 {
                     Console.WriteLine("id " + producto.id);
                     Console.WriteLine("id " + producto.cantidad);
-                    String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                    String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
@@ -394,7 +394,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                         conexion.operaciones(consulta);
 
                         //Console.Write();
-                        String sql2 = "UPDATE productos SET stock = stock-'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + productos.Rows[i].ItemArray[2] + "' ";
+                        String sql2 = "UPDATE productos SET stock = stock+'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + productos.Rows[i].ItemArray[2] + "' ";
                         conexion.operaciones(sql2);
                     }
                     string sql = "delete from remitosalidas where idremitos = '" + idSeleccionado + "'";
@@ -492,14 +492,14 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                     {
                         //MessageBox.Show("stock viejo :" + producto.cantidad);
 
-                        String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                        String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
                         conexion.operaciones(sql);
                     }
                     //SUMO CANTIDAD NUEVA STOCK EN PRODUCTO
                     foreach (var producto in newW.ProdRemito)
                     {
                         //MessageBox.Show("stock nuevo :" + producto.cantidad);
-                        String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                        String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
                         conexion.operaciones(sql);
                     }
 

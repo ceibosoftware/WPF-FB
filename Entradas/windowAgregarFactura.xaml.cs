@@ -20,18 +20,19 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarFactura : Window
     {
-        float subtotal;
-        float subtotali =0;
-        float total;
+
+
+        float total = 0;
         CRUD conexion = new CRUD();
         public List<Producto> items = new List<Producto>();
         public List<Producto> itemsFact = new List<Producto>();
         public List<Cuotas> todaslascuotas = new List<Cuotas>();
+        public List<Producto> productosOC = new List<Producto>();
         Producto producto;
         public Producto prod;
         bool bandera = false;
         DateTime dt = DateTime.Now;
-      public  float totalSubtotal = 0;
+      public  float Subtotal = 0;
         public int id = 0;
         public windowAgregarFactura()
         {
@@ -88,7 +89,7 @@ namespace wpfFamiliaBlanco.Entradas
                 this.cmbCuotas.Text = cuotas;
                 dtFactura.SelectedDate = fechafactura;
                 cmbOrden.Text = numeroOC.ToString();
-                this.subtotali = subtotal;
+                this.Subtotal = subtotal;
                 txtSubtotal.Text = subtotal.ToString();
                 cmbIVA.SelectedIndex = IVA;
                 cmbTipoCambio.SelectedIndex = tipoCambio;
@@ -258,7 +259,9 @@ namespace wpfFamiliaBlanco.Entradas
         private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             items.Clear();
-
+            txtSubtotal.Text = "0";
+            calculaTotal();
+            Subtotal = 0;
        
                 String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
@@ -283,7 +286,11 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void LoadDgvProducto(List<Producto> pOC)
         {
-            dgvProductosOC.ItemsSource = pOC;
+            foreach (var item in pOC)
+            {
+                productosOC.Add(item);
+            }
+            dgvProductosOC.ItemsSource = productosOC;
         }
         private void LoadDgvProducto()
         {
@@ -304,6 +311,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
+                MessageBox.Show(Subtotal.ToString());
                 bool existe = false;
                 Producto prod = dgvProductosOC.SelectedItem as Producto;
                
@@ -342,11 +350,13 @@ namespace wpfFamiliaBlanco.Entradas
                             
                             Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
                             itemsFact.Add(productoFactura);
-                            totalSubtotal = totalSubtotal + (prod.cantidad * prod.precioUnitario);
+                            Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
+                          
                             dgvProductosFactura.Items.Refresh();
                            // float.TryParse(txtSubtotal.Text, out subtotal);
-                            subtotal += productoFactura.total;
-                            txtSubtotal.Text = (totalSubtotal).ToString();                          
+                           
+                          
+                            txtSubtotal.Text = (Subtotal).ToString();                          
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();
                             calculaTotal();
@@ -390,8 +400,9 @@ namespace wpfFamiliaBlanco.Entradas
                     }
 
                 }
-                subtotali = subtotali - prod.cantidad * prod.precioUnitario;
-                txtSubtotal.Text = subtotali.ToString();
+                Subtotal = Subtotal - (prod.cantidad * prod.precioUnitario);
+        
+                txtSubtotal.Text = Subtotal.ToString();
                 calculaTotal();
                 dgvProductosOC.Items.Refresh();
                 itemsFact.Remove(prod);
@@ -400,7 +411,7 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     txtSubtotal.Text = "0";
                     txtTotal.Text = "0";
-                    subtotali = 0;
+               
                     todaslascuotas.Clear();
                     DgvCuotas.Items.Refresh();
                 }
@@ -601,6 +612,12 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
         {
+            items.Clear();
+            productosOC.Clear();
+            Subtotal = 0;
+            txtSubtotal.Text = "0";
+            calculaTotal();
+            dgvProductosOC.Items.Refresh();
             // Busquedas de productos.
             DataTable facturas = new DataTable();
             String consulta;

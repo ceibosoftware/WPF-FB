@@ -34,6 +34,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProveedores();
             LlenarComboFiltro();
+            
   
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
