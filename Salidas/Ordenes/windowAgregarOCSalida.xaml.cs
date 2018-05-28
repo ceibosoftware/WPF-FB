@@ -43,7 +43,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         public windowAgregarOCSalida(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, string telefono, int proveedor, string direccion, List<Producto> producto, int idOC,int chk)
         {
             modifica = true;
-            this.productos = producto;
+            llenarLista(producto);
             loadModificar(chk);
             dpFecha.SelectedDate = fecha;
             txtObservaciones.Text = observaciones;
@@ -64,6 +64,14 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             lblWindowTitle.Width = 176;
             ColumnasDGVProductos();
             modifica = false;
+        }
+        private void llenarLista(List<Producto> producto) {
+            foreach (var item in producto)
+            {
+                this.productos.Add(item);
+                
+            }
+            
         }
         private void lblAgregarRemito_Copy_Click(object sender, RoutedEventArgs e)
         {
@@ -150,23 +158,23 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         }
         private void LoadListaComboClienteMI()
         {
-            modifica = true;
+          
             String consulta = "SELECT  distinct t1.nombre , t1.idClientemi FROM clientesMI t1";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idClientemi";
             cmbProveedores.SelectedIndex = 0;
-            modifica = false;
+            
         }
         private void LoadListaComboClienteME()
         {
-            modifica = true;
+           
             String consulta = "SELECT  distinct t1.nombre , t1.idClienteme FROM clientesME t1";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idClienteme";
             cmbProveedores.SelectedIndex = 0;
-            modifica = false;
+         
         }
         private void LoadListaComboTelefonos()
         {
