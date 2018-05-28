@@ -286,8 +286,8 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                 string sql = "delete from remito where idremitos = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
-                
-                    if(ltsremitos.Items.Count <= 0)
+                        MessageBox.Show("Se elimino correctamente");
+                        if (ltsremitos.Items.Count <= 0)
                     {
                         txtProveedor.Text = "";
                         txtOC.Text = "";
@@ -296,12 +296,14 @@ namespace wpfFamiliaBlanco.Entradas
                     seleccioneParaFiltrar();
                     loadLtsRemitos();
                     LoadListaComboProveedor();
-                }
+                    
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Este remito tiene notas de credito y no se puede eliminar");
                 }
+
             }
             catch (NullReferenceException)
             {

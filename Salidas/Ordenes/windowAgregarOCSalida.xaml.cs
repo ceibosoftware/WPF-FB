@@ -65,8 +65,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             ColumnasDGVProductos();
             modifica = false;
         }
-
-
         private void lblAgregarRemito_Copy_Click(object sender, RoutedEventArgs e)
         {
 
@@ -79,7 +77,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
 
         }
-
         private void btAgregarFactura_Copy_Click(object sender, RoutedEventArgs e)
         {
             //var newW = new windowAgregarFactura();
@@ -90,13 +87,11 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             //}
 
         }
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             //var newW = new windowCuotas();
             //newW.ShowDialog();
         }
-
         private void btnAgregar_Copy_Click(object sender, RoutedEventArgs e)
         {
             if (cmbProveedores.SelectedIndex != -1)
@@ -153,35 +148,38 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto");
             }
         }
-
-
-        public void LoadListaComboClienteMI()
+        private void LoadListaComboClienteMI()
         {
+            modifica = true;
             String consulta = "SELECT  distinct t1.nombre , t1.idClientemi FROM clientesMI t1";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idClientemi";
             cmbProveedores.SelectedIndex = 0;
+            modifica = false;
         }
-        public void LoadListaComboClienteME()
+        private void LoadListaComboClienteME()
         {
+            modifica = true;
             String consulta = "SELECT  distinct t1.nombre , t1.idClienteme FROM clientesME t1";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idClienteme";
             cmbProveedores.SelectedIndex = 0;
+            modifica = false;
         }
-        public void LoadListaComboTelefonos()
+        private void LoadListaComboTelefonos()
         {
            
-                String consulta;
-                if (chkMI.IsChecked == true && (int)cmbProveedores.SelectedValue > 0)
+            String consulta;
+            
+            if (chkMI.IsChecked == true && cmbProveedores.Text.ToString() != "")
                 {
-                    
+               
                     consulta = "SELECT telefono FROM contactocliente where FK_idClientemi = " + cmbProveedores.SelectedValue + "";
                     conexion.Consulta(consulta, combo: cmbTelefono);
                 }
-                else if((int)cmbProveedores.SelectedValue > 0)
+                else if(cmbProveedores.Text.ToString() != "")
                 {
                     consulta = "SELECT telefono FROM contactocliente where FK_idClienteme = " + cmbProveedores.SelectedValue + "";
                     conexion.Consulta(consulta, combo: cmbTelefono);
@@ -197,10 +195,11 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
            
 
         }
-        public void LoadListaComboDireccion()
+        private void LoadListaComboDireccion()
         {
             String consulta;
-            if (chkMI.IsChecked == true && (int)cmbProveedores.SelectedValue > 0)
+           
+            if (chkMI.IsChecked == true &&  cmbProveedores.Text.ToString() != "")
             {
 
                 consulta = "SELECT direccionentrega FROM clientesMI where idClientemi = " + cmbProveedores.SelectedValue + "";
@@ -208,7 +207,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 cmbDireccion.DisplayMemberPath = "direccionentrega";
                 cmbDireccion.SelectedValuePath = "direccionentrega";
             }
-            else if ((int)cmbProveedores.SelectedValue > 0)
+            else if (cmbProveedores.Text.ToString() != "")
             {
                 consulta = "SELECT direccion FROM clientesME where idClienteme = " + cmbProveedores.SelectedValue + "";
                 conexion.Consulta(consulta, combo: cmbDireccion);
@@ -221,7 +220,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbDireccion.SelectedIndex = 0;
 
         }
-
         private void LlenarCmbIVA()
         {
             cmbIVA.Items.Add((float)0);
@@ -229,7 +227,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbIVA.Items.Add((float)10.5);
 
         }
-
         private void LlenarCmbTipoCambio()
         {
             cmbTipoCambio.Items.Add("$");
@@ -243,8 +240,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
           
          
         }
-
-
         private void cmbIVA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             calculaTotal();
@@ -267,7 +262,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 txtTotal.Text = total.ToString();
             }
         }
-
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Busquedas de proveedor.
@@ -285,9 +279,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbProveedores.ItemsSource = productos.AsDataView();
             cmbProveedores.SelectedIndex = 0;
         }
-
-
-
         private void btnEliminar_Copy_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -305,7 +296,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
 
         }
-
         private void btnModificar_Copy1_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -391,12 +381,10 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
 
         }
-
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             if (validar())
@@ -404,8 +392,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 DialogResult = true;
             }
         }
-
-        public bool validar()
+        public bool  validar()
         {
 
             if (productos.Count <= 0)
@@ -434,24 +421,30 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
 
         }
-
         private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             fecha = dpFecha.SelectedDate.Value.Date;
         }
-
         private void loadGeneral()
         {
+            modifica = true;
             InitializeComponent();
             loadDgvProductos();
-            chkMI.IsChecked = true;
-            LoadListaComboClienteMI();
+            if (existeClienteMI() > 0)
+            {
+                chkMI.IsChecked = true;
+               
+            }
+            else
+            {
+                chkME.IsChecked = true;
+                
+            }
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
-            LoadListaComboDireccion();
             LoadListaComboTelefonos();
-
-
+            LoadListaComboDireccion();
+            modifica = false;
         }
         private void loadModificar(int chk)
         {
@@ -471,7 +464,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             LoadListaComboTelefonos();
 
         }
-
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -495,12 +487,10 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             
            
         }
-
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void btnRemito_Click(object sender, RoutedEventArgs e)
         {
             //MessageBoxResult dialog;
@@ -568,7 +558,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             //    }
             //}
         }
-
         private String agregaOC()
         {
             int Proveedor = (int)this.cmbProveedores.SelectedValue;
@@ -596,7 +585,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             return idOC;
         }
-
         private void btnFactura_Click(object sender, RoutedEventArgs e)
         {
             //if (validar())
@@ -710,7 +698,6 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
 
         }
-
         private void ColumnasDGVProductos()
         {
 
@@ -733,28 +720,33 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             dgvProductos.Columns.Add(textColumn4);
 
         }
-
         private void chkMI_Checked(object sender, RoutedEventArgs e)
         {
-            txtFiltro.Text = "";
-            chkME.IsChecked = false;
-            LoadListaComboClienteMI();
-            if (!modifica)
+            if (existeClienteMI() != 0)
             {
-                productos.Clear();
-                dgvProductos.Items.Refresh();
-                subtotal = 0;
-                txtSubtotal.Text = subtotal.ToString();
-                calculaTotal();
-                LoadListaComboTelefonos();
-                LoadListaComboDireccion();
+                txtFiltro.Text = "";
+                chkME.IsChecked = false;
+                LoadListaComboClienteMI();
+                if (!modifica)
+                {
+                    productos.Clear();
+                    dgvProductos.Items.Refresh();
+                    subtotal = 0;
+                    txtSubtotal.Text = subtotal.ToString();
+                    calculaTotal();
+                    LoadListaComboTelefonos();
+                    LoadListaComboDireccion();
+                }
             }
-
+            else
+            {
+                MessageBox.Show("no existe cliente Mercado interno");
+                chkMI.IsChecked = false;
+            }
         }
-
         private void chkME_Checked(object sender, RoutedEventArgs e)
         {
-           
+            if (existeClienteME()!= 0) { 
             txtFiltro.Text = "";
             chkMI.IsChecked = false;
             LoadListaComboClienteME();
@@ -768,8 +760,27 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                 LoadListaComboTelefonos();
                 LoadListaComboDireccion();
             }
-            
+            }
+            else
+            {
+                MessageBox.Show("no existe cliente Mercado externo");
+                chkME.IsChecked = false;
+            }
+        }
+        private int existeClienteMI()
+        {
+
+            string consulta = "select count(idClientemi) from Clientesmi";
+            return int.Parse(conexion.ValorEnVariable(consulta));
+
+        }
+        private int existeClienteME()
+        {
+            string consulta = "select count(idClienteme) from Clientesme";
+            return int.Parse(conexion.ValorEnVariable(consulta));
         }
     }
+   
+
 }
 

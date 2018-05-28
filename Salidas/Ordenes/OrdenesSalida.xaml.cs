@@ -39,6 +39,9 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             seleccioneParaFiltrar();
             ColumnasDGVProductos();
             chkMI.IsChecked = true;
+            
+
+
 
         }
 
@@ -135,48 +138,48 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-
+            if (controlClientes()) { 
 
             var newW = new windowAgregarOCSalida();
 
             newW.ShowDialog();
 
-            if (newW.DialogResult == true && !newW.agregado)
-            {
-                //INSERTAR OC
-                int cliente = (int)newW.cmbProveedores.SelectedValue;
-               
-                DateTime fecha = newW.fecha;
-                fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-                Console.WriteLine(fecha);
-                decimal.TryParse(newW.txtSubtotal.Text, out decimal subtotal);
-                decimal.TryParse(newW.txtTotal.Text, out decimal total);
-                string direccion = newW.cmbDireccion.Text;
-                int telefono = int.Parse(newW.cmbTelefono.Text);
-                String observacion = newW.txtObservaciones.Text;
-                String formaPago = newW.txtFormaPago.Text;
-                int iva = newW.cmbIVA.SelectedIndex;
-                int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                String sql;
-                if (newW.chkMI.IsChecked == true)
+                if (newW.DialogResult == true && !newW.agregado)
                 {
-                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClientemi) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
-                }
-                else
-                {
-                    sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClienteme) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
-                }
-             
-                conexion.operaciones(sql);
+                    //INSERTAR OC
+                    int cliente = (int)newW.cmbProveedores.SelectedValue;
 
-                string ultimoId = "Select last_insert_id()";
-                String id = conexion.ValorEnVariable(ultimoId);
-                foreach (var producto in newW.productos)
-                {
-                    String productos = "insert into productos_has_ordencompraSalida(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOrdenCompra,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
-                    conexion.operaciones(productos);
-                }
+                    DateTime fecha = newW.fecha;
+                    fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
+                    Console.WriteLine(fecha);
+                    decimal.TryParse(newW.txtSubtotal.Text, out decimal subtotal);
+                    decimal.TryParse(newW.txtTotal.Text, out decimal total);
+                    string direccion = newW.cmbDireccion.Text;
+                    int telefono = int.Parse(newW.cmbTelefono.Text);
+                    String observacion = newW.txtObservaciones.Text;
+                    String formaPago = newW.txtFormaPago.Text;
+                    int iva = newW.cmbIVA.SelectedIndex;
+                    int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
+                    String sql;
+                    if (newW.chkMI.IsChecked == true)
+                    {
+                        sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClientemi) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
+                    }
+                    else
+                    {
+                        sql = "insert into ordencompraSalida(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, telefono,direccion,FK_idClienteme) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + cliente + "');";
+                    }
 
+                    conexion.operaciones(sql);
+
+                    string ultimoId = "Select last_insert_id()";
+                    String id = conexion.ValorEnVariable(ultimoId);
+                    foreach (var producto in newW.productos)
+                    {
+                        String productos = "insert into productos_has_ordencompraSalida(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOrdenCompra,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                        conexion.operaciones(productos);
+                    }
+                }
             }
             ejecutar = false;
             loadlistaOC();
@@ -653,6 +656,42 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 return false;
             }
+        }
+
+        private int existeClienteMI()
+        {
+    
+          string  consulta = "select count(idClientemi) from Clientesmi";
+            return int.Parse(conexion.ValorEnVariable(consulta));
+
+        }
+        private   int existeClienteME()
+        {
+           string consulta = "select count(idClienteme) from Clientesme"; 
+           return int.Parse(conexion.ValorEnVariable(consulta));
+        }
+        private bool controlClientes()
+        {
+            if (existeClienteMI() == 0 && existeClienteME() == 0)
+            {
+                MessageBox.Show("Si desea agregar una orden sera necesario agregar un cliente mercado interno o externo");
+                return false;
+            }
+            else if (existeClienteMI() == 0)
+            {
+                MessageBox.Show("No existen cliente mercado interno no podra agregar una orden para mercado interno ");
+                return true;
+            }
+            else if (existeClienteME() == 0)
+            {
+                MessageBox.Show("No existen cliente mercado externo no podra agregar una orden para mercado externo ");
+                return true;
+            }
+            else
+            {
+                return true;
+            }
+        
         }
     }
    

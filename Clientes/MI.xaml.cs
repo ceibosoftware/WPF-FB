@@ -201,6 +201,7 @@ namespace wpfFamiliaBlanco.Clientes
                 }
 
             }
+            MessageBox.Show("Se elimino correctamente");
             ltsClientes.SelectedIndex = 0;
         }
 

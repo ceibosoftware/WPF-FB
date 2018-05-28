@@ -297,8 +297,7 @@ namespace wpfFamiliaBlanco
                     else
                     {
                         eliminarOC();
-
-                        MessageBox.Show("La orden se ha eliminado correctamente");
+                        
                     }      
                 }  
 
@@ -314,6 +313,7 @@ namespace wpfFamiliaBlanco
                     txtTotal.Text = "";
                     lblFechaOC.Content = "";
                 }
+                MessageBox.Show("Se elimino correctamente");
             }
             catch (NullReferenceException)
             {

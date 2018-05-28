@@ -192,10 +192,11 @@ namespace wpfFamiliaBlanco.Clientes
         {
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre + ", se eliminaran todos sus datos ", "Advertencia", MessageBoxButton.YesNo);
             
             if (dialog == MessageBoxResult.Yes)
             {
+               
                 int idSeleccionado = (int)ltsClientes.SelectedValue;
                 string sql = "delete from clientesme where idClienteme = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
@@ -214,6 +215,7 @@ namespace wpfFamiliaBlanco.Clientes
 
                 }
             }
+            MessageBox.Show("Se elimino correctamente");
             ltsClientes.SelectedIndex = 0;
         }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
