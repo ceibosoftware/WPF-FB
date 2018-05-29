@@ -21,6 +21,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
     public partial class windowAgregarOCSalida : Window
     {
         int idOC;
+        bool cambiaCliente;
         public bool agregado = false;
         bool modifica = false;
         int contador = 0;
@@ -476,15 +477,18 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             try
             {
-                if (!modifica)
+                if (!cambiaCliente)
                 {
-                    productos.Clear();
-                    dgvProductos.Items.Refresh();
-                    subtotal = 0;
-                    txtSubtotal.Text = subtotal.ToString();
-                    calculaTotal();
-                    LoadListaComboTelefonos();
-                    LoadListaComboDireccion();
+                    if (!modifica)
+                    {
+                        productos.Clear();
+                        dgvProductos.Items.Refresh();
+                        subtotal = 0;
+                        txtSubtotal.Text = subtotal.ToString();
+                        calculaTotal();
+                        LoadListaComboTelefonos();
+                        LoadListaComboDireccion();
+                    }
                 }
             }
             catch (Exception)
@@ -734,7 +738,9 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 txtFiltro.Text = "";
                 chkME.IsChecked = false;
+                cambiaCliente = true;
                 LoadListaComboClienteMI();
+                cambiaCliente = false;
                 if (!modifica)
                 {
                     productos.Clear();
@@ -757,7 +763,9 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             if (existeClienteME()!= 0) { 
             txtFiltro.Text = "";
             chkMI.IsChecked = false;
+                cambiaCliente = true;
             LoadListaComboClienteME();
+                cambiaCliente = false;
             if (!modifica)
             {
                 productos.Clear();

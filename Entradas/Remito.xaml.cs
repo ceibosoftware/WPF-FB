@@ -35,6 +35,7 @@ namespace wpfFamiliaBlanco.Entradas
             LoadListaComboProveedor();
             loadProductosRemitos();
             seleccioneParaFiltrar();
+            dgvProductos.IsReadOnly = true;
             
         }
 
@@ -91,7 +92,7 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     Console.WriteLine("id " + producto.id);
                     Console.WriteLine("id " + producto.cantidad);
-                    String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                    String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "', ume ='"+DateTime.Now.ToString("yyyy/MM/dd") + "' where idProductos = '" + producto.id + "' ";
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
