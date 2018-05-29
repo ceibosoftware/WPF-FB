@@ -33,13 +33,14 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         {
             InitializeComponent();
             lista.Clear();
-            llenarcmbpais();
+ 
             loadcmblp();
             llenarcmbtc();
             camplimit();
             ActualizarDGVPrecios();
             LoadDGVContacto();
             CampLimit();
+            loadcombopaises();
         }
 
         public windowAgregarClienteme(string nombre, string direccion, string pais, int terminocomercial,string cuitpais, string web, List<Contacto> lista, int id, int idlista)
@@ -52,7 +53,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             cmbtc.SelectedIndex = terminocomercial;
             cmbpais.SelectedValue = pais;
             llenarcmbtc();
-            llenarcmbpais();
+
             camplimit();
             this.lista = lista;
             loaddgvcontacto(this.lista);
@@ -67,6 +68,14 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 
         }
 
+        private void loadcombopaises()
+        {
+            String consulta4 = "SELECT * FROM tablapaises";
+            conexion.Consulta(consulta4, combo: cmbpais);
+            cmbpais.DisplayMemberPath = "nombre";
+            cmbpais.SelectedValuePath = "id";
+            cmbpais.SelectedIndex = -1;
+        }
         private void loadcmblp()
         {
             String consulta = "SELECT * from listadeprecios";
@@ -138,12 +147,6 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 
        
 
-        private void llenarcmbpais()
-        {
-
-            cmbpais.Items.Add("USA");
-            
-        }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {

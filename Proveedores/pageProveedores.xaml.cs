@@ -45,11 +45,16 @@ namespace wpfFamiliaBlanco
             }
             txtFiltro.MaxLength = 25;
             txtFiltro.MaxLines = 1;
+
+            ltsProveedores.SelectedIndex = 0;
         }
    
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click
         {
-            int j=0;
+
+            try
+            {
+                int j=0;
 
             listaContacto.Clear();
           for (int i = 0; i < dgvContacto.Items.Count -1 ; i++)
@@ -71,7 +76,9 @@ namespace wpfFamiliaBlanco
      
             }
 
+       
 
+       
 
             idProv2 = ltsProveedores.SelectedValue.ToString();
             List<Categorias> items = new List<Categorias>();
@@ -173,7 +180,14 @@ namespace wpfFamiliaBlanco
 
                 
             }
-         }
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un proveedor a modificar");
+            }
+        }
         
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
@@ -301,6 +315,10 @@ namespace wpfFamiliaBlanco
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+        
             DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
@@ -322,6 +340,12 @@ namespace wpfFamiliaBlanco
         
                 }
 
+            }
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un proveedor a eliminar");
             }
         }
 

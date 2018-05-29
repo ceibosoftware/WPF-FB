@@ -39,6 +39,7 @@ namespace wpfFamiliaBlanco
 
             }
 
+            ltsProductos.SelectedIndex = 0;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)

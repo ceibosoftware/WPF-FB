@@ -55,6 +55,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.IsReadOnly = true;
             LoadDgvProdFactura();
             txtProveedor.IsReadOnly = true;
+
         }
 
         public windowAgregarNCFactura(int tipo1)
@@ -73,8 +74,8 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.IsReadOnly = true;
             LoadDgvProdFactura();
             txtProveedor.IsReadOnly = true;
-          
         
+
         }
 
         public windowAgregarNCFactura(String subtotal, String total, String iva, String cambio, List<Producto>ProdAmodificar, String idfactura1, int idnotac)
@@ -271,7 +272,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             
                 itemsFact.Clear();
-
+                itemsNC.Clear();
+                dgvProductosNC.Items.Refresh();
                 iva = "";
                 cambio = "";
 
@@ -439,6 +441,7 @@ namespace wpfFamiliaBlanco.Entradas
                 Producto prod = DgvProductosFactur.SelectedItem as Producto;
 
                 id = prod.id;
+
                 if (prod.cantidad > 0)
                 {
                     var newW = new WindowAgregarProductoFactura();
@@ -468,6 +471,8 @@ namespace wpfFamiliaBlanco.Entradas
 
                     if (newW.DialogResult == true)
                     {
+                        string consulta = "SELECT stock from productos where idProductos = "+prod.id+" ";
+                        if(int.Parse(conexion.ValorEnVariable(consulta)) >= int.Parse(newW.txtCantidad.Text)){ 
                         if (int.Parse(newW.txtCantidad.Text) > 0)
                         {
 
@@ -485,6 +490,11 @@ namespace wpfFamiliaBlanco.Entradas
                         else
                         {
                             MessageBox.Show("La cantidad no puede ser cero");
+                        }
+                        }
+                        else
+                        {
+                            MessageBox.Show("La cantidad ingresada supera al stock del producto");
                         }
                     }
                 }

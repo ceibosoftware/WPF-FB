@@ -108,7 +108,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                 foreach (var item in newW.itemsNC)
                 {
-                    String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                    String updatestock = "UPDATE productos SET stock = stock +'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                     conexion.operaciones(updatestock);
                 }
                 loadLtsNCRemitos();

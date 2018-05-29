@@ -200,7 +200,10 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+         
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
@@ -225,8 +228,15 @@ namespace wpfFamiliaBlanco.Clientes
                 }
 
             }
-            MessageBox.Show("Se elimino correctamente");
+   
             ltsClientes.SelectedIndex = 0;
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un cliente a eliminar");
+            }
         }
 
 
@@ -325,6 +335,11 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+           
             int modificado;
             modificado = ltsClientes.SelectedIndex;
             idcliente = (int)ltsClientes.SelectedValue;
@@ -399,6 +414,12 @@ namespace wpfFamiliaBlanco.Clientes
                 loadListaClientes();
             }
             ltsClientes.SelectedIndex = modificado;
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un cliente a modificar");
+            }
         }
     }
     }

@@ -381,7 +381,10 @@ namespace wpfFamiliaBlanco.Entradas
 
                         String consulta = "UPDATE productos_has_facturas SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[3] + "' where FK_idProducto = '" + (int)productos.Rows[i].ItemArray[2] + "' and FK_idfactura= '" + idFactura + "'";
                         conexion.operaciones(consulta);
-                    
+
+                        String updatestock = "UPDATE productos SET stock = stock +'" + (int)productos.Rows[i].ItemArray[3] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[2] + "'";
+                        conexion.operaciones(updatestock);
+
                     }
         
 

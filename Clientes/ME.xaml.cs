@@ -40,6 +40,8 @@ namespace wpfFamiliaBlanco.Clientes
             CampLimit();
         }
 
+    
+
         private void CampLimit()
         {
             txtcp.IsReadOnly = true;
@@ -203,6 +205,11 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+      
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
             MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre + ", se eliminaran todos sus datos ", "Advertencia", MessageBoxButton.YesNo);
@@ -231,6 +238,13 @@ namespace wpfFamiliaBlanco.Clientes
             }
             MessageBox.Show("Se elimino correctamente");
             ltsClientes.SelectedIndex = 0;
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un cliente a eliminar");
+            }
         }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
@@ -304,6 +318,11 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+       
             
             int modificado;
             idcliente = (int)ltsClientes.SelectedValue;
@@ -386,6 +405,13 @@ namespace wpfFamiliaBlanco.Clientes
             
 
             ltsClientes.SelectedIndex = modificado;
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un cliente a modificar");
+            }
         }
 
         private void LlenarComboFiltro()
