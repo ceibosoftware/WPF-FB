@@ -168,7 +168,7 @@ namespace wpfFamiliaBlanco
             try
             {
                 //consulta categoria, descripcion
-                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario, venta FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
+                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario, venta, stock FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias";
                 DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
                 txtDescripcion.Text = productos.Rows[0].ItemArray[2].ToString();
                 txtCategoria.Text = productos.Rows[0].ItemArray[3].ToString();
@@ -176,6 +176,7 @@ namespace wpfFamiliaBlanco
                 txtUnidad.Text = productos.Rows[0].ItemArray[7].ToString();
                 txtPrecioUnitario.Text = productos.Rows[0].ItemArray[8].ToString();
                 chkVenta.IsChecked = (bool)productos.Rows[0].ItemArray[9];
+                txtStock.Text = productos.Rows[0].ItemArray[10].ToString();
                 //consulta proveedores
                 String consultaProveedores = "SELECT proveedor.nombre, proveedor.idProveedor from proveedor , productos_has_proveedor WHERE productos_has_proveedor.FK_idProductos = @valor  AND productos_has_proveedor.FK_idProveedor = proveedor.idProveedor";
                 DataTable proveedores = conexion.ConsultaParametrizada(consultaProveedores, ltsProductos.SelectedValue);

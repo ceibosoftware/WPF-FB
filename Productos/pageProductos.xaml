@@ -1255,7 +1255,7 @@
             </Border.Background>
             <CheckBox x:Name="chkVenta" Content="Producto para venta" Margin="803,303,25,142"/>
         </Border>
-        <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="363.167" Margin="52.222,139.833,0,0" VerticalAlignment="Top" Width="364.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsProductos_SelectionChanged" Style="{DynamicResource ListBoxStyle1}"/>
+        <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="311" Margin="52,140,0,0" VerticalAlignment="Top" Width="365" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsProductos_SelectionChanged" Style="{DynamicResource ListBoxStyle1}"/>
         <ListBox x:Name="ltsProveedores" HorizontalAlignment="Left" Height="124.667" Margin="438.223,139.833,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14"/>
         <TextBox x:Name="txtCategoria" HorizontalAlignment="Left" Height="22" Margin="438,429,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblProductos_lts" Content="Productos" HorizontalAlignment="Left" Margin="285.007,114.833,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
@@ -1286,5 +1286,7 @@
         <Label x:Name="lblExistenciaMinima" Content="Unidad" HorizontalAlignment="Left" Margin="481,456,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtExistenciaMinima" HorizontalAlignment="Left" Height="22" Margin="627,429,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblExistenciaMinima1" Content="Existencia minima" HorizontalAlignment="Left" Margin="670,398,0,0" VerticalAlignment="Top" Height="26" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtStock" HorizontalAlignment="Left" Height="24" Margin="52,479,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
+        <Label x:Name="lblExistenciaMinima_Copy" Content="Stock" HorizontalAlignment="Left" Margin="285,456,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
     </Grid>
 </Page>
