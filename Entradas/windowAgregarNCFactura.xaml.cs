@@ -73,6 +73,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotal.IsReadOnly = true;
             LoadDgvProdFactura();
             txtProveedor.IsReadOnly = true;
+          
         
         }
 
@@ -507,12 +508,22 @@ namespace wpfFamiliaBlanco.Entradas
             subtotalmodificar = txtSubtotal.Text;
             totalmodificar = txtTotal.Text;
 
-          
-            
-            if (Valida() && VerEstado())
+            if (tipo == 1)
             {
-                DialogResult = true;
+                if (Valida())
+                {
+                    DialogResult = true;
+                }
             }
+            else
+            {
+                if (Valida() && VerEstado())
+                {
+                    DialogResult = true;
+                }
+            }
+            
+         
            
  
         }

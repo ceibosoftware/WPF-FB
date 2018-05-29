@@ -72,6 +72,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             txtfecha.IsEnabled = false;
             txtproveedor.IsEnabled = false;
             txtoc.IsEnabled = false;
+      
 
         }
 

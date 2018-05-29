@@ -230,7 +230,16 @@ namespace wpfFamiliaBlanco
             {
 
                 String consulta = "SELECT count(FK_idProducto) FROM productos_has_ordencompra WHERE FK_idProducto ='"+ltsProductos.SelectedValue+"' ";
-                if (conexion.ValorEnVariable(consulta) == "0")
+                String consulta1 = "SELECT count(FK_idProductos) FROM productos_has_listadeprecios WHERE FK_idProductos ='" + ltsProductos.SelectedValue + "' ";
+                if (conexion.ValorEnVariable(consulta) != "0")
+                {
+                    MessageBox.Show("El producto no se puede eliminar porque pertenece a una orden de compra");
+                }
+                else if (conexion.ValorEnVariable(consulta1) != "0")
+                {
+                    MessageBox.Show("El producto no se puede eliminar porque tiene una lista de precio asignada");
+                }
+                else
                 {
                     DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
                     string nombre = selectedDataRow["nombre"].ToString();
@@ -243,10 +252,7 @@ namespace wpfFamiliaBlanco
                         loadListaProducto();
 
                     }
-                }
-                else
-                {
-                    MessageBox.Show("El producto no se puede eliminar porque pertenece a una orden de compra");
+                   
                 }
              
             }

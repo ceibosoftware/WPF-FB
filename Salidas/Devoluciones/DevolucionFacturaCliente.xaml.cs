@@ -45,6 +45,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
             LoadDgvNC();
             SetearColumnas();
             ltsNC.SelectedIndex = 0;
+            funcionver();
 
         }
 
@@ -408,6 +409,15 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
         }
 
         private void btnVertodo_Click(object sender, RoutedEventArgs e)
+        {
+            String consulta = "select * from notacreditosalida where FK_idfacturas IS NOT NULL";
+            conexion.Consulta(consulta, tabla: ltsNC);
+            ltsNC.DisplayMemberPath = "idNotaCredito";
+            ltsNC.SelectedValuePath = "idNotaCredito";
+            ltsNC.SelectedIndex = 0;
+        }
+
+        public void funcionver()
         {
             String consulta = "select * from notacreditosalida where FK_idfacturas IS NOT NULL";
             conexion.Consulta(consulta, tabla: ltsNC);

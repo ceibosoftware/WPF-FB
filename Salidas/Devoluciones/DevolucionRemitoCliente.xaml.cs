@@ -51,6 +51,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
         public void loadLtsNCRemitos()
         {
+           
             String consulta = "select * from notacreditosalida WHERE FK_idremitos IS NOT NULL";
             conexion.Consulta(consulta, tabla: ltsRemitos);
             ltsRemitos.DisplayMemberPath = "idNotaCredito";

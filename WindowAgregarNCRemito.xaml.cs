@@ -168,11 +168,23 @@ namespace wpfFamiliaBlanco
 
         public void loadLtsRemitosSalida()
         {
-            String consulta = "select * from remitosalidas";
-            conexion.Consulta(consulta, tabla: ltsRemitos);
-            ltsRemitos.DisplayMemberPath = "numeroRemito";
-            ltsRemitos.SelectedValuePath = "idremitos";
-            ltsRemitos.SelectedIndex = 0;
+            if (RbInterno.IsChecked == true)
+            {
+                String consulta = "select * from remitosalidas r, ordencomprasalida o WHERE r.FK_idOrdenCompra = o.idOrdenCompra AND o.FK_idClientemi IS NOT NULL";
+                conexion.Consulta(consulta, tabla: ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "numeroRemito";
+                ltsRemitos.SelectedValuePath = "idremitos";
+                ltsRemitos.SelectedIndex = 0;
+            }
+            else
+            {
+                String consulta = "select * from remitosalidas r, ordencomprasalida o WHERE r.FK_idOrdenCompra = o.idOrdenCompra AND o.FK_idClienteme IS NOT NULL";
+                conexion.Consulta(consulta, tabla: ltsRemitos);
+                ltsRemitos.DisplayMemberPath = "numeroRemito";
+                ltsRemitos.SelectedValuePath = "idremitos";
+                ltsRemitos.SelectedIndex = 0;
+            }
+      
         }
 
         public void loadLtsRemitosSalida(int index)
@@ -412,10 +424,22 @@ namespace wpfFamiliaBlanco
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             idRemito = (int)ltsRemitos.SelectedValue;
-            if (Valida() && VerEstado())
+
+            if (tipo == 1)
             {
-                DialogResult = true;
+                if (Valida())
+                {
+                    DialogResult = true;
+                }
             }
+            else
+            {
+                if (Valida() && VerEstado())
+                {
+                    DialogResult = true;
+                }
+            }
+            
       
         }
 
@@ -447,7 +471,7 @@ namespace wpfFamiliaBlanco
         {
             bandera = false;
 
-            if (RbInterno.IsChecked == true)
+            if (tipo == 1)
             {
                 String consulta = "select * from remitosalidas";
                 conexion.Consulta(consulta, tabla: ltsRemitos);
@@ -457,16 +481,8 @@ namespace wpfFamiliaBlanco
                 ltsRemitos.SelectedIndex = 0;
 
                 seleccioneParaFiltrar();
-            } else if (RbExterno.IsChecked == true)
-            {
-                String consulta = "select * from remitosalidas";
-                conexion.Consulta(consulta, tabla: ltsRemitos);
-                ltsRemitos.DisplayMemberPath = "numeroRemito";
-                ltsRemitos.SelectedValuePath = "idremitos";
-
-                ltsRemitos.SelectedIndex = 0;
-
-                seleccioneParaFiltrar();
+                RbInterno.IsChecked = false;
+                RbExterno.IsChecked = false;
             }
             else
             {
@@ -587,6 +603,8 @@ namespace wpfFamiliaBlanco
             cmbProveedores1.SelectedValuePath = "idClientemi";
            // ejecutar = true;
             cmbProveedores1.SelectedIndex = 0;
+            itemsNC.Clear();
+            dgvProductosNCRemito.Items.Refresh();
         }
 
         private void RbExterno_Checked(object sender, RoutedEventArgs e)
@@ -598,8 +616,10 @@ namespace wpfFamiliaBlanco
             cmbProveedores1.SelectedValuePath = "idClienteme";
             //  ejecutar = true;
             cmbProveedores1.SelectedIndex = 0;
-           // LoadListaComboProveedor();
-           
+            itemsNC.Clear();
+            dgvProductosNCRemito.Items.Refresh();
+            // LoadListaComboProveedor();
+
         }
     }
 }
