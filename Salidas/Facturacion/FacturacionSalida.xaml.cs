@@ -180,7 +180,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             conexion.Consulta(consulta, combo: cmbCliente);
             cmbCliente.DisplayMemberPath = "nombre";
             cmbCliente.SelectedValuePath = "idClientemi";
-            cmbCliente.SelectedIndex = 0;
+            
+            
         }
 
         public void LoadListaCME()
@@ -190,6 +191,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             cmbCliente.DisplayMemberPath = "nombre";
             cmbCliente.SelectedValuePath = "idClienteme";
             cmbCliente.SelectedIndex = 0;
+          
         }
         public void SetearColumnas()
         {
@@ -266,6 +268,31 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
 
 
         }
+
+
+        private void Loadltsfactura()
+        {
+            if (rbInterno.IsChecked == true)
+            {
+                String consulta = "SELECT * FROM facturasalida f, ordencomprasalida o WHERE f.FK_idOrdenCompra = o.idOrdenCompra AND FK_idClientemi IS NOT NULL";
+                conexion.Consulta(consulta, ltsFactura);
+                ltsFactura.DisplayMemberPath = "numeroFactura";
+                ltsFactura.SelectedValuePath = "idfacturas";
+                ltsFactura.SelectedIndex = 0;
+            }
+            else
+            {
+                String consulta = "SELECT * FROM facturasalida f, ordencomprasalida o WHERE f.FK_idOrdenCompra = o.idOrdenCompra AND FK_idClienteme IS NOT NULL";
+                conexion.Consulta(consulta, ltsFactura);
+                ltsFactura.DisplayMemberPath = "numeroFactura";
+                ltsFactura.SelectedValuePath = "idfacturas";
+                ltsFactura.SelectedIndex = 0;
+            }
+        
+
+
+        }
+
 
         private void dgvFactura_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -858,12 +885,20 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
         {
             Console.WriteLine("ME");
             LoadListaCME();
+            seleccioneParaFiltrar();
+            Loadltsfactura();
+          
         }
+        
+        
 
         private void rbInterno_Checked(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("MI");
             LoadListaCMI();
+            ltsFactura.SelectedIndex = -1;
+            seleccioneParaFiltrar();
+            Loadltsfactura();
         }
     }
 }

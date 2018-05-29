@@ -29,6 +29,7 @@ namespace wpfFamiliaBlanco
         public int idRemito;
         public int idNotaCred;
         public int id;
+        public String idOC;
         Boolean bandera = false;
         int tipo;
         public WindowAgregarNCRemito()
@@ -411,11 +412,32 @@ namespace wpfFamiliaBlanco
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             idRemito = (int)ltsRemitos.SelectedValue;
-            if (Valida())
+            if (Valida() && VerEstado())
             {
                 DialogResult = true;
             }
       
+        }
+
+        public bool VerEstado()
+        {
+
+            String idOC = "SELECT FK_idOC FROM remito WHERE idremitos ='" + idRemito + "' ";
+            this.idOC = conexion.ValorEnVariable(idOC);
+            String estOC = "SELECT estadoNC FROM ordencompra WHERE idOrdenCompra ='" + conexion.ValorEnVariable(idOC) + "'";
+
+            String estadoOC = conexion.ValorEnVariable(estOC);
+
+            if (estadoOC == "2")
+            {
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {

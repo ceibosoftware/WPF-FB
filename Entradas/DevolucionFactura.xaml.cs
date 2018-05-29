@@ -68,6 +68,8 @@ namespace wpfFamiliaBlanco.Entradas
             itemsNC.Clear();
             int index = ltsNC.SelectedIndex;
             Console.WriteLine("idindex parametro  " + index);
+
+
             var newW = new windowAgregarNCFactura();
             newW.ShowDialog();
             DateTime hoy = DateTime.Today;
@@ -116,6 +118,8 @@ namespace wpfFamiliaBlanco.Entradas
                     conexion.operaciones(updatestock);
                 }
 
+                String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 2 + "' where idOrdenCompra = '" + newW.idOC + "'";
+                conexion.operaciones(updateestadoOC);
 
                 LoadDgvNC();
                 loadLtsNotaCredito();
@@ -397,9 +401,20 @@ namespace wpfFamiliaBlanco.Entradas
                     txtSubtotal.Text = "";
                     txtTipoCambio.Text = "";
                     txtTotal.Text = "";
-                   // ltsNC.Items.Refresh();
-                   // loadLtsFactura();
-                 //   ltsNC.SelectedIndex = 0;
+                    // ltsNC.Items.Refresh();
+                    // loadLtsFactura();
+                    //   ltsNC.SelectedIndex = 0;
+
+                    String idOC = "SELECT FK_idOC FROM factura WHERE idfacturas ='" + idFactura + "' ";
+                    String idOrden = conexion.ValorEnVariable(idOC);
+                    String sql = "SELECT COUNT(FK_idfactura) FROM notacredito WHERE FK_idfactura = '"+idFactura+"' ";
+                    if (conexion.ValorEnVariable(sql) == "0")
+                    {
+                        String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
+                        conexion.operaciones(updateestadoOC);
+                    }
+        
+                
                 }
 
                 LoadDgvNC();

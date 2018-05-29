@@ -34,10 +34,11 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
             InitializeComponent();
             RbInterno.IsChecked = true;
             seleccioneParaFiltrar();
-            LoadListaComboProveedor();
+         //   LoadListaComboProveedor();
             loadProductosRemitos();
            
             loadLtsRemitos();
+            dgvProductos.IsReadOnly = true;
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -95,13 +96,15 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                 {
                     Console.WriteLine("id " + producto.id);
                     Console.WriteLine("id " + producto.cantidad);
-                    String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                    String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "', ums = '"+DateTime.Now.ToString("yyyy/MM/dd") + "' where idProductos = '" + producto.id + "' ";
                     conexion.operaciones(sql);
                 }
                 LoadListaComboProveedor();
+                seleccioneParaFiltrar();
                 loadLtsRemitos();
 
-                seleccioneParaFiltrar();
+             
+             
                 ltsremitos.Items.MoveCurrentToLast();
             }
 
@@ -137,7 +140,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
         private void cmbProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-          
+            
             if (cmbProveedores.Text != "selccione para filtrar")
             {
                 if (RbInterno.IsChecked == true)
@@ -517,30 +520,20 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
 
         private void RbInterno_Checked(object sender, RoutedEventArgs e)
         {
-            String consulta = "SELECT DISTINCT p.nombre, p.idclientemi FROM clientesmi p ,ordencomprasalida o, remitosalidas r where o.FK_idClientemi = p.idClientemi and r.FK_idOrdenCompra = o.idOrdenCompra";
-            conexion.Consulta(consulta, combo: cmbProveedores);
-            ejecutar = false;
-            cmbProveedores.DisplayMemberPath = "nombre";
-            cmbProveedores.SelectedValuePath = "idClientemi";
-            ejecutar = true;
-            cmbProveedores.SelectedIndex = 0;
+            LoadListaComboProveedor();         
+         
+      
+            seleccioneParaFiltrar();
             loadLtsRemitos();
-            LoadListaComboProveedor();
-   
         }
 
         private void RbExterno_Checked(object sender, RoutedEventArgs e)
         {
-            String consulta = "SELECT DISTINCT p.nombre, p.idclienteme FROM clientesme p ,ordencomprasalida o, remitosalidas r where o.FK_idClienteme = p.idClienteme and r.FK_idOrdenCompra = o.idOrdenCompra";
-            conexion.Consulta(consulta, combo: cmbProveedores);
-            ejecutar = false;
-            cmbProveedores.DisplayMemberPath = "nombre";
-            cmbProveedores.SelectedValuePath = "idClienteme";
-            ejecutar = true;
-            cmbProveedores.SelectedIndex = 0;
             LoadListaComboProveedor();
+         
+         
+            seleccioneParaFiltrar();
             loadLtsRemitos();
-        
         }
     }
 

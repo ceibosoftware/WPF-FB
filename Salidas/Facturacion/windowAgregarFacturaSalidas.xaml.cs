@@ -21,7 +21,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
     /// </summary>
     public partial class windowAgregarFacturaSalidas : Window
     {
-        float subtotal;
+        float Subtotal;
+        bool banderacuotas = true;
         float subtotali = 0;
         float total;
         CRUD conexion = new CRUD();
@@ -127,6 +128,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             }
 
             bandera = true;
+            rbInterno.IsEnabled = false;
+            rbExterno.IsEnabled = false;
             // SetearColumnas();
 
             //cambios diseño batta
@@ -317,6 +320,13 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                    // ltsFactura.SelectedIndex = 0;
                    // LoadDgvFactura();
                 }
+                banderacuotas = false;
+                cmbCuotas.SelectedIndex = -1;
+                cmbCuotas.Text = "Seleccione cantidad cuotas";
+                banderacuotas = true;
+                Subtotal = 0;
+                txtSubtotal.Text = "0";
+                txtTotal.Text = "0";
 
             }
             catch (NullReferenceException)
@@ -347,6 +357,13 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             DgvCuotas.Items.Refresh();
             itemsFact.Clear();
             dgvProductosFactura.Items.Refresh();
+            banderacuotas = false;
+            cmbCuotas.SelectedIndex = -1;
+            cmbCuotas.Text = "Seleccione cantidad cuotas";
+            banderacuotas = true;
+            Subtotal = 0;
+            txtSubtotal.Text = "0";
+            txtTotal.Text = "0";
 
         }
 
@@ -373,6 +390,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
         {
             try
             {
+                MessageBox.Show(Subtotal.ToString());
                 bool existe = false;
                 Producto prod = dgvProductosOC.SelectedItem as Producto;
 
@@ -411,11 +429,13 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
 
                             Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
                             itemsFact.Add(productoFactura);
-                            totalSubtotal = totalSubtotal + (prod.cantidad * prod.precioUnitario);
+                            Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
+
                             dgvProductosFactura.Items.Refresh();
                             // float.TryParse(txtSubtotal.Text, out subtotal);
-                            subtotal += productoFactura.total;
-                            txtSubtotal.Text = (totalSubtotal).ToString();
+
+
+                            txtSubtotal.Text = (Subtotal).ToString();
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();
                             calculaTotal();
@@ -436,6 +456,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 MessageBox.Show("Seleccione un producto para agregar");
 
             }
+
 
 
         }
@@ -459,8 +480,9 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                     }
 
                 }
-                subtotali = subtotali - prod.cantidad * prod.precioUnitario;
-                txtSubtotal.Text = subtotali.ToString();
+                Subtotal = Subtotal - (prod.cantidad * prod.precioUnitario);
+
+                txtSubtotal.Text = Subtotal.ToString();
                 calculaTotal();
                 dgvProductosOC.Items.Refresh();
                 itemsFact.Remove(prod);
@@ -469,7 +491,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 {
                     txtSubtotal.Text = "0";
                     txtTotal.Text = "0";
-                    subtotali = 0;
+                    Subtotal = 0;
                     todaslascuotas.Clear();
                     DgvCuotas.Items.Refresh();
                 }
@@ -538,7 +560,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
 
             int cuotass = cmbCuotas.SelectedIndex + 1;
 
-            if (bandera == true)
+            if (bandera == true && banderacuotas)
             {
 
                 todaslascuotas.Clear();

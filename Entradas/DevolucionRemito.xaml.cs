@@ -112,6 +112,10 @@ namespace wpfFamiliaBlanco.Entradas
                     String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                     conexion.operaciones(updatestock);
                 }
+
+
+                String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 1 + "' where idOrdenCompra = '" + newW.idOC + "'";
+                conexion.operaciones(updateestadoOC);
                 loadLtsNCRemitos();
             }
         
@@ -294,7 +298,15 @@ namespace wpfFamiliaBlanco.Entradas
                     string sql3 = " DELETE  FROM productos_has_notacredito WHERE FK_idNotaCredito =  '" + ltsRemitos.SelectedValue + "'";
                     conexion.operaciones(sql3);
 
-         
+                    String idOC = "SELECT FK_idOC FROM remito WHERE idremitos ='" + idremi + "' ";
+                    String idOrden = conexion.ValorEnVariable(idOC);
+                    String sql = "SELECT COUNT(FK_idremitos) FROM notacredito WHERE FK_idfactura = '" + idremi + "' ";
+                    if (conexion.ValorEnVariable(sql) == "0")
+                    {
+                        String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
+                        conexion.operaciones(updateestadoOC);
+                    }
+
                     ltsRemitos.Items.Refresh();
                    loadLtsNCRemitos();
                     ltsRemitos.SelectedIndex = 0;

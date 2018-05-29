@@ -39,6 +39,7 @@ namespace wpfFamiliaBlanco.Entradas
         public String totalmodificar;
         public int tipo;
         Boolean modifica;
+        public String idOC;
         public windowAgregarNCFactura()
         {
             InitializeComponent();
@@ -505,15 +506,37 @@ namespace wpfFamiliaBlanco.Entradas
             idFactura = ltsfacturas.SelectedValue.ToString();
             subtotalmodificar = txtSubtotal.Text;
             totalmodificar = txtTotal.Text;
-            if (Valida())
+
+          
+            
+            if (Valida() && VerEstado())
             {
                 DialogResult = true;
             }
            
  
         }
+        
+        public bool VerEstado()
+        {
+            String idOC = "SELECT FK_idOC FROM factura WHERE idfacturas ='" + idFactura + "' ";
+           this.idOC = conexion.ValorEnVariable(idOC);
+            String estOC = "SELECT estadoNC FROM ordencompra WHERE idOrdenCompra ='" + conexion.ValorEnVariable(idOC) + "'";
 
+            String estadoOC = conexion.ValorEnVariable(estOC);
 
+            if (estadoOC =="1")
+            {
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito.");
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
         public Boolean Valida()
         {
 
