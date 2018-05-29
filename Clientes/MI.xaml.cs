@@ -49,6 +49,18 @@ namespace wpfFamiliaBlanco.Clientes
             txtTransporte.IsReadOnly = true;
             dgvPrecios.IsReadOnly = true;
             txtlp.IsReadOnly = true;
+
+            dgvPrecios.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre1");
+            dgvPrecios.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio de Lista";
+            textColumn2.Binding = new Binding("preciolista");
+            dgvPrecios.Columns.Add(textColumn2);
+
+
         }
         private void loadListaClientes()
         {
@@ -88,7 +100,6 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
             cmbFiltro.Items.Add("Nombre");
-            cmbFiltro.Items.Add("Lista de Precios");
 
 
         }
@@ -128,11 +139,24 @@ namespace wpfFamiliaBlanco.Clientes
                 String consulta = "SELECT * from clientesmi WHERE idClientemi = @valor";
                 DataTable clientemi = conexion.ConsultaParametrizada(consulta, ltsClientes.SelectedValue);
                 txtCuit.Text = clientemi.Rows[0].ItemArray[1].ToString();
-                txtrs.Text = clientemi.Rows[0].ItemArray[5].ToString();
                 txtDireccion.Text = clientemi.Rows[0].ItemArray[4].ToString();
                 txtTelt.Text = clientemi.Rows[0].ItemArray[3].ToString();
                 txtTransporte.Text = clientemi.Rows[0].ItemArray[2].ToString();
-               
+
+
+                if (clientemi.Rows[0].ItemArray[5].ToString() == "0")
+                {
+                    txtrs.Text = "S.A.";
+                }
+                else if (clientemi.Rows[0].ItemArray[5].ToString() == "1")
+                {
+                    txtrs.Text = "S.R.L.";
+                }
+                else if (clientemi.Rows[0].ItemArray[5].ToString() == "2")
+                {
+                    txtrs.Text = "S.A.S.";
+                }
+
 
                 if (clientemi.Rows[0].ItemArray[7].ToString() == "")
                 {
@@ -222,11 +246,7 @@ namespace wpfFamiliaBlanco.Clientes
                 consulta = "SELECT* FROM clientesmi WHERE nombre LIKE '%' @valor '%'";
                 clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             }
-            else if (txtFiltro.Text == "Lista de Precios")
-            {
-                consulta = "SELECT* FROM clientesmi WHERE nombre LIKE '%' @valor '%'";
-                clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
+            
 
             ltsClientes.ItemsSource = clientes.AsDataView();
         }

@@ -69,6 +69,17 @@ namespace wpfFamiliaBlanco.Clientes
             txtTelt.MaxLength = 20;
             txtTransporte.MaxLength = 20;
             dgvPrecios.IsReadOnly = true;
+
+
+            dgvPrecios.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvPrecios.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio de Lista";
+            textColumn2.Binding = new Binding("preciolista");
+            dgvPrecios.Columns.Add(textColumn2);
         }
 
         private void loaddgvcontacto(List<Contacto> l)
@@ -79,8 +90,11 @@ namespace wpfFamiliaBlanco.Clientes
         private void llenarcmbrs()
         {
 
-            cmbRs.Items.Add("Nombre");
-            cmbRs.Items.Add("Categoria");
+            cmbRs.Items.Add("S.A.");
+            cmbRs.Items.Add("S.R.L.");
+            cmbRs.Items.Add("S.A.S.");
+            
+
         }
 
         private void loadcmblp()

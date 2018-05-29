@@ -36,22 +36,24 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             llenarcmbpais();
             loadcmblp();
             llenarcmbtc();
+            camplimit();
             ActualizarDGVPrecios();
             LoadDGVContacto();
             CampLimit();
         }
 
-        public windowAgregarClienteme(string nombre, string direccion, string pais, int terminocomercial, string web, List<Contacto> lista, int id, int idlista)
+        public windowAgregarClienteme(string nombre, string direccion, string pais, int terminocomercial,string cuitpais, string web, List<Contacto> lista, int id, int idlista)
         {
             InitializeComponent();
             txtNombre.Text = nombre;
             txtDireccion.Text = direccion;
             txtdireccionweb.Text = web;
+            txtcp.Text = cuitpais;
             cmbtc.SelectedIndex = terminocomercial;
             cmbpais.SelectedValue = pais;
             llenarcmbtc();
             llenarcmbpais();
-            
+            camplimit();
             this.lista = lista;
             loaddgvcontacto(this.lista);
             loadcmblp();
@@ -74,7 +76,21 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 
         }
 
+        private void camplimit()
+        {
+            dgvPrecios.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvPrecios.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio de Lista";
+            textColumn2.Binding = new Binding("preciolista");
+            dgvPrecios.Columns.Add(textColumn2);
+        }
+
         private void ActualizarDGVPrecios()
+
         {
             dgvPrecios.Items.Refresh();
 
@@ -99,6 +115,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             txtdireccionweb.MaxLength = 40;
             txtNombre.MaxLength = 30;
             dgvPrecios.IsReadOnly = true;
+            txtcp.MaxLength = 16;
 
         }
 
@@ -336,6 +353,12 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         private void cmbPrecios_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActualizarDGVPrecios();
+        }
+
+        private void txtcp_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
         }
     }
 }

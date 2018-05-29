@@ -260,7 +260,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="113.11" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." ScrollViewer.CanContentScroll="True"/>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="113.11" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="En esta pantalla se pueden consultar los clientes de mercado externo agregados previamente. Se puede desde aquí, agregar, modificar y eliminar un cliente. Se puede buscar por nombre. Se les deberá asignar un contacto y se podrá asignar una lista de precios." ScrollViewer.CanContentScroll="True"/>
         </Border>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="853.666,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
         <Border Height="251.907" Width="389.02" BorderThickness="1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="433.5,182.593,211.146,38.715" Opacity="0.5" />

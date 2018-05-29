@@ -33,6 +33,7 @@ namespace wpfFamiliaBlanco.Clientes
             InitializeComponent();
             loaddgvp();
             loaddgvlp();
+            btnModpl.IsEnabled = false;
             camplimit();
             
             
@@ -63,7 +64,7 @@ namespace wpfFamiliaBlanco.Clientes
         private void loadlistadeprecios(DataTable lp)
         {
 
-           dgvLp.AutoGenerateColumns = false;
+            dgvLp.AutoGenerateColumns = false;
             DataGridTextColumn textColumn = new DataGridTextColumn();
             textColumn.Header = "Nombre";
             textColumn.Binding = new Binding("nombre");

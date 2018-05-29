@@ -333,7 +333,7 @@
         <Label x:Name="lblprecios_Copy" Content="Items" HorizontalAlignment="Left" Margin="663.666,99,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="847.765,51,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
         <Border x:Name="rectanguloGuia" BorderBrush="#FF004E6B" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="222.47" Margin="824.489,75,0,0" VerticalAlignment="Top" Width="155.276" Background="#FF2D2C2C" CornerRadius="5">
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="En esta pantalla se agrega/modifica un cliente de Mercado Interno. Complete aquellos campos obligatorios y presione aceptar para cargar los datos o cancelar para descartarlos. Se podrá asignar o no una lista de precios."/>
         </Border>
 
     </Grid>

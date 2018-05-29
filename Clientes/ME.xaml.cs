@@ -50,6 +50,16 @@ namespace wpfFamiliaBlanco.Clientes
             dgvContacto.IsReadOnly = true;
             dgvPrecios.IsReadOnly = true;
             txtlp.IsReadOnly = true;
+
+            dgvPrecios.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre1");
+            dgvPrecios.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio de Lista";
+            textColumn2.Binding = new Binding("preciolista");
+            dgvPrecios.Columns.Add(textColumn2);
         }
 
 
@@ -131,6 +141,7 @@ namespace wpfFamiliaBlanco.Clientes
                 String consulta = "SELECT * from clientesme WHERE idClienteme = @valor";
                 DataTable clienteme = conexion.ConsultaParametrizada(consulta, ltsClientes.SelectedValue);
                 txtPais.Text = clienteme.Rows[0].ItemArray[2].ToString();
+                txtcp.Text = clienteme.Rows[0].ItemArray[7].ToString();
 
                 if (clienteme.Rows[0].ItemArray[5].ToString()=="0")
                 {
@@ -154,6 +165,8 @@ namespace wpfFamiliaBlanco.Clientes
                 {
                     txtt.Text = "CIP";
                 }
+
+                
 
                 txtDireccion.Text = clienteme.Rows[0].ItemArray[1].ToString();
                 txtweb.Text = clienteme.Rows[0].ItemArray[3].ToString();
@@ -211,6 +224,7 @@ namespace wpfFamiliaBlanco.Clientes
                     this.txtDireccion.Text = "";
                     this.txtPais.Text = "";
                     this.txtweb.Text = "";
+                    this.txtcp.Text = "";
 
 
                 }
@@ -232,6 +246,7 @@ namespace wpfFamiliaBlanco.Clientes
                 String direccionweb = newW.txtdireccionweb.Text;
                 String pais = newW.cmbpais.Text;
                 String direccion = newW.txtDireccion.Text;
+                String cuitpais = newW.txtcp.Text;
                 int tc = newW.cmbtc.SelectedIndex;
 
 
@@ -242,14 +257,14 @@ namespace wpfFamiliaBlanco.Clientes
                 if (newW.cmbPrecios.Text == "")
                 {
                     String sql;
-                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "')";
+                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, cuitpais) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" + cuitpais + "')";
                     conexion.operaciones(sql);
 
                 }
                 else
                 {
                     String sql;
-                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, FK_idLista) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" + newW.idlp + "')";
+                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, cuitpais, FK_idLista) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" + newW.idlp + "','" + cuitpais + "' )";
                     conexion.operaciones(sql);
                 }
 
@@ -299,6 +314,7 @@ namespace wpfFamiliaBlanco.Clientes
             string  pais = cliente.Rows[0].ItemArray[2].ToString();
             string web = cliente.Rows[0].ItemArray[3].ToString();
             string nombre = cliente.Rows[0].ItemArray[4].ToString();
+            string cuitpais = cliente.Rows[0].ItemArray[7].ToString();
             int terminocomercial = (int)cliente.Rows[0].ItemArray[5];
 
             int listadeprecios;
@@ -317,7 +333,7 @@ namespace wpfFamiliaBlanco.Clientes
 
 
 
-            var newW = new windowAgregarClienteme(nombre, direccion, pais, terminocomercial, web, listaContacto,idcliente,listadeprecios);
+            var newW = new windowAgregarClienteme(nombre, direccion, pais, terminocomercial,cuitpais, web, listaContacto,idcliente,listadeprecios);
 
             newW.ShowDialog();
             
@@ -331,6 +347,7 @@ namespace wpfFamiliaBlanco.Clientes
                 String nombreActu = newW.txtNombre.Text;
                 String address = newW.txtDireccion.Text;
                 String webpage = newW.txtdireccionweb.Text;
+                String cuitcountry = newW.txtcp.Text;
                 
                 this.dgvContacto.ItemsSource = newW.dgvContacto.ItemsSource;
                 
@@ -339,14 +356,14 @@ namespace wpfFamiliaBlanco.Clientes
                 if (newW.cmbPrecios.Text == "")
                 {
                     String update;
-                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "' where idClienteme ='" + idcliente + "';";
+                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "', cuitpais = '"+cuitcountry+ "' where idClienteme ='" + idcliente + "';";
                     conexion.operaciones(update);
                 }
                 else
                 {
                     
                     String update;
-                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "', FK_idLista = '" + newW.idlp + "' where idClienteme='"+idcliente+"';";
+                    update = "update clientesme set nombre = '" + nombreActu + "', direccion = '" + address + "', pais = '" + country + "', web = '" + webpage + "', terminocomercial = '" + termino + "', FK_idLista = '" + newW.idlp + "', cuitpais = '"+cuitcountry+"' where idClienteme='"+idcliente+"';";
                     conexion.operaciones(update);
                 }
 
@@ -375,7 +392,7 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
             cmbFiltro.Items.Add("Nombre");
-            cmbFiltro.Items.Add("Lista de Precios");
+            
 
 
         }
@@ -392,11 +409,7 @@ namespace wpfFamiliaBlanco.Clientes
                 consulta = "SELECT* FROM clientesme WHERE nombre LIKE '%' @valor '%'";
                 clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             }
-            else if (txtFiltro.Text == "Lista de Precios")
-            {
-                consulta = "SELECT* FROM clientesme WHERE nombre LIKE '%' @valor '%'";
-                clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
+            
 
             ltsClientes.ItemsSource = clientes.AsDataView();
         }

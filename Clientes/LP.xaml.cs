@@ -35,10 +35,24 @@ namespace wpfFamiliaBlanco.Clientes
             InitializeComponent();
             loadlp();
             dgvLp.IsReadOnly = true;
+            Camplimit();
             cargalp();
             ActualizaDGVlp();
             ltsLp.SelectedIndex = 0;
             
+        }
+
+        private void Camplimit()
+        {
+            dgvLp.AutoGenerateColumns = false;
+            DataGridTextColumn textColumn = new DataGridTextColumn();
+            textColumn.Header = "Nombre";
+            textColumn.Binding = new Binding("nombre");
+            dgvLp.Columns.Add(textColumn);
+            DataGridTextColumn textColumn2 = new DataGridTextColumn();
+            textColumn2.Header = "Precio de Lista";
+            textColumn2.Binding = new Binding("preciolista");
+            dgvLp.Columns.Add(textColumn2);
         }
 
         private void ActualizaDGVlp()
@@ -296,7 +310,7 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
             Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
-            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
+            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("LP.pdf", FileMode.Create));
             doc.Open();
             var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
