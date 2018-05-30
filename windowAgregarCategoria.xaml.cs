@@ -99,7 +99,7 @@ namespace wpfFamiliaBlanco
                 if (name == "")
                 {
 
-                    MessageBox.Show("Debe escribir el nombre de la categoria", "Alerta", MessageBoxButton.OK);
+                    MessageBox.Show("Debe escribir el nombre de la categoria", "Advertencia", MessageBoxButton.OK,MessageBoxImage.Warning);
                 }
                 else if (nomCat == "0")
                 {
@@ -116,12 +116,12 @@ namespace wpfFamiliaBlanco
                 }
                 else
                 {
-                    MessageBox.Show("La categoria ya existe");
+                    MessageBox.Show("La categoría ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch
             {
-                MessageBox.Show("Ocurrio un error");
+                MessageBox.Show("Ocurrió un error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -132,7 +132,7 @@ namespace wpfFamiliaBlanco
             selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
             textnombre.Text = selectedDataRow["nombre"].ToString();
 
-            MessageBoxResult result = MessageBox.Show("Seguro quiere eliminar la categoría ? " + selectedDataRow["nombre"].ToString(), "Cuidado", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("¿Seguro quiere eliminar la categoría ? " + selectedDataRow["nombre"].ToString(), "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
             switch (result)
             {
                 case MessageBoxResult.Yes:
@@ -184,7 +184,7 @@ namespace wpfFamiliaBlanco
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Escriba el nombre de la categoría");
+                MessageBox.Show("Escriba el nombre de la categoría", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

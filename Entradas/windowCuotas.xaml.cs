@@ -320,8 +320,8 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 if (string.IsNullOrEmpty(txt1.Text))
                 {
-
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
 
 
 
@@ -346,8 +346,8 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
-                  }
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 else
                 {
                     float aPagar = total / 2;
@@ -370,7 +370,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) &&  string.IsNullOrEmpty(txt3.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -398,7 +398,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -428,8 +428,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text))
                 {
-
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -464,7 +463,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -503,7 +502,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -546,7 +545,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -591,7 +590,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -639,8 +638,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text))
                 {
-
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -693,7 +691,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text) && string.IsNullOrEmpty(txt11.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -750,7 +748,7 @@ namespace wpfFamiliaBlanco.Entradas
                 if (string.IsNullOrEmpty(txt1.Text) && string.IsNullOrEmpty(txt2.Text) && string.IsNullOrEmpty(txt3.Text) && string.IsNullOrEmpty(txt4.Text) && string.IsNullOrEmpty(txt5.Text) && string.IsNullOrEmpty(txt6.Text) && string.IsNullOrEmpty(txt7.Text) && string.IsNullOrEmpty(txt8.Text) && string.IsNullOrEmpty(txt9.Text) && string.IsNullOrEmpty(txt10.Text) && string.IsNullOrEmpty(txt11.Text) && string.IsNullOrEmpty(txt12.Text))
                 {
 
-                    MessageBox.Show("ingrese dias");
+                    MessageBox.Show("ingrese dias", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {

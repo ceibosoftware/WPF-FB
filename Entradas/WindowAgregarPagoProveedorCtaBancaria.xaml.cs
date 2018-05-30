@@ -41,11 +41,13 @@ namespace wpfFamiliaBlanco.Entradas
         {
             if (txtCbu.Text == "")
             {
-                MessageBox.Show("Ingrese CBU");
+                MessageBox.Show("Ingrese CBU", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
             }
             if (txtNombreTitular.Text=="")
             {
-                MessageBox.Show("Ingrese Nombre del titular");
+                MessageBox.Show("Ingrese Nombre del titular", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                
             }
             else if (txtCbu.Text != "" && txtNombreTitular.Text != "")
             {

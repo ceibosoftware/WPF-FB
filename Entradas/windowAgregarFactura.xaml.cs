@@ -311,7 +311,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             try
             {
-                MessageBox.Show(Subtotal.ToString());
+            
                 bool existe = false;
                 Producto prod = dgvProductosOC.SelectedItem as Producto;
                
@@ -339,7 +339,7 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya se agrego");
+                        MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
 
 
@@ -363,18 +363,18 @@ namespace wpfFamiliaBlanco.Entradas
                         }
                         else
                         {
-                            MessageBox.Show("La cantidad no puede ser cero");
+                            MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Ya se entregaron todos las facturas de este producto");
+                    MessageBox.Show("Ya se agregaron todas las facturas de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Seleccione un producto para agregar");
+                MessageBox.Show("Seleccione un producto a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
     
@@ -419,7 +419,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -486,7 +486,7 @@ namespace wpfFamiliaBlanco.Entradas
                 todaslascuotas.Clear();
                 if (dgvProductosFactura.Items.Count ==0)
                 {
-                    MessageBox.Show("Primero cargue productos a la factura");
+                    MessageBox.Show("Primero cargue productos a la factura", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -545,42 +545,42 @@ namespace wpfFamiliaBlanco.Entradas
             String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
             if (dtFactura.SelectedDate == null )
             {
-                MessageBox.Show("Ingrese fecha de la factura");
+                MessageBox.Show("Ingrese fecha de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
            
             else if (dgvProductosFactura.HasItems == false)
             {
-                MessageBox.Show("Es necesario ingresar productos a la factura");
+                MessageBox.Show("Ingrese productos a la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             } else if (cmbCuotas.Text == "") {
 
-                MessageBox.Show("Selecciona cantidad de cuotas");
+                MessageBox.Show("Seleccione cantidad de cuotas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (cmbIVA.Text == "")
             {
 
-                MessageBox.Show("Seleccione IVA");
+                MessageBox.Show("Seleccione IVA", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (cmbTipoCambio.Text == "")
             {
 
-                MessageBox.Show("Seleccione tipo de cambio");
+                MessageBox.Show("Seleccione tipo de cambio", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (cmbProveedores.Text == "")
             {
 
-                MessageBox.Show("Seleccione un proveedor");
+                MessageBox.Show("Seleccione un Proveedor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (bandera == true && nomCat !="0")
             {
-               
-                    MessageBox.Show("El numero de factura ya existe");
-                    return false;
+
+                MessageBox.Show("El número de la factura ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
                 
             
 
@@ -588,7 +588,7 @@ namespace wpfFamiliaBlanco.Entradas
          
             else if (txtNroFactura.Text == "")
             {
-                MessageBox.Show("Ingrese numero de factura");
+                MessageBox.Show("Ingrese número de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
 
             }

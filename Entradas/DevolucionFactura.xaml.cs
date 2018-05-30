@@ -339,7 +339,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                     foreach (var item in newW.itemsNCAntiguos)
                     {
-                        MessageBox.Show("items antiguos :" + item.cantidad);
+                  
                         String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                         conexion.operaciones(updatestock);
                     }
@@ -367,7 +367,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
 
                 String idFactura = "";
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito numero :" + ltsNC.SelectedValue, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito número " + ltsNC.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
@@ -430,7 +430,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una factura a eliminar");
+                MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -132,40 +132,40 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Complete el nombre");
+                MessageBox.Show("Complete el campo Nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(txtCuit.Text))
             {
-                MessageBox.Show("Complete el CUIT");
+                MessageBox.Show("Complete el campo CUIT", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
 
             }
             else if (string.IsNullOrEmpty(txtTelt.Text))
             {
-                MessageBox.Show("Complete el Telefono del Transporte");
+                MessageBox.Show("Complete el campo Teléfono de transporte", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
 
             }
             else if (string.IsNullOrEmpty(txtTransporte.Text))
             {
-                MessageBox.Show("Complete la direccion del Transporte");
+                MessageBox.Show("Complete la Dirección del transporte", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
 
             }
             else if (string.IsNullOrEmpty(txtDireccion.Text))
             {
-                MessageBox.Show("Complete la direccion");
+                MessageBox.Show("Complete el campo Dirección", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (lista.Count <= 0)
             {
-                MessageBox.Show("Agregue un contacto");
+                MessageBox.Show("Agregue un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (cmbPrecios.Text == "")
             {
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea agregar el cliente sin lista de precios?" + txtNombre.Text, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente "+txtNombre.Text+ " sin lista de precios?", "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
                 if (dialog==MessageBoxResult.Yes)
                 {
                     return true;
@@ -240,7 +240,7 @@ namespace wpfFamiliaBlanco.Clientes
                 }
                 catch (NullReferenceException)
                 {
-                    MessageBox.Show("Agregue lista de precios");
+                    MessageBox.Show("Agregue una lista de precios", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                     DialogResult = true;
                 
@@ -272,7 +272,7 @@ namespace wpfFamiliaBlanco.Clientes
                         String update;
                         update = "DELETE FROM contactocliente WHERE telefono = '" + contacto.NumeroTelefono + "'";
                         conexion.operaciones(update);
-                        MessageBox.Show("Se ha eliminado el contacto");
+                        MessageBox.Show("Se eliminó el contacto correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     }
                     else
@@ -287,7 +287,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un contacto");
+                MessageBox.Show("Seleccione un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -326,7 +326,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un contacto");
+                MessageBox.Show("Seleccione un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -47,24 +47,27 @@ namespace wpfFamiliaBlanco.Entradas
         
             if (txtnumeroCheque.Text == "")
             {
-                MessageBox.Show("Ingrese un numero de cheque");
+                MessageBox.Show("Ingrese número del cheque", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (txtDestinatario.Text == "")
             {
-                MessageBox.Show("Ingrese un destinatario");
+                MessageBox.Show("Ingrese un destinatario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+  
             }
             if (dtpFecha.SelectedDate == null)
             {
-                MessageBox.Show("Seleccione una fecha");
+                MessageBox.Show("Seleccione una fecha", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           
             }
             if (dtpFechaCobro.SelectedDate == null)
             {
-                MessageBox.Show("Seleccione una fecha de cobro");
+                MessageBox.Show("Seleccione una fecha de cobro", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
           
             else if (txtnumeroCheque.Text != "" && txtDestinatario.Text != "" && dtpFechaCobro.SelectedDate != null && dtpFecha.SelectedDate != null)
             {
-                MessageBox.Show("impoirte" +txtImporte.Text);
+              
                 banco = cmbBanco.SelectedItem.ToString();
                 destinatario = txtDestinatario.Text;
                 numCheque = int.Parse(txtnumeroCheque.Text);

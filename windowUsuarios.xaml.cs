@@ -47,7 +47,8 @@ namespace wpfFamiliaBlanco
          
             if (us == "0")
             {
-                MessageBox.Show("No existe usuario con ese nombre");
+                MessageBox.Show("No existe usuario con ese nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
             }
              else
              {
@@ -68,10 +69,13 @@ namespace wpfFamiliaBlanco
 
                     }else if (!usuarioTxt.Equals(usuarioDB)) {
 
-                                MessageBox.Show("usuario incorrecto");
+                    MessageBox.Show("usuario incorrecto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                 
 
-                    }else{
-                                MessageBox.Show("contraseña incorrecta");
+                    }else
+                {
+                    MessageBox.Show("contraseña incorrecta", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                 
                     }
              }
      

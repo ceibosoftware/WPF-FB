@@ -206,7 +206,7 @@ namespace wpfFamiliaBlanco.Clientes
          
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar al cliente " + nombre+". Se eliminarán todos sus datos", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             int idSeleccionado = (int)ltsClientes.SelectedValue;
             if (dialog == MessageBoxResult.Yes)
             {
@@ -226,16 +226,16 @@ namespace wpfFamiliaBlanco.Clientes
                     this.txtTransporte.Text = "";
 
                 }
-
-            }
+                    MessageBox.Show("El cliente se ha eliminado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
    
             ltsClientes.SelectedIndex = 0;
 
             }
             catch (NullReferenceException)
             {
+                MessageBox.Show("Seleccione un cliente a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                MessageBox.Show("Seleccione un cliente a eliminar");
             }
         }
 
@@ -328,6 +328,7 @@ namespace wpfFamiliaBlanco.Clientes
                 this.ltsClientes.Items.Refresh();
                 InitializeComponent();
                 loadListaClientes();
+                MessageBox.Show("El cliente se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             ltsClientes.SelectedIndex = ltsClientes.Items.Count - 1;
@@ -418,7 +419,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un cliente a modificar");
+                MessageBox.Show("Seleccione un cliente a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

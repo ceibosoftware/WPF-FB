@@ -166,14 +166,15 @@ namespace wpfFamiliaBlanco
                     }
                     else
                     {
-                        MessageBox.Show("Ese proveedor ya fue agregado");
+                        MessageBox.Show("Ese proveedor ya fue agregado", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                     
                     }
                 }
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Es necesario seleccionar un proveedor a agregar");
+                MessageBox.Show("Es necesario seleccionar un proveedor a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
            
 
@@ -188,8 +189,8 @@ namespace wpfFamiliaBlanco
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Es necesario seleccionar un proveedor a eliminar");
+                MessageBox.Show("Es necesario seleccionar un proveedor a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
             }
         }
 
@@ -223,36 +224,43 @@ namespace wpfFamiliaBlanco
 
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Falta completar campo nombre");
+                MessageBox.Show("Falta completar campo nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
                 return false;
             }
             else if (string.IsNullOrEmpty(txtExistenciaMinima.Text))
             {
-                MessageBox.Show("falta completar campo existencias minimas");
+                MessageBox.Show("Falta completar campo existencias minimas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+   
                 return false;
             }
             else if (string.IsNullOrEmpty(txtUnidad.Text))
             {
-                MessageBox.Show("falta completar campo unidad");
+                MessageBox.Show("Falta completar campo unidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+ 
                 return false;
             }
             else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
             {
-                MessageBox.Show("falta completar campo precio unitario");
+                MessageBox.Show("Falta completar campo precio unitario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
                 return false;
             }
             else if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
-                MessageBox.Show("falta completar campo descripcion");
+                MessageBox.Show("Falta completar campo descripción", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else if (ltsProvProductos.Items.Count == 0)
             {
-                MessageBox.Show("Es necesario ingresar algun proveedor");
+                MessageBox.Show("Es necesario ingresar algun proveedor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
                 return false;
             }else if(cmbCategoria.SelectedItem == null)
             {
-                MessageBox.Show("Es necesario seleccionar categoria");
+                MessageBox.Show("Es necesario seleccionar categoria", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             else

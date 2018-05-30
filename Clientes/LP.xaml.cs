@@ -39,7 +39,9 @@ namespace wpfFamiliaBlanco.Clientes
             cargalp();
             ActualizaDGVlp();
             ltsLp.SelectedIndex = 0;
-            
+            MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         private void Camplimit()
@@ -171,6 +173,7 @@ namespace wpfFamiliaBlanco.Clientes
                 ltsLp.SelectedIndex = ltsLp.Items.Count - 1;
                 bandera = false;
                 ActualizaDGVlp();
+                MessageBox.Show("Se agrego la lista de precio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
 
@@ -184,7 +187,7 @@ namespace wpfFamiliaBlanco.Clientes
             {
                 DataRow seleccionada = ((DataRowView)ltsLp.SelectedItem).Row;
                 string nombre = seleccionada["nombre"].ToString();
-                MessageBoxResult resultado = MessageBox.Show("Esta seguro que desea eliminar la Lista de precios: " + nombre, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult resultado = MessageBox.Show("Esta seguro que desea eliminar la Lista de precios: " + nombre, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (resultado==MessageBoxResult.Yes)
                 {
@@ -200,8 +203,8 @@ namespace wpfFamiliaBlanco.Clientes
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione una Lista de precios a eliminar");
+                MessageBox.Show("Seleccione una Lista de precios a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        
 
             }
             ltsLp.SelectedIndex = ltsLp.Items.Count - 1;
@@ -292,7 +295,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Selecciona una lista de precios");
+                MessageBox.Show("Seleccione una Lista de precios a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
            

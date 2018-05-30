@@ -36,7 +36,7 @@ namespace wpfFamiliaBlanco.Clientes
             
             if (string.IsNullOrEmpty(txtpreciolista.Text))
             {
-                MessageBox.Show("Complete el precio de lista");
+                MessageBox.Show("Complete el campo Precio de la lista", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else

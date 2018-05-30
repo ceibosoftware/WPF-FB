@@ -143,7 +143,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
 
@@ -154,7 +154,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             else
             {
-                MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto");
+                MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
         }
         private void LoadListaComboClienteMI()
@@ -301,7 +302,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("No se ha seleccionado ningun producto");
+                MessageBox.Show("Seleccione una Orden de compra ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -365,7 +366,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                         }
                         else
                         {
-                            MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia",MessageBoxButton.OK, MessageBoxImage.Warning);
+
                         }
                     }
                     else
@@ -384,7 +386,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("No se ha seleccionado ningun producto");
+                MessageBox.Show("No se ha seleccionado ningun producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
             }
 
 
@@ -406,22 +409,26 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
 
             if (productos.Count <= 0)
             {
-                MessageBox.Show("Es necesario ingresar al menos un producto");
+                MessageBox.Show("Es necesario ingresar al menos un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("");
                 return false;
             }
             else if (string.IsNullOrEmpty(dpFecha.Text))
             {
-                MessageBox.Show("Es necesario seleccionar la fecha");
+                MessageBox.Show("Es necesario seleccionar la fecha", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else if (string.IsNullOrEmpty(txtFormaPago.Text))
             {
-                MessageBox.Show("Falta completar la forma de pago");
+                MessageBox.Show("Falta completar la forma de pago", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
                 return false;
             }
             else if (string.IsNullOrEmpty(txtObservaciones.Text))
             {
-                MessageBox.Show("Falta completa el campo observaciones");
+                MessageBox.Show("Falta completa el campo observaciones", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else
@@ -754,7 +761,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             else
             {
-                MessageBox.Show("no existe cliente Mercado interno");
+                MessageBox.Show("no existe cliente Mercado interno", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
                 chkMI.IsChecked = false;
             }
         }
@@ -779,7 +787,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             else
             {
-                MessageBox.Show("no existe cliente Mercado externo");
+                MessageBox.Show("no existe cliente Mercado interno", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 chkME.IsChecked = false;
             }
         }

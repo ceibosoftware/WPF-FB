@@ -179,6 +179,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                         String productos = "insert into productos_has_ordencompraSalida(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOrdenCompra,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
                         conexion.operaciones(productos);
                     }
+                    MessageBox.Show("Se agregó la orden de compra correctamente", "información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             ejecutar = false;
@@ -332,6 +333,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             string sql = "delete from ordencompraSalida where idOrdenCompra = '" + idSeleccionado + "'";
             conexion.operaciones(sql);
             loadlistaOC();
+            MessageBox.Show("Se eliminó correctamente la Orden de compra", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -339,22 +341,25 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 DataRow selectedDataRow = ((DataRowView)ltsNumeroOC.SelectedItem).Row;
                 string OC = selectedDataRow["idOrdenCompra"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la orden de compra numero : " + OC, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar la orden de compra número " + OC, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
                 string existeRemito = "select count(idremitos) from remito where FK_idOC = " + OC + " ";
                 string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + OC + " ";
                 if (dialog == MessageBoxResult.Yes)
                 {
                     if (conexion.ValorEnVariable(existeRemito) != "0" && conexion.ValorEnVariable(existeFactura) != "0")
                     {
-                        MessageBox.Show("No se puede eliminar la orden  tiene remitos y facturas asociados");
+                        MessageBox.Show("No se puede eliminar la orden  tiene remitos y facturas asociados", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        
                     }
                     else if (conexion.ValorEnVariable(existeRemito) != "0")
                     {
-                        MessageBox.Show("No se puede eliminar la orden  tiene remitos asociados");
+                        MessageBox.Show("No se puede eliminar la orden  tiene remitos asociados", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        
                     }
                     else if (conexion.ValorEnVariable(existeFactura) != "0")
                     {
-                        MessageBox.Show("No se puede eliminar la orden  tiene facturas asociadas");
+                        MessageBox.Show("No se puede eliminar la orden  tiene facturas asociadas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        
 
                     }
                     else
@@ -379,8 +384,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Es necesario seleccionar una orden de compra a eliminar");
+                MessageBox.Show("Es necesario seleccionar una orden de compra a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
             }
         }
 
@@ -499,17 +504,20 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
                         loadlistaOC(index);
                         LoadListaComboProveedor();
                         ejecutar = true;
+
+                        MessageBox.Show("Se modificó correctamente la Orden de Compra", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No se puede modificar una Orden que tiene remitos o facturas");
+                    MessageBox.Show("No se puede modificar una Orden que tiene remitos o facturas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
                 }
             }
             catch (NullReferenceException)
             {
-                
-                MessageBox.Show("Es necesario seleccionar una Orden para modificar ");
+                MessageBox.Show("Es necesario seleccionar una Orden para modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
 
         }
@@ -674,17 +682,20 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         {
             if (existeClienteMI() == 0 && existeClienteME() == 0)
             {
-                MessageBox.Show("Si desea agregar una orden sera necesario agregar un cliente mercado interno o externo");
+                MessageBox.Show("Si desea agregar una orden sera necesario agregar un cliente mercado interno o externo", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+               
                 return false;
             }
             else if (existeClienteMI() == 0)
             {
-                MessageBox.Show("No existen cliente mercado interno no podra agregar una orden para mercado interno ");
+                MessageBox.Show("No existen cliente mercado interno no podra agregar una orden para mercado interno ", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+               
                 return true;
             }
             else if (existeClienteME() == 0)
             {
-                MessageBox.Show("No existen cliente mercado externo no podra agregar una orden para mercado externo ");
+                MessageBox.Show("No existen cliente mercado interno no podra agregar una orden para mercado enterno ", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+              
                 return true;
             }
             else

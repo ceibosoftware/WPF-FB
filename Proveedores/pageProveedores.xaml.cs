@@ -178,14 +178,14 @@ namespace wpfFamiliaBlanco
                         conexion.operaciones(sql3);
                     }
 
-                
-            }
+                    MessageBox.Show("El proveedor se modifico correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
             }
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un proveedor a modificar");
+                MessageBox.Show("Seleccione un proveedor a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         
@@ -246,6 +246,7 @@ namespace wpfFamiliaBlanco
                 InitializeComponent();
                 loadListaProveedores();
                 LlenarComboFiltro();
+                MessageBox.Show("El proveedor se agrego correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -318,10 +319,19 @@ namespace wpfFamiliaBlanco
             try
             {
 
-        
-            DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
+                String consulta = "SELECT count(FK_idProducto) FROM productos_has_ordencompra WHERE FK_idProducto ='" + ltsProveedores.SelectedValue + "' ";
+                DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre, "Advertencia", MessageBoxButton.YesNo);
+
+                if (conexion.ValorEnVariable(consulta) =="0")
+                {
+                    MessageBox.Show("No se puede eliminar el proveedor porque tiene órdenes de compra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+
+               
+            MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea eliminar al proveedor " + nombre+"?", "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
             if (dialog == MessageBoxResult.Yes)
             {
                 int idSeleccionado = (int)ltsProveedores.SelectedValue;
@@ -339,15 +349,17 @@ namespace wpfFamiliaBlanco
                     this.txtLocalidad.Text = "";
         
                 }
-
+                    MessageBox.Show("El proveedor de eliminó correctamente", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             }
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un proveedor a eliminar");
+                MessageBox.Show("Seleccione un proveedor a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        
+    }
 
         public void ActualizaDGVContacto()
         {

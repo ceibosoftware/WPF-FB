@@ -55,17 +55,21 @@ namespace wpfFamiliaBlanco
             }
             else if (txtUsername.Text == "")
             {
-                MessageBox.Show("Debe ingresar el nombre de usuario");
+                MessageBox.Show("Debe ingresar el nombre de usuario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
 
             }else if (txtPassword.Password.ToString() == "")
             {
-                MessageBox.Show("Debe ingresar una contraseña");
-            }else if (!nomCat.Equals("0"))
+                MessageBox.Show("Debe ingresar una contraseña", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!nomCat.Equals("0"))
             {
-                MessageBox.Show("El usuario ingresado ya existe");
+                MessageBox.Show("El usuario ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
             }else if (cmbTipoUsuario.SelectedItem.ToString() == "")
             {
-                MessageBox.Show("Debe seleccionar un tipo de usuario");
+                MessageBox.Show("Debe seleccionar un tipo de usuario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
             }
             
         }

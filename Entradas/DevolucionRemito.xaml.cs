@@ -117,6 +117,7 @@ namespace wpfFamiliaBlanco.Entradas
                 String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 1 + "' where idOrdenCompra = '" + newW.idOC + "'";
                 conexion.operaciones(updateestadoOC);
                 loadLtsNCRemitos();
+                MessageBox.Show("La nota de crédito se agrego correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         
 
@@ -243,7 +244,7 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     foreach (var item in newW.itemsNCAntiguos)
                     {
-                        MessageBox.Show("items antiguos :" + item.cantidad);
+                      
                         String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                         conexion.operaciones(updatestock);
                     }
@@ -260,7 +261,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una nota de credito a modificar");
+                MessageBox.Show("Seleccione una Nota de crédito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -272,7 +273,7 @@ namespace wpfFamiliaBlanco.Entradas
                 String idremi="";
 
 
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito numero :" + ltsRemitos.SelectedValue, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito número " + ltsRemitos.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
@@ -323,7 +324,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una Nota de Crédito a eliminar");
+                MessageBox.Show("Seleccione una Nota de crédito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -374,7 +375,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
              
                 String id = cmbProveedores1.SelectedValue.ToString();
-                MessageBox.Show("" + id);
+               
                 String sql = "select distinct n.idNotaCredito from remito r, ordencompra o, proveedor p, notacredito n where   o.FK_idProveedor = '" + id + "' and o.idOrdenCompra = r.FK_idOC   and n.FK_idremitos  = r.idremitos";
                 conexion.Consulta(sql, ltsRemitos);
                 ltsRemitos.DisplayMemberPath = "idNotaCredito";

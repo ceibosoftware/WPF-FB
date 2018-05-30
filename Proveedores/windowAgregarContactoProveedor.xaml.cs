@@ -36,15 +36,18 @@ namespace wpfFamiliaBlanco.Proveedores
         {
             if (txtMailContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un email");
+                MessageBox.Show("Ingrese un email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
             }
             else if ( txtNombreContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un nombre de contacto");
+                MessageBox.Show("Ingrese un nombre de contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
             }
             else if (txtTelefonoContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un telefono");
+                MessageBox.Show("Ingrese un telefono", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
             }
             else
             {

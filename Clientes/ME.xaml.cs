@@ -212,7 +212,7 @@ namespace wpfFamiliaBlanco.Clientes
       
             DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar :" + nombre + ", se eliminaran todos sus datos ", "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea eliminar al cliente " + nombre + ", se eliminarán todos sus datos ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             
             if (dialog == MessageBoxResult.Yes)
             {
@@ -236,14 +236,13 @@ namespace wpfFamiliaBlanco.Clientes
 
                 }
             }
-            MessageBox.Show("Se elimino correctamente");
-            ltsClientes.SelectedIndex = 0;
+                MessageBox.Show("Se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                ltsClientes.SelectedIndex = 0;
 
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione un cliente a eliminar");
+                MessageBox.Show("Seleccione un cliente a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -311,6 +310,7 @@ namespace wpfFamiliaBlanco.Clientes
                 this.ltsClientes.Items.Refresh();
                 InitializeComponent();
                 loadListaClientes();
+                MessageBox.Show("Se agregó el cliente correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             ltsClientes.SelectedIndex = ltsClientes.Items.Count - 1;
@@ -410,7 +410,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un cliente a modificar");
+                MessageBox.Show("Seleccione un cliente a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -89,7 +89,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
         }
         public void loadListaProducto(int idProveedor, int idProducto, string nombre, int cliente)
         {
-            MessageBox.Show(idProveedor.ToString());
+       
             String consulta;
             if (cliente == 1)
             {
@@ -103,7 +103,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
             
-            MessageBox.Show(ltsProductos.Items.Count.ToString());
+         
             ////BUSCAR ITEM EN LISTBOX
             for (int i = 0; i < ltsProductos.Items.Count; i++)
             {
@@ -153,7 +153,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             catch (OverflowException)
             {
 
-                MessageBox.Show("No puede ingresar un numero tan grande");
+                MessageBox.Show("No puede ingresar un numero tan grande", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
             }
 
 
@@ -173,7 +174,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             {
                 txtCantidad.Text = "0";
                 txtCantidad.Focus();
-                MessageBox.Show("Total demaciado grande , vueva a ingresar cantidad", "Error", MessageBoxButton.OK, MessageBoxImage.Hand);
+
+                MessageBox.Show("Total demasiado grande, vueva a ingresar la cantidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 
@@ -202,7 +204,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             else
             {
-                MessageBox.Show("La cantidad ingresada es mayor al stock");
+                MessageBox.Show("La cantidad ingresada es mayor al stock", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
                 return false;
             }
         }
@@ -241,33 +244,39 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             Decimal.TryParse(txtPrecioUnitario.Text, out decimal PU);
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Falta completar campo nombre");
+                MessageBox.Show("Falta completar campo nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
                 return false;
             }
             else if (string.IsNullOrEmpty(txtCantidad.Text))
             {
-                MessageBox.Show("falta completar campo cantidad");
+                MessageBox.Show("falta completar campo cantidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+       
                 return false;
             }
             else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
             {
-                MessageBox.Show("falta completar precio unitario");
+                MessageBox.Show("falta completar precio unitario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           
                 return false;
             }
 
             else if (string.IsNullOrEmpty(txtTotal.Text))
             {
-                MessageBox.Show("falta completar campo total");
+                MessageBox.Show("falta completar campo total", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
                 return false;
             }
             else if (cantidad <= 0)
             {
-                MessageBox.Show("La cantidad debe ser mayor a cero");
+                MessageBox.Show("La cantidad debe ser mayor a cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             else if (PU <= 0)
             {
-                MessageBox.Show("El precio unitario no puede ser cero");
+                MessageBox.Show("El precio unitario no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
                 return false;
             }
             else

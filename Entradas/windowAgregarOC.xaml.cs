@@ -65,7 +65,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
 
             var newW = new windowAgregarRemito();
-            var resultado = MessageBox.Show("Desea agregar la orden de compra? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var resultado = MessageBox.Show("¿Desea agregar la orden de compra? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resultado == MessageBoxResult.Yes)
             {
                 newW.ShowDialog();
@@ -77,7 +77,7 @@ namespace wpfFamiliaBlanco.Entradas
         private void btAgregarFactura_Copy_Click(object sender, RoutedEventArgs e)
         {
             var newW = new windowAgregarFactura();
-            var resultado = MessageBox.Show("Desea agregar la orden de compra? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var resultado = MessageBox.Show("¿Desea agregar la orden de compra? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resultado == MessageBoxResult.Yes)
             {
                 newW.ShowDialog();
@@ -128,8 +128,9 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
+                   
                 }
 
 
@@ -139,7 +140,8 @@ namespace wpfFamiliaBlanco.Entradas
             }
             else
             {
-                MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto");
+                MessageBox.Show("Es necesario seleccionar un proveedor para agregar producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
             }
         }
 
@@ -236,10 +238,11 @@ namespace wpfFamiliaBlanco.Entradas
                 txtSubtotal.Text = (subtotal).ToString();
                 productos.Remove(prod);
                 dgvProductos.Items.Refresh();
+                MessageBox.Show("Se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("No se ha seleccionado ningun producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -295,7 +298,7 @@ namespace wpfFamiliaBlanco.Entradas
                         }
                         else
                         {
-                            MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            MessageBox.Show("El producto ya fue agregado a la orden de compra", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
                     else
@@ -310,11 +313,12 @@ namespace wpfFamiliaBlanco.Entradas
                         txtSubtotal.Text = (subtotal).ToString();
                         calculaTotal();
                     }
+                    MessageBox.Show("Se agregó correctamente la orden de compra", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("No se ha seleccionado ningun producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
 
@@ -339,22 +343,22 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (productos.Count <= 0)
             {
-                MessageBox.Show("Es necesario ingresar al menos un producto");
+                MessageBox.Show("Ingrese al menos un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(dpFecha.Text))
             {
-                MessageBox.Show("Es necesario seleccionar la fecha");
+                MessageBox.Show("Seleccione la fecha", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(txtFormaPago.Text))
             {
-                MessageBox.Show("Falta completar la forma de pago");
+                MessageBox.Show("Ingrese la forma de pago", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(txtObservaciones.Text))
             {
-                MessageBox.Show("Falta completa el campo observaciones");
+                MessageBox.Show("Complete el campo observación", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else
@@ -409,7 +413,7 @@ namespace wpfFamiliaBlanco.Entradas
                 string ultimoId;
                 if (!agregado)
                 {
-                    dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                    dialog = MessageBox.Show("¿Desea agregar orden la Orden de compra?", "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -471,7 +475,7 @@ namespace wpfFamiliaBlanco.Entradas
                             String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
                             conexion.operaciones(sql);
                         }
-                        MessageBox.Show("El remito se agrego correctamente");
+                        MessageBox.Show("El remito se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
@@ -514,7 +518,7 @@ namespace wpfFamiliaBlanco.Entradas
                 string fkOrden;
                 if (!agregado)
                 {
-                    dialog = MessageBox.Show("¿Desea agregar orden de compra?", "Agregar OC", MessageBoxButton.YesNo);
+                    dialog = MessageBox.Show("¿Desea agregar la orden de compra?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -615,7 +619,7 @@ namespace wpfFamiliaBlanco.Entradas
                                 String sql = "UPDATE productos_has_ordencompra SET CrFactura = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOC = '" + fkOrden + "'";
                                 conexion.operaciones(sql);
                             }
-                            MessageBox.Show("Se agregó la factura correctamente");
+                            MessageBox.Show("Se agregó la factura correctamente", "información", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                     }
                 }

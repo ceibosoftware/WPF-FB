@@ -141,7 +141,7 @@ namespace wpfFamiliaBlanco
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Es necesario seleccionar un producto a modificar");
+                MessageBox.Show("Seleccione un producto a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -234,17 +234,19 @@ namespace wpfFamiliaBlanco
                 String consulta1 = "SELECT count(FK_idProductos) FROM productos_has_listadeprecios WHERE FK_idProductos ='" + ltsProductos.SelectedValue + "' ";
                 if (conexion.ValorEnVariable(consulta) != "0")
                 {
-                    MessageBox.Show("El producto no se puede eliminar porque pertenece a una orden de compra");
+                    MessageBox.Show("El producto no se puede eliminar porque pertenece a una orden de compra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                   
                 }
                 else if (conexion.ValorEnVariable(consulta1) != "0")
                 {
-                    MessageBox.Show("El producto no se puede eliminar porque tiene una lista de precio asignada");
+                    MessageBox.Show("El producto no se puede eliminar porque tiene una lista de precio asignada", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                  
                 }
                 else
                 {
                     DataRow selectedDataRow = ((DataRowView)ltsProductos.SelectedItem).Row;
                     string nombre = selectedDataRow["nombre"].ToString();
-                    MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar : " + nombre, "Advertencia", MessageBoxButton.YesNo);
+                    MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea eliminar el producto " + nombre+"?", "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
                     if (dialog == MessageBoxResult.Yes)
                     {
                         int idSeleccionado = (int)ltsProductos.SelectedValue;
@@ -259,8 +261,8 @@ namespace wpfFamiliaBlanco
             }
             catch (NullReferenceException)
             {
+                MessageBox.Show("Es necesario seleccionar un producto a eliminar", "Advertencia", MessageBoxButton.OK,MessageBoxImage.Warning);
 
-                MessageBox.Show("Es necesario seleccionar un producto a eliminar");
             }
 
         }

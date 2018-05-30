@@ -379,7 +379,8 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya se agrego");
+                        MessageBox.Show("El producto ya se agrego", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
                     }
 
 
@@ -395,18 +396,21 @@ namespace wpfFamiliaBlanco.Entradas
                         }
                         else
                         {
-                            MessageBox.Show("La cantidad no puede ser cero");
+                            MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                          
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Ya se entregaron todos los remitos de este producto");
+                    MessageBox.Show("Ya se entregaron todos los remitos de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                  
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Seleccione un producto para agregar");
+                MessageBox.Show("Seleccione un producto para agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+     
                 
             }
           
@@ -456,7 +460,8 @@ namespace wpfFamiliaBlanco.Entradas
                      
                     if (differenceInDays <= 0)
                     {
-                        MessageBox.Show("No se puede modificar el remito porque ya se ha realizado una venta.");
+                        MessageBox.Show("No se puede modificar el remito porque ya se ha realizado una venta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                  
                     }
                     else
                     {
@@ -496,8 +501,8 @@ namespace wpfFamiliaBlanco.Entradas
             
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione un producto para eliminar");
+                MessageBox.Show("Seleccione un producto para eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        
 
             }
 
@@ -705,17 +710,20 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (prodRemito.Count <= 0)
             {
-                MessageBox.Show("Ingrese al menos un producto");
+                MessageBox.Show("Ingrese al menos un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             else if (string.IsNullOrEmpty(dtRemito.Text))
             {
-                MessageBox.Show("Seleccione una fecha");
+                MessageBox.Show("Seleccione una fecha", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else if (string.IsNullOrEmpty(txtNroRemito.Text))
             {
-                MessageBox.Show("Ingrese numero remito");
+                MessageBox.Show("Ingrese numero remito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             

@@ -78,7 +78,7 @@ namespace wpfFamiliaBlanco.Entradas
                 conexion.operaciones(sq2l);
 
           
-                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK);
+                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 pageEntradas pe = new pageEntradas();
                 
                 
@@ -92,7 +92,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
                 conexion.operaciones(sq2l);
-                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK);
+                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK,MessageBoxImage.Information);
             }
             else if (newW.tipopago == 2)
             {
@@ -101,7 +101,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
                 conexion.operaciones(sq2l);
-                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK);
+                MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK,MessageBoxImage.Information);
             }
 
             loadLtsProximosPagos();
@@ -328,7 +328,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             bandera = true;
             String tipo = txtTipoPago.Text;
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el pago numero :" + ltsPagosReaizados.SelectedValue, "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el pago número " + ltsPagosReaizados.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
             if (dialog == MessageBoxResult.Yes)
@@ -370,6 +370,7 @@ namespace wpfFamiliaBlanco.Entradas
                 loadLtsProximosPagos();
                 loadLtsPagosRealizados();
                 bandera = false;
+                MessageBox.Show("El pago se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

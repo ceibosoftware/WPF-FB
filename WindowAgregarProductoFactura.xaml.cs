@@ -37,11 +37,13 @@ namespace wpfFamiliaBlanco
                 DialogResult = true;
             }else if (string.IsNullOrEmpty(txtCantidad.Text))
             {
-                MessageBox.Show("Ingrese una cantidad");
+                MessageBox.Show("Ingrese una cantidad.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
             }
             else
             {
-                MessageBox.Show("La cantidad no puede ser mayor a "+can);
+                MessageBox.Show("La cantidad no puede ser mayor a " + can, "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+            
             }
           
         }

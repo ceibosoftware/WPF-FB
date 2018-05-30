@@ -109,8 +109,8 @@ namespace wpfFamiliaBlanco.Entradas
             }
             catch (OverflowException)
             {
-
-                MessageBox.Show("No puede ingresar un numero tan grande");
+                MessageBox.Show("No puede ingresar un número tan grande", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             }
                 
            
@@ -130,7 +130,7 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 txtCantidad.Text = "0";
                 txtCantidad.Focus();
-                MessageBox.Show("Total demaciado grande , vueva a ingresar cantidad","Error" ,MessageBoxButton.OK, MessageBoxImage.Hand);
+                MessageBox.Show("Total demasiado grande, vuelva a ingresar la cantidad","Error" ,MessageBoxButton.OK, MessageBoxImage.Error);
                 
             }
             
@@ -162,7 +162,7 @@ namespace wpfFamiliaBlanco.Entradas
             if (PUOriginal != PU)
             {
                 if (!modifica)
-                    resultado = MessageBox.Show("¿Quiere actualizar el precio unitario en el producto?", "Actualizar PU", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    resultado = MessageBox.Show("¿Quiere actualizar el precio unitario en el producto?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 else
                     resultado = MessageBoxResult.Yes;
 
@@ -183,33 +183,39 @@ namespace wpfFamiliaBlanco.Entradas
             Decimal.TryParse(txtPrecioUnitario.Text, out decimal PU);
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Falta completar campo nombre");
+                MessageBox.Show("Falta completar campo nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             else if (string.IsNullOrEmpty(txtCantidad.Text) )
             {
-                MessageBox.Show("falta completar campo cantidad");
+                MessageBox.Show("falta completar campo cantidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
             {
-                MessageBox.Show("falta completar precio unitario");
+                MessageBox.Show("falta completar precio unitario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
                 return false;
             }
 
             else if (string.IsNullOrEmpty(txtTotal.Text))
             {
-                MessageBox.Show("falta completar campo total");
+                MessageBox.Show("falta completar campo total", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
                 return false;
             }
             else if (cantidad <= 0)
             {
-                MessageBox.Show("La cantidad debe ser mayor a cero");
+                MessageBox.Show("La cantidad debe ser mayor a cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
                 return false;
             }
             else if (PU <= 0)
             {
-                MessageBox.Show("El precio unitario no puede ser cero");
+                MessageBox.Show("El precio unitario no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else

@@ -67,7 +67,9 @@ namespace wpfFamiliaBlanco
         //MODIFICAR CATEGORIA
         private void btnModificar_Click_1(object sender, RoutedEventArgs e)
         {
- 
+            try
+            {
+
 
             id = ltsCategorias.SelectedValue.ToString();
             Console.WriteLine("VALOR: " + id);
@@ -83,8 +85,14 @@ namespace wpfFamiliaBlanco
             sql = "update categorias set nombre='" + name + "' WHERE idCategorias ='" + id + "'";
             conexion.operaciones(sql);
             this.loadListaCategoria();
-           
-                       
+
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Debe seleccionar una categoria a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
 
@@ -136,8 +144,11 @@ namespace wpfFamiliaBlanco
         //ELIMINAR CATEGORIA
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-           
 
+            try
+            {
+
+        
                 selectedDataRow = ((DataRowView)ltsCategorias.SelectedItem).Row;
                 textnombre.Text =selectedDataRow["nombre"].ToString();
         
@@ -187,8 +198,13 @@ namespace wpfFamiliaBlanco
                         break;
                 
                 }
-            
-          
+
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione una categoría a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

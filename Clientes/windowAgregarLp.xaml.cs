@@ -98,13 +98,13 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Complete el nombre");
+                MessageBox.Show("Complete el campo Nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             
             else if (itemslp.Count <= 0)
             {
-                MessageBox.Show("Agregue un producto");
+                MessageBox.Show("Agregue un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -152,7 +152,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -161,7 +161,7 @@ namespace wpfFamiliaBlanco.Clientes
         {
              if (string.IsNullOrEmpty(txtPreciolista.Text))
             {
-                MessageBox.Show("Complete el precio de lista");
+                MessageBox.Show("Complete el Precio de la lista", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
             else
@@ -281,7 +281,7 @@ namespace wpfFamiliaBlanco.Clientes
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Seleccione un producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             bandera = false;
@@ -316,7 +316,7 @@ namespace wpfFamiliaBlanco.Clientes
             Producto selected = dgvLp.SelectedItem as Producto;
  
 
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea modificar el producto :" + selected.nombre, "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea modificar el producto " + selected.nombre, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
             if (dialog == MessageBoxResult.Yes)
             {
@@ -332,7 +332,7 @@ namespace wpfFamiliaBlanco.Clientes
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }

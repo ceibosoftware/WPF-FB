@@ -57,20 +57,20 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (txtMailContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un email");
+                MessageBox.Show("Complete el campo Email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (!Regex.IsMatch(txtMailContacto.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
-                MessageBox.Show("Ingrese un email valido");
+                MessageBox.Show("Ingrese un Email válido", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             else if (txtNombreContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un nombre de contacto");
+                MessageBox.Show("Complete el campo Nombre de contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (txtTelefonoContacto.Text == "")
             {
-                MessageBox.Show("Ingrese un telefono");
+                MessageBox.Show("Complete el campo Teléfono", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             //else if (!Regex.IsMatch(txtTelefonoContacto.Text, @"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}"))
             //{

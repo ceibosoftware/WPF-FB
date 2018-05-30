@@ -147,8 +147,8 @@ namespace wpfFamiliaBlanco.Entradas
                    
                 }
 
+                MessageBox.Show("La factura se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information );
 
-              
             }
             LoadListfactura();
             ltsFactura.Items.Refresh();
@@ -322,7 +322,7 @@ namespace wpfFamiliaBlanco.Entradas
                 DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
                 string numeroFactura = selectedDataRow["numeroFactura"].ToString();
                 string idFactura = selectedDataRow["idfacturas"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la factura numero :" + numeroFactura, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la factura número " + numeroFactura, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
@@ -341,16 +341,19 @@ namespace wpfFamiliaBlanco.Entradas
 
                     if (NC != "0" && tienep != "0")
                     {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado y una nota de credito");
+                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado y una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+          
 
                     }
                     else if (tienep !="0")
                     {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado");
+                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     }
                     else if (NC != "0" )
                     {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene una nota de credito");
+                        MessageBox.Show("La factura no se puede eliminar porque tiene una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                
                     }
                     else
                     {
@@ -375,7 +378,7 @@ namespace wpfFamiliaBlanco.Entradas
                         txtTipoCambio.Text = "";
                         txtTotal1.Text = "";
 
-                        MessageBox.Show("La factura se ha eliminado correctamente");
+                        MessageBox.Show("La factura se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
 
                 }
@@ -384,7 +387,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una factura a eliminar");
+                MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -425,16 +428,19 @@ namespace wpfFamiliaBlanco.Entradas
 
                 if (NC != "0" && tienep != "0")
                 {
-                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado y una nota de credito");
+                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado y una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+           
 
                 }
                 else if (tienep != "0")
                 {
-                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado");
+                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 }
                 else if (NC != "0")
                 {
-                    MessageBox.Show("La factura no se puede modificar porque tiene una nota de credito");
+                    MessageBox.Show("La factura no se puede modificar porque tiene una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 }
                 else
                 {
@@ -668,8 +674,7 @@ namespace wpfFamiliaBlanco.Entradas
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione una factura a modificar");
+                MessageBox.Show("Seleccione una factura a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

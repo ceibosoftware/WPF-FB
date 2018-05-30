@@ -106,6 +106,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
              
              
                 ltsremitos.Items.MoveCurrentToLast();
+                MessageBox.Show("Se agregó correctamente el Remito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
         }
@@ -387,7 +388,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
 
                 DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
                 string numeroRemito = selectedDataRow["numeroRemito"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito numero: " + numeroRemito, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el remito numero " + numeroRemito, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
                 if (dialog == MessageBoxResult.Yes)
                 {
                     int idSeleccionado = (int)ltsremitos.SelectedValue;
@@ -412,12 +413,13 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                     seleccioneParaFiltrar();
                     loadLtsRemitos();
                     LoadListaComboProveedor();
+                    MessageBox.Show("Se eliminó correctamente el Remito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione un remito a eliminar");
+                MessageBox.Show("Seleccione un remito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
             }
         }
 
@@ -451,7 +453,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                         idprov = conexion.ConsultaParametrizada(consulta, OC);
                         index = ltsremitos.SelectedIndex;
                         tipocliente = 2;
-                        MessageBox.Show("idClienteME" + idprov);
+                       
                     }
 
                     var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro, fecha, numeroR, (int)ltsremitos.SelectedValue, tipocliente);
@@ -469,10 +471,6 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                         int idOC = (int)newW.cmbOrden.SelectedValue;
                         int idRemito = newW.idRemito;
 
-                        MessageBox.Show("numeroremito " + numeroRemito);
-                        MessageBox.Show("fecha " + fecha);
-                        MessageBox.Show("idOC " + idOC);
-                        MessageBox.Show("idRemito " + idRemito);
                         string consultasql = "UPDATE  remitosalidas SET numeroRemito = '" + numeroRemito + "', fecha ='" + fecha.ToString("yyyy/MM/dd") + "', FK_idOrdenCompra ='" + idOC + "' where idremitos ='" + idRemito + "' ";
                         conexion.operaciones(consultasql);
 
@@ -512,6 +510,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                         }
 
                         loadLtsRemitos(index);
+                        MessageBox.Show("Se modificó correctamente el Remito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else

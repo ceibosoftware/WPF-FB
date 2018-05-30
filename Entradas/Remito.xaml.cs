@@ -100,6 +100,7 @@ namespace wpfFamiliaBlanco.Entradas
             
                 seleccioneParaFiltrar();
                 ltsremitos.Items.MoveCurrentToLast();
+                MessageBox.Show("Se agrego el remito correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
         }
@@ -272,7 +273,7 @@ namespace wpfFamiliaBlanco.Entradas
             if(conexion.ValorEnVariable(consulta1) == "0") { 
             DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
             string numeroRemito = selectedDataRow["numeroRemito"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito numero: " + numeroRemito, "Advertencia", MessageBoxButton.YesNo);
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito número " + numeroRemito, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
             if (dialog == MessageBoxResult.Yes)
             {
                 int idSeleccionado = (int)ltsremitos.SelectedValue;
@@ -287,7 +288,7 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                 string sql = "delete from remito where idremitos = '" + idSeleccionado + "'";
                 conexion.operaciones(sql);
-                        MessageBox.Show("Se elimino correctamente");
+                        MessageBox.Show("Se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                         if (ltsremitos.Items.Count <= 0)
                     {
                         txtProveedor.Text = "";
@@ -302,14 +303,14 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 else
                 {
-                    MessageBox.Show("Este remito tiene notas de credito y no se puede eliminar");
+                    MessageBox.Show("No se puede eliminar el remito porque tiene notas de crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un remito a eliminar");
+                MessageBox.Show("Seleccione un remito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -385,13 +386,13 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     else
                     {
-                        MessageBox.Show("El remito no se puede modificar porque tiene notas de credito");
-                    }
+                    MessageBox.Show("El remito no se puede modificar porque tiene notas de crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 }
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un remito a modificar");
+                MessageBox.Show("Seleccione un remito a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
             

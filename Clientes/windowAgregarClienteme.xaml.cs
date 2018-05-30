@@ -159,7 +159,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                 }
                 catch (NullReferenceException)
                 {
-                    MessageBox.Show("Agregue lista de precios");
+                    MessageBox.Show("Agregue una lista de precios", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 DialogResult = true;
@@ -171,28 +171,28 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
-                MessageBox.Show("Complete el nombre");
+                MessageBox.Show("Complete el campo nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(txtdireccionweb.Text))
             {
-                MessageBox.Show("Complete la web");
+                MessageBox.Show("Complete el campo de la web.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
 
             }
             else if (string.IsNullOrEmpty(txtDireccion.Text))
             {
-                MessageBox.Show("Complete la direccion");
+                MessageBox.Show("Complete el campo de la dirección.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (lista.Count<=0)
             {
-                MessageBox.Show("Agregue un contacto");
+                MessageBox.Show("Agregue un contacto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (cmbPrecios.Text == "")
             {
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea agregar el cliente sin lista de precios?" + txtNombre.Text, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente "+ txtNombre.Text+" sin lista de precio?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (dialog == MessageBoxResult.Yes)
                 {
                     return true;
@@ -292,7 +292,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione un contacto");
+                MessageBox.Show("Seleccione un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         
         }
@@ -327,7 +327,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                         String update;
                         update = "DELETE FROM contactocliente WHERE telefono = '" + contacto.NumeroTelefono + "'";
                         conexion.operaciones(update);
-                        MessageBox.Show("Se ha eliminado el contacto");
+                        MessageBox.Show("El contacto se ha eliminado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     }
                     else
@@ -342,7 +342,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleecione un contacto");
+                MessageBox.Show("Seleccione un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
