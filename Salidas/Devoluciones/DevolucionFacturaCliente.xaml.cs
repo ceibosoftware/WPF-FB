@@ -326,7 +326,18 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                         String sql = "UPDATE productos_has_facturassalida SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProductos = '" + producto.id + "' and FK_idfacturas = '" + idFactura + "'";
                         conexion.operaciones(sql);
                     }
-
+                    foreach (var item in newW.itemsNCAntiguos)
+                    {
+                        MessageBox.Show("items antiguos :" + item.cantidad);
+                        String updatestock = "UPDATE productos SET stock = stock-'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
+                    //update stock
+                    foreach (var item in newW.itemsNC)
+                    {
+                        String updatestock = "UPDATE productos SET stock = stock +'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                        conexion.operaciones(updatestock);
+                    }
 
                 }
                 LoadDgvNC();
@@ -387,9 +398,10 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 String idOC = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas ='" + idFactura + "' ";
                 String idOrden = conexion.ValorEnVariable(idOC);
                 String sql = "SELECT COUNT(FK_idfacturas) FROM notacreditosalida WHERE FK_idfacturas = '" + idFactura + "' ";
+                MessageBox.Show(conexion.ValorEnVariable(sql));
                 if (conexion.ValorEnVariable(sql) == "0")
                 {
-                    String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
+                    String updateestadoOC = "UPDATE ordencompraSalida SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
                     conexion.operaciones(updateestadoOC);
                 }
                 LoadDgvNC();

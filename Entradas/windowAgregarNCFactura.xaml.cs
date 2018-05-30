@@ -139,6 +139,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtProveedor.IsReadOnly = true;
             LoadDgvNC(itemsNC);
             LoadDgvProdFactura();
+            backupproductos(ProdAmodificar);
             lblWindowTitle.Content = "Modificar Nota de Crédito";
 
         }
@@ -209,10 +210,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, ltsfacturas);
             ltsfacturas.DisplayMemberPath = "numeroFactura";
             ltsfacturas.SelectedValuePath = "idfacturas";
-            ltsfacturas.SelectedIndex = -1;
-            ltsfacturas.SelectedIndex = 0;
-            ltsfacturas.SelectedIndex = 1;
-            ltsfacturas.SelectedIndex = 0;
+          
         }
 
         public void loadLtsfacturaSalida()
@@ -221,7 +219,7 @@ namespace wpfFamiliaBlanco.Entradas
             conexion.Consulta(consulta, ltsfacturas);
             ltsfacturas.DisplayMemberPath = "numeroFactura";
             ltsfacturas.SelectedValuePath = "idfacturas";
-            ltsfacturas.SelectedIndex = 0;
+           // ltsfacturas.SelectedIndex = 0;
         }
 
         public void loadLtsfactura(String idfacturas)
