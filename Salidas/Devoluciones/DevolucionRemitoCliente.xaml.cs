@@ -254,7 +254,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                         //update stock
                         foreach (var item in newW.itemsNCAntiguos)
                         {
-                            MessageBox.Show("items antiguos :" + item.cantidad);
+                          
                             String updatestock = "UPDATE productos SET stock = stock-'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                             conexion.operaciones(updatestock);
                         }
@@ -268,13 +268,14 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                     }
                     loadLtsNCRemitos();
+                    MessageBox.Show("Se modificó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione una nota de credito a modificar");
+                MessageBox.Show("Seleccione una nota de credito a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+             
             }
         }
 
@@ -286,7 +287,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 String idremi = "";
 
 
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito numero :" + ltsRemitos.SelectedValue, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar la nota de crédito numero :" + ltsRemitos.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
@@ -322,6 +323,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                     ltsRemitos.Items.Refresh();
                     loadLtsNCRemitos();
                     ltsRemitos.SelectedIndex = 0;
+                    MessageBox.Show("SSe eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
                 if (ltsRemitos.Items.Count <= 0)
@@ -335,7 +337,8 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una Nota de Crédito a eliminar");
+          MessageBox.Show("Seleccione una Nota de Crédito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
             }
         }
 

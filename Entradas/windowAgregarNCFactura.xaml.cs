@@ -119,7 +119,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             InitializeComponent();
             tipo = tipo3;
-            MessageBox.Show("id factura" + idfactura1);
+       
            // loadLtsfacturaSalida();
             loadLtsfacturaSalida(idfactura1);
             txtIVA.IsReadOnly = true;
@@ -234,7 +234,7 @@ namespace wpfFamiliaBlanco.Entradas
         }
         public void loadLtsfacturaSalida(String idfac)
         {
-            MessageBox.Show("asdsa" + idfac);
+ 
             String consulta2 = "SELECT idfacturas, numeroFactura FROM facturasalida WHERE idfacturas = '" + idfac + "'";
             conexion.Consulta(consulta2, ltsfacturas);
             ltsfacturas.DisplayMemberPath = "numeroFactura";
@@ -463,7 +463,8 @@ namespace wpfFamiliaBlanco.Entradas
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya se agrego");
+                        MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+
                     }
 
 
@@ -490,12 +491,14 @@ namespace wpfFamiliaBlanco.Entradas
                                 }
                                 else
                                 {
-                                    MessageBox.Show("La cantidad no puede ser cero");
+                                    MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                   
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("La cantidad ingresada supera al stock del producto");
+                                MessageBox.Show("La cantidad ingresada supera al stock del producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                             }
                         }
 
@@ -517,19 +520,24 @@ namespace wpfFamiliaBlanco.Entradas
                             }
                             else
                             {
-                                MessageBox.Show("La cantidad no puede ser cero");
+                                MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                              
                             }
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto");
+                        MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                      
                     }
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Seleccione un producto para agregar");
+                MessageBox.Show("Seleccione un producto para agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+             
 
             }
         }
@@ -572,7 +580,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (estadoOC =="1")
             {
-                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito.");
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
 
                 return false;
             }
@@ -592,7 +601,8 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (estadoOC == "1")
             {
-                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito.");
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+       
 
                 return false;
             }
@@ -607,12 +617,13 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (DgvProductosFactur.HasItems == false)
             {
-                MessageBox.Show("Agregue productos a la Nota de Crédito");
+                MessageBox.Show("Agregue productos a la Nota de Crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
                 return false;
             }
             else if (dgvProductosNC.HasItems == false)
             {
-                MessageBox.Show("Agregue productos a la Nota de Crédito");
+                MessageBox.Show("Agregue productos a la Nota de Crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else
@@ -661,8 +672,8 @@ namespace wpfFamiliaBlanco.Entradas
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione un producto");
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+       
             }
 
         }

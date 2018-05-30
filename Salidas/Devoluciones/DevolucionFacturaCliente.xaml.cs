@@ -118,6 +118,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                 bandera = false;
                 ltsNC.Items.MoveCurrentToLast();
+                MessageBox.Show("Se agrego correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
 
@@ -328,7 +329,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                     }
                     foreach (var item in newW.itemsNCAntiguos)
                     {
-                        MessageBox.Show("items antiguos :" + item.cantidad);
+                    
                         String updatestock = "UPDATE productos SET stock = stock-'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                         conexion.operaciones(updatestock);
                     }
@@ -345,6 +346,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                 bandera = false;
                 ltsNC.Items.MoveCurrentToLast();
+                MessageBox.Show("Se modifico correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
 
@@ -357,7 +359,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
             {
 
                 String idFactura = "";
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito numero :" + ltsNC.SelectedValue, "Advertencia", MessageBoxButton.YesNo);
+                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar la nota de crédito numero " + ltsNC.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
@@ -368,11 +370,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                         String idf = "SELECT FK_idfacturas FROM notacreditosalida WHERE idNotaCredito = '" + ltsNC.SelectedValue + "'";
                         idFactura = conexion.ValorEnVariable(idf);
-                        MessageBox.Show("id oc" + productos.Rows[i].ItemArray[0]);
-                        MessageBox.Show("cantidad en la NC" + productos.Rows[i].ItemArray[1]);
-                        MessageBox.Show("precio unitario" + productos.Rows[i].ItemArray[2]);
-                        MessageBox.Show("id producto" + productos.Rows[i].ItemArray[3]);
-                        MessageBox.Show("id nota credito" + productos.Rows[i].ItemArray[4]);
+
                 
                         String consulta = "UPDATE productos_has_facturassalida SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProductos = '" + (int)productos.Rows[i].ItemArray[3] + "' and FK_idfacturas= '" + idFactura + "'";
                         conexion.operaciones(consulta);
@@ -392,13 +390,13 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                     txtSubtotal.Text = "";
                     txtTipoCambio.Text = "";
                     txtTotal.Text = "";
-              
-          
+                    MessageBox.Show("Se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
                 String idOC = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas ='" + idFactura + "' ";
                 String idOrden = conexion.ValorEnVariable(idOC);
                 String sql = "SELECT COUNT(FK_idfacturas) FROM notacreditosalida WHERE FK_idfacturas = '" + idFactura + "' ";
-                MessageBox.Show(conexion.ValorEnVariable(sql));
+       
                 if (conexion.ValorEnVariable(sql) == "0")
                 {
                     String updateestadoOC = "UPDATE ordencompraSalida SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
@@ -413,8 +411,8 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione una factura a eliminar");
+                MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+         
             }
         }
 

@@ -341,7 +341,7 @@ namespace wpfFamiliaBlanco
                     }
                     else
                     {
-                        MessageBox.Show("El producto ya se agrego");
+                        MessageBox.Show("E producto ya se agregó", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
 
@@ -359,18 +359,21 @@ namespace wpfFamiliaBlanco
                         }
                         else
                         {
-                            MessageBox.Show("La cantidad no puede ser cero");
+                            MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto");
+                    MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                   
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Seleccione un producto para agregar");
+                MessageBox.Show("Seleccione un producto para agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+              
 
             }
         }
@@ -383,12 +386,13 @@ namespace wpfFamiliaBlanco
 
             if (dgvProductosNCRemito.HasItems == false)
             {
-                MessageBox.Show("Agregue productos a la Nota de Crédito");
+
+                MessageBox.Show("Agregue productos a la Nota de Crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else if (DgvProductosRemitos.HasItems == false)
             {
-                MessageBox.Show("Agregue productos a la Nota de Crédito");
+                MessageBox.Show("Agregue productos a la Nota de Crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else
@@ -417,8 +421,8 @@ namespace wpfFamiliaBlanco
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione un producto para eliminar");
+                MessageBox.Show("Seleccione un producto para eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    
 
             }
         }
@@ -455,7 +459,8 @@ namespace wpfFamiliaBlanco
 
             if (estadoOC == "2")
             {
-                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.");
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
                 return false;
             }
             else
@@ -475,7 +480,8 @@ namespace wpfFamiliaBlanco
 
             if (estadoOC == "2")
             {
-                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.");
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return false;
             }
             else
@@ -591,7 +597,7 @@ namespace wpfFamiliaBlanco
                 DataTable remitos = new DataTable();
                 String consulta = "SELECT * FROM remitosalidas WHERE numeroRemito LIKE '%' @valor '%'";
                 remitos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
-                MessageBox.Show("" + remitos);
+              
                 ltsRemitos.ItemsSource = remitos.AsDataView();
                 ltsRemitos.SelectedIndex = 0;
 
@@ -602,7 +608,7 @@ namespace wpfFamiliaBlanco
                 DataTable remitos = new DataTable();
                 String consulta = "SELECT * FROM remito WHERE numeroRemito LIKE '%' @valor '%'";
                 remitos = conexion.ConsultaParametrizada(consulta, txtnroremito.Text);
-                MessageBox.Show("" + remitos);
+            
                 ltsRemitos.ItemsSource = remitos.AsDataView();
                 ltsRemitos.SelectedIndex = 0;
 
