@@ -111,6 +111,8 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                     String updatestock = "UPDATE productos SET stock = stock +'" + item.cantidad + "' where idProductos = '" + item.id + "'";
                     conexion.operaciones(updatestock);
                 }
+                String updateestadoOC = "UPDATE ordencomprasalida SET estadoNC = '" + 1 + "' where idOrdenCompra = '" + newW.idOC + "'";
+                conexion.operaciones(updateestadoOC);
                 loadLtsNCRemitos();
             }
 
@@ -292,7 +294,7 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                         conexion.operaciones(consulta);
 
 
-                        String updatestock = "UPDATE productos SET stock = stock +'" + (int)productos.Rows[i].ItemArray[3] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[2] + "'";
+                        String updatestock = "UPDATE productos SET stock = stock -'" + (int)productos.Rows[i].ItemArray[3] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[2] + "'";
                         conexion.operaciones(updatestock);
                     }
 
@@ -302,8 +304,14 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                     string sql3 = " DELETE  FROM productos_has_notacreditosalida WHERE FK_idNotaCredito =  '" + ltsRemitos.SelectedValue + "'";
                     conexion.operaciones(sql3);
-
-
+                    String idOC = "SELECT FK_idOrdenCompra FROM remitosalidas WHERE idremitos ='" + idremi + "' ";
+                    String idOrden = conexion.ValorEnVariable(idOC);
+                    String sql = "SELECT COUNT(FK_idremitos) FROM notacredito WHERE FK_idfactura = '" + idremi + "' ";
+                    if (conexion.ValorEnVariable(sql) == "0")
+                    {
+                        String updateestadoOC = "UPDATE ordencomprasalida SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
+                        conexion.operaciones(updateestadoOC);
+                    }
                     ltsRemitos.Items.Refresh();
                     loadLtsNCRemitos();
                     ltsRemitos.SelectedIndex = 0;

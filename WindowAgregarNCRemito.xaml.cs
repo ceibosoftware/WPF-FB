@@ -427,7 +427,7 @@ namespace wpfFamiliaBlanco
 
             if (tipo == 1)
             {
-                if (Valida())
+                if (Valida() && VerEstadoSalida())
                 {
                     DialogResult = true;
                 }
@@ -449,6 +449,26 @@ namespace wpfFamiliaBlanco
             String idOC = "SELECT FK_idOC FROM remito WHERE idremitos ='" + idRemito + "' ";
             this.idOC = conexion.ValorEnVariable(idOC);
             String estOC = "SELECT estadoNC FROM ordencompra WHERE idOrdenCompra ='" + conexion.ValorEnVariable(idOC) + "'";
+
+            String estadoOC = conexion.ValorEnVariable(estOC);
+
+            if (estadoOC == "2")
+            {
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Factura.");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public bool VerEstadoSalida()
+        {
+
+            String idOC = "SELECT FK_idOrdenCompra FROM remitosalidas WHERE idremitos ='" + idRemito + "' ";
+            this.idOC = conexion.ValorEnVariable(idOC);
+            String estOC = "SELECT estadoNC FROM ordencomprasalida WHERE idOrdenCompra ='" + conexion.ValorEnVariable(idOC) + "'";
 
             String estadoOC = conexion.ValorEnVariable(estOC);
 

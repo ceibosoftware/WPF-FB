@@ -98,6 +98,9 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
                     String productostNC = "INSERT INTO productos_has_notacreditosalida (FK_idNotaCredito, FK_idProductos, cantidad, precioUnitario) VALUES ('" + lastid + "','" + idp + "', '" + cantidad + "', '" + precioUni + "')";
                     conexion.operaciones(productostNC);
+                   
+                    String updatestock = "UPDATE productos SET stock = stock+'" + p.cantidad + "' where idProductos = '" + p.id + "'";
+                    conexion.operaciones(updatestock);
 
                 }
 
@@ -105,7 +108,10 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 {
                     String sql = "UPDATE productos_has_facturassalida SET CrNotaCredito = '" + producto.cantidad + "' where FK_idProductos = '" + producto.id + "' and FK_idfacturas = '" + idFactura + "'";
                     conexion.operaciones(sql);
+                   
                 }
+                String updateestadoOC = "UPDATE ordencomprasalida SET estadoNC = '" + 2 + "' where idOrdenCompra = '" + newW.idOC + "'";
+                conexion.operaciones(updateestadoOC);
 
                 LoadDgvNC();
                 loadLtsNotaCredito();
@@ -359,6 +365,9 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 
                         String consulta = "UPDATE productos_has_facturassalida SET CrNotaCredito = CrNotaCredito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProductos = '" + (int)productos.Rows[i].ItemArray[3] + "' and FK_idfacturas= '" + idFactura + "'";
                         conexion.operaciones(consulta);
+
+                        String updatestock = "UPDATE productos SET stock = stock -'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + (int)productos.Rows[i].ItemArray[3] + "'";
+                        conexion.operaciones(updatestock);
                     }
 
 
@@ -375,7 +384,14 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
               
           
                 }
-
+                String idOC = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas ='" + idFactura + "' ";
+                String idOrden = conexion.ValorEnVariable(idOC);
+                String sql = "SELECT COUNT(FK_idfacturas) FROM notacreditosalida WHERE FK_idfacturas = '" + idFactura + "' ";
+                if (conexion.ValorEnVariable(sql) == "0")
+                {
+                    String updateestadoOC = "UPDATE ordencompra SET estadoNC = '" + 0 + "' where idOrdenCompra = '" + idOrden + "'";
+                    conexion.operaciones(updateestadoOC);
+                }
                 LoadDgvNC();
                 loadLtsNotaCredito();
 

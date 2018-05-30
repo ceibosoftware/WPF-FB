@@ -434,7 +434,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnAgregarProductoNC_Click(object sender, RoutedEventArgs e)
         {
-            
+
             try
             {
                 bool existe = false;
@@ -471,36 +471,62 @@ namespace wpfFamiliaBlanco.Entradas
 
                     if (newW.DialogResult == true)
                     {
-                        string consulta = "SELECT stock from productos where idProductos = "+prod.id+" ";
-                        if(int.Parse(conexion.ValorEnVariable(consulta)) >= int.Parse(newW.txtCantidad.Text)){ 
-                        if (int.Parse(newW.txtCantidad.Text) > 0)
+                        string consulta = "SELECT stock from productos where idProductos = " + prod.id + " ";
+                        if (tipo != 1)
                         {
+                            if (int.Parse(conexion.ValorEnVariable(consulta)) >= int.Parse(newW.txtCantidad.Text))
+                            {
+                                if (int.Parse(newW.txtCantidad.Text) > 0)
+                                {
 
-                            Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), int.Parse(newW.txtCantidad.Text)*prod.precioUnitario, prod.precioUnitario);
-                            itemsNC.Add(productoFactura);
-                            dgvProductosNC.Items.Refresh();
-                            float.TryParse(txtSubtotal.Text, out subtotal);
-                            subtotal += productoFactura.total;
-                            txtSubtotal.Text = (subtotal).ToString();
-                            prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
-                            DgvProductosFactur.Items.Refresh();
-                            calculaTotal();
-                     
+                                    Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), int.Parse(newW.txtCantidad.Text) * prod.precioUnitario, prod.precioUnitario);
+                                    itemsNC.Add(productoFactura);
+                                    dgvProductosNC.Items.Refresh();
+                                    float.TryParse(txtSubtotal.Text, out subtotal);
+                                    subtotal += productoFactura.total;
+                                    txtSubtotal.Text = (subtotal).ToString();
+                                    prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
+                                    DgvProductosFactur.Items.Refresh();
+                                    calculaTotal();
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("La cantidad no puede ser cero");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("La cantidad ingresada supera al stock del producto");
+                            }
                         }
+
                         else
                         {
-                            MessageBox.Show("La cantidad no puede ser cero");
-                        }
-                        }
-                        else
-                        {
-                            MessageBox.Show("La cantidad ingresada supera al stock del producto");
+                            if (int.Parse(newW.txtCantidad.Text) > 0)
+                            {
+
+                                Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), int.Parse(newW.txtCantidad.Text) * prod.precioUnitario, prod.precioUnitario);
+                                itemsNC.Add(productoFactura);
+                                dgvProductosNC.Items.Refresh();
+                                float.TryParse(txtSubtotal.Text, out subtotal);
+                                subtotal += productoFactura.total;
+                                txtSubtotal.Text = (subtotal).ToString();
+                                prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
+                                DgvProductosFactur.Items.Refresh();
+                                calculaTotal();
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("La cantidad no puede ser cero");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto");
+                    else
+                    {
+                        MessageBox.Show("Ya se entregaron todas las ordenes de compra de este producto");
+                    }
                 }
             }
             catch (NullReferenceException)
@@ -508,9 +534,9 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione un producto para agregar");
 
             }
-
-
         }
+
+       
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
@@ -520,7 +546,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (tipo == 1)
             {
-                if (Valida())
+                if (Valida() && VerEstadoSalida())
                 {
                     DialogResult = true;
                 }
@@ -547,6 +573,26 @@ namespace wpfFamiliaBlanco.Entradas
             String estadoOC = conexion.ValorEnVariable(estOC);
 
             if (estadoOC =="1")
+            {
+                MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito.");
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        public bool VerEstadoSalida()
+        {
+            String idOC = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas ='" + idFactura + "' ";
+            this.idOC = conexion.ValorEnVariable(idOC);
+            String estOC = "SELECT estadoNC FROM ordencomprasalida WHERE idOrdenCompra ='" + conexion.ValorEnVariable(idOC) + "'";
+
+            String estadoOC = conexion.ValorEnVariable(estOC);
+
+            if (estadoOC == "1")
             {
                 MessageBox.Show("No se puede agregar la Nota de Crédito porque ya tiene una Nota de Crédito de Remito.");
 

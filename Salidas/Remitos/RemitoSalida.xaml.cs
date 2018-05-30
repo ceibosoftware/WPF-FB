@@ -427,86 +427,96 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
             try
             {
 
-                string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
-                DataTable idprov;
-                int OC;
-                int index;
-                if (RbInterno.IsChecked == true)
+
+                string consulta1 = "SELECT count(FK_idremitos) FROM notacreditosalida where FK_idremitos = " + ltsremitos.SelectedValue + "";
+
+                if (conexion.ValorEnVariable(consulta1) == "0")
                 {
-                    string consulta = "select t2.FK_idClientemi from  ordencomprasalida t2 where idOrdenCompra = @valor";
-                    int.TryParse(txtOC.Text.ToString(), out  OC);
-                     idprov = conexion.ConsultaParametrizada(consulta, OC);
-                     index = ltsremitos.SelectedIndex;
-                    tipocliente = 1;
+                    string numeroR = (((DataRowView)ltsremitos.SelectedItem).Row[1]).ToString();
+                    DataTable idprov;
+                    int OC;
+                    int index;
+                    if (RbInterno.IsChecked == true)
+                    {
+                        string consulta = "select t2.FK_idClientemi from  ordencomprasalida t2 where idOrdenCompra = @valor";
+                        int.TryParse(txtOC.Text.ToString(), out OC);
+                        idprov = conexion.ConsultaParametrizada(consulta, OC);
+                        index = ltsremitos.SelectedIndex;
+                        tipocliente = 1;
+                    }
+                    else
+                    {
+                        string consulta = "select t2.FK_idClienteme from  ordencomprasalida t2 where idOrdenCompra = @valor";
+                        int.TryParse(txtOC.Text.ToString(), out OC);
+                        idprov = conexion.ConsultaParametrizada(consulta, OC);
+                        index = ltsremitos.SelectedIndex;
+                        tipocliente = 2;
+                        MessageBox.Show("idClienteME" + idprov);
+                    }
+
+                    var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro, fecha, numeroR, (int)ltsremitos.SelectedValue, tipocliente);
+                    newW.ShowDialog();
+
+
+
+
+                    if (newW.DialogResult == true)
+                    {
+                        //DATOS REMITO.
+
+                        int numeroRemito = int.Parse(newW.txtNroRemito.Text);
+                        DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
+                        int idOC = (int)newW.cmbOrden.SelectedValue;
+                        int idRemito = newW.idRemito;
+
+                        MessageBox.Show("numeroremito " + numeroRemito);
+                        MessageBox.Show("fecha " + fecha);
+                        MessageBox.Show("idOC " + idOC);
+                        MessageBox.Show("idRemito " + idRemito);
+                        string consultasql = "UPDATE  remitosalidas SET numeroRemito = '" + numeroRemito + "', fecha ='" + fecha.ToString("yyyy/MM/dd") + "', FK_idOrdenCompra ='" + idOC + "' where idremitos ='" + idRemito + "' ";
+                        conexion.operaciones(consultasql);
+
+                        //ELIMINAR PRODUCTOS
+
+                        String sqlElim = "delete from productos_has_remitossalida where FK_idRemito = '" + idRemito + "'";
+                        conexion.operaciones(sqlElim);
+                        //PRODUCTOS REMITO  
+
+                        foreach (var producto in newW.ProdRemito)
+                        {
+                            Console.Write("stock nuevo :" + producto.cantidad);
+                            String productos = "insert into productos_has_remitossalida(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + idRemito + "' )";
+                            conexion.operaciones(productos);
+                        }
+                        //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
+                        int idOrden = (int)newW.cmbOrden.SelectedValue;
+                        foreach (var producto in newW.Productos)
+                        {
+                            String sql = "UPDATE productos_has_ordencomprasalida SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOrdenCompra = '" + idOrden + "'";
+                            conexion.operaciones(sql);
+                        }
+                        //RESTO CANTIDAD STOCK VIEJA
+                        foreach (var producto in newW.ProdRemitoStock)
+                        {
+                            //MessageBox.Show("stock viejo :" + producto.cantidad);
+
+                            String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                            conexion.operaciones(sql);
+                        }
+                        //SUMO CANTIDAD NUEVA STOCK EN PRODUCTO
+                        foreach (var producto in newW.ProdRemito)
+                        {
+                            //MessageBox.Show("stock nuevo :" + producto.cantidad);
+                            String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
+                            conexion.operaciones(sql);
+                        }
+
+                        loadLtsRemitos(index);
+                    }
                 }
                 else
                 {
-                    string consulta = "select t2.FK_idClienteme from  ordencomprasalida t2 where idOrdenCompra = @valor";
-                    int.TryParse(txtOC.Text.ToString(), out  OC);
-                     idprov = conexion.ConsultaParametrizada(consulta, OC);
-                     index = ltsremitos.SelectedIndex;
-                    tipocliente = 2;
-                    MessageBox.Show("idClienteME" + idprov);
-                }
-
-                var newW = new windowAgregarRemito((int)idprov.Rows[0].ItemArray[0], OC, productosparametro, fecha, numeroR, (int)ltsremitos.SelectedValue,tipocliente);
-                newW.ShowDialog();
-
-              
-
-
-                if (newW.DialogResult == true)
-                {
-                    //DATOS REMITO.
-
-                    int numeroRemito = int.Parse(newW.txtNroRemito.Text);
-                    DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
-                    int idOC = (int)newW.cmbOrden.SelectedValue;
-                    int idRemito = newW.idRemito;
-
-                    MessageBox.Show("numeroremito " + numeroRemito);
-                    MessageBox.Show("fecha " + fecha);
-                    MessageBox.Show("idOC " + idOC);
-                    MessageBox.Show("idRemito " + idRemito);
-                    string consultasql = "UPDATE  remitosalidas SET numeroRemito = '" + numeroRemito + "', fecha ='" + fecha.ToString("yyyy/MM/dd") + "', FK_idOrdenCompra ='" + idOC + "' where idremitos ='" + idRemito + "' ";
-                    conexion.operaciones(consultasql);
-
-                    //ELIMINAR PRODUCTOS
-
-                    String sqlElim = "delete from productos_has_remitossalida where FK_idRemito = '" + idRemito + "'";
-                    conexion.operaciones(sqlElim);
-                    //PRODUCTOS REMITO  
-
-                    foreach (var producto in newW.ProdRemito)
-                    {
-                        Console.Write("stock nuevo :" + producto.cantidad);
-                        String productos = "insert into productos_has_remitossalida(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + idRemito + "' )";
-                        conexion.operaciones(productos);
-                    }
-                    //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
-                    int idOrden = (int)newW.cmbOrden.SelectedValue;
-                    foreach (var producto in newW.Productos)
-                    {
-                        String sql = "UPDATE productos_has_ordencomprasalida SET CrRemito = '" + producto.cantidad + "' where FK_idProducto = '" + producto.id + "' and FK_idOrdenCompra = '" + idOrden + "'";
-                        conexion.operaciones(sql);
-                    }
-                    //RESTO CANTIDAD STOCK VIEJA
-                    foreach (var producto in newW.ProdRemitoStock)
-                    {
-                        //MessageBox.Show("stock viejo :" + producto.cantidad);
-
-                        String sql = "UPDATE productos SET stock = stock+'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
-                        conexion.operaciones(sql);
-                    }
-                    //SUMO CANTIDAD NUEVA STOCK EN PRODUCTO
-                    foreach (var producto in newW.ProdRemito)
-                    {
-                        //MessageBox.Show("stock nuevo :" + producto.cantidad);
-                        String sql = "UPDATE productos SET stock = stock-'" + producto.cantidad + "' where idProductos = '" + producto.id + "' ";
-                        conexion.operaciones(sql);
-                    }
-
-                    loadLtsRemitos(index);
+                    MessageBox.Show("No se puede modificar el remito ya que tiene notas de credito asocidas");
                 }
             }
             catch (NullReferenceException)
