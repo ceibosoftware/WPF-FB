@@ -253,10 +253,10 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
                     //}
 
 
-                    txtTotalPAgo.Text = "El pago no se ha realizado";
-                    txtTipoPago.Text = "El pago no se ha realizado";
-                    txtfecha.Text = "El pago no se ha realizado";
-                    txtnumerocuotapaga.Text = "El pago no se ha realizado";
+                    txtTotalPAgo.Text = "El cobro no se ha realizado";
+                    txtTipoPago.Text = "El cobro no se ha realizado";
+                    txtfecha.Text = "El cobro no se ha realizado";
+                    txtnumerocuotapaga.Text = "El cobro no se ha realizado";
 
                 }
                // ltsPagosReaizados.SelectedIndex = -1;
@@ -325,7 +325,7 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
                 if (estado1 == "True")
                 {
 
-                    txtEstado.Text = "PAGADO";
+                    txtEstado.Text = "COBRADO";
                     txtEstado.BorderBrush = Brushes.Green;
                 }
 
@@ -343,7 +343,7 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
         {
             bandera = true;
             String tipo = txtTipoPago.Text;
-            MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el pago número " + ltsPagosReaizados.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
+            MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el cobro número " + ltsPagosReaizados.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
 
             if (dialog == MessageBoxResult.Yes)
@@ -386,7 +386,7 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
                 loadLtsProximosPagos();
                 loadLtsPagosRealizados();
                 bandera = false;
-                MessageBox.Show("El pago se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("El cobro se eliminó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

@@ -117,8 +117,10 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 loadLtsNotaCredito();
 
                 bandera = false;
-                ltsNC.Items.MoveCurrentToLast();
+          
                 MessageBox.Show("Se agrego correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                ltsNC.SelectedIndex = -1;
+                ltsNC.SelectedIndex = 0;
             }
 
 
@@ -269,6 +271,11 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
 
         private void btnModificarNC_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+
+     
             bandera = true;
             int idnotacredito = (int)ltsNC.SelectedValue;
             productosAmodificar.Clear();
@@ -348,7 +355,12 @@ namespace wpfFamiliaBlanco.Salidas.Devoluciones
                 ltsNC.Items.MoveCurrentToLast();
                 MessageBox.Show("Se modifico correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Seleccione una factura a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            }
 
         }
 

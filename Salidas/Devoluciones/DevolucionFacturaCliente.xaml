@@ -17,7 +17,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="btnAgregar" Content="+ NC" HorizontalAlignment="Left" Margin="895.386,257.331,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="24" Style="{DynamicResource agregar}" Foreground="White" ToolTip="Agregar Nota de Crédito"/>
+        <Button x:Name="btnAgregar" Content="+ NC" HorizontalAlignment="Left" Margin="895,262,0,0" VerticalAlignment="Top" Width="75" Click="btnAgregar_Click" Height="24" Style="{DynamicResource agregar}" Foreground="White" ToolTip="Agregar Nota de Crédito"/>
         <ListBox x:Name="ltsNC" HorizontalAlignment="Left" Height="144.224" Margin="41,174,0,0" VerticalAlignment="Top" Width="365" SelectionChanged="ltsNC_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
         <DataGrid x:Name="dgvProductosNC" HorizontalAlignment="Left" Height="152.224" Margin="432,63,0,0" VerticalAlignment="Top" Width="365"/>
         <TextBox x:Name="txtSubtotal" HorizontalAlignment="Left" Height="24" Margin="432,245.224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
@@ -33,14 +33,14 @@
         <Label x:Name="lblProveedor_Copy5" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="471,220.224,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Subtotal"/>
         <Label x:Name="lblProveedor_Copy6" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="471,269.224,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Tipo de Cambio"/>
         <Label x:Name="lblProveedor_Copy7" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="665,269.224,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="IVA"/>
-        <Border Height="170.5" Width="149.276" BorderThickness="1,1,5,1" BorderBrush="#FF00446B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="820.39,63.167,44.334,174.333" >
+        <Border Height="187" Width="149" BorderThickness="1,1,5,1" BorderBrush="#FF00446B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="831,68,55,195" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="150.5" TextWrapping="Wrap" VerticalAlignment="Top" Width="129.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="177" TextWrapping="Wrap" VerticalAlignment="Top" Width="129" Margin="9,9,0,-1" Foreground="#FFC9C5C5" FontSize="11"><Run Text="En esta pantalla se muestran l"/><Run Text="as notas de crédito con factura "/><Run Text="y todos los datos de l"/><Run Text="a"/><Run Text=" mism"/><Run Text="a"/><Run Text=", junto con una tabla de los distintos "/><Run Text="productos que tiene"/><Run Text=". Se pueden agregar, modificar y eliminar "/><Run Text="las notas de credito "/><Run Text="desde los botones del borde inferior derecho. Se puede buscar rápidamente "/><Run Text="por proveedor y fecha"/><Run Text="."/></TextBlock>
         </Border>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="838.386,38.167,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
         <Border Height="127.622" Width="389.02" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="28.479,18.043,596.501,262.335" Opacity="0.5" />

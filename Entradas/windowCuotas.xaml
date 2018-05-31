@@ -144,40 +144,40 @@
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="220,538,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource agregar}" Height="22" VerticalContentAlignment="Center" Click="btnCancelar_Click"/>
         <Label x:Name="lbl1" Content="cuota 1" HorizontalAlignment="Left" Margin="42,54,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias1" Content="dias" HorizontalAlignment="Left" Margin="106,54,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="106,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt1" HorizontalAlignment="Left" Height="23" Margin="106,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" TextChanged="txt1_TextChanged" PreviewTextInput="txt1_PreviewTextInput"/>
         <Label x:Name="lbl2" Content="cuota 2" HorizontalAlignment="Left" Margin="42,118,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias2" Content="dias" HorizontalAlignment="Left" Margin="106,118,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt2" HorizontalAlignment="Left" Height="22" Margin="106,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt2" HorizontalAlignment="Left" Height="22" Margin="106,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" PreviewTextInput="txt2_PreviewTextInput"/>
         <Label x:Name="lbl3" Content="cuota 3" HorizontalAlignment="Left" Margin="42,190,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias3" Content="dias" HorizontalAlignment="Left" Margin="106,190,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt3" HorizontalAlignment="Left" Height="22" Margin="106,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt3" HorizontalAlignment="Left" Height="22" Margin="106,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" PreviewTextInput="txt3_PreviewTextInput"/>
         <Label x:Name="lbl4" Content="cuota 4" HorizontalAlignment="Left" Margin="42,264,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias4" Content="dias" HorizontalAlignment="Left" Margin="106,264,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt4" HorizontalAlignment="Left" Height="22" Margin="106,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt4" HorizontalAlignment="Left" Height="22" Margin="106,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" PreviewTextInput="txt4_PreviewTextInput"/>
         <Label x:Name="lbl5" Content="cuota 5" HorizontalAlignment="Left" Margin="42,352,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias5" Content="dias" HorizontalAlignment="Left" Margin="106,352,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt5" HorizontalAlignment="Left" Height="22" Margin="106,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt5" HorizontalAlignment="Left" Height="22" Margin="106,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" PreviewTextInput="txt5_PreviewTextInput"/>
         <Label x:Name="lbl6" Content="cuota 6" HorizontalAlignment="Left" Margin="42,432,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias6" Content="dias" HorizontalAlignment="Left" Margin="106,432,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt6" HorizontalAlignment="Left" Height="22" Margin="106,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47"/>
+        <TextBox x:Name="txt6" HorizontalAlignment="Left" Height="22" Margin="106,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" PreviewTextInput="txt6_PreviewTextInput"/>
         <Label x:Name="lbl7" Content="cuota 7" HorizontalAlignment="Left" Margin="220,54,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias7" Content="dias" HorizontalAlignment="Left" Margin="284,54,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt7" HorizontalAlignment="Left" Height="23" Margin="284,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt7" HorizontalAlignment="Left" Height="23" Margin="284,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt7_PreviewTextInput"/>
         <Label x:Name="lbl8" Content="cuota 8" HorizontalAlignment="Left" Margin="220,118,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias8" Content="dias" HorizontalAlignment="Left" Margin="284,118,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt8" HorizontalAlignment="Left" Height="22" Margin="284,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt8" HorizontalAlignment="Left" Height="22" Margin="284,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt8_PreviewTextInput"/>
         <Label x:Name="lbl9" Content="cuota 9" HorizontalAlignment="Left" Margin="220,190,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias9" Content="dias" HorizontalAlignment="Left" Margin="284,190,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt9" HorizontalAlignment="Left" Height="22" Margin="284,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt9" HorizontalAlignment="Left" Height="22" Margin="284,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt9_PreviewTextInput"/>
         <Label x:Name="lbl10" Content="cuota 10" HorizontalAlignment="Left" Margin="220,264,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias10" Content="dias" HorizontalAlignment="Left" Margin="284,264,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt10" HorizontalAlignment="Left" Height="22" Margin="284,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt10" HorizontalAlignment="Left" Height="22" Margin="284,296,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt10_PreviewTextInput"/>
         <Label x:Name="lbl11" Content="cuota 11" HorizontalAlignment="Left" Margin="220,352,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias11" Content="dias" HorizontalAlignment="Left" Margin="284,352,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt11" HorizontalAlignment="Left" Height="22" Margin="284,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt11" HorizontalAlignment="Left" Height="22" Margin="284,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt11_PreviewTextInput"/>
         <Label x:Name="lbl12" Content="cuota 12" HorizontalAlignment="Left" Margin="220,432,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dias12" Content="dias" HorizontalAlignment="Left" Margin="284,432,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt12" HorizontalAlignment="Left" Height="22" Margin="284,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="txt12" HorizontalAlignment="Left" Height="22" Margin="284,464,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" PreviewTextInput="txt12_PreviewTextInput"/>
 
     </Grid>
 </Window>

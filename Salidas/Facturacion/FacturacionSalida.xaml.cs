@@ -792,8 +792,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             }
             catch (NullReferenceException)
             {
-
-                MessageBox.Show("Seleccione una factura a modificar");
+                MessageBox.Show("Seleccione una factura a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+       
 
             }
         }

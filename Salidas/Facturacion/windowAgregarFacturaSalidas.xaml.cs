@@ -629,20 +629,20 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             if (dtFactura.SelectedDate == null)
             {
                 MessageBox.Show("Ingrese fecha de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-              
+
                 return false;
             }
 
             else if (dgvProductosFactura.HasItems == false)
             {
                 MessageBox.Show("Es necesario ingresar productos a la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            
+
                 return false;
             }
-            else if (cmbCuotas.Text == "")
+            else if (DgvCuotas.HasItems == false)
             {
                 MessageBox.Show("Selecciona cantidad de cuotas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            
+                bandera = true;
                 return false;
             }
             else if (cmbIVA.Text == "")

@@ -162,7 +162,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."/>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11"><Run Text="En esta pantalla se muestran "/><Run Text="los pagos realizados y los pagos que no se han realizado. Se muestran"/><Run Text=" todos los datos de l"/><Run Text="o"/><Run Text="s mism"/><Run Text="o"/><Run Text="s"/><Run Text=". "/><Run Text="Se pueden agregar"/><Run Text=" "/><Run Text="y eliminar "/><Run Text="pagos "/><Run Text="desde los botones del borde inferior derecho"/><Run Text="."/></TextBlock>
         </Border>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="485.787,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
     </Grid>

@@ -39,6 +39,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             cmbDireccion.SelectedIndex = 0;
             cmbTelefono.SelectedIndex = 0;
             dpFecha.SelectedDate = DateTime.Now;
+            btnFactura.Visibility = Visibility.Collapsed;
+            btnRemito.Visibility = Visibility.Collapsed;
             
         }
         public windowAgregarOCSalida(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, string telefono, int proveedor, string direccion, List<Producto> producto, int idOC,int chk)
@@ -65,6 +67,8 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             lblWindowTitle.Width = 176;
             ColumnasDGVProductos();
             modifica = false;
+            btnFactura.Visibility = Visibility.Collapsed;
+            btnRemito.Visibility = Visibility.Collapsed;
         }
         private void llenarLista(List<Producto> producto) {
             foreach (var item in producto)

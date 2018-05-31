@@ -636,6 +636,11 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbCuotas.Text = "Seleccione cantidad de cuotas";
             bandera = true;
         }
+
+        private void txtNroFactura_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 
 }
