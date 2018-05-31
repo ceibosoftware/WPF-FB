@@ -39,8 +39,7 @@ namespace wpfFamiliaBlanco.Clientes
             cargalp();
             ActualizaDGVlp();
             ltsLp.SelectedIndex = 0;
-            MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            MessageBox.Show("Seleccione una factura a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
 
         }
 

@@ -24,8 +24,7 @@ namespace wpfFamiliaBlanco
         public windowUsuarios()
         {
             InitializeComponent();
-            txtPassword.Password = "rober";
-            txtUsername.Text = "rober";
+        
         }
 
 

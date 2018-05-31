@@ -40,6 +40,7 @@ namespace wpfFamiliaBlanco
             }
 
             ltsProductos.SelectedIndex = 0;
+            chkVenta.IsEnabled = false;
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
