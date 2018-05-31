@@ -319,11 +319,11 @@ namespace wpfFamiliaBlanco
             try
             {
 
-                String consulta = "SELECT count(FK_idProducto) FROM productos_has_ordencompra WHERE FK_idProducto ='" + ltsProveedores.SelectedValue + "' ";
+                String consulta = "SELECT count(FK_idProveedor) FROM ordencompra WHERE FK_idProveedor ='" + ltsProveedores.SelectedValue + "' ";
                 DataRow selectedDataRow = ((DataRowView)ltsProveedores.SelectedItem).Row;
             string nombre = selectedDataRow["nombre"].ToString();
 
-                if (conexion.ValorEnVariable(consulta) =="0")
+                if (conexion.ValorEnVariable(consulta) != "0")
                 {
                     MessageBox.Show("No se puede eliminar el proveedor porque tiene órdenes de compra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

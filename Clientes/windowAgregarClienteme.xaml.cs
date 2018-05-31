@@ -150,22 +150,29 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            
-                if (Validacion())
-                {
-                try
-                {
-                    idlp = (int)cmbPrecios.SelectedValue;
-                }
-                catch (NullReferenceException)
-                {
-                    MessageBox.Show("Agregue una lista de precios", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
 
-                DialogResult = true;
+            if (Validacion())
+            {
+                if (cmbPrecios.SelectedIndex == -1)
+                {
+                    MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente " + txtNombre.Text + " sin lista de precios?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (dialog == MessageBoxResult.Yes)
+                    {
+
+                        DialogResult = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
-            
-        }
+                else
+                {
+                    idlp = (int)cmbPrecios.SelectedValue; ;
+                    DialogResult = true;
+                }
+            }
+            }
 
         public Boolean Validacion()
         {
@@ -190,18 +197,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                 MessageBox.Show("Agregue un contacto.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            else if (cmbPrecios.Text == "")
-            {
-                MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente "+ txtNombre.Text+" sin lista de precio?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (dialog == MessageBoxResult.Yes)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+         
             return true;
         }
 

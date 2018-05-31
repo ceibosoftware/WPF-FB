@@ -385,41 +385,49 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
             try
             {
 
+                string consulta1 = "SELECT count(FK_idremitos) FROM notacreditosalida where FK_idremitos = " + ltsremitos.SelectedValue + "";
 
-                DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
-                string numeroRemito = selectedDataRow["numeroRemito"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el remito numero " + numeroRemito, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
-                if (dialog == MessageBoxResult.Yes)
+                if (conexion.ValorEnVariable(consulta1) == "0")
                 {
-                    int idSeleccionado = (int)ltsremitos.SelectedValue;
-                    for (int i = 0; i < productos.Rows.Count; i++)
+                    DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
+                    string numeroRemito = selectedDataRow["numeroRemito"].ToString();
+                    MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el remito numero " + numeroRemito, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (dialog == MessageBoxResult.Yes)
                     {
-                        String consulta = "UPDATE productos_has_ordencomprasalida SET CrRemito = CrRemito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[2] + "' and FK_idOrdenCompra = '" + txtOC.Text.ToString() + "'";
-                        conexion.operaciones(consulta);
+                        int idSeleccionado = (int)ltsremitos.SelectedValue;
+                        for (int i = 0; i < productos.Rows.Count; i++)
+                        {
+                            String consulta = "UPDATE productos_has_ordencomprasalida SET CrRemito = CrRemito + '" + (int)productos.Rows[i].ItemArray[1] + "' where FK_idProducto = '" + productos.Rows[i].ItemArray[2] + "' and FK_idOrdenCompra = '" + txtOC.Text.ToString() + "'";
+                            conexion.operaciones(consulta);
 
-                        //Console.Write();
-                        String sql2 = "UPDATE productos SET stock = stock+'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + productos.Rows[i].ItemArray[2] + "' ";
-                        conexion.operaciones(sql2);
-                    }
-                    string sql = "delete from remitosalidas where idremitos = '" + idSeleccionado + "'";
-                    conexion.operaciones(sql);
+                            //Console.Write();
+                            String sql2 = "UPDATE productos SET stock = stock+'" + (int)productos.Rows[i].ItemArray[1] + "' where idProductos = '" + productos.Rows[i].ItemArray[2] + "' ";
+                            conexion.operaciones(sql2);
+                        }
+                        string sql = "delete from remitosalidas where idremitos = '" + idSeleccionado + "'";
+                        conexion.operaciones(sql);
 
-                    if (ltsremitos.Items.Count <= 0)
-                    {
-                        txtProveedor.Text = "";
-                        txtOC.Text = "";
-                        txtFecha.Text = "";
+                        if (ltsremitos.Items.Count <= 0)
+                        {
+                            txtProveedor.Text = "";
+                            txtOC.Text = "";
+                            txtFecha.Text = "";
+                        }
+                        seleccioneParaFiltrar();
+                        loadLtsRemitos();
+                        LoadListaComboProveedor();
+                        MessageBox.Show("Se eliminó correctamente el Remito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    seleccioneParaFiltrar();
-                    loadLtsRemitos();
-                    LoadListaComboProveedor();
-                    MessageBox.Show("Se eliminó correctamente el Remito", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El remito no se puede eliminar porque tiene notas de crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (NullReferenceException)
             {
                 MessageBox.Show("Seleccione un remito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-              
+
             }
         }
 
@@ -515,7 +523,7 @@ namespace wpfFamiliaBlanco.Salidas.Remitos
                 }
                 else
                 {
-                    MessageBox.Show("No se puede modificar el remito ya que tiene notas de credito asocidas");
+                    MessageBox.Show("El remito no se puede modificar porque tiene notas de crédito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (NullReferenceException)

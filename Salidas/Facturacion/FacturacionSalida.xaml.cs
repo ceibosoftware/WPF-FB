@@ -45,9 +45,9 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             rbInterno.IsChecked = false;
             rbInterno.IsChecked = true;
             rbExterno.IsChecked = false;
-            
+
             lblNC.Visibility = Visibility.Collapsed;
-           // LoadListaComboProveedor();
+            // LoadListaComboProveedor();
 
             LoadDgvFactura();
             txtSubTotal.IsReadOnly = true;
@@ -58,7 +58,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             LoadDgvFactura();
             LoadListfactura();
             //cmbordenCompra.SelectedIndex = -1;
-          //  seleccioneParaFiltrar();
+            //  seleccioneParaFiltrar();
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
@@ -72,7 +72,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             txtfecha.IsEnabled = false;
             txtproveedor.IsEnabled = false;
             txtoc.IsEnabled = false;
-      
+
 
         }
 
@@ -181,8 +181,8 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             conexion.Consulta(consulta, combo: cmbCliente);
             cmbCliente.DisplayMemberPath = "nombre";
             cmbCliente.SelectedValuePath = "idClientemi";
-            
-            
+
+
         }
 
         public void LoadListaCME()
@@ -192,7 +192,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             cmbCliente.DisplayMemberPath = "nombre";
             cmbCliente.SelectedValuePath = "idClienteme";
             cmbCliente.SelectedIndex = 0;
-          
+
         }
         public void SetearColumnas()
         {
@@ -244,9 +244,9 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                     ltsFactura.SelectedIndex = 0;
                     LoadDgvFactura();
                 }
-             
 
-            
+
+
 
             }
             catch (Exception)
@@ -289,7 +289,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 ltsFactura.SelectedValuePath = "idfacturas";
                 ltsFactura.SelectedIndex = 0;
             }
-        
+
 
 
         }
@@ -316,7 +316,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
 
             try
             {
-             
+
                 String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos, t1.cantidad from productos_has_facturassalida t1, productos_has_ordencomprasalida t3 inner join productos t2 where t1.FK_idProductos = t2.idProductos and t1.FK_idfacturas = '" + ltsFactura.SelectedValue + "'";
 
                 productos = conexion.ConsultaParametrizada(productosFatura, ltsFactura.SelectedValue);
@@ -330,7 +330,7 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                 txtfecha.Text = fecha.ToString("dd/MM/yyyy");
                 txtoc.Text = OC.Rows[0].ItemArray[8].ToString();
 
-      
+
 
                 if (rbInterno.IsChecked == true)
                 {
@@ -344,9 +344,9 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
                     String p = conexion.ValorEnVariable(pr).ToString();
                     txtproveedor.Text = p;
                 }
-          
 
-         
+
+
                 if (OC.Rows[0].ItemArray[4].ToString() == "0")
                 {
                     txtIVA.Text = "0";
@@ -402,44 +402,44 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
             {
 
 
-                DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
+                String tieneNC = "SELECT COUNT(*) FROM notacreditosalida WHERE FK_idFacturas  = '" + ltsFactura.SelectedValue + "'";
+                String NC = conexion.ValorEnVariable(tieneNC).ToString();
+
+                String idf = "   SELECT idCuota FROM cuotassalida WHERE FK_idfacturas =  '" + ltsFactura.SelectedValue + "'";
+                String pagosi = conexion.ValorEnVariable(idf).ToString();
+
+                String pag = "SELECT COUNT(*) FROM pagosalida WHERE FK_idCuota  = '" + pagosi + "'";
+                String tienep = conexion.ValorEnVariable(pag).ToString();
+
+
+
+                if (NC != "0" && tienep != "0")
+                {
+                    MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado y una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+                }
+                else if (tienep != "0")
+                {
+                    MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else if (NC != "0")
+                {
+                    MessageBox.Show("La factura no se puede eliminar porque tiene una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else
+                {
+                    DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
                 string numeroFactura = selectedDataRow["numeroFactura"].ToString();
                 string idFactura = selectedDataRow["idfacturas"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar la factura numero " + numeroFactura, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
+                MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar la factura numero " + numeroFactura, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
 
                 if (dialog == MessageBoxResult.Yes)
                 {
 
-                    String tieneNC = "SELECT COUNT(*) FROM notacredito WHERE FK_idFactura  = '" + ltsFactura.SelectedValue + "'";
-                    String NC = conexion.ValorEnVariable(tieneNC).ToString();
-
-                    String idf = "   SELECT idCuota FROM cuotassalida WHERE FK_idfacturas =  '" + ltsFactura.SelectedValue + "'";
-                    String pagosi = conexion.ValorEnVariable(idf).ToString();
-
-                    String pag = "SELECT COUNT(*) FROM pago WHERE FK_idCuota  = '" + pagosi + "'";
-                    String tienep = conexion.ValorEnVariable(pag).ToString();
-
-
-
-                    if (NC != "0" && tienep != "0")
-                    {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado y una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                      
-
-                    }
-                    else if (tienep != "0")
-                    {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene un pago realizado", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                  
-                    }
-                    else if (NC != "0")
-                    {
-                        MessageBox.Show("La factura no se puede eliminar porque tiene una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                   
-                    }
-                    else
-                    {
                         int idSeleccionado = (int)ltsFactura.SelectedValue;
                         for (int i = 0; i < productos.Rows.Count; i++)
                         {
@@ -494,278 +494,309 @@ namespace wpfFamiliaBlanco.Salidas.Facturacion
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
 
-            
-                itemsFacturaDB.Clear();
-                itemsFacdb.Clear();
-                itemsdb.Clear();
-                int index = ltsFactura.SelectedIndex;
-                int numerofacturaID = (int)this.ltsFactura.SelectedValue;
-            Console.WriteLine("ID FACTURA " + numerofacturaID);
-                DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
-                idOC = selectedDataRow["numeroFactura"].ToString();
+                String tieneNC = "SELECT COUNT(*) FROM notacreditosalida WHERE FK_idFacturas  = '" + ltsFactura.SelectedValue + "'";
+                String NC = conexion.ValorEnVariable(tieneNC).ToString();
 
-                String oc = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas = '" + numerofacturaID + "'";
-                FKoc = conexion.ValorEnVariable(oc);
-        
-                if (rbInterno.IsChecked == true)
+                String idf = "   SELECT idCuota FROM cuotassalida WHERE FK_idfacturas =  '" + ltsFactura.SelectedValue + "'";
+                String pagosi = conexion.ValorEnVariable(idf).ToString();
+
+                String pag = "SELECT COUNT(*) FROM pagosalida WHERE FK_idCuota  = '" + pagosi + "'";
+                String tienep = conexion.ValorEnVariable(pag).ToString();
+
+
+
+                if (NC != "0" && tienep != "0")
                 {
-                    String fkidprov = "SELECT FK_idClientemi FROM ordencomprasalida WHERE idOrdenCompra = '" + FKoc + "'";
-                    fkidproveedor = conexion.ValorEnVariable(fkidprov);
+                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado y una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    String fkidprov1 = "   select nombre from clientesmi  where idClientemi =  '" + fkidproveedor + "'";
-                    idproveed = conexion.ValorEnVariable(fkidprov1);
+
+                }
+                else if (tienep != "0")
+                {
+                    MessageBox.Show("La factura no se puede modificar porque tiene un pago realizado", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else if (NC != "0")
+                {
+                    MessageBox.Show("La factura no se puede modificar porque tiene una nota de credito", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 }
                 else
                 {
-                    String fkidprov = "SELECT FK_idClienteme FROM ordencomprasalida WHERE idOrdenCompra = '" + FKoc + "'";
-                    fkidproveedor = conexion.ValorEnVariable(fkidprov);
+                    itemsFacturaDB.Clear();
+                    itemsFacdb.Clear();
+                    itemsdb.Clear();
+                    int index = ltsFactura.SelectedIndex;
+                    int numerofacturaID = (int)this.ltsFactura.SelectedValue;
+                    Console.WriteLine("ID FACTURA " + numerofacturaID);
+                    DataRow selectedDataRow = ((DataRowView)ltsFactura.SelectedItem).Row;
+                    idOC = selectedDataRow["numeroFactura"].ToString();
 
-                    String fkidprov1 = "  select nombre from clientesme  where idClienteme =  '" + fkidproveedor + "'";
-                    idproveed = conexion.ValorEnVariable(fkidprov1);
-                }
-          
-
-
-
-
-                String proveedor = idproveed;
-
-                String crfact = "SELECT * FROM facturasalida WHERE idfacturas = '" + numerofacturaID + "'";
-                DataTable OC = conexion.ConsultaParametrizada(crfact, numerofacturaID);
-                DateTime fecha = (DateTime)OC.Rows[0].ItemArray[7];
-                String cuotas = OC.Rows[0].ItemArray[6].ToString();
-                Int64 numf = (Int64)OC.Rows[0].ItemArray[2];
-                int iva;
-                int tipocambio;
-
-                int j = 0;
-                for (int i = 0; i < dgvProductosFactura.Items.Count; i++)
-                {
-
-                    var total = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                    j++;
-
-                    var nombre = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                    j++;
-
-                    var precioU = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                    j++;
-
-
-                    var id = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                    j++;
-
-
-                    var cantidadrestante = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-                    j++;
-                    j = 0;
-
-
-                    subtotal = subtotal + float.Parse(precioU) * float.Parse(total);
-                    Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidadrestante), float.Parse(total), float.Parse(precioU));
-                    itemsFacdb.Add(conA);
-                  
-                }
-
-                Cuotas cuota;
-                cuotasAinsertar.Clear();
-                try
-                {
-
-                    String sql2 = "SELECT * from cuotassalida c  where c.FK_idfacturas = '" + numerofacturaID + "'";
-
-                    DataTable cuotass = conexion.ConsultaParametrizada(sql2, numerofacturaID);
-                    for (int i = 0; i < cuotass.Rows.Count; i++)
-                    {
-
-                        cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[3], (int)cuotass.Rows[i].ItemArray[4]);
-                        cuotasAinsertar.Add(cuota);
-                       
-                    }
-
-                }
-                catch (NullReferenceException)
-                {
-
-
-                }
-
-                Producto producto;
-                itemsdb.Clear();
-
-                try
-                {
-
-
-                    String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencomprasalida.CrFactura, subtotal, productos_has_ordencomprasalida.PUPagado  FROM productos_has_ordencomprasalida, productos WHERE FK_idOrdenCompra ='" + FKoc + "' AND productos.idProductos = productos_has_ordencomprasalida.FK_idProducto";
-
-                    DataTable productos = conexion.ConsultaParametrizada(sql2, Int64.Parse(idOC));
-                    for (int i = 0; i < productos.Rows.Count; i++)
-                    {
-                        producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
-                        itemsdb.Add(producto);
-
-                    }
-
-
-                }
-                catch (NullReferenceException)
-                {
-
-
-                }
-
-                if (txtIVA.Text == "0")
-                {
-                    iva = 0;
-                }
-                else if (txtIVA.Text == "21")
-                {
-                    iva = 1;
-                }
-                else
-                {
-                    iva = 2;
-                }
-
-                if (txtTipoCambio.Text == "$")
-                {
-                    tipocambio = 0;
-                }
-                else if (txtTipoCambio.Text == "u$d")
-                {
-                    tipocambio = 1;
-                }
-                else
-                {
-                    tipocambio = 2;
-                }
-
-                int tipoCliente;
-                if (rbInterno.IsChecked == true)
-                {
-                   tipoCliente = 1;
-                }
-                else
-                {
-                   tipoCliente = 2;
-                }
-
-                var newW = new windowAgregarFacturaSalidas((Int64)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(txtoc.Text), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar,tipoCliente);
-                newW.Title = "Modificar Factura";
-            
-                newW.ShowDialog();
-
-                if (newW.DialogResult == true)
-                {
-
-                    String idPR = newW.txtcliente.Text.ToString();
+                    String oc = "SELECT FK_idOrdenCompra FROM facturasalida WHERE idfacturas = '" + numerofacturaID + "'";
+                    FKoc = conexion.ValorEnVariable(oc);
 
                     if (rbInterno.IsChecked == true)
                     {
-                        string sql32 = "SELECT idClientemi FROM clientesmi WHERE nombre = '" + idPR + "'";
-                        string idProve2 = conexion.ValorEnVariable(sql32);
+                        String fkidprov = "SELECT FK_idClientemi FROM ordencomprasalida WHERE idOrdenCompra = '" + FKoc + "'";
+                        fkidproveedor = conexion.ValorEnVariable(fkidprov);
+
+                        String fkidprov1 = "   select nombre from clientesmi  where idClientemi =  '" + fkidproveedor + "'";
+                        idproveed = conexion.ValorEnVariable(fkidprov1);
                     }
                     else
                     {
-                        string sql32 = "SELECT idClienteme FROM clientesme WHERE nombre = '" + idPR + "'";
-                        string idProve2 = conexion.ValorEnVariable(sql32);
-                    }
-                   
+                        String fkidprov = "SELECT FK_idClienteme FROM ordencomprasalida WHERE idOrdenCompra = '" + FKoc + "'";
+                        fkidproveedor = conexion.ValorEnVariable(fkidprov);
 
-                   
-                    decimal subtotal2 = decimal.Parse(newW.txtSubtotal.Text);
-                    decimal total2 = decimal.Parse(newW.txtTotal.Text);
-                    Int64 numeroFact2 = Int64.Parse(newW.txtNroFactura.Text);
-                    String iva32 = newW.cmbIVA.SelectedIndex.ToString();
-                    String tipoCambio2 = newW.cmbTipoCambio.SelectedIndex.ToString();
-                    String cuotas2 = newW.cmbCuotas.Text;
-                    int fkOrden2 = int.Parse(newW.txtordenn.Text);
-                    DateTime dtp2 = System.DateTime.Now;
-                    dtp2 = newW.dtFactura.SelectedDate.Value;
+                        String fkidprov1 = "  select nombre from clientesme  where idClienteme =  '" + fkidproveedor + "'";
+                        idproveed = conexion.ValorEnVariable(fkidprov1);
+                    }
+
+
+
+
+
+                    String proveedor = idproveed;
+
+                    String crfact = "SELECT * FROM facturasalida WHERE idfacturas = '" + numerofacturaID + "'";
+                    DataTable OC = conexion.ConsultaParametrizada(crfact, numerofacturaID);
+                    DateTime fecha = (DateTime)OC.Rows[0].ItemArray[7];
+                    String cuotas = OC.Rows[0].ItemArray[6].ToString();
+                    Int64 numf = (Int64)OC.Rows[0].ItemArray[2];
+                    int iva;
+                    int tipocambio;
+
+                    int j = 0;
+                    for (int i = 0; i < dgvProductosFactura.Items.Count; i++)
+                    {
+
+                        var total = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                        j++;
+
+                        var nombre = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                        j++;
+
+                        var precioU = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                        j++;
+
+
+                        var id = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                        j++;
+
+
+                        var cantidadrestante = (dgvProductosFactura.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
+                        j++;
+                        j = 0;
+
+
+                        subtotal = subtotal + float.Parse(precioU) * float.Parse(total);
+                        Producto conA = new Producto(nombre, int.Parse(id), int.Parse(cantidadrestante), float.Parse(total), float.Parse(precioU));
+                        itemsFacdb.Add(conA);
+
+                    }
+
+                    Cuotas cuota;
+                    cuotasAinsertar.Clear();
+                    try
+                    {
+
+                        String sql2 = "SELECT * from cuotassalida c  where c.FK_idfacturas = '" + numerofacturaID + "'";
+
+                        DataTable cuotass = conexion.ConsultaParametrizada(sql2, numerofacturaID);
+                        for (int i = 0; i < cuotass.Rows.Count; i++)
+                        {
+
+                            cuota = new Cuotas((int)cuotass.Rows[i].ItemArray[0], (int)cuotass.Rows[i].ItemArray[1], (DateTime)cuotass.Rows[i].ItemArray[2], (float)cuotass.Rows[i].ItemArray[3], (int)cuotass.Rows[i].ItemArray[4]);
+                            cuotasAinsertar.Add(cuota);
+
+                        }
+
+                    }
+                    catch (NullReferenceException)
+                    {
+
+
+                    }
+
+                    Producto producto;
+                    itemsdb.Clear();
 
                     try
                     {
-                        //UPDATE FACTURA
-                        String updatefactura = "UPDATE facturasalida SET subtotal =  '" + subtotal2 + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2 + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOrdenCompra= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "' WHERE idfacturas = '" + numerofacturaID + "'";
-                        conexion.operaciones(updatefactura);
+
+
+                        String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencomprasalida.CrFactura, subtotal, productos_has_ordencomprasalida.PUPagado  FROM productos_has_ordencomprasalida, productos WHERE FK_idOrdenCompra ='" + FKoc + "' AND productos.idProductos = productos_has_ordencomprasalida.FK_idProducto";
+
+                        DataTable productos = conexion.ConsultaParametrizada(sql2, Int64.Parse(idOC));
+                        for (int i = 0; i < productos.Rows.Count; i++)
+                        {
+                            producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
+                            itemsdb.Add(producto);
+
+                        }
+
+
                     }
-                    catch (Exception)
+                    catch (NullReferenceException)
                     {
 
 
                     }
 
-                    string sql2 = "DELETE  FROM cuotassalida WHERE FK_idfacturas = '" + numerofacturaID + "'";
-                    conexion.operaciones(sql2);
-
-
-                    //inserto cuotas en la factura
-                    foreach (Cuotas cc in newW.todaslascuotas)
+                    if (txtIVA.Text == "0")
                     {
-                        int id2 = cc.cuota;
-                        int dias12 = cc.dias;
-                        DateTime fecha21 = cc.fechadepago;
-                        float montoCuota = cc.montoCuota;
+                        iva = 0;
+                    }
+                    else if (txtIVA.Text == "21")
+                    {
+                        iva = 1;
+                    }
+                    else
+                    {
+                        iva = 2;
+                    }
+
+                    if (txtTipoCambio.Text == "$")
+                    {
+                        tipocambio = 0;
+                    }
+                    else if (txtTipoCambio.Text == "u$d")
+                    {
+                        tipocambio = 1;
+                    }
+                    else
+                    {
+                        tipocambio = 2;
+                    }
+
+                    int tipoCliente;
+                    if (rbInterno.IsChecked == true)
+                    {
+                        tipoCliente = 1;
+                    }
+                    else
+                    {
+                        tipoCliente = 2;
+                    }
+
+                    var newW = new windowAgregarFacturaSalidas((Int64)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(txtoc.Text), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar, tipoCliente);
+                    newW.Title = "Modificar Factura";
+
+                    newW.ShowDialog();
+
+                    if (newW.DialogResult == true)
+                    {
+
+                        String idPR = newW.txtcliente.Text.ToString();
+
+                        if (rbInterno.IsChecked == true)
+                        {
+                            string sql32 = "SELECT idClientemi FROM clientesmi WHERE nombre = '" + idPR + "'";
+                            string idProve2 = conexion.ValorEnVariable(sql32);
+                        }
+                        else
+                        {
+                            string sql32 = "SELECT idClienteme FROM clientesme WHERE nombre = '" + idPR + "'";
+                            string idProve2 = conexion.ValorEnVariable(sql32);
+                        }
 
 
-                        String insertcuotas = "INSERT INTO cuotassalida ( dias, fecha, montoCuota, FK_idFacturas, estado) VALUES ('" + dias12 + "', '" + fecha21.ToString("yyyy/MM/dd") + "','" + montoCuota + "', '" + numerofacturaID + "', '"+0+"')";
-                        conexion.operaciones(insertcuotas);
 
+                        decimal subtotal2 = decimal.Parse(newW.txtSubtotal.Text);
+                        decimal total2 = decimal.Parse(newW.txtTotal.Text);
+                        Int64 numeroFact2 = Int64.Parse(newW.txtNroFactura.Text);
+                        String iva32 = newW.cmbIVA.SelectedIndex.ToString();
+                        String tipoCambio2 = newW.cmbTipoCambio.SelectedIndex.ToString();
+                        String cuotas2 = newW.cmbCuotas.Text;
+                        int fkOrden2 = int.Parse(newW.txtordenn.Text);
+                        DateTime dtp2 = System.DateTime.Now;
+                        dtp2 = newW.dtFactura.SelectedDate.Value;
+
+                        try
+                        {
+                            //UPDATE FACTURA
+                            String updatefactura = "UPDATE facturasalida SET subtotal =  '" + subtotal2 + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2 + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOrdenCompra= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "' WHERE idfacturas = '" + numerofacturaID + "'";
+                            conexion.operaciones(updatefactura);
+                        }
+                        catch (Exception)
+                        {
+
+
+                        }
+
+                        string sql2 = "DELETE  FROM cuotassalida WHERE FK_idfacturas = '" + numerofacturaID + "'";
+                        conexion.operaciones(sql2);
+
+
+                        //inserto cuotas en la factura
+                        foreach (Cuotas cc in newW.todaslascuotas)
+                        {
+                            int id2 = cc.cuota;
+                            int dias12 = cc.dias;
+                            DateTime fecha21 = cc.fechadepago;
+                            float montoCuota = cc.montoCuota;
+
+
+                            String insertcuotas = "INSERT INTO cuotassalida ( dias, fecha, montoCuota, FK_idFacturas, estado) VALUES ('" + dias12 + "', '" + fecha21.ToString("yyyy/MM/dd") + "','" + montoCuota + "', '" + numerofacturaID + "', '" + 0 + "')";
+                            conexion.operaciones(insertcuotas);
+
+
+                        }
+
+
+                        String deleteproducto = "DELETE FROM productos_has_facturassalida WHERE FK_idfacturas = '" + numerofacturaID + "'";
+                        conexion.operaciones(deleteproducto);
+
+
+
+                        //INSERTO LOS PRODUCTOS DE LA FACTURA
+                        itemsFacturaDB.Clear();
+                        foreach (Producto p in newW.itemsFact)
+                        {
+                            String nombre = p.nombre;
+                            int cantidad = p.cantidad;
+                            float totalp = p.total;
+                            float precioUni = p.precioUnitario;
+                            int idProducto = p.id;
+
+                            Producto pr = new Producto(nombre, idProducto, cantidad, totalp, precioUni);
+                            itemsFacturaDB.Add(pr);
+
+
+                            String sqlProductoHas = "INSERT INTO productos_has_facturassalida (cantidad, subtotal, FK_idProductos, FK_idFacturas) VALUES ('" + cantidad + "','" + subtotal2 + "', '" + idProducto + "', '" + numerofacturaID + "')";
+                            conexion.operaciones(sqlProductoHas);
+
+
+                        }
+
+                        int idOrden = int.Parse(newW.txtordenn.Text);
+                        foreach (var producto1 in newW.items)
+                        {
+                            String sql = "UPDATE productos_has_ordencomprasalida SET CrFactura = '" + producto1.cantidad + "' where FK_idProducto = '" + producto1.id + "' and FK_idOrdenCompra = '" + idOrden + "'";
+                            conexion.operaciones(sql);
+                        }
+                        MessageBox.Show("La factura se modificó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
 
 
-                    String deleteproducto = "DELETE FROM productos_has_facturassalida WHERE FK_idfacturas = '" + numerofacturaID + "'";
-                    conexion.operaciones(deleteproducto);
 
+                    LoadDgvFactura();
+                    Vertodo(index);
+                   
+                }
+               
+            }
+            catch (NullReferenceException)
+            {
 
-
-                    //INSERTO LOS PRODUCTOS DE LA FACTURA
-                    itemsFacturaDB.Clear();
-                    foreach (Producto p in newW.itemsFact)
-                    {
-                        String nombre = p.nombre;
-                        int cantidad = p.cantidad;
-                        float totalp = p.total;
-                        float precioUni = p.precioUnitario;
-                        int idProducto = p.id;
-
-                        Producto pr = new Producto(nombre, idProducto, cantidad, totalp, precioUni);
-                        itemsFacturaDB.Add(pr);
-
-
-                        String sqlProductoHas = "INSERT INTO productos_has_facturassalida (cantidad, subtotal, FK_idProductos, FK_idFacturas) VALUES ('" + cantidad + "','" + subtotal2 + "', '" + idProducto + "', '" + numerofacturaID + "')";
-                        conexion.operaciones(sqlProductoHas);
-
-
-                    }
-
-                    int idOrden = int.Parse(newW.txtordenn.Text);
-                    foreach (var producto1 in newW.items)
-                    {
-                        String sql = "UPDATE productos_has_ordencomprasalida SET CrFactura = '" + producto1.cantidad + "' where FK_idProducto = '" + producto1.id + "' and FK_idOrdenCompra = '" + idOrden + "'";
-                        conexion.operaciones(sql);
-                    }
-                MessageBox.Show("La factura se modificó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Seleccione una factura a modificar");
 
             }
-
-
-
-                LoadDgvFactura();
-              //  Vertodo(index);
-            //}
-            //catch (NullReferenceException)
-            //{
-
-            //    MessageBox.Show("Seleccione una factura a modificar");
-            //}
         }
-
         private void btnVertodo_Click(object sender, RoutedEventArgs e)
         {
 

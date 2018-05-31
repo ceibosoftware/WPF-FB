@@ -694,7 +694,7 @@ namespace wpfFamiliaBlanco.Salidas.Ordenes
             }
             else if (existeClienteME() == 0)
             {
-                MessageBox.Show("No existen cliente mercado interno no podra agregar una orden para mercado enterno ", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("No existen cliente mercado externo no podra agregar una orden para mercado enterno ", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
               
                 return true;
             }

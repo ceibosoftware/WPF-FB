@@ -203,10 +203,11 @@ namespace wpfFamiliaBlanco.Clientes
             try
             {
 
-         
-            DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
-            string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar al cliente " + nombre+". Se eliminarán todos sus datos", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                string consulta = "SELECT count(*) from ordencomprasalida where FK_idClientemi = " + ltsClientes.SelectedValue + "";
+                if (conexion.ValorEnVariable(consulta) == "0") { 
+                    DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
+                    string nombre = selectedDataRow["nombre"].ToString();
+                    MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar al cliente " + nombre+". Se eliminarán todos sus datos", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             int idSeleccionado = (int)ltsClientes.SelectedValue;
             if (dialog == MessageBoxResult.Yes)
             {
@@ -231,13 +232,19 @@ namespace wpfFamiliaBlanco.Clientes
    
             ltsClientes.SelectedIndex = 0;
 
+                }
+                else
+                {
+                    MessageBox.Show("El cliente no se puede eliminar porque tiene ordenes de compra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
+
             catch (NullReferenceException)
             {
                 MessageBox.Show("Seleccione un cliente a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-        }
+    }
 
 
 
@@ -275,6 +282,7 @@ namespace wpfFamiliaBlanco.Clientes
                 String telt = newW.txtTelt.Text;
                 String direccion = newW.txtDireccion.Text;
                 String transporte = newW.txtTransporte.Text;
+                
                 int razons = newW.cmbRs.SelectedIndex;
 
 

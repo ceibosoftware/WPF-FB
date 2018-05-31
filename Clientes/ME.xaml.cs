@@ -209,36 +209,42 @@ namespace wpfFamiliaBlanco.Clientes
             try
             {
 
-      
-            DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
-            string nombre = selectedDataRow["nombre"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea eliminar al cliente " + nombre + ", se eliminarán todos sus datos ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            
-            if (dialog == MessageBoxResult.Yes)
-            {
-               
-                int idSeleccionado = (int)ltsClientes.SelectedValue;
-                string sql = "delete from clientesme where idClienteme = '" + idSeleccionado + "'";
-                conexion.operaciones(sql);
-                loadListaClientes();
-                ActualizaDGVContacto();
-                ActualizaDGVPrecios();
-
-                if (dgvContacto.Items == null)
+                string consulta = "SELECT count(*) from ordencomprasalida where FK_idClienteme = " + ltsClientes.SelectedValue + "";
+                if (conexion.ValorEnVariable(consulta) == "0")
                 {
+                    DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
+                    string nombre = selectedDataRow["nombre"].ToString();
+                    MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea eliminar al cliente " + nombre + ", se eliminarán todos sus datos ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-                    this.txtt.Text = "";
-                    this.txtDireccion.Text = "";
-                    this.txtPais.Text = "";
-                    this.txtweb.Text = "";
-                    this.txtcp.Text = "";
+                    if (dialog == MessageBoxResult.Yes)
+                    {
+
+                        int idSeleccionado = (int)ltsClientes.SelectedValue;
+                        string sql = "delete from clientesme where idClienteme = '" + idSeleccionado + "'";
+                        conexion.operaciones(sql);
+                        loadListaClientes();
+                        ActualizaDGVContacto();
+                        ActualizaDGVPrecios();
+
+                        if (dgvContacto.Items == null)
+                        {
+
+                            this.txtt.Text = "";
+                            this.txtDireccion.Text = "";
+                            this.txtPais.Text = "";
+                            this.txtweb.Text = "";
+                            this.txtcp.Text = "";
 
 
+                        }
+                    }
+                    MessageBox.Show("Se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ltsClientes.SelectedIndex = 0;
                 }
-            }
-                MessageBox.Show("Se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                ltsClientes.SelectedIndex = 0;
-
+                else
+                {
+                    MessageBox.Show("El cliente no se puede eliminar porque tiene ordenes de compra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (NullReferenceException)
             {
@@ -277,7 +283,7 @@ namespace wpfFamiliaBlanco.Clientes
                 else
                 {
                     String sql;
-                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, cuitpais, FK_idLista) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" + newW.idlp + "','" + cuitpais + "' )";
+                    sql = "insert into clientesme(nombre, web, pais, direccion, terminocomercial, cuitpais, FK_idLista) values('" + nombre + "', '" + direccionweb + "', '" + pais + "', '" + direccion + "', '" + tc + "','" +  cuitpais + "','" + newW.idlp + "' )";
                     conexion.operaciones(sql);
                 }
 

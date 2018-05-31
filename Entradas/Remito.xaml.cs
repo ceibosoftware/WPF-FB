@@ -271,9 +271,9 @@ namespace wpfFamiliaBlanco.Entradas
             string consulta1 = "SELECT count(FK_idremitos) FROM notacredito where FK_idremitos = "+ltsremitos.SelectedValue+"";
               
             if(conexion.ValorEnVariable(consulta1) == "0") { 
-            DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
-            string numeroRemito = selectedDataRow["numeroRemito"].ToString();
-            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito número " + numeroRemito, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
+                DataRow selectedDataRow = ((DataRowView)ltsremitos.SelectedItem).Row;
+                string numeroRemito = selectedDataRow["numeroRemito"].ToString();
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el remito número " + numeroRemito, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
             if (dialog == MessageBoxResult.Yes)
             {
                 int idSeleccionado = (int)ltsremitos.SelectedValue;
@@ -319,7 +319,7 @@ namespace wpfFamiliaBlanco.Entradas
             try
             {
 
-                string consulta1 = "SELECT count(FK_idremitos) FROM notacredito where FK_idremitos = " + ltsremitos.SelectedValue + "";
+                string consulta1 = "SELECT count(FK_idremitos) FROM notacreditosalida where FK_idremitos = " + ltsremitos.SelectedValue + "";
                 
                 if (conexion.ValorEnVariable(consulta1) == "0")
                 {
