@@ -424,7 +424,8 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
             cmbFiltro.Items.Add("Nombre");
-            
+            cmbFiltro.Items.Add("País");
+
 
 
         }
@@ -439,6 +440,11 @@ namespace wpfFamiliaBlanco.Clientes
             if (cmbFiltro.Text == "Nombre")
             {   //Busca por nombre
                 consulta = "SELECT* FROM clientesme WHERE nombre LIKE '%' @valor '%'";
+                clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            }
+            else if (cmbFiltro.Text == "País")
+            {
+                consulta = "SELECT * FROM clientesme WHERE pais LIKE '%' @valor '%' ";
                 clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             }
             

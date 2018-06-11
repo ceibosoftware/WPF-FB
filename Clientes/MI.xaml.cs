@@ -100,6 +100,7 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
             cmbFiltro.Items.Add("Nombre");
+            cmbFiltro.Items.Add("Provincia");
 
 
         }
@@ -142,19 +143,22 @@ namespace wpfFamiliaBlanco.Clientes
                 txtDireccion.Text = clientemi.Rows[0].ItemArray[4].ToString();
                 txtTelt.Text = clientemi.Rows[0].ItemArray[3].ToString();
                 txtTransporte.Text = clientemi.Rows[0].ItemArray[2].ToString();
+                txtProvincia.Text = clientemi.Rows[0].ItemArray[8].ToString();
+            
+           
 
 
                 if (clientemi.Rows[0].ItemArray[5].ToString() == "0")
                 {
-                    txtrs.Text = "S.A.";
+                    txtrs.Text = "Excento";
                 }
                 else if (clientemi.Rows[0].ItemArray[5].ToString() == "1")
                 {
-                    txtrs.Text = "S.R.L.";
+                    txtrs.Text = "Responsable Inscripto";
                 }
                 else if (clientemi.Rows[0].ItemArray[5].ToString() == "2")
                 {
-                    txtrs.Text = "S.A.S.";
+                    txtrs.Text = "Monotribustista";
                 }
 
 
@@ -262,6 +266,10 @@ namespace wpfFamiliaBlanco.Clientes
             {   //Busca por nombre
                 consulta = "SELECT* FROM clientesmi WHERE nombre LIKE '%' @valor '%'";
                 clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+            }else if (cmbFiltro.Text=="Provincia")
+            {
+                consulta = "SELECT * FROM clientesmi WHERE provincia LIKE '%' @valor '%'";
+                clientes = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             }
             
 
@@ -280,8 +288,10 @@ namespace wpfFamiliaBlanco.Clientes
                 String nombre = newW.txtNombre.Text;
                 String cuit = newW.txtCuit.Text;
                 String telt = newW.txtTelt.Text;
+                String provincia = newW.cmbP.Text;
                 String direccion = newW.txtDireccion.Text;
                 String transporte = newW.txtTransporte.Text;
+               
                 
                 int razons = newW.cmbRs.SelectedIndex;
 
@@ -292,14 +302,14 @@ namespace wpfFamiliaBlanco.Clientes
                 if (newW.cmbPrecios.Text == "") 
                 {
                     String sql;
-                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "')";
+                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, provincia) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','"+provincia+"')";
                     conexion.operaciones(sql);
 
                 }
                 else
                 {
                     String sql;
-                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, FK_idLista) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','" + newW.idlp + "')";
+                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, FK_idLista) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','" + newW.idlp + "','"+provincia+"')";
                     conexion.operaciones(sql);
                 }
                
@@ -360,6 +370,7 @@ namespace wpfFamiliaBlanco.Clientes
             string teltransporte = cliente.Rows[0].ItemArray[3].ToString();
             string direccionentrega = cliente.Rows[0].ItemArray[4].ToString();
             string razonsocial = cliente.Rows[0].ItemArray[5].ToString();
+            string provincia = cliente.Rows[0].ItemArray[8].ToString();
             int listadeprecios;
             if (cliente.Rows[0].ItemArray[7].ToString() == "")
             {
@@ -373,7 +384,7 @@ namespace wpfFamiliaBlanco.Clientes
 
 
 
-            var newW = new windowAgregarClientemi(nombre, cuit, transporte, teltransporte, direccionentrega, razonsocial, listaContacto, idcliente, listadeprecios);
+            var newW = new windowAgregarClientemi(nombre, cuit, transporte, teltransporte, direccionentrega, razonsocial, listaContacto, idcliente, listadeprecios,provincia);
             
             newW.ShowDialog();
             
@@ -386,6 +397,7 @@ namespace wpfFamiliaBlanco.Clientes
                 this.txtDireccion.Text = newW.txtDireccion.Text;
                 this.txtrs.Text = newW.cmbRs.Text;
                 this.txtTelt.Text = newW.txtTelt.Text;
+                this.txtProvincia.Text = newW.cmbP.Text;
 
                 
 
@@ -395,13 +407,13 @@ namespace wpfFamiliaBlanco.Clientes
                 if (newW.cmbPrecios.Text == "")
                 {
                     String update;
-                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "' where idClientemi ='" + idcliente + "';";
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', provincia='"+this.txtProvincia.Text+"' where idClientemi ='" + idcliente + "';";
                     conexion.operaciones(update);
                 }
                 else
                 {
                     String update;
-                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', FK_idLista = '"+newW.idlp+ "' where idClientemi ='" + idcliente + "';";
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', FK_idLista = '"+newW.idlp+ "', provincia='" + this.txtProvincia + "' where idClientemi ='" + idcliente + "';";
                     conexion.operaciones(update);
                 }
 
@@ -430,6 +442,8 @@ namespace wpfFamiliaBlanco.Clientes
                 MessageBox.Show("Seleccione un cliente a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+       
     }
     }
 

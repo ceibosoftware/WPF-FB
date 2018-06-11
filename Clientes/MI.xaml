@@ -592,7 +592,7 @@
     </Page.Resources>
 
     <Grid Background="#FF171717">
-        <Border Height="431.957" Width="979.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="26.48,18.043,27.666,23.215" Opacity="0.5" >
+        <Border Height="432" Width="979" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="43,18,12,23" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -603,8 +603,8 @@
         <ListBox x:Name="ltsClientes" HorizontalAlignment="Left" Height="117" Margin="53.778,166.332,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsClientes_SelectionChanged"/>
         <Label x:Name="lblClientes" Content="Clientes" HorizontalAlignment="Left" Margin="285,141.332,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtCuit" Width="171" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="444.993,51.992,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
-        <Label x:Name="lblBuscar_Copy" Content="Cuit" HorizontalAlignment="Left" Margin="484,26.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label x:Name="lblBuscar_Copy1" Content="Razón social" HorizontalAlignment="Left" Margin="678.326,27.579,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblBuscar_Copy" Content="CUIT" HorizontalAlignment="Left" Margin="484,26.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblBuscar_Copy1" Content="Condición frente al IVA" HorizontalAlignment="Left" Margin="646,27,0,0" VerticalAlignment="Top" Height="25" Width="163" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtDireccion" Width="364.778" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="444.215,99.992,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
         <Label x:Name="lblFiltrar_Copy" Content="Dirección de entrega" HorizontalAlignment="Left" Margin="625.66,74.992,0,0" VerticalAlignment="Top" Height="25" Width="183.333" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblClientes_Copy" Content="Contacto" HorizontalAlignment="Left" Margin="285,282,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
@@ -632,11 +632,12 @@
         <Label x:Name="lblBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="285.007,26.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <ComboBox x:Name="cmbFiltro" Width="364" VerticalAlignment="Top" SelectedIndex="0" Style="{DynamicResource combo_box}" Margin="53,99.992,0,0" IsReadOnly="True" Height="23" HorizontalAlignment="Left" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C"/>
         <Label x:Name="lblFiltrar" Content="Filtrar" HorizontalAlignment="Left" Margin="285,74.992,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Border Height="251.907" Width="389.02" BorderThickness="1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="433.5,182.593,211.146,38.715" Opacity="0.5" />
         <Label x:Name="lblClientes_Copy1" Content="Lista de precios" HorizontalAlignment="Left" Margin="676.993,192.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtlp" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="171" Margin="637.993,217.992,0,0"/>
         <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="156.223" VerticalAlignment="Top" Width="361.174" Margin="447.319,265.992,0,0"/>
         <Label x:Name="lblClientes_Copy2" Content="Items" HorizontalAlignment="Left" Margin="676.993,240.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtProvincia" Width="171" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="444,218,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
+        <Label x:Name="lblProvincia" Content="Provincia" HorizontalAlignment="Left" Margin="484,193,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 </Page>

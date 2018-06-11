@@ -51,19 +51,20 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             txtdireccionweb.Text = web;
             txtcp.Text = cuitpais;
             cmbtc.SelectedIndex = terminocomercial;
-            cmbpais.SelectedValue = pais;
+            
             llenarcmbtc();
-
+            
             camplimit();
             this.lista = lista;
             loaddgvcontacto(this.lista);
             loadcmblp();
-            
+            loadcombopaises();
             cmbPrecios.SelectedValue = idlista;
             ActualizarDGVPrecios();
             LoadDGVContacto();
             idcliente = id;
             CampLimit();
+            cmbpais.Text = pais;
             lblWindowTitle.Content = "Modificar Cliente de Mercado Externo";
 
         }

@@ -35,12 +35,13 @@ namespace wpfFamiliaBlanco.Clientes
             llenarcmbrs();
             loadcmblp();
             ActualizarDGVPrecios();
+            loadcomboprovincias();
             LoadDGVContacto();
             CampLimit();
 
         }
 
-       public windowAgregarClientemi(string nombre,string cuit,string trasnporte,string teltransporte,string direccionentrega,string razonsocial,List<Contacto>lista, int id, int idlista)
+       public windowAgregarClientemi(string nombre,string cuit,string trasnporte,string teltransporte,string direccionentrega,string razonsocial,List<Contacto>lista, int id, int idlista,string provincia)
         {
             InitializeComponent();
             txtNombre.Text = nombre;
@@ -50,6 +51,7 @@ namespace wpfFamiliaBlanco.Clientes
             txtDireccion.Text = direccionentrega;
             cmbRs.Text = razonsocial;
             loadcmblp();
+            loadcomboprovincias();
             cmbPrecios.SelectedValue = idlista;
             ActualizarDGVPrecios();
             llenarcmbrs();
@@ -57,13 +59,14 @@ namespace wpfFamiliaBlanco.Clientes
             loaddgvcontacto(this.lista);
             idcliente = id;
             CampLimit();
+            cmbP.Text = provincia;
             lblWindowTitle.Content = "Modificar Cliente de Mercado Interno";
 
         }
 
         private void CampLimit()
         {
-            txtCuit.MaxLength = 20;
+            txtCuit.MaxLength = 11;
             txtDireccion.MaxLength = 40;
             txtNombre.MaxLength = 30;
             txtTelt.MaxLength = 20;
@@ -90,9 +93,9 @@ namespace wpfFamiliaBlanco.Clientes
         private void llenarcmbrs()
         {
 
-            cmbRs.Items.Add("S.A.");
-            cmbRs.Items.Add("S.R.L.");
-            cmbRs.Items.Add("S.A.S.");
+            cmbRs.Items.Add("Excento");
+            cmbRs.Items.Add("Responsable Inscripto");
+            cmbRs.Items.Add("Monotributista");
             
 
         }
@@ -124,11 +127,18 @@ namespace wpfFamiliaBlanco.Clientes
 
         }
 
+        private void loadcomboprovincias()
+        {
+            String consulta4 = "SELECT * FROM provincia";
+            conexion.Consulta(consulta4, combo: cmbP);
+            cmbP.DisplayMemberPath = "provincia_nombre";
+            cmbP.SelectedValuePath = "id";
+            cmbP.SelectedIndex = -1;
+        }
 
 
 
-
-    public Boolean Validacion()
+        public Boolean Validacion()
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
@@ -163,10 +173,15 @@ namespace wpfFamiliaBlanco.Clientes
                 MessageBox.Show("Agregue un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-          
-           
-            
-                return true;
+            else if (cmbP.SelectedIndex==-1)
+            {
+                MessageBox.Show("Seleccione la provinca", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+
+
+            return true;
         }
         
        
