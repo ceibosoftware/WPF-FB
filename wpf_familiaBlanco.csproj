@@ -202,6 +202,9 @@
     <Compile Include="Salidas\Remitos\RemitoSalida.xaml.cs">
       <DependentUpon>RemitoSalida.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Salidas\salidasME.xaml.cs">
+      <DependentUpon>salidasME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Seguridad.cs" />
     <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
@@ -454,6 +457,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Salidas\Remitos\RemitoSalida.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Salidas\salidasME.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

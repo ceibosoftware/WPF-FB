@@ -15,7 +15,7 @@
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="96,282,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="24" Click="btnAceptar_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="96,324,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="btnCancelar_Click"/>
         <Label Content="Monto" HorizontalAlignment="Left" Margin="67,196,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="24" Margin="68,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="24" Margin="68,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157"/>
 
     </Grid>
 </Window>

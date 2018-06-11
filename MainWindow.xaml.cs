@@ -31,6 +31,8 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             //loadTimer();
             notificaciones();
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
         }
 
         public void notificaciones()
@@ -69,6 +71,8 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
 
             #region Fade in
             //animaciones
@@ -96,6 +100,8 @@ namespace wpfFamiliaBlanco
         private void cargar_pageInicio(object sender, EventArgs e)
         {
             frameInicio.Content = new pageInicio(); // en este caso se carga la imagen bodega fblanco al inicializarse el programa
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
         }
 
         private void btnProductos_Click(object sender, RoutedEventArgs e)
@@ -110,6 +116,8 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
 
             #region Fade in
             //animaciones
@@ -146,6 +154,8 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
 
 
             #region Fade in
@@ -183,6 +193,9 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Collapsed;
             lblnotificaciones.Visibility = Visibility.Collapsed;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
+
         }
 
         private void btnSalidas_Click(object sender, RoutedEventArgs e)
@@ -199,6 +212,10 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Visible;
+            btnSalidasME.Visibility = Visibility.Visible;
+            btnSalidasMI.Style = FindResource("buttonSwitchStylePressed") as Style;
+            btnSalidasME.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
@@ -213,6 +230,8 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();
@@ -252,6 +271,8 @@ namespace wpfFamiliaBlanco
             btnClientes.Style = FindResource("BotonStylePanel") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();
@@ -278,7 +299,9 @@ namespace wpfFamiliaBlanco
         private void btn_ImageB_Blanco_Click(object sender, RoutedEventArgs e)
         {
             frameInicio.Content = new pageInicio();
-            
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
+
 
             #region Fade in
             //animaciones
@@ -338,8 +361,20 @@ namespace wpfFamiliaBlanco
             Environment.Exit(0);
         }
 
-       
+        private void btnSalidasMI_Click(object sender, RoutedEventArgs e)
+        {
+            btnSalidasMI.Style = FindResource("buttonSwitchStylePressed") as Style;
+            btnSalidasME.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
+            frameInicio.Content = new pageSalidas();
 
-        
+
+        }
+
+        private void btnSalidasME_Click(object sender, RoutedEventArgs e)
+        {
+            btnSalidasMI.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
+            btnSalidasME.Style = FindResource("buttonSwitchStylePressed") as Style;
+            frameInicio.Content = new Salidas.salidasME();
+        }
     }
 }

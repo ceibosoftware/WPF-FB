@@ -1,4 +1,4 @@
-﻿<Page x:Class="wpfFamiliaBlanco.pageSalidas"
+﻿<Page x:Class="wpfFamiliaBlanco.Salidas.salidasME"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -36,28 +36,23 @@
     </Page.Resources>
 
     <Grid Background="#FF171717">
-        <Label x:Name="lblSalidas" Content="Salidas Mercado Interno" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnOrdenes" Content="Órdenes" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnOrdenes_Click">
+        <Label x:Name="lblSalidas" Content="Salidas Mercado Externo" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="btnFacturaPro" Content="Facturas Proforma" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFacturas_Click">
+        <Button x:Name="btnFacturas" Content="Facturas E" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemitos_Click">
+        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnPagoProveedor" Content="Cobro a Clientes" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnPagoProveedor_Click">
-            <Button.BorderBrush>
-                <SolidColorBrush Color="White" Opacity="0"/>
-            </Button.BorderBrush>
-        </Button>
-        <Button x:Name="btnDevolucionProductos" Content="Devolución de Productos" HorizontalAlignment="Left" Margin="820,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnDevolucionProductos_Click">
+        <Button x:Name="btnPagoProveedor" Content="Cobro a Clientes" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -66,3 +61,4 @@
 
     </Grid>
 </Page>
+    
