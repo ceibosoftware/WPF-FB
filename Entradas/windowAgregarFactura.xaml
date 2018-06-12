@@ -295,7 +295,7 @@
         <TextBox x:Name="txtTotal" Width="195" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="653.666,481.923,0,0" Height="24" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" Padding="4,0,0,0" />
         <ComboBox x:Name="cmbTipoCambio" HorizontalAlignment="Left" Height="24" Margin="653.666,531.03,0,0" VerticalAlignment="Top" Width="195" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" SelectionChanged="cmbTipoCambio_SelectionChanged"/>
         <DatePicker x:Name="dtOrden" HorizontalAlignment="Left" Margin="453.666,120.923,0,0" VerticalAlignment="Top" Width="395" Style="{DynamicResource DatePickerCambioForeground}"/>
-        <Button x:Name="btnProdEliminar" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="374,328,0,0" Height="85.5" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminar_Click" >
+        <Button x:Name="btnProdEliminar" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="283,330,0,0" Height="86" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminar_Click" ToolTip="Eliminar producto" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -305,7 +305,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnProdAgregar" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="63,328,0,0" Height="85.5" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregar_Click">
+        <Button x:Name="btnProdAgregar" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="155,330,0,0" Height="86" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregar_Click" ToolTip="Agregar producto">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -328,6 +328,26 @@
             <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11"><Run Text="En esta pantalla se agrega un"/><Run Text="a"/><Run Text=" "/><Run Text="factura"/><Run Text=". Primero deben completarse los "/><Run Text="productos "/><Run Text="de"/><Run Text=" "/><Run Text="l"/><Run Text="a factura "/><Run Text="a la izquierda"/><Run Text=", asi tambien como el numero y el proveedor. L"/><Run Text="uego se le asignan las "/><Run Text="fechas y cuotas de la misma"/><Run Text=". "/><Run Text="Además deberá seleccionar el IVA y tipo de cambio."/></TextBlock>
         </Border>
         <Label x:Name="lblWindowTitle" Width="108" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="18,13,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar Factura"/>
+        <Button x:Name="btnProdAgregarTodo" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="66,330,0,0" Height="86" HorizontalAlignment="Left" Foreground="White" Content="&lt;&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregarTodo_Click" ToolTip="Agregar todos los productos">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnProdEliminartodo" Width="24" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="372,330,0,0" Height="86" HorizontalAlignment="Left" Foreground="White" Content="&gt;&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminartodo_Click" ToolTip="Eliminar todos los productos" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
     </Grid>
 </Window>

@@ -34,6 +34,7 @@ namespace wpfFamiliaBlanco.Entradas
         DateTime dt = DateTime.Now;
       public  float Subtotal = 0;
         public int id = 0;
+        bool modifica = false;
         public windowAgregarFactura()
         {
             itemsFact.Clear();
@@ -48,7 +49,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadDGVCuotas();
             LlenarCmbTipoCuota();
             txtNroFactura.MaxLines = 1;
-            txtNroFactura.MaxLength = 10;
+            txtNroFactura.MaxLength = 18;
             txtTotal.IsReadOnly = true;
             txtSubtotal.IsReadOnly = true;
             dgvProductosFactura.IsReadOnly = true;
@@ -59,16 +60,17 @@ namespace wpfFamiliaBlanco.Entradas
             bandera = true;
             SetearColumnas();
             SetearColumnas2();
+      
         }
 
-        public windowAgregarFactura(Int64 numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
+        public windowAgregarFactura(String numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
         {
             InitializeComponent();
-           // try
+            // try
             //{
-
+            modifica = true;
                 txtNroFactura.MaxLines = 1;
-                txtNroFactura.MaxLength = 10;
+                txtNroFactura.MaxLength = 18;
                 itemsFact.Clear();
                 items.Clear();
                 todaslascuotas.Clear();
@@ -258,10 +260,14 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            items.Clear();
-            txtSubtotal.Text = "0";
-            calculaTotal();
-            Subtotal = 0;
+            if (modifica == false)
+            {
+
+            
+                items.Clear();
+                txtSubtotal.Text = "0";
+                calculaTotal();
+                Subtotal = 0;
        
                 String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
@@ -278,6 +284,17 @@ namespace wpfFamiliaBlanco.Entradas
                 DgvCuotas.Items.Refresh();
             itemsFact.Clear();
             dgvProductosFactura.Items.Refresh();
+
+            if ((int)cmbOrden.SelectedValue < 10)
+            {
+                txtNroFactura.Text = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
+            }
+            else
+            {
+                txtNroFactura.Text = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
+            }
+
+            }
 
         }
      
@@ -426,6 +443,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
+         
             bandera = false;
             if (Valida())
             {
@@ -592,6 +610,11 @@ namespace wpfFamiliaBlanco.Entradas
                 return false;
 
             }
+            else if (txtNroFactura.Text == "000"+cmbOrden.SelectedValue.ToString()+"-"+"0000" || txtNroFactura.Text == "00" + cmbOrden.SelectedValue.ToString()+"-" + "0000")
+            {
+                MessageBox.Show("Complete el número de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             else
             {
                 return true;
@@ -640,6 +663,116 @@ namespace wpfFamiliaBlanco.Entradas
         private void txtNroFactura_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void btnProdAgregarTodo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                btnProdAgregar.Visibility = Visibility.Collapsed;
+                btnProdEliminar.Visibility = Visibility.Collapsed;
+                bool existe = false;
+
+                Producto prod = dgvProductosOC.SelectedItem as Producto;
+
+                id = prod.id;
+                if (prod.cantidad > 0)
+                {
+                   
+                    for (int i = 0; i < itemsFact.Count; i++)
+                    {
+                        if (itemsFact[i].nombre == prod.nombre)
+                        {
+                            existe = true;
+                        }
+                        else
+                        {
+                            existe = false;
+                        }
+                    }
+                    if (prod.cantidad >= 1 && !existe)
+                    {
+                        foreach (var producto in items)
+                        {
+
+                       
+                        Producto productoFactura = new Producto(producto.nombre, producto.id, producto.cantidad, producto.total, producto.precioUnitario);
+                        itemsFact.Add(productoFactura);
+                        Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
+
+                        dgvProductosFactura.Items.Refresh();
+                        // float.TryParse(txtSubtotal.Text, out subtotal);
+
+
+                        txtSubtotal.Text = (Subtotal).ToString();
+                        producto.cantidad = 0;
+                        dgvProductosOC.Items.Refresh();
+                        calculaTotal();
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+
+
+                  
+                }
+                else
+                {
+                    MessageBox.Show("Ya se agregaron todas las facturas de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Seleccione un producto a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+        private void btnProdEliminartodo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+               
+                prod = dgvProductosFactura.SelectedItem as Producto;
+                int cantidadAsumar = 0;
+
+                cantidadAsumar = prod.cantidad;
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (items[i].nombre == itemsFact[i].nombre)
+                    {
+                        items[i].cantidad += itemsFact[i].cantidad;
+
+                    }
+                    Subtotal = Subtotal - (itemsFact[i].cantidad * itemsFact[i].precioUnitario);
+                }
+               // Subtotal = Subtotal - (prod.cantidad * prod.precioUnitario);
+
+                txtSubtotal.Text = Subtotal.ToString();
+                calculaTotal();
+                dgvProductosOC.Items.Refresh();
+                itemsFact.Clear();
+                dgvProductosFactura.Items.Refresh();
+                btnProdAgregar.Visibility = Visibility.Visible;
+                btnProdEliminar.Visibility = Visibility.Visible;
+                if (dgvProductosFactura.HasItems == false)
+                {
+                    txtSubtotal.Text = "0";
+                    txtTotal.Text = "0";
+
+                    todaslascuotas.Clear();
+                    DgvCuotas.Items.Refresh();
+                }
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 

@@ -22,6 +22,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class Facturacion : Page
     {
+        
         CRUD conexion = new CRUD();
         public List<Producto> itemsFactura = new List<Producto>();
         public List<Producto> itemsdb = new List<Producto>();
@@ -41,6 +42,8 @@ namespace wpfFamiliaBlanco.Entradas
         {
     
             InitializeComponent();
+            txtoc.Visibility = Visibility.Collapsed;
+            lbloc.Visibility = Visibility.Collapsed;
             lblNC.Visibility = Visibility.Collapsed;
             LoadListaComboProveedor();
              
@@ -77,8 +80,8 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 String idPRove = newW.cmbProveedores.SelectedValue.ToString();
                 decimal subtotal = decimal.Parse(newW.txtSubtotal.Text);
-                decimal total = decimal.Parse(newW.txtTotal.Text);
-                Int64 numeroFact = Int64.Parse(newW.txtNroFactura.Text);
+                decimal total = decimal.Parse(newW.txtTotal.Text);          
+                String numeroFact = newW.txtNroFactura.Text;
                 String iva = newW.cmbIVA.SelectedIndex.ToString();
                 String tipoCambio = newW.cmbTipoCambio.SelectedIndex.ToString();
                 String cuotas = newW.cmbCuotas.Text;
@@ -468,7 +471,7 @@ namespace wpfFamiliaBlanco.Entradas
                     DataTable OC = conexion.ConsultaParametrizada(crfact, numerofacturaID);
                     DateTime fecha = (DateTime)OC.Rows[0].ItemArray[8];
                     String cuotas = OC.Rows[0].ItemArray[6].ToString();
-                    Int64 numf = (Int64)OC.Rows[0].ItemArray[2];
+                    String numf = OC.Rows[0].ItemArray[2].ToString();
                     int iva;
                     int tipocambio;
 
@@ -533,7 +536,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                         String sql2 = "SELECT productos.nombre, productos.idProductos, productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC ='" + FKoc + "' AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
 
-                        DataTable productos = conexion.ConsultaParametrizada(sql2, Int64.Parse(idOC));
+                        DataTable productos = conexion.ConsultaParametrizada(sql2, idOC);
                         for (int i = 0; i < productos.Rows.Count; i++)
                         {
                             producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
@@ -576,7 +579,7 @@ namespace wpfFamiliaBlanco.Entradas
                     }
 
 
-                    var newW = new windowAgregarFactura((Int64)numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
+                    var newW = new windowAgregarFactura(numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
                     newW.Title = "Modificar Factura";
                     newW.ShowDialog();
 
@@ -589,7 +592,7 @@ namespace wpfFamiliaBlanco.Entradas
                         string idProve2 = conexion.ValorEnVariable(sql32);
                         decimal subtotal2 = decimal.Parse(newW.txtSubtotal.Text);
                         decimal total2 = decimal.Parse(newW.txtTotal.Text);
-                        Int64 numeroFact2 = Int64.Parse(newW.txtNroFactura.Text);
+                        String numeroFact2 = newW.txtNroFactura.Text;
                         String iva32 = newW.cmbIVA.SelectedIndex.ToString();
                         String tipoCambio2 = newW.cmbTipoCambio.SelectedIndex.ToString();
                         String cuotas2 = newW.cmbCuotas.Text;

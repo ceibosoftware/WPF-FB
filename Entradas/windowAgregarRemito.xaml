@@ -172,7 +172,7 @@
         <Label x:Name="lblOrden1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="755,96,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha emision"/>
         <DataGrid x:Name="dgvProductosOC" HorizontalAlignment="Left" Height="133" Margin="40,218,0,0" VerticalAlignment="Top" Width="395"/>
         <DataGrid x:Name="dgvProductosRemito" HorizontalAlignment="Left" Height="133" Margin="492,217,0,0" VerticalAlignment="Top" Width="394" />
-        <Button x:Name="btnProdEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,317,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminar_Click" >
+        <Button x:Name="btnProdEliminar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,287,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminar_Click" ToolTip="Eliminar producto" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -182,7 +182,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnProdAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,230,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregar_Click" AutomationProperties.IsOffscreenBehavior="Onscreen" >
+        <Button x:Name="btnProdAgregar" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,263,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregar_Click" AutomationProperties.IsOffscreenBehavior="Onscreen" ToolTip="Agregar producto" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -207,6 +207,26 @@
         <RadioButton x:Name="RbInterno" Content="Mercado Interno" HorizontalAlignment="Left" Margin="56,51,0,0" VerticalAlignment="Top" Checked="RbInterno_Checked"/>
         <RadioButton x:Name="RbExterno" Content="Mercado Externo" HorizontalAlignment="Left" Margin="182,52,0,0" VerticalAlignment="Top" Checked="RbExterno_Checked"/>
         <ScrollBar HorizontalAlignment="Left" Margin="687,-80,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnProdAgregarTodo" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,217,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&lt;&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdAgregarTodo_Click" AutomationProperties.IsOffscreenBehavior="Onscreen" ToolTip="Agregar todos los productos" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnProdEliminarTodo" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="446,326,0,0" Height="22" HorizontalAlignment="Left" Foreground="White" Content="&gt;&gt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnProdEliminarTodo_Click" ToolTip="Eliminar todos los productos" >
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
     </Grid>
 </Window>

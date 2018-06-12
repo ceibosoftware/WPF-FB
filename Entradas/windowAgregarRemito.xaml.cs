@@ -22,7 +22,9 @@ namespace wpfFamiliaBlanco.Entradas
     {
        public int idRemito;
         bool ejecuta = true;
+        bool modifica1 = false;
         bool modifica = false;
+        int id;
         private List<Producto> prodRemito = new List<Producto>();
         private List<Producto> productos = new List<Producto>();
         private List<Producto> prodRemitoStock = new List<Producto>();
@@ -40,7 +42,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadDgvProd();
             loadDgvProdRemito();
             dtRemito.SelectedDate = DateTime.Now;
-            txtNroRemito.MaxLength = 10;
+            txtNroRemito.MaxLength = 18;
             dgvProductosOC.IsReadOnly = true;
             dgvProductosRemito.IsReadOnly = true;
 
@@ -76,7 +78,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadcmbProveedores(proveedor);
             loadCmbOrdenes(numeroOC);
             dtRemito.SelectedDate = DateTime.Now;
-            txtNroRemito.MaxLength = 10;
+            txtNroRemito.MaxLength = 18;
             dgvProductosOC.IsReadOnly = true;
             dgvProductosRemito.IsReadOnly = true;
 
@@ -84,7 +86,9 @@ namespace wpfFamiliaBlanco.Entradas
         //MODIFICAR
         public windowAgregarRemito(int proveedor, int numeroOC, List<Producto> productosRemito,DateTime fecha, string numeroRemito, int idRemito)
         {
+
             InitializeComponent();
+            modifica1 = true;
             RbExterno.Visibility = Visibility.Collapsed;
             RbInterno.Visibility = Visibility.Collapsed;
             loadCmbOrdenes(numeroOC);
@@ -336,16 +340,19 @@ namespace wpfFamiliaBlanco.Entradas
             if (RbInterno.IsChecked == true)
             {
                 loadProductosOCSalida();
+          
             }
             else if (RbExterno.IsChecked == true)
             {
                 loadProductosOCSalida();
+             
             }
             else
             {
                 loadProductosOC();
+          
             }
-        
+ 
 
         }
 
@@ -534,7 +541,6 @@ namespace wpfFamiliaBlanco.Entradas
             cmbOrden.ItemsSource = OCProveedor.AsDataView();
             cmbOrden.DisplayMemberPath = "idOrdenCompra";
             cmbOrden.SelectedValuePath = "idOrdenCompra";
-            cmbOrden.SelectedIndex = -1;
             cmbOrden.SelectedIndex = 0;
         }
 
@@ -651,6 +657,18 @@ namespace wpfFamiliaBlanco.Entradas
             }
  
             dgvProductosOC.Items.Refresh();
+            if (modifica1 == false)
+            {
+                if ((int)cmbOrden.SelectedValue < 10)
+                {
+                    txtNroRemito.Text = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
+                }
+                else
+                {
+                    txtNroRemito.Text = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
+                }
+            }
+       
         }
 
         public void loadProductosOCSalida()
@@ -765,6 +783,135 @@ namespace wpfFamiliaBlanco.Entradas
             cmbProveedores.DisplayMemberPath = "nombre";
             cmbProveedores.SelectedValuePath = "idClienteme";
             cmbProveedores.SelectedIndex = 0;
+        }
+
+        private void btnProdAgregarTodo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                btnProdAgregar.Visibility = Visibility.Collapsed;
+                btnProdEliminar.Visibility = Visibility.Collapsed;
+                bool existe = false;
+
+                Producto prod = dgvProductosOC.SelectedItem as Producto;
+
+                id = prod.id;
+                if (prod.cantidad > 0)
+                {
+
+                    for (int i = 0; i < ProdRemito.Count; i++)
+                    {
+                        if (ProdRemito[i].nombre == prod.nombre)
+                        {
+                            existe = true;
+                        }
+                        else
+                        {
+                            existe = false;
+                        }
+                    }
+                    if (prod.cantidad >= 1 && !existe)
+                    {
+                        foreach (var producto in productos )
+                        {
+
+
+                            Producto productoremito = new Producto(producto.nombre, producto.id, producto.cantidad);
+                            prodRemito.Add(productoremito);
+                            dgvProductosRemito.Items.Refresh();
+                            producto.cantidad = 0;
+                            dgvProductosOC.Items.Refresh();
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Ya se agregaron todas las facturas de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Seleccione un producto a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+        private void btnProdEliminarTodo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                btnProdAgregar.Visibility  = Visibility.Visible;
+                btnProdEliminar.Visibility = Visibility.Visible;
+                Producto prod = dgvProductosRemito.SelectedItem as Producto;
+                if (modifica)
+                {
+
+                    String en = "SELECT fecha FROM remito WHERE idremitos = '" + idRemito + "'";
+                    DateTime fechaRemito = DateTime.Parse(conexion.ValorEnVariable(en));
+
+                    String s = "SELECT ums FROM productos WHERE idProductos = '" + prod.id + "'";
+                    DateTime fechaUMS = DateTime.Parse(conexion.ValorEnVariable(s));
+
+                    TimeSpan ts = fechaRemito - fechaUMS;
+
+                    // Difference in days.
+                    int differenceInDays = ts.Days;
+
+                    if (differenceInDays <= 0)
+                    {
+                        MessageBox.Show("No se puede modificar el remito porque ya se ha realizado una venta.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+                    else
+                    {
+                        for (int i = 0; i < productos.Count; i++)
+                        {
+                            if (productos[i].nombre == ProdRemito[i].nombre)
+                            {
+                                productos[i].cantidad += ProdRemito[i].cantidad;
+                            }
+
+                        }
+                        ProdRemito.Clear();
+                        dgvProductosRemito.Items.Refresh();
+                        dgvProductosOC.Items.Refresh();
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < productos.Count; i++)
+                    {
+                        if (productos[i].nombre == ProdRemito[i].nombre)
+                        {
+                            productos[i].cantidad += ProdRemito[i].cantidad;
+                        }
+
+                    }
+                    ProdRemito.Clear();
+                    dgvProductosRemito.Items.Refresh();
+                    dgvProductosOC.Items.Refresh();
+                }
+            }
+
+
+
+
+
+
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Seleccione un producto para eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+            }
         }
     }
 

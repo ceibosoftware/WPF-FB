@@ -64,7 +64,7 @@ namespace wpfFamiliaBlanco.Entradas
             if (newW.DialogResult == true)
             {
                 //DATOS REMITO.
-                int numeroRemito = int.Parse(newW.txtNroRemito.Text);
+                String numeroRemito = newW.txtNroRemito.Text;
                 DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
 
                 int idOC = (int)newW.cmbOrden.SelectedValue;
@@ -338,7 +338,7 @@ namespace wpfFamiliaBlanco.Entradas
                     {
                         //DATOS REMITO.
 
-                        int numeroRemito = int.Parse(newW.txtNroRemito.Text);
+                        String numeroRemito = newW.txtNroRemito.Text;
                         DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
                         int idOC = (int)newW.cmbOrden.SelectedValue;
                         int idRemito = newW.idRemito;
