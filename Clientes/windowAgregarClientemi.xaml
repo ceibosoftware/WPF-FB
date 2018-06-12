@@ -328,7 +328,7 @@
         <Label x:Name="lblTeltrasporte" Content="Teléfono del Transporte" HorizontalAlignment="Left" Margin="237,195,0,0" VerticalAlignment="Top" Height="25" Width="167" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtTelt" Width="172" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="232,220,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1" PreviewTextInput="txtTelt_PreviewTextInput"/>
         <DataGrid x:Name="dgvContacto" HorizontalAlignment="Left" Height="97.03" Margin="38,268,0,0" VerticalAlignment="Top" Width="366"/>
-        <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="273.53" Margin="431.666,124,0,0" VerticalAlignment="Top" Width="364"/>
+        <DataGrid x:Name="dgvPrecios" HorizontalAlignment="Left" Height="241" Margin="432,124,0,0" VerticalAlignment="Top" Width="364"/>
         <Label x:Name="lblWindowTitle" Content="Agregar Cliente de Mercado Interno" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="27" Width="253.333" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
         <Label x:Name="lblprecios_Copy" Content="Items" HorizontalAlignment="Left" Margin="663.666,99,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="847.765,51,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
@@ -337,6 +337,7 @@
         </Border>
         <ComboBox x:Name="cmbP" HorizontalAlignment="Left" Margin="42,222,0,0" VerticalAlignment="Top" Width="171" Height="21"/>
         <Label x:Name="lblProvincia" Content="Provincia" HorizontalAlignment="Left" Margin="46,200,0,0" VerticalAlignment="Top" Height="25" Width="167" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Button x:Name="btnnlp" Content="+ LP" HorizontalAlignment="Left" Margin="721,375,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnnlp_Click"/>
 
     </Grid>
 

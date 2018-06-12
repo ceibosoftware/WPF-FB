@@ -189,7 +189,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnAgregarc_Click(object sender, RoutedEventArgs e)
         {
-            
+           
             var newW = new WindowAgregarContactoCliente();
             newW.ShowDialog();
 
@@ -368,6 +368,12 @@ namespace wpfFamiliaBlanco.Clientes
         private void cmbPrecios_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActualizarDGVPrecios();
+        }
+
+        private void btnnlp_Click(object sender, RoutedEventArgs e)
+        {
+            var neww = new windowAgregarLp();
+            neww.ShowDialog();
         }
     }
 }

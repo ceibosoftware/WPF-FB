@@ -273,8 +273,8 @@ namespace wpfFamiliaBlanco.Clientes
 
                 itemslp.Remove(prod);
                 dgvLp.Items.Refresh();
-               // Producto p = new Producto(prod.id,prod.nombre,precio);
-               // items.Add(p);
+                Producto p = new Producto(prod.id, prod.nombre, precio);
+                items.Add(p);
                 dgvProductos.Items.Refresh();
 
             

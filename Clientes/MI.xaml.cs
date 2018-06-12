@@ -229,6 +229,7 @@ namespace wpfFamiliaBlanco.Clientes
                     this.txtrs.Text = "";
                     this.txtTelt.Text = "";
                     this.txtTransporte.Text = "";
+                    this.txtProvincia.Text = "";
 
                 }
                     MessageBox.Show("El cliente se ha eliminado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -309,7 +310,7 @@ namespace wpfFamiliaBlanco.Clientes
                 else
                 {
                     String sql;
-                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, FK_idLista) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','" + newW.idlp + "','"+provincia+"')";
+                    sql = "insert into clientesmi(nombre, razonsocial, cuit, teltransporte, direccionentrega, transporte, FK_idLista,provincia) values('" + nombre + "', '" + razons + "', '" + cuit + "', '" + telt + "', '" + direccion + "', '" + transporte + "','" + newW.idlp + "','"+provincia+"')";
                     conexion.operaciones(sql);
                 }
                
@@ -397,7 +398,8 @@ namespace wpfFamiliaBlanco.Clientes
                 this.txtDireccion.Text = newW.txtDireccion.Text;
                 this.txtrs.Text = newW.cmbRs.Text;
                 this.txtTelt.Text = newW.txtTelt.Text;
-                this.txtProvincia.Text = newW.cmbP.Text;
+                String province = newW.cmbP.Text;
+                
 
                 
 
@@ -407,13 +409,13 @@ namespace wpfFamiliaBlanco.Clientes
                 if (newW.cmbPrecios.Text == "")
                 {
                     String update;
-                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', provincia='"+this.txtProvincia.Text+"' where idClientemi ='" + idcliente + "';";
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', provincia='"+province+"' where idClientemi ='" + idcliente + "';";
                     conexion.operaciones(update);
                 }
                 else
                 {
                     String update;
-                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', FK_idLista = '"+newW.idlp+ "', provincia='" + this.txtProvincia + "' where idClientemi ='" + idcliente + "';";
+                    update = "update clientesmi set nombre = '" + nombreActu + "', razonsocial = '" + this.txtrs.Text + "', cuit = '" + this.txtCuit.Text + "', direccionentrega = '" + this.txtDireccion.Text + "', teltransporte = '" + this.txtTelt.Text + "', transporte = '" + this.txtTransporte.Text + "', FK_idLista = '"+newW.idlp+ "', provincia='" + province + "' where idClientemi ='" + idcliente + "';";
                     conexion.operaciones(update);
                 }
 
