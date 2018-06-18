@@ -31,6 +31,7 @@ namespace wpfFamiliaBlanco.Entradas
         Producto producto;
         public Producto prod;
         bool bandera = false;
+        bool modificafactura = false;
         DateTime dt = DateTime.Now;
       public  float Subtotal = 0;
         public int id = 0;
@@ -69,6 +70,7 @@ namespace wpfFamiliaBlanco.Entradas
             // try
             //{
             modifica = true;
+            modificafactura = true;
                 txtNroFactura.MaxLines = 1;
                 txtNroFactura.MaxLength = 18;
                 itemsFact.Clear();
@@ -243,12 +245,15 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 String id = cmbProveedores.SelectedValue.ToString();
                 String nombreProv = cmbProveedores.Text;
-
-                String sql = "SELECT * FROM ordencompra WHERE FK_idProveedor =  '" + id + "'";
-                conexion.Consulta(sql, combo: cmbOrden);
-                cmbOrden.DisplayMemberPath = "idOrdenCompra";
-                cmbOrden.SelectedValuePath = "idOrdenCompra";
-                cmbOrden.SelectedIndex = 0;
+             
+                    String sql = "SELECT * FROM ordencompra WHERE FK_idProveedor =  '" + id + "'";
+                    conexion.Consulta(sql, combo: cmbOrden);
+                    cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                    cmbOrden.SelectedValuePath = "idOrdenCompra";
+             
+                    cmbOrden.SelectedIndex = 0;
+                
+               
             }
             catch (NullReferenceException)
             {
@@ -285,15 +290,7 @@ namespace wpfFamiliaBlanco.Entradas
             itemsFact.Clear();
             dgvProductosFactura.Items.Refresh();
 
-            if ((int)cmbOrden.SelectedValue < 10)
-            {
-                txtNroFactura.Text = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
-            }
-            else
-            {
-                txtNroFactura.Text = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
-            }
-
+             
             }
 
         }
@@ -447,6 +444,29 @@ namespace wpfFamiliaBlanco.Entradas
             bandera = false;
             if (Valida())
             {
+                if (modificafactura)
+                {
+
+                }
+                else
+                {
+
+                    if ((int)cmbOrden.SelectedValue < 10)
+                    {
+                        String numero = txtNroFactura.Text.ToString();
+                        String numerofinal = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+
+                        txtNroFactura.Text = numerofinal;
+                    }
+                    else
+                    {
+                        String numero = txtNroFactura.Text.ToString();
+                        String numerofinal = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+
+                        txtNroFactura.Text = numerofinal;
+                    }
+
+                }
                 DialogResult = true;
             }
         }

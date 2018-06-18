@@ -96,8 +96,7 @@ namespace wpfFamiliaBlanco
         }
         private void LlenarComboFiltro()
         {
-            cmbFiltro.Items.Add("Nombre");
-            cmbFiltro.Items.Add("Categoria");
+       
         }
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
@@ -106,17 +105,11 @@ namespace wpfFamiliaBlanco
             DataTable productos = new DataTable();
             String consulta;
 
-            if (cmbFiltro.Text == "Nombre")
-            {   //Busca por nombre
+            //Busca por nombre
                 consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
                 productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
-            else if (cmbFiltro.Text == "Categoria")
-            {
-                //busca por nombre de categoria (posibilidad de agregar combobox)
-                consulta = "SELECT proveedor.nombre ,categorias.idCategorias FROM categorias , proveedor, categorias_has_proveedor WHERE categorias.nombre LIKE '%' @valor '%' and categorias.idCategorias = categorias_has_proveedor.FK_idCategorias";
-                productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
+            
+          
 
             ltsProveedores.ItemsSource = productos.AsDataView();
         }
@@ -383,6 +376,11 @@ namespace wpfFamiliaBlanco
         private void txtPrecioUnitario_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void txtBuscarNombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+   
         }
     }
  }

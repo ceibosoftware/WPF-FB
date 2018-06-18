@@ -24,6 +24,7 @@ namespace wpfFamiliaBlanco.Entradas
         bool ejecuta = true;
         bool modifica1 = false;
         bool modifica = false;
+        bool modificaRemito = false;
         int id;
         private List<Producto> prodRemito = new List<Producto>();
         private List<Producto> productos = new List<Producto>();
@@ -88,6 +89,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
 
             InitializeComponent();
+            modificaRemito = true;
             modifica1 = true;
             RbExterno.Visibility = Visibility.Collapsed;
             RbInterno.Visibility = Visibility.Collapsed;
@@ -177,40 +179,7 @@ namespace wpfFamiliaBlanco.Entradas
                 prodRemito.Clear();
                 dgvProductosRemito.Items.Refresh();
 
-                if (RbInterno.IsChecked == true)
-                {
-                    try
-                    {
 
-                        ejecuta = false;
-                        loadCmbOrdenesSalida();
-                       // loadFechaEmision();
-                        ejecuta = true;
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-                }
-                else if(RbExterno.IsChecked == true)
-                {
-                    try
-                    {
-
-                        ejecuta = false;
-                        loadCmbOrdenesSalida();
-                       // loadFechaEmision();
-                        ejecuta = true;
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-                }
-                else
-                {
                     try
                     {
 
@@ -224,7 +193,7 @@ namespace wpfFamiliaBlanco.Entradas
 
 
                     }
-                }
+                
                
             }
         }
@@ -529,6 +498,29 @@ namespace wpfFamiliaBlanco.Entradas
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             if (validar()) {
+                if (modificaRemito)
+                {
+
+                }
+                else
+                {
+                    if ((int)cmbOrden.SelectedValue < 10)
+                    {
+                        String numero = txtNroRemito.Text.ToString();
+                        String numerofinal = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+
+                        txtNroRemito.Text = numerofinal;
+                    }
+                    else
+                    {
+                        String numero = txtNroRemito.Text.ToString();
+                        String numerofinal = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+
+                        txtNroRemito.Text = numerofinal;
+                    }
+                }
+               
+             
                 DialogResult = true;
             }
         
@@ -657,17 +649,7 @@ namespace wpfFamiliaBlanco.Entradas
             }
  
             dgvProductosOC.Items.Refresh();
-            if (modifica1 == false)
-            {
-                if ((int)cmbOrden.SelectedValue < 10)
-                {
-                    txtNroRemito.Text = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
-                }
-                else
-                {
-                    txtNroRemito.Text = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000";
-                }
-            }
+          
        
         }
 

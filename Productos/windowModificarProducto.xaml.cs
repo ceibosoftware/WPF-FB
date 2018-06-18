@@ -35,7 +35,7 @@ namespace wpfFamiliaBlanco
 
             InitializeComponent();
             LoadListaComboCategoria();           
-            LlenarComboFiltro();
+            LlenarlistaProveedores();
         }
         public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario, bool venta)
         {
@@ -48,7 +48,7 @@ namespace wpfFamiliaBlanco
             txtExistenciaMinima.Text = existencia.ToString();
             txtPrecioUnitario.Text = precioUnitario.ToString();
             txtUnidad.Text = unidad;
-            LlenarComboFiltro();
+         
             this.Items = items;
             LoadListaProv();
             if (venta)
@@ -59,6 +59,7 @@ namespace wpfFamiliaBlanco
             {
                 chkVenta.IsChecked = false;
             }
+            LlenarlistaProveedores();
         }
         private void LoadListaComboCategoria()
         {
@@ -95,10 +96,12 @@ namespace wpfFamiliaBlanco
         }
 
 
-        private void LlenarComboFiltro()
+        private void LlenarlistaProveedores()
         {
-            cmbFiltro.Items.Add("Nombre");
-            cmbFiltro.Items.Add("Categoria");
+            String consulta = " Select * from proveedor ";
+            conexion.Consulta(consulta, ltsProveedores);
+            ltsProveedores.DisplayMemberPath = "nombre";
+            ltsProveedores.SelectedValuePath = "idProveedor";
         }
 
         private void txtBuscar_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -120,18 +123,11 @@ namespace wpfFamiliaBlanco
             DataTable productos = new DataTable();
             String consulta;
 
-            if (cmbFiltro.Text == "Nombre")
-            {   //Busca por nombre
+             //Busca por nombre
                 consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
                 productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
-            else if (cmbFiltro.Text == "Categoria")
-            {
-                //busca por nombre de categoria (posibilidad de agregar combobox)
-                consulta = "SELECT proveedor.nombre ,categorias.idCategorias FROM categorias , proveedor, categorias_has_proveedor WHERE categorias.nombre LIKE '%' @valor '%' and categorias.idCategorias = categorias_has_proveedor.FK_idCategorias";
-                productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            }
-
+       
+          
             ltsProveedores.ItemsSource = productos.AsDataView();
 
 
