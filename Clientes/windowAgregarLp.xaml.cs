@@ -33,7 +33,9 @@ namespace wpfFamiliaBlanco.Clientes
             InitializeComponent();
             loaddgvp();
             loaddgvlp();
-            btnModpl.IsEnabled = false;
+            btnModpl.Visibility = Visibility.Collapsed;
+            txtPreciolista.Visibility = Visibility.Collapsed;
+            lblnombre_Copy2.Visibility = Visibility.Collapsed;
             camplimit();
             
             

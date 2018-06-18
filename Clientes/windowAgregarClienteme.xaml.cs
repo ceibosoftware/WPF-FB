@@ -360,5 +360,60 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }
+
+        private void btnmlp_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new windowAgregarLp();
+            string nombre;
+            newW.ShowDialog();
+
+
+            if (newW.DialogResult == true)
+            {
+                nombre = newW.txtNombre.Text;
+                DateTime hoy;
+                hoy = DateTime.Today;
+
+
+
+
+
+
+                String sql;
+                sql = "INSERT into listadeprecios(nombre, fecha) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "')";
+                conexion.operaciones(sql);
+
+                string ultimoId = "Select last_insert_id()";
+                String id = conexion.ValorEnVariable(ultimoId);
+
+
+                String consulta;
+
+
+                for (int i = 0; i < newW.itemslp.Count; i++)
+                {
+
+                    int fkidp = newW.itemslp[i].id;
+                    double preciolista = newW.itemslp[i].preciolista;
+                    consulta = "INSERT into productos_has_listadeprecios(FK_idProductos, FK_idLista, precioLista) values('" + fkidp + "', '" + id + "', '" + preciolista + "')";
+                    conexion.operaciones(consulta);
+
+
+
+
+                }
+
+
+                
+                
+               
+                
+                MessageBox.Show("Se agrego la lista de precio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                loadcmblp();
+                cmbPrecios.SelectedIndex = cmbPrecios.Items.Count - 1;
+            }
+            
+
+        }
     }
 }

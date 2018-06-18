@@ -41,7 +41,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         }
 
-       public windowAgregarClientemi(string nombre,string cuit,string trasnporte,string teltransporte,string direccionentrega,string razonsocial,List<Contacto>lista, int id, int idlista,string provincia)
+        public windowAgregarClientemi(string nombre, string cuit, string trasnporte, string teltransporte, string direccionentrega, string razonsocial, List<Contacto> lista, int id, int idlista, string provincia)
         {
             InitializeComponent();
             txtNombre.Text = nombre;
@@ -96,7 +96,7 @@ namespace wpfFamiliaBlanco.Clientes
             cmbRs.Items.Add("Excento");
             cmbRs.Items.Add("Responsable Inscripto");
             cmbRs.Items.Add("Monotributista");
-            
+
 
         }
 
@@ -119,11 +119,11 @@ namespace wpfFamiliaBlanco.Clientes
 
             dgvPrecios.ItemsSource = listadeprecios.AsDataView();
 
-        
 
 
 
-        dgvPrecios.Items.Refresh();
+
+            dgvPrecios.Items.Refresh();
 
         }
 
@@ -173,7 +173,7 @@ namespace wpfFamiliaBlanco.Clientes
                 MessageBox.Show("Agregue un contacto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            else if (cmbP.SelectedIndex==-1)
+            else if (cmbP.SelectedIndex == -1)
             {
                 MessageBox.Show("Seleccione la provinca", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -183,20 +183,20 @@ namespace wpfFamiliaBlanco.Clientes
 
             return true;
         }
-        
-       
+
+
 
 
         private void btnAgregarc_Click(object sender, RoutedEventArgs e)
         {
-           
+
             var newW = new WindowAgregarContactoCliente();
             newW.ShowDialog();
 
 
             if (newW.DialogResult == true)
             {
-                
+
 
                 String telefono1 = newW.txtTelefonoContacto.Text;
                 String nombreContacto1 = newW.txtNombreContacto.Text;
@@ -223,7 +223,7 @@ namespace wpfFamiliaBlanco.Clientes
         public void LoadDGVContacto()
         {
             this.dgvContacto.ItemsSource = lista;
-            
+
 
         }
 
@@ -238,19 +238,21 @@ namespace wpfFamiliaBlanco.Clientes
         {
             if (Validacion())
             {
-                if(cmbPrecios.SelectedIndex == -1) { 
-                MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente " + txtNombre.Text + " sin lista de precios?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (dialog == MessageBoxResult.Yes)
+                if (cmbPrecios.SelectedIndex == -1)
                 {
-                   
-                    DialogResult = true;
+                    MessageBoxResult dialog = MessageBox.Show("¿Está seguro que desea agregar el cliente " + txtNombre.Text + " sin lista de precios?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (dialog == MessageBoxResult.Yes)
+                    {
+
+                        DialogResult = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
-                    return;
-                }
-                }
-                else{
                     idlp = (int)cmbPrecios.SelectedValue; ;
                     DialogResult = true;
                 }
@@ -372,8 +374,52 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void btnnlp_Click(object sender, RoutedEventArgs e)
         {
-            var neww = new windowAgregarLp();
-            neww.ShowDialog();
+
+            var newW = new windowAgregarLp();
+            string nombre;
+            newW.ShowDialog();
+
+
+            if (newW.DialogResult == true)
+            {
+                nombre = newW.txtNombre.Text;
+                DateTime hoy;
+                hoy = DateTime.Today;
+
+
+
+
+
+
+                String sql;
+                sql = "INSERT into listadeprecios(nombre, fecha) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "')";
+                conexion.operaciones(sql);
+
+                string ultimoId = "Select last_insert_id()";
+                String id = conexion.ValorEnVariable(ultimoId);
+
+
+                String consulta;
+
+
+                for (int i = 0; i < newW.itemslp.Count; i++)
+                {
+
+                    int fkidp = newW.itemslp[i].id;
+                    double preciolista = newW.itemslp[i].preciolista;
+                    consulta = "INSERT into productos_has_listadeprecios(FK_idProductos, FK_idLista, precioLista) values('" + fkidp + "', '" + id + "', '" + preciolista + "')";
+                    conexion.operaciones(consulta);
+
+
+
+
+                }
+
+                MessageBox.Show("Se agrego la lista de precio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                loadcmblp();
+                cmbPrecios.SelectedIndex = cmbPrecios.Items.Count - 1;
+                
+            }
         }
     }
 }

@@ -210,6 +210,7 @@ namespace wpfFamiliaBlanco.Clientes
             {
 
                 string consulta = "SELECT count(*) from ordencomprasalida where FK_idClienteme = " + ltsClientes.SelectedValue + "";
+                
                 if (conexion.ValorEnVariable(consulta) == "0")
                 {
                     DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;

@@ -182,23 +182,35 @@ namespace wpfFamiliaBlanco.Clientes
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             bandera = true;
+            string consulta2 = "SELECT count(*) from clientesme where FK_idLista = " + ltsLp.SelectedValue +"";
+            string consulta3 = "SELECT count(*) from clientesmi where FK_idLista = " + ltsLp.SelectedValue + "";
+            string cliente = conexion.ValorEnVariable(consulta2);
+            string cliente2 = conexion.ValorEnVariable(consulta3);
             try
             {
-                DataRow seleccionada = ((DataRowView)ltsLp.SelectedItem).Row;
-                string nombre = seleccionada["nombre"].ToString();
-                MessageBoxResult resultado = MessageBox.Show("Esta seguro que desea eliminar la Lista de precios: " + nombre, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (resultado==MessageBoxResult.Yes)
+                if (int.Parse(cliente) != 0 || int.Parse(cliente2) != 0)
                 {
-                    int id = (int)ltsLp.SelectedValue;
-                    String sqlelimancion = "DELETE FROM listadeprecios WHERE listadeprecios.idLista = '" + id + "'";
-                    conexion.operaciones(sqlelimancion);
-
+                    MessageBox.Show("No se puede eliminar la lista de precios por que esta asignada a clientes", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                ltsLp.Items.Refresh();
-                ltsLp.SelectedIndex = 0;
-                loadlp();
+                else
+                {
+                    DataRow seleccionada = ((DataRowView)ltsLp.SelectedItem).Row;
+                    string nombre = seleccionada["nombre"].ToString();
+                    MessageBoxResult resultado = MessageBox.Show("Esta seguro que desea eliminar la Lista de precios: " + nombre, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+                    if (resultado == MessageBoxResult.Yes)
+                    {
+                        int id = (int)ltsLp.SelectedValue;
+                        String sqlelimancion = "DELETE FROM listadeprecios WHERE listadeprecios.idLista = '" + id + "'";
+                        conexion.operaciones(sqlelimancion);
+
+                    }
+                    ltsLp.Items.Refresh();
+                    ltsLp.SelectedIndex = 0;
+                    loadlp();
+
+
+                }               
             }
             catch (NullReferenceException)
             {
