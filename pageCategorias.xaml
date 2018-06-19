@@ -656,9 +656,7 @@
     </Page.Resources>
 
     <Grid Background="#FF171717">
-
-        <Label x:Name="lblCategorias" Content="Categorias" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Border Height="174.555" Width="440.187" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="465,78.052,128.479,297.06" Opacity="0.5" >
+        <Border Height="431.957" Width="979.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="26.48,18.043,27.666,99.667" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -666,12 +664,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Button x:Name="btnModificar" Width="75" VerticalAlignment="Top" Style="{DynamicResource modificar}" Margin="653.667,214.942,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Modificar" BorderBrush="{x:Null}" Click="btnModificar_Click_1"/>
-        <Button x:Name="btnAgregar" Width="75" VerticalAlignment="Top" Style="{DynamicResource agregar}" Margin="733.667,214.942,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Agregar" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
-        <Button x:Name="btnEliminar" Width="75" VerticalAlignment="Top" Style="{DynamicResource eliminar}" Margin="813.667,214.942,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Eliminar" BorderBrush="{x:Null}" RenderTransformOrigin="0.579,2.246" Click="btnEliminar_Click"/>
-        <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="751.674,88.052,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
-        <Label x:Name="lblAgregarCategoria" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="465,41.052,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoría" Background="{x:Null}"/>
-        <Border Height="174.555" Width="403.278" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="37,78.052,593.388,297.06" Opacity="0.5" >
+        <Border Height="234.564" Width="387.278" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="408.117,18.043,238.271,297.06" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -679,10 +672,32 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <ListBox x:Name="ltsCategorias" HorizontalAlignment="Left" Height="122.89" Margin="53,115.052,0,0" VerticalAlignment="Top" Width="368.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14" SelectionChanged="ltsCategorias_SelectionChanged" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle1}"/>
-        <Label x:Name="lblNombreCat" Width="70.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="351.031,78.052,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre" Background="{x:Null}"/>
-        <TextBox x:Name="textnombre" Width="404.556" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="480.111,115.052,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
-        <Label x:Name="lblCategorias1" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="37,41.052,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoriras" Background="{x:Null}"/>
+        <Button x:Name="btnModificar" Width="75" VerticalAlignment="Top" Style="{DynamicResource modificar}" Margin="541.33,79.945,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Modificar" BorderBrush="{x:Null}" Click="btnModificar_Click_1"/>
+        <Button x:Name="btnAgregar" Width="75" VerticalAlignment="Top" Style="{DynamicResource agregar}" Margin="621.33,79.945,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Agregar" BorderBrush="{x:Null}" Click="btnAgregar_Click"/>
+        <Button x:Name="btnEliminar" Width="75" VerticalAlignment="Top" Style="{DynamicResource eliminar}" Margin="701.33,79.945,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Eliminar" BorderBrush="{x:Null}" RenderTransformOrigin="0.579,2.246" Click="btnEliminar_Click"/>
+        <Label x:Name="lblNombre" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="646.559,22.945,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
+        <Label x:Name="lblAgregarCategoria" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="425.774,200.942,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar categoría" Background="{x:Null}"/>
+        <Border Height="413.897" Width="345.278" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="45,18.043,643.388,117.727" Opacity="0.5" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <ListBox x:Name="ltsCategorias" HorizontalAlignment="Left" Height="364.86" Margin="62.333,50.203,0,0" VerticalAlignment="Top" Width="310.778" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="White" FontSize="14" SelectionChanged="ltsCategorias_SelectionChanged" IsSynchronizedWithCurrentItem="True" Style="{DynamicResource ListBoxStyle1}"/>
+        <Label x:Name="lblNombreCat" Width="70.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="312.364,15.945,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre" Background="{x:Null}"/>
+        <TextBox x:Name="textnombre" Width="352.778" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="425.774,47.945,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"/>
+        <Border Height="202.404" Width="169.939" BorderThickness="1,1,5,1" BorderBrush="#FF6B2C00" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="814.561,50.203,49.166,297.06" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="136.008" TextWrapping="Wrap" VerticalAlignment="Top" Width="156.605" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Loren ipsum loren"/>
+        </Border>
+        <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="852.507,24.205,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 </Page>

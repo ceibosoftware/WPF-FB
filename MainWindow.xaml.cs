@@ -69,7 +69,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+            //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
@@ -106,13 +106,13 @@ namespace wpfFamiliaBlanco
 
         private void btnProductos_Click(object sender, RoutedEventArgs e)
         {
-            frameInicio.Content = new pageProductos();
+            frameInicio.Content = new Productos.productosPestañas();
             btnUsuarios.Style = FindResource("botonDock") as Style;
             btnProductos.Style = FindResource("BotonStylePanel") as Style;
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+           // btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
@@ -150,7 +150,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("BotonStylePanel") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+            //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
@@ -189,7 +189,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("BotonStylePanel") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+//btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Collapsed;
             lblnotificaciones.Visibility = Visibility.Collapsed;
@@ -208,7 +208,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("BotonStylePanel") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+           // btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
@@ -226,7 +226,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("BotonStylePanel") as Style;
+            //btnCategorias.Style = FindResource("BotonStylePanel") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
@@ -267,7 +267,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-            btnCategorias.Style = FindResource("botonDock") as Style;
+            //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("BotonStylePanel") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
