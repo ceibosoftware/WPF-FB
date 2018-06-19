@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using wpfFamiliaBlanco.Clientes;
 
 namespace wpfFamiliaBlanco
 {
@@ -33,6 +34,8 @@ namespace wpfFamiliaBlanco
             notificaciones();
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
         }
 
         public void notificaciones()
@@ -118,6 +121,8 @@ namespace wpfFamiliaBlanco
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
 
             #region Fade in
             //animaciones
@@ -156,6 +161,8 @@ namespace wpfFamiliaBlanco
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
 
 
             #region Fade in
@@ -195,6 +202,8 @@ namespace wpfFamiliaBlanco
             lblnotificaciones.Visibility = Visibility.Collapsed;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
 
         }
 
@@ -216,6 +225,8 @@ namespace wpfFamiliaBlanco
             btnSalidasME.Visibility = Visibility.Visible;
             btnSalidasMI.Style = FindResource("buttonSwitchStylePressed") as Style;
             btnSalidasME.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
         }
 
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
@@ -232,6 +243,8 @@ namespace wpfFamiliaBlanco
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();
@@ -273,6 +286,8 @@ namespace wpfFamiliaBlanco
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Collapsed;
             btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Visible;
+            btnClientesME.Visibility = Visibility.Visible;
             #region Fade in
             //animaciones
             Storyboard storyboard = new Storyboard();
@@ -375,6 +390,21 @@ namespace wpfFamiliaBlanco
             btnSalidasMI.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
             btnSalidasME.Style = FindResource("buttonSwitchStylePressed") as Style;
             frameInicio.Content = new Salidas.salidasME();
+        }
+
+        private void btnClientesMI_Click(object sender, RoutedEventArgs e)
+        {
+            btnClientesMI.Style = FindResource("buttonSwitchStylePressed") as Style;
+            btnClientesME.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
+            frameInicio.Content = new pageClientes();
+        }
+
+        private void btnClientesME_Click(object sender, RoutedEventArgs e)
+        {
+            btnClientesMI.Style = FindResource("ButtonStyleSwitchNotSelected") as Style;
+            btnClientesME.Style = FindResource("buttonSwitchStylePressed") as Style;
+            frameInicio.Content = new pageClientesME();
+ 
         }
     }
 }

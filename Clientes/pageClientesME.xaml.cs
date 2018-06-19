@@ -12,24 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using wpfFamiliaBlanco.Clientes;
 
-namespace wpfFamiliaBlanco
+namespace wpfFamiliaBlanco.Clientes
 {
     /// <summary>
-    /// Interaction logic for pageClientes.xaml
+    /// Interaction logic for pageClientesME.xaml
     /// </summary>
-    public partial class pageClientes : Page
+    public partial class pageClientesME : Page
     {
-        public pageClientes()
+        public pageClientesME()
         {
             InitializeComponent();
+            frameInicioClientes.Content = new ME();
             btnClientes.Style = FindResource("botonTabPressed") as Style;
-            frameInicioClientes.Content = new MI();
-           
-        }
 
-    
+        }
 
 
         private void btnLP_Click(object sender, RoutedEventArgs e)
@@ -43,10 +40,10 @@ namespace wpfFamiliaBlanco
         {
             btnClientes.Style = FindResource("botonTabPressed") as Style;
             btnLP.Style = FindResource("botonTab") as Style;
-            frameInicioClientes.Content = new MI();
-            
+            frameInicioClientes.Content = new ME();
 
-            
+
+
 
         }
     }

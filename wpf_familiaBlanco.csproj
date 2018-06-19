@@ -75,6 +75,9 @@
     <Compile Include="Clientes\ME.xaml.cs" />
     <Compile Include="Clientes\MI.xaml.cs" />
     <Compile Include="Clientes\pageClientes.xaml.cs" />
+    <Compile Include="Clientes\pageClientesME.xaml.cs">
+      <DependentUpon>pageClientesME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Clientes\windowAgregarClienteme.xaml.cs" />
     <Compile Include="Clientes\windowAgregarClientemi.xaml.cs" />
     <Compile Include="Clientes\WindowAgregarContactoCliente.xaml.cs" />
@@ -244,6 +247,10 @@
     <Page Include="Clientes\pageClientes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Clientes\pageClientesME.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Clientes\windowAgregarClienteme.xaml">
       <Generator>MSBuild:Compile</Generator>

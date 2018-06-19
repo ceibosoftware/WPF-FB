@@ -1,4 +1,4 @@
-﻿<Page x:Class="wpfFamiliaBlanco.pageClientes"
+﻿<Page x:Class="wpfFamiliaBlanco.Clientes.pageClientesME"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -142,7 +142,7 @@
         </Style>
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
-        <Label x:Name="lblClientes" Content="Clientes Mercado Interno" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblClientes" Content="Clientes Mercado Externo" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Frame x:Name="frameInicioClientes" Content="" HorizontalAlignment="Left" Height="473.215" Margin="0,76.452,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717"/>
         <Button x:Name="btnLP" Content="Lista de Precios" HorizontalAlignment="Left" Margin="251,34.452,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnLP_Click">
             <Button.BorderBrush>

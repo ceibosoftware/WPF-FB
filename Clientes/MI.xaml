@@ -592,7 +592,7 @@
     </Page.Resources>
 
     <Grid Background="#FF171717">
-        <Border Height="432" Width="979" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="43,18,12,23" Opacity="0.5" >
+        <Border Height="431.957" Width="979.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="26.48,18.043,27.666,23.215" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -600,6 +600,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
+
         <ListBox x:Name="ltsClientes" HorizontalAlignment="Left" Height="117" Margin="53.778,166.332,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsClientes_SelectionChanged"/>
         <Label x:Name="lblClientes" Content="Clientes" HorizontalAlignment="Left" Margin="285,141.332,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtCuit" Width="171" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="444.993,51.992,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>

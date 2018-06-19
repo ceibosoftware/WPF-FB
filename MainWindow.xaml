@@ -1066,6 +1066,8 @@
         </Border>
         <Button x:Name="btnSalidasMI" Content="MI" Margin="14,311.812,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnSalidasMI_Click" ToolTip="Mercado Interno"/>
         <Button x:Name="btnSalidasME" Content="ME" Margin="49,311.812,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnSalidasME_Click" ToolTip="Mercado Externo"/>
+        <Button x:Name="btnClientesMI" Content="MI" Margin="14,386.925,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnClientesMI_Click" ToolTip="Mercado Interno"/>
+        <Button x:Name="btnClientesME" Content="ME" Margin="49,386.925,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnClientesME_Click" ToolTip="Mercado Externo"/>
 
 
     </Grid>
