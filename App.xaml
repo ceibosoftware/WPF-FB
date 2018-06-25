@@ -68,7 +68,7 @@
                 </Setter>
             </Style>
 
-            
+
 
             <Style x:Key="agregar" TargetType="{x:Type Button}">
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -951,6 +951,55 @@
                                 <Trigger Property="IsPressed" Value="true">
                                     <Setter Property="Background" TargetName="border" Value="#FF004568"/>
                                     <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="botonSettings" TargetType="{x:Type Button}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" SnapsToDevicePixels="true" BorderThickness="0,0,3,0" CornerRadius="3" BorderBrush="{x:Null}">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="icons8-settings-50.png" Stretch="Uniform"/>
+                                </Border.Background>
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsDefaulted" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                                    <Setter Property="Background" TargetName="border">
+                                        <Setter.Value>
+                                            <ImageBrush ImageSource="icons8-settings-50.png" Stretch="Uniform"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="OpacityMask" TargetName="border" Value="{x:Null}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                                    <Setter Property="Background" TargetName="border">
+                                        <Setter.Value>
+                                            <ImageBrush Stretch="Uniform" ImageSource="icons8-settings-50.png"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="false">
                                     <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>

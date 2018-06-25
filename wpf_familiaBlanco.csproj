@@ -226,6 +226,9 @@
     <Compile Include="WindowAgregarProductoFactura.xaml.cs">
       <DependentUpon>WindowAgregarProductoFactura.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windowAjustes.xaml.cs">
+      <DependentUpon>windowAjustes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windowCrearUsuario.xaml.cs">
       <DependentUpon>windowCrearUsuario.xaml</DependentUpon>
     </Compile>
@@ -505,6 +508,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="windowAjustes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windowCrearUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -605,7 +612,9 @@
   <ItemGroup>
     <Resource Include="ceibo ss small.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icons8-settings-50.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="ceibo line not gray.png" />
   </ItemGroup>

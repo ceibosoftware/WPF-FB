@@ -406,5 +406,11 @@ namespace wpfFamiliaBlanco
             frameInicio.Content = new pageClientesME();
  
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) //AJUSTES
+        {
+            var newW = new windowAjustes();
+            newW.ShowDialog();
+        }
     }
 }
