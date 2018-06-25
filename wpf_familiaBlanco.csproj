@@ -116,6 +116,9 @@
     <Compile Include="Entradas\windowAgregarNCFactura.xaml.cs">
       <DependentUpon>windowAgregarNCFactura.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entradas\WindowAgregarPagoFactura.xaml.cs">
+      <DependentUpon>WindowAgregarPagoFactura.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entradas\windowAgregarPagoProveedor.xaml.cs">
       <DependentUpon>windowAgregarPagoProveedor.xaml</DependentUpon>
     </Compile>
@@ -297,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Entradas\windowAgregarNCFactura.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\WindowAgregarPagoFactura.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
