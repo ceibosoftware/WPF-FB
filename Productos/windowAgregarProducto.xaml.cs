@@ -47,7 +47,7 @@ namespace wpfFamiliaBlanco
             LlenarComboFiltro();
             LoadListaProv();
            // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
-
+          
         }
 
         public void LoadListaComboCategoria()
@@ -382,6 +382,8 @@ namespace wpfFamiliaBlanco
         {
    
         }
+
+        
     }
  }
 

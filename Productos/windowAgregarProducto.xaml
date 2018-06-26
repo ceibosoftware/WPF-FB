@@ -1,10 +1,10 @@
-﻿<Window
+﻿<Window x:Class="wpfFamiliaBlanco.windowAgregarProducto"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
-        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="wpfFamiliaBlanco.windowModificarProducto"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         mc:Ignorable="d"
         Title="windowModificarProducto" Height="605.334" Width="1162.999" WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -708,5 +708,6 @@
         <Label x:Name="lblExistenciaMinima" Content="Unidad" HorizontalAlignment="Left" Margin="99.758,93,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtExistenciaMinima" HorizontalAlignment="Left" Height="23" Margin="238.758,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" PreviewTextInput="txtExistenciaMinima_PreviewTextInput"/>
         <Label x:Name="lblExistenciaMinima1" Content="Existencia minima" HorizontalAlignment="Left" Margin="300.758,37,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <ComboBox x:Name="cmbMoneda" HorizontalAlignment="Left" Height="23" Margin="492,159,0,0" VerticalAlignment="Top" Width="394" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" Style="{DynamicResource combo_box}" SelectionChanged="cmbCategoria_SelectionChanged"/>
     </Grid>
 </Window>
