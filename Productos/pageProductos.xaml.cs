@@ -56,6 +56,8 @@ namespace wpfFamiliaBlanco
                 String unidad = newW.txtUnidad.Text;
                 String existencias = newW.txtExistenciaMinima.Text;
                 String precioUnitario = newW.txtPrecioUnitario.Text;
+                String costo = newW.txtCosto.Text;
+                int moneda = newW.cmbMoneda.SelectedIndex;
                 int venta ;
                 if (newW.venta)
                 {
@@ -67,7 +69,7 @@ namespace wpfFamiliaBlanco
                 }
            
                 int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                String sql = "insert into productos(nombre, descripcion, FK_idCategorias, existenciaMinima, unidad, precioUnitario,venta) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "', '" + existencias + "', '" + unidad + "','" + precioUnitario + "','" + venta + "');";
+                String sql = "insert into productos(nombre, descripcion, FK_idCategorias, existenciaMinima, unidad, precioUnitario,venta, moneda, costo) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "', '" + existencias + "', '" + unidad + "','" + precioUnitario + "','" + venta + "','" + moneda + "','" + costo + "');";
                 conexion.operaciones(sql);
 
                 //INSERTAR PROVEEDORES DE PRODUCTO CARGADO                
@@ -91,7 +93,7 @@ namespace wpfFamiliaBlanco
                 int idProducto = (int)ltsProductos.SelectedValue;
                 int index = (int)ltsProductos.SelectedIndex;
                 // LLENAR DATOS PRODUCTOS.
-                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario, productos.venta FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias"; 
+                String consulta = "SELECT productos.nombre, productos.idProductos, productos.descripcion, categorias.nombre, categorias.idCategorias, productos.FK_idCategorias, productos.existenciaMinima, productos.unidad , productos.precioUnitario, productos.venta, productos.moneda, productos.costo FROM productos , categorias WHERE idProductos = @valor AND productos.FK_idCategorias = categorias.idCategorias"; 
                 DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
 
                 // LLENAR DATOS PROVEEDORES.
@@ -103,7 +105,7 @@ namespace wpfFamiliaBlanco
                     items.Add(elemento);
                 }
                 //CONSTRUCTOR PAGINA MODIFICAR 
-                var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(), items, (float)productos.Rows[0].ItemArray[6], productos.Rows[0].ItemArray[7].ToString(), (float)productos.Rows[0].ItemArray[8], (bool)productos.Rows[0].ItemArray[9]);
+                var newW = new windowModificarProducto((int)productos.Rows[0].ItemArray[4], productos.Rows[0].ItemArray[0].ToString(), productos.Rows[0].ItemArray[2].ToString(), items, (float)productos.Rows[0].ItemArray[6], productos.Rows[0].ItemArray[7].ToString(), (float)productos.Rows[0].ItemArray[8], (bool)productos.Rows[0].ItemArray[9], (int)productos.Rows[0].ItemArray[10], (float)productos.Rows[0].ItemArray[11]);
 
                 newW.ShowDialog();
                 if (newW.Aceptar)
@@ -114,6 +116,9 @@ namespace wpfFamiliaBlanco
                     String unidad = newW.txtUnidad.Text;
                     String existencias = newW.txtExistenciaMinima.Text;
                     String precioUnitario = newW.txtPrecioUnitario.Text;
+                    String costo = newW.txtCosto.Text;
+                    int moneda = newW.cmbMoneda1.SelectedIndex;
+
                     int venta;
                     if (newW.venta)
                     {
@@ -124,7 +129,7 @@ namespace wpfFamiliaBlanco
                         venta = 0;
                     }
                     int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                    String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "',precioUnitario = '" + precioUnitario + "',unidad = '" + unidad + "',existenciaMinima = '" + existencias + "',venta = '" + venta + "' WHERE productos.idProductos = '" + idProducto + "';";
+                    String sql = "UPDATE productos SET nombre = '" + nombre + "', descripcion = '" + descripcion + "' ,FK_idCategorias = '" + idCategoria + "',precioUnitario = '" + precioUnitario + "',unidad = '" + unidad + "',existenciaMinima = '" + existencias + "',venta = '" + venta + "', costo = '"+costo+"', moneda = '"+ moneda +"' WHERE productos.idProductos = '" + idProducto + "';";
                     conexion.operaciones(sql);
                     //ELIMINA REGISTRO DE TABLA INTERMEDIA
                     string sql2 = "delete  from productos_has_proveedor where FK_idProductos =  '" + idProducto + "'";

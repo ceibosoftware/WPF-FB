@@ -36,10 +36,13 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             LoadListaComboCategoria();           
             LlenarlistaProveedores();
+
         }
-        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario, bool venta)
+        public windowModificarProducto(int cmbValue, string nombre, string descripcion, List<elemento> items, float existencia, String unidad , float precioUnitario, bool venta, int moneda, float costo)
         {
+        
             InitializeComponent();
+         
             LoadListaComboCategoria();
             LoadListaProveedorCategoria();
             cmbCategoria.SelectedValue = cmbValue;
@@ -48,9 +51,10 @@ namespace wpfFamiliaBlanco
             txtExistenciaMinima.Text = existencia.ToString();
             txtPrecioUnitario.Text = precioUnitario.ToString();
             txtUnidad.Text = unidad;
-         
-            this.Items = items;
-            LoadListaProv();
+            loadCotizacion();       
+            LlenarCmbTipoCambio();
+            cmbMoneda1.SelectedIndex = moneda;
+            txtCosto.Text = costo.ToString();
             if (venta)
             {
                 chkVenta.IsChecked = true;
@@ -59,7 +63,19 @@ namespace wpfFamiliaBlanco
             {
                 chkVenta.IsChecked = false;
             }
-            LlenarlistaProveedores();
+            llenarProveedoresExistentes(items);
+            LoadListaProv();
+          
+            // LlenarlistaProveedores();
+        }
+        private void llenarProveedoresExistentes(List<elemento> lista) {
+            foreach (var item in lista)
+            {
+               
+                this.Items.Add(item);
+            }
+
+            
         }
         private void LoadListaComboCategoria()
         {
@@ -206,9 +222,13 @@ namespace wpfFamiliaBlanco
         }
         private void LoadListaProv()
         {
+            
+
             ltsProvProductos.ItemsSource = Items;
             ltsProvProductos.DisplayMemberPath = "nombre";
             ltsProvProductos.SelectedValuePath = "id";
+
+           
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -357,7 +377,7 @@ namespace wpfFamiliaBlanco
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine("aca entre");
+            
            
             LoadListaProveedorCategoria();
             Items.Clear();
@@ -390,6 +410,65 @@ namespace wpfFamiliaBlanco
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
-      
+        private void LlenarCmbTipoCambio()
+        {
+            cmbMoneda1.Items.Add("$");
+            cmbMoneda1.Items.Add("u$d");
+            cmbMoneda1.Items.Add("€");
+        }
+        private void loadCotizacion()
+        {
+            txtCosto.Text = "";
+            if (cmbMoneda1.SelectedIndex == 0)
+            {
+                txtCotizacion.Text = "1";
+            }
+            else if (cmbMoneda1.SelectedIndex == 1)
+            {
+                string consultaDolar = "SELECT cotizacion from cotizacion where nombre = 'dolar'";
+                txtCotizacion.Text = conexion.ValorEnVariable(consultaDolar);
+            }
+            else
+            {
+                string consultaEuro = "SELECT cotizacion from cotizacion where nombre = 'euro'";
+                txtCotizacion.Text = conexion.ValorEnVariable(consultaEuro);
+            }
+
+
+
+        }
+
+        private void cmbMoneda_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+       
+        }
+
+        private void txtCosto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        
+
+        }
+        private void calculaPrecioUnitario()
+        {
+            if (txtCosto.Text != "")
+            {
+                txtPrecioUnitario.Text = (float.Parse(txtCosto.Text) * float.Parse(txtCotizacion.Text)).ToString();
+            }
+            else
+            {
+                txtPrecioUnitario.Text = "";
+            }
+        }
+
+        private void cmbMoneda1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            loadCotizacion();
+            calculaPrecioUnitario();
+        }
+
+        private void txtCosto_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            calculaPrecioUnitario();
+        }
     }
 }

@@ -752,7 +752,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF232222" Margin="0,0,-6.667,-0.666" HorizontalAlignment="Right" Width="1226.999">
+    <Grid x:Name="cmbMoneda" Background="#FF232222" Margin="0,0,-6.667,-0.666" HorizontalAlignment="Right" Width="1226.999">
         <Button x:Name="btnCancelar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="1099.166,507.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Cancelar" BorderBrush="#FFB90909" Click="btnCancelar_Click" Background="#FF4B4848" BorderThickness="0,0,3,0"/>
         <Button x:Name="btnAceptar" Width="75" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud}" Margin="1099.166,459.318,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Aceptar" BorderBrush="#FF009D72" Click="btnAceptar_Click" Background="#FF4B4848" BorderThickness="0,0,3,0"/>
         <Label x:Name="lblAgregarProducto" Width="224.747" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="102,0,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Agregar producto" Background="{x:Null}"/>
@@ -778,7 +778,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBox x:Name="txtBuscar" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="557.666,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}"  TextChanged="txtBuscar_TextChanged"/>
+        <TextBox x:Name="txtBuscar" Width="394.667" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="557.666,62.159,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" />
         <Label x:Name="lblCategoria" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="820,92,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Categoría"/>
         <Button x:Name="btnCatNueva" Width="75" VerticalAlignment="Top" Style="{DynamicResource agregar}" Margin="874,213,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="Agregar" BorderBrush="{x:Null}" ToolTip="Agregar categoria" Click="btnCatNueva_Click"/>
         <ComboBox x:Name="cmbCategoria" HorizontalAlignment="Left" Height="23" Margin="558,118,0,0" VerticalAlignment="Top" Width="394" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" Style="{DynamicResource combo_box}" SelectionChanged="cmbCategoria_SelectionChanged"/>
@@ -813,12 +813,18 @@
         </Border>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="1042.173,7.159,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblNombre_Copy" Width="131.993" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="816.673,37.159,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre"/>
-        <TextBox x:Name="txtPrecioUnitario" HorizontalAlignment="Left" Height="23" Margin="308,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14"  PreviewTextInput="txtPrecioUnitario_PreviewTextInput" TextChanged="txtPrecioUnitario_TextChanged"/>
+        <TextBox x:Name="txtPrecioUnitario" HorizontalAlignment="Left" Height="23" Margin="308,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14"  PreviewTextInput="txtPrecioUnitario_PreviewTextInput" />
         <Label x:Name="lblPrecioUnitario" Content="Precio unitario" HorizontalAlignment="Left" Margin="370,92,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtUnidad" HorizontalAlignment="Left" Height="23" Margin="107,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" PreviewTextInput="txtUnidad_PreviewTextInput"/>
         <Label x:Name="lblExistenciaMinima" Content="Unidad" HorizontalAlignment="Left" Margin="169,93,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtExistenciaMinima" HorizontalAlignment="Left" Height="23" Margin="308,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" PreviewTextInput="txtExistenciaMinima_PreviewTextInput"/>
         <Label x:Name="lblExistenciaMinima1" Content="Existencia minima" HorizontalAlignment="Left" Margin="370,37,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblCategoria_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="1066,280,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Moneda"/>
+        <Label x:Name="lblCategoria_Copy1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="1066,323,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cotizacion"/>
+        <Label x:Name="lblCategoria_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="1066,364,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Costo"/>
+        <ComboBox x:Name="cmbMoneda1" HorizontalAlignment="Left" Margin="1042,298,0,0" VerticalAlignment="Top" Width="156" Height="25" SelectionChanged="cmbMoneda1_SelectionChanged" />
+        <TextBox x:Name="txtCosto" HorizontalAlignment="Left" Height="23" Margin="1042,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextChanged="txtCosto_TextChanged_1"/>
+        <TextBox x:Name="txtCotizacion" HorizontalAlignment="Left" Height="23" Margin="1042,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" TextChanged="txtCosto_TextChanged_1"/>
 
     </Grid>
 </Window>

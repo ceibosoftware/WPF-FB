@@ -42,12 +42,12 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             LoadListaComboCategoria();
-            LoadListaProveedor();
-            
+            LoadListaProveedor();     
             LlenarComboFiltro();
             LoadListaProv();
+            LlenarCmbTipoCambio();
            // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
-          
+
         }
 
         public void LoadListaComboCategoria()
@@ -383,7 +383,64 @@ namespace wpfFamiliaBlanco
    
         }
 
-        
+     
+
+       
+        // Logica cotizacion
+        private void LlenarCmbTipoCambio()
+        {
+            cmbMoneda.Items.Add("$");
+            cmbMoneda.Items.Add("u$d");
+            cmbMoneda.Items.Add("€");
+        }
+
+        private void loadCotizacion() {
+            txtCosto.Text = "";
+            if(cmbMoneda.SelectedIndex == 0)
+            {
+                txtCotizacion.Text = "1";
+            }else if (cmbMoneda.SelectedIndex == 1)
+            {
+                string consultaDolar = "SELECT cotizacion from cotizacion where nombre = 'dolar'";
+                txtCotizacion.Text = conexion.ValorEnVariable(consultaDolar);
+            }
+            else
+            {
+                string consultaEuro = "SELECT cotizacion from cotizacion where nombre = 'euro'";
+                txtCotizacion.Text = conexion.ValorEnVariable(consultaEuro);
+            }
+
+                
+
+            }
+
+        private void cmbMoneda_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            loadCotizacion();
+            calculaPrecioUnitario();
+        }
+
+        private void txtCosto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            calculaPrecioUnitario();
+         
+        }
+        private void calculaPrecioUnitario()
+        {
+            if (txtCosto.Text != "")
+            {
+                txtPrecioUnitario.Text = (float.Parse(txtCosto.Text) * float.Parse(txtCotizacion.Text)).ToString();
+            }
+            else
+            {
+                txtPrecioUnitario.Text = "";
+            }
+        }
+            private void txtBuscar_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
- }
+    }
+ 
 
