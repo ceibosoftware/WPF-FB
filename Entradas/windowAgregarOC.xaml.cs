@@ -12,6 +12,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarOC : Window
     {
+ 
         private int monedaProductos;
         int idOC;
         public bool agregado = false;
@@ -35,7 +36,7 @@ namespace wpfFamiliaBlanco.Entradas
             dpFecha.SelectedDate = DateTime.Now;
             ColumnasDGVProductos();
         }
-        public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC)
+        public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC,float cotizacion)
         {
            
             modifica = true;
@@ -60,7 +61,8 @@ namespace wpfFamiliaBlanco.Entradas
             ColumnasDGVProductos();
             btnRemito.Visibility = Visibility.Collapsed;
             btnFactura.Visibility = Visibility.Collapsed;
-            
+            txtCotizacion.Text = cotizacion.ToString();
+
         }
 
 
@@ -418,12 +420,12 @@ namespace wpfFamiliaBlanco.Entradas
                 lblTotalPesos.Visibility = Visibility.Collapsed;
                 txtCotizacion.Visibility = Visibility.Collapsed;
                 txtTotalPesos.Visibility = Visibility.Collapsed;
-            }
-            else
+            }else if(!modifica)
             {
                 loadCotizacion(moneda);
             }
-
+           
+    
 
         }
 
@@ -710,6 +712,34 @@ namespace wpfFamiliaBlanco.Entradas
             dgvProductos.Columns.Add(textColumn4);
 
         }
+
+        private void btnCotizacion_Click(object sender, RoutedEventArgs e)
+        {
+            actualizaCotizacion();
+        }
+
+        private  void actualizaCotizacion() {
+            if (!modifica)
+            {
+                var neww = new windowAjustes();
+                neww.ShowDialog();
+                loadCotizacion(monedaProductos);
+                calculaTotal();
+            }
+            else
+            {
+                var resultado = MessageBox.Show("¿Esta seguro que desea actualizar la cotizacion de la orden numero: " + idOC + " a la cotizacion actual? ", "Cotizacion", MessageBoxButton.YesNo);
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    loadCotizacion(monedaProductos);
+                    calculaTotal();
+                }
+            }
+  
+
+        }
+
+        
     }
 
 }

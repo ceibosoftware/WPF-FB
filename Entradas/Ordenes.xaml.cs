@@ -354,6 +354,7 @@ namespace wpfFamiliaBlanco
                     int telefono = (int)OC.Rows[0].ItemArray[8];
                     int proveedor = (int)OC.Rows[0].ItemArray[10];
                     int direccion = (int)OC.Rows[0].ItemArray[9];
+                    float cotizacion = (float)OC.Rows[0].ItemArray[12];
 
                     //PRODUCTOS DE LA ORDEN DE COMPRA
                     String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
@@ -371,7 +372,7 @@ namespace wpfFamiliaBlanco
                         float PU = (float)productos.Rows[i].ItemArray[4];
                         listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
                     }
-                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC);
+                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC,cotizacion);
 
                     newW.Title = "Modificar OC";
                     newW.ShowDialog();

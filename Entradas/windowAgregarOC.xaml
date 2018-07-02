@@ -305,7 +305,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Height="604" Background="#FF232222">
+    <Grid Height="604">
 
         <Border BorderBrush="#FF858585" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="482.03" Margin="18,50.334,0,0" VerticalAlignment="Top" Width="1040" CornerRadius="5" Opacity="0.5">
             <Border.Background>
@@ -314,7 +314,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
-            <TextBox TextWrapping="Wrap" Margin="5,1,-5,-1"/>
+          
         </Border>
 
         <Label x:Name="lblProductos" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,162.31,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Productos"/>
@@ -354,10 +354,11 @@
         <Label x:Name="lblProveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,99,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor"/>
         <Label x:Name="lblBuscar" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278.333,52,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
         <Border BorderBrush="#FF858585" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="110.31" Margin="32.98,52,0,0" VerticalAlignment="Top" Width="389.02" Opacity="0.5" CornerRadius="5"/>
-        <TextBox x:Name="txtCotizacion" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="44,495,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
+        <TextBox x:Name="txtCotizacion" Width="151" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="71,495,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" Padding="4,0,0,0"   />
         <TextBox x:Name="txtTotalPesos" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="232,495,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
         <Label x:Name="lblCotizacion" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="90,478,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cotizacion"/>
         <Label x:Name="lblTotalPesos" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278,478,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total en pesos"/>
+        <Button x:Name="btnCotizacion" Content="" HorizontalAlignment="Left" Margin="45,495,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="btnCotizacion_Click"/>
 
     </Grid>
 </Window>

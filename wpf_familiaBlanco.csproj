@@ -643,5 +643,8 @@
   <ItemGroup>
     <Resource Include="Entradas\notificaton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="act.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
