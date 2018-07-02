@@ -1,0 +1,16 @@
+﻿<Window x:Class="wpfFamiliaBlanco.Entradas.windowMonedaOC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
+        mc:Ignorable="d"
+        Title="windowMonedaOC" Height="189.894" Width="456.915"  Background="#FF2D2C2C" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button Name="btnARS" Content="ARS" HorizontalAlignment="Left" Margin="64,106,0,0" VerticalAlignment="Top" Width="72" Height="30" Click="btnARS_Click"/>
+        <Button Name="btnUSD" Content="USD" HorizontalAlignment="Left" Margin="188,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnUSD_Click"/>
+        <Button Name="btnEUR" Content="EUR" HorizontalAlignment="Left" Margin="317,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnEUR_Click"/>
+        <Label Content="¿ En que moneda sera la siguiente orden de compra ?" HorizontalAlignment="Left" Margin="77,38,0,0" VerticalAlignment="Top" Width="303"/>
+
+    </Grid>
+</Window>

@@ -28,6 +28,8 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class Ordenes : Page
     {
+         
+     
         DataTable productos;
         bool ejecutar = true;
         CRUD conexion = new CRUD();
@@ -109,9 +111,11 @@ namespace wpfFamiliaBlanco
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-          
-           
-            var newW = new windowAgregarOC();
+        
+            var moneda = new windowMonedaOC();
+            moneda.ShowDialog();
+            
+            var newW = new windowAgregarOC(moneda.moneda);
           
             newW.ShowDialog();
 
@@ -123,17 +127,17 @@ namespace wpfFamiliaBlanco
                 DateTime fecha = newW.fecha;
                 fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
                 Console.WriteLine(fecha);
-                decimal.TryParse(newW.txtSubtotal.Text, out decimal subtotal);
-                decimal.TryParse(newW.txtTotal.Text, out decimal total);
+                String subtotal = newW.txtSubtotal.Text;
+                String total = newW.txtTotal.Text;
                 int direccion = (int)newW.cmbDireccion.SelectedValue;
                 int telefono = (int)newW.cmbTelefono.SelectedValue;
                 String observacion = newW.txtObservaciones.Text;
                 String formaPago = newW.txtFormaPago.Text;
                 int iva = newW.cmbIVA.SelectedIndex;
-                int tipoCambio = newW.cmbTipoCambio.SelectedIndex;          
-                String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal+ "', '" + total+ "', '" + iva+ "','" + tipoCambio+ "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "');";
+                int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
+                String cotizacion = newW.txtCotizacion.Text;
+                String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal+ "', '" + total+ "', '" + iva+ "','" + tipoCambio+ "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','"+cotizacion+"')";
                 conexion.operaciones(sql);
-
                 string ultimoId = "Select last_insert_id()";
                 String id = conexion.ValorEnVariable(ultimoId);
                 foreach (var producto in newW.productos)
@@ -378,8 +382,8 @@ namespace wpfFamiliaBlanco
                         int Proveedor = (int)newW.cmbProveedores.SelectedValue;
                         fecha = newW.fecha;
                         Console.WriteLine(fecha);
-                        decimal.TryParse(newW.txtSubtotal.Text, out decimal sub);
-                        decimal.TryParse(newW.txtTotal.Text, out decimal total);
+                        String sub = newW.txtSubtotal.Text;
+                        String total =  newW.txtTotal.Text;
                         direccion = (int)newW.cmbDireccion.SelectedValue;
                         telefono = (int)newW.cmbTelefono.SelectedValue;
                         observaciones = newW.txtObservaciones.Text;

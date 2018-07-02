@@ -143,6 +143,9 @@
     <Compile Include="Entradas\windowCuotas.xaml.cs">
       <DependentUpon>windowCuotas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entradas\windowMonedaOC.xaml.cs">
+      <DependentUpon>windowMonedaOC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="factura.cs" />
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
@@ -339,6 +342,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Entradas\windowCuotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Entradas\windowMonedaOC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

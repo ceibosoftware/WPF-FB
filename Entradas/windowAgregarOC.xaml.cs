@@ -12,21 +12,23 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarOC : Window
     {
-        
+        private int monedaProductos;
         int idOC;
         public bool agregado = false;
         bool modifica = false;
         int contador = 0;
         public List<Producto> productos = new List<Producto>();
         public float subtotal;
-        float total;
+        public float total ;
+        public float cotizacion;
+        float totalPesos;
         public DateTime fecha;
         CRUD conexion = new CRUD();
         public List<Producto> Productos { get => Productos; set => productos = value; }
 
-        public windowAgregarOC()
+        public windowAgregarOC(int moneda)
         {
-            loadGeneral();
+            loadGeneral(moneda);
             cmbProveedores.SelectedIndex = 0;
             cmbDireccion.SelectedIndex = 0;
             cmbTelefono.SelectedIndex = 0;
@@ -37,9 +39,9 @@ namespace wpfFamiliaBlanco.Entradas
         {
            
             modifica = true;
-       
+            monedaProductos = tipoCambio;
             this.productos = producto;
-            loadGeneral();
+            loadGeneral(monedaProductos);
             dpFecha.SelectedDate = fecha;
             txtObservaciones.Text = observaciones;
             this.subtotal = subtotal;
@@ -58,6 +60,7 @@ namespace wpfFamiliaBlanco.Entradas
             ColumnasDGVProductos();
             btnRemito.Visibility = Visibility.Collapsed;
             btnFactura.Visibility = Visibility.Collapsed;
+            
         }
 
 
@@ -96,7 +99,7 @@ namespace wpfFamiliaBlanco.Entradas
             if (cmbProveedores.SelectedIndex != -1)
             {
                 bool existe = false;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, monedaProductos);
                 newW.ShowDialog();
                 if (newW.DialogResult == true)
                 {
@@ -146,6 +149,19 @@ namespace wpfFamiliaBlanco.Entradas
         }
 
 
+        public void LoadListaComboProveedor(int moneda)
+        {
+            String consulta = "SELECT  distinct t1.nombre , t1.idProveedor FROM proveedor t1 ,productos_has_proveedor t2, productos t3 where t1.idProveedor = t2.FK_idProveedor and  t2.FK_idProductos = t3.idProductos and t3.moneda = '" + moneda + "'";
+            conexion.Consulta(consulta, combo: cmbProveedores);
+            cmbProveedores.DisplayMemberPath = "nombre";
+            cmbProveedores.SelectedValuePath = "idProveedor";
+            String monedas = (moneda == 0) ? "pesos" : (moneda == 1) ? "dolares" : "Euros";
+            if(cmbProveedores.Items.Count == 0)
+            {
+                MessageBox.Show("No existen provedorees que tengan productos en: " + monedas);
+             
+            }  
+        }
         public void LoadListaComboProveedor()
         {
             String consulta = "SELECT  distinct t1.nombre , t1.idProveedor FROM proveedor t1 inner join productos_has_proveedor t2 on t1.idProveedor = t2.FK_idProveedor";
@@ -201,18 +217,29 @@ namespace wpfFamiliaBlanco.Entradas
         {
             if (cmbIVA.SelectedIndex == 0)
             {
-                txtTotal.Text = subtotal.ToString();
+                total = subtotal;
+                txtTotal.Text = total.ToString().Replace(",", "."); ;
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
                 total = subtotal * (float)1.21;
-                txtTotal.Text = total.ToString();
+                txtTotal.Text = total.ToString().Replace(",", "."); ;
+              
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
                 total = subtotal * (float)1.105;
-                txtTotal.Text = total.ToString();
+                txtTotal.Text = total.ToString().Replace(",", "."); ;
+                
             }
+            if (txtCotizacion.Text != "" && txtTotal.Text != "") {
+               
+                totalPesos = cotizacion * total;
+                txtTotalPesos.Text = totalPesos.ToString().Replace(",", "."); 
+                
+            }
+           
+
         }
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
@@ -255,7 +282,7 @@ namespace wpfFamiliaBlanco.Entradas
                 Producto prod = dgvProductos.SelectedItem as Producto;
                 float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC, monedaProductos);
 
                 newW.txtCantidad.Text = prod.cantidad.ToString();
 
@@ -373,17 +400,50 @@ namespace wpfFamiliaBlanco.Entradas
             fecha = dpFecha.SelectedDate.Value.Date;
         }
 
-        private void loadGeneral()
+        private void loadGeneral(int moneda)
         {
             InitializeComponent();
             loadDgvProductos();
-            LoadListaComboProveedor();
+            LoadListaComboProveedor(moneda);
             LlenarCmbIVA();
             LlenarCmbTipoCambio();
+            cmbTipoCambio.SelectedIndex = moneda;
             LoadListaComboDireccion();
             LoadListaComboTelefonos();
+            monedaProductos = moneda;
+            
+            if(moneda == 0)
+            {
+                lblCotizacion.Visibility = Visibility.Collapsed;
+                lblTotalPesos.Visibility = Visibility.Collapsed;
+                txtCotizacion.Visibility = Visibility.Collapsed;
+                txtTotalPesos.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                loadCotizacion(moneda);
+            }
 
 
+        }
+
+
+        private void loadCotizacion(int moneda)
+        {
+            if(moneda == 1)
+            {
+                string consultaDolar = "SELECT cotizacion from cotizacion where nombre = 'dolar'";
+                cotizacion = float.Parse(conexion.ValorEnVariable(consultaDolar));
+                txtCotizacion.Text = cotizacion.ToString().Replace(",", ".");
+            }
+            else
+            {
+                string consultaEuro = "SELECT cotizacion from cotizacion where nombre = 'euro'";
+                cotizacion = float.Parse(conexion.ValorEnVariable(consultaEuro));
+                txtCotizacion.Text = cotizacion.ToString().Replace(",", ".");
+            }
+            
+                    
         }
 
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

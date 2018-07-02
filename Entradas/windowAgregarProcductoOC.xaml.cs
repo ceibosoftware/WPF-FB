@@ -25,40 +25,40 @@ namespace wpfFamiliaBlanco.Entradas
         bool modifica = false;
         public int idProducto;
         CRUD conexion = new CRUD();
-        public windowAgregarClienteME(int idProveedor)
+        public windowAgregarClienteME(int idProveedor, int moneda)
         {
             InitializeComponent();
-            loadListaProducto(idProveedor);
+            loadListaProducto(idProveedor, moneda);
 
         }
-        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre, int idOC)
+        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre, int idOC,int moneda)
         {
             modifica = true;
             InitializeComponent();
-            loadListaProducto(idProveedor, idProducto,nombre);
+            loadListaProducto(idProveedor, idProducto,nombre,moneda);
             this.idOC = idOC;
             lblPrecioUnitario.Content = "Precio unitario pagado";
         }
-        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre)
+        public windowAgregarClienteME(int idProveedor, int idProducto,  int moneda, string nombre)
         {
            
             InitializeComponent();
-            loadListaProducto(idProveedor, idProducto, nombre);
+            loadListaProducto(idProveedor, idProducto, nombre,moneda);
             
         }
 
-        public void loadListaProducto(int idProveedor)
+        public void loadListaProducto(int idProveedor,int moneda)
         {
-            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor =" + idProveedor.ToString() + " and p.idProductos = t2.FK_idProductos";
+            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor =" + idProveedor.ToString() + " and p.idProductos = t2.FK_idProductos and p.moneda = '"+moneda+"'";
             conexion.Consulta(consulta, ltsProductos);
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
             ltsProductos.SelectedIndex = 0;
 
         }
-        public void loadListaProducto(int idProveedor, int idProducto,string nombre)
+        public void loadListaProducto(int idProveedor, int idProducto,string nombre,int moneda)
         {
-            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor = @valor  and p.idProductos = t2.FK_idProductos";
+            String consulta = " Select p.nombre , p.idProductos from productos p inner join productos_has_proveedor t2 where t2.FK_idProveedor = @valor  and p.idProductos = t2.FK_idProductos and p.moneda ='"+moneda+"' ";
             ltsProductos.ItemsSource= conexion.ConsultaParametrizada(consulta, idProveedor).AsDataView() ;
             ltsProductos.DisplayMemberPath = "nombre";
             ltsProductos.SelectedValuePath = "idProductos";
@@ -84,7 +84,7 @@ namespace wpfFamiliaBlanco.Entradas
         private void ltsProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
-            String consulta = "SELECT p.nombre , p.precioUnitario , p.idProductos from productos p where p.idProductos  = @valor";
+            String consulta = "SELECT p.nombre , p.costo , p.idProductos from productos p where p.idProductos  = @valor";
            
           
             DataTable productos = conexion.ConsultaParametrizada(consulta, ltsProductos.SelectedValue);
@@ -148,14 +148,13 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void compararPrecioUnitario()
         {
-            var resultado = MessageBoxResult.No; 
+            var resultado = MessageBoxResult.No;
             String consulta;
-            if (modifica == false) 
-            consulta= "select p.precioUnitario from productos p where p.idProductos = "+ ltsProductos.SelectedValue +" ";
+            if (modifica == false)
+                consulta = "select p.costo from productos p where p.idProductos = " + ltsProductos.SelectedValue + " ";
             else
-            consulta = "SELECT t1.PUPagado FROM productos_has_ordencompra t1 where FK_idOC = "+idOC+ " and t1.FK_idProducto = " + ltsProductos.SelectedValue + " ";
-            Console.WriteLine(ltsProductos.SelectedValue);
-            Console.WriteLine(idOC);
+                consulta = "SELECT t1.PUPagado FROM productos_has_ordencompra t1 where FK_idOC = " + idOC + " and t1.FK_idProducto = " + ltsProductos.SelectedValue + " ";
+          
             String valor = conexion.ValorEnVariable(consulta);
             float.TryParse(txtPrecioUnitario.Text, out float PU);
             float.TryParse(valor, out float PUOriginal);
@@ -166,15 +165,15 @@ namespace wpfFamiliaBlanco.Entradas
                 else
                     resultado = MessageBoxResult.Yes;
 
-                if (resultado == MessageBoxResult.Yes )
-               {
-                    if(modifica != true)
-                        consulta = "UPDATE productos SET precioUnitario = '" + PU + "' where idProductos = " + ltsProductos.SelectedValue + " ";
+                if (resultado == MessageBoxResult.Yes)
+                {
+                    if (modifica != true)
+                        consulta = "UPDATE productos SET costo = '" + PU + "' where idProductos = " + ltsProductos.SelectedValue + " ";
                     else
                         consulta = "UPDATE productos_has_ordencompra SET PUPagado = '" + PU + "' where FK_idOC = " + idOC + " and FK_idProducto = " + ltsProductos.SelectedValue + " ";
 
                     conexion.operaciones(consulta);
-               }
+                }
             }
         }
         public bool validar()
