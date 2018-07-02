@@ -33,7 +33,7 @@ namespace wpfFamiliaBlanco.Clientes
         {
             btnClientes.Style = FindResource("botonTab") as Style;
             btnLP.Style = FindResource("botonTabPressed") as Style;
-            frameInicioClientes.Content = new LP();
+            frameInicioClientes.Content = new LPME();
         }
 
         private void btnClientes_Click(object sender, RoutedEventArgs e)

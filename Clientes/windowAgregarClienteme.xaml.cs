@@ -79,7 +79,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         }
         private void loadcmblp()
         {
-            String consulta = "SELECT * from listadeprecios";
+            String consulta = "SELECT * from listadeprecios WHERE tipo=0";
             conexion.Consulta(consulta, combo: cmbPrecios);
             cmbPrecios.DisplayMemberPath = "nombre";
             cmbPrecios.SelectedValuePath = "idLista";

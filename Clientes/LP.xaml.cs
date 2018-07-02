@@ -92,7 +92,9 @@ namespace wpfFamiliaBlanco.Clientes
         }
         private void loadlp()
         {
-            String consulta = "Select * from listadeprecios";
+
+
+            String consulta = "Select * from listadeprecios WHERE tipo=1";
             conexion.Consulta(consulta, ltsLp);
             ltsLp.DisplayMemberPath = "nombre";
             ltsLp.SelectedValuePath = "idLista";
@@ -144,7 +146,7 @@ namespace wpfFamiliaBlanco.Clientes
                 
                 
                 String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "')";
+                sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+1+"')";
                 conexion.operaciones(sql);
 
                 string ultimoId = "Select last_insert_id()";
@@ -188,7 +190,7 @@ namespace wpfFamiliaBlanco.Clientes
             string cliente2 = conexion.ValorEnVariable(consulta3);
             try
             {
-                if (int.Parse(cliente) != 0 || int.Parse(cliente2) != 0)
+                if (int.Parse(cliente2) != 0)
                 {
                     MessageBox.Show("No se puede eliminar la lista de precios por que esta asignada a clientes", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

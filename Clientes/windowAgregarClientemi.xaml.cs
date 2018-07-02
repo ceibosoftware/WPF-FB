@@ -102,7 +102,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void loadcmblp()
         {
-            String consulta = "SELECT * from listadeprecios";
+            String consulta = "SELECT * from listadeprecios WHERE tipo=1";
             conexion.Consulta(consulta, combo: cmbPrecios);
             cmbPrecios.DisplayMemberPath = "nombre";
             cmbPrecios.SelectedValuePath = "idLista";

@@ -72,6 +72,9 @@
     <Compile Include="Clientes\LP.xaml.cs">
       <DependentUpon>LP.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Clientes\LPME.xaml.cs">
+      <DependentUpon>LPME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Clientes\ME.xaml.cs" />
     <Compile Include="Clientes\MI.xaml.cs" />
     <Compile Include="Clientes\pageClientes.xaml.cs" />
@@ -83,6 +86,9 @@
     <Compile Include="Clientes\WindowAgregarContactoCliente.xaml.cs" />
     <Compile Include="Clientes\windowAgregarLp.xaml.cs">
       <DependentUpon>windowAgregarLp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes\WindowAgregarLpme.xaml.cs">
+      <DependentUpon>WindowAgregarLpme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Clientes\windowAgregarProducto.xaml.cs">
       <DependentUpon>windowAgregarProducto.xaml</DependentUpon>
@@ -245,6 +251,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Clientes\LPME.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Clientes\ME.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -276,6 +286,10 @@
     <Page Include="Clientes\windowAgregarLp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clientes\WindowAgregarLpme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Clientes\windowAgregarProducto.xaml">
       <SubType>Designer</SubType>
