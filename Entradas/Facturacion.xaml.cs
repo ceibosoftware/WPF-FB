@@ -88,8 +88,9 @@ namespace wpfFamiliaBlanco.Entradas
                 fkOrden = int.Parse(newW.cmbOrden.Text);
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtFactura.SelectedDate.Value;
+                String cotizacion = newW.txtCotizacion.Text.Replace(",", ".");
 
-                String sqlFactura = "INSERT INTO factura ( subtotal, numeroFactura, total, iva, tipoCambio, cuotas, FK_idOC, fecha, totalRestante )VALUES ('"+subtotal+ "','" + numeroFact + "','" + total + "','" + iva + "','" + tipoCambio + "','" + cuotas + "','" + fkOrden + "','" + dtp.ToString("yyyy/MM/dd") + "','" + total + "')";
+                String sqlFactura = "INSERT INTO factura ( subtotal, numeroFactura, total, iva, tipoCambio, cuotas, FK_idOC, fecha, totalRestante, cotizacion )VALUES ('"+subtotal+ "','" + numeroFact + "','" + total + "','" + iva + "','" + tipoCambio + "','" + cuotas + "','" + fkOrden + "','" + dtp.ToString("yyyy/MM/dd") + "','" + total + "','" + cotizacion + "')";
                 conexion.operaciones(sqlFactura);
           
 
@@ -182,7 +183,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             DataGridTextColumn textColumn2 = new DataGridTextColumn();
             textColumn2.Header = "Precio Unitario";
-            textColumn2.Binding = new Binding("precioUnitario");
+            textColumn2.Binding = new Binding("costo");
             dgvProductosFactura.Columns.Add(textColumn2);
 
             DataGridTextColumn textColumn3 = new DataGridTextColumn();
@@ -251,7 +252,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             try
             {
-                String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos, t1.cantidad from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '"+ ltsFactura.SelectedValue+"'";
+                String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.costo,t2.idProductos, t1.cantidad from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '"+ ltsFactura.SelectedValue+"'";
 
                  productos = conexion.ConsultaParametrizada(productosFatura, ltsFactura.SelectedValue);
                 dgvProductosFactura.ItemsSource = productos.AsDataView();
@@ -472,6 +473,7 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime fecha = (DateTime)OC.Rows[0].ItemArray[8];
                     String cuotas = OC.Rows[0].ItemArray[6].ToString();
                     String numf = OC.Rows[0].ItemArray[2].ToString();
+                    String cotizacion = OC.Rows[0].ItemArray[9].ToString();
                     int iva;
                     int tipocambio;
 
@@ -579,7 +581,7 @@ namespace wpfFamiliaBlanco.Entradas
                     }
 
 
-                    var newW = new windowAgregarFactura(numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar);
+                    var newW = new windowAgregarFactura(numf, proveedor, itemsdb, itemsFacdb, fecha, int.Parse(FKoc), float.Parse(txtSubTotal.Text), float.Parse(txtTotal1.Text), iva, tipocambio, subtotal, cuotas, cuotasAinsertar,cotizacion);
                     newW.Title = "Modificar Factura";
                     newW.ShowDialog();
 
@@ -596,6 +598,7 @@ namespace wpfFamiliaBlanco.Entradas
                         String iva32 = newW.cmbIVA.SelectedIndex.ToString();
                         String tipoCambio2 = newW.cmbTipoCambio.SelectedIndex.ToString();
                         String cuotas2 = newW.cmbCuotas.Text;
+                        String cotiza = newW.txtCotizacion.Text.Replace(",",".");
                         int fkOrden2 = int.Parse(newW.cmbOrden.Text);
                         DateTime dtp2 = System.DateTime.Now;
                         dtp2 = newW.dtFactura.SelectedDate.Value;
@@ -603,7 +606,7 @@ namespace wpfFamiliaBlanco.Entradas
                         try
                         {
                             //UPDATE FACTURA
-                            String updatefactura = "UPDATE factura SET subtotal =  '" + subtotal2 + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2 + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOC= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "' WHERE idfacturas = '" + numerofacturaID + "'";
+                            String updatefactura = "UPDATE factura SET subtotal =  '" + subtotal2 + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2 + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOC= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "',cotizacion ='" + cotiza + "' WHERE idfacturas = '" + numerofacturaID + "'";
                             conexion.operaciones(updatefactura);
                         }
                         catch (Exception)

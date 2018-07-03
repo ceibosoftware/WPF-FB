@@ -64,11 +64,10 @@ namespace wpfFamiliaBlanco.Entradas
       
         }
 
-        public windowAgregarFactura(String numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU)
+        public windowAgregarFactura(String numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU, String cotizacion)
         {
             InitializeComponent();
-            // try
-            //{
+        
             modifica = true;
             modificafactura = true;
                 txtNroFactura.MaxLines = 1;
@@ -87,7 +86,7 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbOrden.IsEnabled = false;
                 txtFiltro.IsEnabled = false;
 
-            this.txtNroFactura.Text = numFactura.ToString();
+                this.txtNroFactura.Text = numFactura.ToString();
                 this.cmbProveedores.Text = proveedor;
                 this.items = pOC;
                 this.cmbCuotas.Text = cuotas;
@@ -97,19 +96,31 @@ namespace wpfFamiliaBlanco.Entradas
                 txtSubtotal.Text = subtotal.ToString();
                 cmbIVA.SelectedIndex = IVA;
                 cmbTipoCambio.SelectedIndex = tipoCambio;
+            if (tipoCambio == 0)
+            {
+                txtCotizacion.Visibility = Visibility.Collapsed;
+                txtTotalPesos.Visibility = Visibility.Collapsed;
+                lblCotizacion.Visibility = Visibility.Collapsed;
+                lblTotalPesos.Visibility = Visibility.Collapsed;
+            }
+            txtCotizacion.Text = cotizacion;
+            
                 txtTotal.Text = total.ToString();
                 dt = fechafactura.Date;
                 this.itemsFact = pFA;
                 this.todaslascuotas = lCU;
-       
-                bandera = true;
+              
+                
+            bandera = true;
 
                 txtTotal.IsReadOnly = true;
                 txtSubtotal.IsReadOnly = true;
                 dgvProductosFactura.IsReadOnly = true;
                 dgvProductosOC.IsReadOnly = true;
-            SetearColumnas();
 
+           
+            SetearColumnas();
+            calculaTotalPesos();
             //cambios diseño batta
             lblWindowTitle.Content = "Modificar Factura";
         }
@@ -287,10 +298,27 @@ namespace wpfFamiliaBlanco.Entradas
                 dgvProductosOC.Items.Refresh();
                 todaslascuotas.Clear();
                 DgvCuotas.Items.Refresh();
-            itemsFact.Clear();
-            dgvProductosFactura.Items.Refresh();
+                itemsFact.Clear();
+                dgvProductosFactura.Items.Refresh();
 
-             
+                string consultamoneda = "select tipoCambio from ordencompra where idOrdenCompra = " + cmbOrden.SelectedValue + "";               
+                cmbTipoCambio.SelectedIndex = int.Parse(conexion.ValorEnVariable(consultamoneda));
+
+                if(int.Parse(conexion.ValorEnVariable(consultamoneda))==0)
+                {
+                    txtCotizacion.Visibility = Visibility.Collapsed;
+                    txtTotalPesos.Visibility = Visibility.Collapsed;
+                    lblCotizacion.Visibility = Visibility.Collapsed;
+                    lblTotalPesos.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    txtCotizacion.Visibility = Visibility.Visible;
+                    txtTotalPesos.Visibility = Visibility.Visible;
+                    lblCotizacion.Visibility = Visibility.Visible;
+                    lblTotalPesos.Visibility = Visibility.Visible;
+                }
+
             }
 
         }
@@ -367,9 +395,9 @@ namespace wpfFamiliaBlanco.Entradas
                             Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
                           
                             dgvProductosFactura.Items.Refresh();
-                           // float.TryParse(txtSubtotal.Text, out subtotal);
-                           
-                          
+                            // float.TryParse(txtSubtotal.Text, out subtotal);
+
+                            MessageBox.Show("Subtotal: " + Subtotal);
                             txtSubtotal.Text = (Subtotal).ToString();                          
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();
@@ -415,7 +443,8 @@ namespace wpfFamiliaBlanco.Entradas
 
                 }
                 Subtotal = Subtotal - (prod.cantidad * prod.precioUnitario);
-        
+                MessageBox.Show("Total: " + total);
+                MessageBox.Show("subtotal: " + Subtotal);
                 txtSubtotal.Text = Subtotal.ToString();
                 calculaTotal();
                 dgvProductosOC.Items.Refresh();
@@ -483,22 +512,27 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 total = float.Parse(txtSubtotal.Text) * (float)1.21;
                 txtTotal.Text = total.ToString();
+               
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
                 total = float.Parse(txtSubtotal.Text) * (float)1.105;
                 txtTotal.Text = total.ToString();
+                
             }
         }
 
         private void cmbTipoCambio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        
         }
 
         private void cmbIVA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             calculaTotal();
+            calculaTotalPesos();
+            
         }
 
        
@@ -793,6 +827,22 @@ namespace wpfFamiliaBlanco.Entradas
 
                 MessageBox.Show("Seleccione un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void txtCotizacion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            calculaTotalPesos();
+        }
+
+        private  void calculaTotalPesos()
+        {
+            if (txtTotal.Text != "" && txtCotizacion.Text != "")
+                txtTotalPesos.Text = (float.Parse(txtTotal.Text) * float.Parse(txtCotizacion.Text)).ToString();
+            if (txtCotizacion.Text == "")
+                txtTotalPesos.Text = "";
+            if(itemsFact.Count == 0)            
+                txtTotalPesos.Text = "";
+            
         }
     }
 
