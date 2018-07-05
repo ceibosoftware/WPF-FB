@@ -397,7 +397,7 @@ namespace wpfFamiliaBlanco.Entradas
                             dgvProductosFactura.Items.Refresh();
                             // float.TryParse(txtSubtotal.Text, out subtotal);
 
-                            MessageBox.Show("Subtotal: " + Subtotal);
+                            
                             txtSubtotal.Text = (Subtotal).ToString();                          
                             prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
                             dgvProductosOC.Items.Refresh();

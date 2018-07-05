@@ -346,7 +346,7 @@ namespace wpfFamiliaBlanco.Entradas
                 }
                 else
                 {
-                    String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos,t1.CrNotaCredito from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '" + ltsfacturas.SelectedValue + "'";
+                    String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.costo,t2.idProductos,t1.CrNotaCredito from productos_has_facturas t1, productos_has_ordencompra t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '" + ltsfacturas.SelectedValue + "'";
 
                     productos = conexion.ConsultaParametrizada(productosFatura, ltsfacturas.SelectedValue);
                     //DgvProductosFactur.ItemsSource = productos.AsDataView();

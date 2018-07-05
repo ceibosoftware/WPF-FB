@@ -128,7 +128,7 @@ namespace wpfFamiliaBlanco.Entradas
                     itemsFacturaDB.Add(p);
 
                     
-                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal,CrNotaCredito ,FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '"+cantidad+"','" + idp + "', '" + id + "')";
+                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal,CrNotaCredito ,FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '"+ cantidad +"','" + idp + "', '" + id + "')";
                     conexion.operaciones(sqlProductoHas);
 
 
