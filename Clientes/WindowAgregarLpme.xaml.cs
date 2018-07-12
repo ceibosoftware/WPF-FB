@@ -37,17 +37,17 @@ namespace wpfFamiliaBlanco.Clientes
             camplimit();
         }
 
-        public WindowAgregarLpme(int id, string nombre, DataTable itemslp, String fecha)
+        public WindowAgregarLpme(int id, string nombre, DataTable itemslp, String fecha, String anexo=null)
         {
             InitializeComponent();
-
-            this.txtNombre.Text = nombre;
+            
             loaddgvp();
             loadlistadeprecios(itemslp);
             idlistadb = id;
             camplimit();
             lblWindowTitle.Content = "Modificar Lista de Precios";
-
+            this.txtNombre.Text = nombre;
+            this.txtAnexo.Text = anexo;
         }
 
 
@@ -57,6 +57,7 @@ namespace wpfFamiliaBlanco.Clientes
             dgvProductos.IsReadOnly = true;
             txtNombre.MaxLength = 20;
             txtPreciolista.MaxLength = 10;
+            txtAnexo.MaxLength = 2;
 
 
         }
@@ -286,6 +287,17 @@ namespace wpfFamiliaBlanco.Clientes
         private void dgvProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtAnexo_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
         }
     }
 

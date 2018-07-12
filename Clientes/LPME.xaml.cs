@@ -44,7 +44,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void loadlp()
         {
-            String consulta = "Select * from listadeprecios WHERE tipo=0";
+            String consulta = "Select * from listadeprecios WHERE tipo=1";
             conexion.Consulta(consulta, ltsLpme);
             ltsLpme.DisplayMemberPath = "nombre";
             ltsLpme.SelectedValuePath = "idLista";
@@ -98,10 +98,20 @@ namespace wpfFamiliaBlanco.Clientes
                 String fecha = conexion.ValorEnVariable(consulta);
                 String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
                 String nombre = conexion.ValorEnVariable(consulta2);
-
+                String consulta3 = "Select anexo from listadeprecios where idLista='" + seleccionado + "'";
+                String anexo = conexion.ValorEnVariable(consulta3);
 
                 lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
                 lblnombre.Content = nombre;
+                if (anexo=="")
+                {
+                    lbltienea.Content = "No tiene anexo";
+                }
+                else
+                {
+                    lbltienea.Content = anexo;
+                }
+                
                 ActualizaDGVlp();
             }
         }
@@ -113,9 +123,10 @@ namespace wpfFamiliaBlanco.Clientes
             bandera = true;
             var newW = new WindowAgregarLpme();
             string nombre;
-            // newW.lblpreciolista.Visibility = Visibility.Hidden;
-            //newW.txtPreciolista.Visibility = Visibility.Hidden;
-            //newW.btnModpl.Visibility = Visibility.Hidden;
+            string anexo;
+            newW.lblpreciolista.Visibility = Visibility.Collapsed;
+            newW.txtPreciolista.Visibility = Visibility.Collapsed;
+            newW.btnModpl.Visibility = Visibility.Collapsed;
             newW.ShowDialog();
 
             if (newW.DialogResult == true)
@@ -123,15 +134,33 @@ namespace wpfFamiliaBlanco.Clientes
                 nombre = newW.txtNombre.Text;
                 DateTime hoy;
                 hoy = DateTime.Today;
+                if (newW.txtAnexo.Text=="")
+                {
+                    anexo = "";
+                }
+                else
+                {
+                    anexo = newW.txtAnexo.Text;
+                }
+               
 
 
 
 
 
-
-                String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+0+"')";
-                conexion.operaciones(sql);
+                if (newW.txtAnexo.Text=="")
+                {
+                    String sql;
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 +"')";
+                    conexion.operaciones(sql);
+                }
+                else
+                {
+                    String sql;
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,anexo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 + "','" + anexo + "')";
+                    conexion.operaciones(sql);
+                }
+               
 
                 string ultimoId = "Select last_insert_id()";
                 String id = conexion.ValorEnVariable(ultimoId);
@@ -179,6 +208,7 @@ namespace wpfFamiliaBlanco.Clientes
                 int idlista = (int)ltsLpme.SelectedValue;
                 String nombrelp;
                 String fecha;
+                String anexo;
 
                 DateTime hoy;
                 hoy = DateTime.Today;
@@ -189,8 +219,11 @@ namespace wpfFamiliaBlanco.Clientes
                 fecha = hoy.ToString("yyyy/MM/dd");
 
                 nombrelp = nombre;
-
-                var newW = new windowAgregarLp(idlista, nombrelp, listadeprecios, fecha);
+                String consulta2 = "SELECT anexo from listadeprecios where idLista='" + idlista + "';";
+                String anexolista = conexion.ValorEnVariable(consulta2);
+                anexo = anexolista;
+             
+                var newW = new WindowAgregarLpme(idlista, lblnombre.Content.ToString(), listadeprecios, fecha,lbltienea.Content.ToString());
 
                 for (int i = 0; i < newW.itemslp.Count; i++)
                 {
@@ -213,6 +246,7 @@ namespace wpfFamiliaBlanco.Clientes
                     hoy = DateTime.Today;
                     fecha = hoy.ToString("yyyy/MM/dd");
                     nombre = newW.txtNombre.Text;
+                    anexo = newW.txtAnexo.Text;
 
                     String update = "update listadeprecios set nombre = '" + nombre + "', fecha = '" + fecha + "' where idLista = '" + idlista + "'; ";
                     conexion.operaciones(update);

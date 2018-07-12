@@ -128,7 +128,7 @@
         <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="902,403,0,47" Width="76" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" />
         <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="902.5,355.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnModificar_Click"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="902.5,307.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnEliminar_Click"/>
-        <ListBox x:Name="ltsLpme" HorizontalAlignment="Left" Height="326.341" Margin="53,51.992,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsLpme_SelectionChanged"/>
+        <ListBox x:Name="ltsLpme" HorizontalAlignment="Left" Height="296" Margin="53,52,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsLpme_SelectionChanged"/>
         <Label x:Name="lbllp" Content="Listas de Precios" HorizontalAlignment="Left" Margin="285,26.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblnlp" Content="" HorizontalAlignment="Left" Margin="874,40,0,0" VerticalAlignment="Top"/>
         <DataGrid x:Name="dgvLpme" HorizontalAlignment="Left" Height="326.341" Margin="444.993,51.992,0,0" VerticalAlignment="Top" Width="369.717"/>
@@ -148,6 +148,9 @@
         <Label x:Name="lbllp_Copy" Content="Última modificación:" HorizontalAlignment="Left" Margin="45.007,398.177,0,0" VerticalAlignment="Top" Height="25" Width="137" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblultimam" Content="" HorizontalAlignment="Left" Margin="190.007,397.814,0,0" VerticalAlignment="Top" Height="25" Width="227" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lbllp_Copy1" Content="Items" HorizontalAlignment="Left" Margin="682.717,26.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Rectangle HorizontalAlignment="Left" Height="23" Margin="53,362,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="364" Stroke="#FF858585"/>
+        <Label x:Name="lblanexo" Content="Anexo:" HorizontalAlignment="Right" Margin="-32,364,929,0" VerticalAlignment="Top" Height="25" Width="137" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lbltienea" Content="" HorizontalAlignment="Left" Margin="190,364,0,0" VerticalAlignment="Top" Height="25" Width="227" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 </Page>

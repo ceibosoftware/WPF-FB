@@ -112,7 +112,7 @@
             <ColumnDefinition Width="589*"/>
             <ColumnDefinition Width="281*"/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="27,37,0,0" Width="811" Opacity="0.5" CornerRadius="5" Height="311" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Border BorderBrush="#FF858585" BorderThickness="1,1,3,1" HorizontalAlignment="Left" Margin="18,37,0,0" Width="811" Opacity="0.5" CornerRadius="5" Height="334" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -140,8 +140,8 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="153.455,253.128,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource agregar}" Click="btnAceptar_Click"/>
-        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="153.455,299.843,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource Cancelar}"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="153,303,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource agregar}" Click="btnAceptar_Click"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="153,336,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Height="23" Foreground="White" Style="{DynamicResource Cancelar}" Click="btnCancelar_Click"/>
         <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="51,76.843,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224" FontSize="14"/>
         <DataGrid x:Name="dgvProductos" HorizontalAlignment="Left" Height="198" Margin="51,124.843,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="dgvProductos_SelectionChanged"/>
         <Label x:Name="lblWindowTitle" Content="Agregar Lista de Precios" HorizontalAlignment="Left" Margin="18,5,0,0" VerticalAlignment="Top" Height="32" Width="253.333" FontSize="14" RenderTransformOrigin="0.547,0.535"/>
@@ -152,10 +152,12 @@
         <TextBox x:Name="txtPreciolista" HorizontalAlignment="Left" Height="23" Margin="348,76.843,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224"/>
         <Button x:Name="btnModpl" Content="Modificar" HorizontalAlignment="Left" Margin="584,76.843,0,0" VerticalAlignment="Top" Width="75" Height="23" Foreground="White" ToolTip="Modificar Precio de Lista" Grid.ColumnSpan="2"/>
         <Label x:Name="lblnombre_Copy1" Content="Lista de Precios" HorizontalAlignment="Left" Margin="440,99.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label x:Name="lblnombre_Copy2" Content="Precio de Lista" HorizontalAlignment="Left" Margin="440,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblpreciolista" Content="Precio de Lista" HorizontalAlignment="Left" Margin="440,51.843,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="96.455,47.513,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
         <Border BorderBrush="#FF00586B" BorderThickness="1,1,5,1" HorizontalAlignment="Left" Height="155.008" Margin="107.179,72.62,0,0" VerticalAlignment="Top" Width="121.276" Background="#FF2D2C2C" CornerRadius="5" Grid.Column="1">
             <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="135.008" TextWrapping="Wrap" VerticalAlignment="Top" Width="101.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="En esta pantalla se crea/modifica la lista de precios. El botón modificar solo estará disponible cuando así se desee. Seleccione el producto y agréguelo a la lista asignando su precios de lista."/>
         </Border>
+        <TextBox x:Name="txtAnexo" HorizontalAlignment="Left" Height="23" Margin="155,336,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="83" FontSize="14" PreviewTextInput="txtAnexo_PreviewTextInput"/>
+        <Label x:Name="lblanexo" Content="Anexo" HorizontalAlignment="Left" Margin="18,336,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
     </Grid>
 </Window>
