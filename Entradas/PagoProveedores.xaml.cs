@@ -25,24 +25,19 @@ namespace wpfFamiliaBlanco.Entradas
         CRUD conexion = new CRUD();
         public List<Producto> ProximosPagos = new List<Producto>();
         DataTable porPagar;
-        DataTable pagado;
-        DataTable Pagadocheque;
-        DateTime fecha;
         bool bandera = false;
         pageEntradas pe = new pageEntradas();
-
+        String moneda;
         float restante = 0;
         public PagoProveedores()
         {
             InitializeComponent();
             LoadltsFacturas();
-          //  loadLtsPagosRealizados();
-            txtEstado.IsReadOnly = true;
+            txtMoneda.IsReadOnly = true;
             txtfecha.IsReadOnly = true;
             txtNumeroCuota.IsReadOnly = true;
             txtnumerocuotapaga.IsReadOnly = true;
-            txtNumeroFactura.IsReadOnly = true;
-            //txtProveedor.IsReadOnly = true;
+            txtRestanteFactura.IsReadOnly = true;
             txtTipoPago.IsReadOnly = true;
             txtTotalCuota.IsReadOnly = true;
             txtTotalFactura.IsReadOnly = true;
@@ -58,68 +53,32 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void btnAgregarPago_Click(object sender, RoutedEventArgs e)
         {
-            //bandera = true;
-            //int idcuota =(int)ltsProximospagos.SelectedValue;
-            //String totalCuota = txtTotalCuota.Text;
-
-            //String id = "SELECT FK_idfacturas FROM cuotas WHERE idCuota = '" + ltsProximospagos.SelectedValue + "'";
+            moneda = txtMoneda.Text;
+            TipoMoneda(moneda);
      
-            //String idfac = conexion.ValorEnVariable(id);
-     
-            var newW = new WindowAgregarPagoFactura(float.Parse(txtTotalFactura.Text), (int) ltsfacturas.SelectedValue, (float)restante);
+            var newW = new WindowAgregarPagoFactura(float.Parse(txtTotalFactura.Text), (int) ltsfacturas.SelectedValue, (float)restante, moneda);
+           
             newW.ShowDialog();
 
-            //if (newW.DialogResult == true)
-            //{
-
-            //    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idCuota)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + 0  + "','" + totalCuota + "','" + idcuota + "')";
-            //    conexion.operaciones(sql);
-
-            //    String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
-            //    conexion.operaciones(sq2l);
-
-          
-            //    MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    pageEntradas pe = new pageEntradas();
-                
-                
-
-
-            //}
-            //else if (newW.tipopago == 1)
-            //{
-            //    String sql = "INSERT INTO pago (fecha, formaPago,FK_idCheque ,FK_idCuota)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + 1 + "','" + newW.idCheque + "','" + idcuota + "')";
-            //    conexion.operaciones(sql);
-
-            //    String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
-            //    conexion.operaciones(sq2l);
-            //    MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK,MessageBoxImage.Information);
-            //}
-            //else if (newW.tipopago == 2)
-            //{
-            //    String sql = "INSERT INTO pago (fecha, formaPago,FK_idCuentaBco ,FK_idCuota)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + 2 + "','" + newW.idCtaBcria + "','" + idcuota + "')";
-            //    conexion.operaciones(sql);
-
-            //    String sq2l = "UPDATE cuotas SET estado = '" + 1 + "' where idCuota = '" + idcuota + "' and FK_idfacturas = '" + idfac + "'";
-            //    conexion.operaciones(sq2l);
-            //    MessageBox.Show("El pago se ha realizado correctamente", "Información", MessageBoxButton.OK,MessageBoxImage.Information);
-            //}
-
-            //loadLtsProximosPagos();
-            //loadLtsPagosRealizadosMOve();
-            //bandera = false;
-            //MainWindow.notificaciones();
         }
 
-        //public void loadLtsProximosPagos()
-        //{
-         
-        //    String consulta = "SELECT * FROM cuotas WHERE estado = '" + 0 + "' ORDER BY fecha ASC ";
-        //    conexion.Consulta(consulta, tabla: ltsProximospagos);
-        //    ltsProximospagos.DisplayMemberPath = "fecha";
-        //    ltsProximospagos.SelectedValuePath = "idCuota";
-        //    ltsProximospagos.SelectedIndex = 0;
-        //}
+
+        private void TipoMoneda(string m)
+        {
+            if (m == "$")
+            {
+                moneda = "0";
+            }
+            else if (m == "u$d")
+            {
+              moneda = "1";
+            }
+            else
+            {
+                moneda = "2";
+            }
+
+        }
 
         public void LoadltsFacturas()
         {
@@ -135,11 +94,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         public void loadLtsPagosRealizadosMOve()
         {
-            //String consulta = "SELECT *  FROM pago ";
-            //conexion.Consulta(consulta, tabla: ltsPagosReaizados);
-            //ltsPagosReaizados.DisplayMemberPath = "idPago";
-            //ltsPagosReaizados.SelectedValuePath = "idPago";
-           
+
 
         }
 
@@ -312,27 +267,24 @@ namespace wpfFamiliaBlanco.Entradas
            // }
         }
 
-        private void ltsfacturas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ColapsarElementos()
         {
-            try
-            {
-
             btnEliminarPago.Visibility = Visibility.Collapsed;
 
             txtNumeroCuota.Visibility = Visibility.Visible;
-           // txtProveedor.Visibility = Visibility.Visible;
-            txtNumeroFactura.Visibility = Visibility.Visible;
+            // txtProveedor.Visibility = Visibility.Visible;
+            txtRestanteFactura.Visibility = Visibility.Visible;
             txtTotalCuota.Visibility = Visibility.Visible;
             txtTotalFactura.Visibility = Visibility.Visible;
             btnAgregarPago.Visibility = Visibility.Visible;
             lbl1.Visibility = Visibility.Visible;
-           // lbl2.Visibility = Visibility.Visible;
+            // lbl2.Visibility = Visibility.Visible;
             lbl3.Visibility = Visibility.Visible;
             lbl4.Visibility = Visibility.Visible;
             lbl5.Visibility = Visibility.Visible;
 
             txtTotalPAgo.Visibility = Visibility.Collapsed;
-            txtEstado.Visibility = Visibility.Collapsed;
+            //txtEstado.Visibility = Visibility.Collapsed;
             txtTipoPago.Visibility = Visibility.Collapsed;
             txtfecha.Visibility = Visibility.Collapsed;
             txtnumerocuotapaga.Visibility = Visibility.Collapsed;
@@ -341,6 +293,13 @@ namespace wpfFamiliaBlanco.Entradas
             lblfp.Visibility = Visibility.Collapsed;
             fec.Visibility = Visibility.Collapsed;
             lblnumcuotapaga.Visibility = Visibility.Collapsed;
+        }
+        private void ltsfacturas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+
+                ColapsarElementos();
 
             String sql = "SELECT * FROM cuotas c, factura f WHERE f.idfacturas = '" + ltsfacturas.SelectedValue + "' AND c.FK_idfacturas = '" + ltsfacturas.SelectedValue + "'";
             porPagar = conexion.ConsultaParametrizada(sql, ltsfacturas.SelectedValue);
@@ -348,12 +307,26 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotalCuota.Text = porPagar.Rows[0].ItemArray[4].ToString();
             txtNumeroCuota.Text = porPagar.Rows[0].ItemArray[5].ToString();
             txtTotalFactura.Text = porPagar.Rows[0].ItemArray[10].ToString();
-            txtNumeroFactura.Text = porPagar.Rows[0].ItemArray[16].ToString();
 
-             restante = 0;
-            restante = float.Parse( porPagar.Rows[0].ItemArray[16].ToString());
+                String tipoCambio = porPagar.Rows[0].ItemArray[12].ToString();
+                if (tipoCambio == "0")
+                {
+                    txtMoneda.Text = "$";
+                }
+                else if (tipoCambio == "1")
+                {
+                    txtMoneda.Text = "u$d";
+                }
+                else
+                {
+                    txtMoneda.Text = "€";
+                }
+                
 
-            if (!bandera)
+                restante = 0;
+            restante = float.Parse( porPagar.Rows[0].ItemArray[17].ToString());
+                txtRestanteFactura.Text = restante.ToString();
+                if (!bandera)
             {
                     
                 String consultaProveedores = "SELECT fecha, DATE_FORMAT(fecha,'%d%m%Y') FROM cuotas WHERE FK_idfacturas = '" + ltsfacturas.SelectedValue + "'";

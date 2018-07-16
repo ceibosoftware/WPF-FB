@@ -422,10 +422,10 @@ namespace wpfFamiliaBlanco.Entradas
                 String tieneNC = "SELECT COUNT(*) FROM notacredito WHERE FK_idFactura  = '" + ltsFactura.SelectedValue + "'";
                 String NC = conexion.ValorEnVariable(tieneNC).ToString();
 
-                String idf = "   SELECT idCuota FROM cuotas WHERE FK_idfacturas =  '" + ltsFactura.SelectedValue + "'";
-                String pagosi = conexion.ValorEnVariable(idf).ToString();
+                //String idf = "   SELECT idCuota FROM cuotas WHERE FK_idfacturas =  '" + ltsFactura.SelectedValue + "'";
+                //String pagosi = conexion.ValorEnVariable(idf).ToString();
 
-                String pag = "SELECT COUNT(*) FROM pago WHERE FK_idCuota  = '" + pagosi + "'";
+                String pag = "SELECT COUNT(*) FROM pago WHERE FK_idfacturas  = '" + ltsFactura.SelectedValue + "'";
                 String tienep = conexion.ValorEnVariable(pag).ToString();
 
 
