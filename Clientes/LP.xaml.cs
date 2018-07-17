@@ -95,19 +95,19 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void ltsLp_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!bandera) { 
-            int seleccionado = (int)ltsLp.SelectedValue;
+            if (!bandera) {
+                int seleccionado = (int)ltsLp.SelectedValue;
 
 
-             
-            String consulta = "Select fecha from listadeprecios where idLista='" + seleccionado + "'";
-            String fecha = conexion.ValorEnVariable(consulta);
-            String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
-            String nombre = conexion.ValorEnVariable(consulta2);
 
-
-            lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
-            lblnombre.Content = nombre;
+                String consulta = "Select fecha from listadeprecios where idLista='" + seleccionado + "'";
+                String fecha = conexion.ValorEnVariable(consulta);
+                String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
+                String nombre = conexion.ValorEnVariable(consulta2);
+                
+                lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
+                lblnombre.Content = nombre;
+                
             ActualizaDGVlp();
             }
 
@@ -136,7 +136,7 @@ namespace wpfFamiliaBlanco.Clientes
                 
                 
                 String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+0+"')";
+                sql = "INSERT into listadeprecios(nombre, fecha,tipo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+0+"','"+0+"')";
                 conexion.operaciones(sql);
 
                 string ultimoId = "Select last_insert_id()";

@@ -100,9 +100,20 @@ namespace wpfFamiliaBlanco.Clientes
                 String nombre = conexion.ValorEnVariable(consulta2);
                 String consulta3 = "Select anexo from listadeprecios where idLista='" + seleccionado + "'";
                 String anexo = conexion.ValorEnVariable(consulta3);
+                String consulta4 = "Select moneda from listadeprecios where idLista='" + seleccionado + "'";
+                String moneda = conexion.ValorEnVariable(consulta4);
+
 
                 lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
                 lblnombre.Content = nombre;
+                if (moneda=="1")
+                {
+                    lblcoin.Content = "USD";
+                }
+                else
+                {
+                    lblcoin.Content = "EURO";
+                }
                 if (anexo=="")
                 {
                     lbltienea.Content = "No tiene anexo";
@@ -128,6 +139,7 @@ namespace wpfFamiliaBlanco.Clientes
             newW.txtPreciolista.Visibility = Visibility.Collapsed;
             newW.btnModpl.Visibility = Visibility.Collapsed;
             newW.ShowDialog();
+            int moneda;
 
             if (newW.DialogResult == true)
             {
@@ -142,22 +154,30 @@ namespace wpfFamiliaBlanco.Clientes
                 {
                     anexo = newW.txtAnexo.Text;
                 }
+
+
+                if (newW.cmbMoneda.Text=="USD")
+                {
+                    moneda = 1;
+                }
+                else
+                {
+                    moneda = 2;
+                }
                
-
-
 
 
 
                 if (newW.txtAnexo.Text=="")
                 {
                     String sql;
-                    sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 +"')";
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 +"','"+moneda+"')";
                     conexion.operaciones(sql);
                 }
                 else
                 {
                     String sql;
-                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,anexo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 + "','" + anexo + "')";
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,anexo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 + "','" + anexo + "','"+moneda+"')";
                     conexion.operaciones(sql);
                 }
                
@@ -189,6 +209,10 @@ namespace wpfFamiliaBlanco.Clientes
                 ActualizaDGVlp();
                 MessageBox.Show("Se agrego la lista de precio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            else
+            {
+                bandera = false;
+            }
 
 
 
@@ -204,11 +228,13 @@ namespace wpfFamiliaBlanco.Clientes
 
 
                 int modificado;
+                
                 modificado = ltsLpme.SelectedIndex;
                 int idlista = (int)ltsLpme.SelectedValue;
                 String nombrelp;
                 String fecha;
                 String anexo;
+                int coin;
 
                 DateTime hoy;
                 hoy = DateTime.Today;
@@ -221,9 +247,12 @@ namespace wpfFamiliaBlanco.Clientes
                 nombrelp = nombre;
                 String consulta2 = "SELECT anexo from listadeprecios where idLista='" + idlista + "';";
                 String anexolista = conexion.ValorEnVariable(consulta2);
+                String consulta3 = "SELECT moneda from listadeprecios where idLista='" + idlista + "';";
+                String moneda = conexion.ValorEnVariable(consulta3);
+                coin = int.Parse(moneda);
                 anexo = anexolista;
              
-                var newW = new WindowAgregarLpme(idlista, lblnombre.Content.ToString(), listadeprecios, fecha,lbltienea.Content.ToString());
+                var newW = new WindowAgregarLpme(idlista, lblnombre.Content.ToString(), listadeprecios, fecha,coin,lbltienea.Content.ToString());
 
                 for (int i = 0; i < newW.itemslp.Count; i++)
                 {

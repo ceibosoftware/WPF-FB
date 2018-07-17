@@ -377,6 +377,9 @@ namespace wpfFamiliaBlanco.Clientes
 
             var newW = new windowAgregarLp();
             string nombre;
+            newW.lblpreciolista.Visibility = Visibility.Collapsed;
+            newW.txtPreciolista.Visibility = Visibility.Collapsed;
+            newW.btnModpl.Visibility = Visibility.Collapsed;
             newW.ShowDialog();
 
 

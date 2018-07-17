@@ -340,9 +340,12 @@
             <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11"><Run Text="Aquí se agrega/modifica un Cliente de Mercado Externo. Complete aquellos campos obligatorios, como nombre y contacto. Podrá asignar o no una lista de precios al cliente."/><LineBreak/><Run Text="Presione aceptar para cargar los datos o  cancelar para descartar."/></TextBlock>
         </Border>
         <Button x:Name="btnmlp" Content="+LP" HorizontalAlignment="Left" Margin="731,372,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnmlp_Click"/>
-        <Rectangle HorizontalAlignment="Left" Height="21" Margin="442,372,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="281" Stroke="#FF858585"/>
+        <Rectangle HorizontalAlignment="Left" Height="21" Margin="442,372,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="132" Stroke="#FF858585"/>
         <Label x:Name="lblanexo" Content="Anexo:" HorizontalAlignment="Right" Margin="0,372,533,0" VerticalAlignment="Top" Height="25" Width="137" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label x:Name="lbltienea" Content="" HorizontalAlignment="Left" Margin="552,372,0,0" VerticalAlignment="Top" Height="22" Width="164" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lbltienea" Content="" HorizontalAlignment="Left" Margin="507,373,0,0" VerticalAlignment="Top" Height="22" Width="67" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Rectangle HorizontalAlignment="Left" Height="21" Margin="580,372,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="132" Stroke="#FF858585"/>
+        <Label x:Name="lblmoneda" Content="Moneda:" HorizontalAlignment="Right" Margin="0,372,387,0" VerticalAlignment="Top" Height="25" Width="139" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lbllmoneda" Content="" HorizontalAlignment="Left" Margin="654,373,0,0" VerticalAlignment="Top" Height="22" Width="50" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 

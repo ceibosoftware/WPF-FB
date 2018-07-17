@@ -119,6 +119,7 @@
                     <GradientStop Color="#FF282727" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+            <ComboBox x:Name="cmbMoneda" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Height="21" Margin="675,222,0,0"/>
         </Border>
         <Button x:Name="btnEliminarp" Width="36" VerticalAlignment="Top" Style="{DynamicResource BotonStyle_crud2}" Margin="287,249,0,0" Height="23" HorizontalAlignment="Left" Foreground="White" Content="&lt;" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnEliminarp_Click">
             <Button.RenderTransform>
@@ -159,5 +160,6 @@
         </Border>
         <TextBox x:Name="txtAnexo" HorizontalAlignment="Left" Height="23" Margin="155,336,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="83" FontSize="14" PreviewTextInput="txtAnexo_PreviewTextInput"/>
         <Label x:Name="lblanexo" Content="Anexo" HorizontalAlignment="Left" Margin="18,336,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblmoneda" Content="Moneda" HorizontalAlignment="Left" Margin="153,233,0,0" VerticalAlignment="Top" Height="25" Width="64" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}" Grid.Column="1"/>
     </Grid>
 </Window>

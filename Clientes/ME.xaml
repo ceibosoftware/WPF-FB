@@ -270,8 +270,10 @@
         <TextBox x:Name="txtDireccion" Width="363.493" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle2}" Margin="445,146.225,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" BorderThickness="1"/>
         <Label x:Name="lbldireccion" Content="Direccion" HorizontalAlignment="Left" Margin="714.667,121.225,0,0" VerticalAlignment="Top" Height="25" Width="94.333" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblClientes_Copy2" Content="Items" HorizontalAlignment="Left" Margin="676.993,240.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <Label x:Name="lblanexo" Content="%Anexo" HorizontalAlignment="Left" Margin="484,193,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
-        <TextBox x:Name="txtanexo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" Margin="447,218,0,0"/>
+        <Label x:Name="lblanexo" Content="%Anexo" HorizontalAlignment="Left" Margin="434,193,0,0" VerticalAlignment="Top" Height="25" Width="70" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtanexo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57" Margin="447,218,0,0"/>
+        <Label x:Name="lblmoneda" Content="Moneda" HorizontalAlignment="Left" Margin="523,193,0,0" VerticalAlignment="Top" Height="25" Width="70" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <TextBox x:Name="txtmoneda" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57" Margin="534,218,0,0"/>
 
     </Grid>
 </Page>
