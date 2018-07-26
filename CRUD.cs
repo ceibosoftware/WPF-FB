@@ -18,6 +18,8 @@ namespace wpfFamiliaBlanco
        // MySqlConnection conexion = new MySqlConnection("Server=192.168.0.3; Database=familiablanco; Uid=mariano; Pwd=1234");
        MySqlConnection conexion = new MySqlConnection("Server=localhost; Database=familiablanco; Uid=root; Pwd=''");
 
+        public MySqlConnection Conexion1 { get => conexion; set => conexion = value; }
+
         public void Conexion()
         {
             try
@@ -30,6 +32,13 @@ namespace wpfFamiliaBlanco
             {
                 var result = MessageBox.Show("Conexion fallida", "", buttons);
             }
+        }
+
+        public MySqlTransaction iniciarTransaccion()
+        {
+            conexion.Open();
+            MySqlTransaction tr = conexion.BeginTransaction();
+            return tr;
         }
         // consulta para llenar con todos los datos una listBox , vamos a ir agregando elementos a llenar, (combo y tabla son parametros opcionales por eso estan como null) 
         public void Consulta(String sql, ListBox tabla = null, ComboBox combo = null)
@@ -87,6 +96,20 @@ namespace wpfFamiliaBlanco
                 var result = MessageBox.Show("No se pudo realizar la consulta", "Error", buttons);
             }
         }
+
+        public DataTable coleccion(string sql)
+        {
+            
+                //Objeto data adapter: realiza conexion y solicitud del usuario.
+                MySqlDataAdapter DA = new MySqlDataAdapter(sql, conexion);
+                // Data table recibe la informacion del dataAdapter (DA).
+                DataTable DT = new DataTable();
+                //Pasamos la informacion del dataAdapter (DA) al data (DT) 
+                DA.Fill(DT);
+
+                return DT;
+          
+        }
         // funcion que se va usar para hacer abm .
         public void operaciones(String sql)
         {
@@ -120,6 +143,8 @@ namespace wpfFamiliaBlanco
             
 
         }
+
+        
     }
 }
 

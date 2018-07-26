@@ -15,9 +15,10 @@ using System.Windows.Shapes;
 using wpfFamiliaBlanco.Salidas;
 using wpfFamiliaBlanco.Salidas.Devoluciones;
 using wpfFamiliaBlanco.Salidas.Facturacion;
-using wpfFamiliaBlanco.Salidas.Ordenes;
+
 using wpfFamiliaBlanco.Salidas.Pagos;
 using wpfFamiliaBlanco.Salidas.Remitos;
+using wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido;
 
 namespace wpfFamiliaBlanco
 {
@@ -29,7 +30,7 @@ namespace wpfFamiliaBlanco
         public pageSalidas()
         {
             InitializeComponent();
-            frameInicioSalida.Content = new OrdenesSalida();
+           
             btnOrdenes.Style = FindResource("botonTabPressed") as Style;
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;
@@ -39,7 +40,7 @@ namespace wpfFamiliaBlanco
 
         private void btnOrdenes_Click(object sender, RoutedEventArgs e)
         {
-            frameInicioSalida.Content = new OrdenesSalida();
+            frameInicioSalida.Content = new PageOrdenPedido();
             btnOrdenes.Style = FindResource("botonTabPressed") as Style;
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;
