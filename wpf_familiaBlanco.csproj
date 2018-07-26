@@ -190,6 +190,13 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalidasNuevo\Clases\INV\Analisis.cs" />
+    <Compile Include="SalidasNuevo\Vistas\INV\PageINV.xaml.cs">
+      <DependentUpon>PageINV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\INV\windowAgregarINV.xaml.cs">
+      <DependentUpon>windowAgregarINV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml.cs">
       <DependentUpon>DevolucionFacturaCliente.xaml</DependentUpon>
     </Compile>
@@ -456,6 +463,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SalidasNuevo\Vistas\INV\PageINV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\INV\windowAgregarINV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -641,7 +656,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SalidasNuevo\Clases\OrdenesPedido\" />
-    <Folder Include="SalidasNuevo\Vistas\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
