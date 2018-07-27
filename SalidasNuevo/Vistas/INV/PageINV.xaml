@@ -1325,17 +1325,41 @@
 
     <Grid HorizontalAlignment="Left" Height="473.215" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
         <ComboBox x:Name="cmbtipo" HorizontalAlignment="Left" Margin="110,100,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="cmbtipo_DropDownClosed"/>
-        <Label Content="Tipo de Analisis" HorizontalAlignment="Left" Margin="137,74,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tipo de Analisis" HorizontalAlignment="Left" Margin="137,74,0,0" VerticalAlignment="Top" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <ListBox x:Name="ltsnumanalisis" HorizontalAlignment="Left" Height="225" Margin="110,146,0,0" VerticalAlignment="Top" Width="120" MouseLeftButtonUp="ListBox_MouseLeftButtonUp"/>
-        <Label Content="Litros Habilitados" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,105,0,0"/>
+        <Label Content="Litros Habilitados" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="258,105,0,0" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <TextBox x:Name="txtlitros" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="373,105,0,0"/>
-        <Label Content="Numero Analisis" HorizontalAlignment="Left" Margin="137,120,0,0" VerticalAlignment="Top"/>
-        <Label Content="Fecha Expiracion" HorizontalAlignment="Left" Margin="266,219,0,0" VerticalAlignment="Top"/>
+        <Label Content="Numero Analisis" HorizontalAlignment="Left" Margin="137,120,0,0" VerticalAlignment="Top" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Fecha Expiracion" HorizontalAlignment="Left" Margin="260,219,0,0" VerticalAlignment="Top" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="26" Margin="373,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtdensidad" HorizontalAlignment="Left" Height="23" Margin="373,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Densidad" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,164,0,0"/>
+        <Label Content="Densidad" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,164,0,0" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <TextBox x:Name="txtalcohol" HorizontalAlignment="Left" Height="26" Margin="373,279,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="76"/>
-        <Label Content="Alcohol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,279,0,0"/>
+        <Label Content="Alcohol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,279,0,0" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <Button x:Name="btnAgregar" Content="Agregar" Margin="588,378,369.666,0" VerticalAlignment="Top" Height="21" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAgregar_Click"/>
         <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="588,333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White"/>
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="588,287,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" RenderTransformOrigin="0.5,0.5">
@@ -1349,7 +1373,17 @@
             </Button.RenderTransform>
         </Button>
         <TextBox x:Name="txtnombre" HorizontalAlignment="Left" Height="23" Margin="375,333,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="176"/>
-        <Label Content="Nombre del vino" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,333,0,0"/>
+        <Label Content="Nombre del vino" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="262,333,0,0" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label x:Name="lblproducto" Content="Producto Asociado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="248,385,0,0" FontSize="14">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="txtproducto" HorizontalAlignment="Left" Height="23" Margin="375,387,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="176"/>
 
     </Grid>
 </Page>

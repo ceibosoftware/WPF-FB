@@ -30,8 +30,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         public windowAgregarINV()
         {
             InitializeComponent();
-           
-            llenarcmbtipo();
+
+            loadGeneral();
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -44,7 +44,11 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
                 
             }
         }
-
+        private void loadGeneral()
+        {
+            llenarcmbtipo();
+          
+        }
         public Boolean validacion()
         {
 
@@ -75,6 +79,11 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
                 MessageBox.Show("Complete la fecha de analisis");
                 return false;
             }
+            else if (String.IsNullOrEmpty(txtnombrevino.Text))
+            {
+                MessageBox.Show("Complete el nombre del vino analizado");
+                return false;
+            }
             return true;
         }
 
@@ -92,6 +101,19 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
             inv = new Analisis(alcohol, densidad, litros, numeroAnalisis, tipo, fecha, nombrevino);
 
 
+        }
+        private void collapsedproduct(string tipo)
+        {
+            if (tipo == "0")
+            {
+                cmbproducto.Visibility = Visibility.Collapsed;
+                lblproducto.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                cmbproducto.Visibility = Visibility.Visible;
+                lblproducto.Visibility = Visibility.Visible;
+            }
         }
 
         public void llenarcmbtipo()
@@ -121,6 +143,9 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
                 e.Handled = true;
         }
 
-       
+        private void cmbtipo_DropDownClosed(object sender, EventArgs e)
+        {
+            collapsedproduct(cmbtipo.SelectedIndex.ToString());
+        }
     }
 }

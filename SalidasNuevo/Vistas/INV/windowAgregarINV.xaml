@@ -17,13 +17,15 @@
         <Label Content="Alcohol" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="446,345,0,0"/>
         <TextBox x:Name="txtnombrevino" HorizontalAlignment="Left" Height="23" Margin="553,399,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Nombre vino" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="446,399,0,0"/>
-        <ComboBox x:Name="cmbtipo" HorizontalAlignment="Left" Margin="552,93,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cmbtipo" HorizontalAlignment="Left" Margin="552,93,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="cmbtipo_DropDownClosed"/>
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="451,89,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="815,374,0,0" VerticalAlignment="Top" Width="76" Click="btnAceptar_Click" Style="{DynamicResource agregar}" Foreground="White" Height="23"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="815,402,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource Cancelar}" Foreground="White" Height="23"/>
         <TextBox x:Name="txtnumero" HorizontalAlignment="Left" Height="23" Margin="553,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Numero Analisis" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="446,127,0,0"/>
         <DatePicker x:Name="dpFecha" HorizontalAlignment="Left" Margin="552,277,0,0" VerticalAlignment="Top" Width="121" Style="{DynamicResource DatePickerCambioForeground}" Height="34"/>
+        <Label x:Name="lblproducto" Content="Producto Asociado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="432,455,0,0"/>
+        <ComboBox x:Name="cmbproducto" HorizontalAlignment="Left" Margin="555,455,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
     

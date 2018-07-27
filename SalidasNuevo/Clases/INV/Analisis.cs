@@ -30,6 +30,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.INV
         public DateTime Fechaanalisis { get => fechaanalisis; set => fechaanalisis = value; }
 
         public Analisis(){ }
+
         public Analisis(float alcohol,float densidad, float litros, String numeroanalisis,int tipo, DateTime fechaanalisis,String nombrevino)
         {
             this.densidad = densidad;

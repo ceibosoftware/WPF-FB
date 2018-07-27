@@ -28,6 +28,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         {
             InitializeComponent();
             loadGeneral();
+
         }
 
         private void settxt()
@@ -60,6 +61,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         {
             loadltsanalisis();
             loadcmbtipo();
+            
         }
         private void loadltsanalisis(string tipo)
         {
@@ -67,6 +69,18 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
             ltsnumanalisis.DisplayMemberPath = "numero";
             ltsnumanalisis.SelectedValuePath = "idAnalisis";
             ltsnumanalisis.Items.Refresh();
+        }
+        private void collapsedproduct(string tipo)
+        {
+            if (tipo=="0"){
+                txtproducto.Visibility = Visibility.Collapsed;
+                lblproducto.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                txtproducto.Visibility = Visibility.Visible;
+                lblproducto.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -99,7 +113,11 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
 
         private void cmbtipo_DropDownClosed(object sender, EventArgs e)
         {
-            loadltsanalisis(cmbtipo.SelectedIndex.ToString());
+           
+                
+                loadltsanalisis(cmbtipo.SelectedIndex.ToString());
+                collapsedproduct(cmbtipo.SelectedIndex.ToString());
+           
             
             
         }
