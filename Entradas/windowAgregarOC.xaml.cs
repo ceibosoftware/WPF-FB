@@ -12,7 +12,7 @@ namespace wpfFamiliaBlanco.Entradas
     /// </summary>
     public partial class windowAgregarOC : Window
     {
- 
+        public bool existeProveedor = true;
         private int monedaProductos;
         int idOC;
         public bool agregado = false;
@@ -161,7 +161,7 @@ namespace wpfFamiliaBlanco.Entradas
             if(cmbProveedores.Items.Count == 0)
             {
                 MessageBox.Show("No existen provedorees que tengan productos en: " + monedas);
-             
+                existeProveedor = false;
             }  
         }
         public void LoadListaComboProveedor()
@@ -284,7 +284,7 @@ namespace wpfFamiliaBlanco.Entradas
                 Producto prod = dgvProductos.SelectedItem as Producto;
                 float.TryParse(txtSubtotal.Text, out subtotal);
                 subtotal -= prod.total;
-                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC, monedaProductos);
+                var newW = new windowAgregarClienteME((int)cmbProveedores.SelectedValue, prod.id, prod.nombre, idOC, monedaProductos, modifica);
 
                 newW.txtCantidad.Text = prod.cantidad.ToString();
 
@@ -342,7 +342,7 @@ namespace wpfFamiliaBlanco.Entradas
                         txtSubtotal.Text = (subtotal).ToString();
                         calculaTotal();
                     }
-                    MessageBox.Show("Se agregó correctamente la orden de compra", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
                 }
             }
             catch (NullReferenceException)
@@ -420,6 +420,7 @@ namespace wpfFamiliaBlanco.Entradas
                 lblTotalPesos.Visibility = Visibility.Collapsed;
                 txtCotizacion.Visibility = Visibility.Collapsed;
                 txtTotalPesos.Visibility = Visibility.Collapsed;
+                btnCotizacion.Visibility = Visibility.Collapsed;
             }else if(!modifica)
             {
                 loadCotizacion(moneda);
@@ -506,7 +507,7 @@ namespace wpfFamiliaBlanco.Entradas
                     if (newW.DialogResult == true)
                     {
                         //DATOS REMITO.
-                        int numeroRemito = int.Parse(newW.txtNroRemito.Text);
+                       string numeroRemito = newW.txtNroRemito.Text;
                         DateTime fecha = newW.dtRemito.SelectedDate.Value.Date;
 
                         int idOC = (int)newW.cmbOrden.SelectedValue;
@@ -625,7 +626,7 @@ namespace wpfFamiliaBlanco.Entradas
                         Console.WriteLine("subtotal : " + subtotal);
                         decimal total = decimal.Parse(newW.txtTotal.Text);
                         Console.WriteLine("total : " + total);
-                        int numeroFact = int.Parse(newW.txtNroFactura.Text);
+                        string numeroFact = newW.txtNroFactura.Text;
                         Console.WriteLine("numeroFact : " + numeroFact);
                         String iva = newW.cmbIVA.SelectedIndex.ToString();
                         Console.WriteLine("iva : " + iva);

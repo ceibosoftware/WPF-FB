@@ -16,10 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfFamiliaBlanco.Entradas;
 //PARA PDF
-using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using System.Windows.Media.Effects;
+using HandlebarsDotNet;
+using IronPdf.Forms;
+using IronPdf;
 
 namespace wpfFamiliaBlanco
 {
@@ -28,14 +27,14 @@ namespace wpfFamiliaBlanco
     /// </summary>
     public partial class Ordenes : Page
     {
-         
-     
+
+
         DataTable productos;
         bool ejecutar = true;
         CRUD conexion = new CRUD();
         public Ordenes()
         {
-    
+
             InitializeComponent();
             loadlistaOC();
             ejecutar = false;
@@ -61,11 +60,11 @@ namespace wpfFamiliaBlanco
             try
             {
                 String consulta = " Select * from ordencompra ";
-                conexion.Consulta(consulta, ltsNumeroOC);             
+                conexion.Consulta(consulta, ltsNumeroOC);
                 ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
-                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";  
+                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
                 ltsNumeroOC.SelectedIndex = index;
-                
+
             }
             catch (NullReferenceException)
             {
@@ -78,8 +77,8 @@ namespace wpfFamiliaBlanco
 
         public void LoadListaComboProveedor()
         {
-           
-          
+
+
             String consulta = "SELECT DISTINCT p.nombre, p.idProveedor FROM proveedor p inner join ordencompra o where o.FK_idProveedor = p.idProveedor ";
             conexion.Consulta(consulta, combo: cmbProveedores);
             cmbProveedores.DisplayMemberPath = "nombre";
@@ -88,7 +87,7 @@ namespace wpfFamiliaBlanco
         }
         private void ColumnasDGVProductos()
         {
-            
+
             dgvProductos.AutoGenerateColumns = false;
             DataGridTextColumn textColumn = new DataGridTextColumn();
             textColumn.Header = "Nombre";
@@ -111,58 +110,63 @@ namespace wpfFamiliaBlanco
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-        
+
             var moneda = new windowMonedaOC();
             moneda.ShowDialog();
-            
-            var newW = new windowAgregarOC(moneda.moneda);
-          
-            newW.ShowDialog();
-
-            if (newW.DialogResult == true && !newW.agregado)
+            if (moneda.DialogResult == true)
             {
-                //INSERTAR OC
-                int Proveedor = (int)newW.cmbProveedores.SelectedValue;
-                Console.WriteLine(Proveedor);
-                DateTime fecha = newW.fecha;
-                fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-                Console.WriteLine(fecha);
-                String subtotal = newW.txtSubtotal.Text;
-                String total = newW.txtTotal.Text;
-                int direccion = (int)newW.cmbDireccion.SelectedValue;
-                int telefono = (int)newW.cmbTelefono.SelectedValue;
-                String observacion = newW.txtObservaciones.Text;
-                String formaPago = newW.txtFormaPago.Text;
-                int iva = newW.cmbIVA.SelectedIndex;
-                int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                String cotizacion = newW.txtCotizacion.Text;
-                String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal+ "', '" + total+ "', '" + iva+ "','" + tipoCambio+ "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','"+cotizacion+"')";
-                conexion.operaciones(sql);
-                string ultimoId = "Select last_insert_id()";
-                String id = conexion.ValorEnVariable(ultimoId);
-                foreach (var producto in newW.productos)
+                var newW = new windowAgregarOC(moneda.moneda);
+                if (newW.existeProveedor) { 
+                 newW.ShowDialog();
+               
+                 
+
+                if (newW.DialogResult == true && !newW.agregado)
                 {
-                    String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" +producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
-                    conexion.operaciones(productos);
+                    //INSERTAR OC
+                    int Proveedor = (int)newW.cmbProveedores.SelectedValue;
+                    Console.WriteLine(Proveedor);
+                    DateTime fecha = newW.fecha;
+                    fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
+                    Console.WriteLine(fecha);
+                    String subtotal = newW.txtSubtotal.Text;
+                    String total = newW.txtTotal.Text;
+                    int direccion = (int)newW.cmbDireccion.SelectedValue;
+                    int telefono = (int)newW.cmbTelefono.SelectedValue;
+                    String observacion = newW.txtObservaciones.Text;
+                    String formaPago = newW.txtFormaPago.Text;
+                    int iva = newW.cmbIVA.SelectedIndex;
+                    int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
+                    String cotizacion = newW.txtCotizacion.Text;
+                    String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','" + cotizacion + "')";
+                    conexion.operaciones(sql);
+                    string ultimoId = "Select last_insert_id()";
+                    String id = conexion.ValorEnVariable(ultimoId);
+                    foreach (var producto in newW.productos)
+                    {
+                        String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                        conexion.operaciones(productos);
+                    }
+                    MessageBox.Show("Se agregó la orden de compra correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                MessageBox.Show("Se agregó la orden de compra correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                ejecutar = false;
+                loadlistaOC();
+                LoadListaComboProveedor();
+                ltsNumeroOC.Items.MoveCurrentToLast();
+                ejecutar = true;
+                seleccioneParaFiltrar();
             }
-            ejecutar = false;
-            loadlistaOC();
-            LoadListaComboProveedor();
-            ltsNumeroOC.Items.MoveCurrentToLast();
-            ejecutar = true;
-            seleccioneParaFiltrar();
+            }
         }
 
-    
 
-    
-      /* private void fechaActual()
-        {
 
-            dpFecha.SelectedDate = DateTime.Now;
-        }*/
+
+        /* private void fechaActual()
+          {
+
+              dpFecha.SelectedDate = DateTime.Now;
+          }*/
 
         private void ltsNumeroOC_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -178,11 +182,11 @@ namespace wpfFamiliaBlanco
                 DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
                 txtFecha.Text = fecha.ToString("dd/MM/yyyy");
                 txtSubtotal.Text = OC.Rows[0].ItemArray[3].ToString();
-                txtProveedor.Text = OC.Rows[0].ItemArray[12].ToString();
+                txtProveedor.Text = OC.Rows[0].ItemArray[14].ToString();
                 if ((int)OC.Rows[0].ItemArray[5] == 0)
                 {
                     txtIva.Text = "0";
-                }else if((int)OC.Rows[0].ItemArray[5] == 1)
+                } else if ((int)OC.Rows[0].ItemArray[5] == 1)
                 {
                     txtIva.Text = "21";
                 }
@@ -190,31 +194,31 @@ namespace wpfFamiliaBlanco
                 {
                     txtIva.Text = "10,5";
                 }
-               
+
                 txtFormaPago.Text = OC.Rows[0].ItemArray[7].ToString();
                 //simbolo segun tipo cambio
-                if((int)OC.Rows[0].ItemArray[6] == 0)
+                if ((int)OC.Rows[0].ItemArray[6] == 0)
                 {
                     txtTipoCambio.Text = "$";
                 }
-                else if((int)OC.Rows[0].ItemArray[6] == 1)
+                else if ((int)OC.Rows[0].ItemArray[6] == 1)
                 {
                     txtTipoCambio.Text = "u$d";
                 }
-                else{
+                else {
                     txtTipoCambio.Text = "€";
                 }
-              
+
                 txtTotal.Text = OC.Rows[0].ItemArray[4].ToString();
                 txtDescripcion.Text = OC.Rows[0].ItemArray[2].ToString();
             }
             catch (Exception)
             {
 
-               
+
             }
-      
-         
+
+
         }
 
 
@@ -234,7 +238,7 @@ namespace wpfFamiliaBlanco
                     String sql = "   Select distinct DATE_FORMAT(t1.fecha, '%d-%m-%Y') AS fecha from ordencompra t1 where t1.FK_idProveedor = @valor ";
                     DataTable fechas = conexion.ConsultaParametrizada(sql, cmbProveedores.SelectedValue);
                     cmbFechas.ItemsSource = fechas.AsDataView();
-                    cmbFechas.DisplayMemberPath= "fecha";
+                    cmbFechas.DisplayMemberPath = "fecha";
                     cmbFechas.SelectedValuePath = "fecha";
                     cmbFechas.SelectedIndex = 0;
                     ejecutar = true;
@@ -249,24 +253,24 @@ namespace wpfFamiliaBlanco
 
         }
 
-      /*  private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                String consulta = " Select * from ordencompra t1 where t1.fecha = @valor ";
-                DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
-                ltsNumeroOC.ItemsSource = OCFecha.AsDataView();
-                ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
-                ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
-                ltsNumeroOC.SelectedIndex = 0;
-            }
-            catch (NullReferenceException)
-            {
+        /*  private void dpFecha_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+          {
+              try
+              {
+                  String consulta = " Select * from ordencompra t1 where t1.fecha = @valor ";
+                  DataTable OCFecha = conexion.ConsultaParametrizada(consulta, dpFecha.SelectedDate);
+                  ltsNumeroOC.ItemsSource = OCFecha.AsDataView();
+                  ltsNumeroOC.DisplayMemberPath = "idOrdenCompra";
+                  ltsNumeroOC.SelectedValuePath = "idOrdenCompra";
+                  ltsNumeroOC.SelectedIndex = 0;
+              }
+              catch (NullReferenceException)
+              {
 
 
-            }
-        }
-        */
+              }
+          }
+          */
         private void eliminarOC()
         {
             int idSeleccionado = (int)ltsNumeroOC.SelectedValue;
@@ -280,7 +284,7 @@ namespace wpfFamiliaBlanco
             {
                 DataRow selectedDataRow = ((DataRowView)ltsNumeroOC.SelectedItem).Row;
                 string OC = selectedDataRow["idOrdenCompra"].ToString();
-                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la orden de compra número " + OC, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
+                MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la orden de compra número " + OC, "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 string existeRemito = "select count(idremitos) from remito where FK_idOC = " + OC + " ";
                 string existeFactura = "select count(idFacturas) from factura where FK_idOC = " + OC + " ";
                 if (dialog == MessageBoxResult.Yes)
@@ -288,27 +292,27 @@ namespace wpfFamiliaBlanco
                     if (conexion.ValorEnVariable(existeRemito) != "0" && conexion.ValorEnVariable(existeFactura) != "0")
                     {
                         MessageBox.Show("No se puede eliminar la orden  tiene remitos y facturas asociados", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                      
+
                     }
                     else if (conexion.ValorEnVariable(existeRemito) != "0")
                     {
                         MessageBox.Show("No se puede eliminar la orden  tiene remitos asociados", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                      
+
                     }
                     else if (conexion.ValorEnVariable(existeFactura) != "0")
                     {
                         MessageBox.Show("No se puede eliminar la orden  tiene facturas asociadas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                
-                        
+
+
                     }
                     else
                     {
                         eliminarOC();
                         MessageBox.Show("Se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }      
-                }  
+                    }
+                }
 
-                
+
                 if (ltsNumeroOC.Items.Count <= 0)
                 {
                     txtDescripcion.Text = "";
@@ -320,7 +324,7 @@ namespace wpfFamiliaBlanco
                     txtTotal.Text = "";
                     lblFechaOC.Content = "";
                 }
-               
+
             }
             catch (NullReferenceException)
             {
@@ -331,7 +335,7 @@ namespace wpfFamiliaBlanco
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
- 
+
 
             try
             {
@@ -372,7 +376,7 @@ namespace wpfFamiliaBlanco
                         float PU = (float)productos.Rows[i].ItemArray[4];
                         listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
                     }
-                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC,cotizacion);
+                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC, cotizacion);
 
                     newW.Title = "Modificar OC";
                     newW.ShowDialog();
@@ -384,7 +388,7 @@ namespace wpfFamiliaBlanco
                         fecha = newW.fecha;
                         Console.WriteLine(fecha);
                         String sub = newW.txtSubtotal.Text;
-                        String total =  newW.txtTotal.Text;
+                        String total = newW.txtTotal.Text;
                         direccion = (int)newW.cmbDireccion.SelectedValue;
                         telefono = (int)newW.cmbTelefono.SelectedValue;
                         observaciones = newW.txtObservaciones.Text;
@@ -423,14 +427,14 @@ namespace wpfFamiliaBlanco
 
                 MessageBox.Show("Seleccione una orden a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
 
         private void cmbFechas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ejecutar)
             {
-                
+
                 String consulta = " Select * from ordencompra t1 where t1.fecha = @valor and FK_idProveedor = '" + cmbProveedores.SelectedValue + "'";
                 DateTime fecha;
                 DateTime.TryParse(cmbFechas.SelectedValue.ToString(), out fecha);
@@ -460,7 +464,7 @@ namespace wpfFamiliaBlanco
             cmbFechas.SelectedIndex = -1;
             loadlistaOC();
             seleccioneParaFiltrar();
-           
+
         }
         private void seleccioneParaFiltrar()
         {
@@ -470,53 +474,143 @@ namespace wpfFamiliaBlanco
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
-            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
-            doc.Open();
-            var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
-            
-            string imageURL = "C:\\Users\\maria\\Desktop\\proyectos\\WPF-FB\\logo.png";
-            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
-            jpg.Alignment = Element.ALIGN_CENTER;
-            //Resize image depend upon your need 
-            jpg.ScaleToFit(140f, 120f);
-            //Give space before image 
-            jpg.SpacingBefore = 10f;
-            //Give some space after the image 
-            jpg.SpacingAfter = 1f;
-            doc.Add(jpg);
-            Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
-            Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
-            Paragraph telefono = new Paragraph("Numero de contacto: 0303456 " );
-            Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");   //buena mari
-            Paragraph prod = new Paragraph("Productos de la orden \n \n");
+            //    Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
+            //    PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
+            //    doc.Open();
+            //    var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
-           
-            doc.Add(proveedor);
-            doc.Add(fecha);
-            doc.Add(telefono);
-            doc.Add(Direccion);
-            doc.Add(prod);
-            PdfPTable table1 = new PdfPTable(1);
-            table1.AddCell("Productos");
-            PdfPTable table = new PdfPTable(4);
+            //    //string imageURL = "C:\\Users\\maria\\Desktop\\proyectos\\WPF-FB\\logo.png";
+            //   // iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
+            //    jpg.Alignment = Element.ALIGN_CENTER;
+            //    //Resize image depend upon your need 
+            //    jpg.ScaleToFit(140f, 120f);
+            //    //Give space before image 
+            //    jpg.SpacingBefore = 10f;
+            //    //Give some space after the image 
+            //    jpg.SpacingAfter = 1f;
+            //    doc.Add(jpg);
+            //    Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
+            //    Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
+            //    Paragraph telefono = new Paragraph("Numero de contacto: 0303456 " );
+            //    Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");   //buena mari
+            //    Paragraph prod = new Paragraph("Productos de la orden \n \n");
+
+
+            //    doc.Add(proveedor);
+            //    doc.Add(fecha);
+            //    doc.Add(telefono);
+            //    doc.Add(Direccion);
+            //    doc.Add(prod);
+            //    PdfPTable table1 = new PdfPTable(1);
+            //    table1.AddCell("Productos");
+            //    PdfPTable table = new PdfPTable(4);
+
+            //    table.AddCell("Cantidad");
+            //    table.AddCell("Producto");
+            //    table.AddCell("Precio Unitario");
+            //    table.AddCell("Total");
+            //    PdfPTable producto = new PdfPTable(4);
+            //    for (int i = 0; i < this.productos.Rows.Count; i++)
+            //    {
+            //        producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
+            //        producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
+            //        producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
+            //        producto.AddCell(productos.Rows[i].ItemArray[2].ToString());
+            //    }
+            //    doc.Add(table1);
+            //    doc.Add(table);
+            //    doc.Add(producto);
+            //    doc.Close();
+
+                string HtmlTemplate =
+                @"<head>
+        <meta charset=""UTF-8"">
+        <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
+        <meta http-equiv=""X-UA-Compatible"" content=""ie=edge"">
+        <title>Document</title>
+        <link rel=""stylesheet"" href=""D:\Repositorio familia blanco\WPF-FB\PDF\css\bootstrap.min.css"">
+    </head>
+    <body>
+        <br>
+        <div class=""col-md-12"">
+            <div class=""col-md-offset-1 col-md-1"">
+                <img src=""D:\Repositorio familia blanco\WPF-FB\PDF\img\B- Familia Blanco NNFIXED.png"" class=""img-responsive"">
+            </div>
+            <div class=""col-md-offset-4 col-md-4""><h1>Orden de compra: Nro 35</h1></div>
+        
+        </div>  
+        <div class=""col-md-12""><hr></div>
+        <div class=""col-md-12"">
+            <div class=""col-md-offset-2 col-md-4"">
+                <h4>Familia Blanco</h4>
+                <h5>Direccion: Guardia Vieja 2370</h5>
+                <h5>telefono: 2616261566</h5>
+            </div>
+            <div class=""col-md-offset-2 col-md-4"">
+                <h4>Proveedor: Andreu</h4>
+                <h5>Direccion: San martin 455</h5>
+                <h5>telefono: 4567654</h5> 
+            </div>
+        </div>
+        <div class=""col-md-12""><hr></div>
+
+        <table class=""table table-striped"">
+            <tr>
+                <td>No</td>
+                <td>Articulo</td>
+                <td>Cantidad</td>
+                <td>Precio</td>
+                <td>Total</td>
+            </tr>
+        
+    <tr>
             
-            table.AddCell("Cantidad");
-            table.AddCell("Producto");
-            table.AddCell("Precio Unitario");
-            table.AddCell("Total");
-            PdfPTable producto = new PdfPTable(4);
-            for (int i = 0; i < this.productos.Rows.Count; i++)
+                <td>1</td>
+                <td>[[NAME]]</td>
+                <td>23</td>
+                <td>15,32</td>
+                <td>352,36</td>
+                {{/each}}
+            </tr>
+        </table>
+        <div class=""col-md-12"">
+            <div class=""col-md-offset-9""><h3>Subtotal: 352,36</h3></div>
+            <div class=""col-md-offset-9""><h3>Iva: 21%</h3></div>
+            <div class=""col-md-offset-9""><h3>Total: 426,32</h3></div>
+        </div>
+    </body>";
+            
+            IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
+      
+          
+            foreach (var producto in ListaProducto())
             {
-                producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[2].ToString());
+               // HtmlTemplate.("[[NAME]]", producto.nombre);
+               
             }
-            doc.Add(table1);
-            doc.Add(table);
-            doc.Add(producto);
-            doc.Close();
+           
+            //Renderer.RenderHtmlAsPdf(htm).SaveAs("C:\\Users\\mariano\\Desktop\\proyectos\\Handelbars.pdf");
+            System.Diagnostics.Process.Start("C:\\Users\\mariano\\Desktop\\proyectos\\Handelbars.pdf");
+
+        }
+
+        private List<Producto> ListaProducto(){
+            String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = '"+ltsNumeroOC.SelectedValue.ToString()+"' and t1.FK_idProducto = t2.idProductos";
+            DataTable productos = conexion.ConsultaParametrizada(consultaProductos, ltsNumeroOC.SelectedValue);
+            List<Producto> listaProd = new List<Producto>();
+
+
+            for (int i = 0; i < productos.Rows.Count; i++)
+            {
+
+                int idProducto = (int)productos.Rows[i].ItemArray[0];
+                int cantitad = (int)productos.Rows[i].ItemArray[1];
+                float sub = (float)productos.Rows[i].ItemArray[2];
+                String nombre = productos.Rows[i].ItemArray[3].ToString();
+                float PU = (float)productos.Rows[i].ItemArray[4];
+                listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
+            }
+            return listaProd;
         }
     }
 }
