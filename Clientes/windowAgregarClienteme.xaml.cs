@@ -112,7 +112,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         {
             dgvPrecios.Items.Refresh();
             
-            String consultalp = "SELECT p.nombre, plp.preciolista, plp.FK_idProductos, lp.anexo from productos p,productos_has_listadeprecios plp, listadeprecios lp where FK_idLista = @valor and FK_idProductos=p.idProductos and idLista = @valor";
+            String consultalp = "SELECT p.nombre, plp.preciolista, plp.FK_idProductos, lp.anexo, lp.moneda from productos p,productos_has_listadeprecios plp, listadeprecios lp where FK_idLista = @valor and FK_idProductos=p.idProductos and idLista = @valor";
             listadeprecios = conexion.ConsultaParametrizada(consultalp, cmbPrecios.SelectedValue);
             
 
@@ -130,6 +130,14 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                 else
                 {
                     lbltienea.Content = listadeprecios.Rows[0].ItemArray[3].ToString();
+                }
+                if (listadeprecios.Rows[0].ItemArray[4].ToString()=="1")
+                {
+                    lbllmoneda.Content = "USD";
+                }
+                else if (listadeprecios.Rows[0].ItemArray[4].ToString()=="2")
+                {
+                    lbllmoneda.Content = "EURO";
                 }
             }
 

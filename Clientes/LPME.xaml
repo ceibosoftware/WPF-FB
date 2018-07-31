@@ -131,7 +131,7 @@
         <ListBox x:Name="ltsLpme" HorizontalAlignment="Left" Height="296" Margin="53,52,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsLpme_SelectionChanged"/>
         <Label x:Name="lbllp" Content="Listas de Precios" HorizontalAlignment="Left" Margin="285,26.992,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblnlp" Content="" HorizontalAlignment="Left" Margin="874,40,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dgvLpme" HorizontalAlignment="Left" Height="326.341" Margin="444.993,51.992,0,0" VerticalAlignment="Top" Width="369.717"/>
+        <DataGrid x:Name="dgvLpme" HorizontalAlignment="Left" Height="296" Margin="445,52,0,0" VerticalAlignment="Top" Width="370"/>
         <Button x:Name="btnPdf" Content="PDF" HorizontalAlignment="Left" Margin="445,397.332,0,0" VerticalAlignment="Top" Width="75" Height="21.138" Click="btnPdf_Click" Foreground="White"/>
         <Border Height="229.508" Width="133.11" BorderThickness="1,1,5,1" BorderBrush="#FF31006B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="845.89,51.992,54.666,191.715" >
             <Border.Background>
@@ -151,6 +151,9 @@
         <Rectangle HorizontalAlignment="Left" Height="23" Margin="53,362,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="364" Stroke="#FF858585"/>
         <Label x:Name="lblanexo" Content="Anexo:" HorizontalAlignment="Right" Margin="-32,364,929,0" VerticalAlignment="Top" Height="25" Width="137" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lbltienea" Content="" HorizontalAlignment="Left" Margin="190,364,0,0" VerticalAlignment="Top" Height="25" Width="227" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Rectangle HorizontalAlignment="Left" Height="23" Margin="447,362,0,0" RadiusY="7" RadiusX="7" VerticalAlignment="Top" Width="364" Stroke="#FF858585"/>
+        <Label x:Name="lblmoneda" Content="Moneda:" HorizontalAlignment="Right" Margin="0,364,517,0" VerticalAlignment="Top" Height="25" Width="137" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblcoin" Content="" HorizontalAlignment="Left" Margin="580,364,0,0" VerticalAlignment="Top" Height="25" Width="227" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
 
     </Grid>
 </Page>

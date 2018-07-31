@@ -187,9 +187,21 @@ namespace wpfFamiliaBlanco.Clientes
                     int id = (int)clienteme.Rows[0].ItemArray[6];
                     String consultan = "Select nombre from listadeprecios where idLista='" + id + "'";
                     String consultaa = "Select anexo from listadeprecios where idLista='" + id + "'";
+                    String consultam = "Select moneda from listadeprecios where idLista='" + id + "'";
                     String anexo = conexion.ValorEnVariable(consultaa);
                     String nombre = conexion.ValorEnVariable(consultan);
+                    String moneda = conexion.ValorEnVariable(consultam);
+
+
                     txtlp.Text = nombre;
+
+                    if (moneda=="1")
+                    {
+                        txtmoneda.Text = "USD";
+                    }else if (moneda == "2")
+                    {
+                        txtmoneda.Text = "EURO";
+                    }
                     if (anexo=="")
                     {
                         txtanexo.Text = "No tiene anexo";
