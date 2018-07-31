@@ -61,7 +61,8 @@ namespace wpfFamiliaBlanco.Entradas
             bandera = true;
             SetearColumnas();
             SetearColumnas2();
-      
+            cmbTipoCambio.IsEnabled = false;
+           
         }
 
         public windowAgregarFactura(String numFactura, String proveedor, List<Producto> pOC, List<Producto> pFA, DateTime fechafactura, int numeroOC, float subtotal, float total, int IVA, int tipoCambio, float subtotal2, String cuotas, List<Cuotas> lCU, String cotizacion)
@@ -85,7 +86,7 @@ namespace wpfFamiliaBlanco.Entradas
                 cmbProveedores.IsEnabled = false;
                 cmbOrden.IsEnabled = false;
                 txtFiltro.IsEnabled = false;
-
+            cmbTipoCambio.IsEnabled = false;
                 this.txtNroFactura.Text = numFactura.ToString();
                 this.cmbProveedores.Text = proveedor;
                 this.items = pOC;
@@ -251,6 +252,8 @@ namespace wpfFamiliaBlanco.Entradas
         {
 
             itemsFact.Clear();
+            productosOC.Clear();
+            dgvProductosOC.Items.Refresh();
             dgvProductosFactura.Items.Refresh();
             try
             {
@@ -262,7 +265,7 @@ namespace wpfFamiliaBlanco.Entradas
                     cmbOrden.DisplayMemberPath = "idOrdenCompra";
                     cmbOrden.SelectedValuePath = "idOrdenCompra";
              
-                    cmbOrden.SelectedIndex = 0;
+                    cmbOrden.SelectedIndex = -1;
                 
                
             }
@@ -276,50 +279,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (modifica == false)
-            {
-
-            
-                items.Clear();
-                txtSubtotal.Text = "0";
-                calculaTotal();
-                Subtotal = 0;
-       
-                String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
-
-                DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
-                for (int i = 0; i < productos.Rows.Count; i++)
-                {
-                    producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
-                    items.Add(producto);
-
-                }
-
-                dgvProductosOC.Items.Refresh();
-                todaslascuotas.Clear();
-                DgvCuotas.Items.Refresh();
-                itemsFact.Clear();
-                dgvProductosFactura.Items.Refresh();
-
-                string consultamoneda = "select tipoCambio from ordencompra where idOrdenCompra = " + cmbOrden.SelectedValue + "";               
-                cmbTipoCambio.SelectedIndex = int.Parse(conexion.ValorEnVariable(consultamoneda));
-
-                if(int.Parse(conexion.ValorEnVariable(consultamoneda))==0)
-                {
-                    txtCotizacion.Visibility = Visibility.Collapsed;
-                    txtTotalPesos.Visibility = Visibility.Collapsed;
-                    lblCotizacion.Visibility = Visibility.Collapsed;
-                    lblTotalPesos.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    txtCotizacion.Visibility = Visibility.Visible;
-                    txtTotalPesos.Visibility = Visibility.Visible;
-                    lblCotizacion.Visibility = Visibility.Visible;
-                    lblTotalPesos.Visibility = Visibility.Visible;
-                }
-
-            }
+           
 
         }
      
@@ -547,55 +507,7 @@ namespace wpfFamiliaBlanco.Entradas
 
         }
 
-        private void cmbCuotas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-         
-            int cuotass = cmbCuotas.SelectedIndex+1;
-      
-            if (bandera == true)
-            {
-
-                todaslascuotas.Clear();
-                if (dgvProductosFactura.Items.Count ==0)
-                {
-                    MessageBox.Show("Primero cargue productos a la factura", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    var newW = new windowCuotas(cuotass, dt, float.Parse(txtTotal.Text));
-                    newW.Title = "Agregar Cuotas";
-                    newW.ShowDialog();
-
-                    if (newW.DialogResult == true)
-                    {
-                        todaslascuotas.Clear();
-                        foreach (Cuotas cuot in newW.listacuotas)
-                        {
-
-                            int id = cuot.cuota;
-                            int dias = cuot.dias;
-                            DateTime fecha = cuot.fechadepago;
-                            float totalPagar = cuot.montoCuota;
-                            int cuota = cuot.cuota;
-                            Cuotas cu = new Cuotas(id, dias, fecha, totalPagar,cuota);
-                            todaslascuotas.Add(cu);
-                           
-                        }
-                        loadDGVCuotas();
-
-                    }
-                    else
-                    {
-                        bandera = false;
-                      cmbCuotas.SelectedIndex = -1;
-                        bandera = true;
-                    }
-                  
-                }
-              
-            }
-      
-        }
+  
 
         public void loadDGVCuotas()
         {
@@ -843,6 +755,135 @@ namespace wpfFamiliaBlanco.Entradas
             if(itemsFact.Count == 0)            
                 txtTotalPesos.Text = "";
             
+        }
+
+        private void cmbCuotas_DropDownClosed(object sender, EventArgs e)
+        {
+            int cuotass = cmbCuotas.SelectedIndex + 1;
+
+            if (bandera == true)
+            {
+
+                todaslascuotas.Clear();
+                if (dgvProductosFactura.Items.Count == 0)
+                {
+                    MessageBox.Show("Primero cargue productos a la factura", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    var newW = new windowCuotas(cuotass, dt, float.Parse(txtTotal.Text));
+                    newW.Title = "Agregar Cuotas";
+                    newW.ShowDialog();
+
+                    if (newW.DialogResult == true)
+                    {
+                        todaslascuotas.Clear();
+                        foreach (Cuotas cuot in newW.listacuotas)
+                        {
+
+                            int id = cuot.cuota;
+                            int dias = cuot.dias;
+                            DateTime fecha = cuot.fechadepago;
+                            float totalPagar = cuot.montoCuota;
+                            int cuota = cuot.cuota;
+                            Cuotas cu = new Cuotas(id, dias, fecha, totalPagar, cuota);
+                            todaslascuotas.Add(cu);
+
+                        }
+                        loadDGVCuotas();
+
+                    }
+                    else
+                    {
+                        bandera = false;
+                        cmbCuotas.SelectedIndex = -1;
+                        bandera = true;
+                    }
+
+                }
+
+            }
+        }
+
+        private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+            itemsFact.Clear();
+        
+            dgvProductosFactura.Items.Refresh();
+            try
+            {
+                String id = cmbProveedores.SelectedValue.ToString();
+                String nombreProv = cmbProveedores.Text;
+
+                String sql = "SELECT * FROM ordencompra WHERE FK_idProveedor =  '" + id + "'";
+                conexion.Consulta(sql, combo: cmbOrden);
+                cmbOrden.DisplayMemberPath = "idOrdenCompra";
+                cmbOrden.SelectedValuePath = "idOrdenCompra";
+
+                cmbOrden.SelectedIndex = -1;
+                cmbOrden.Text = "Seleccione OC";
+                items.Clear();
+                dgvProductosOC.Items.Refresh();
+
+            }
+            catch (NullReferenceException)
+            {
+
+
+            }
+        }
+
+        private void cmbOrden_DropDownClosed(object sender, EventArgs e)
+        {
+
+
+
+            loadDatosOC();
+
+            
+        }
+
+        private void loadDatosOC()
+        {
+            items.Clear();
+            txtSubtotal.Text = "0";
+            calculaTotal();
+            Subtotal = 0;
+
+            String sql2 = "SELECT productos.nombre, productos.idProductos,productos_has_ordencompra.CrFactura, subtotal, productos_has_ordencompra.PUPagado  FROM productos_has_ordencompra, productos WHERE FK_idOC = @valor AND productos.idProductos = productos_has_ordencompra.FK_idProducto";
+
+            DataTable productos = conexion.ConsultaParametrizada(sql2, cmbOrden.SelectedValue);
+            for (int i = 0; i < productos.Rows.Count; i++)
+            {
+                producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2], (float)productos.Rows[i].ItemArray[3], (float)productos.Rows[i].ItemArray[4]);
+                items.Add(producto);
+
+            }
+
+            dgvProductosOC.Items.Refresh();
+            todaslascuotas.Clear();
+            DgvCuotas.Items.Refresh();
+            itemsFact.Clear();
+            dgvProductosFactura.Items.Refresh();
+
+            string consultamoneda = "select tipoCambio from ordencompra where idOrdenCompra = " + cmbOrden.SelectedValue + "";
+            cmbTipoCambio.SelectedIndex = int.Parse(conexion.ValorEnVariable(consultamoneda));
+
+            if (int.Parse(conexion.ValorEnVariable(consultamoneda)) == 0)
+            {
+                txtCotizacion.Visibility = Visibility.Collapsed;
+                txtTotalPesos.Visibility = Visibility.Collapsed;
+                lblCotizacion.Visibility = Visibility.Collapsed;
+                lblTotalPesos.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                txtCotizacion.Visibility = Visibility.Visible;
+                txtTotalPesos.Visibility = Visibility.Visible;
+                lblCotizacion.Visibility = Visibility.Visible;
+                lblTotalPesos.Visibility = Visibility.Visible;
+            }
         }
     }
 
