@@ -560,6 +560,12 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione un Proveedor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            else if (txtCotizacion.Text == "")
+            {
+
+                MessageBox.Show("Ingrese cotización", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             else if (bandera == true && nomCat !="0")
             {
 
@@ -581,6 +587,7 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Complete el número de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+
             else
             {
                 return true;
