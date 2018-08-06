@@ -190,6 +190,18 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalidasNuevo\Vistas\OrdenesPedido\PageOrdenPedido.xaml.cs">
+      <DependentUpon>PageOrdenPedido.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\OrdenesPedido\windowAgregarOP.xaml.cs">
+      <DependentUpon>windowAgregarOP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\OrdenesPedido\windowAgregarProductoOP.xaml.cs">
+      <DependentUpon>windowAgregarProductoOP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\OrdenesPedido\WindowTransporte.xaml.cs">
+      <DependentUpon>WindowTransporte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml.cs">
       <DependentUpon>DevolucionFacturaCliente.xaml</DependentUpon>
     </Compile>
@@ -456,6 +468,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SalidasNuevo\Vistas\OrdenesPedido\PageOrdenPedido.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\OrdenesPedido\windowAgregarOP.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\OrdenesPedido\windowAgregarProductoOP.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\OrdenesPedido\WindowTransporte.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -640,6 +668,7 @@
     <Resource Include="act.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="SalidasNuevo\Clases\OrdenesPedido\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
