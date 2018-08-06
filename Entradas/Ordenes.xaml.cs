@@ -19,6 +19,9 @@ using wpfFamiliaBlanco.Entradas;
 using HandlebarsDotNet;
 using IronPdf.Forms;
 using IronPdf;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 namespace wpfFamiliaBlanco
 {
@@ -116,46 +119,47 @@ namespace wpfFamiliaBlanco
             if (moneda.DialogResult == true)
             {
                 var newW = new windowAgregarOC(moneda.moneda);
-                if (newW.existeProveedor) { 
-                 newW.ShowDialog();
-               
-                 
-
-                if (newW.DialogResult == true && !newW.agregado)
+                if (newW.existeProveedor)
                 {
-                    //INSERTAR OC
-                    int Proveedor = (int)newW.cmbProveedores.SelectedValue;
-                    Console.WriteLine(Proveedor);
-                    DateTime fecha = newW.fecha;
-                    fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-                    Console.WriteLine(fecha);
-                    String subtotal = newW.txtSubtotal.Text;
-                    String total = newW.txtTotal.Text;
-                    int direccion = (int)newW.cmbDireccion.SelectedValue;
-                    int telefono = (int)newW.cmbTelefono.SelectedValue;
-                    String observacion = newW.txtObservaciones.Text;
-                    String formaPago = newW.txtFormaPago.Text;
-                    int iva = newW.cmbIVA.SelectedIndex;
-                    int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                    String cotizacion = newW.txtCotizacion.Text;
-                    String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','" + cotizacion + "')";
-                    conexion.operaciones(sql);
-                    string ultimoId = "Select last_insert_id()";
-                    String id = conexion.ValorEnVariable(ultimoId);
-                    foreach (var producto in newW.productos)
+                    newW.ShowDialog();
+
+
+
+                    if (newW.DialogResult == true && !newW.agregado)
                     {
-                        String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
-                        conexion.operaciones(productos);
+                        //INSERTAR OC
+                        int Proveedor = (int)newW.cmbProveedores.SelectedValue;
+                        Console.WriteLine(Proveedor);
+                        DateTime fecha = newW.fecha;
+                        fecha = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
+                        Console.WriteLine(fecha);
+                        String subtotal = newW.txtSubtotal.Text;
+                        String total = newW.txtTotal.Text;
+                        int direccion = (int)newW.cmbDireccion.SelectedValue;
+                        int telefono = (int)newW.cmbTelefono.SelectedValue;
+                        String observacion = newW.txtObservaciones.Text;
+                        String formaPago = newW.txtFormaPago.Text;
+                        int iva = newW.cmbIVA.SelectedIndex;
+                        int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
+                        String cotizacion = newW.txtCotizacion.Text;
+                        String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','" + cotizacion + "')";
+                        conexion.operaciones(sql);
+                        string ultimoId = "Select last_insert_id()";
+                        String id = conexion.ValorEnVariable(ultimoId);
+                        foreach (var producto in newW.productos)
+                        {
+                            String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
+                            conexion.operaciones(productos);
+                        }
+                        MessageBox.Show("Se agregó la orden de compra correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    MessageBox.Show("Se agregó la orden de compra correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ejecutar = false;
+                    loadlistaOC();
+                    LoadListaComboProveedor();
+                    ltsNumeroOC.Items.MoveCurrentToLast();
+                    ejecutar = true;
+                    seleccioneParaFiltrar();
                 }
-                ejecutar = false;
-                loadlistaOC();
-                LoadListaComboProveedor();
-                ltsNumeroOC.Items.MoveCurrentToLast();
-                ejecutar = true;
-                seleccioneParaFiltrar();
-            }
             }
         }
 
@@ -186,7 +190,8 @@ namespace wpfFamiliaBlanco
                 if ((int)OC.Rows[0].ItemArray[5] == 0)
                 {
                     txtIva.Text = "0";
-                } else if ((int)OC.Rows[0].ItemArray[5] == 1)
+                }
+                else if ((int)OC.Rows[0].ItemArray[5] == 1)
                 {
                     txtIva.Text = "21";
                 }
@@ -205,7 +210,8 @@ namespace wpfFamiliaBlanco
                 {
                     txtTipoCambio.Text = "u$d";
                 }
-                else {
+                else
+                {
                     txtTipoCambio.Text = "€";
                 }
 
@@ -474,143 +480,65 @@ namespace wpfFamiliaBlanco
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //    Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
-            //    PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
-            //    doc.Open();
-            //    var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
+            Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
+            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC.pdf", FileMode.Create));
+            doc.Open();
+            var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
-            //    //string imageURL = "C:\\Users\\maria\\Desktop\\proyectos\\WPF-FB\\logo.png";
-            //   // iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
-            //    jpg.Alignment = Element.ALIGN_CENTER;
-            //    //Resize image depend upon your need 
-            //    jpg.ScaleToFit(140f, 120f);
-            //    //Give space before image 
-            //    jpg.SpacingBefore = 10f;
-            //    //Give some space after the image 
-            //    jpg.SpacingAfter = 1f;
-            //    doc.Add(jpg);
-            //    Paragraph proveedor = new Paragraph("Proveedor: " + cmbProveedores.Text.ToString());
-            //    Paragraph fecha = new Paragraph("Fecha: "+lblFecha.Content.ToString());
-            //    Paragraph telefono = new Paragraph("Numero de contacto: 0303456 " );
-            //    Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");   //buena mari
-            //    Paragraph prod = new Paragraph("Productos de la orden \n \n");
+            string imageURL = "D:\\Repositorio familia blanco\\WPF-FB\\logo.png";
+            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
+            jpg.Alignment = Element.ALIGN_CENTER;
+            //Resize image depend upon your need
+            jpg.ScaleToFit(140f, 120f);
+            //Give space before image
+            jpg.SpacingBefore = 10f;
+            //Give some space after the image
+            jpg.SpacingAfter = 1f;
+            doc.Add(jpg);
+            Paragraph proveedor = new Paragraph("Proveedor: " + txtProveedor.Text.ToString());
+            Paragraph fecha = new Paragraph("Fecha: " + lblFecha.Content.ToString());
+            Paragraph telefono = new Paragraph("Numero de contacto: 0303456 ");
+            Paragraph Direccion = new Paragraph("Direccion de entrega: Guardia vieja 2314 ");   //buena mari
+            Paragraph prod = new Paragraph("Productos de la orden \n \n");
 
-
-            //    doc.Add(proveedor);
-            //    doc.Add(fecha);
-            //    doc.Add(telefono);
-            //    doc.Add(Direccion);
-            //    doc.Add(prod);
-            //    PdfPTable table1 = new PdfPTable(1);
-            //    table1.AddCell("Productos");
-            //    PdfPTable table = new PdfPTable(4);
-
-            //    table.AddCell("Cantidad");
-            //    table.AddCell("Producto");
-            //    table.AddCell("Precio Unitario");
-            //    table.AddCell("Total");
-            //    PdfPTable producto = new PdfPTable(4);
-            //    for (int i = 0; i < this.productos.Rows.Count; i++)
-            //    {
-            //        producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
-            //        producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
-            //        producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
-            //        producto.AddCell(productos.Rows[i].ItemArray[2].ToString());
-            //    }
-            //    doc.Add(table1);
-            //    doc.Add(table);
-            //    doc.Add(producto);
-            //    doc.Close();
-
-                string HtmlTemplate =
-                @"<head>
-        <meta charset=""UTF-8"">
-        <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-        <meta http-equiv=""X-UA-Compatible"" content=""ie=edge"">
-        <title>Document</title>
-        <link rel=""stylesheet"" href=""D:\Repositorio familia blanco\WPF-FB\PDF\css\bootstrap.min.css"">
-    </head>
-    <body>
-        <br>
-        <div class=""col-md-12"">
-            <div class=""col-md-offset-1 col-md-1"">
-                <img src=""D:\Repositorio familia blanco\WPF-FB\PDF\img\B- Familia Blanco NNFIXED.png"" class=""img-responsive"">
-            </div>
-            <div class=""col-md-offset-4 col-md-4""><h1>Orden de compra: Nro 35</h1></div>
-        
-        </div>  
-        <div class=""col-md-12""><hr></div>
-        <div class=""col-md-12"">
-            <div class=""col-md-offset-2 col-md-4"">
-                <h4>Familia Blanco</h4>
-                <h5>Direccion: Guardia Vieja 2370</h5>
-                <h5>telefono: 2616261566</h5>
-            </div>
-            <div class=""col-md-offset-2 col-md-4"">
-                <h4>Proveedor: Andreu</h4>
-                <h5>Direccion: San martin 455</h5>
-                <h5>telefono: 4567654</h5> 
-            </div>
-        </div>
-        <div class=""col-md-12""><hr></div>
-
-        <table class=""table table-striped"">
-            <tr>
-                <td>No</td>
-                <td>Articulo</td>
-                <td>Cantidad</td>
-                <td>Precio</td>
-                <td>Total</td>
-            </tr>
-        
-    <tr>
             
-                <td>1</td>
-                <td>[[NAME]]</td>
-                <td>23</td>
-                <td>15,32</td>
-                <td>352,36</td>
-                {{/each}}
-            </tr>
-        </table>
-        <div class=""col-md-12"">
-            <div class=""col-md-offset-9""><h3>Subtotal: 352,36</h3></div>
-            <div class=""col-md-offset-9""><h3>Iva: 21%</h3></div>
-            <div class=""col-md-offset-9""><h3>Total: 426,32</h3></div>
-        </div>
-    </body>";
-            
-            IronPdf.HtmlToPdf Renderer = new IronPdf.HtmlToPdf();
-      
-          
-            foreach (var producto in ListaProducto())
+            doc.Add(proveedor);
+            doc.Add(fecha);
+            doc.Add(telefono);
+            doc.Add(Direccion);
+            doc.Add(prod);
+            PdfPTable table1 = new PdfPTable(1);
+            table1.AddCell("Productos");
+            PdfPTable table = new PdfPTable(4);
+
+            table.AddCell("Cantidad");
+            table.AddCell("Producto");
+            table.AddCell("Precio Unitario");
+            table.AddCell("Total");
+            PdfPTable producto = new PdfPTable(4);
+            for (int i = 0; i < this.productos.Rows.Count; i++)
             {
-               // HtmlTemplate.("[[NAME]]", producto.nombre);
-               
+                producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
+                producto.AddCell(productos.Rows[i].ItemArray[2].ToString()+" "+ txtTipoCambio.Text );
             }
-           
-            //Renderer.RenderHtmlAsPdf(htm).SaveAs("C:\\Users\\mariano\\Desktop\\proyectos\\Handelbars.pdf");
-            System.Diagnostics.Process.Start("C:\\Users\\mariano\\Desktop\\proyectos\\Handelbars.pdf");
+            doc.Add(table1);
+            doc.Add(table);
+            doc.Add(producto);
+            Paragraph subtotal = new Paragraph("Subtotal: " + txtSubtotal.Text.ToString());
+            Paragraph iva = new Paragraph("Iva: " + txtIva.Text.ToString());
+            Paragraph total = new Paragraph("Total: " + txtTotal.Text.ToString());
+            subtotal.IndentationLeft = 400f;
+            iva.IndentationLeft = 400f;
+            total.IndentationLeft = 400f;
+            doc.Add(subtotal);
+            doc.Add(iva);
+            doc.Add(total);
+            doc.Close();
 
-        }
+    
 
-        private List<Producto> ListaProducto(){
-            String consultaProductos = "SELECT t2.idProductos, t1.cantidad ,t1.subtotal,t2.nombre,t1.PUPagado FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = '"+ltsNumeroOC.SelectedValue.ToString()+"' and t1.FK_idProducto = t2.idProductos";
-            DataTable productos = conexion.ConsultaParametrizada(consultaProductos, ltsNumeroOC.SelectedValue);
-            List<Producto> listaProd = new List<Producto>();
-
-
-            for (int i = 0; i < productos.Rows.Count; i++)
-            {
-
-                int idProducto = (int)productos.Rows[i].ItemArray[0];
-                int cantitad = (int)productos.Rows[i].ItemArray[1];
-                float sub = (float)productos.Rows[i].ItemArray[2];
-                String nombre = productos.Rows[i].ItemArray[3].ToString();
-                float PU = (float)productos.Rows[i].ItemArray[4];
-                listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
-            }
-            return listaProd;
         }
     }
 }
