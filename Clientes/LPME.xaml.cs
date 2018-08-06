@@ -112,7 +112,7 @@ namespace wpfFamiliaBlanco.Clientes
                 }
                 else
                 {
-                    lblcoin.Content = "EURO";
+                    lblcoin.Content = "EUROS";
                 }
                 if (anexo=="")
                 {
@@ -234,6 +234,7 @@ namespace wpfFamiliaBlanco.Clientes
                 String nombrelp;
                 String fecha;
                 String anexo;
+
                 int coin;
 
                 DateTime hoy;
@@ -276,8 +277,9 @@ namespace wpfFamiliaBlanco.Clientes
                     fecha = hoy.ToString("yyyy/MM/dd");
                     nombre = newW.txtNombre.Text;
                     anexo = newW.txtAnexo.Text;
+                    coin = newW.cmbMoneda.SelectedIndex+1;
 
-                    String update = "update listadeprecios set nombre = '" + nombre + "', fecha = '" + fecha + "' where idLista = '" + idlista + "'; ";
+                    String update = "update listadeprecios set nombre = '" + nombre + "', fecha = '" + fecha + "', anexo= '"+anexo+"', moneda='"+coin+"' where idLista = '" + idlista + "'; ";
                     conexion.operaciones(update);
 
 
@@ -308,6 +310,16 @@ namespace wpfFamiliaBlanco.Clientes
 
                 lblnombre.Content = nombre;
                 lblultimam.Content = hoy.ToString("yyyy/MM/dd");
+                lbltienea.Content = anexo;
+
+                if (coin==1)
+                {
+                    lblcoin.Content = "USD";
+                }else if (coin == 2)
+                {
+                    lblcoin.Content = "EUROS";
+                }
+               
 
             }
             catch (NullReferenceException)
