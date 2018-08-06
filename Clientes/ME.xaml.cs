@@ -167,7 +167,10 @@ namespace wpfFamiliaBlanco.Clientes
                 {
                     txtt.Text = "CIP";
                 }
-
+              
+                
+                
+               
                 
 
                 txtDireccion.Text = clienteme.Rows[0].ItemArray[1].ToString();
@@ -177,13 +180,37 @@ namespace wpfFamiliaBlanco.Clientes
                 if (clienteme.Rows[0].ItemArray[6].ToString() == "")
                 {
                     txtlp.Text = "No tiene lista de precios";
+                    txtanexo.Text = "No tiene lista de precios";
                 }
                 else
                 {
                     int id = (int)clienteme.Rows[0].ItemArray[6];
                     String consultan = "Select nombre from listadeprecios where idLista='" + id + "'";
+                    String consultaa = "Select anexo from listadeprecios where idLista='" + id + "'";
+                    String consultam = "Select moneda from listadeprecios where idLista='" + id + "'";
+                    String anexo = conexion.ValorEnVariable(consultaa);
                     String nombre = conexion.ValorEnVariable(consultan);
+                    String moneda = conexion.ValorEnVariable(consultam);
+
+
                     txtlp.Text = nombre;
+
+                    if (moneda=="1")
+                    {
+                        txtmoneda.Text = "USD";
+                    }else if (moneda == "2")
+                    {
+                        txtmoneda.Text = "EUROS";
+                    }
+                    if (anexo=="")
+                    {
+                        txtanexo.Text = "No tiene anexo";
+                    }
+                    else
+                    {
+                        txtanexo.Text = anexo;
+                        
+                    }
                 }
 
             }
@@ -209,9 +236,9 @@ namespace wpfFamiliaBlanco.Clientes
             try
             {
 
-                string consulta = "SELECT count(*) from ordencomprasalida where FK_idClienteme = " + ltsClientes.SelectedValue + "";
+                //string consulta = "SELECT count(*) from  where FK_idClienteme = " + ltsClientes.SelectedValue + ""; Comente esta linea por que aun no esta salidas la parte nueva.
                 
-                if (conexion.ValorEnVariable(consulta) == "0")
+                if (true)
                 {
                     DataRow selectedDataRow = ((DataRowView)ltsClientes.SelectedItem).Row;
                     string nombre = selectedDataRow["nombre"].ToString();

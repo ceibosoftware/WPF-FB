@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,23 +30,64 @@ namespace wpfFamiliaBlanco.Entradas
         public DateTime fechaCobro;
         public String idCheque;
         public String idCtaBcria;
-        float totalf;
+        public String moneda;
+        float totalf =0;
         float totalr;
         CRUD conexion = new CRUD();
-        public int tipo ;
-        public int tipopago= -1;
-   
-        public windowAgregarPagoProveedor(float totalfact)
+        public int tipo;
+        public int tipopago = -1;
+
+
+        public windowAgregarPagoProveedor(float totalfact, string moned)
         {
             InitializeComponent();
             totalf = totalfact;
-
+            moneda = moned;
+          
             LoadCmbFormaPago();
             OcultarElementos();
             txttotafactura.Text = totalfact.ToString();
-           
+            LoadCmbMoneda();
 
         }
+
+        private void LoadCmbMoneda()
+        {
+            if (moneda == "0")
+            {
+                cmbMoneda.Items.Add("$");
+            }
+            else if (moneda == "1")
+            {
+                cmbMoneda.Items.Add("$");
+                cmbMoneda.Items.Add("u$d");
+            }
+            else
+            {
+                cmbMoneda.Items.Add("$");
+                cmbMoneda.Items.Add("€");
+            }
+          
+            cmbMoneda.SelectedIndex = 0;
+        }
+
+        //private void TipoMoneda(string m)
+        //{
+        //    if (m == "0")
+        //    {
+        //        cmbMoneda.Text = "$";
+        //        txtcotizacion.Text = "1";
+        //    }
+        //    else if(m == "1")
+        //    {
+        //        cmbMoneda.Text = "u$d";
+        //    }
+        //    else
+        //    {
+        //        cmbMoneda.Text = "€";
+        //    }
+
+        //}
 
         private void btnPagar_Click(object sender, RoutedEventArgs e)
         {
@@ -60,8 +102,8 @@ namespace wpfFamiliaBlanco.Entradas
             cmbFormaPago.Items.Add("Efectivo");
             cmbFormaPago.Items.Add("Cheque");
             cmbFormaPago.Items.Add("Transferencia");
-            cmbFormaPago.SelectedIndex =0;
-       
+            cmbFormaPago.SelectedIndex = 0;
+
         }
 
         public bool ValidaDatos()
@@ -70,11 +112,11 @@ namespace wpfFamiliaBlanco.Entradas
             {
                 if (txttotafacturaApagar.Text != "")
                 {
-                    if ( float.Parse(txttotafacturaApagar.Text) > float.Parse(txttotafactura.Text))
+                    if (float.Parse(txttotafacturaApagar.Text) > float.Parse(txttotafactura.Text))
                     {
                         MessageBox.Show("El monto ingresado supera el monto restante de la factura", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    else if (txtRecibo.Text =="")
+                    else if (txtRecibo.Text == "")
                     {
                         MessageBox.Show("Ingrese el numero de recibo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
@@ -108,105 +150,115 @@ namespace wpfFamiliaBlanco.Entradas
             return false;
         }
 
-    
+
         public void VerTipoPago()
         {
 
-     
-            if (cmbFormaPago.SelectedIndex ==0)
-            {
-                lblBanco.Visibility = Visibility.Collapsed;
-                lblCheque.Visibility = Visibility.Collapsed;
-                lblImporte.Visibility = Visibility.Collapsed;
-                lblFecha.Visibility = Visibility.Collapsed;
-                lblFechacobro.Visibility = Visibility.Collapsed;
-                lblDestinatario.Visibility = Visibility.Collapsed;
-                lbldatoscuentaBancaria.Visibility = Visibility.Collapsed;
-                lblcbu.Visibility = Visibility.Collapsed;
-                lblnombretitualr.Visibility = Visibility.Collapsed;
-                lbldatoscheque.Visibility = Visibility.Collapsed;
 
-                cmbBanco.Visibility = Visibility.Collapsed;
-                txtnumeroCheque.Visibility = Visibility.Collapsed;
-                txtImporte.Visibility = Visibility.Collapsed;
-                dtpFecha.Visibility = Visibility.Collapsed;
-                dtpFechaCobro.Visibility = Visibility.Collapsed;
-                txtDestinatario.Visibility = Visibility.Collapsed;
-                txtCbu.Visibility = Visibility.Collapsed;
-                txtNombreTitular.Visibility = Visibility.Collapsed;
-           
+            if (cmbFormaPago.SelectedIndex == 0)
+            {
+                pagoEfectivo();
             }
-            else if(cmbFormaPago.SelectedIndex ==1)
+            else if (cmbFormaPago.SelectedIndex == 1)
             {
-                lblBanco.Visibility = Visibility.Visible;
-                lblCheque.Visibility = Visibility.Visible;
-                lblImporte.Visibility = Visibility.Visible;
-                lblFecha.Visibility = Visibility.Visible;
-                lblFechacobro.Visibility = Visibility.Visible;
-                lblDestinatario.Visibility = Visibility.Visible;
-                lbldatoscuentaBancaria.Visibility = Visibility.Collapsed;
-                lblcbu.Visibility = Visibility.Collapsed;
-                lblnombretitualr.Visibility = Visibility.Collapsed;
-                lbldatoscheque.Visibility = Visibility.Visible;
-                lbldatoscheque.Visibility = Visibility.Visible;
-
-                cmbBanco.Visibility = Visibility.Visible;
-                txtnumeroCheque.Visibility = Visibility.Visible;
-                txtImporte.Visibility = Visibility.Visible;
-                dtpFecha.Visibility = Visibility.Visible;
-                dtpFechaCobro.Visibility = Visibility.Visible;
-                txtDestinatario.Visibility = Visibility.Visible;
-                txtCbu.Visibility = Visibility.Collapsed;
-                txtNombreTitular.Visibility = Visibility.Collapsed;
+                PagoCheque();
             }
-            else if(cmbFormaPago.SelectedIndex == 2)
+            else if (cmbFormaPago.SelectedIndex == 2)
             {
-                lblBanco.Visibility = Visibility.Visible;
-                lblCheque.Visibility = Visibility.Collapsed;
-                lblImporte.Visibility = Visibility.Collapsed;
-                lblFecha.Visibility = Visibility.Collapsed;
-                lblFechacobro.Visibility = Visibility.Collapsed;
-                lblDestinatario.Visibility = Visibility.Collapsed;
-                lbldatoscuentaBancaria.Visibility = Visibility.Visible;
-                lblcbu.Visibility = Visibility.Visible;
-                lblnombretitualr.Visibility = Visibility.Visible;
-                lbldatoscheque.Visibility = Visibility.Collapsed;
-
-                cmbBanco.Visibility = Visibility.Visible;
-                txtnumeroCheque.Visibility = Visibility.Collapsed;
-                txtImporte.Visibility = Visibility.Collapsed;
-                dtpFecha.Visibility = Visibility.Collapsed;
-                dtpFechaCobro.Visibility = Visibility.Collapsed;
-                txtDestinatario.Visibility = Visibility.Collapsed;
-                txtCbu.Visibility = Visibility.Visible;
-                txtNombreTitular.Visibility = Visibility.Visible;
+                PagoTransferencia();
             }
             else if (cmbFormaPago.SelectedIndex == -1)
             {
-
-          
-                lblBanco.Visibility = Visibility.Collapsed;
-                lblCheque.Visibility = Visibility.Collapsed;
-                lblImporte.Visibility = Visibility.Collapsed;
-                lblFecha.Visibility = Visibility.Collapsed;
-                lblFechacobro.Visibility = Visibility.Collapsed;
-                lblDestinatario.Visibility = Visibility.Collapsed;
-                lbldatoscuentaBancaria.Visibility = Visibility.Collapsed;
-                lblcbu.Visibility = Visibility.Collapsed;
-                lblnombretitualr.Visibility = Visibility.Collapsed;
-                lbldatoscheque.Visibility = Visibility.Collapsed;
-
-                cmbBanco.Visibility = Visibility.Collapsed;
-                txtnumeroCheque.Visibility = Visibility.Collapsed;
-                txtImporte.Visibility = Visibility.Collapsed;
-                dtpFecha.Visibility = Visibility.Collapsed;
-                dtpFechaCobro.Visibility = Visibility.Collapsed;
-                txtDestinatario.Visibility = Visibility.Collapsed;
-                txtCbu.Visibility = Visibility.Collapsed;
-                txtNombreTitular.Visibility = Visibility.Collapsed;
+                pagoEfectivo();
             }
         }
 
+        public void pagoEfectivo()
+        {
+            lblBanco.Visibility = Visibility.Collapsed;
+            lblCheque.Visibility = Visibility.Collapsed;
+            lblImporte.Visibility = Visibility.Collapsed;
+            lblFecha.Visibility = Visibility.Collapsed;
+            lblFechacobro.Visibility = Visibility.Collapsed;
+            lblDestinatario.Visibility = Visibility.Collapsed;
+            lbldatoscuentaBancaria.Visibility = Visibility.Collapsed;
+            lblcbu.Visibility = Visibility.Collapsed;
+            lblnombretitualr.Visibility = Visibility.Collapsed;
+            lbldatoscheque.Visibility = Visibility.Collapsed;
+
+            cmbBanco.Visibility = Visibility.Collapsed;
+            txtnumeroCheque.Visibility = Visibility.Collapsed;
+            txtImporte.Visibility = Visibility.Collapsed;
+            dtpFecha.Visibility = Visibility.Collapsed;
+            dtpFechaCobro.Visibility = Visibility.Collapsed;
+            txtDestinatario.Visibility = Visibility.Collapsed;
+            txtCbu.Visibility = Visibility.Collapsed;
+            txtNombreTitular.Visibility = Visibility.Collapsed;
+        }
+        public void PagoCheque()
+        {
+            lblBanco.Visibility = Visibility.Visible;
+            lblCheque.Visibility = Visibility.Visible;
+            lblImporte.Visibility = Visibility.Visible;
+            lblFecha.Visibility = Visibility.Visible;
+            lblFechacobro.Visibility = Visibility.Visible;
+            lblDestinatario.Visibility = Visibility.Visible;
+            lbldatoscuentaBancaria.Visibility = Visibility.Collapsed;
+            lblcbu.Visibility = Visibility.Collapsed;
+            lblnombretitualr.Visibility = Visibility.Collapsed;
+            lbldatoscheque.Visibility = Visibility.Visible;
+            lbldatoscheque.Visibility = Visibility.Visible;
+
+            cmbBanco.Visibility = Visibility.Visible;
+            txtnumeroCheque.Visibility = Visibility.Visible;
+            txtImporte.Visibility = Visibility.Visible;
+            dtpFecha.Visibility = Visibility.Visible;
+            dtpFechaCobro.Visibility = Visibility.Visible;
+            txtDestinatario.Visibility = Visibility.Visible;
+            txtCbu.Visibility = Visibility.Collapsed;
+            txtNombreTitular.Visibility = Visibility.Collapsed;
+
+            CargarCmbBancos();
+        }
+        public void PagoTransferencia()
+        {
+            lblBanco.Visibility = Visibility.Visible;
+            lblCheque.Visibility = Visibility.Collapsed;
+            lblImporte.Visibility = Visibility.Collapsed;
+            lblFecha.Visibility = Visibility.Collapsed;
+            lblFechacobro.Visibility = Visibility.Collapsed;
+            lblDestinatario.Visibility = Visibility.Collapsed;
+            lbldatoscuentaBancaria.Visibility = Visibility.Visible;
+            lblcbu.Visibility = Visibility.Visible;
+            lblnombretitualr.Visibility = Visibility.Visible;
+            lbldatoscheque.Visibility = Visibility.Collapsed;
+
+            cmbBanco.Visibility = Visibility.Visible;
+            txtnumeroCheque.Visibility = Visibility.Collapsed;
+            txtImporte.Visibility = Visibility.Collapsed;
+            dtpFecha.Visibility = Visibility.Collapsed;
+            dtpFechaCobro.Visibility = Visibility.Collapsed;
+            txtDestinatario.Visibility = Visibility.Collapsed;
+            txtCbu.Visibility = Visibility.Visible;
+            txtNombreTitular.Visibility = Visibility.Visible;
+
+            CargarCmbBancos();
+            String sql = "SELECT * FROM cuentabanco WHERE idCuentaBco = '" + cmbBanco.SelectedValue + "'";
+            DataTable cuentas = conexion.ConsultaParametrizada(sql, cmbBanco.SelectedValue);
+
+            txtNombreTitular.Text = cuentas.Rows[0].ItemArray[2].ToString();
+            txtCbu.Text = cuentas.Rows[0].ItemArray[1].ToString();
+        }
+
+
+        public void CargarCmbBancos()
+        {
+            String consulta = "SELECT * FROM cuentabanco";
+            conexion.Consulta(consulta, combo: cmbBanco);
+            cmbBanco.DisplayMemberPath = "banco";
+            cmbBanco.SelectedValuePath = "idCuentaBco";
+            cmbBanco.SelectedIndex = 0;
+        }
         private void cmbFormaPago_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             VerTipoPago();
@@ -248,83 +300,85 @@ namespace wpfFamiliaBlanco.Entradas
             txtNombreTitular.Visibility = Visibility.Collapsed;
 
 
-            txttotafactura.IsEnabled = false;
+            txttotafactura.IsReadOnly =true;
         }
-        //PAGO EFECTIVO
 
-        //private void btnEfectivo_Click(object sender, RoutedEventArgs e)
-        //{
-        //    DialogResult = true;
-        //}
+        private void cmbBanco_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
 
+        
+            String sql = "SELECT * FROM cuentabanco WHERE idCuentaBco = '" + cmbBanco.SelectedValue + "'";
+            DataTable cuentas = conexion.ConsultaParametrizada(sql, cmbBanco.SelectedValue);
 
+            txtNombreTitular.Text = cuentas.Rows[0].ItemArray[2].ToString();
+            txtCbu.Text = cuentas.Rows[0].ItemArray[1].ToString();
+            }
+            catch (Exception)
+            {
 
+              
+            }
+        }
 
-        //PAGO CON CHEQUE
+        public float CalculaMonto(float cot)
+        {
+            float total=0;
 
-
-        //var newW = new WindowAgregarPagoProveedorCheque(totalc, this.tipo);
-        //newW.ShowDialog();
-
-        //if (newW.DialogResult == true)
-        //{
-        //    banco = newW.cmbBanco.SelectedItem.ToString();
-        //    destinatario = newW.txtDestinatario.Text;
-        //    numCheque = int.Parse(newW.txtnumeroCheque.Text);
-        //    importe = float.Parse(newW.txtImporte.Text);
-        //    fecha = newW.dtpFecha.SelectedDate.Value.Date;
-        //    fechaCobro = newW.dtpFechaCobro.SelectedDate.Value.Date;
-        //    tipo = newW.tipo;
-
-        //    if (tipo == 1)
-        //    {
-        //        String sql = "INSERT INTO chequesalida (banco, importe,destinatario,numeroCheque, fecha, fechaCobro)VALUES ('" + banco + "','" + importe + "','" + destinatario + "','" + numCheque + "','" + fecha.ToString("yyyy/MM/dd") + "','" + fechaCobro.ToString("yyyy/MM/dd") + "')";
-        //        conexion.operaciones(sql);
-        //    }
-        //    else
-        //    {
-        //        String sql = "INSERT INTO cheque (banco, importe,destinatario,numeroCheque, fecha, fechaCobro)VALUES ('" + banco + "','" + importe + "','" + destinatario + "','" + numCheque + "','" + fecha.ToString("yyyy/MM/dd") + "','" + fechaCobro.ToString("yyyy/MM/dd") + "')";
-        //        conexion.operaciones(sql);
-        //    }
+            total = float.Parse(txttotafacturaApagar.Text) / cot;
 
 
-        //    string ultimoId = "Select last_insert_id()";
-        //    idCheque = conexion.ValorEnVariable(ultimoId);
-        //    tipopago = 1;
-        ////    this.Close();
-        //}
+            return total;
+        }
+        private void txttotafacturaApagar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //if (txtcotizacion.Text == "")
+            //{
+            //    MessageBox.Show("Por favor ingrese cotización", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            CacularCotizacion();
+        }
+
+        private void cmbMoneda_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CacularCotizacion();
+        }
+
+        public void CacularCotizacion()
+        {
+            if (cmbMoneda.Text == "u$d")
+            {
+                txtresultado.Text = "";
+                txtresultado.Text = txttotafacturaApagar.Text;
+            }
+            else if (cmbMoneda.Text == "$")
+            {
+                try
+                {
+
+                
+                txtresultado.Text = (float.Parse(txttotafacturaApagar.Text) / float.Parse(txtcotizacion.Text)).ToString();
+
+                }
+                catch (Exception)
+                {
+
+                  
+                }
+            }
+
+            if (txtcotizacion.Text == "" || txttotafacturaApagar.Text == "")
+            {
+                txtresultado.Text = "";
+            }
+        }
+
+        private void txtcotizacion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CacularCotizacion();
+        }
     }
-
-       
-    
-    
-    //PAGO CON CUENTA BANCARIA
-
-        //var newW = new WindowAgregarPagoProveedorCtaBancaria(totalc, tipo);
-        //newW.ShowDialog();
-
-        //if (newW.DialogResult == true)
-        //{
-        //    cbu = newW.cbuu;
-        //    nombreTitular = newW.nombreT;
-
-        //    if (tipo == 1)
-        //    {
-        //        String sql = "INSERT INTO cuentabancosalida (cbu, nombreTitular, montoPagado)VALUES ('" + cbu + "','" + nombreTitular + "','" + float.Parse(newW.txtMonto.Text) + "')";
-        //        conexion.operaciones(sql);
-        //    }
-        //    else
-        //    {
-        //        String sql = "INSERT INTO cuentabanco (cbu, nombreTitular, montoPagado)VALUES ('" + cbu + "','" + nombreTitular + "','" + float.Parse(newW.txtMonto.Text) + "')";
-        //        conexion.operaciones(sql);
-        //    }
-
-
-        //    string ultimoId = "Select last_insert_id()";
-        //    idCtaBcria = conexion.ValorEnVariable(ultimoId);
-        //    tipopago = 2;
-        //    this.Close();
-        //}
     
 }
 

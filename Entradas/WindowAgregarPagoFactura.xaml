@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Entradas"
         mc:Ignorable="d"
-        Title="WindowAgregarPagoFactura" Height="450" Width="800" Background="#FF232222" WindowStartupLocation="CenterScreen">
+        Title="WindowAgregarPagoFactura" Height="450" Width="837.5" Background="#FF232222" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="LabelStyle_Detalle" TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -34,21 +34,27 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Label x:Name="lbl1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="267,46,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de la factura"/>
-        <Label x:Name="lbl1_Copy" Width="161" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="239,101,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total restante por pagar"/>
-        <TextBox x:Name="txttotalfactura" HorizontalAlignment="Left" Height="24" Margin="226,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
-        <TextBox x:Name="txttotalrestante" HorizontalAlignment="Left" Height="24" Margin="225,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lbl1" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="653,46,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de la factura"/>
+        <Label x:Name="lbl1_Copy" Width="161" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="625,101,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total restante por pagar"/>
+        <TextBox x:Name="txttotalfactura" HorizontalAlignment="Left" Height="24" Margin="612,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <TextBox x:Name="txttotalrestante" HorizontalAlignment="Left" Height="24" Margin="611,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <ListBox x:Name="ltsPagosRealizados" HorizontalAlignment="Left" Height="243" Margin="26,48,0,0" VerticalAlignment="Top" Width="159" SelectionChanged="ltsfacturas_SelectionChanged"/>
-        <Button x:Name="btnAgregarPago" Content="Agregar pago" HorizontalAlignment="Left" Margin="513,253,0,0" VerticalAlignment="Top" Width="84" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Foreground="White"/>
-        <TextBox x:Name="txtmontorealido" HorizontalAlignment="Left" Height="24" Margin="226,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Button x:Name="btnAgregarPago" Content="Agregar pago" HorizontalAlignment="Left" Margin="657,349,0,0" VerticalAlignment="Top" Width="84" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Foreground="White"/>
+        <TextBox x:Name="txtmontorealido" HorizontalAlignment="Left" Height="24" Margin="229,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lbl1_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="53,23,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Pagos realizados"/>
-        <Label x:Name="lbl1_Copy3" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="226,165,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Monto del pago realizado"/>
-        <TextBox x:Name="txtfechapago" HorizontalAlignment="Left" Height="24" Margin="225,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
-        <Label x:Name="lbl1_Copy1" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="225,228,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha del Pago"/>
+        <Label x:Name="lbl1_Copy3" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="226,48,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Monto del pago realizado"/>
+        <TextBox x:Name="txtfechapago" HorizontalAlignment="Left" Height="24" Margin="229,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lbl1_Copy1" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="225,101,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha del Pago"/>
         <TextBox x:Name="txtForma" HorizontalAlignment="Left" Height="24" Margin="423,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lbl1_Copy4" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="423,46,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de Pago"/>
         <TextBox x:Name="txtRecibo" HorizontalAlignment="Left" Height="24" Margin="423,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lbl1_Copy5" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="423,101,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Recibo"/>
+        <TextBox x:Name="txtBanco" HorizontalAlignment="Left" Height="24" Margin="423,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lblbanco" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="420,165,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Banco"/>
+        <Label x:Name="lblnrocheque" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="426,283,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Numero del Cheque"/>
+        <TextBox x:Name="txtDestinatario" HorizontalAlignment="Left" Height="24" Margin="426,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lblDestinatario" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="423,228,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Destinatario"/>
+        <TextBox x:Name="txtChequeNumero1" HorizontalAlignment="Left" Height="24" Margin="426,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
 
     </Grid>
 </Window>

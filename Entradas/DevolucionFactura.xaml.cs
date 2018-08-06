@@ -47,6 +47,12 @@ namespace wpfFamiliaBlanco.Entradas
             SetearColumnas();
             ltsNC.SelectedIndex = 0;
 
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnEliminarNC.Visibility = Visibility.Collapsed;
+                this.btnModificarNC.Visibility = Visibility.Collapsed;
+
+            }
         }
 
         public void SetearColumnas()

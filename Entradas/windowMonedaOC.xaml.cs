@@ -28,18 +28,21 @@ namespace wpfFamiliaBlanco.Entradas
         private void btnARS_Click(object sender, RoutedEventArgs e)
         {
             moneda = 0;
+            DialogResult = true;
             this.Close();
         }
 
         private void btnUSD_Click(object sender, RoutedEventArgs e)
         {
             moneda = 1;
+            DialogResult = true;
             this.Close();
         }
 
         private void btnEUR_Click(object sender, RoutedEventArgs e)
         {
             moneda = 2;
+            DialogResult = true;
             this.Close();
         }
     }

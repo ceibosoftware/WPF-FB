@@ -31,13 +31,14 @@ namespace wpfFamiliaBlanco.Entradas
             loadListaProducto(idProveedor, moneda);
 
         }
-        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre, int idOC,int moneda)
+        public windowAgregarClienteME(int idProveedor, int idProducto, string nombre, int idOC,int moneda, bool modifica)
         {
-            modifica = true;
+            this.modifica = modifica;
             InitializeComponent();
             loadListaProducto(idProveedor, idProducto,nombre,moneda);
             this.idOC = idOC;
-            lblPrecioUnitario.Content = "Precio unitario pagado";
+            if(modifica)
+                lblPrecioUnitario.Content = "Precio unitario pagado";
         }
         public windowAgregarClienteME(int idProveedor, int idProducto,  int moneda, string nombre)
         {

@@ -44,7 +44,7 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void loadlp()
         {
-            String consulta = "Select * from listadeprecios WHERE tipo=0";
+            String consulta = "Select * from listadeprecios WHERE tipo=1";
             conexion.Consulta(consulta, ltsLpme);
             ltsLpme.DisplayMemberPath = "nombre";
             ltsLpme.SelectedValuePath = "idLista";
@@ -98,10 +98,31 @@ namespace wpfFamiliaBlanco.Clientes
                 String fecha = conexion.ValorEnVariable(consulta);
                 String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
                 String nombre = conexion.ValorEnVariable(consulta2);
+                String consulta3 = "Select anexo from listadeprecios where idLista='" + seleccionado + "'";
+                String anexo = conexion.ValorEnVariable(consulta3);
+                String consulta4 = "Select moneda from listadeprecios where idLista='" + seleccionado + "'";
+                String moneda = conexion.ValorEnVariable(consulta4);
 
 
                 lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
                 lblnombre.Content = nombre;
+                if (moneda=="1")
+                {
+                    lblcoin.Content = "USD";
+                }
+                else
+                {
+                    lblcoin.Content = "EUROS";
+                }
+                if (anexo=="")
+                {
+                    lbltienea.Content = "No tiene anexo";
+                }
+                else
+                {
+                    lbltienea.Content = anexo;
+                }
+                
                 ActualizaDGVlp();
             }
         }
@@ -113,25 +134,53 @@ namespace wpfFamiliaBlanco.Clientes
             bandera = true;
             var newW = new WindowAgregarLpme();
             string nombre;
-            // newW.lblpreciolista.Visibility = Visibility.Hidden;
-            //newW.txtPreciolista.Visibility = Visibility.Hidden;
-            //newW.btnModpl.Visibility = Visibility.Hidden;
+            string anexo;
+            newW.lblpreciolista.Visibility = Visibility.Collapsed;
+            newW.txtPreciolista.Visibility = Visibility.Collapsed;
+            newW.btnModpl.Visibility = Visibility.Collapsed;
             newW.ShowDialog();
+            int moneda;
 
             if (newW.DialogResult == true)
             {
                 nombre = newW.txtNombre.Text;
                 DateTime hoy;
                 hoy = DateTime.Today;
+                if (newW.txtAnexo.Text=="")
+                {
+                    anexo = "";
+                }
+                else
+                {
+                    anexo = newW.txtAnexo.Text;
+                }
+
+
+                if (newW.cmbMoneda.Text=="USD")
+                {
+                    moneda = 1;
+                }
+                else
+                {
+                    moneda = 2;
+                }
+               
 
 
 
-
-
-
-                String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+0+"')";
-                conexion.operaciones(sql);
+                if (newW.txtAnexo.Text=="")
+                {
+                    String sql;
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 +"','"+moneda+"')";
+                    conexion.operaciones(sql);
+                }
+                else
+                {
+                    String sql;
+                    sql = "INSERT into listadeprecios(nombre, fecha,tipo,anexo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','" + 1 + "','" + anexo + "','"+moneda+"')";
+                    conexion.operaciones(sql);
+                }
+               
 
                 string ultimoId = "Select last_insert_id()";
                 String id = conexion.ValorEnVariable(ultimoId);
@@ -160,6 +209,10 @@ namespace wpfFamiliaBlanco.Clientes
                 ActualizaDGVlp();
                 MessageBox.Show("Se agrego la lista de precio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            else
+            {
+                bandera = false;
+            }
 
 
 
@@ -175,10 +228,14 @@ namespace wpfFamiliaBlanco.Clientes
 
 
                 int modificado;
+                
                 modificado = ltsLpme.SelectedIndex;
                 int idlista = (int)ltsLpme.SelectedValue;
                 String nombrelp;
                 String fecha;
+                String anexo;
+
+                int coin;
 
                 DateTime hoy;
                 hoy = DateTime.Today;
@@ -189,8 +246,14 @@ namespace wpfFamiliaBlanco.Clientes
                 fecha = hoy.ToString("yyyy/MM/dd");
 
                 nombrelp = nombre;
-
-                var newW = new windowAgregarLp(idlista, nombrelp, listadeprecios, fecha);
+                String consulta2 = "SELECT anexo from listadeprecios where idLista='" + idlista + "';";
+                String anexolista = conexion.ValorEnVariable(consulta2);
+                String consulta3 = "SELECT moneda from listadeprecios where idLista='" + idlista + "';";
+                String moneda = conexion.ValorEnVariable(consulta3);
+                coin = int.Parse(moneda);
+                anexo = anexolista;
+             
+                var newW = new WindowAgregarLpme(idlista, lblnombre.Content.ToString(), listadeprecios, fecha,coin,lbltienea.Content.ToString());
 
                 for (int i = 0; i < newW.itemslp.Count; i++)
                 {
@@ -213,8 +276,10 @@ namespace wpfFamiliaBlanco.Clientes
                     hoy = DateTime.Today;
                     fecha = hoy.ToString("yyyy/MM/dd");
                     nombre = newW.txtNombre.Text;
+                    anexo = newW.txtAnexo.Text;
+                    coin = newW.cmbMoneda.SelectedIndex+1;
 
-                    String update = "update listadeprecios set nombre = '" + nombre + "', fecha = '" + fecha + "' where idLista = '" + idlista + "'; ";
+                    String update = "update listadeprecios set nombre = '" + nombre + "', fecha = '" + fecha + "', anexo= '"+anexo+"', moneda='"+coin+"' where idLista = '" + idlista + "'; ";
                     conexion.operaciones(update);
 
 
@@ -245,6 +310,16 @@ namespace wpfFamiliaBlanco.Clientes
 
                 lblnombre.Content = nombre;
                 lblultimam.Content = hoy.ToString("yyyy/MM/dd");
+                lbltienea.Content = anexo;
+
+                if (coin==1)
+                {
+                    lblcoin.Content = "USD";
+                }else if (coin == 2)
+                {
+                    lblcoin.Content = "EUROS";
+                }
+               
 
             }
             catch (NullReferenceException)

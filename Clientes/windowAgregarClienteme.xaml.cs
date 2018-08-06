@@ -56,6 +56,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             
             camplimit();
             this.lista = lista;
+            
             loaddgvcontacto(this.lista);
             loadcmblp();
             loadcombopaises();
@@ -77,12 +78,15 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             cmbpais.SelectedValuePath = "id";
             cmbpais.SelectedIndex = -1;
         }
+      
         private void loadcmblp()
         {
-            String consulta = "SELECT * from listadeprecios WHERE tipo=0";
+            String consulta = "SELECT * from listadeprecios WHERE tipo=1";
             conexion.Consulta(consulta, combo: cmbPrecios);
             cmbPrecios.DisplayMemberPath = "nombre";
             cmbPrecios.SelectedValuePath = "idLista";
+            
+
 
         }
 
@@ -97,27 +101,53 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             textColumn2.Header = "Precio de Lista";
             textColumn2.Binding = new Binding("preciolista");
             dgvPrecios.Columns.Add(textColumn2);
+            
+            
+
+           
+            
+             
         }
 
         private void ActualizarDGVPrecios()
 
         {
             dgvPrecios.Items.Refresh();
-
-            String consultalp = "SELECT p.nombre, plp.preciolista, plp.FK_idProductos from productos p,productos_has_listadeprecios plp where FK_idLista = @valor and FK_idProductos=p.idProductos";
+            
+            String consultalp = "SELECT p.nombre, plp.preciolista, plp.FK_idProductos, lp.anexo, lp.moneda from productos p,productos_has_listadeprecios plp, listadeprecios lp where FK_idLista = @valor and FK_idProductos=p.idProductos and idLista = @valor";
             listadeprecios = conexion.ConsultaParametrizada(consultalp, cmbPrecios.SelectedValue);
-
+            
 
             dgvPrecios.ItemsSource = listadeprecios.AsDataView();
 
 
 
-
+            if (listadeprecios.Rows.Count!=0)
+            {
+                
+                if (listadeprecios.Rows[0].ItemArray[3].ToString()=="")
+                {
+                    lbltienea.Content = "No tiene anexo";
+                }
+                else
+                {
+                    lbltienea.Content = listadeprecios.Rows[0].ItemArray[3].ToString();
+                }
+                if (listadeprecios.Rows[0].ItemArray[4].ToString()=="1")
+                {
+                    lbllmoneda.Content = "USD";
+                }
+                else if (listadeprecios.Rows[0].ItemArray[4].ToString()=="2")
+                {
+                    lbllmoneda.Content = "EUROS";
+                }
+            }
 
             dgvPrecios.Items.Refresh();
+            
 
         }
-
+        
 
         private void CampLimit()
         {
@@ -343,6 +373,8 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             }
 
         }
+     
+        
 
         private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -353,6 +385,13 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
         private void cmbPrecios_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ActualizarDGVPrecios();
+
+
+
+           
+            
+           
+            
         }
 
         private void txtcp_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -363,8 +402,9 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
 
         private void btnmlp_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new windowAgregarLp();
+            var newW = new WindowAgregarLpme();
             string nombre;
+            string anexo;
             newW.ShowDialog();
 
 
@@ -375,12 +415,23 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                 hoy = DateTime.Today;
 
 
+                if (newW.txtAnexo.Text == "")
+                {
+                    anexo = "";
+                }
+                else
+                {
+                    anexo = newW.txtAnexo.Text;
+                }
+                
+
+
 
 
 
 
                 String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "')";
+                sql = "INSERT into listadeprecios(nombre, fecha,tipo,anexo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+1+"','"+anexo+"')";
                 conexion.operaciones(sql);
 
                 string ultimoId = "Select last_insert_id()";

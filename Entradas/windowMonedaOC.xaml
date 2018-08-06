@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="windowMonedaOC" Height="189.894" Width="456.915"  Background="#FF2D2C2C" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Name="btnARS" Content="ARS" HorizontalAlignment="Left" Margin="64,106,0,0" VerticalAlignment="Top" Width="72" Height="30" Click="btnARS_Click"/>
-        <Button Name="btnUSD" Content="USD" HorizontalAlignment="Left" Margin="188,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnUSD_Click"/>
-        <Button Name="btnEUR" Content="EUR" HorizontalAlignment="Left" Margin="317,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnEUR_Click"/>
+        <Button Name="btnARS" Content="ARS" HorizontalAlignment="Left" Margin="64,106,0,0" VerticalAlignment="Top" Width="72" Height="30" Click="btnARS_Click" TabIndex="0"/>
+        <Button Name="btnUSD" Content="USD" HorizontalAlignment="Left" Margin="188,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnUSD_Click" TabIndex="1"/>
+        <Button Name="btnEUR" Content="EUR" HorizontalAlignment="Left" Margin="317,106,0,0" VerticalAlignment="Top" Width="77" Height="30" Click="btnEUR_Click" TabIndex="2"/>
         <Label Content="¿ En que moneda sera la siguiente orden de compra ?" HorizontalAlignment="Left" Margin="77,38,0,0" VerticalAlignment="Top" Width="303"/>
 
     </Grid>

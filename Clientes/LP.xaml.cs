@@ -36,7 +36,7 @@ namespace wpfFamiliaBlanco.Clientes
             loadlp();
             dgvLp.IsReadOnly = true;
             Camplimit();
-            cargalp();
+            
             ActualizaDGVlp();
             ltsLp.SelectedIndex = 0;
 
@@ -78,23 +78,13 @@ namespace wpfFamiliaBlanco.Clientes
         }
 
        
-        private void cargalp()
-        {
-           /* dgvLp.AutoGenerateColumns = false;
-            DataGridTextColumn textColumn = new DataGridTextColumn();
-            textColumn.Header = "Nombre";
-            textColumn.Binding = new Binding("nombre");
-            dgvLp.Columns.Add(textColumn);
-            DataGridTextColumn textColumn2 = new DataGridTextColumn();
-            textColumn2.Header = "Precio de Lista";
-            textColumn2.Binding = new Binding("preciolista");
-            dgvLp.Columns.Add(textColumn2);*/
-        }
+       
+    
         private void loadlp()
         {
 
 
-            String consulta = "Select * from listadeprecios WHERE tipo=1";
+            String consulta = "Select * from listadeprecios WHERE tipo=0";
             conexion.Consulta(consulta, ltsLp);
             ltsLp.DisplayMemberPath = "nombre";
             ltsLp.SelectedValuePath = "idLista";
@@ -105,19 +95,19 @@ namespace wpfFamiliaBlanco.Clientes
 
         private void ltsLp_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!bandera) { 
-            int seleccionado = (int)ltsLp.SelectedValue;
+            if (!bandera) {
+                int seleccionado = (int)ltsLp.SelectedValue;
 
 
-             
-            String consulta = "Select fecha from listadeprecios where idLista='" + seleccionado + "'";
-            String fecha = conexion.ValorEnVariable(consulta);
-            String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
-            String nombre = conexion.ValorEnVariable(consulta2);
 
-
-            lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
-            lblnombre.Content = nombre;
+                String consulta = "Select fecha from listadeprecios where idLista='" + seleccionado + "'";
+                String fecha = conexion.ValorEnVariable(consulta);
+                String consulta2 = "Select nombre from listadeprecios where idLista='" + seleccionado + "'";
+                String nombre = conexion.ValorEnVariable(consulta2);
+                
+                lblultimam.Content = DateTime.Parse(fecha).ToString("yyyy/MM/dd");
+                lblnombre.Content = nombre;
+                
             ActualizaDGVlp();
             }
 
@@ -146,7 +136,7 @@ namespace wpfFamiliaBlanco.Clientes
                 
                 
                 String sql;
-                sql = "INSERT into listadeprecios(nombre, fecha,tipo) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+1+"')";
+                sql = "INSERT into listadeprecios(nombre, fecha,tipo,moneda) values('" + nombre + "', '" + hoy.ToString("yyyy/MM/dd") + "','"+0+"','"+0+"')";
                 conexion.operaciones(sql);
 
                 string ultimoId = "Select last_insert_id()";

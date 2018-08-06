@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Handlebars, Version=1.9.5.0, Culture=neutral, PublicKeyToken=22225d0bf33cd661, processorArchitecture=MSIL">
+      <HintPath>packages\Handlebars.Net.1.9.5\lib\net452\Handlebars.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPdf, Version=4.4.9.15720, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>packages\IronPdf.4.4.9\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>.\itextsharp.dll</HintPath>
     </Reference>
@@ -47,6 +53,8 @@
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -189,6 +197,13 @@
     </Compile>
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Clases\INV\Analisis.cs" />
+    <Compile Include="SalidasNuevo\Vistas\INV\PageINV.xaml.cs">
+      <DependentUpon>PageINV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\INV\windowAgregarINV.xaml.cs">
+      <DependentUpon>windowAgregarINV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml.cs">
       <DependentUpon>DevolucionFacturaCliente.xaml</DependentUpon>
@@ -456,6 +471,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SalidasNuevo\Vistas\INV\PageINV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\INV\windowAgregarINV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Salidas\Devoluciones\DevolucionFacturaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -641,7 +664,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SalidasNuevo\Clases\OrdenesPedido\" />
-    <Folder Include="SalidasNuevo\Vistas\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,21 +33,25 @@ namespace wpfFamiliaBlanco.Clientes
         {
             InitializeComponent();
             loaddgvp();
+            loadcmbmoneda();
             loaddgvlp();
             camplimit();
         }
 
-        public WindowAgregarLpme(int id, string nombre, DataTable itemslp, String fecha)
+        public WindowAgregarLpme(int id, string nombre, DataTable itemslp, String fecha, int moneda, String anexo = null)
         {
             InitializeComponent();
-
-            this.txtNombre.Text = nombre;
+            
             loaddgvp();
             loadlistadeprecios(itemslp);
             idlistadb = id;
             camplimit();
+            
             lblWindowTitle.Content = "Modificar Lista de Precios";
-
+            this.txtNombre.Text = nombre;
+            this.txtAnexo.Text = anexo;
+            loadcmbmoneda(moneda);
+            
         }
 
 
@@ -57,6 +61,7 @@ namespace wpfFamiliaBlanco.Clientes
             dgvProductos.IsReadOnly = true;
             txtNombre.MaxLength = 20;
             txtPreciolista.MaxLength = 10;
+            txtAnexo.MaxLength = 2;
 
 
         }
@@ -86,6 +91,25 @@ namespace wpfFamiliaBlanco.Clientes
 
 
         }
+
+        private void loadcmbmoneda()
+        {
+            cmbMoneda.Items.Add("USD");
+            cmbMoneda.Items.Add("EUROS");
+
+        }
+        private void loadcmbmoneda(int moneda)
+        {
+            cmbMoneda.Items.Add("USD");
+            cmbMoneda.Items.Add("EUROS");
+            if (moneda==1)
+            {
+                cmbMoneda.SelectedIndex = moneda - 1;
+            }else if (moneda==2)
+            {
+                cmbMoneda.SelectedIndex = moneda - 1;
+            }
+        }
         public Boolean Validacion()
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
@@ -97,6 +121,11 @@ namespace wpfFamiliaBlanco.Clientes
             else if (itemslp.Count <= 0)
             {
                 MessageBox.Show("Agregue un producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else if (cmbMoneda.SelectedIndex==-1)
+            {
+                MessageBox.Show("Seleccione una moneda", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -287,6 +316,19 @@ namespace wpfFamiliaBlanco.Clientes
         {
 
         }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtAnexo_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
+
+        
     }
 
 }

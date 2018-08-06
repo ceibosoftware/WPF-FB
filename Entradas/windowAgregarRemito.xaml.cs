@@ -306,23 +306,9 @@ namespace wpfFamiliaBlanco.Entradas
 
         private void cmbOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (RbInterno.IsChecked == true)
-            {
-                loadProductosOCSalida();
-          
-            }
-            else if (RbExterno.IsChecked == true)
-            {
-                loadProductosOCSalida();
-             
-            }
-            else
-            {
-                loadProductosOC();
-          
-            }
- 
-
+            prodRemito.Clear();
+            dgvProductosRemito.Items.Refresh();
+            loadProductosOC();
         }
 
         private void btnProdAgregar_Click(object sender, RoutedEventArgs e)
@@ -636,6 +622,7 @@ namespace wpfFamiliaBlanco.Entradas
         public void loadProductosOC()
         {
             productos.Clear();
+        
             string consulta = "SELECT t2.idProductos, t1.CrRemito ,t2.nombre FROM productos_has_ordencompra t1 inner join productos t2 where FK_idOC = @valor and t1.FK_idProducto = t2.idProductos";
             DataTable prod = conexion.ConsultaParametrizada(consulta, cmbOrden.SelectedValue);
             

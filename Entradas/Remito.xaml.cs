@@ -36,7 +36,12 @@ namespace wpfFamiliaBlanco.Entradas
             loadProductosRemitos();
             seleccioneParaFiltrar();
             dgvProductos.IsReadOnly = true;
-            
+
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnEliminar.Visibility = Visibility.Collapsed;
+                this.btnModificar_Copy.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfFamiliaBlanco.SalidasNuevo.Vistas.INV;
 
 namespace wpfFamiliaBlanco.Productos
 {
@@ -31,6 +32,7 @@ namespace wpfFamiliaBlanco.Productos
         {
             frameInicioProductos.Content = new pageProductos();
             btnProductos.Style = FindResource("botonTabPressed") as Style;
+            btnINV.Style = FindResource("botonTab") as Style;
             btnClientes.Style = FindResource("botonTab") as Style;
             lblProductosClientes.Content = "Productos";
         }
@@ -39,9 +41,19 @@ namespace wpfFamiliaBlanco.Productos
         {
             frameInicioProductos.Content = new pageCategorias();
             btnProductos.Style = FindResource("botonTab") as Style;
+            btnINV.Style = FindResource("botonTab") as Style;
             btnClientes.Style = FindResource("botonTabPressed") as Style;
             lblProductosClientes.Content = "Clientes";
         
+        }
+
+        private void btnINV_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicioProductos.Content = new PageINV();
+            btnProductos.Style = FindResource("botonTab") as Style;
+            btnClientes.Style = FindResource("botonTab") as Style;
+            btnINV.Style = FindResource("botonTabPressed") as Style;
+            lblProductosClientes.Content = "INV";
         }
     }
 }
