@@ -29,7 +29,7 @@ namespace wpfFamiliaBlanco
         public pageSalidas()
         {
             InitializeComponent();
-            //frameInicioSalida.Content = new OrdenesSalida();
+            // frameInicioSalida.Content = new OrdenesSalida();
             btnOrdenes.Style = FindResource("botonTabPressed") as Style;
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTab") as Style;

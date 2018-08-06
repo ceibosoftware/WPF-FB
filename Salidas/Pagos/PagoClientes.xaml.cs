@@ -66,7 +66,7 @@ namespace wpfFamiliaBlanco.Salidas.Pagos
 
             String idfac = conexion.ValorEnVariable(id);
 
-            var newW = new windowAgregarPagoProveedor(float.Parse(txtTotalCuota.Text, ""));
+            var newW = new windowAgregarPagoProveedor(float.Parse(txtTotalCuota.Text),"");
             newW.ShowDialog();
 
             if (newW.DialogResult == true)

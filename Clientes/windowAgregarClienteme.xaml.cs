@@ -56,6 +56,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             
             camplimit();
             this.lista = lista;
+            
             loaddgvcontacto(this.lista);
             loadcmblp();
             loadcombopaises();
@@ -77,6 +78,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             cmbpais.SelectedValuePath = "id";
             cmbpais.SelectedIndex = -1;
         }
+      
         private void loadcmblp()
         {
             String consulta = "SELECT * from listadeprecios WHERE tipo=1";
@@ -137,7 +139,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
                 }
                 else if (listadeprecios.Rows[0].ItemArray[4].ToString()=="2")
                 {
-                    lbllmoneda.Content = "EURO";
+                    lbllmoneda.Content = "EUROS";
                 }
             }
 

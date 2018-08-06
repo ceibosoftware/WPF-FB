@@ -200,7 +200,7 @@ namespace wpfFamiliaBlanco.Clientes
                         txtmoneda.Text = "USD";
                     }else if (moneda == "2")
                     {
-                        txtmoneda.Text = "EURO";
+                        txtmoneda.Text = "EUROS";
                     }
                     if (anexo=="")
                     {
@@ -209,6 +209,7 @@ namespace wpfFamiliaBlanco.Clientes
                     else
                     {
                         txtanexo.Text = anexo;
+                        
                     }
                 }
 
