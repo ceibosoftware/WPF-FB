@@ -640,7 +640,6 @@
     <Resource Include="act.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SalidasNuevo\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
