@@ -43,12 +43,12 @@
             <ColumnDefinition Width="101*"/>
             <ColumnDefinition Width="135*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnPagar" Content="Aceptar" Grid.Column="2" HorizontalAlignment="Left" Margin="268,281,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="24" Click="btnPagar_Click" Foreground="White" Grid.Row="1"/>
+        <Button x:Name="btnPagar" Content="Aceptar" Grid.Column="2" HorizontalAlignment="Left" Margin="268,281,0,0" VerticalAlignment="Top" Width="75" Style="{DynamicResource agregar}" Height="24" Click="btnPagar_Click" Foreground="White" Grid.Row="1" TabIndex="12"/>
         <Label x:Name="lbl1" Width="104" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="91,35,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de Pago" Grid.Column="1" Grid.Row="1"/>
-        <ComboBox x:Name="cmbFormaPago" Grid.Column="1" HorizontalAlignment="Left" Margin="44,57,0,0" VerticalAlignment="Top" Width="149" Grid.Row="1" SelectionChanged="cmbFormaPago_SelectionChanged"/>
+        <ComboBox x:Name="cmbFormaPago" Grid.Column="1" HorizontalAlignment="Left" Margin="44,57,0,0" VerticalAlignment="Top" Width="149" Grid.Row="1" SelectionChanged="cmbFormaPago_SelectionChanged" TabIndex="0"/>
         <TextBox x:Name="txttotafactura" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="44,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Grid.Row="1"/>
         <Label x:Name="lbl1_Copy" Width="135" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="62,83,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Restante por pagar" Grid.Column="1" Grid.Row="1"/>
-        <TextBox x:Name="txttotafacturaApagar" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="45,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Grid.Row="1" TextChanged="txttotafacturaApagar_TextChanged"/>
+        <TextBox x:Name="txttotafacturaApagar" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="45,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Grid.Row="1" TextChanged="txttotafacturaApagar_TextChanged" TabIndex="1"/>
         <Label x:Name="lbl1_Copy1" Width="135" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="62,136,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Monto a pagar" Grid.Column="1" Grid.Row="1"/>
         <TextBox x:Name="txtImporte" HorizontalAlignment="Left" Height="23" Margin="255,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Label x:Name="lblBanco" Content="Banco" HorizontalAlignment="Left" Margin="253,30,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
@@ -57,25 +57,25 @@
         <Label x:Name="lblCheque" Content="N° del cheque" HorizontalAlignment="Left" Margin="224,30,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1"/>
         <Label x:Name="lblFecha" Content="Fecha" HorizontalAlignment="Left" Margin="268,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.593,0.572" Grid.Column="2" Grid.Row="1"/>
         <Label x:Name="lblFechacobro" Content="Fecha de cobro" HorizontalAlignment="Left" Margin="219,134,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1"/>
-        <TextBox x:Name="txtDestinatario" HorizontalAlignment="Left" Height="23" Margin="255,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtDestinatario" HorizontalAlignment="Left" Height="23" Margin="255,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" TabIndex="6"/>
         <TextBox x:Name="txtnumeroCheque" HorizontalAlignment="Left" Height="23" Margin="164,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="146" PreviewTextInput="txtnumeroCheque_PreviewTextInput" Grid.Column="2" Grid.Row="1"/>
-        <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Margin="166,105,0,0" VerticalAlignment="Top" Width="165" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="2" Grid.Row="1"/>
-        <DatePicker x:Name="dtpFechaCobro" HorizontalAlignment="Left" Margin="166,156,0,0" VerticalAlignment="Top" Width="165" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="2" Grid.Row="1"/>
-        <ComboBox x:Name="cmbBanco" HorizontalAlignment="Left" Margin="253,55,0,0" VerticalAlignment="Top" Width="142" Height="23" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" SelectionChanged="cmbBanco_SelectionChanged"/>
+        <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Margin="166,105,0,0" VerticalAlignment="Top" Width="165" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="2" Grid.Row="1" TabIndex="10"/>
+        <DatePicker x:Name="dtpFechaCobro" HorizontalAlignment="Left" Margin="166,156,0,0" VerticalAlignment="Top" Width="165" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="2" Grid.Row="1" TabIndex="11"/>
+        <ComboBox x:Name="cmbBanco" HorizontalAlignment="Left" Margin="253,55,0,0" VerticalAlignment="Top" Width="142" Height="23" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" SelectionChanged="cmbBanco_SelectionChanged" TabIndex="4"/>
         <Label x:Name="lbldatoscheque" Content="Datos del Cheque" HorizontalAlignment="Left" Margin="94,6,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1"/>
         <Label x:Name="lbldatoscuentaBancaria" Content="Datos cuenta Bancaria" HorizontalAlignment="Left" Margin="80,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.618,0.497" Grid.Column="2" Grid.Row="1"/>
-        <TextBox x:Name="txtCbu" HorizontalAlignment="Left" Height="23" Margin="166,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" PreviewTextInput="txtCbu_PreviewTextInput" Grid.Column="2" Grid.Row="1"/>
+        <TextBox x:Name="txtCbu" HorizontalAlignment="Left" Height="23" Margin="166,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" PreviewTextInput="txtCbu_PreviewTextInput" Grid.Column="2" Grid.Row="1" TabIndex="9"/>
         <Label x:Name="lblcbu" Content="CBU" HorizontalAlignment="Left" Margin="277,32,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1"/>
         <Label x:Name="lblnombretitualr" Content="Nombre Titular" HorizontalAlignment="Left" Margin="253,78,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtNombreTitular" HorizontalAlignment="Left" Height="23" Margin="255,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <DatePicker x:Name="dtpFechaDelPago" HorizontalAlignment="Left" Margin="45,210,0,0" VerticalAlignment="Top" Width="148" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="1" Grid.Row="1"/>
+        <TextBox x:Name="txtNombreTitular" HorizontalAlignment="Left" Height="23" Margin="255,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" TabIndex="5"/>
+        <DatePicker x:Name="dtpFechaDelPago" HorizontalAlignment="Left" Margin="45,210,0,0" VerticalAlignment="Top" Width="148" Style="{DynamicResource DatePickerCambioForeground}" Grid.Column="1" Grid.Row="1" TabIndex="2"/>
         <Label x:Name="lbl1_Copy2" Width="135" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="62,188,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha del Pago" Grid.Column="1" Grid.Row="1"/>
         <Label x:Name="lblrecibo" Content="N° de Recibo" HorizontalAlignment="Left" Margin="253,185,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <TextBox x:Name="txtRecibo" HorizontalAlignment="Left" Height="23" Margin="255,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtRecibo" HorizontalAlignment="Left" Height="23" Margin="255,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" TabIndex="7"/>
         <Label x:Name="lblrecibo_Copy" Content="Moneda" HorizontalAlignment="Left" Margin="138,238,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" RenderTransformOrigin="1.038,0.5"/>
         <Label x:Name="lblrecibo_Copy1" Content="Cotizacion" HorizontalAlignment="Left" Margin="255,238,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" RenderTransformOrigin="1.038,0.5" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtcotizacion" HorizontalAlignment="Left" Height="23" Margin="255,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" TextChanged="txtcotizacion_TextChanged"/>
-        <ComboBox x:Name="cmbMoneda" Grid.Column="1" HorizontalAlignment="Left" Margin="43,264,0,0" VerticalAlignment="Top" Width="149" Grid.Row="1" SelectionChanged="cmbMoneda_SelectionChanged"/>
+        <TextBox x:Name="txtcotizacion" HorizontalAlignment="Left" Height="23" Margin="255,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" TextChanged="txtcotizacion_TextChanged" TabIndex="8"/>
+        <ComboBox x:Name="cmbMoneda" Grid.Column="1" HorizontalAlignment="Left" Margin="43,264,0,0" VerticalAlignment="Top" Width="149" Grid.Row="1" SelectionChanged="cmbMoneda_SelectionChanged" TabIndex="3"/>
         <Label x:Name="lblresutado" Content="Total en u$d" HorizontalAlignment="Left" Margin="256,189,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.Row="1" RenderTransformOrigin="1.038,0.5"/>
         <TextBox x:Name="txtresultado" HorizontalAlignment="Left" Height="23" Margin="170,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" Grid.Column="2" Grid.Row="1"/>
 

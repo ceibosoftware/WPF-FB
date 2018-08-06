@@ -43,6 +43,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotalFactura.IsReadOnly = true;
             txtTotalPAgo.IsReadOnly = true;
 
+        
 
         }
 

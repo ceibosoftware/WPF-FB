@@ -48,6 +48,13 @@ namespace wpfFamiliaBlanco.Entradas
             txtfecha.IsReadOnly = true;
             txtproveedor.IsReadOnly = true;
             txtremito.IsReadOnly = true;
+
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnEliminar.Visibility = Visibility.Collapsed;
+                this.btnModificar.Visibility = Visibility.Collapsed;
+
+            }
         }
 
         public void loadLtsNCRemitos()

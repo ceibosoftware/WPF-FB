@@ -32,7 +32,8 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaCategoria();
             ltsCategorias.SelectedIndex = 1;
-           // CargarTxtNombreCategoria();
+            // CargarTxtNombreCategoria();
+            textnombre.Focus();
 
         }
 

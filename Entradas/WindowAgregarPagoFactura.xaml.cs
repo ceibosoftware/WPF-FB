@@ -32,6 +32,12 @@ namespace wpfFamiliaBlanco.Entradas
         {
             InitializeComponent();
             OcultarElementos();
+
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnAgregarPago.Visibility = Visibility.Collapsed;
+               
+            }
         }
 
         public void LoadLtsPagosRealizados()
@@ -70,6 +76,11 @@ namespace wpfFamiliaBlanco.Entradas
             BloquearElementos();
             AsignarValores(tf, idfac, restante, moned);
             LoadLtsPagosRealizados();
+            if (windowUsuarios.tipoUsuarioDB == "basico")
+            {
+                this.btnAgregarPago.Visibility = Visibility.Collapsed;
+
+            }
         }
 
         private void BloquearElementos()

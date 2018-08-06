@@ -62,6 +62,7 @@ namespace wpfFamiliaBlanco.Entradas
             SetearColumnas();
             SetearColumnas2();
             cmbTipoCambio.IsEnabled = false;
+            txtNroFactura.Focus();
            
         }
 

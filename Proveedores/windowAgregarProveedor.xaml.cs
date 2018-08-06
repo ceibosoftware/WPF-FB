@@ -49,6 +49,7 @@ namespace wpfFamiliaBlanco.Proveedores
             LoadListaProv();
             LoadListaProveedor();
             LimitarCampos();
+            txtCuit.Focus();
         }
 
         private void LoadListaProveedor()

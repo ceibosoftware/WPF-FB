@@ -46,8 +46,8 @@ namespace wpfFamiliaBlanco
             LlenarComboFiltro();
             LoadListaProv();
             LlenarCmbTipoCambio();
-           // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
-
+            // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
+            txtNombre.Focus();
         }
 
         public void LoadListaComboCategoria()
