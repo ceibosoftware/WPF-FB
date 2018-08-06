@@ -120,6 +120,21 @@ namespace wpfFamiliaBlanco
             
 
         }
+
+        public DataTable coleccion(string sql)
+        {
+
+            //Objeto data adapter: realiza conexion y solicitud del usuario.
+            MySqlDataAdapter DA = new MySqlDataAdapter(sql, conexion);
+            // Data table recibe la informacion del dataAdapter (DA).
+            DataTable DT = new DataTable();
+            //Pasamos la informacion del dataAdapter (DA) al data (DT) 
+            DA.Fill(DT);
+
+            return DT;
+
+        }
+
     }
 }
 
