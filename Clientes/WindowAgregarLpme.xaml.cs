@@ -46,10 +46,11 @@ namespace wpfFamiliaBlanco.Clientes
             loadlistadeprecios(itemslp);
             idlistadb = id;
             camplimit();
+            
             lblWindowTitle.Content = "Modificar Lista de Precios";
             this.txtNombre.Text = nombre;
             this.txtAnexo.Text = anexo;
-            MessageBox.Show(moneda.ToString());
+            loadcmbmoneda(moneda);
             
         }
 
@@ -99,11 +100,15 @@ namespace wpfFamiliaBlanco.Clientes
         }
         private void loadcmbmoneda(int moneda)
         {
-            
-            
             cmbMoneda.Items.Add("USD");
             cmbMoneda.Items.Add("EUROS");
-
+            if (moneda==1)
+            {
+                cmbMoneda.SelectedIndex = moneda - 1;
+            }else if (moneda==2)
+            {
+                cmbMoneda.SelectedIndex = moneda - 1;
+            }
         }
         public Boolean Validacion()
         {
@@ -322,6 +327,8 @@ namespace wpfFamiliaBlanco.Clientes
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }
+
+        
     }
 
 }
