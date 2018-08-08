@@ -91,7 +91,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             id = int.Parse(conexion.ValorEnVariable(ultimoId));
             foreach (var producto in productosOP)
             {
-                String insertarProducto = "INSERT INTO op_has_productos (FK_idOP, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe) VALUES ('"+id+"','"+producto.Id+ "','"+producto.Cajas+ "', '"+producto.CajasPor+ "', '"+producto.TotalBotellas+ "','"+producto.Descuento+ "', '"+producto.DescuentoPesos+ "', '"+producto.Importe+"')";
+                String insertarProducto = "INSERT INTO op_has_productos (FK_idOP, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe, FK_idAnalisis) VALUES ('"+id+"','"+producto.Id+ "','"+producto.Cajas+ "', '"+producto.CajasPor+ "', '"+producto.TotalBotellas+ "','"+producto.Descuento+ "', '"+producto.DescuentoPesos+ "', '"+producto.Importe+"', '"+producto.IdINV+"')";
                 conexion.operaciones(insertarProducto);
             }
             foreach (var producto in productosMuestra)

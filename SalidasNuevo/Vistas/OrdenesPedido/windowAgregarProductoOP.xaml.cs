@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wpfFamiliaBlanco.SalidasNuevo.Clases.INV;
 using wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido;
 
 namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
@@ -23,6 +25,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
     {
         ListaPrecio listaPrecio = new ListaPrecio();
         ProductoOP producto = new ProductoOP();
+        Analisis inv = new Analisis();
         private bool cambiaPrecio ;
         private bool actualizaPrecio;
 
@@ -39,6 +42,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
         {
             LoadDgvLista(idCliente);
             SetColumnasDgvProductos();
+            LoadCmbAnalisis();
+            SetDatosAnalisis();
         }
         private void LoadDgvLista(int idCliente)
         {
@@ -61,6 +66,18 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
             dgvProductos.SelectedIndex = count;
 
 
+        }
+        private void LoadCmbAnalisis()
+        {
+            cmbAnalisis.ItemsSource = Analisis.getAnalisis().AsDataView();
+            cmbAnalisis.SelectedValuePath = "idAnalisis";
+            cmbAnalisis.DisplayMemberPath = "nombrevino";
+            cmbAnalisis.SelectedIndex = 0;
+        }
+        private void SetDatosAnalisis(){
+            DataTable inv  = Analisis.getAnalisisID(cmbAnalisis.SelectedValue.ToString());
+            txtCodigo.Text = inv.Rows[0].ItemArray[1].ToString();
+            txtLitros.Text = inv.Rows[0].ItemArray[3].ToString();
         }
         private void SetColumnasDgvProductos()
         {
@@ -221,6 +238,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
 
         }
 
+
         //Eventos
         private void dgvProductos_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -247,7 +265,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
         }
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-           if(valida())
+            if (valida())
+            producto.IdINV = (int)cmbAnalisis.SelectedValue;
             DialogResult = true;
             
         }
@@ -281,7 +300,11 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
                 actualizaPrecio = true;
             }
         }
-       
+        private void cmbAnalisis_DropDownClosed(object sender, EventArgs e)
+        {
+            SetDatosAnalisis();
+        }
+
         // validacion eventos
         private void txtCajas_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -308,6 +331,6 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
-     
+      
     }
 }

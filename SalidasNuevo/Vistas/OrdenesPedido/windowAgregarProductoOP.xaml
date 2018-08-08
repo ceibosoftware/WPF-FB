@@ -330,6 +330,23 @@
         <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="742,412,0,139" Width="74" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAceptar_Click" />
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="742,455,0,0" VerticalAlignment="Top" Width="74" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" />
         <Button Content="Actualizar precio" HorizontalAlignment="Left" Margin="670,99,0,0" VerticalAlignment="Top" Width="106" Height="22"  Foreground="White" Click="Button_Click"/>
+        <TextBox x:Name="txtBuscar" Width="264" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="790,48,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
+        <Label x:Name="lblBuscar" Width="196" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="858,30,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
+        <ComboBox x:Name="cmbAnalisis" HorizontalAlignment="Left" Height="24" Margin="792,99,0,0" VerticalAlignment="Top" Width="264" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" RenderTransformOrigin="0.043,7.208" DropDownClosed="cmbAnalisis_DropDownClosed"   >
+            <ComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.414"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ComboBox.RenderTransform>
+        </ComboBox>
+        <Label x:Name="lblNombre1" Width="196" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="858,75,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Analisis"/>
+        <TextBox x:Name="txtCodigo" Width="264" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="790,161,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
+        <Label x:Name="lblCodigo" Width="196" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="858,143,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Código"/>
+        <TextBox x:Name="txtLitros" Width="264" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="790,215,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
+        <Label x:Name="lblLitros" Width="196" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="858,197,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Litros"/>
 
     </Grid>
 </Window>
