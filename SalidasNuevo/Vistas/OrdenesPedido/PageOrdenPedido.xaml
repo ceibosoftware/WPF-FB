@@ -250,6 +250,80 @@
         <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="903.666,354.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" />
         <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="903.666,306.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" />
         <Label x:Name="lblFechaOC" Content="" HorizontalAlignment="Left" Margin="975,60,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Border Height="413.742" Width="355.02" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="42.48,18.043,636.166,39.215" Opacity="0.5" />
+        <Label x:Name="lblCliente" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="253,74.992,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cliente"/>
+        <ComboBox x:Name="cmbCliente" HorizontalAlignment="Left" Height="23" Margin="55,99.992,0,0" VerticalAlignment="Top" Width="330" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" IsEditable="True"/>
+        <TextBox x:Name="txtFiltro" Width="330" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="55,51.992,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" />
+        <Label x:Name="lblBuscar" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="253,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
+        <ListBox HorizontalAlignment="Left" Height="271.793" Margin="55,147.992,0,0" VerticalAlignment="Top" Width="330"/>
+        <Label x:Name="ltsOP" Width="150" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="235,122.992,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Órdenes de Producto"/>
+
+        <TabControl x:Name="xx" HorizontalAlignment="Left" Height="413.742" Margin="409.145,18.043,0,0" VerticalAlignment="Top" Width="405.667">
+            <TabItem x:Name="productoOP" Header="Productos OP">
+                <Grid Background="#FF2D2C2C">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="79*"/>
+                        <ColumnDefinition Width="145*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtSubtotal" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,207,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="2" />
+                    <TextBox x:Name="txtTotal" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,253,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="2" />
+                    <TextBox x:Name="txtTotalCajas" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,299,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="2" />
+                    <TextBox x:Name="txtTotalBotellas" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="68.343,253,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.Column="1" />
+                    <Button x:Name="btnAgregar1" Content="Agregar" HorizontalAlignment="Left" Margin="60.328,331.04,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" />
+                    <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="19.69,331.04,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource Modificar}" Foreground="White" Grid.Column="1"/>
+                    <Button x:Name="btnEliminar1" Content="Eliminar" HorizontalAlignment="Left" Margin="119.134,331.04,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource Cancelar}" Grid.Column="1" />
+                    <ComboBox x:Name="cmbTipoIVA" HorizontalAlignment="Left" Height="24" Margin="68.343,205,0,0" VerticalAlignment="Top" Width="178" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" RenderTransformOrigin="0.043,7.208" Grid.Column="1"  />
+                    <Label x:Name="lblSubtotal" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="55.33,183,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Subtotal" Grid.ColumnSpan="2"/>
+                    <Label x:Name="lblTipoIVA" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="114.343,181,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="IVA" Grid.Column="1"/>
+                    <Label x:Name="lblDescuento" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="114.343,275,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Descuento" Grid.Column="1"/>
+                    <Label x:Name="lblTotalCajas" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="55.33,275,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total cajas" Grid.ColumnSpan="2"/>
+                    <Label x:Name="lblTotal" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="55.33,229,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total" Grid.ColumnSpan="2"/>
+                    <Label x:Name="lblTotalBotellas" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="114.343,229,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total Botellas" Grid.Column="1"/>
+                    <TextBox x:Name="txtDescuento" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="68.343,299,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" Padding="4,0,0,0" Grid.Column="1"  />
+
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Muestras">
+                <Grid Background="#FF2D2C2C">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="126*"/>
+                        <ColumnDefinition Width="290*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvProductosMuestra" HorizontalAlignment="Left" Height="181" VerticalAlignment="Top" Width="395.667" IsReadOnly="True" SelectionMode="Single" SelectedIndex="0" Grid.ColumnSpan="4"/>
+                    <Button x:Name="btnAgregarMuestra" Content="Agregar" HorizontalAlignment="Left" Margin="32.034,331,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Grid.Column="2" />
+                    <Button x:Name="btnModificarMuestra" Content="Modificar" HorizontalAlignment="Left" Margin="23,331,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="{x:Null}" Style="{DynamicResource Modificar}" Foreground="White" Grid.Column="3"/>
+                    <Button x:Name="btnEliminarMuestra" Content="Eliminar" HorizontalAlignment="Left" Margin="122,331,0,0" VerticalAlignment="Top" Width="75" Height="24" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource Cancelar}" Grid.Column="3" />
+                    <TextBox x:Name="txtSubtotal_Copy" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,207,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="4" />
+                    <TextBox x:Name="txtTotal_Copy" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,253,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="4" />
+                    <TextBox x:Name="txtTotalCajas_Copy" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="9.33,299,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.ColumnSpan="4" />
+                    <TextBox x:Name="txtTotalBotellas_Copy" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="67.772,253,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" Grid.Column="3" />
+                    <ComboBox x:Name="cmbTipoIVA_Copy" HorizontalAlignment="Left" Height="24" Margin="67.772,205,0,0" VerticalAlignment="Top" Width="178" FontSize="14" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="{x:Null}" RenderTransformOrigin="0.043,7.208" Grid.Column="3"  />
+                    <Label x:Name="lblSubtotal_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="26.25,183,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Subtotal" Grid.ColumnSpan="2" Grid.Column="2"/>
+                    <Label x:Name="lblTipoIVA_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="113.772,181,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="IVA" Grid.Column="3"/>
+                    <Label x:Name="lblDescuento_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="113.772,275,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Descuento" Grid.Column="3"/>
+                    <Label x:Name="lblTotalCajas_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="26.25,275,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de Cajas" Grid.ColumnSpan="2" Grid.Column="2"/>
+                    <Label x:Name="lblTotal_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="26.25,229,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total" Grid.ColumnSpan="2" Grid.Column="2"/>
+                    <Label x:Name="lblTotalBotellas_Copy" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="113.553,229,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de Botellas" Grid.Column="3"/>
+                    <TextBox x:Name="txtDescuento_Copy" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="67.772,299,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" Padding="4,0,0,0" Grid.Column="3"  />
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+        <Border Height="229.508" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF00536B" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="830.39,51.992,48,189.5" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="209.508" TextWrapping="Wrap" VerticalAlignment="Top" Width="136.276" Margin="9,9,0,0" Foreground="#FFC9C5C5" FontSize="11" Text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"/>
+        </Border>
+        <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="853.666,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía"/>
 
     </Grid>
 </Page>
