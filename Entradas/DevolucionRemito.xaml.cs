@@ -48,6 +48,7 @@ namespace wpfFamiliaBlanco.Entradas
             txtfecha.IsReadOnly = true;
             txtproveedor.IsReadOnly = true;
             txtremito.IsReadOnly = true;
+            
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
@@ -200,7 +201,7 @@ namespace wpfFamiliaBlanco.Entradas
             String idr = "SELECT FK_idremitos FROM notacredito WHERE idNotaCredito = '" + idnotacredito + "'";
             String idRem = conexion.ValorEnVariable(idr);
 
-            String productosRemito = "SELECT DISTINCT  t2.nombre,t2.idProductos,t3.cantidad from productos_has_remitos t1, productos_has_notacredito t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idRemito = '" + idRem + "' and  t3.FK_idNotaCredito = '" + ltsRemitos.SelectedValue + "'";
+            String productosRemito = "SELECT DISTINCT  t2.nombre,t2.idProductos,t3.cantidad from productos_has_remitos t1, productos_has_notacredito t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idRemito = '" + idRem + "' and  t3.FK_idNotaCredito = '" + ltsRemitos.SelectedValue + "' and t3.FK_idProductos = t2.idProductos";
             productos = conexion.ConsultaParametrizada(productosRemito, ltsRemitos.SelectedValue);
 
 
@@ -226,6 +227,7 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     String nombre = p.nombre;
                     int cantidad = p.cantidad;
+                        MessageBox.Show("cabtudad" + cantidad);
                     float totalp = p.total;
                     float precioUni = p.precioUnitario;
                     int idp = p.id;
@@ -233,9 +235,11 @@ namespace wpfFamiliaBlanco.Entradas
                     Producto pr = new Producto(nombre, idp, cantidad, totalp, precioUni);
                     itemsNC.Add(p);
 
-      
-
-                    String updateProductosNC = "UPDATE productos_has_notacredito SET FK_idNotaCredito = '" + newW.idNotaCred + "', FK_idProductos = '" + idp + "', cantidad = '" + cantidad + "' WHERE FK_idNotaCredito = '" + newW.idNotaCred + "' AND FK_idProductos = '" + idp + "'";
+                        String deete = "DELETE FROM productos_has_notacredito WHERE FK_idNotaCredito = '" + newW.idNotaCred + "' AND FK_idProductos = '" + idp + "'";
+                        conexion.operaciones(deete);
+                       
+                        String updateProductosNC = "INSERT INTO productos_has_notacredito (FK_idNotaCredito, FK_idProductos, cantidad) VALUES('" + newW.idNotaCred + "','" + idp + "', '" + cantidad + "')";
+                
                     conexion.operaciones(updateProductosNC);
                    
 
@@ -248,7 +252,7 @@ namespace wpfFamiliaBlanco.Entradas
                       
                         }
 
-                    }
+                 }
                     foreach (var item in newW.itemsNCAntiguos)
                     {
                       
@@ -268,7 +272,7 @@ namespace wpfFamiliaBlanco.Entradas
             catch (NullReferenceException)
             {
 
-                MessageBox.Show("Seleccione una Nota de crédito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Seleccione una Nota de crédito a modificar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

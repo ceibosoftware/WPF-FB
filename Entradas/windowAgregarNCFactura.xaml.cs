@@ -473,7 +473,7 @@ namespace wpfFamiliaBlanco.Entradas
                         string consulta = "SELECT stock from productos where idProductos = " + prod.id + " ";
                         if (tipo != 1)
                         {
-                            if (int.Parse(conexion.ValorEnVariable(consulta)) >= int.Parse(newW.txtCantidad.Text))
+                            if (int.Parse(conexion.ValorEnVariable(consulta)+ prod.cantidad ) >= int.Parse(newW.txtCantidad.Text))
                             {
                                 if (int.Parse(newW.txtCantidad.Text) > 0)
                                 {

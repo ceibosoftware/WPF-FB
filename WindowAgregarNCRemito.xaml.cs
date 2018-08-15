@@ -125,6 +125,8 @@ namespace wpfFamiliaBlanco
             RbExterno.IsEnabled = false;
             lblWindowTitle.Content = "Modificar Nota de Crédito";
             backupproductos(ProdAmodificar);
+            RbInterno.Visibility = Visibility.Collapsed;
+            RbExterno.Visibility = Visibility.Collapsed;
         }
         private void LoadComboProveedor()
         {

@@ -561,12 +561,14 @@ namespace wpfFamiliaBlanco.Entradas
                 MessageBox.Show("Seleccione un Proveedor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            else if (txtCotizacion.Text == "")
+            if (cmbTipoCambio.Text != "$" && txtCotizacion.Text == "")
             {
-
-                MessageBox.Show("Ingrese cotización", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+             
+                    MessageBox.Show("Ingrese cotización", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                
             }
+          
             else if (bandera == true && nomCat !="0")
             {
 
@@ -756,13 +758,22 @@ namespace wpfFamiliaBlanco.Entradas
 
         private  void calculaTotalPesos()
         {
+            try
+            {
+
+            
             if (txtTotal.Text != "" && txtCotizacion.Text != "")
                 txtTotalPesos.Text = (float.Parse(txtTotal.Text) * float.Parse(txtCotizacion.Text)).ToString();
             if (txtCotizacion.Text == "")
                 txtTotalPesos.Text = "";
             if(itemsFact.Count == 0)            
                 txtTotalPesos.Text = "";
-            
+            }
+            catch (Exception)
+            {
+
+               
+            }
         }
 
         private void cmbCuotas_DropDownClosed(object sender, EventArgs e)

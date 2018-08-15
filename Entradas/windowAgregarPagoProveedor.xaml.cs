@@ -43,7 +43,7 @@ namespace wpfFamiliaBlanco.Entradas
             InitializeComponent();
             totalf = totalfact;
             moneda = moned;
-          
+            txtresultado.IsEnabled = false;
             LoadCmbFormaPago();
             OcultarElementos();
             txttotafactura.Text = totalfact.ToString();

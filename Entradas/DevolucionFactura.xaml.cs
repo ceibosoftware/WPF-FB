@@ -289,21 +289,18 @@ namespace wpfFamiliaBlanco.Entradas
 
             String idf = "SELECT FK_idfactura FROM notacredito WHERE idNotaCredito = '" + ltsNC.SelectedValue + "'";
             String idFactura = conexion.ValorEnVariable(idf);
-
-            String productosFatura = "SELECT DISTINCT t1.subtotal, t2.nombre ,t2.precioUnitario,t2.idProductos,t3.cantidad from productos_has_facturas t1, productos_has_notacredito t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idfactura = '"+ idFactura + "' and  t3.FK_idNotaCredito = '"+ ltsNC.SelectedValue + "'"
-                ;
+         
+            String productosFatura = "SELECT DISTINCT  t2.nombre,t2.idProductos,t3.cantidad from productos_has_facturas t1, productos_has_notacredito t3 inner join productos t2 where t1.FK_idProducto = t2.idProductos and t1.FK_idFactura = '" + idFactura + "' and  t3.FK_idNotaCredito = '" + ltsNC.SelectedValue + "' and t3.FK_idProductos = t2.idProductos";
             productos = conexion.ConsultaParametrizada(productosFatura, ltsNC.SelectedValue);
           
 
             for (int i = 0; i < productos.Rows.Count; i++)
             {
-                producto = new Producto(productos.Rows[i].ItemArray[1].ToString(), (int)productos.Rows[i].ItemArray[3], (int)productos.Rows[i].ItemArray[4], (float)productos.Rows[i].ItemArray[0], (float)productos.Rows[i].ItemArray[2]);
-                Console.WriteLine("nombre"+producto.nombre);
-                Console.WriteLine("total" + producto.total);
-                Console.WriteLine("cantidad" + producto.cantidad);
-                Console.WriteLine("p unitario" + producto.precioUnitario);
+                
+
+                producto = new Producto(productos.Rows[i].ItemArray[0].ToString(), (int)productos.Rows[i].ItemArray[1], (int)productos.Rows[i].ItemArray[2]);
                 productosAmodificar.Add(producto);
-          
+           
             }
 
 
@@ -315,10 +312,16 @@ namespace wpfFamiliaBlanco.Entradas
             if (newW.DialogResult == true)
             {
 
+
                 String subm = newW.subtotalmodificar;
                 String totalm = newW.totalmodificar;
                 int idnotaCredito = newW.idnota;
+
                 itemsNC.Clear();
+
+                String deete = "DELETE FROM productos_has_notacredito WHERE FK_idNotaCredito = '" + idnotaCredito + "' ";
+                conexion.operaciones(deete);
+
                 foreach (Producto p in newW.itemsNC)
                 {
                     String nombre = p.nombre;
@@ -333,7 +336,7 @@ namespace wpfFamiliaBlanco.Entradas
                     String updateNC = "UPDATE notacredito SET total =  '" + totalm + "', subtotal = '" + subm + "' WHERE idNotaCredito = '" + idnotaCredito + "'";
                     conexion.operaciones(updateNC);
 
-                    String updateProductosNC = "UPDATE productos_has_notacredito SET FK_idNotaCredito = '" + idnotaCredito + "', FK_idProductos = '" + idp + "', cantidad = '" + cantidad + "', precioUnitario = '" + precioUni + "' WHERE FK_idNotaCredito = '" + idnotaCredito + "' AND FK_idProductos = '" + idp + "'";
+                    String updateProductosNC = "INSERT INTO productos_has_notacredito (FK_idNotaCredito, FK_idProductos, cantidad) VALUES('" + idnotaCredito + "','" + idp + "', '" + cantidad + "')";
                     conexion.operaciones(updateProductosNC);
 
                     foreach (var producto in newW.itemsFact)
@@ -343,18 +346,20 @@ namespace wpfFamiliaBlanco.Entradas
                     
                     }
 
-                    foreach (var item in newW.itemsNCAntiguos)
-                    {
                   
-                        String updatestock = "UPDATE productos SET stock = stock+'" + item.cantidad + "' where idProductos = '" + item.id + "'";
-                        conexion.operaciones(updatestock);
-                    }
-                    //update stock
-                    foreach (var item in newW.itemsNC)
-                    {
-                        String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
-                        conexion.operaciones(updatestock);
-                    }
+                }
+
+                foreach (var item1 in newW.itemsNCAntiguos)
+                {
+
+                    String updatestock1 = "UPDATE productos SET stock = stock+'" + item1.cantidad + "' where idProductos = '" + item1.id + "'";
+                    conexion.operaciones(updatestock1);
+                }
+                //update stock
+                foreach (var item in newW.itemsNC)
+                {
+                    String updatestock = "UPDATE productos SET stock = stock -'" + item.cantidad + "' where idProductos = '" + item.id + "'";
+                    conexion.operaciones(updatestock);
                 }
                 LoadDgvNC();
                 loadLtsNotaCredito();

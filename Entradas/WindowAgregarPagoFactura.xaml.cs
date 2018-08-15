@@ -120,6 +120,10 @@ namespace wpfFamiliaBlanco.Entradas
                 {
                     txtBanco.Visibility = Visibility.Visible;
                     lblbanco.Visibility = Visibility.Visible;
+                    txtnrocta.Visibility = Visibility.Visible;
+                    lblnrocta.Visibility = Visibility.Visible;
+                    lblttutal.Visibility = Visibility.Visible;
+                    txttitular.Visibility = Visibility.Visible;
                     txtChequeNumero1.Visibility = Visibility.Collapsed;
                     lblnrocheque.Visibility = Visibility.Collapsed;
                     lblDestinatario.Visibility = Visibility.Collapsed;
@@ -127,7 +131,8 @@ namespace wpfFamiliaBlanco.Entradas
                     String sql2 = "SELECT * FROM cuentabanco c , pago p WHERE p.FK_idCuentaBco = c.idCuentaBco AND p.idPago = '" + ltsPagosRealizados.SelectedValue + "'";
                     DataTable info = conexion.ConsultaParametrizada(sql2, ltsPagosRealizados.SelectedValue);
                     txtBanco.Text = info.Rows[0].ItemArray[3].ToString();
-
+                    txtnrocta.Text = info.Rows[0].ItemArray[1].ToString();
+                    txttitular.Text = info.Rows[0].ItemArray[2].ToString();
                 }
                 else if (txtForma.Text == "Cheque")
                 {
@@ -137,11 +142,15 @@ namespace wpfFamiliaBlanco.Entradas
                     lblnrocheque.Visibility = Visibility.Visible;
                     lblDestinatario.Visibility = Visibility.Visible;
                     txtDestinatario.Visibility = Visibility.Visible;
+                    txtnrocta.Visibility = Visibility.Collapsed;
+                    lblnrocta.Visibility = Visibility.Collapsed;
                     String sql2 = "SELECT * FROM cheque c , pago p WHERE p.FK_idCheque = c.idCheque AND p.idPago = '" + ltsPagosRealizados.SelectedValue + "'";
                     DataTable info = conexion.ConsultaParametrizada(sql2, ltsPagosRealizados.SelectedValue);
                     txtChequeNumero1.Text = info.Rows[0].ItemArray[4].ToString();
                     txtDestinatario.Text = info.Rows[0].ItemArray[3].ToString();
                     txtBanco.Text = info.Rows[0].ItemArray[1].ToString();
+                    lblttutal.Visibility = Visibility.Collapsed;
+                    txttitular.Visibility = Visibility.Collapsed;
 
                 }
                 else
@@ -152,24 +161,30 @@ namespace wpfFamiliaBlanco.Entradas
                     lblnrocheque.Visibility = Visibility.Collapsed;
                     lblDestinatario.Visibility = Visibility.Collapsed;
                     txtDestinatario.Visibility = Visibility.Collapsed;
+                    txtnrocta.Visibility = Visibility.Collapsed;
+                    lblnrocta.Visibility = Visibility.Collapsed;
+                    lblttutal.Visibility = Visibility.Collapsed;
+                    txttitular.Visibility = Visibility.Collapsed;
                 }
             }
         }
 
         private void btnAgregarPago_Click(object sender, RoutedEventArgs e)
         {
-            var newW = new windowAgregarPagoProveedor(totalresfactura, moneda);
+            
 
             String totalre2 = "SELECT totalRestante FROM factura WHERE idfacturas = '" + idfactura + "'";
             float totalRestant2e = float.Parse(conexion.ValorEnVariable(totalre2));
+            
             if (totalRestant2e == 0)
             {
                 MessageBox.Show("La factura seleccionada ya se pago en su totalidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
+                var newW = new windowAgregarPagoProveedor(totalresfactura, moneda);
                 newW.ShowDialog();
-            }
+            
 
             paga = true;
             if (newW.DialogResult == true)
@@ -183,8 +198,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                     String tipo = "SELECT tipoCambio FROM factura WHERE idfacturas = '" + idfactura + "'";
                     string tipoCambio = conexion.ValorEnVariable(tipo);
-                    MessageBox.Show("" + tipoCambio);
-                    MessageBox.Show("" + newW.cmbMoneda.Text);
+                 
                     if (newW.cmbMoneda.Text == "u$d" && tipoCambio == "1")
                     {
                         totalRestante = totalRestante - float.Parse(newW.txttotafacturaApagar.Text);
@@ -308,15 +322,18 @@ namespace wpfFamiliaBlanco.Entradas
                     String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante + "' where idfacturas = '" + idfactura + "'";
                     conexion.operaciones(sq1l);
 
-
+                    DateTime fecha = System.DateTime.Now;
+                    fecha = newW.dtpFechaDelPago.SelectedDate.Value;
                     String efectivo = "Transferencia";
-                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCuentaBco)VALUES ('" + newW.fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '"+newW.cmbBanco.SelectedValue+"')";
+                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCuentaBco)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '"+newW.cmbBanco.SelectedValue+"')";
                     conexion.operaciones(sql);
                     MessageBox.Show("El pago con transferencia se ha realizado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadLtsPagosRealizados();
                     RefrescarCantidadRestante();
                 }
                 paga = false;
+                this.Close();
+            }
             }
         }
 

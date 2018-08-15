@@ -55,6 +55,10 @@
         <TextBox x:Name="txtDestinatario" HorizontalAlignment="Left" Height="24" Margin="426,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lblDestinatario" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="423,228,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Destinatario"/>
         <TextBox x:Name="txtChequeNumero1" HorizontalAlignment="Left" Height="24" Margin="426,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <TextBox x:Name="txtnrocta" HorizontalAlignment="Left" Height="24" Margin="615,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lblnrocta" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="612,165,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Cuenta"/>
+        <TextBox x:Name="txttitular" HorizontalAlignment="Left" Height="24" Margin="614,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
+        <Label x:Name="lblttutal" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="611,226,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Titular"/>
 
     </Grid>
 </Window>
