@@ -282,6 +282,8 @@ namespace wpfFamiliaBlanco
             int idSeleccionado = (int)ltsNumeroOC.SelectedValue;
             string sql = "delete from ordencompra where idOrdenCompra = '" + idSeleccionado + "'";
             conexion.operaciones(sql);
+            string sql1 = "delete from productos_has_ordencompra where FK_idOC = '" + idSeleccionado + "'";
+            conexion.operaciones(sql1);
             loadlistaOC();
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -485,7 +487,7 @@ namespace wpfFamiliaBlanco
             doc.Open();
             var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
-            string imageURL = "D:\\Repositorio familia blanco\\WPF-FB\\familiablanco_membrete.png";
+            string imageURL = "C:\\Users\\Nicolas\\source\\repos\\WPF-FB\\familiablanco_membrete.png";
             iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
             jpg.Alignment = Element.ALIGN_CENTER;
             //Resize image depend upon your need
