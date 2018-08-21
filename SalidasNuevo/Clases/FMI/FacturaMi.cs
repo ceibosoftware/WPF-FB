@@ -35,8 +35,14 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
         {
             String insertarDatos = "INSERT INTO facturami (numeroFactura, fecha, diasVencimiento, tipoFactura, fechaVencimiento, FK_idOPMI) VALUES ('" + numeroFactura + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + diasVencimiento + "', '" + tipoFactura + "', '"+fecha.ToString("yyyy/MM/dd") + "', '"+idOP+"')";
             conexion.operaciones(insertarDatos);
+
+            //FALTA INSERTAR IMPUESTOS
         }
 
+        public void Eliminar()
+        {
+
+        }
 
     }
 }
