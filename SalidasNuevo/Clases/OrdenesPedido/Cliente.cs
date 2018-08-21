@@ -34,6 +34,13 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             clientes = conexion.coleccion(consulta);
             return clientes;
         }
+        public DataTable getClientesOPedidos()
+        {
+            DataTable clientes;
+            string consulta = "SELECT  DISTINCT  nombre, idClientemi FROM clientesMI c , ordenespedido op where c.idClientemi = op.FK_idClientemi ";
+            clientes = conexion.coleccion(consulta);
+            return clientes;
+        }
         public void setDatos(string id)
         {
             

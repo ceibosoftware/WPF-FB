@@ -82,8 +82,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
             textColumn8.Binding = new Binding("Importe");
             dgvProductos.Columns.Add(textColumn8);
             DataGridTextColumn textColumn9 = new DataGridTextColumn();
-            textColumn9.Header = "INV ";
-            textColumn9.Binding = new Binding("IdINV");
+            textColumn9.Header = "INV";
+            textColumn9.Binding = new Binding("CodigoINV");
             dgvProductos.Columns.Add(textColumn9);
 
         }
@@ -121,7 +121,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
             dgvProductosMuestra.Columns.Add(textColumn8);
             DataGridTextColumn textColumn9 = new DataGridTextColumn();
             textColumn9.Header = "INV ";
-            textColumn9.Binding = new Binding("IdINV");
+            textColumn9.Binding = new Binding("CodigoINV");
             dgvProductosMuestra.Columns.Add(textColumn9);
 
         }

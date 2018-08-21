@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,15 +92,15 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             id = int.Parse(conexion.ValorEnVariable(ultimoId));
             foreach (var producto in productosOP)
             {
-                String insertarProducto = "INSERT INTO op_has_productos (FK_idOP, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe, FK_idAnalisis) VALUES ('"+id+"','"+producto.Id+ "','"+producto.Cajas+ "', '"+producto.CajasPor+ "', '"+producto.TotalBotellas+ "','"+producto.Descuento+ "', '"+producto.DescuentoPesos+ "', '"+producto.Importe+"', '"+producto.IdINV+"')";
+                String insertarProducto = "INSERT INTO op_has_productos (FK_idOP, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe, FK_idAnalisis, precioVenta) VALUES ('"+id+"','"+producto.Id+ "','"+producto.Cajas+ "', '"+producto.CajasPor+ "', '"+producto.TotalBotellas+ "','"+producto.Descuento+ "', '"+producto.DescuentoPesos+ "', '"+producto.Importe+"', '"+producto.IdINV+"', '"+producto.Precio+"')";
                 conexion.operaciones(insertarProducto);
             }
             foreach (var producto in productosMuestra)
             {
-                String insertarProducto = "INSERT INTO opmuestras_has_productos (FK_idOPMI, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe) VALUES ('" + id + "','" + producto.Id + "','" + producto.Cajas + "', '" + producto.CajasPor + "', '" + producto.TotalBotellas + "','" + producto.Descuento + "', '" + producto.DescuentoPesos + "', '" + producto.Importe + "')";
+                String insertarProducto = "INSERT INTO opmuestras_has_productos (FK_idOPMI, FK_idProductos, cajas, cajasPor, totalBotellas, descuento, descuentoPesos, importe, FK_idAnalisis, precioVenta ) VALUES ('" + id + "','" + producto.Id + "','" + producto.Cajas + "', '" + producto.CajasPor + "', '" + producto.TotalBotellas + "','" + producto.Descuento + "', '" + producto.DescuentoPesos + "', '" + producto.Importe + "', '"+ producto.IdINV +"', '"+producto.Precio +"')";
                 conexion.operaciones(insertarProducto);
             }
-               
+            MessageBox.Show("Orden de pedido agregada correctamente");   
                      
            
         }
@@ -162,6 +163,91 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
         {
             this.descuento = descuento / 100f;
             this.total = this.total - (total * this.descuento);
+        }
+        public DataTable GetOrdenes()
+        {
+            string consulta = "select idOPMI from ordenesPedido ";
+            DataTable ordenes = conexion.coleccion(consulta);
+            return ordenes;
+        }
+        public void GetOrdenes(int idOrden)
+        {
+            
+            string consulta = "select * from ordenesPedido where idOPMI = '"+idOrden+"' ";
+            DataTable orden = conexion.coleccion(consulta);
+            SetDatos(orden);
+            SetProductos(idOrden);
+
+        }
+        public DataTable  GetOrdenesCliente(int idCliente)
+        {
+
+            string consulta = "select * from ordenesPedido where FK_idClientemi = '" + idCliente + "' ";
+            DataTable orden = conexion.coleccion(consulta);
+            return orden;
+            
+        }
+        private void SetDatos(DataTable orden)
+        {
+            fecha = (DateTime)orden.Rows[0].ItemArray[1];
+            subtotal = (float)orden.Rows[0].ItemArray[2];
+            total = (float)orden.Rows[0].ItemArray[15];
+            tipoIva = (int)orden.Rows[0].ItemArray[3];
+            totalCajas = (int)orden.Rows[0].ItemArray[4];
+            totalBotellas = (int)orden.Rows[0].ItemArray[5];
+            Descuento = (float)orden.Rows[0].ItemArray[6];
+            notas = orden.Rows[0].ItemArray[7].ToString();
+            idCliente = (int)orden.Rows[0].ItemArray[14];
+            Id = (int)orden.Rows[0].ItemArray[0];
+            // muestra
+
+            subtotalMuestra = (float)orden.Rows[0].ItemArray[8];
+            tipoIvaMuestra = (int)orden.Rows[0].ItemArray[9];
+            totalMuestra = (float)orden.Rows[0].ItemArray[10];
+            totalCajasMuestra = (int)orden.Rows[0].ItemArray[11];
+            totalBotellasMuestra = (int)orden.Rows[0].ItemArray[12];
+            descuentoMuestra = (float)orden.Rows[0].ItemArray[13];
+
+
+            
+        }
+        private void SetProductos(int idOrden)
+        {
+            //Limpiamos listas
+            productosOP.Clear();
+            ProductosMuestra.Clear();
+
+            string consulta = "select * from op_has_productos where FK_idOP = '" + idOrden + "'";
+            DataTable productos = conexion.coleccion(consulta);
+            for (int i = 0; i < productos.Rows.Count; i++)
+            {
+                int idProducto = (int)productos.Rows[i].ItemArray[1];
+                int Cajas = (int)productos.Rows[i].ItemArray[2] ;
+                int CajasPor = (int)productos.Rows[i].ItemArray[3];
+                int TotalBotellas = (int)productos.Rows[i].ItemArray[4];
+                float Descuento = (float)productos.Rows[i].ItemArray[5];
+                float DescuentoPesos = (float)productos.Rows[i].ItemArray[6];
+                float Importe = (float)productos.Rows[i].ItemArray[7];
+                int  idAnalisis = (int)productos.Rows[i].ItemArray[9];
+                float precio = (float)productos.Rows[i].ItemArray[10];
+                productosOP.Add(new ProductoOP(idProducto,Cajas,CajasPor,TotalBotellas,Descuento,DescuentoPesos,Importe,idAnalisis,precio));
+            }
+            // muestra
+            string consultaMuestra = "select * from opmuestras_has_productos where FK_idOPMI = '" + idOrden + "'";
+            DataTable productosMuestra = conexion.coleccion(consultaMuestra);
+            for (int i = 0; i < productosMuestra.Rows.Count; i++)
+            {
+                int idProducto = (int)productosMuestra.Rows[i].ItemArray[1];
+                int Cajas = (int)productosMuestra.Rows[i].ItemArray[2];
+                int CajasPor = (int)productosMuestra.Rows[i].ItemArray[3];
+                int TotalBotellas = (int)productosMuestra.Rows[i].ItemArray[4];
+                float Descuento = (float)productosMuestra.Rows[i].ItemArray[5];
+                float DescuentoPesos = (float)productosMuestra.Rows[i].ItemArray[6];
+                float Importe = (float)productosMuestra.Rows[i].ItemArray[7];
+                int idAnalisis = (int)productosMuestra.Rows[i].ItemArray[10];
+                float precio = (float)productosMuestra.Rows[i].ItemArray[9];
+                ProductosMuestra.Add(new ProductoOP(idProducto, Cajas, CajasPor, TotalBotellas, Descuento, DescuentoPesos, Importe, 1, precio));
+            }
         }
         //metodos muestra
         public void CalculaDescuentoMuestra(float descuento)

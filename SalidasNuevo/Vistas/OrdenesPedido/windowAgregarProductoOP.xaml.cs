@@ -76,8 +76,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
         }
         private void SetDatosAnalisis(){
             DataTable inv  = Analisis.getAnalisisID(cmbAnalisis.SelectedValue.ToString());
-            txtCodigo.Text = inv.Rows[0].ItemArray[1].ToString();
-            txtLitros.Text = inv.Rows[0].ItemArray[3].ToString();
+            txtCodigo.Text = inv.Rows[0].ItemArray[0].ToString();
+            txtLitros.Text = inv.Rows[0].ItemArray[1].ToString();
         }
         private void SetColumnasDgvProductos()
         {
@@ -267,6 +267,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido
         {
             if (valida())
             producto.IdINV = (int)cmbAnalisis.SelectedValue;
+            producto.CodigoINV = txtCodigo.Text;
             DialogResult = true;
             
         }

@@ -9,6 +9,23 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
 {
     class ProductoOP
     {
+
+        public ProductoOP()
+        {
+
+        }
+        public ProductoOP(int idProducto, int cajas,int cajasPor, int totalBotellas, float descuento,float descuentoPesos, float importe,int idAnalisis, float precio)
+        {
+            nombre = GetNombre(idProducto);
+            Cajas = cajas;
+            CajasPor = cajasPor;
+            TotalBotellas = totalBotellas;
+            Descuento = descuento;
+            DescuentoPesos = descuentoPesos;
+            Importe = importe;
+            codigoINV = GetCodigoINV(idAnalisis);
+            Precio = precio;
+        }
         private CRUD conexion = new CRUD();
         private int id;
         private string nombre;
@@ -21,6 +38,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
         private float descuentoPesos;
         private float importe;
         private int idINV;
+        private string codigoINV;
 
         public string Nombre { get => nombre; set => nombre = value; }
         public float Precio { get => precio; set => precio = value; }
@@ -33,8 +51,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
         public float Importe { get => importe; set => importe = value; }
         public int IdINV { get => idINV; set => idINV = value; }
         public int Id { get => id; set => id = value; }
-
-    
+        public string CodigoINV { get => codigoINV; set => codigoINV = value; }
         public void SetStock(int idProducto)
         {
             string consulta = "SELECT stock FROM productos where idProductos = '"+idProducto+"'";
@@ -69,5 +86,16 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             importe = 0;
 
         }
+        private String GetNombre(int idProducto)
+        {
+            string consulta = "SELECT nombre FROM productos where idProductos = '"+idProducto+"'";
+            return conexion.ValorEnVariable(consulta);
+        }
+        private String GetCodigoINV(int idAnalisis)
+        {
+            string consulta = "SELECT numero FROM analisisinv where idAnalisis = '" + idAnalisis + "'";
+            return conexion.ValorEnVariable(consulta);
+        }
+
     }
 }
