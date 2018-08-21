@@ -8,6 +8,12 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
 {
     class FacturaMi
     {
+        int id;
+        String tipoFactura;
+        DateTime fecha;
+        DateTime fechaVencimiento;
+        String numeroFactura;
+        int diasVencimiento;
 
     }
 }
