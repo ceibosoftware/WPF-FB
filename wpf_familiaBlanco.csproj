@@ -208,6 +208,18 @@
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\ListaPrecio.cs" />
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\OrdenPedido.cs" />
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\ProductoOP.cs" />
+    <Compile Include="SalidasNuevo\Vistas\FacturaProforma\PageFacturaProforma.xaml.cs">
+      <DependentUpon>PageFacturaProforma.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\FacturaProforma\WindowAgregarFP.xaml.cs">
+      <DependentUpon>WindowAgregarFP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\FacturaProforma\windowAgregarPallet.xaml.cs">
+      <DependentUpon>windowAgregarPallet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SalidasNuevo\Vistas\FacturaProforma\WindowAgregarProductoFP.xaml.cs">
+      <DependentUpon>WindowAgregarProductoFP.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalidasNuevo\Vistas\INV\PageINV.xaml.cs">
       <DependentUpon>PageINV.xaml</DependentUpon>
     </Compile>
@@ -491,6 +503,22 @@
     <Page Include="Proveedores\windowModificarProveedor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaProforma\PageFacturaProforma.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaProforma\WindowAgregarFP.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaProforma\windowAgregarPallet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaProforma\WindowAgregarProductoFP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SalidasNuevo\Vistas\INV\PageINV.xaml">
       <SubType>Designer</SubType>
