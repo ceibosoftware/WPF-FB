@@ -198,6 +198,7 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalidasNuevo\Clases\FMI\FacturaMi.cs" />
     <Compile Include="SalidasNuevo\Clases\INV\Analisis.cs" />
     <Compile Include="SalidasNuevo\Vistas\INV\PageINV.xaml.cs">
       <DependentUpon>PageINV.xaml</DependentUpon>
