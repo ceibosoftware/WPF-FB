@@ -36,8 +36,8 @@ namespace wpfFamiliaBlanco
             btnSalidasME.Visibility = Visibility.Collapsed;
             btnClientesMI.Visibility = Visibility.Collapsed;
             btnClientesME.Visibility = Visibility.Collapsed;
-            btnClientes.IsEnabled = false;
-            btnSalidas.IsEnabled = false;
+            //btnClientes.IsEnabled = false;
+            //btnSalidas.IsEnabled = false;
         }
 
         public void notificaciones()

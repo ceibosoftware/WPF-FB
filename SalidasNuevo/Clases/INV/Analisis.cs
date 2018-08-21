@@ -93,5 +93,17 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.INV
 
 
         }
+
+        public static DataTable getAnalisisID(string id)
+        {
+            CRUD conexion = new CRUD();
+            String consulta;
+            DataTable analisisINV;
+            consulta = "Select numero, litros from analisisinv where idAnalisis='" + id + ";'";
+            analisisINV = conexion.coleccion(consulta);
+            return analisisINV;
+
+        }
+
     }
 }
