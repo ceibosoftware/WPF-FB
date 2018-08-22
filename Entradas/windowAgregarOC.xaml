@@ -314,6 +314,7 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+            <Button x:Name="btnCotizacion" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="23" Click="Button_Click" Background="#FFDDDDDD" Margin="24,443,0,0"/>
 
         </Border>
 
@@ -358,7 +359,6 @@
         <TextBox x:Name="txtTotalPesos" Width="178" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="232,495,0,0" Height="22" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" FontFamily="Calibri light" IsReadOnly="True" Padding="4,0,0,0" />
         <Label x:Name="lblCotizacion" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="90,478,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Cotizacion"/>
         <Label x:Name="lblTotalPesos" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="278,478,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total en pesos"/>
-        <Button x:Name="btnCotizacion" Content="" HorizontalAlignment="Left" Margin="45,495,0,0" VerticalAlignment="Top" Width="23" Height="22" Click="btnCotizacion_Click"/>
 
     </Grid>
 </Window>

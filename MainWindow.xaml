@@ -1068,7 +1068,7 @@
         <Button x:Name="btnSalidasME" Content="ME" Margin="49,311.812,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnSalidasME_Click" ToolTip="Mercado Externo"/>
         <Button x:Name="btnClientesMI" Content="MI" Margin="14,386.925,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnClientesMI_Click" ToolTip="Mercado Interno"/>
         <Button x:Name="btnClientesME" Content="ME" Margin="49,386.925,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnClientesME_Click" ToolTip="Mercado Externo"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click" Background="#FFDDDDDD"/>
 
 
     </Grid>

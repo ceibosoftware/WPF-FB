@@ -740,7 +740,10 @@ namespace wpfFamiliaBlanco.Entradas
 
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            actualizaCotizacion();
+        }
     }
 
 }
