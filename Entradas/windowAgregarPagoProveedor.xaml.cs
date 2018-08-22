@@ -56,6 +56,9 @@ namespace wpfFamiliaBlanco.Entradas
             if (moneda == "0")
             {
                 cmbMoneda.Items.Add("$");
+                txtcotizacion.Text = "1";
+                txtcotizacion.Visibility = Visibility.Collapsed;
+                lblrecibo_Copy1.Visibility = Visibility.Collapsed;
             }
             else if (moneda == "1")
             {

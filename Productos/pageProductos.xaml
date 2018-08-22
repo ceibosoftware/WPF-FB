@@ -1330,10 +1330,11 @@
                     <GradientStop Color="#FF2D2C2C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+            <ComboBox x:Name="cmbMoneda" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="25"  Margin="222,378,0,0" IsEnabled="False" />
         </Border>
         <ListBox x:Name="ltsProductos" HorizontalAlignment="Left" Height="170.667" Margin="52,98.333,0,0" VerticalAlignment="Top" Width="365" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14" SelectionChanged="ltsProductos_SelectionChanged" Style="{DynamicResource ListBoxStyle1}"/>
         <ListBox x:Name="ltsProveedores" HorizontalAlignment="Left" Height="170.834" Margin="438.223,98.166,0,0" VerticalAlignment="Top" Width="364" Background="#FF4B4848" BorderBrush="{x:Null}" Foreground="#FFC9C5C5" FontSize="14"/>
-        <TextBox x:Name="txtCategoria" HorizontalAlignment="Left" Height="22" Margin="52,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
+        <TextBox x:Name="txtCategoria" HorizontalAlignment="Left" Height="23" Margin="52,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblProductos_lts" Content="Productos" HorizontalAlignment="Left" Margin="285.007,73.166,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblProveedores" Content="Proveedores" HorizontalAlignment="Left" Margin="670.23,73.166,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblDescripcion" Content="Descripción" HorizontalAlignment="Left" Margin="670.23,274,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
@@ -1350,7 +1351,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="122" Margin="438.223,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="122" Margin="438,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="285.007,48.492,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblFiltrar" Content="Filtrar" HorizontalAlignment="Left" Margin="670.23,25.203,0,0" VerticalAlignment="Top" Height="25" Width="131.993" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <ComboBox x:Name="cmbFiltro" HorizontalAlignment="Left" Height="23" Margin="438.223,50.203,0,0" VerticalAlignment="Top" Width="364" IsReadOnly="True" SelectedIndex="0" Foreground="White" Background="#FF333333" BorderBrush="#FF4C4C4C" Style="{DynamicResource combo_box}"/>
@@ -1372,8 +1373,9 @@
         <TextBox x:Name="txtExistenciaMinima" HorizontalAlignment="Left" Height="22" Margin="242,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
         <Label x:Name="lblExistenciaMinima1" Content="Existencia minima" HorizontalAlignment="Left" Margin="285,274,0,0" VerticalAlignment="Top" Height="26" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <TextBox x:Name="txtStock" HorizontalAlignment="Left" Height="24" Margin="52,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Background="#FF4B4848" Foreground="#FFC9C5C5" BorderBrush="{x:Null}" FontSize="14" IsReadOnly="True"/>
-        <Label x:Name="lblExistenciaMinima_Copy" Content="Categoría" HorizontalAlignment="Left" Margin="285,375,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
+        <Label x:Name="lblExistenciaMinima_Copy" Content="Categoría" HorizontalAlignment="Left" Margin="96,375,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <Label x:Name="lblFecha_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="288,25.203,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Buscar"/>
         <CheckBox x:Name="chkVenta" Content="Producto para Venta" HorizontalAlignment="Left" Margin="823.724,276.156,0,0" VerticalAlignment="Top" Width="155.276" FontSize="14"/>
+        <Label x:Name="lblMoneda" Content="Moneda" HorizontalAlignment="Left" Margin="288,375,0,0" VerticalAlignment="Top" Height="24" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
     </Grid>
 </Page>

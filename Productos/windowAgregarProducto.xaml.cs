@@ -48,6 +48,7 @@ namespace wpfFamiliaBlanco
             LlenarCmbTipoCambio();
             // newW.btnAgregar.Click += new EventHandler(this.MiBoton_Click);
             txtNombre.Focus();
+            txtCotizacion.IsEnabled = false;
         }
 
         public void LoadListaComboCategoria()
@@ -256,6 +257,12 @@ namespace wpfFamiliaBlanco
               
                 return false;
             }
+            else if (txtCosto.Text == "")
+            {
+                MessageBox.Show("Es necesario ingresar el costo", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return false;
+            }
             else
             {
                 return true;
@@ -395,7 +402,7 @@ namespace wpfFamiliaBlanco
         }
 
         private void loadCotizacion() {
-            txtCosto.Text = "";
+          
             if(cmbMoneda.SelectedIndex == 0)
             {
                 txtCotizacion.Text = "1";
@@ -416,6 +423,7 @@ namespace wpfFamiliaBlanco
 
         private void cmbMoneda_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            txtCotizacion.Text = "";
             loadCotizacion();
             calculaPrecioUnitario();
         }
@@ -437,8 +445,26 @@ namespace wpfFamiliaBlanco
             }
         }
             private void txtBuscar_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
+            {
 
+             }
+
+        private void actualizaCotizacion()
+        {
+           
+                var neww = new windowAjustes();
+                neww.ShowDialog();
+                 neww.Close();
+                loadCotizacion();
+                calculaPrecioUnitario();
+               
+                
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            actualizaCotizacion();
         }
     }
     }
