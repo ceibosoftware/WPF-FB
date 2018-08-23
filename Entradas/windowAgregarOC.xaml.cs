@@ -520,7 +520,7 @@ namespace wpfFamiliaBlanco.Entradas
                         String id = conexion.ValorEnVariable(ultimoId);
                         foreach (var producto in newW.ProdRemito)
                         {
-                            String productos = "insert into productos_has_remitos(cantidad,  FK_idProducto, FK_idRemito) values( '" + producto.cantidad + "', '" + producto.id + "','" + id + "' )";
+                            String productos = "insert into productos_has_remitos(cantidad,  FK_idProducto, FK_idRemito, CrNotaCredito) values( '" + producto.cantidad + "', '" + producto.id + "','" + id + "','"+producto.cantidad+"' )";
                             conexion.operaciones(productos);
                         }
                         //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
@@ -672,7 +672,7 @@ namespace wpfFamiliaBlanco.Entradas
                             float totalp = p.total;
                             float precioUni = p.precioUnitario;
 
-                            String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + idOrden + "')";
+                            String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal, FK_idProducto, FK_idFactura,CrNotaCredito) VALUES ('" + cantidad + "','" + subtotal + "', '" + idProducto + "', '" + idOrden + "','"+cantidad+"')";
                             conexion.operaciones(sqlProductoHas);
 
                             //ACTUALIZAR CANTITAD RESTANTE REMITO DE PRODUCTO OC
