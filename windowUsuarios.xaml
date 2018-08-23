@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:wpfFamiliaBlanco"
         xmlns:gif="http://wpfanimatedgif.codeplex.com" x:Class="wpfFamiliaBlanco.windowUsuarios"
         mc:Ignorable="d"
-        Title="Iniciar sesión" Height="611" Width="1276.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png" Closed="Window_Closed">
+        Title="Iniciar sesión" Height="611" Width="1276.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Icon="ceibo ss small.png" Closed="Window_Closed" Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="ButtonLogin" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
@@ -259,7 +259,7 @@
                 <DropShadowEffect ShadowDepth="60" Opacity="0.15" BlurRadius="50"/>
             </Border.Effect>
         </Border>
-        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="598.666,344.278,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72" TabIndex="2"/>
+        <Button x:Name="btnSubmit" Content="Acceder" HorizontalAlignment="Left" Margin="598.666,344.278,0,0" VerticalAlignment="Top" Width="75" Foreground="White" Style="{DynamicResource ButtonLogin}" Height="23" VerticalContentAlignment="Center" Click="btnSubmit_Click" Background="#FF4B4848" BorderBrush="#FF009D72" TabIndex="2" IsDefault="True"/>
         <Border BorderBrush="#FF024629" BorderThickness="1" HorizontalAlignment="Left" Height="47.992" Margin="425.276,21.497,0,0" VerticalAlignment="Top" Width="425.779" CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -274,7 +274,7 @@
         <Label Content="ceibo software" HorizontalAlignment="Left" Margin="595.59,484.67,0,0" VerticalAlignment="Top" Opacity="0.8" Height="27.74" Width="90.076"/>
         <Image HorizontalAlignment="Left" Height="67.256" Margin="598.59,116.911,0,0" VerticalAlignment="Top" Width="75.076" Source="B- Familia Blanco NNFIXED.png" Opacity="0.9"/>
         <TextBox x:Name="txtUsername" HorizontalAlignment="Left"  Height="23" Margin="482,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" Background="{x:Null}" Foreground="White" FontSize="14"  BorderBrush="#FF303030" Style="{DynamicResource txtLogin}" UseLayoutRounding="True" Padding="5,1" SelectionBrush="#FF666A6C" TabIndex="0"/>
-        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="482,273,0,0" VerticalAlignment="Top" Width="308" Height="23" BorderBrush="#FF303030" Foreground="White" FontSize="14" Padding="5,1" SelectionBrush="#FF666A6C" Style="{DynamicResource password}" Background="{x:Null}" TabIndex="1"/>
+        <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="482,272,0,0" VerticalAlignment="Top" Width="308" Height="22" BorderBrush="#FF303030" Foreground="White" FontSize="14" Padding="5,1" SelectionBrush="#FF666A6C" Style="{DynamicResource password}" Background="{x:Null}" TabIndex="1" KeyUp="txtPassword_KeyUp"/>
 
     </Grid>
 </Window>

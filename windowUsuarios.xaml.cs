@@ -21,6 +21,7 @@ namespace wpfFamiliaBlanco
     {
         public static String tipoUsuarioDB;
         CRUD conexion = new CRUD();
+        bool acceso = false;
         public windowUsuarios()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace wpfFamiliaBlanco
         //INICIAR SESION
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            
             String usuarioTxt;
             String passTxt;
             String usuarioDB ;
@@ -62,7 +64,7 @@ namespace wpfFamiliaBlanco
 
                 if (usuarioTxt.Equals(usuarioDB) && passTxt.Equals(Seguridad.DesEncriptar(passDB))){
 
-                   
+                    acceso = true;
                     var newW = new MainWindow();
                     newW.Show();
                     this.Close(); 
@@ -85,5 +87,19 @@ namespace wpfFamiliaBlanco
         {
 
         }
+
+        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+          
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!acceso )
+            {
+                Environment.Exit(0);
+            }
+            
+         }
     }
 }

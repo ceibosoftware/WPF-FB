@@ -733,5 +733,8 @@
   <ItemGroup>
     <Resource Include="refresh-curve-arrows_icon-icons.com_68503.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logout-128.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

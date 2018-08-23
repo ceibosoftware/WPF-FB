@@ -26,6 +26,7 @@ namespace wpfFamiliaBlanco
     {
         CRUD conexion = new CRUD();
         pageProductos productos = new pageProductos();
+        bool salir = false;
 
         public MainWindow()
         {
@@ -375,7 +376,11 @@ namespace wpfFamiliaBlanco
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            if (!salir)
+            {
+                Environment.Exit(0);
+            }
+            
         }
 
         private void btnSalidasMI_Click(object sender, RoutedEventArgs e)
@@ -413,6 +418,17 @@ namespace wpfFamiliaBlanco
         {
             var newW = new windowAjustes();
             newW.ShowDialog();
+        }
+
+        private void btnCerrarSesion1_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            salir = true;
+            var usuarios = new windowUsuarios();
+
+            usuarios.Show();
+
+            this.Close();
         }
     }
 }

@@ -28,6 +28,7 @@ namespace wpfFamiliaBlanco.Entradas
         public string moneda;
         DataTable porPagar;
         bool paga = false;
+        bool elimina = false;
         public WindowAgregarPagoFactura()
         {
             InitializeComponent();
@@ -104,7 +105,7 @@ namespace wpfFamiliaBlanco.Entradas
         }
         private void ltsfacturas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!paga)
+            if (!paga && elimina == false)
             {
 
 
@@ -354,6 +355,7 @@ namespace wpfFamiliaBlanco.Entradas
 
             if (dialog == MessageBoxResult.Yes)
             {
+                elimina = true;
                 String totalre = "SELECT totalRestante FROM factura WHERE idfacturas = '" + idfactura + "'";
                 float totalParcial = float.Parse(conexion.ValorEnVariable(totalre));
 
@@ -365,7 +367,10 @@ namespace wpfFamiliaBlanco.Entradas
                 String deletePago = "DELETE FROM pago WHERE idPago = '"+ltsPagosRealizados.SelectedValue+"'";
                 conexion.operaciones(deletePago);
 
-                MessageBox.Show("El pago se elimino correctamente ", "Información", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                
+                MessageBox.Show("El pago se elimino correctamente ", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadLtsPagosRealizados();
+                elimina = false;
             }
         
         }
