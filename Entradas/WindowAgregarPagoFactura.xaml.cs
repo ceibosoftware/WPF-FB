@@ -346,5 +346,28 @@ namespace wpfFamiliaBlanco.Entradas
 
             return total;
         }
+
+        private void btnEliminarPago_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult dialog = MessageBox.Show("¿Esta seguro que desea eliminar el pago? ", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+
+            if (dialog == MessageBoxResult.Yes)
+            {
+                String totalre = "SELECT totalRestante FROM factura WHERE idfacturas = '" + idfactura + "'";
+                float totalParcial = float.Parse(conexion.ValorEnVariable(totalre));
+
+                totalParcial = totalParcial + float.Parse(txtmontorealido.Text);
+
+                String sq1l = "UPDATE factura SET totalRestante = '" + totalParcial + "' where idfacturas = '" + idfactura + "'";
+                conexion.operaciones(sq1l);
+
+                String deletePago = "DELETE FROM pago WHERE idPago = '"+ltsPagosRealizados.SelectedValue+"'";
+                conexion.operaciones(deletePago);
+
+                MessageBox.Show("El pago se elimino correctamente ", "Información", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            }
+        
+        }
     }
 }

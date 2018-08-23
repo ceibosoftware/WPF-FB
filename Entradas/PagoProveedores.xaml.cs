@@ -310,6 +310,10 @@ namespace wpfFamiliaBlanco.Entradas
             txtTotalFactura.Text = porPagar.Rows[0].ItemArray[10].ToString();
 
                 String tipoCambio = porPagar.Rows[0].ItemArray[12].ToString();
+
+              String nombbrep =  "SELECT p.nombre FROM factura f, ordencompra o, proveedor p  WHERE f.idfacturas = '" + ltsfacturas.SelectedValue + "' AND f.FK_idOC = o.idOrdenCompra AND o.FK_idProveedor = p.idProveedor";
+                String valor = conexion.ValorEnVariable(nombbrep);
+                txtproveedor.Text = valor;
                 if (tipoCambio == "0")
                 {
                     txtMoneda.Text = "$";

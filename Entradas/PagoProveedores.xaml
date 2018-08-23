@@ -142,7 +142,7 @@
         <TextBox x:Name="txtMoneda" HorizontalAlignment="Left" Height="24" Margin="77,211.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <TextBox x:Name="txtRestanteFactura" HorizontalAlignment="Left" Height="24" Margin="77,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <TextBox x:Name="txtTotalPAgo" HorizontalAlignment="Left" Height="24" Margin="77,260.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
-        <TextBox x:Name="txtTipoPago" HorizontalAlignment="Left" Height="24" Margin="266,260.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <TextBox x:Name="txtTipoPago" HorizontalAlignment="Left" Height="24" Margin="266,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="24" Margin="77,309.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <TextBox x:Name="txtnumerocuotapaga" HorizontalAlignment="Left" Height="24" Margin="266,309.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
         <Label x:Name="lblProveedor_Copy2" Width="285" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="152,26,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Datos de pago" Grid.Column="1" Background="{x:Null}" BorderBrush="#FF363535"/>
@@ -153,7 +153,7 @@
         <Label x:Name="fec" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="116,284.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Fecha de pago" Grid.Column="1"/>
         <Label x:Name="lbl3" Width="157" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="94,141,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total restante por pagar" Grid.Column="1"/>
         <Label x:Name="lbl5" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,143,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Total de factura" Grid.Column="1"/>
-        <Label x:Name="lblfp" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,235.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de pago" Grid.Column="1"/>
+        <Label x:Name="lblfp" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,236,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Forma de pago" Grid.Column="1"/>
         <Label x:Name="lblnumcuotapaga" Width="157" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="280,284.5,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de cuota paga" Grid.Column="1"/>
         <Border Height="229.508" Width="155.276" BorderThickness="1,1,5,1" BorderBrush="#FF006B13" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="462.511,51.992,47.994,191.715" Grid.Column="1" >
             <Border.Background>
@@ -167,5 +167,7 @@
         <Label x:Name="lblGuia" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="485.787,25.686,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Guía" Grid.Column="1"/>
         <TextBox x:Name="txtfiltro" HorizontalAlignment="Left" Height="24" Margin="57,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="361" Grid.ColumnSpan="2" TextChanged="txtfiltro_TextChanged"/>
         <Label x:Name="Filtrar_por_nombre_del_Proveedor" Width="219" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="199,38,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Filtrar por nombre del proveedor" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtproveedor" HorizontalAlignment="Left" Height="24" Margin="266,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Grid.Column="1"/>
+        <Label x:Name="lblproveedor" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="305,188,0,0" Height="24" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Proveedor" Grid.Column="1"/>
     </Grid>
 </Page>
