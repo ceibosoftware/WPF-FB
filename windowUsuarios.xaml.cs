@@ -21,7 +21,7 @@ namespace wpfFamiliaBlanco
     {
         public static String tipoUsuarioDB;
         CRUD conexion = new CRUD();
-        bool acceso = false;
+       bool acceso = false;
         public windowUsuarios()
         {
             InitializeComponent();
@@ -67,8 +67,8 @@ namespace wpfFamiliaBlanco
                     acceso = true;
                     var newW = new MainWindow();
                     newW.Show();
-                    this.Close(); 
-
+                    this.Close();
+                    acceso = false;
                     }else if (!usuarioTxt.Equals(usuarioDB)) {
 
                     MessageBox.Show("usuario incorrecto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -95,11 +95,11 @@ namespace wpfFamiliaBlanco
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!acceso )
+            if (acceso == false)
             {
                 Environment.Exit(0);
             }
-            
-         }
+
+        }
     }
 }

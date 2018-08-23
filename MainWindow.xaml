@@ -1070,11 +1070,7 @@
         <Button x:Name="btnClientesME" Content="ME" Margin="49,386.925,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnClientesME_Click" ToolTip="Mercado Externo" Visibility="Collapsed"/>
         <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click" Background="#FFDDDDDD"/>
         <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click" Background="{x:Null}"/>
-        <Button x:Name="btnCerrarSesion1" Content="Salir" HorizontalAlignment="Left" Margin="29,95,0,0" VerticalAlignment="Top" Width="29" Foreground="White" Style="{DynamicResource cerrarsesionsimple}" Click="btnCerrarSesion1_Click_1">
-            <Button.Background>
-                <ImageBrush ImageSource="logout-128.png"/>
-            </Button.Background>
-        </Button>
+        <Button x:Name="btnsalir" Content="Cerrar Sesión" HorizontalAlignment="Left" Margin="82,162,0,0" VerticalAlignment="Top" Width="75" Click="btnsalir_Click"/>
 
 
     </Grid>

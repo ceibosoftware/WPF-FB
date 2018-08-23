@@ -380,7 +380,7 @@ namespace wpfFamiliaBlanco
             {
                 Environment.Exit(0);
             }
-            
+
         }
 
         private void btnSalidasMI_Click(object sender, RoutedEventArgs e)
@@ -423,6 +423,16 @@ namespace wpfFamiliaBlanco
         private void btnCerrarSesion1_Click_1(object sender, RoutedEventArgs e)
         {
 
+            //salir = true;
+            var usuarios = new windowUsuarios();
+
+            usuarios.Show();
+
+            this.Close();
+        }
+
+        private void btnsalir_Click(object sender, RoutedEventArgs e)
+        {
             salir = true;
             var usuarios = new windowUsuarios();
 
