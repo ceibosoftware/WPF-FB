@@ -117,7 +117,7 @@
             </Button.BorderBrush>
         </Button>
         <Frame x:Name="frameInicioProductos" Content="" HorizontalAlignment="Left" Height="473.215" Margin="0,76.452,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717"/>
-        <Button x:Name="btnINV" Content="INV" HorizontalAlignment="Left" Margin="418,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnINV_Click">
+        <Button x:Name="btnINV" Content="INV" HorizontalAlignment="Left" Margin="418,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnINV_Click" IsEnabled="False" Visibility="Collapsed">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>

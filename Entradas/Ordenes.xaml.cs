@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -22,6 +23,7 @@ using IronPdf;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using Microsoft.Win32;
 
 namespace wpfFamiliaBlanco
 {
@@ -482,77 +484,84 @@ namespace wpfFamiliaBlanco
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
-            PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream("OC-"+ltsNumeroOC.SelectedValue+".pdf", FileMode.Create));
-            doc.Open();
-            var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            saveFileDialog.FileName = "OC-" + ltsNumeroOC.SelectedValue;
+            saveFileDialog.DefaultExt = "pdf";
 
-            string imageURL = "C:\\Users\\Nicolas\\source\\repos\\WPF-FB\\familiablanco_membrete.png";
-            iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
-            jpg.Alignment = Element.ALIGN_CENTER;
-            //Resize image depend upon your need
-            jpg.ScaleToFit(500f, 400f);
-            //Give space before image
-            jpg.SpacingBefore = 10f;
-            //Give some space after the image
-            jpg.SpacingAfter = 1f;
-            doc.Add(jpg);
-            DataTable proveedores = datosProveedor((int)ltsNumeroOC.SelectedValue);
-            Paragraph titulo = new Paragraph("Orden Nro : " + ltsNumeroOC.SelectedValue.ToString(), titleFont);
-            Paragraph proveedor = new Paragraph("Proveedor: " + txtProveedor.Text.ToString());
-            Paragraph fecha = new Paragraph("Fecha: " + txtFecha.Text);
-            Paragraph telefono = new Paragraph("Cuit: " + proveedores.Rows[0].ItemArray[1].ToString());
-            Paragraph Direccion = new Paragraph("Direccion de entrega: "+ proveedores.Rows[0].ItemArray[3].ToString());   //buena mari
-            Paragraph razonSocial = new Paragraph("Razon social: " + proveedores.Rows[0].ItemArray[0].ToString());
-            Paragraph prod = new Paragraph("Productos de la orden \n \n");
-            titulo.IndentationLeft = 400f;
-            doc.Add(titulo);
-            doc.Add(proveedor);
-            doc.Add(fecha);
-            doc.Add(telefono);
-            doc.Add(Direccion);
-            doc.Add(razonSocial);
-            doc.Add(prod);
-           
-            PdfPTable table1 = new PdfPTable(1);
-            table1.AddCell("Productos");
-            PdfPTable table = new PdfPTable(4);
-            float[] width = new float[] { 17f, 40f, 25f, 25f };
-            table.SetWidths(width);
-            table.AddCell("Cantidad");
-            table.AddCell("Producto");
-            table.AddCell("Precio Unitario");
-            table.AddCell("Total");
-            PdfPTable producto = new PdfPTable(4);
-            float[] widths = new float[] { 17f, 40f, 25f, 25f };
-            producto.SetWidths(widths);
-            producto.DefaultCell.BorderWidthTop = 0;
-            producto.DefaultCell.BorderWidthBottom = 0;
-            for (int i = 0; i < this.productos.Rows.Count; i++)
+            if (saveFileDialog.ShowDialog() == true)
             {
-                if (this.productos.Rows.Count - 1 == i)
-                    producto.DefaultCell.BorderWidthBottom = 0.5f;
+                Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
+                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName , FileMode.Create));
+                doc.Open();
+                var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
-                producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
-                producto.AddCell(productos.Rows[i].ItemArray[2].ToString() + " " + txtTipoCambio.Text);
-               
+                string imageURL = "C:\\imagenFB\\familiablanco_membrete.png";
+                iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
+                jpg.Alignment = Element.ALIGN_CENTER;
+                //Resize image depend upon your need
+                jpg.ScaleToFit(500f, 400f);
+                //Give space before image
+                jpg.SpacingBefore = 10f;
+                //Give some space after the image
+                jpg.SpacingAfter = 1f;
+                doc.Add(jpg);
+                DataTable proveedores = datosProveedor((int)ltsNumeroOC.SelectedValue);
+                Paragraph titulo = new Paragraph("Orden Nro : " + ltsNumeroOC.SelectedValue.ToString(), titleFont);
+                Paragraph proveedor = new Paragraph("Proveedor: " + txtProveedor.Text.ToString());
+                Paragraph fecha = new Paragraph("Fecha: " + txtFecha.Text);
+                Paragraph telefono = new Paragraph("Cuit: " + proveedores.Rows[0].ItemArray[1].ToString());
+                Paragraph Direccion = new Paragraph("Direccion de entrega: " + proveedores.Rows[0].ItemArray[3].ToString());   //buena mari
+                Paragraph razonSocial = new Paragraph("Razon social: " + proveedores.Rows[0].ItemArray[0].ToString());
+                Paragraph prod = new Paragraph("Productos de la orden \n \n");
+                titulo.IndentationLeft = 400f;
+                doc.Add(titulo);
+                doc.Add(proveedor);
+                doc.Add(fecha);
+                doc.Add(telefono);
+                doc.Add(Direccion);
+                doc.Add(razonSocial);
+                doc.Add(prod);
+
+                PdfPTable table1 = new PdfPTable(1);
+                table1.AddCell("Productos");
+                PdfPTable table = new PdfPTable(4);
+                float[] width = new float[] { 17f, 40f, 25f, 25f };
+                table.SetWidths(width);
+                table.AddCell("Cantidad");
+                table.AddCell("Producto");
+                table.AddCell("Precio Unitario");
+                table.AddCell("Total");
+                PdfPTable producto = new PdfPTable(4);
+                float[] widths = new float[] { 17f, 40f, 25f, 25f };
+                producto.SetWidths(widths);
+                producto.DefaultCell.BorderWidthTop = 0;
+                producto.DefaultCell.BorderWidthBottom = 0;
+                for (int i = 0; i < this.productos.Rows.Count; i++)
+                {
+                    if (this.productos.Rows.Count - 1 == i)
+                        producto.DefaultCell.BorderWidthBottom = 0.5f;
+
+                    producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
+                    producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
+                    producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
+                    producto.AddCell(productos.Rows[i].ItemArray[2].ToString() + " " + txtTipoCambio.Text);
+
+                }
+                doc.Add(table1);
+                doc.Add(table);
+                doc.Add(producto);
+                Paragraph subtotal = new Paragraph("Subtotal: " + txtSubtotal.Text.ToString());
+                Paragraph iva = new Paragraph("Iva: " + txtIva.Text.ToString());
+                Paragraph total = new Paragraph("Total: " + txtTotal.Text.ToString());
+                subtotal.IndentationLeft = 400f;
+                iva.IndentationLeft = 400f;
+                total.IndentationLeft = 400f;
+                doc.Add(subtotal);
+                doc.Add(iva);
+                doc.Add(total);
+                doc.Close();
             }
-            doc.Add(table1);
-            doc.Add(table);
-            doc.Add(producto);
-            Paragraph subtotal = new Paragraph("Subtotal: " + txtSubtotal.Text.ToString());
-            Paragraph iva = new Paragraph("Iva: " + txtIva.Text.ToString());
-            Paragraph total = new Paragraph("Total: " + txtTotal.Text.ToString());
-            subtotal.IndentationLeft = 400f;
-            iva.IndentationLeft = 400f;
-            total.IndentationLeft = 400f;
-            doc.Add(subtotal);
-            doc.Add(iva);
-            doc.Add(total);
-            doc.Close();
-
     
 
         }

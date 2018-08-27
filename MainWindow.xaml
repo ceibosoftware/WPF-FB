@@ -1024,8 +1024,8 @@
             </Button.BorderBrush>
         </Button>
         <Button x:Name="btnCeibo_Bottom_Right" Content="" HorizontalAlignment="Left" Margin="1231.999,549.667,0,0" VerticalAlignment="Top" Width="27.667" Style="{DynamicResource ButtonStyleCeibo_bottom_right}" Template="{DynamicResource ButtonCeibo_BR}" Height="22" Background="#FFDDDDDD" ToolTip="Ir a ceibosoftware.com"/>
-        <Frame x:Name="frameSalidas" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
-        <Button x:Name="btnSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" Click="btnSalidas_Click" FontSize="14">
+        <Frame x:Name="frameSalidas" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden" IsEnabled="False"/>
+        <Button x:Name="btnSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" Click="btnSalidas_Click" FontSize="14" Visibility="Collapsed">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -1036,13 +1036,13 @@
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Frame x:Name="frameUsuarios" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden"/>
-        <Button x:Name="btnUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0,341.132,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnUsuarios_Click">
+        <Frame x:Name="frameUsuarios" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden" IsEnabled="False"/>
+        <Button x:Name="btnUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0,306,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnUsuarios_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnClientes" Content="Clientes" HorizontalAlignment="Left" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnClientes_Click_1">
+        <Button x:Name="btnClientes" Content="Clientes" HorizontalAlignment="Left" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnClientes_Click_1" Visibility="Collapsed">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -1064,11 +1064,13 @@
             </Border.Effect>
             <Label x:Name="lblnotificaciones" Content="" HorizontalAlignment="Center" Margin="-7.25,-5.98,-6.75,-5.98" VerticalAlignment="Center" Background="{x:Null}" Foreground="Black" Width="27" FontWeight="Bold" Height="25.96" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Border>
-        <Button x:Name="btnSalidasMI" Content="MI" Margin="14,311.812,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnSalidasMI_Click" ToolTip="Mercado Interno"/>
-        <Button x:Name="btnSalidasME" Content="ME" Margin="49,311.812,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnSalidasME_Click" ToolTip="Mercado Externo"/>
-        <Button x:Name="btnClientesMI" Content="MI" Margin="14,386.925,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnClientesMI_Click" ToolTip="Mercado Interno"/>
-        <Button x:Name="btnClientesME" Content="ME" Margin="49,386.925,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnClientesME_Click" ToolTip="Mercado Externo"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click"/>
+        <Button x:Name="btnSalidasMI" Content="MI" Margin="14,311.812,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnSalidasMI_Click" ToolTip="Mercado Interno" Visibility="Hidden"/>
+        <Button x:Name="btnSalidasME" Content="ME" Margin="49,311.812,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnSalidasME_Click" ToolTip="Mercado Externo" Visibility="Collapsed"/>
+        <Button x:Name="btnClientesMI" Content="MI" Margin="14,386.925,1221.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource buttonSwitchStylePressed}" Padding="1" Click="btnClientesMI_Click" ToolTip="Mercado Interno" Visibility="Collapsed"/>
+        <Button x:Name="btnClientesME" Content="ME" Margin="49,386.925,1186.333,0" VerticalAlignment="Top" Height="21" Foreground="White" Style="{DynamicResource ButtonStyleSwitchNotSelected}" Padding="1" Click="btnClientesME_Click" ToolTip="Mercado Externo" Visibility="Collapsed"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click" Background="#FFDDDDDD"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="174.165,88.501,0,0" VerticalAlignment="Top" Width="23" Style="{DynamicResource botonSettings}" Height="22.42" Click="Button_Click" Background="{x:Null}"/>
+        <Button x:Name="btnsalir" Content="Cerrar Sesión" HorizontalAlignment="Left" Margin="82,162,0,0" VerticalAlignment="Top" Width="75" Click="btnsalir_Click"/>
 
 
     </Grid>

@@ -39,7 +39,7 @@
         <TextBox x:Name="txttotalfactura" HorizontalAlignment="Left" Height="24" Margin="612,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <TextBox x:Name="txttotalrestante" HorizontalAlignment="Left" Height="24" Margin="611,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <ListBox x:Name="ltsPagosRealizados" HorizontalAlignment="Left" Height="243" Margin="26,48,0,0" VerticalAlignment="Top" Width="159" SelectionChanged="ltsfacturas_SelectionChanged"/>
-        <Button x:Name="btnAgregarPago" Content="Agregar pago" HorizontalAlignment="Left" Margin="657,349,0,0" VerticalAlignment="Top" Width="84" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="23" Foreground="White"/>
+        <Button x:Name="btnAgregarPago" Content="Agregar pago" HorizontalAlignment="Left" Margin="698,324,0,0" VerticalAlignment="Top" Width="84" Click="btnAgregarPago_Click" Style="{DynamicResource agregar}" Height="22" Foreground="White"/>
         <TextBox x:Name="txtmontorealido" HorizontalAlignment="Left" Height="24" Margin="229,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lbl1_Copy2" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="53,23,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Pagos realizados"/>
         <Label x:Name="lbl1_Copy3" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="226,48,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Monto del pago realizado"/>
@@ -59,6 +59,7 @@
         <Label x:Name="lblnrocta" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="612,165,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="N° Cuenta"/>
         <TextBox x:Name="txttitular" HorizontalAlignment="Left" Height="24" Margin="614,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171"/>
         <Label x:Name="lblttutal" Width="174" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="611,226,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Titular"/>
+        <Button x:Name="btnEliminarPago" Content="Eliminar pago" HorizontalAlignment="Left" Margin="698,355,0,0" VerticalAlignment="Top" Width="84" Height="22" Click="btnEliminarPago_Click" Style="{DynamicResource Cancelar}" Foreground="White"/>
 
     </Grid>
 </Window>

@@ -376,7 +376,10 @@ namespace wpfFamiliaBlanco.Entradas
             bandera = true;
             try
             {
+                if (ltsNC.SelectedValue != null)
+                {
 
+               
                 String idFactura = "";
                 MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar la nota de crédito número " + ltsNC.SelectedValue, "Advertencia", MessageBoxButton.YesNo,MessageBoxImage.Warning);
 
@@ -435,7 +438,12 @@ namespace wpfFamiliaBlanco.Entradas
                 loadLtsNotaCredito();
 
                 bandera = false;
-    
+
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione una nota de credito a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             }
             catch (NullReferenceException)

@@ -145,6 +145,7 @@ namespace wpfFamiliaBlanco.Entradas
             seleccionefecha();
             dtFactura.SelectedDate = DateTime.Now;
             SetearColumnas();
+            loadDatosOC();
         }
 
         public void SetearColumnas()
