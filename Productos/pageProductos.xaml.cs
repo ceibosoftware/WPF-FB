@@ -61,6 +61,8 @@ namespace wpfFamiliaBlanco
                 String unidad = newW.txtUnidad.Text;
                 String existencias = newW.txtExistenciaMinima.Text;
                 String precioUnitario = newW.txtPrecioUnitario.Text;
+                precioUnitario =  precioUnitario.Replace(",",".");
+                MessageBox.Show("preio"+precioUnitario);
                 String costo = newW.txtCosto.Text;
                 int moneda = newW.cmbMoneda.SelectedIndex;
                 int venta ;
