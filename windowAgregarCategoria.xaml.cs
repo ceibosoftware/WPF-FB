@@ -141,9 +141,20 @@ namespace wpfFamiliaBlanco
                     String name = textnombre.Text.ToString();
                     String sql;
 
-                    sql = "delete from categorias where idCategorias='" + id + "'";
-                    conexion.operaciones(sql);
-                    this.loadListaCategoria();
+                    String valida = "SELECT COUNT(*) FROM categorias WHERE nombre  = '" + name + "'";
+                    String NC = conexion.ValorEnVariable(valida).ToString();
+
+                    if (NC != "0")
+                    {
+                        MessageBox.Show("No se puede eliminar la categoría porque pertenece a uno o varios proveedores", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        sql = "delete from categorias where idCategorias='" + id + "'";
+                        conexion.operaciones(sql);
+                        this.loadListaCategoria();
+                    }
+
                     break;
                 case MessageBoxResult.No:
 
