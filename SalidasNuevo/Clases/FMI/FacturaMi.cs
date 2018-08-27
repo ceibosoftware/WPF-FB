@@ -9,6 +9,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
     class FacturaMi
     {
         CRUD conexion = new CRUD();
+        Impuesto impuestoActual = new Impuesto();
         private int id;
         private String tipoFactura;
         private DateTime fecha;
@@ -18,7 +19,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
 
         private int idOP;
         private int idCLiente;
-        //FALTA LIST IMPUESTO
+        private List<Impuesto> impuestos = new List<Impuesto>();
 
         public int Id { get => id; set => id = value; }
         public string TipoFactura { get => tipoFactura; set => tipoFactura = value; }
@@ -28,7 +29,9 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
         public int DiasVencimiento { get => diasVencimiento; set => diasVencimiento = value; }
         public int IdOP { get => idOP; set => idOP = value; }
         public int IdCLiente { get => idCLiente; set => idCLiente = value; }
-        //FALTA get set LIST IMPUESTO
+        internal List<Impuesto> ImpuestosF { get => impuestos; set => impuestos = value; }
+
+        
 
 
         public void Insertar()
@@ -36,12 +39,17 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.FMI
             String insertarDatos = "INSERT INTO facturami (numeroFactura, fecha, diasVencimiento, tipoFactura, fechaVencimiento, FK_idOPMI) VALUES ('" + numeroFactura + "', '" + fecha.ToString("yyyy/MM/dd") + "', '" + diasVencimiento + "', '" + tipoFactura + "', '"+fecha.ToString("yyyy/MM/dd") + "', '"+idOP+"')";
             conexion.operaciones(insertarDatos);
 
-            //FALTA INSERTAR IMPUESTOS
+            foreach (var item in ImpuestosF)
+            {
+                item.Insertar();
+            }
+            
         }
 
         public void Eliminar()
         {
-
+            String ELiminarFactura = "DELETE FROM facturami WHERE id = '"+this.id+"'";
+            conexion.operaciones(ELiminarFactura);
         }
 
     }
