@@ -74,7 +74,7 @@ namespace wpfFamiliaBlanco
                     MessageBox.Show("usuario incorrecto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                  
 
-                    }else
+                  }else
                 {
                     MessageBox.Show("contraseña incorrecta", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                  

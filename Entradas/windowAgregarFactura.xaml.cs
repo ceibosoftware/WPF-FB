@@ -63,6 +63,7 @@ namespace wpfFamiliaBlanco.Entradas
             SetearColumnas2();
             cmbTipoCambio.IsEnabled = false;
             txtNroFactura.Focus();
+            txtNroFactura.MaxLength = 8;
            
         }
 
@@ -445,14 +446,29 @@ namespace wpfFamiliaBlanco.Entradas
                     if ((int)cmbOrden.SelectedValue < 10)
                     {
                         String numero = txtNroFactura.Text.ToString();
-                        String numerofinal = "000" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+
+                        String numerofinal = "OC " + "000" + cmbOrden.SelectedValue.ToString() + "-" + numero;
+
+                        txtNroFactura.Text = numerofinal;
+                    } else if ((int)cmbOrden.SelectedValue >= 100)
+                    {
+                        String numero = txtNroFactura.Text.ToString();
+                        String numerofinal = "OC " + "0" + cmbOrden.SelectedValue.ToString() + "-" + numero;
 
                         txtNroFactura.Text = numerofinal;
                     }
+                    else if ((int)cmbOrden.SelectedValue >= 1000)
+                    {
+                        String numero = txtNroFactura.Text.ToString();
+                        String numerofinal = "OC " + cmbOrden.SelectedValue.ToString() + "-" + numero;
+
+                        txtNroFactura.Text = numerofinal;
+                    }
+
                     else
                     {
                         String numero = txtNroFactura.Text.ToString();
-                        String numerofinal = "00" + cmbOrden.SelectedValue.ToString() + "-" + "0000" + numero;
+                        String numerofinal = "OC " + "00" + cmbOrden.SelectedValue.ToString() + "-" + numero;
 
                         txtNroFactura.Text = numerofinal;
                     }

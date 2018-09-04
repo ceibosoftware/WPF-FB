@@ -105,38 +105,42 @@
         </Style>
     </Page.Resources>
     <Grid HorizontalAlignment="Left" Height="549.667" VerticalAlignment="Top" Width="1033.666" Background="#FF171717">
-        <Label x:Name="lblEntradas" Content="Entradas" HorizontalAlignment="Left" Margin="0.33,0.159,0,0" VerticalAlignment="Top" Width="224.747" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="567*"/>
+            <ColumnDefinition Width="466*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblEntradas" Content="Entradas" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="btnOrdenes" Content="Órdenes" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnOrdenes_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="206,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFacturas_Click">
+        <Button x:Name="btnFacturas" Content="Facturas" HorizontalAlignment="Left" Margin="404,34,0,0" VerticalAlignment="Top" Width="205" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnFacturas_Click" Grid.ColumnSpan="2">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="411,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemitos_Click">
+        <Button x:Name="btnRemitos" Content="Remitos" HorizontalAlignment="Left" Margin="196,34,0,0" VerticalAlignment="Top" Width="206" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnRemitos_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnPagoProveedor" Content="Pago a proveedor" HorizontalAlignment="Left" Margin="617,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnPagoProveedor_Click_1">
+        <Button x:Name="btnPagoProveedor" Content="Pago a proveedor" HorizontalAlignment="Left" Margin="45,34,0,0" VerticalAlignment="Top" Width="203" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnPagoProveedor_Click_1" Grid.Column="1">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Frame x:Name="frameInicioEntradas" Content="" HorizontalAlignment="Left" Height="473.215" Margin="0,76.452,0,0" VerticalAlignment="Top" Width="1033.666" Background="#FF171717"/>
-        <Button x:Name="btnDevolucionProductos" Content="Devolución de productos" HorizontalAlignment="Left" Margin="820,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnDevolucion_Click_1">
+        <Frame x:Name="frameInicioEntradas" Content="" HorizontalAlignment="Left" Height="474" Margin="0,76,-0.334,-0.333" VerticalAlignment="Top" Width="1034" Background="#FF171717" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnDevolucionProductos" Content="Devolución de productos" HorizontalAlignment="Left" Margin="252.525,34,0,0" VerticalAlignment="Top" Width="204" Height="37" Foreground="White" Style="{DynamicResource botonTab}" Background="{x:Null}" FontSize="14" Click="btnDevolucion_Click_1" Grid.Column="1">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Border BorderThickness="2" HorizontalAlignment="Left" Height="17" Margin="787,45,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5" BorderBrush="#FFC1C0C0">
+        <Border BorderThickness="2" HorizontalAlignment="Left" Height="17" Margin="219.525,45,0,0" VerticalAlignment="Top" Width="17" Background="White" CornerRadius="5" BorderBrush="#FFC1C0C0" Grid.Column="1">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.3"/>
             </Border.Effect>
         </Border>
-        <Label x:Name="lblbotificaciones" Content="" HorizontalAlignment="Left" Margin="782,40.5,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black" Width="27" FontWeight="Bold" FontStretch="SemiCondensed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label x:Name="lblbotificaciones" Content="" HorizontalAlignment="Left" Margin="214.525,40,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="Black" Width="27" FontWeight="Bold" FontStretch="SemiCondensed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1"/>
     </Grid>
 </Page>
