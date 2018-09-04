@@ -60,6 +60,12 @@ namespace wpfFamiliaBlanco
             ltsNumeroOC.SelectedIndex = 0;
 
         }
+
+        private void cmbProveedores_DropDownOpened(object sender, EventArgs e)
+        {
+            lblseleccione1.Visibility = Visibility.Collapsed;
+        }
+
         private void loadlistaOC(int index)
         {
             try
@@ -463,10 +469,10 @@ namespace wpfFamiliaBlanco
             // Busquedas de productos.
             DataTable productos = new DataTable();
             String consulta;
-            consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
+            consulta = "SELECT * FROM ordencompra WHERE idOrdenCompra LIKE '%' @valor '%'";
             productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            cmbProveedores.ItemsSource = productos.AsDataView();
-            cmbProveedores.SelectedIndex = 0;
+            ltsNumeroOC.ItemsSource = productos.AsDataView();
+            ltsNumeroOC.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -479,8 +485,8 @@ namespace wpfFamiliaBlanco
         }
         private void seleccioneParaFiltrar()
         {
-            cmbProveedores.Text = "Seleccione para filtrar";
-            cmbFechas.Text = "Seleccione para filtrar";
+            lblseleccione1.Visibility = Visibility.Visible;
+            cmbFechas.Text = "Seleccione un proveedor";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
