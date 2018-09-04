@@ -29,26 +29,47 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
             InitializeComponent();
             loadGeneral();
 
-        }
 
+        }
+        //Metodo para definir lo que se va a mostrar en esta pantalla
         private void settxt()
         {
+            
+            if (inv.Tipo==0)
+            {
+                txttype.Text = "Libre Circulacion";
+            }
+            else
+            {
+                txttype.Text = "Aptitud de Exportacion";
+            }
+
             txtalcohol.Text = inv.Alcohol.ToString();
             txtdensidad.Text = inv.Densidad.ToString();
             txtfecha.Text = inv.Fechaanalisis.ToString("yyyy/MM/dd");
             txtlitros.Text = inv.Litros.ToString();
             txtnombre.Text = inv.Nombrevino.ToString();
-
-            
         }
 
         private void loadltsanalisis()
         {
+            ltsnumanalisis.Items.Clear();
             ltsnumanalisis.ItemsSource = Analisis.getAnalisis().AsDataView();
             ltsnumanalisis.DisplayMemberPath = "numero";
             ltsnumanalisis.SelectedValuePath = "idAnalisis";
             ltsnumanalisis.Items.Refresh();
 
+        }
+        private void loadltsanalisis(int indexlista)
+        {
+            
+            ltsnumanalisis.ItemsSource = Analisis.getAnalisis().AsDataView();
+            ltsnumanalisis.DisplayMemberPath = "numero";
+            ltsnumanalisis.SelectedValuePath = "idAnalisis";
+            ltsnumanalisis.SelectedIndex = indexlista;
+            inv.setDatos(ltsnumanalisis.SelectedValue.ToString());
+            settxt();
+           
         }
         private void loadcmbtipo()
         {
@@ -65,22 +86,32 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         }
         private void loadltsanalisis(string tipo)
         {
+            
             ltsnumanalisis.ItemsSource = Analisis.getAnalisis(tipo).AsDataView();
             ltsnumanalisis.DisplayMemberPath = "numero";
             ltsnumanalisis.SelectedValuePath = "idAnalisis";
             ltsnumanalisis.Items.Refresh();
         }
-        private void collapsedproduct(string tipo)
+        private void collapsedproduct(int tipo)
         {
-            if (tipo=="0"){
-                txtproducto.Visibility = Visibility.Collapsed;
+            if (tipo==0){
+                ltspasociado.Visibility = Visibility.Collapsed;
                 lblproducto.Visibility = Visibility.Collapsed;
             }
             else
             {
-                txtproducto.Visibility = Visibility.Visible;
+                ltspasociado.Visibility = Visibility.Visible;
                 lblproducto.Visibility = Visibility.Visible;
             }
+        }
+
+        private void loadltsproductos(string tipo)
+        {
+            
+            ltspasociado.ItemsSource = Analisis.getProductoasociado(tipo).AsDataView();
+            ltspasociado.DisplayMemberPath = "FK_idProductos";
+            ltspasociado.SelectedValuePath = "idAnalisis";
+            ltspasociado.Items.Refresh();
         }
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
@@ -97,16 +128,28 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         }
         private void selectlastinsert(Analisis inv)
         {
-            loadltsanalisis(inv.Tipo.ToString());
-            cmbtipo.SelectedIndex = inv.Tipo;
-            ltsnumanalisis.SelectedIndex = ltsnumanalisis.Items.Count - 1;
-            settxt();
+
+
+            ltsnumanalisis.SelectedItem = ltsnumanalisis.Items.Count;
+            loadltsanalisis(ltsnumanalisis.Items.Count);
+
         }
 
         private void ListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        { 
-              inv.setDatos(ltsnumanalisis.SelectedValue.ToString(),cmbtipo.SelectedIndex.ToString());
+        {
+            try
+            {
+                inv.setDatos(ltsnumanalisis.SelectedValue.ToString());
+            }
+            catch (NullReferenceException)
+            {
+
+                
+            }
+              
               settxt();
+            int id = inv.gettipo((int)ltsnumanalisis.SelectedValue);
+            collapsedproduct(id);
             
             
         }
@@ -116,10 +159,52 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
            
                 
                 loadltsanalisis(cmbtipo.SelectedIndex.ToString());
-                collapsedproduct(cmbtipo.SelectedIndex.ToString());
-           
+                collapsedproduct(cmbtipo.SelectedIndex);
+                
+                
+
+
+
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+            inv.delete((int)ltsnumanalisis.SelectedValue);
+            ltsnumanalisis.Items.Refresh();
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            int id = (int)ltsnumanalisis.SelectedValue;
+            int indexlista = ltsnumanalisis.SelectedIndex;
+            float alcohol = float.Parse(txtalcohol.Text);
+            float densidad = float.Parse(txtdensidad.Text);
+            float litros = float.Parse(txtlitros.Text);
+            String numeroanalisis = inv.getnumero((int)ltsnumanalisis.SelectedValue);
+            int tipo = inv.gettipo((int)ltsnumanalisis.SelectedValue);
+            DateTime fechaanalisis = DateTime.Parse(txtfecha.Text);
+            String nombrevino = txtnombre.Text;
+            Analisis modified = new Analisis(id,alcohol, densidad, litros, numeroanalisis, tipo, fechaanalisis, nombrevino);
+            var newW = new windowAgregarINV(modified);
+            newW.ShowDialog();
+            if (newW.DialogResult==true)
+            {
+                newW.Inv.update((int)ltsnumanalisis.SelectedValue);
+            }
+            else
+            {
+                MessageBox.Show("No se puedo modificar");
+            }
+            
+            loadltsanalisis(indexlista);
             
             
+        }
+
+        private void ltsnumanalisis_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            loadltsproductos(cmbtipo.SelectedIndex.ToString());
         }
     }
 }

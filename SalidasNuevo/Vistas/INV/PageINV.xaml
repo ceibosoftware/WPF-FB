@@ -1333,7 +1333,7 @@
             </Border.Background>
         </Border>
 
-        <Border Height="413.897" Width="460.778" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="45,18.043,527.888,41.275" Opacity="0.5" >
+        <Border Height="414" Width="611" BorderThickness="1,0,1,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="27,18,395.666,41.215" Opacity="0.5" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF323131" Offset="0"/>
@@ -1343,7 +1343,7 @@
         </Border>
 
         <ComboBox x:Name="cmbtipo" HorizontalAlignment="Left" Margin="65.5,54.936,0,0" VerticalAlignment="Top" Width="200" DropDownClosed="cmbtipo_DropDownClosed"/>
-        <ListBox x:Name="ltsnumanalisis" HorizontalAlignment="Left" Height="302.164" Margin="65.5,111.896,0,0" VerticalAlignment="Top" Width="200" MouseLeftButtonUp="ListBox_MouseLeftButtonUp"/>
+        <ListBox x:Name="ltsnumanalisis" HorizontalAlignment="Left" Height="302.164" Margin="65.5,111.896,0,0" VerticalAlignment="Top" Width="200" MouseLeftButtonUp="ListBox_MouseLeftButtonUp" SelectionChanged="ltsnumanalisis_SelectionChanged"/>
         <TextBox x:Name="txtlitros" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Margin="286.783,54.936,0,0"/>
         <Label Content="Fecha de Expiración" HorizontalAlignment="Left" Margin="356.778,134.896,0,0" VerticalAlignment="Top" FontSize="14" HorizontalContentAlignment="Right">
             <Label.Effect>
@@ -1359,8 +1359,8 @@
             </Label.Effect>
         </Label>
         <Button x:Name="btnAgregar" Content="Agregar" Margin="901.5,399,56.166,0" VerticalAlignment="Top" Height="21" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="btnAgregar_Click"/>
-        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="901.5,354,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White"/>
-        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="901.5,308,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="btnModificar" Content="Modificar" HorizontalAlignment="Left" Margin="901.5,354,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="{x:Null}" Style="{DynamicResource modificar_}" Foreground="White" Click="btnModificar_Click"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="901.5,308,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Foreground="White" Background="#FF4B4848" Style="{DynamicResource eliminar_}" RenderTransformOrigin="0.5,0.5" Click="btnEliminar_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -1376,17 +1376,19 @@
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
-        <TextBox x:Name="txtproducto" HorizontalAlignment="Left" Height="23" Margin="286.781,324.376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
         <Label x:Name="lblNombreCat" Width="117.611" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="155.889,17.936,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Tipo de Análisis" Background="{x:Null}"/>
         <Label x:Name="lblNombreCat_Copy" Width="137.111" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="132.389,74.896,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Número de Análisis" Background="{x:Null}"/>
         <Label x:Name="lblNombreCat_Copy1" Width="129.611" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="361.171,17.936,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Libros Habilitados" Background="{x:Null}"/>
         <Label x:Name="lblNombreCat_Copy2" Width="77.111" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="411.671,74.896,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Densidad" Background="{x:Null}"/>
         <Label x:Name="lblNombreCat_Copy3" Width="129.611" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="376.167,-68.731,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Nombre de Vino" Background="{x:Null}"/>
-        <Label x:Name="lblproducto" Content="Producto Asociado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="361.859,295.756,0,0" FontSize="14" HorizontalContentAlignment="Right">
+        <Label x:Name="lblproducto" Content="Producto Asociado" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="360,294,0,0" FontSize="14" HorizontalContentAlignment="Right">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
         </Label>
+        <ListBox x:Name="ltspasociado" HorizontalAlignment="Left" Height="92" Margin="290,322,0,0" VerticalAlignment="Top" Width="200" MouseLeftButtonUp="ListBox_MouseLeftButtonUp"/>
+        <TextBox x:Name="txttype" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="126" Margin="505,55,0,0"/>
+        <Label x:Name="lbltipo" Width="130" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_HeaderPagina}" Margin="505,18,0,0" Height="37" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Tipo" Background="{x:Null}"/>
 
     </Grid>
 </Page>

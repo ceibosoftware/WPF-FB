@@ -23,7 +23,7 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
     {
         Analisis inv;
         String tipo;
-        
+       
 
         internal Analisis Inv { get => inv; set => inv = value; }
 
@@ -33,7 +33,41 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
 
             loadGeneral();
         }
+        public windowAgregarINV(Analisis modified)
 
+        {
+            InitializeComponent();
+            Inv = modified;
+            loadGeneral();
+            setDatos(modified);
+            
+
+        }
+        
+        // Metodo que envia los datos de la pantalla cuando se modifica un analisis
+
+        private void setDatos(Analisis modified)
+        {
+            txtalcohol.Text = modified.Alcohol.ToString();
+            txtdensidad.Text = modified.Densidad.ToString();
+            txtlitros.Text = modified.Litros.ToString();
+            txtnombrevino.Text = modified.Nombrevino.ToString();
+            if (modified.Tipo==1)
+            {
+                cmbtipo.SelectedIndex = 1;
+            }
+            else
+            {
+                cmbtipo.SelectedIndex = 0;
+            }
+            
+            dpFecha.SelectedDate = modified.Fechaanalisis;
+            txtnumero.Text = modified.Numeroanalisis.ToString();
+
+
+        }
+
+        
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             
@@ -86,6 +120,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
             }
             return true;
         }
+        
+        //Metodo que asigna los datos de un nuevo analisis.
 
         public void llenarDatos()
         {
@@ -99,9 +135,12 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
             DateTime fecha = DateTime.Today;
             
             inv = new Analisis(alcohol, densidad, litros, numeroAnalisis, tipo, fecha, nombrevino);
-
+           
 
         }
+
+        //Metodo que colapsa los elementos segun corresponda el tipo
+
         private void collapsedproduct(string tipo)
         {
             if (tipo == "0")
@@ -115,6 +154,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
                 lblproducto.Visibility = Visibility.Visible;
             }
         }
+        
+        
 
         public void llenarcmbtipo()
         {
@@ -146,6 +187,11 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.INV
         private void cmbtipo_DropDownClosed(object sender, EventArgs e)
         {
             collapsedproduct(cmbtipo.SelectedIndex.ToString());
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

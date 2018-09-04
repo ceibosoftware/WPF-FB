@@ -155,7 +155,7 @@ namespace wpfFamiliaBlanco.Clientes  // var LP = new LinkinPark();
             txtdireccionweb.MaxLength = 40;
             txtNombre.MaxLength = 30;
             dgvPrecios.IsReadOnly = true;
-            txtcp.MaxLength = 16;
+            txtcp.MaxLength = 11;
 
         }
 
