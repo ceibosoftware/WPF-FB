@@ -36,7 +36,7 @@ namespace wpfFamiliaBlanco.Entradas
             dpFecha.SelectedDate = DateTime.Now;
             ColumnasDGVProductos();
         }
-        public windowAgregarOC(DateTime fecha, String observaciones, float subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC,float cotizacion)
+        public windowAgregarOC(DateTime fecha, String observaciones, string subtotal, int iva, int tipoCambio, String formaPago, int telefono, int proveedor, int direccion, List<Producto> producto, int idOC,float cotizacion , string total)
         {
            
             modifica = true;
@@ -45,7 +45,7 @@ namespace wpfFamiliaBlanco.Entradas
             loadGeneral(monedaProductos);
             dpFecha.SelectedDate = fecha;
             txtObservaciones.Text = observaciones;
-            this.subtotal = subtotal;
+            this.subtotal = float.Parse(subtotal);
             txtSubtotal.Text = subtotal.ToString();
             cmbIVA.SelectedIndex = iva;
             cmbTipoCambio.SelectedIndex = tipoCambio;
@@ -53,7 +53,11 @@ namespace wpfFamiliaBlanco.Entradas
             cmbTelefono.SelectedValue = telefono;
             cmbDireccion.SelectedValue = direccion;
             cmbProveedores.SelectedValue = proveedor;
-            calculaTotal();
+            txtTotal.Text = total;
+            txtCotizacion.Text = cotizacion.ToString();
+            this.total = float.Parse(total);
+            MessageBox.Show(this.total.ToString());
+            calculaTotalPesos();
             this.idOC = idOC;
             //Cambios de Diseño batta
             lblWindowTitle.Content = "Modificar Orden de Compra"; 
@@ -61,8 +65,7 @@ namespace wpfFamiliaBlanco.Entradas
             ColumnasDGVProductos();
             btnRemito.Visibility = Visibility.Collapsed;
             btnFactura.Visibility = Visibility.Collapsed;
-            txtCotizacion.Text = cotizacion.ToString();
-
+           
         }
 
 
@@ -224,13 +227,13 @@ namespace wpfFamiliaBlanco.Entradas
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
-                total = subtotal * (float)1.21;
+                total = subtotal * 1.21f;
                 txtTotal.Text = total.ToString().Replace(",", "."); ;
               
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
-                total = subtotal * (float)1.105;
+                total = subtotal * 1.105f;
                 txtTotal.Text = total.ToString().Replace(",", "."); ;
                 
             }
@@ -242,6 +245,16 @@ namespace wpfFamiliaBlanco.Entradas
             }
            
 
+        }
+        private void calculaTotalPesos()
+        {
+            if (txtCotizacion.Text != "" && txtTotal.Text != "")
+            {
+
+                totalPesos = cotizacion * total;
+                txtTotalPesos.Text = totalPesos.ToString().Replace(",", ".");
+
+            }
         }
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)

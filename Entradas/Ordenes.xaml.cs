@@ -361,7 +361,8 @@ namespace wpfFamiliaBlanco
                     DataTable OC = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                     DateTime fecha = (DateTime)OC.Rows[0].ItemArray[1];
                     String observaciones = OC.Rows[0].ItemArray[2].ToString();
-                    float subtotal = (float)OC.Rows[0].ItemArray[3];
+                    String subtotal = OC.Rows[0].ItemArray[3].ToString();
+                    String total = OC.Rows[0].ItemArray[4].ToString();
                     int iva = (int)OC.Rows[0].ItemArray[5];
                     int tipoCambio = (int)OC.Rows[0].ItemArray[6];
                     String formaPago = OC.Rows[0].ItemArray[7].ToString();
@@ -386,7 +387,7 @@ namespace wpfFamiliaBlanco
                         float PU = (float)productos.Rows[i].ItemArray[4];
                         listaProd.Add(new Producto(nombre, idProducto, cantitad, sub, PU));
                     }
-                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC, cotizacion);
+                    var newW = new windowAgregarOC(fecha, observaciones, subtotal, iva, tipoCambio, formaPago, telefono, proveedor, direccion, listaProd, idOC, cotizacion,total);
 
                     newW.Title = "Modificar OC";
                     newW.ShowDialog();
@@ -398,7 +399,7 @@ namespace wpfFamiliaBlanco
                         fecha = newW.fecha;
                         Console.WriteLine(fecha);
                         String sub = newW.txtSubtotal.Text;
-                        String total = newW.txtTotal.Text;
+                         total = newW.txtTotal.Text;
                         direccion = (int)newW.cmbDireccion.SelectedValue;
                         telefono = (int)newW.cmbTelefono.SelectedValue;
                         observaciones = newW.txtObservaciones.Text;

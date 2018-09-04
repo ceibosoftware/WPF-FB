@@ -53,11 +53,13 @@ namespace wpfFamiliaBlanco
 
         public void LoadListaComboCategoria()
         {
+
+            cmbCategoria.Text = "Seleccione categoria";
             String consulta = "SELECT * FROM categorias";
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
-            cmbCategoria.SelectedIndex = 0;
+            cmbCategoria.SelectedIndex = -1;
         }
 
         private void LoadListaProveedorCategoria()
@@ -351,9 +353,7 @@ namespace wpfFamiliaBlanco
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Items.Clear();
-            ltsProvProductos.Items.Refresh();        
-            LoadListaProveedorCategoria();
+       
         }
 
         private void txtExistenciaMinima_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -471,6 +471,29 @@ namespace wpfFamiliaBlanco
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             actualizaCotizacion();
+        }
+
+      
+
+        private void cmbCategoria_DropDownClosed(object sender, EventArgs e)
+        {
+            if ((int)cmbCategoria.SelectedIndex != -1 )
+            {
+                ltsProveedores.IsEnabled = true;
+            }
+            else
+            {
+                cmbCategoria.SelectedIndex = 1;
+            }
+           
+
+        }
+
+        private void cmbCategoria_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            Items.Clear();
+            ltsProvProductos.Items.Refresh();
+            LoadListaProveedorCategoria();
         }
     }
     }

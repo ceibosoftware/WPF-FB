@@ -34,7 +34,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProveedores();
             LlenarComboFiltro();
-            
+            LlenarCmbCategoriaFrenteIVA();
   
 
             if (windowUsuarios.tipoUsuarioDB == "basico")
@@ -48,7 +48,7 @@ namespace wpfFamiliaBlanco
 
             ltsProveedores.SelectedIndex = 0;
         }
-   
+        
         private void btnModificar_Click(object sender, RoutedEventArgs e) //btnModificarProveedor_Click
         {
 
@@ -103,12 +103,12 @@ namespace wpfFamiliaBlanco
             newW.txtCP.Text = this.txtCP.Text;
             newW.txtCategoria.Text = nombre.ToString();
             newW.txtDireccion.Text = this.txtDireccion.Text;
-            newW.cmbRazonSocial.Text = this.txtRazonSocial.Text;
+            newW.cmbRazonSocial.Text = this.cmbRazonSocial.Text;
             newW.txtLocalidad.Text = this.txtLocalidad.Text;
-     
-            
+            newW.CUIT = this.txtCuit.Text;
 
-            newW.ShowDialog();
+
+                newW.ShowDialog();
 
             if (newW.DialogResult == true)
             {
@@ -116,13 +116,13 @@ namespace wpfFamiliaBlanco
                 this.txtCP.Text = newW.txtCP.Text;
                 String nombreActu = newW.txtCategoria.Text;
                 this.txtDireccion.Text = newW.txtDireccion.Text;
-                this.txtRazonSocial.Text = newW.cmbRazonSocial.Text;
+                this.cmbRazonSocial.Text = newW.cmbRazonSocial.Text;
                 this.txtLocalidad.Text = newW.txtLocalidad.Text;
                 this.dgvContacto.ItemsSource = newW.dgvContactom.ItemsSource;
                 
 
                 String update;
-                update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.txtRazonSocial.Text + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
+                update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.cmbRazonSocial.SelectedIndex + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
                 conexion.operaciones(update);
                 loadListaProveedores();
      
@@ -200,7 +200,7 @@ namespace wpfFamiliaBlanco
 
                 String nombre = newW2.txtNombre.Text;
                 String cuit = newW2.txtCuit.Text;
-                String razonSocial = newW2.cmbRazonSocial.Text;
+                int razonSocial = newW2.cmbRazonSocial.SelectedIndex;
                 String direccion = newW2.txtDireccion.Text;
                 String codigoPostal = newW2.txtCP.Text;
                 String localidad = newW2.txtLocalidad.Text;
@@ -281,7 +281,7 @@ namespace wpfFamiliaBlanco
                 DataTable proveedor = conexion.ConsultaParametrizada(consulta, ltsProveedores.SelectedValue);
                 txtCuit.Text = proveedor.Rows[0].ItemArray[3].ToString();
                 txtDireccion.Text = proveedor.Rows[0].ItemArray[5].ToString();
-                txtRazonSocial.Text = proveedor.Rows[0].ItemArray[2].ToString();
+                cmbRazonSocial.SelectedIndex = (int)proveedor.Rows[0].ItemArray[2];
                 txtLocalidad.Text = proveedor.Rows[0].ItemArray[6].ToString();
                 txtCP.Text = proveedor.Rows[0].ItemArray[4].ToString();
 
@@ -305,7 +305,15 @@ namespace wpfFamiliaBlanco
         }
 
 
+        private void LlenarCmbCategoriaFrenteIVA()
+        {
 
+            cmbRazonSocial.Items.Add("Responsable Inscripto");
+            cmbRazonSocial.Items.Add("Monotributista");
+            cmbRazonSocial.Items.Add("Exento");
+            cmbRazonSocial.Items.Add("Consumidor final");
+
+        }
         private void LlenarComboFiltro()
         {
 
@@ -339,17 +347,18 @@ namespace wpfFamiliaBlanco
                 conexion.operaciones(sql);
                 loadListaProveedores();
                 ActualizaDGVContacto();
-
+        
                 if(dgvContacto.Items == null)
                 {
                     this.txtCuit.Text = "";
                     this.txtCP.Text = "";   
                     this.txtDireccion.Text = "";
-                    this.txtRazonSocial.Text = "";
                     this.txtLocalidad.Text = "";
+                         cmbRazonSocial.Text = "";
         
                 }
                     MessageBox.Show("El proveedor de eliminó correctamente", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        ltsProveedores.SelectedIndex = 0;
                 }
             }
             }

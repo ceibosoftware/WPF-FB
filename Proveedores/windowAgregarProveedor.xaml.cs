@@ -44,6 +44,7 @@ namespace wpfFamiliaBlanco.Proveedores
         public windowAgregarProveedor()
         {
             InitializeComponent();
+           
             LlenarComboFiltro();
             EliminarDGVContacto();
             LoadListaProv();
@@ -69,10 +70,10 @@ namespace wpfFamiliaBlanco.Proveedores
             txtBuscar.MaxLines = 1;
             txtCP.MaxLength = 10;
             txtCP.MaxLines = 1;
-            txtCuit.MaxLength = 15;
+            txtCuit.MaxLength = 11;
             txtCuit.MaxLines = 1;
-            txtDireccion.MaxLength = 20;
-            txtDireccion.MaxLength = 20;
+            txtDireccion.MaxLength = 40;
+
             txtLocalidad.MaxLength = 20;
             txtLocalidad.MaxLines = 1;
             txtNombre.MaxLength = 20;
@@ -101,8 +102,10 @@ namespace wpfFamiliaBlanco.Proveedores
         {
 
             cmbRazonSocial.Items.Add("Responsable Inscripto");
-            cmbRazonSocial.Items.Add("SA");
-            cmbRazonSocial.Items.Add("SRL");
+            cmbRazonSocial.Items.Add("Monotributista");
+            cmbRazonSocial.Items.Add("Exento");
+            cmbRazonSocial.Items.Add("Consumidor final");
+
         }
 
         public Boolean Valida()
@@ -127,9 +130,16 @@ namespace wpfFamiliaBlanco.Proveedores
             }
             else if (string.IsNullOrEmpty(txtCuit.Text))
             {
+               
                 MessageBox.Show("Falta completar campo cuit", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                
                 return false;
+            }else if(!string.IsNullOrEmpty(txtCuit.Text) && int.Parse(conexion.ValorEnVariable("select count(cuit) from proveedor where cuit = '" + txtCuit.Text + "'")) == 1)
+            {
+                                
+                    MessageBox.Show("El cuit ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                
             }
             else if (string.IsNullOrEmpty(txtCP.Text))
             {
@@ -149,7 +159,7 @@ namespace wpfFamiliaBlanco.Proveedores
                
                 return false;
             }
-            
+         
             else
             {
                 return true;
@@ -313,7 +323,7 @@ namespace wpfFamiliaBlanco.Proveedores
 
         private void txtCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+            if (!char.IsDigit(e.Text, e.Text.Length - 1) )
                 e.Handled = true;
         }
 
@@ -325,10 +335,7 @@ namespace wpfFamiliaBlanco.Proveedores
 
         private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
-            {
-                e.Handled = true;
-            }
+          
         }
 
         private void txtLocalidad_PreviewTextInput(object sender, TextCompositionEventArgs e)

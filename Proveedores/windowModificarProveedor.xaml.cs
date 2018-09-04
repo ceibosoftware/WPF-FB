@@ -26,7 +26,7 @@ namespace wpfFamiliaBlanco
         private List<Categorias> items;
         public List<Categorias> Items { get => items; set => items = value; }
         public List<Contacto> conActual = new List<Contacto>() ;
-   
+         public string CUIT;
      
         public windowModificarProveedor(List<Categorias> lista, List<Contacto> contactoActual)
         {
@@ -42,6 +42,9 @@ namespace wpfFamiliaBlanco
             ltsCatProveedores.SelectionMode = SelectionMode.Single;
             ltsCategorias.SelectionMode = SelectionMode.Single;
             this.dgvContactom.IsReadOnly = true;
+            
+           
+
         }
 
 
@@ -56,8 +59,7 @@ namespace wpfFamiliaBlanco
             txtCP.MaxLines = 1;
             txtCuit.MaxLength = 15;
             txtCuit.MaxLines = 1;
-            txtDireccion.MaxLength = 20;
-            txtDireccion.MaxLength = 20;
+            txtDireccion.MaxLength = 40;
             txtLocalidad.MaxLength = 20;
             txtLocalidad.MaxLines = 1;
             txtCategoria.MaxLength = 20;
@@ -82,9 +84,10 @@ namespace wpfFamiliaBlanco
 
         public void CargarCMB()
         {
-            cmbRazonSocial.Items.Add("SA");
             cmbRazonSocial.Items.Add("Responsable Inscripto");
-            cmbRazonSocial.Items.Add("MOnotributista");
+            cmbRazonSocial.Items.Add("Monotributista");
+            cmbRazonSocial.Items.Add("Exento");
+            cmbRazonSocial.Items.Add("Consumidor final");
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -119,12 +122,18 @@ namespace wpfFamiliaBlanco
                 MessageBox.Show("Es necesario ingresar alguna categoria del proveedor");
 
             }
+            else if (!string.IsNullOrEmpty(txtCuit.Text) && int.Parse(conexion.ValorEnVariable("select count(cuit) from proveedor where cuit = '" + txtCuit.Text + "'")) == 1 && String.Compare(CUIT,txtCuit.Text) != 0)
+            {
+
+                MessageBox.Show("El cuit ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               
+
+            }
             else if (dgvContactom.HasItems == false)
             {
                 MessageBox.Show("Es necesario ingresar algun contacto al proveedor");
 
             }
-
             else
             {
                 DialogResult = true;
@@ -295,10 +304,7 @@ namespace wpfFamiliaBlanco
 
         private void txtCategoria_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z-ñ]"))
-            {
-                e.Handled = true;
-            }
+         
         }
 
         private void txtLocalidad_PreviewTextInput(object sender, TextCompositionEventArgs e)

@@ -106,7 +106,7 @@ namespace wpfFamiliaBlanco
             String sql;
             String nombreDB = "SELECT COUNT(*) FROM categorias WHERE nombre  = '" + name + "'";
             String nomCat = conexion.ValorEnVariable(nombreDB).ToString();
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAA" + nomCat);
+           
             try
             {
 

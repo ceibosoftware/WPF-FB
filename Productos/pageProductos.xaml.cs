@@ -30,7 +30,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
             loadListaProducto();
             LlenarComboFiltro();
-            cmbFiltro.IsEnabled = false;
+            //cmbFiltro.IsEnabled = false;
             LlenarCmbTipoCambio();
             if (windowUsuarios.tipoUsuarioDB == "basico")
             {
@@ -63,7 +63,7 @@ namespace wpfFamiliaBlanco
                 String precioUnitario = newW.txtPrecioUnitario.Text;
                 precioUnitario =  precioUnitario.Replace(",",".");
                 MessageBox.Show("preio"+precioUnitario);
-                String costo = newW.txtCosto.Text;
+                String costo = newW.txtCosto.Text.Replace(",", ".");
                 int moneda = newW.cmbMoneda.SelectedIndex;
                 int venta ;
                 if (newW.venta)
@@ -122,8 +122,8 @@ namespace wpfFamiliaBlanco
                     String descripcion = newW.txtDescripcion.Text;
                     String unidad = newW.txtUnidad.Text;
                     String existencias = newW.txtExistenciaMinima.Text;
-                    String precioUnitario = newW.txtPrecioUnitario.Text;
-                    String costo = newW.txtCosto.Text;
+                    String precioUnitario = newW.txtPrecioUnitario.Text.Replace(",", ".");
+                    String costo = newW.txtCosto.Text.Replace(",",".");
                     int moneda = newW.cmbMoneda1.SelectedIndex;
 
                     int venta;
@@ -224,11 +224,12 @@ namespace wpfFamiliaBlanco
             else if (cmbFiltro.Text == "Categoria")
             {
                 //busca por nombre de categoria (posibilidad de agregar combobox)
-                consulta = "SELECT productos.nombre ,categorias.idCategorias FROM categorias , productos WHERE categorias.nombre LIKE  '%' @valor '%' and categorias.idCategorias = productos.FK_idCategorias";
+                consulta = "SELECT productos.nombre ,categorias.idCategorias, productos.idProductos FROM categorias , productos WHERE categorias.nombre LIKE  '%' @valor '%' and categorias.idCategorias = productos.FK_idCategorias";
                 productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
             }
 
             ltsProductos.ItemsSource = productos.AsDataView();
+            ltsProductos.SelectedValuePath = "idProductos";
 
         }
 
