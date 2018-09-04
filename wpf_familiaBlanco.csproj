@@ -161,6 +161,29 @@
       <DependentUpon>windowMonedaOC.xaml</DependentUpon>
     </Compile>
     <Compile Include="factura.cs" />
+    <Compile Include="Gastos\Clases\Gasto.cs" />
+    <Compile Include="Gastos\Clases\Impuesto.cs" />
+    <Compile Include="Gastos\Clases\Otro.cs" />
+    <Compile Include="Gastos\Clases\Servicio.cs" />
+    <Compile Include="Gastos\Clases\Sueldo.cs" />
+    <Compile Include="Gastos\Vistas\PageGastos.xaml.cs">
+      <DependentUpon>PageGastos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\Vistas\windowAgregarImpuesto.xaml.cs">
+      <DependentUpon>windowAgregarImpuesto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\Vistas\windowAgregarOtro.xaml.cs">
+      <DependentUpon>windowAgregarOtro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\Vistas\windowAgregarServicio.xaml.cs">
+      <DependentUpon>windowAgregarServicio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\Vistas\windowAgregarSueldo.xaml.cs">
+      <DependentUpon>windowAgregarSueldo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gastos\Vistas\windowTipoGasto.xaml.cs">
+      <DependentUpon>windowTipoGasto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pageCategorias.xaml.cs">
       <DependentUpon>pageCategorias.xaml</DependentUpon>
     </Compile>
@@ -416,6 +439,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Entradas\windowMonedaOC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\PageGastos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\windowAgregarImpuesto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\windowAgregarOtro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\windowAgregarServicio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\windowAgregarSueldo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gastos\Vistas\windowTipoGasto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
