@@ -263,6 +263,23 @@
       <DependentUpon>salidasME.xaml</DependentUpon>
     </Compile>
     <Compile Include="Seguridad.cs" />
+    <Compile Include="Tesoreria\Clases\Cheque.cs" />
+    <Compile Include="Tesoreria\Clases\CuentaBancaria.cs" />
+    <Compile Include="Tesoreria\Vistas\PageCheque.xaml.cs">
+      <DependentUpon>PageCheque.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tesoreria\Vistas\PageCuentaBancaria.xaml.cs">
+      <DependentUpon>PageCuentaBancaria.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tesoreria\Vistas\PageTesoreria.xaml.cs">
+      <DependentUpon>PageTesoreria.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tesoreria\Vistas\WindowAgregarCheque.xaml.cs">
+      <DependentUpon>WindowAgregarCheque.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tesoreria\Vistas\WindowAgregarCuentaBancaria.xaml.cs">
+      <DependentUpon>WindowAgregarCuentaBancaria.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
     <Compile Include="Themes\TreeViewItemExtensions.cs" />
     <Compile Include="windowAgregarCategoria.xaml.cs">
@@ -579,6 +596,26 @@
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tesoreria\Vistas\PageCheque.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tesoreria\Vistas\PageCuentaBancaria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tesoreria\Vistas\PageTesoreria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tesoreria\Vistas\WindowAgregarCheque.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tesoreria\Vistas\WindowAgregarCuentaBancaria.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
