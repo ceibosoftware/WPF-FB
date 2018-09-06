@@ -106,7 +106,7 @@ namespace wpfFamiliaBlanco
             newW.cmbRazonSocial.Text = this.cmbRazonSocial.Text;
             newW.txtLocalidad.Text = this.txtLocalidad.Text;
             newW.CUIT = this.txtCuit.Text;
-
+            newW.txtWeb.Text = this.txtWeb.Text;
 
                 newW.ShowDialog();
 
@@ -122,7 +122,7 @@ namespace wpfFamiliaBlanco
                 
 
                 String update;
-                update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.cmbRazonSocial.SelectedIndex + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "' where idProveedor ='" + selectedValue + "';";
+                update = "update proveedor set nombre = '" + nombreActu + "', razonSocial = '" + this.cmbRazonSocial.SelectedIndex + "', cuit = '" + this.txtCuit.Text + "', codigoPostal = '" + this.txtCP.Text + "', direccion = '" + this.txtDireccion.Text + "', localidad = '" + this.txtLocalidad.Text + "', web = '"+newW.txtWeb.Text+"' where idProveedor ='" + selectedValue + "';";
                 conexion.operaciones(update);
                 loadListaProveedores();
      
@@ -204,11 +204,11 @@ namespace wpfFamiliaBlanco
                 String direccion = newW2.txtDireccion.Text;
                 String codigoPostal = newW2.txtCP.Text;
                 String localidad = newW2.txtLocalidad.Text;
-
+                String web = newW2.txtWeb.Text;
                 
                 //INSERTAR DATOS PRINCIPALES
                 String sql;
-                sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "');";
+                sql = "insert into proveedor(nombre, razonSocial, cuit, codigoPostal, direccion, localidad,web) values('" + nombre + "', '" + razonSocial + "', '" + cuit + "', '" + codigoPostal + "', '" + direccion + "', '" + localidad + "', '"+web+"');";
                 conexion.operaciones(sql);
 
 
@@ -284,6 +284,7 @@ namespace wpfFamiliaBlanco
                 cmbRazonSocial.SelectedIndex = (int)proveedor.Rows[0].ItemArray[2];
                 txtLocalidad.Text = proveedor.Rows[0].ItemArray[6].ToString();
                 txtCP.Text = proveedor.Rows[0].ItemArray[4].ToString();
+                txtWeb.Text = proveedor.Rows[0].ItemArray[7].ToString();
 
                 //consulta contacto
                 String consultaContacto = "SELECT contactoproveedor.telefono, contactoproveedor.email, contactoproveedor.nombreContacto from contactoproveedor WHERE FK_idProveedor=@valor";

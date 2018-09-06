@@ -123,8 +123,8 @@
         <Label x:Name="lblFecha_Copy2" Width="74" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="283.857,157.854,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Dolar USD"/>
         <Button x:Name="btnActualizarUSD" Content="Actualizar" HorizontalAlignment="Left" Margin="421.857,182.854,0,0" VerticalAlignment="Top" Width="84" Height="23" Click="btnActualizarUSD_Click" Style="{DynamicResource agregar}" Foreground="White"/>
         <Button x:Name="btnActualizarEUR" Content="Actualizar" HorizontalAlignment="Left" Margin="421.857,230.854,0,0" VerticalAlignment="Top" Width="84" Height="23" Click="btnActualizarEUR_Click" Style="{DynamicResource agregar}" Foreground="White"/>
-        <TextBox x:Name="txtUSD" HorizontalAlignment="Left" Height="23" Margin="283.857,182.854,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="txtUSD_PreviewTextInput"/>
-        <TextBox x:Name="txtEUR" HorizontalAlignment="Left" Height="23" Margin="283.857,230.854,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="txtEUR_PreviewTextInput"/>
+        <TextBox x:Name="txtUSD" HorizontalAlignment="Left" Height="23" Margin="283.857,182.854,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="txtUSD_PreviewTextInput" KeyDown="txtUSD_KeyDown"/>
+        <TextBox x:Name="txtEUR" HorizontalAlignment="Left" Height="23" Margin="283.857,230.854,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" PreviewTextInput="txtEUR_PreviewTextInput" KeyDown="txtEUR_KeyDown"/>
         <Label x:Name="lblFecha_Copy1" Width="66" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="283.857,205.854,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Euro EUR"/>
         <Border BorderBrush="#FF024346" BorderThickness="1" HorizontalAlignment="Left" Height="78.992" Margin="233.276,16.164,0,0" VerticalAlignment="Top" Width="319.779" CornerRadius="5">
             <Border.Background>

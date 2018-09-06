@@ -169,9 +169,9 @@ namespace wpfFamiliaBlanco.Entradas
                 if (resultado == MessageBoxResult.Yes)
                 {
                     if (modifica != true)
-                        consulta = "UPDATE productos SET costo = '" + PU + "' where idProductos = " + ltsProductos.SelectedValue + " ";
+                        consulta = "UPDATE productos SET costo = '" + PU.ToString().Replace(",",".") + "' where idProductos = " + ltsProductos.SelectedValue + " ";
                     else
-                        consulta = "UPDATE productos_has_ordencompra SET PUPagado = '" + PU + "' where FK_idOC = " + idOC + " and FK_idProducto = " + ltsProductos.SelectedValue + " ";
+                        consulta = "UPDATE productos_has_ordencompra SET PUPagado = '" + PU.ToString().Replace(",", ".") + "' where FK_idOC = " + idOC + " and FK_idProducto = " + ltsProductos.SelectedValue + " ";
 
                     conexion.operaciones(consulta);
                 }
@@ -243,13 +243,23 @@ namespace wpfFamiliaBlanco.Entradas
                 e.Handled = true;
             }
 
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void txtPrecioUnitario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtPrecioUnitario.Text = txtPrecioUnitario.Text + ",";
+                txtPrecioUnitario.SelectionStart = txtPrecioUnitario.Text.Length;
+            }
         }
     }
 }

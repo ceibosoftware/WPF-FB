@@ -150,14 +150,12 @@ namespace wpfFamiliaBlanco
                         int iva = newW.cmbIVA.SelectedIndex;
                         int tipoCambio = newW.cmbTipoCambio.SelectedIndex;
                         String cotizacion = newW.txtCotizacion.Text;
-                        String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal + "', '" + total + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','" + cotizacion + "')";
-                        conexion.operaciones(sql);
+                        String sql = "insert into ordencompra(fecha, observaciones, subtotal, total, iva, tipoCambio ,formaPago, FK_idContacto,FK_idDireccion,FK_idProveedor,cotizacion) values( '" + fecha.ToString("yyyy/MM/dd") + "', '" + observacion + "', '" + subtotal.Replace(",", ".") + "', '" + total.Replace(",", ".") + "', '" + iva + "','" + tipoCambio + "','" + formaPago + "','" + telefono + "','" + direccion + "','" + Proveedor + "','" + cotizacion + "')"; conexion.operaciones(sql);
                         string ultimoId = "Select last_insert_id()";
                         String id = conexion.ValorEnVariable(ultimoId);
                         foreach (var producto in newW.productos)
                         {
-                            String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario + "');";
-                            conexion.operaciones(productos);
+                            String productos = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC,PUPagado) values( '" + producto.cantidad + "', '" + producto.total.ToString().Replace(",", ".") + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + id + "','" + producto.precioUnitario.ToString().Replace(",", ".") + "');"; conexion.operaciones(productos);
                         }
                         MessageBox.Show("Se agregó la orden de compra correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
@@ -412,8 +410,7 @@ namespace wpfFamiliaBlanco
                         formaPago = newW.txtFormaPago.Text;
                         iva = newW.cmbIVA.SelectedIndex;
                         tipoCambio = newW.cmbTipoCambio.SelectedIndex;
-                        String sql = "UPDATE ordencompra SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub + "',total = '" + total + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',FK_idContacto = '" + telefono + "',FK_idDireccion = '" + direccion + "',FK_idProveedor = '" + Proveedor + "' WHERE ordencompra.idOrdenCompra = '" + idOC + "';";
-                        conexion.operaciones(sql);
+                        String sql = "UPDATE ordencompra SET fecha = '" + fecha.ToString("yyyy/MM/dd") + "', observaciones = '" + observaciones + "' ,subtotal = '" + sub.Replace(",", ".") + "',total = '" + total.Replace(",", ".") + "',iva = '" + iva + "',tipoCambio = '" + tipoCambio + "',formaPago = '" + formaPago + "',FK_idContacto = '" + telefono + "',FK_idDireccion = '" + direccion + "',FK_idProveedor = '" + Proveedor + "' WHERE ordencompra.idOrdenCompra = '" + idOC + "';"; conexion.operaciones(sql);
 
                         //ELIMINA REGISTRO DE TABLA INTERMEDIA
                         string sql2 = "delete  from productos_has_ordencompra where FK_idOC =  '" + idOC + "'";
@@ -425,8 +422,7 @@ namespace wpfFamiliaBlanco
                             //string CantidadAntigua = "select cantidad from productos_has_ordencompra where FK_idOC = '" + idOC + "' and FK_idProducto =  '" + producto.id + "'";
                             //int.TryParse(conexion.ValorEnVariable(CrRemito), out int CRR);
                             //CRR = producto.cantidad - CRR;
-                            String productosActualizar = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC, PUPagado) values( '" + producto.cantidad + "', '" + producto.total + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario + "');";
-                            conexion.operaciones(productosActualizar);
+                            String productosActualizar = "insert into productos_has_ordencompra(cantidad, subtotal, Crfactura, CrRemito, FK_idProducto, FK_idOC, PUPagado) values( '" + producto.cantidad + "', '" + producto.total.ToString().Replace(",", ".") + "', '" + producto.cantidad + "', '" + producto.cantidad + "', '" + producto.id + "','" + idOC + "','" + producto.precioUnitario.ToString().Replace(",", ".") + "');"; conexion.operaciones(productosActualizar);
                         }
                         ejecutar = false;
                         loadlistaOC(index);

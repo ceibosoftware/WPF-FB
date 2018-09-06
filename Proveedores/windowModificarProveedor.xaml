@@ -948,7 +948,7 @@
         <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="193" TextWrapping="Wrap" Text="En esta pantalla se modifican los datos de los proveedores. Agregue o elimine categorías y/o datos de contacto, además puede modificar cualquier otro dato de proveedores." VerticalAlignment="Top" Width="114" Margin="960,155,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="960,121,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgvContactom" HorizontalAlignment="Left" Height="152" Margin="33,276,0,0" VerticalAlignment="Top" Width="557"/>
-        <TextBox x:Name="txtDireccion_Copy" Width="554" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="36,215,0,0" Height="24" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" TabIndex="4"/>
+        <TextBox x:Name="txtWeb" Width="554" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="36,215,0,0" Height="24" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" TabIndex="4"/>
         <Label x:Name="lblContacto_Copy" Width="170" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="421,185,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Web Proveedor" ScrollViewer.CanContentScroll="True"/>
 
     </Grid>

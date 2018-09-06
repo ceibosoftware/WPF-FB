@@ -31,17 +31,17 @@ namespace wpfFamiliaBlanco
         {
             string consultaDolar = "SELECT cotizacion from cotizacion where nombre = 'dolar'";
             string consultaEuro = "SELECT cotizacion from cotizacion where nombre = 'euro'";         
-            txtUSD.Text = conexion.ValorEnVariable(consultaDolar).Replace(",", "."); 
-            txtEUR.Text = conexion.ValorEnVariable(consultaEuro).Replace(",", ".");
+            txtUSD.Text = conexion.ValorEnVariable(consultaDolar); 
+            txtEUR.Text = conexion.ValorEnVariable(consultaEuro);
         }
 
         private void actualizarDolar()
         {
             try
             {
-                string consultaDolar = "UPDATE cotizacion set cotizacion = '" + txtUSD.Text + "' where nombre = 'dolar'";
+                string consultaDolar = "UPDATE cotizacion set cotizacion = '" + txtUSD.Text.Replace(",", ".") + "' where nombre = 'dolar'";
                 conexion.operaciones(consultaDolar);
-                MessageBox.Show("Cotizacion acualizada a :" + txtUSD.Text.Replace(",", "."));
+                MessageBox.Show("Cotizacion acualizada a :" + txtUSD.Text);
             }
             catch (Exception)
             {
@@ -55,9 +55,9 @@ namespace wpfFamiliaBlanco
         {
             try
             {
-                string consultaEUR = "UPDATE cotizacion set cotizacion = '" + txtEUR.Text + "' where nombre = 'euro'";
+                string consultaEUR = "UPDATE cotizacion set cotizacion = '" + txtEUR.Text.Replace(",", ".") + "' where nombre = 'euro'";
                 conexion.operaciones(consultaEUR);
-                MessageBox.Show("Cotizacion acualizada a :" + txtEUR.Text.Replace(",", "."));
+                MessageBox.Show("Cotizacion acualizada a :" + txtEUR.Text);
             }
             catch (Exception)
             {
@@ -95,7 +95,7 @@ namespace wpfFamiliaBlanco
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
@@ -103,10 +103,28 @@ namespace wpfFamiliaBlanco
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
+        private void txtUSD_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtUSD.Text = txtUSD.Text + ",";
+                txtUSD.SelectionStart = txtUSD.Text.Length;
+            }
+        }
 
+        private void txtEUR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtEUR.Text = txtEUR.Text + ",";
+                txtEUR.SelectionStart = txtEUR.Text.Length;
+            }
+        }
     }
 }

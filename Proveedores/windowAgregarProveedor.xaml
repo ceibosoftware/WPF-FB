@@ -947,7 +947,7 @@
         <TextBlock x:Name="txtGuia" HorizontalAlignment="Left" Height="181" TextWrapping="Wrap" Text="En esta pantalla se agrega un proveedor. Primero deben completarse los datos del mismo a la izquierda y luego se le asignan las distintas categorías al proveedor. " VerticalAlignment="Top" Width="124" Margin="959,146,0,0" Foreground="#FFC9C5C5" FontSize="11"/>
         <Label x:Name="lblGuia" Content="Guia" HorizontalAlignment="Left" Margin="957,113,0,0" VerticalAlignment="Top" Height="25" Width="132" Foreground="White" HorizontalContentAlignment="Right" FontSize="14" Style="{DynamicResource LabelStyle_Detalle}"/>
         <DataGrid Style="{StaticResource {x:Type DataGrid}}" x:Name="dgv" HorizontalAlignment="Left" Height="178" Margin="33,250,0,0" VerticalAlignment="Top" Width="567"/>
-        <TextBox x:Name="txtDireccion_Copy" Width="566" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="33,192,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" TabIndex="4"/>
+        <TextBox x:Name="txtWeb" Width="566" VerticalAlignment="Top" TextWrapping="Wrap" Style="{DynamicResource TextBoxStyle1}" Margin="33,192,0,0" Height="23" HorizontalAlignment="Left" FontSize="14" Foreground="White" Background="#FF4B4848" BorderBrush="{x:Null}" TabIndex="4"/>
         <Label x:Name="lblWEB" Width="132" VerticalAlignment="Top" Style="{DynamicResource LabelStyle_Detalle}" Margin="467,173,0,0" Height="25" HorizontalContentAlignment="Right" HorizontalAlignment="Left" FontSize="14" Foreground="White" Content="Web del proveedor"/>
 
     </Grid>

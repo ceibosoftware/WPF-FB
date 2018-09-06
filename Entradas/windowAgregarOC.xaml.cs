@@ -223,18 +223,18 @@ namespace wpfFamiliaBlanco.Entradas
             if (cmbIVA.SelectedIndex == 0)
             {
                 total = subtotal;
-                txtTotal.Text = total.ToString().Replace(",", "."); ;
+                txtTotal.Text = total.ToString() ;
             }
             else if (cmbIVA.SelectedIndex == 1)
             {
                 total = subtotal * 1.21f;
-                txtTotal.Text = total.ToString().Replace(",", "."); ;
+                txtTotal.Text = total.ToString() ;
               
             }
             else if (cmbIVA.SelectedIndex == 2)
             {
                 total = subtotal * 1.105f;
-                txtTotal.Text = total.ToString().Replace(",", "."); ;
+                txtTotal.Text = total.ToString() ;
                 
             }
             if (txtCotizacion.Text != "" && txtTotal.Text != "") {

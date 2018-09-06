@@ -76,7 +76,7 @@ namespace wpfFamiliaBlanco
                 }
            
                 int idCategoria = (int)newW.cmbCategoria.SelectedValue;
-                String sql = "insert into productos(nombre, descripcion, FK_idCategorias, existenciaMinima, unidad, precioUnitario,venta, moneda, costo) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "', '" + existencias + "', '" + unidad + "','" + precioUnitario + "','" + venta + "','" + moneda + "','" + costo + "');";
+                String sql = "insert into productos(nombre, descripcion, FK_idCategorias, existenciaMinima, unidad, precioUnitario,venta, moneda, costo) values('" + nombre + "', '" + descripcion + "', '" + idCategoria + "', '" + existencias + "', '" + unidad + "','" + precioUnitario + "','" + venta + "','" + moneda + "','" + costo.Replace(",",".") + "');";
                 conexion.operaciones(sql);
 
                 //INSERTAR PROVEEDORES DE PRODUCTO CARGADO                

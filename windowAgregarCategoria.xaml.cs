@@ -141,7 +141,7 @@ namespace wpfFamiliaBlanco
                     String name = textnombre.Text.ToString();
                     String sql;
 
-                    String valida = "SELECT COUNT(*) FROM categorias WHERE nombre  = '" + name + "'";
+                    String valida = "SELECT COUNT(*) FROM categorias_has_proveedor WHERE fk_idCategorias  = '" + ltsCategorias.SelectedValue + "'";
                     String NC = conexion.ValorEnVariable(valida).ToString();
 
                     if (NC != "0")

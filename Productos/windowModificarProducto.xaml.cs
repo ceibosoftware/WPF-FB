@@ -44,7 +44,7 @@ namespace wpfFamiliaBlanco
             InitializeComponent();
          
             LoadListaComboCategoria();
-            LoadListaProveedorCategoria();
+           
             cmbCategoria.SelectedValue = cmbValue;
             txtDescripcion.Text = descripcion;
             txtNombre.Text = nombre;
@@ -65,7 +65,7 @@ namespace wpfFamiliaBlanco
             }
             llenarProveedoresExistentes(items);
             LoadListaProv();
-          
+            LoadListaProveedorCategoria();
             // LlenarlistaProveedores();
         }
         private void llenarProveedoresExistentes(List<elemento> lista) {
@@ -79,7 +79,7 @@ namespace wpfFamiliaBlanco
         }
         private void LoadListaComboCategoria()
         {
-            String consulta = "SELECT * FROM categorias";
+            String consulta = "SELECT * FROM categorias ,  categorias_has_proveedor c where c.FK_idCategorias = categorias.idCategorias  ";
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
@@ -377,11 +377,11 @@ namespace wpfFamiliaBlanco
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-           
-            LoadListaProveedorCategoria();
-            Items.Clear();
-            ltsProvProductos.Items.Refresh();
+
+
+            //LoadListaProveedorCategoria();
+            //Items.Clear();
+            //ltsProvProductos.Items.Refresh();
 
         }
 
@@ -406,7 +406,7 @@ namespace wpfFamiliaBlanco
                 e.Handled = true;
             }
 
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
@@ -477,6 +477,23 @@ namespace wpfFamiliaBlanco
                 e.Handled = true;
             Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+        }
+
+        private void txtCosto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtCosto.Text = txtCosto.Text + ",";
+                txtCosto.SelectionStart = txtCosto.Text.Length;
+            }
+        }
+
+        private void cmbCategoria_DropDownClosed(object sender, EventArgs e)
+        {
+            LoadListaProveedorCategoria();
+            Items.Clear();
+            ltsProvProductos.Items.Refresh();
         }
     }
 }

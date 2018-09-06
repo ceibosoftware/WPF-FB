@@ -24,8 +24,8 @@ namespace wpfFamiliaBlanco
     public partial class windowAgregarProducto : Window
     {
 
-       
-        private  List<elemento> items = new List<elemento>();
+
+        private List<elemento> items = new List<elemento>();
         private Boolean aceptar = false;
         CRUD conexion = new CRUD();
         public bool venta;
@@ -42,7 +42,7 @@ namespace wpfFamiliaBlanco
         {
             InitializeComponent();
             LoadListaComboCategoria();
-            LoadListaProveedor();     
+            LoadListaProveedor();
             LlenarComboFiltro();
             LoadListaProv();
             LlenarCmbTipoCambio();
@@ -54,8 +54,8 @@ namespace wpfFamiliaBlanco
         public void LoadListaComboCategoria()
         {
 
-            cmbCategoria.Text = "Seleccione categoria";
-            String consulta = "SELECT * FROM categorias";
+           
+            String consulta = "SELECT * FROM categorias ,  categorias_has_proveedor c where c.FK_idCategorias = categorias.idCategorias  ";
             conexion.Consulta(consulta, combo: cmbCategoria);
             cmbCategoria.DisplayMemberPath = "nombre";
             cmbCategoria.SelectedValuePath = "idCategorias";
@@ -99,7 +99,7 @@ namespace wpfFamiliaBlanco
         }
         private void LlenarComboFiltro()
         {
-       
+
         }
 
         private void txtFiltro_TextChanged(object sender, TextChangedEventArgs e)
@@ -109,10 +109,10 @@ namespace wpfFamiliaBlanco
             String consulta;
 
             //Busca por nombre
-                consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
-                productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
-            
-          
+            consulta = "SELECT * FROM proveedor WHERE proveedor.nombre LIKE '%' @valor '%'";
+            productos = conexion.ConsultaParametrizada(consulta, txtFiltro.Text);
+
+
 
             ltsProveedores.ItemsSource = productos.AsDataView();
         }
@@ -163,16 +163,16 @@ namespace wpfFamiliaBlanco
                     else
                     {
                         MessageBox.Show("Ese proveedor ya fue agregado", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
-                     
+
                     }
                 }
             }
             catch (NullReferenceException)
             {
                 MessageBox.Show("Es necesario seleccionar un proveedor a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            
+
             }
-           
+
 
         }
 
@@ -186,7 +186,7 @@ namespace wpfFamiliaBlanco
             catch (NullReferenceException)
             {
                 MessageBox.Show("Es necesario seleccionar un proveedor a eliminar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-             
+
             }
         }
 
@@ -205,7 +205,7 @@ namespace wpfFamiliaBlanco
                 Aceptar = true;
                 this.Close();
             }
-         
+
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -213,7 +213,7 @@ namespace wpfFamiliaBlanco
             this.Close();
         }
 
-    
+
 
         public bool validar()
         {
@@ -221,42 +221,43 @@ namespace wpfFamiliaBlanco
             if (string.IsNullOrEmpty(txtNombre.Text))
             {
                 MessageBox.Show("Falta completar campo nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-         
+
                 return false;
             }
             else if (string.IsNullOrEmpty(txtExistenciaMinima.Text))
             {
                 MessageBox.Show("Falta completar campo existencias minimas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-   
+
                 return false;
             }
             else if (string.IsNullOrEmpty(txtUnidad.Text))
             {
                 MessageBox.Show("Falta completar campo unidad", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
- 
+
                 return false;
             }
             else if (string.IsNullOrEmpty(txtPrecioUnitario.Text))
             {
                 MessageBox.Show("Falta completar campo precio unitario", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-          
+
                 return false;
             }
             else if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 MessageBox.Show("Falta completar campo descripción", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            
+
                 return false;
             }
             else if (ltsProvProductos.Items.Count == 0)
             {
                 MessageBox.Show("Es necesario ingresar algun proveedor", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-          
+
                 return false;
-            }else if(cmbCategoria.SelectedItem == null)
+            }
+            else if (cmbCategoria.SelectedItem == null)
             {
                 MessageBox.Show("Es necesario seleccionar categoria", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-              
+
                 return false;
             }
             else if (txtCosto.Text == "")
@@ -269,7 +270,7 @@ namespace wpfFamiliaBlanco
             {
                 return true;
             }
-          
+
         }
 
         private void btnCatNueva_Click(object sender, RoutedEventArgs e)
@@ -277,18 +278,18 @@ namespace wpfFamiliaBlanco
             windowAgregarCategoria newW = new windowAgregarCategoria();
             newW.ShowDialog();
 
-           if(newW.DialogResult == true)
-           {
+            if (newW.DialogResult == true)
+            {
                 LoadListaComboCategoria();
-           }
+            }
         }
 
         private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-          
+
         }
 
-   
+
 
 
         private void btnProvNuevo_Click(object sender, RoutedEventArgs e)
@@ -297,13 +298,13 @@ namespace wpfFamiliaBlanco
             String idProv;
             Proveedores.windowAgregarProveedor newW2 = new Proveedores.windowAgregarProveedor();
             newW2.ShowDialog();
-            if(newW2.DialogResult == true)
+            if (newW2.DialogResult == true)
             {
                 String nombre = newW2.txtNombre.Text;
                 String cuit = newW2.txtCuit.Text;
                 String razonSocial = newW2.cmbRazonSocial.Text;
                 String direccion = newW2.txtDireccion.Text;
-               // String categoria = newW2.cmbCategoria.Text;
+                // String categoria = newW2.cmbCategoria.Text;
                 String codigoPostal = newW2.txtCP.Text;
                 String localidad = newW2.txtLocalidad.Text;
 
@@ -343,17 +344,17 @@ namespace wpfFamiliaBlanco
                     string sql3 = "INSERT INTO categorias_has_proveedor(FK_idProveedor, FK_idCategorias) VALUES('" + id + "','" + idCategoria + "' )";
                     conexion.operaciones(sql3);
                 }
-                
-               
+
+
             }
-           // LoadListaProveedor(); //
+            // LoadListaProveedor(); //
             LoadListaProveedorCategoria();
             LoadListaComboCategoria();
         }
 
         private void cmbCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-       
+
         }
 
         private void txtExistenciaMinima_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -361,7 +362,7 @@ namespace wpfFamiliaBlanco
 
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
-            
+
         }
 
         private void txtPrecioUnitario_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -391,14 +392,15 @@ namespace wpfFamiliaBlanco
         }
         private void txtCosto_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
             Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
             e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
-     
-       
-       
+
+
+
         // Logica cotizacion
         private void LlenarCmbTipoCambio()
         {
@@ -407,12 +409,14 @@ namespace wpfFamiliaBlanco
             cmbMoneda.Items.Add("€");
         }
 
-        private void loadCotizacion() {
-          
-            if(cmbMoneda.SelectedIndex == 0)
+        private void loadCotizacion()
+        {
+
+            if (cmbMoneda.SelectedIndex == 0)
             {
                 txtCotizacion.Text = "1";
-            }else if (cmbMoneda.SelectedIndex == 1)
+            }
+            else if (cmbMoneda.SelectedIndex == 1)
             {
                 string consultaDolar = "SELECT cotizacion from cotizacion where nombre = 'dolar'";
                 txtCotizacion.Text = conexion.ValorEnVariable(consultaDolar);
@@ -423,9 +427,9 @@ namespace wpfFamiliaBlanco
                 txtCotizacion.Text = conexion.ValorEnVariable(consultaEuro);
             }
 
-                
 
-            }
+
+        }
 
         private void cmbMoneda_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -436,8 +440,9 @@ namespace wpfFamiliaBlanco
 
         private void txtCosto_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             calculaPrecioUnitario();
-         
+
         }
         private void calculaPrecioUnitario()
         {
@@ -450,21 +455,21 @@ namespace wpfFamiliaBlanco
                 txtPrecioUnitario.Text = "";
             }
         }
-            private void txtBuscar_TextChanged_1(object sender, TextChangedEventArgs e)
-            {
+        private void txtBuscar_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
 
-             }
+        }
 
         private void actualizaCotizacion()
         {
-           
-                var neww = new windowAjustes();
-                neww.ShowDialog();
-                 neww.Close();
-                loadCotizacion();
-                calculaPrecioUnitario();
-               
-                
+
+            var neww = new windowAjustes();
+            neww.ShowDialog();
+            neww.Close();
+            loadCotizacion();
+            calculaPrecioUnitario();
+
+
 
         }
 
@@ -473,19 +478,20 @@ namespace wpfFamiliaBlanco
             actualizaCotizacion();
         }
 
-      
+
 
         private void cmbCategoria_DropDownClosed(object sender, EventArgs e)
         {
-            if ((int)cmbCategoria.SelectedIndex != -1 )
+            if ((int)cmbCategoria.SelectedIndex != -1)
             {
                 ltsProveedores.IsEnabled = true;
+                lblCategorias.Visibility = Visibility.Collapsed;
             }
             else
             {
                 cmbCategoria.SelectedIndex = 1;
             }
-           
+
 
         }
 
@@ -495,7 +501,19 @@ namespace wpfFamiliaBlanco
             ltsProvProductos.Items.Refresh();
             LoadListaProveedorCategoria();
         }
+
+        private void txtCosto_KeyDown(object sender, KeyEventArgs e)
+        {
+          
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtCosto.Text = txtCosto.Text + ",";
+                txtCosto.SelectionStart = txtCosto.Text.Length;
+            }
+        }
     }
-    }
+}
+    
  
 
