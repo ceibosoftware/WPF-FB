@@ -4,11 +4,98 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:wpfFamiliaBlanco.Gastos.Vistas"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageGastos">
+      mc:Ignorable="d"
+      Title="PageGastos" Width="1033.666" Height="549.667">
+    <Page.Resources>
+        <Style x:Key="LabelStyle_HeaderPagina" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,5,0,3.38">
+                                <ContentPresenter.Effect>
+                                    <DropShadowEffect/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BotonStyle_crud" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true" Background="#FF4B4848" BorderThickness="0,0,3,0" CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource botongrisMouseover}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF004568"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid>
-        
+    <Grid Background="#FF171717">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="237*"/>
+            <ColumnDefinition Width="563*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblgastos" Content="Gastos" HorizontalAlignment="Left" VerticalAlignment="Top" Width="225" Foreground="White" FontSize="14" Height="37" Style="{DynamicResource LabelStyle_HeaderPagina}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Gastos" HorizontalAlignment="Left" Margin="20,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577"/>
+        <Button x:Name="btnAgregar" Content="Pagar" HorizontalAlignment="Left" Margin="495,392,0,135" Width="74" BorderBrush="{x:Null}" Height="23" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" Grid.Column="1"/>
+        <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="495,438,0,0" VerticalAlignment="Top" Width="74" Height="24" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnModificar_Copy_Click" Grid.Column="1"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="495,490,0,0" VerticalAlignment="Top" Width="74" Height="24" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" Click="btnEliminar_Click" Grid.Column="1"/>
+        <DataGrid x:Name="dgvGastos" HorizontalAlignment="Left" Height="380" Margin="25,134,0,0" VerticalAlignment="Top" Width="354" Grid.ColumnSpan="2" SelectionChanged="dgvGastos_SelectionChanged" MouseLeftButtonUp="dgvGastos_MouseLeftButtonUp"/>
+        <RadioButton x:Name="rbImpuesto" Content="Impuestos" HorizontalAlignment="Left" Margin="203,95,0,0" VerticalAlignment="Top" Checked="rbImpuesto_Checked"/>
+        <RadioButton x:Name="RbServicios" Content="Servicios" HorizontalAlignment="Left" Margin="11,95,0,0" VerticalAlignment="Top" Checked="RbServicios_Checked" Grid.Column="1"/>
+        <RadioButton x:Name="RbSueldo" Content="Sueldos" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Checked="RbSueldo_Checked" Grid.Column="1"/>
+        <RadioButton x:Name="rbOtros" Content="Otros" HorizontalAlignment="Left" Margin="223,95,0,0" VerticalAlignment="Top" Grid.Column="1" Checked="rbOtros_Checked"/>
+        <TextBox x:Name="txtObservaciones" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"/>
+        <Label Content="Observaciones" HorizontalAlignment="Left" Margin="106,341,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtUnidad" HorizontalAlignment="Left" Height="23" Margin="108,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblunidad" Content="Unidad" HorizontalAlignment="Left" Margin="106,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtHoras" HorizontalAlignment="Left" Height="23" Margin="108,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblHorasT" Content="Horas Trabajadas" HorizontalAlignment="Left" Margin="106,238,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtFormaDePago" HorizontalAlignment="Left" Height="22" Margin="108,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblFormaPAgo" Content="Forma de Pago" HorizontalAlignment="Left" Margin="106,189,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="22" Margin="110,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblFormaPAgo_Copy" Content="Fecha" HorizontalAlignment="Left" Margin="108,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+
     </Grid>
 </Page>

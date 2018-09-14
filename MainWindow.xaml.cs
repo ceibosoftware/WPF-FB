@@ -75,6 +75,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             btnSalidasMI.Visibility = Visibility.Collapsed;
@@ -118,7 +119,8 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
-           // btnCategorias.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
+            // btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
@@ -158,6 +160,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("BotonStylePanel") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
@@ -201,6 +204,7 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
 //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Collapsed;
             lblnotificaciones.Visibility = Visibility.Collapsed;
             btnSalidasMI.Visibility = Visibility.Collapsed;
@@ -222,6 +226,7 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("BotonStylePanel") as Style;
            // btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Visible;
@@ -242,6 +247,7 @@ namespace wpfFamiliaBlanco
             btnSalidas.Style = FindResource("botonDock") as Style;
             //btnCategorias.Style = FindResource("BotonStylePanel") as Style;
             btnClientes.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             nube.Visibility = Visibility.Visible;
             lblnotificaciones.Visibility = Visibility.Visible;
             btnSalidasMI.Visibility = Visibility.Collapsed;
@@ -283,6 +289,7 @@ namespace wpfFamiliaBlanco
             btnProveedores.Style = FindResource("botonDock") as Style;
             btnEntradas.Style = FindResource("botonDock") as Style;
             btnSalidas.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("botonDock") as Style;
             //btnCategorias.Style = FindResource("botonDock") as Style;
             btnClientes.Style = FindResource("BotonStylePanel") as Style;
             nube.Visibility = Visibility.Visible;
@@ -439,6 +446,48 @@ namespace wpfFamiliaBlanco
             usuarios.Show();
 
             this.Close();
+        }
+
+        private void btnGastos_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicio.Content = new Gastos.Vistas.PageGastos();
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnGastos.Style = FindResource("BotonStylePanel") as Style;
+            btnEntradas.Style = FindResource("botonDock") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            //btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Visible;
+            lblnotificaciones.Visibility = Visibility.Visible;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
+
+
+            #region Fade in
+            //animaciones
+            Storyboard storyboard = new Storyboard();
+            TimeSpan duration = new TimeSpan(0, 0, 1);
+
+            // fade in
+            DoubleAnimation animation = new DoubleAnimation();
+
+            animation.From = 0.0;
+            animation.To = 1.0;
+            animation.Duration = new Duration(duration);
+            // opacity
+            Storyboard.SetTargetName(animation, frameInicio.Name);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Control.OpacityProperty));
+            // + mainwindow a storyboard
+            storyboard.Children.Add(animation);
+
+            //start storyboard
+            storyboard.Begin(this);
+
+            #endregion
         }
     }
 }

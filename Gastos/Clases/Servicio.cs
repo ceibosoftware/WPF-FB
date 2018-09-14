@@ -6,7 +6,41 @@ using System.Threading.Tasks;
 
 namespace wpfFamiliaBlanco.Gastos.Clases
 {
-    class Servicio
+    class Servicio : Gasto
     {
+
+        int idServicio;
+        String unidad;
+
+        public Servicio(string nombre, int tipo, float monto, string observaciones, int formaPago, int gasto, String unidad, DateTime fech)
+        {
+            this.nombre = nombre;
+            this.tipo = tipo;
+            this.monto = monto;
+            this.observaciones = observaciones;
+            this.formaPago = formaPago;
+            this.gastos = gasto;
+            this.unidad = unidad;
+            this.fecha = fech;
+        }
+
+        public void Delete(String id)
+        {
+            String delete = "DELETE * FROM gasto WHERE idGasto = '" + id + "'";
+            this.Conexion.operaciones(delete);
+        }
+
+        public  void Save()
+        {
+            String insert = "INSERT INTO gasto (nombre, tipo, monto, observaciones, unidad,formaPago,gastot,fecha) VALUES('" + this.nombre + "','" + this.tipo + "','" + this.monto.ToString().Replace(",", ".") + "', '" + this.observaciones + "', '" + this.unidad + "', '" + this.formaPago + "', '" + 1 + "', '" + this.fecha.ToString("yyyy/MM/dd") + "')";
+            this.Conexion.operaciones(insert);
+        }
+
+        public  void Update()
+        {
+           
+        }
+
+
     }
 }

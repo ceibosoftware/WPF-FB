@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Gastos.Vistas"
         mc:Ignorable="d"
-        Title="windowTipoGasto" Height="450" Width="800">
-    <Grid>
-        
+        Title="windowTipoGasto" Height="277.97" Width="309.245" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF232222">
+        <Button x:Name="btnImpuesto" Content="Impuesto" HorizontalAlignment="Left" Margin="113,57,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnImpuesto_Click"/>
+        <Button x:Name="btnServicio" Content="Servicio" HorizontalAlignment="Left" Margin="113,95,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnServicio_Click"/>
+        <Button x:Name="btnSueldo" Content="Sueldo" HorizontalAlignment="Left" Margin="113,132,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnSueldo_Click"/>
+        <Button x:Name="btnOtro" Content="Otro" HorizontalAlignment="Left" Margin="113,168,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnOtro_Click"/>
+
     </Grid>
 </Window>

@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpfFamiliaBlanco.Gastos.Vistas"
         mc:Ignorable="d"
-        Title="windowAgregarSueldo" Height="450" Width="800">
-    <Grid>
-        
+        Title="windowAgregarSueldo" Height="368.617" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF232222">
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="24" Margin="59,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Margin="224,179,0,0" VerticalAlignment="Top" Width="56" Height="26"/>
+        <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="24" Margin="59,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" KeyDown="txtMonto_KeyDown"/>
+        <Label Content="Importe" HorizontalAlignment="Left" Margin="226,131,0,0" VerticalAlignment="Top" Width="61" Height="26"/>
+        <TextBox x:Name="txtObservaciones" HorizontalAlignment="Left" Height="117" Margin="304,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340"/>
+        <Label Content="Observaciones" HorizontalAlignment="Left" Margin="559,39,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.016,0.731" Height="26"/>
+        <ComboBox x:Name="cmbFormadePAgo" HorizontalAlignment="Left" Margin="61,60,0,0" VerticalAlignment="Top" Width="213" Height="20"/>
+        <Label Content="Forma de pago" HorizontalAlignment="Left" Margin="187,39,0,0" VerticalAlignment="Top" Width="92" Height="26"/>
+        <ComboBox x:Name="cmbTipo" HorizontalAlignment="Left" Margin="61,106,0,0" VerticalAlignment="Top" Width="213" Height="20" RenderTransformOrigin="-0.15,0.75"/>
+        <Label Content="Tipo" HorizontalAlignment="Left" Margin="243,85,0,0" VerticalAlignment="Top" Width="33" Height="26" RenderTransformOrigin="4.758,0"/>
+        <TextBox x:Name="txtHoras" HorizontalAlignment="Left" Height="24" Margin="306,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <Label Content="Horas Trabajadas" HorizontalAlignment="Left" Margin="426,177,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="569,227,0,88" Width="75" BorderBrush="{x:Null}" Height="23" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click"/>
+        <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Height="100" Margin="59,250,0,-12" VerticalAlignment="Top" Width="215"/>
+        <Label Content="Fecha del pago" HorizontalAlignment="Left" Margin="187,229,0,0" VerticalAlignment="Top" Width="92" Height="26"/>
+
     </Grid>
 </Window>

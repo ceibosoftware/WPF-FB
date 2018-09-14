@@ -19,9 +19,72 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
     /// </summary>
     public partial class windowAgregarOtro : Window
     {
+        CRUD conexion = new CRUD();
         public windowAgregarOtro()
         {
             InitializeComponent();
+            LoadCMB();
+            LoadCMBTIpo();
+        }
+        private void LoadCMB()
+        {
+            cmbFormadePAgo.Items.Add("Efectivo");
+            cmbFormadePAgo.Items.Add("Transferencia");
+            cmbFormadePAgo.SelectedIndex = 0;
+        }
+
+        private void LoadCMBTIpo()
+        {
+            cmbTipo.Items.Add("Ingresos Brutos");
+            cmbTipo.Items.Add("IVA");
+            cmbTipo.Items.Add("Otro");
+            cmbTipo.SelectedIndex = 0;
+        }
+        private void txtMonto_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            if (Valida())
+            {
+                DialogResult = true;
+            }
+        }
+
+        private bool Valida()
+        {
+
+            String tieneN = "SELECT COUNT(*) FROM gasto WHERE nombre  = '" + txtNombre.Text + "'";
+            String NC = conexion.ValorEnVariable(tieneN).ToString();
+
+            if (txtMonto.Text == "")
+            {
+                MessageBox.Show("Ingrese el monto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+
+            }
+            else if (NC != "0")
+            {
+                MessageBox.Show("El nombre ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else if (txtNombre.Text == "")
+            {
+                MessageBox.Show("Ingrese el nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else if (txtObservaciones.Text == "")
+            {
+                MessageBox.Show("Ingrese las observaciones", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
         }
     }
 }
