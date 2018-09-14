@@ -16,6 +16,8 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using wpfFamiliaBlanco.Clientes;
+using wpfFamiliaBlanco.Tesoreria;
+using wpfFamiliaBlanco.Tesoreria.Vistas;
 
 namespace wpfFamiliaBlanco
 {
@@ -439,6 +441,24 @@ namespace wpfFamiliaBlanco
             usuarios.Show();
 
             this.Close();
+        }
+
+        private void btnTesoreria_Click(object sender, RoutedEventArgs e)
+        {
+            frameInicio.Content = new PageTesoreria();
+            btnUsuarios.Style = FindResource("botonDock") as Style;
+            btnProductos.Style = FindResource("botonDock") as Style;
+            btnProveedores.Style = FindResource("botonDock") as Style;
+            btnTesoreria.Style = FindResource("BotonStylePanel") as Style;
+            btnSalidas.Style = FindResource("botonDock") as Style;
+            //btnCategorias.Style = FindResource("botonDock") as Style;
+            btnClientes.Style = FindResource("botonDock") as Style;
+            nube.Visibility = Visibility.Collapsed;
+            lblnotificaciones.Visibility = Visibility.Collapsed;
+            btnSalidasMI.Visibility = Visibility.Collapsed;
+            btnSalidasME.Visibility = Visibility.Collapsed;
+            btnClientesMI.Visibility = Visibility.Collapsed;
+            btnClientesME.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -22,6 +22,30 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
         public WindowAgregarCuentaBancaria()
         {
             InitializeComponent();
+            loadcmbmoneda();
+            loadcmbtipo();
+        }
+        
+        private void loadcmbmoneda()
+        {
+            cmbmoneda.Items.Add("EURO");
+            cmbmoneda.Items.Add("USD");
+            cmbmoneda.Items.Add("PESO");
+        }
+        private void loadcmbtipo()
+        {
+            cmbtipo.Items.Add("CA");
+            cmbtipo.Items.Add("CC");
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
