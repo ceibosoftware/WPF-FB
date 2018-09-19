@@ -504,7 +504,6 @@ namespace wpfFamiliaBlanco
 
         private void txtCosto_KeyDown(object sender, KeyEventArgs e)
         {
-          
             if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
             {
                 e.Handled = true;

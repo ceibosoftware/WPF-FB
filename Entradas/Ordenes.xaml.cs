@@ -183,7 +183,7 @@ namespace wpfFamiliaBlanco
             try
             {
                 //consulta s
-                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
+                String consulta = "  SELECT t2.nombre , t1.cantidad,  t1.subtotal , t1.PUPagado, t2.unidad, t2.descripcion from productos_has_ordencompra t1 inner join productos t2  on t1.FK_idProducto = t2.idProductos where t1.FK_idOC = @valor";
                 productos = conexion.ConsultaParametrizada(consulta, ltsNumeroOC.SelectedValue);
                 dgvProductos.ItemsSource = productos.AsDataView();
                 //llenar datos de oc
@@ -482,7 +482,7 @@ namespace wpfFamiliaBlanco
         private void seleccioneParaFiltrar()
         {
             lblseleccione1.Visibility = Visibility.Visible;
-            cmbFechas.Text = "Seleccione un proveedor";
+            cmbFechas.Text = "Seleccione para filtrar";
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -494,12 +494,13 @@ namespace wpfFamiliaBlanco
 
             if (saveFileDialog.ShowDialog() == true)
             {
+                
                 Document doc = new Document(iTextSharp.text.PageSize.A4, 10, 10, 42, 35);
-                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName , FileMode.Create));
+                PdfWriter wri = PdfWriter.GetInstance(doc, new FileStream(saveFileDialog.FileName, FileMode.Create));
                 doc.Open();
                 var titleFont = FontFactory.GetFont("Arial", 18, Font.BOLD);
 
-                string imageURL = "C:\\imagenFB\\familiablanco_membrete.png";
+                string imageURL = "D:\\Repositorio familia blanco\\WPF-FB\\familiablanco_membrete.png";
                 iTextSharp.text.Image jpg = iTextSharp.text.Image.GetInstance(imageURL);
                 jpg.Alignment = Element.ALIGN_CENTER;
                 //Resize image depend upon your need
@@ -509,34 +510,69 @@ namespace wpfFamiliaBlanco
                 //Give some space after the image
                 jpg.SpacingAfter = 1f;
                 doc.Add(jpg);
+
+                // traigo contaconto proveedor
+                String consultaIdProveedor = "select idProveedor from proveedor where nombre = '" + txtProveedor.Text.ToString() + "'";
+                string idProveedor = conexion.ValorEnVariable(consultaIdProveedor);
+                String consultaContactoProveedor = "Select * from contactoproveedor where FK_idProveedor = '" + idProveedor + "' LIMIT 1";
+                DataTable contacto = conexion.coleccion(consultaContactoProveedor);
+                String Telefono = contacto.Rows[0].ItemArray[1].ToString();
+                String Mail = contacto.Rows[0].ItemArray[2].ToString(); ;
+                String Nombre = contacto.Rows[0].ItemArray[3].ToString(); ;
+
+                //info direccion y telefono de oc
+                String consultaInfo = "Select d.direccion , t.telefono from telefonocontacto t , direcciones d, ordencompra o where o.idOrdenCompra = '" + ltsNumeroOC.SelectedValue + "' and o.FK_idDireccion = d.idDireccion and o.FK_idContacto = t.idTelefono ";
+                DataTable infoContacto = conexion.coleccion(consultaInfo);
+                
+
                 DataTable proveedores = datosProveedor((int)ltsNumeroOC.SelectedValue);
                 Paragraph titulo = new Paragraph("Orden Nro : " + ltsNumeroOC.SelectedValue.ToString(), titleFont);
-                Paragraph proveedor = new Paragraph("Proveedor: " + txtProveedor.Text.ToString());
-                Paragraph fecha = new Paragraph("Fecha: " + txtFecha.Text);
+                Paragraph titulos = new Paragraph("Información Proveedor: " +  "                                                                                 "+ "Informacion De entrega");
+                Paragraph fecha = new Paragraph("Fecha: " + txtFecha.Text+ "\n \n");
+                Paragraph proveedor = new Paragraph("Proveedor: " + txtProveedor.Text.ToString() +    "                              Direccion de entrega: " + infoContacto.Rows[0].ItemArray[0]);
+                Paragraph Contacto = new Paragraph("Nombre de contacto: " + Nombre + "                                                      Nombre de contacto: Gabriel Blanco");
+                Paragraph MailContacto = new Paragraph("Mail : " + Mail+ "                                                       Mail: gabriel@familiablancowines.com \n \n");
+                Paragraph TelefonoContacto = new Paragraph("Telefono : " + Telefono + "                                                                                            Telefono: " + infoContacto.Rows[0].ItemArray[1]);
+
+               
                 Paragraph telefono = new Paragraph("Cuit: " + proveedores.Rows[0].ItemArray[1].ToString());
                 Paragraph Direccion = new Paragraph("Direccion de entrega: " + proveedores.Rows[0].ItemArray[3].ToString());   //buena mari
                 Paragraph razonSocial = new Paragraph("Razon social: " + proveedores.Rows[0].ItemArray[0].ToString());
                 Paragraph prod = new Paragraph("Productos de la orden \n \n");
+                Paragraph Salto = new Paragraph("");
                 titulo.IndentationLeft = 400f;
+                fecha.IndentationLeft = 400f;
+                titulos.IndentationLeft = 20f;
+                proveedor.IndentationLeft = 20f;
+                Contacto.IndentationLeft = 20f;
+                TelefonoContacto.IndentationLeft = 20f;
+                MailContacto.IndentationLeft = 20f;
                 doc.Add(titulo);
-                doc.Add(proveedor);
                 doc.Add(fecha);
-                doc.Add(telefono);
-                doc.Add(Direccion);
-                doc.Add(razonSocial);
-                doc.Add(prod);
+                doc.Add(titulos);
+                doc.Add(proveedor);
+                doc.Add(Contacto);
+                doc.Add(TelefonoContacto);
+                doc.Add(MailContacto);
+                
+                
 
                 PdfPTable table1 = new PdfPTable(1);
                 table1.AddCell("Productos");
-                PdfPTable table = new PdfPTable(4);
-                float[] width = new float[] { 17f, 40f, 25f, 25f };
+                table1.WidthPercentage = 100f;
+                PdfPTable table = new PdfPTable(6);
+                table.WidthPercentage = 100f;
+                float[] width = new float[] { 15f, 20f, 35f, 45f, 20f, 20f };
                 table.SetWidths(width);
                 table.AddCell("Cantidad");
+                table.AddCell("Unidad");
                 table.AddCell("Producto");
-                table.AddCell("Precio Unitario");
-                table.AddCell("Total");
-                PdfPTable producto = new PdfPTable(4);
-                float[] widths = new float[] { 17f, 40f, 25f, 25f };
+                table.AddCell("Descripción");
+                table.AddCell("$/Unit");
+                table.AddCell("Subtotal");
+                PdfPTable producto = new PdfPTable(6);
+                producto.WidthPercentage = 100f;
+                float[] widths = new float[] { 15f, 20f, 35f, 45f, 20f, 20f };
                 producto.SetWidths(widths);
                 producto.DefaultCell.BorderWidthTop = 0;
                 producto.DefaultCell.BorderWidthBottom = 0;
@@ -546,7 +582,9 @@ namespace wpfFamiliaBlanco
                         producto.DefaultCell.BorderWidthBottom = 0.5f;
 
                     producto.AddCell(productos.Rows[i].ItemArray[1].ToString());
+                    producto.AddCell(productos.Rows[i].ItemArray[4].ToString());
                     producto.AddCell(productos.Rows[i].ItemArray[0].ToString());
+                    producto.AddCell(productos.Rows[i].ItemArray[5].ToString());
                     producto.AddCell(productos.Rows[i].ItemArray[3].ToString());
                     producto.AddCell(productos.Rows[i].ItemArray[2].ToString() + " " + txtTipoCambio.Text);
 
@@ -554,12 +592,12 @@ namespace wpfFamiliaBlanco
                 doc.Add(table1);
                 doc.Add(table);
                 doc.Add(producto);
-                Paragraph subtotal = new Paragraph("Subtotal: " + txtSubtotal.Text.ToString());
-                Paragraph iva = new Paragraph("Iva: " + txtIva.Text.ToString());
-                Paragraph total = new Paragraph("Total: " + txtTotal.Text.ToString());
-                subtotal.IndentationLeft = 400f;
-                iva.IndentationLeft = 400f;
-                total.IndentationLeft = 400f;
+                Paragraph subtotal = new Paragraph("Subtotal: " + txtSubtotal.Text.ToString() +" "+ txtTipoCambio.Text);
+                Paragraph iva = new Paragraph(txtIva.Text.ToString()+"% Iva: " + float.Parse(txtSubtotal.Text) * float.Parse(txtIva.Text)/100 +" "+ txtTipoCambio.Text);
+                Paragraph total = new Paragraph("Total: " + txtTotal.Text.ToString() +" "+txtTipoCambio.Text);
+                subtotal.IndentationLeft = 450f;
+                iva.IndentationLeft =450f;
+                total.IndentationLeft = 450f;
                 doc.Add(subtotal);
                 doc.Add(iva);
                 doc.Add(total);

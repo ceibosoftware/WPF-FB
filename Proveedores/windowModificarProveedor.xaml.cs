@@ -57,7 +57,7 @@ namespace wpfFamiliaBlanco
             txtFiltro.MaxLines = 1;
             txtCP.MaxLength = 10;
             txtCP.MaxLines = 1;
-            txtCuit.MaxLength = 15;
+            txtCuit.MaxLength = 11;
             txtCuit.MaxLines = 1;
             txtDireccion.MaxLength = 40;
             txtLocalidad.MaxLength = 20;
@@ -398,6 +398,11 @@ namespace wpfFamiliaBlanco
         private void btnNuevoContacto_Click_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void txtCategoria_GotFocus(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Esta por modificar la razon social.","Alerta",MessageBoxButton.OK,MessageBoxImage.Warning);
         }
     }
 }

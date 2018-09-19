@@ -221,13 +221,13 @@ namespace wpfFamiliaBlanco.Entradas
                         totalRestante = totalRestante - float.Parse(newW.txttotafacturaApagar.Text);
                     }
 
-                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante + "' where idfacturas = '" + idfactura + "'";
+                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante.ToString().Replace(",",".") + "' where idfacturas = '" + idfactura + "'";
                     conexion.operaciones(sq1l);
 
                   
 
                     String efectivo = "Efectivo";
-                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo)VALUES ('" + newW.fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text + "','" + idfactura + "','" + newW.txtRecibo.Text + "')";
+                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo)VALUES ('" + newW.fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text.Replace(",",".") + "','" + idfactura + "','" + newW.txtRecibo.Text + "')";
                     conexion.operaciones(sql);
 
                  
@@ -267,7 +267,7 @@ namespace wpfFamiliaBlanco.Entradas
                         totalRestante = totalRestante - float.Parse(newW.txttotafacturaApagar.Text);
                     }
 
-                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante + "' where idfacturas = '" + idfactura + "'";
+                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante.ToString().Replace(",",".") + "' where idfacturas = '" + idfactura + "'";
                     conexion.operaciones(sq1l);
 
                     DateTime fechaCobro = System.DateTime.Now;
@@ -277,14 +277,14 @@ namespace wpfFamiliaBlanco.Entradas
                     DateTime fechaPago = System.DateTime.Now;
                     fechaCobro = newW.dtpFechaDelPago.SelectedDate.Value;
 
-                    String sql = "INSERT INTO cheque (banco, importe,destinatario ,numeroCheque,fecha, fechaCobro)VALUES ('" + newW.cmbBanco.Text + "','" + newW.txtImporte.Text + "','" + newW.txtDestinatario.Text + "','" + newW.txtnumeroCheque.Text + "','" + fecha.ToString("yyyy/MM/dd") + "', '" + fechaCobro.ToString("yyyy/MM/dd") + "')";
+                    String sql = "INSERT INTO cheque (banco, importe,destinatario ,numeroCheque,fecha, fechaCobro)VALUES ('" + newW.cmbBanco.Text + "','" + newW.txtImporte.Text.Replace(",",".") + "','" + newW.txtDestinatario.Text + "','" + newW.txtnumeroCheque.Text + "','" + fecha.ToString("yyyy/MM/dd") + "', '" + fechaCobro.ToString("yyyy/MM/dd") + "')";
                     conexion.operaciones(sql);
 
                     string ultimoId = "Select last_insert_id()";
                     String id = conexion.ValorEnVariable(ultimoId);
 
                     String efectivo = "Cheque";
-                    String sql2 = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCheque)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '" + id + "')";
+                    String sql2 = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCheque)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text.Replace(",",".") + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '" + id + "')";
                     conexion.operaciones(sql2);
 
                     MessageBox.Show("El pago con cheque se ha realizado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -320,13 +320,13 @@ namespace wpfFamiliaBlanco.Entradas
                         totalRestante = totalRestante - float.Parse(newW.txttotafacturaApagar.Text);
                     }
 
-                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante + "' where idfacturas = '" + idfactura + "'";
+                    String sq1l = "UPDATE factura SET totalRestante = '" + totalRestante.ToString().Replace(",",".") + "' where idfacturas = '" + idfactura + "'";
                     conexion.operaciones(sq1l);
 
                     DateTime fecha = System.DateTime.Now;
                     fecha = newW.dtpFechaDelPago.SelectedDate.Value;
                     String efectivo = "Transferencia";
-                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCuentaBco)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '"+newW.cmbBanco.SelectedValue+"')";
+                    String sql = "INSERT INTO pago (fecha, formaPago,efectivo ,FK_idfacturas, nroRecibo, FK_idCuentaBco)VALUES ('" + fecha.ToString("yyyy/MM/dd") + "','" + efectivo + "','" + newW.txttotafacturaApagar.Text.Replace(",",".") + "','" + idfactura + "','" + newW.txtRecibo.Text + "', '"+newW.cmbBanco.SelectedValue+"')";
                     conexion.operaciones(sql);
                     MessageBox.Show("El pago con transferencia se ha realizado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadLtsPagosRealizados();
@@ -361,7 +361,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 totalParcial = totalParcial + float.Parse(txtmontorealido.Text);
 
-                String sq1l = "UPDATE factura SET totalRestante = '" + totalParcial + "' where idfacturas = '" + idfactura + "'";
+                String sq1l = "UPDATE factura SET totalRestante = '" + totalParcial.ToString().Replace(",",".") + "' where idfacturas = '" + idfactura + "'";
                 conexion.operaciones(sq1l);
 
                 String deletePago = "DELETE FROM pago WHERE idPago = '"+ltsPagosRealizados.SelectedValue+"'";

@@ -510,7 +510,10 @@ namespace wpfFamiliaBlanco.Entradas
         {
             calculaTotal();
             calculaTotalPesos();
-            
+            todaslascuotas.Clear();
+            DgvCuotas.Items.Refresh();
+            cmbCuotas.SelectedIndex = -1;
+            cmbCuotas.Text = "Seleccione cantidad de cuotas";
         }
 
        
@@ -585,7 +588,11 @@ namespace wpfFamiliaBlanco.Entradas
                     return false;
                 
             }
-          
+            else if(!DgvCuotas.HasItems)
+            {
+                MessageBox.Show("Seleccione cantidad de cuotas", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             else if (bandera == true && nomCat !="0")
             {
 
@@ -797,8 +804,7 @@ namespace wpfFamiliaBlanco.Entradas
         {
             int cuotass = cmbCuotas.SelectedIndex + 1;
 
-            if (bandera == true)
-            {
+           
 
                 todaslascuotas.Clear();
                 if (dgvProductosFactura.Items.Count == 0)
@@ -838,7 +844,7 @@ namespace wpfFamiliaBlanco.Entradas
 
                 }
 
-            }
+            
         }
 
         private void cmbProveedores_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -380,6 +381,24 @@ namespace wpfFamiliaBlanco.Entradas
         private void txtcotizacion_TextChanged(object sender, TextChangedEventArgs e)
         {
             CacularCotizacion();
+        }
+
+        private void txttotafacturaApagar_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txttotafacturaApagar.Text = txttotafacturaApagar.Text + ",";
+                txttotafacturaApagar.SelectionStart = txttotafacturaApagar.Text.Length;
+            }
+        }
+
+        private void txttotafacturaApagar_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+            Regex regex = new Regex("^[,][0-9]+$|^[0-9]*[,]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
     }
     

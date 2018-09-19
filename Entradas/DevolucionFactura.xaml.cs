@@ -86,7 +86,7 @@ namespace wpfFamiliaBlanco.Entradas
                 idFactura = newW.idFactura;
                 String totall = newW.txtTotal.Text;
                 String subtotall = newW.txtSubtotal.Text;
-                String insertNC = "INSERT INTO notacredito (total, subtotal,FK_idFactura, fecha) VALUES ( '" + totall + "', '"+ subtotall + "','" + idFactura + "','"+hoy.ToString("yyyy/MM/dd") + "')";
+                String insertNC = "INSERT INTO notacredito (total, subtotal,FK_idFactura, fecha) VALUES ( '" + totall.ToString().Replace(",", ".") + "', '"+ subtotall.ToString().Replace(",",".") + "','" + idFactura + "','"+hoy.ToString("yyyy/MM/dd") + "')";
                 conexion.operaciones(insertNC);
                   
 
@@ -104,7 +104,7 @@ namespace wpfFamiliaBlanco.Entradas
                     Producto pr = new Producto(nombre, idp, cantidad, totalp, precioUni);
                     itemsNC.Add(p);
 
-                   String productostNC = "INSERT INTO productos_has_notacredito (FK_idNotaCredito, FK_idProductos, cantidad, precioUnitario) VALUES ('" + lastid + "','" + idp + "', '" + cantidad + "', '" + precioUni + "')";
+                   String productostNC = "INSERT INTO productos_has_notacredito (FK_idNotaCredito, FK_idProductos, cantidad, precioUnitario) VALUES ('" + lastid + "','" + idp + "', '" + cantidad + "', '" + precioUni.ToString().Replace(",", ".") + "')";
                     conexion.operaciones(productostNC);
 
                 }
@@ -333,7 +333,7 @@ namespace wpfFamiliaBlanco.Entradas
                     Producto pr = new Producto(nombre, idp, cantidad, totalp, precioUni);
                     itemsNC.Add(p);
 
-                    String updateNC = "UPDATE notacredito SET total =  '" + totalm + "', subtotal = '" + subm + "' WHERE idNotaCredito = '" + idnotaCredito + "'";
+                    String updateNC = "UPDATE notacredito SET total =  '" + totalm.ToString().Replace(",", ".") + "', subtotal = '" + subm.ToString().Replace(",", ".") + "' WHERE idNotaCredito = '" + idnotaCredito + "'";
                     conexion.operaciones(updateNC);
 
                     String updateProductosNC = "INSERT INTO productos_has_notacredito (FK_idNotaCredito, FK_idProductos, cantidad) VALUES('" + idnotaCredito + "','" + idp + "', '" + cantidad + "')";

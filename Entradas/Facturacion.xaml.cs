@@ -90,7 +90,7 @@ namespace wpfFamiliaBlanco.Entradas
                 dtp = newW.dtFactura.SelectedDate.Value;
                 String cotizacion = newW.txtCotizacion.Text.Replace(",", ".");
 
-                String sqlFactura = "INSERT INTO factura ( subtotal, numeroFactura, total, iva, tipoCambio, cuotas, FK_idOC, fecha, totalRestante, cotizacion )VALUES ('"+subtotal+ "','" + numeroFact + "','" + total + "','" + iva + "','" + tipoCambio + "','" + cuotas + "','" + fkOrden + "','" + dtp.ToString("yyyy/MM/dd") + "','" + total + "','" + cotizacion + "')";
+                String sqlFactura = "INSERT INTO factura ( subtotal, numeroFactura, total, iva, tipoCambio, cuotas, FK_idOC, fecha, totalRestante, cotizacion )VALUES ('"+subtotal.ToString().Replace(",",".")+ "','" + numeroFact + "','" + total.ToString().Replace(",", ".") + "','" + iva + "','" + tipoCambio + "','" + cuotas + "','" + fkOrden + "','" + dtp.ToString("yyyy/MM/dd") + "','" + total.ToString().Replace(",", ".") + "','" + cotizacion.ToString().Replace(",", ".") + "')";
                 conexion.operaciones(sqlFactura);
           
 
@@ -110,7 +110,7 @@ namespace wpfFamiliaBlanco.Entradas
                     float montocuota = cuot.montoCuota;
                     int cuota = cuot.cuota;
 
-                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, montoCuota ,FK_idFacturas,numCuota,estado) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "','"+ montocuota + "' ,'" + id + "' ,'" + cuota + "','" + 0 + "')";
+                    String sqlProductoHas = "INSERT INTO cuotas ( dias, fecha, montoCuota ,FK_idFacturas,numCuota,estado) VALUES ('" + dias + "', '" + fecha.ToString("yyyy/MM/dd") + "','"+ montocuota.ToString().Replace(",", ".") + "' ,'" + id + "' ,'" + cuota + "','" + 0 + "')";
                     conexion.operaciones(sqlProductoHas);
 
                 }
@@ -128,7 +128,7 @@ namespace wpfFamiliaBlanco.Entradas
                     itemsFacturaDB.Add(p);
 
                     
-                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal,CrNotaCredito ,FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal + "', '"+ cantidad +"','" + idp + "', '" + id + "')";
+                    String sqlProductoHas = "INSERT INTO productos_has_facturas (cantidad, subtotal,CrNotaCredito ,FK_idProducto, FK_idFactura) VALUES ('" + cantidad + "','" + subtotal.ToString().Replace(",", ".") + "', '"+ cantidad +"','" + idp + "', '" + id + "')";
                     conexion.operaciones(sqlProductoHas);
 
 
@@ -606,7 +606,7 @@ namespace wpfFamiliaBlanco.Entradas
                         try
                         {
                             //UPDATE FACTURA
-                            String updatefactura = "UPDATE factura SET subtotal =  '" + subtotal2 + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2 + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOC= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "',cotizacion ='" + cotiza + "' WHERE idfacturas = '" + numerofacturaID + "'";
+                            String updatefactura = "UPDATE factura SET subtotal =  '" + subtotal2.ToString().Replace(",", ".") + "',numeroFactura = '" + numeroFact2 + "' ,total = '" + total2.ToString().Replace(",", ".") + "',iva= '" + iva32 + "',tipocambio='" + tipoCambio2 + "' ,cuotas = '" + cuotas2 + "',FK_idOC= '" + fkOrden2 + "',fecha ='" + dtp2.ToString("yyyy/MM/dd") + "',cotizacion ='" + cotiza.ToString().Replace(",", ".") + "',totalRestante = '"+total2.ToString().Replace(",", ".") + "' WHERE idfacturas = '" + numerofacturaID + "'";
                             conexion.operaciones(updatefactura);
                         }
                         catch (Exception)
