@@ -19,6 +19,7 @@ namespace wpfFamiliaBlanco.Tesoreria.Clases
         private String cbu;
         private int moneda;
         private float saldo;
+        private string obs;
 
         public int Tipo { get => tipo; set => tipo = value; }
         public string Titular { get => titular; set => titular = value; }
@@ -28,6 +29,27 @@ namespace wpfFamiliaBlanco.Tesoreria.Clases
         public string Cbu { get => cbu; set => cbu = value; }
         public int Moneda { get => moneda; set => moneda = value; }
         public float Saldo { get => saldo; set => saldo = value; }
+        public string Obs { get => obs; set => obs = value; }
+
+
+
+
+        public CuentaBancaria(int tipo, string titular, string alias, string banco, string numero, string cbu, string obs,float saldo, int moneda)
+        {
+            this.tipo = tipo;
+            this.titular = titular;
+            this.alias = alias;
+            this.moneda = moneda;
+            this.banco = banco;
+            this.numero = numero;
+            this.cbu = cbu;
+            this.obs = obs;
+            this.saldo = saldo;
+        }
+        public CuentaBancaria()
+        {
+
+        }
 
         public static DataTable getCta()
         {
@@ -56,8 +78,14 @@ namespace wpfFamiliaBlanco.Tesoreria.Clases
             Banco = (String)cuenta.Rows[0].ItemArray[3];
             Saldo = (float)cuenta.Rows[0].ItemArray[5];
             Moneda = (int)cuenta.Rows[0].ItemArray[8];
+            Obs = (String)cuenta.Rows[0].ItemArray[9];
 
-
+        }
+        public void save()
+        {
+            String consulta;
+            consulta = "INSERT INTO cuentabanco(tipocta,cbu,alias,numerocta,nombreTitular,saldo,moneda,banco,obs) VALUES('" + tipo + "','" + cbu + "','" + alias + "','" + numero + "','" + titular + "','" + saldo + "','" + moneda + "','"+banco+"','"+obs+"')";
+            conexion.operaciones(consulta);
         }
 
     }

@@ -36,6 +36,11 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
             var newW = new WindowAgregarCuentaBancaria();
 
             newW.ShowDialog();
+
+            if (newW.DialogResult==true)
+            {
+                newW.Cta.save();
+            }
         }
 
         private void loadltscheques()

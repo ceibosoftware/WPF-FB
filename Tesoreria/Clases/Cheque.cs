@@ -25,6 +25,19 @@ namespace wpfFamiliaBlanco.Tesoreria.Clases
         public int Numero { get => numero; set => numero = value; }
         public string Banco { get => banco; set => banco = value; }
 
+        public Cheque()
+        {
+
+        }
+        public Cheque(int tipo, DateTime fechacobro, DateTime fechaconfeccion, float importe, int numero, string banco)
+        {
+            this.tipo = tipo;
+            this.fechacobro = fechacobro;
+            this.fechaconfeccion = fechaconfeccion;
+            this.importe = importe;
+            this.numero = numero;
+            this.banco = banco;
+        }
         public void save(int tipo)
         {
             if (tipo==0)//el cheque es tipo 0 cuando es propio y tipo 1 cuando es de terceros.

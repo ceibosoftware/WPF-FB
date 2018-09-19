@@ -54,7 +54,7 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
                 txtimporte.Text = cheq.Importe.ToString();
                 txtnumero.Text = cheq.Numero.ToString();
                 txtFechacobro.Text = cheq.Fechacobro.ToString("yyyy/MM/dd");
-                txtfechaconfeccion.Text = cheq.Fechaconfeccion.ToString();
+                txtfechaconfeccion.Text = cheq.Fechaconfeccion.ToString("yyyy/MM/dd");
                 txtbanco.Text = cheq.Banco.ToString();
             }
             else
@@ -74,8 +74,8 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             int tipo = 0;
-
-            var newW = new WindowAgregarCheque(tipo,ltsCheques.Items.Count);
+            int numero = int.Parse(ltsCheques.SelectedValuePath);
+            var newW = new WindowAgregarCheque(tipo,numero);
 
             newW.ShowDialog();
             if (newW.DialogResult == true)

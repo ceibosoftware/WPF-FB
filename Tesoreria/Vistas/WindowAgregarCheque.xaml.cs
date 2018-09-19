@@ -39,13 +39,29 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
             collapsedproduct(tipo);
             loadcmbfinaldidad();
             loadcmbcuenta();
+            txtnumerocheque.Text=cheq.numerocheque(numero);
             
 
         }
-       
+        public void llenarDatos()
+        {
 
-           
-        
+            int tipo = cmbtipo.SelectedIndex;
+            DateTime fechacobro = dtpcobro.SelectedDate.Value;
+            DateTime fechaconfeccion = dtpconfeccion.SelectedDate.Value;
+            string banco = txtbco.Text;
+            int numero = int.Parse(txtnumerocheque.Text);
+            float importe = float.Parse(txtimporte.Text);
+
+
+            cheq = new Cheque(tipo, fechacobro, fechaconfeccion, importe, numero, banco);
+
+
+        }
+
+
+
+
         private void loadcmbfinaldidad()
         {
             cmbtipo.Items.Add("Cruzado");
@@ -182,6 +198,7 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
             {
                 if (validacionpropio())
                 {
+                    llenarDatos();
                     DialogResult = true;
                 }
                 
@@ -189,7 +206,8 @@ namespace wpfFamiliaBlanco.Tesoreria.Vistas
             }
             else 
             {
-                if (validaciontercero()){ 
+                if (validaciontercero()){
+                    llenarDatos();
                 DialogResult = true;
                 }
 
