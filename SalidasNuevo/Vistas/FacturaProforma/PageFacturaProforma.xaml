@@ -6,9 +6,20 @@
       xmlns:local="clr-namespace:wpfFamiliaBlanco.SalidasNuevo.Vistas.FacturaProforma"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageFacturaProforma">
+      Title="PageFacturaProforma" Width="1033.666" Height="471">
 
-    <Grid>
-        
+    <Grid Width="1033.666">
+        <Border Height="431.956" Width="979.52" BorderThickness="1,1,5,1" BorderBrush="#FF858585" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="26.647,16.936,27.499,22.108" Opacity="0.5" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF323131" Offset="0"/>
+                    <GradientStop Color="#FF2D2C2C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Button x:Name="btnAgregar" Content="Agregar" HorizontalAlignment="Left" Margin="904,399,0,51" Width="75" BorderBrush="{x:Null}" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" />
+        <Button x:Name="btnModificar_Copy" Content="Modificar" HorizontalAlignment="Left" Margin="903.666,354.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFF6C900" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" />
+        <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Left" Margin="903.666,306.333,0,0" VerticalAlignment="Top" Width="75" Height="23" BorderBrush="#FFB90909" Style="{DynamicResource BotonStyle_crud}" Foreground="White" Background="#FF4B4848" />
     </Grid>
 </Page>

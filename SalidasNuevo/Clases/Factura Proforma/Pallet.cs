@@ -8,5 +8,10 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.Factura_Proforma
 {
     class Pallet
     {
+        private int id;
+        private int idFP;
+        private int numeroPallet;
+        private List<ProductoFP> productos;
+
     }
 }
