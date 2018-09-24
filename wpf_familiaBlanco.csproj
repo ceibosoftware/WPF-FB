@@ -221,6 +221,7 @@
     <Compile Include="Proveedores\windowModificarProveedor.xaml.cs">
       <DependentUpon>windowModificarProveedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalidasNuevo\Clases\Factura Proforma\ClienteME.cs" />
     <Compile Include="SalidasNuevo\Clases\Factura Proforma\facturaProforma.cs" />
     <Compile Include="SalidasNuevo\Clases\Factura Proforma\Pallet.cs" />
     <Compile Include="SalidasNuevo\Clases\Factura Proforma\ProductoFP.cs" />
