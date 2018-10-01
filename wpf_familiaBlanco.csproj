@@ -235,6 +235,9 @@
     <Compile Include="SalidasNuevo\Vistas\FacturaMI\PageFacturaMI.xaml.cs">
       <DependentUpon>PageFacturaMI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SalidasNuevo\Vistas\FacturaMI\WindowAgregarFMI.xaml.cs">
+      <DependentUpon>WindowAgregarFMI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalidasNuevo\Vistas\FacturaProforma\PageFacturaProforma.xaml.cs">
       <DependentUpon>PageFacturaProforma.xaml</DependentUpon>
     </Compile>
@@ -573,6 +576,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SalidasNuevo\Vistas\FacturaMI\PageFacturaMI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaMI\WindowAgregarFMI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
