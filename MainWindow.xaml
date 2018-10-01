@@ -1025,7 +1025,7 @@
         </Button>
         <Button x:Name="btnCeibo_Bottom_Right" Content="" HorizontalAlignment="Left" Margin="1231.999,549.667,0,0" VerticalAlignment="Top" Width="27.667" Style="{DynamicResource ButtonStyleCeibo_bottom_right}" Template="{DynamicResource ButtonCeibo_BR}" Height="22" Background="#FFDDDDDD" ToolTip="Ir a ceibosoftware.com"/>
         <Frame x:Name="frameSalidas" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden" IsEnabled="False"/>
-        <Button x:Name="btnSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" Click="btnSalidas_Click" FontSize="14" Visibility="Collapsed">
+        <Button x:Name="btnSalidas" Content="Salidas" HorizontalAlignment="Left" Margin="0,303.839,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" Click="btnSalidas_Click" FontSize="14">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
@@ -1037,12 +1037,12 @@
             </Button.BorderBrush>
         </Button>
         <Frame x:Name="frameUsuarios" Content="" HorizontalAlignment="Left" Height="37.293" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Focusable="False" IsTabStop="False" NavigationUIVisibility="Hidden" IsEnabled="False"/>
-        <Button x:Name="btnUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0,306,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnUsuarios_Click">
+        <Button x:Name="btnUsuarios" Content="Usuarios" HorizontalAlignment="Left" Margin="0,342,0,0" VerticalAlignment="Top" Width="236" Height="37" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnUsuarios_Click">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button x:Name="btnClientes" Content="Clientes" HorizontalAlignment="Left" Margin="0,378.425,0,0" VerticalAlignment="Top" Width="236" Height="37.293" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnClientes_Click_1" Visibility="Collapsed">
+        <Button x:Name="btnClientes" Content="Clientes" HorizontalAlignment="Left" Margin="0,380,0,0" VerticalAlignment="Top" Width="236" Height="38" Foreground="White" Style="{DynamicResource botonDock}" Background="{x:Null}" FontSize="14" Click="btnClientes_Click_1">
             <Button.BorderBrush>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.BorderBrush>
