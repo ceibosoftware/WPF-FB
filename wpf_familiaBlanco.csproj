@@ -820,7 +820,6 @@
     <Resource Include="act.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="SalidasNuevo\Clases\FacturaMI\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <ItemGroup>

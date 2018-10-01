@@ -179,6 +179,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             SetProductos(idOrden);
 
         }
+
+
         public DataTable  GetOrdenesCliente(int idCliente)
         {
 

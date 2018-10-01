@@ -18,6 +18,7 @@ using wpfFamiliaBlanco.Salidas.Facturacion;
 //using wpfFamiliaBlanco.Salidas.Ordenes;
 using wpfFamiliaBlanco.Salidas.Pagos;
 using wpfFamiliaBlanco.Salidas.Remitos;
+using wpfFamiliaBlanco.SalidasNuevo.Vistas.FacturaMI;
 using wpfFamiliaBlanco.SalidasNuevo.Vistas.OrdenesPedido;
 
 namespace wpfFamiliaBlanco
@@ -51,7 +52,7 @@ namespace wpfFamiliaBlanco
 
         private void btnFacturas_Click(object sender, RoutedEventArgs e)
         {
-            frameInicioSalida.Content = new FacturacionSalida();
+            frameInicioSalida.Content = new PageFacturaMI();
             btnOrdenes.Style = FindResource("botonTab") as Style;
             btnRemitos.Style = FindResource("botonTab") as Style;
             btnFacturas.Style = FindResource("botonTabPressed") as Style;
