@@ -232,6 +232,9 @@
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\ListaPrecio.cs" />
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\OrdenPedido.cs" />
     <Compile Include="SalidasNuevo\Clases\OrdenesPedido\ProductoOP.cs" />
+    <Compile Include="SalidasNuevo\Vistas\FacturaMI\PageFacturaMI.xaml.cs">
+      <DependentUpon>PageFacturaMI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SalidasNuevo\Vistas\FacturaProforma\PageFacturaProforma.xaml.cs">
       <DependentUpon>PageFacturaProforma.xaml</DependentUpon>
     </Compile>
@@ -569,6 +572,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SalidasNuevo\Vistas\FacturaMI\PageFacturaMI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SalidasNuevo\Vistas\FacturaProforma\PageFacturaProforma.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -813,6 +820,7 @@
     <Resource Include="act.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="SalidasNuevo\Clases\FacturaMI\" />
     <Folder Include="Salidas\Ordenes\" />
   </ItemGroup>
   <ItemGroup>
