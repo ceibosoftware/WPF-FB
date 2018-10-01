@@ -15,7 +15,7 @@
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="224,179,0,0" VerticalAlignment="Top" Width="56" Height="26"/>
         <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="24" Margin="59,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" KeyDown="txtMonto_KeyDown"/>
         <Label Content="Importe" HorizontalAlignment="Left" Margin="226,131,0,0" VerticalAlignment="Top" Width="61" Height="26"/>
-        <TextBox x:Name="txtObservaciones" HorizontalAlignment="Left" Height="117" Margin="304,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtObservaciones" HorizontalAlignment="Left" Height="66" Margin="304,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="340" Grid.ColumnSpan="2"/>
         <Label Content="Observaciones" HorizontalAlignment="Left" Margin="559,39,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.016,0.731" Height="26" Grid.ColumnSpan="2"/>
         <ComboBox x:Name="cmbFormadePAgo" HorizontalAlignment="Left" Margin="61,60,0,0" VerticalAlignment="Top" Width="213" Height="20"/>
         <Label Content="Forma de pago" HorizontalAlignment="Left" Margin="187,39,0,0" VerticalAlignment="Top" Width="92" Height="26"/>
@@ -26,6 +26,10 @@
         <Label Content="Unidad" HorizontalAlignment="Left" Margin="472,177,0,0" VerticalAlignment="Top" Width="56" Height="26"/>
         <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Height="100" Margin="59,250,0,-65" VerticalAlignment="Top" Width="215"/>
         <Label Content="Fecha del pago" HorizontalAlignment="Left" Margin="187,229,0,0" VerticalAlignment="Top" Width="92" Height="26"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="24" Margin="306,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216"/>
+        <Label Content="Nombre del Proveedor" HorizontalAlignment="Left" Margin="394,224,0,0" VerticalAlignment="Top" Width="134" Height="26"/>
+        <DatePicker x:Name="dtpV" HorizontalAlignment="Left" Height="100" Margin="314,152,0,0" VerticalAlignment="Top" Width="215"/>
+        <Label Content="Fecha de vencimiento" HorizontalAlignment="Left" Margin="408,131,0,0" VerticalAlignment="Top" Width="126" Height="26"/>
 
     </Grid>
 </Window>

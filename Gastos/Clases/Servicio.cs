@@ -11,8 +11,10 @@ namespace wpfFamiliaBlanco.Gastos.Clases
 
         int idServicio;
         String unidad;
+        String proveedor;
+        DateTime fechaV;
 
-        public Servicio(string nombre, int tipo, float monto, string observaciones, int formaPago, int gasto, String unidad, DateTime fech)
+        public Servicio(string nombre, String tipo, float monto, string observaciones, int formaPago, int gasto, String unidad, DateTime fech, String proveedor, DateTime fechavv)
         {
             this.nombre = nombre;
             this.tipo = tipo;
@@ -22,6 +24,8 @@ namespace wpfFamiliaBlanco.Gastos.Clases
             this.gastos = gasto;
             this.unidad = unidad;
             this.fecha = fech;
+            this.proveedor = proveedor;
+            this.fechaV = fechavv;
         }
 
         public void Delete(String id)
@@ -32,13 +36,14 @@ namespace wpfFamiliaBlanco.Gastos.Clases
 
         public  void Save()
         {
-            String insert = "INSERT INTO gasto (nombre, tipo, monto, observaciones, unidad,formaPago,gastot,fecha) VALUES('" + this.nombre + "','" + this.tipo + "','" + this.monto.ToString().Replace(",", ".") + "', '" + this.observaciones + "', '" + this.unidad + "', '" + this.formaPago + "', '" + 1 + "', '" + this.fecha.ToString("yyyy/MM/dd") + "')";
+            String insert = "INSERT INTO gasto (nombre, tipo, monto, observaciones, unidad,formaPago,gastot,fecha, proveedor) VALUES('" + this.nombre + "','" + this.tipo + "','" + this.monto.ToString().Replace(",", ".") + "', '" + this.observaciones + "', '" + this.unidad + "', '" + this.formaPago + "', '" + 1 + "', '" + this.fecha.ToString("yyyy/MM/dd") + "', '" + this.proveedor + "', '" + this.fechaV.ToString("yyyy/MM/dd") + "')";
             this.Conexion.operaciones(insert);
         }
 
-        public  void Update()
+        public  void Update(int id)
         {
-           
+            String updateserv = "UPDATE gasto SET nombre =  '" + this.nombre + "',tipo = '" + this.tipo + "' ,monto = '" + this.monto + "',observaciones= '" + this.observaciones + "',formaPago='" + this.formaPago + "' ,fecha = '" + this.fecha.ToString("yyyy/MM/dd") + "',fechaVencimiento= '" + this.fechaV.ToString("yyyy/MM/dd") + "',proveedor = '" + this.proveedor + "',unidad = '" + this.unidad + "' WHERE idGasto = '" + id + "'";
+            Conexion.operaciones(updateserv);
         }
 
 

@@ -24,6 +24,7 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
     {
         public List<Gasto> listagastos = new List<Gasto>();
         CRUD conexion = new CRUD();
+        String tipoRb;
         public PageGastos()
         {
             InitializeComponent();
@@ -33,15 +34,150 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             BloquearElementos();
         }
 
+        
+        private void Modificar()
+        {
+            if (rbImpuesto.IsChecked == true)
+            {
+                var id = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
+                var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var fechav = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[11].ToString();
+
+                windowAgregarImpuesto newW= new windowAgregarImpuesto(nombre,int.Parse(tipo),float.Parse(monto),obs,int.Parse(formaPago),DateTime.Parse(fecha),DateTime.Parse(fechav));
+                newW.Title = "Modificar Impuesto";
+                newW.ShowDialog();
+
+                if (newW.DialogResult == true)
+                {
+                    DateTime dtpv = System.DateTime.Now;
+                    dtpv = newW.dtpV.SelectedDate.Value;
+                    DateTime dtp = System.DateTime.Now;
+                    dtp = newW.dtpFecha.SelectedDate.Value;
+
+                    Impuesto imp = new Impuesto(newW.txtNombre.Text,tipo,float.Parse(monto),newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex,0,dtp,dtpv );
+                    imp.Update(int.Parse(id));
+                    MessageBox.Show("Impuesto modificado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else if (RbServicios.IsChecked == true)
+            {
+                var id = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                var unidad = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[5].ToString();
+                var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
+                var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
+                var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var proveedor = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[10].ToString();
+                var fechav = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[11].ToString();
+               
+                windowAgregarServicio newW = new windowAgregarServicio(nombre, int.Parse(tipo), float.Parse(monto), obs, int.Parse(formaPago), DateTime.Parse(fecha), DateTime.Parse(fechav),proveedor, unidad);
+                newW.Title = "Modificar Servicio";
+                newW.ShowDialog();
+
+                if (newW.DialogResult == true)
+                {
+                    DateTime dtpv = System.DateTime.Now;
+                    dtpv = newW.dtpV.SelectedDate.Value;
+                    DateTime dtp = System.DateTime.Now;
+                    dtp = newW.dtpFecha.SelectedDate.Value;
+
+                    Servicio ser = new Servicio(newW.txtNombre.Text, tipo, float.Parse(monto), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtUnidad.Text,dtp, newW.txtProveedor.Text, dtpv);
+                    ser.Update(int.Parse(id));
+                    MessageBox.Show("Impuesto modificado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else if (RbSueldo.IsChecked == true)
+            {
+                
+                var id = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                var horast = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[6].ToString();
+                var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
+                var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
+                var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var viatico = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[12].ToString();
+                
+
+                windowAgregarSueldo newW = new windowAgregarSueldo(int.Parse(tipo),nombre, float.Parse(monto), int.Parse(horast), obs, int.Parse(formaPago), DateTime.Parse(fecha),float.Parse(viatico));
+                newW.Title = "Modificar Sueldo";
+                newW.ShowDialog();
+
+                if (newW.DialogResult == true)
+                {
+                  
+                    DateTime dtp = System.DateTime.Now;
+                    dtp = newW.dtpFecha.SelectedDate.Value;
+
+                    Sueldo i = new Sueldo(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtHoras.Text, dtp, float.Parse(newW.txtViaticos.Text));
+                    i.Update(int.Parse(id));
+                    MessageBox.Show("Sueldo modificado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                var id = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
+                var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
+                var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                
+
+
+                windowAgregarOtro newW = new windowAgregarOtro(int.Parse(tipo), float.Parse(monto), nombre,  int.Parse(formaPago), obs, DateTime.Parse(fecha));
+                newW.Title = "Modificar otro";
+                newW.ShowDialog();
+
+                if (newW.DialogResult == true)
+                {
+
+                    DateTime dtp = System.DateTime.Now;
+                    dtp = newW.dtpFecha.SelectedDate.Value;
+                    Otro i = new Otro(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, dtp);
+                    i.Update(int.Parse(id));
+                    MessageBox.Show("Otro modificado correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
         private void BloquearElementos()
         {
             txtfecha.IsReadOnly = true;
             txtFormaDePago.IsReadOnly = true;
             txtHoras.IsReadOnly = true;
             txtObservaciones.IsReadOnly = true;
-            txtUnidad.IsReadOnly = true;
+            txtProveedor.IsReadOnly = true;
+            txtfechaVencimiento.IsReadOnly = true;
+            txtViat.IsReadOnly = true;
         }
-
+        private void ParaMensajeEliminar()
+        {
+            if (rbImpuesto.IsChecked == true)
+            {
+                tipoRb = "Impuesto";
+            }
+            else if (RbServicios.IsChecked == true)
+            {
+                tipoRb = "Servicio";
+            }
+            else if (RbSueldo.IsChecked == true)
+            {
+                tipoRb = "Sueldo";
+            }
+            else
+            {
+                tipoRb = "Otro";
+            }
+        }
         private void SetFormaPago(String var)
         {
             if (var == "0")
@@ -61,55 +197,164 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
         {
             if (rbImpuesto.IsChecked == true)
             {
+                try
+                {
+
                 var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
                 var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
                 var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
                 var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
-                
-                SetFormaPago(formaPago);
-                txtObservaciones.Text = obs.ToString();
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
                 var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var fechav = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[11].ToString();
+                SetFormaPago(formaPago);
+                setTipo(tipo);
+                txtObservaciones.Text = obs.ToString();
                 txtfecha.Text = fecha.ToString();
+                txtfechaVencimiento.Text = fechav.ToString();
+
+                }
+                catch (NullReferenceException)
+                {
+
+                    MessageBox.Show("Seleccione un impuesto", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else if (RbServicios.IsChecked == true)
             {
+                try
+                {
+
+         
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
                 var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
                 var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
                 var unidad = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[5].ToString();
                 var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
                 var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
                 var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var proveedor = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[10].ToString();
+                var fechav = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[11].ToString();
                 txtfecha.Text = fecha.ToString();
+                txtfechaVencimiento.Text = fechav.ToString();
+                txtProveedor.Text = proveedor.ToString();
                 SetFormaPago(formaPago);
                 txtObservaciones.Text = obs.ToString();
                 txtUnidad.Text = unidad.ToString();
+                setTipo(tipo);
+                }
+                catch (NullReferenceException)
+                {
 
+                    MessageBox.Show("Seleccione un servicio", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else if (RbSueldo.IsChecked == true)
             {
+                try
+                {
+
+             
+                var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
                 var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
                 var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
                 var horas = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[6].ToString();
                 var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
                 var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
                 var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                var viatico = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[12].ToString();
+                txtViat.Text = viatico.ToString();
                 txtfecha.Text = fecha.ToString();
                 SetFormaPago(formaPago);
                 txtObservaciones.Text = obs.ToString();
                 txtHoras.Text = horas.ToString();
+                setTipo(tipo);
+                }
+                catch (NullReferenceException)
+                {
 
+                    MessageBox.Show("Seleccione un sueldo", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
-                var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
-                var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
-                var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
-                var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
-                var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
-                txtfecha.Text = fecha.ToString();
-                SetFormaPago(formaPago);
-                txtObservaciones.Text = obs.ToString();
-            
+                try
+                {
+
+
+                    var tipo = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                    var nombre = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                    var monto = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                    var obs = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[4].ToString();
+                    var formaPago = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[7].ToString();
+                    var fecha = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[9].ToString();
+                    txtfecha.Text = fecha.ToString();
+                    SetFormaPago(formaPago);
+                    txtObservaciones.Text = obs.ToString();
+                    setTipo(tipo);
+                 }
+                 catch (NullReferenceException)
+                 {
+                    MessageBox.Show("Seleccione un elemento", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                 }
+            }
+        }
+        private void cambiarRb()
+        {
+            if (rbImpuesto.IsChecked == true)
+            {
+                rbImpuesto.IsChecked = false;
+                RbSueldo.IsChecked = true;
+                rbImpuesto.IsChecked = true;
+            }
+            else if (RbServicios.IsChecked == true)
+            {
+                RbServicios.IsChecked = true;
+                RbSueldo.IsChecked = true;
+                RbServicios.IsChecked = true;
+            }
+            else if (RbSueldo.IsChecked == true)
+            {
+                RbSueldo.IsChecked = false;
+                RbServicios.IsChecked = true;
+                RbSueldo.IsChecked = true;
+            }
+            else
+            {
+                rbOtros.IsChecked = false;
+                RbSueldo.IsChecked = true;
+                rbOtros.IsChecked = true;
+            }
+        }
+        private void setTipo(String t)
+        {
+            if (t == "0")
+            {
+                txtTipo.Text = "Ingresos Brutos";
+            }
+            else if (t == "1")
+            {
+                txtTipo.Text = "IVA";
+            }
+            else if (t == "2")
+            {
+                txtTipo.Text = "Otro";
+            }
+            else if (t == "7")
+            {
+                txtTipo.Text = "Directo";
+            }
+            else if (t == "8")
+            {
+                txtTipo.Text = "Indirecto";
+            }
+            else if (t == "4")
+            {
+                txtTipo.Text = "Jornal";
+            }
+            else if (t == "5")
+            {
+                txtTipo.Text = "Mensual";
             }
         }
         private void OcultarElementos()
@@ -122,8 +367,15 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
                 lblunidad.Visibility = Visibility.Collapsed;
                 txtUnidad.Visibility = Visibility.Collapsed;
-                
 
+                lblProveedor.Visibility = Visibility.Collapsed;
+                txtProveedor.Visibility = Visibility.Collapsed;
+
+                lblFechaven.Visibility = Visibility.Visible;
+                txtfechaVencimiento.Visibility = Visibility.Visible;
+
+                lblviat.Visibility = Visibility.Collapsed;
+                txtViat.Visibility = Visibility.Collapsed;
             }
             else if (RbServicios.IsChecked == true)
             {
@@ -133,6 +385,16 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
                 lblunidad.Visibility = Visibility.Visible;
                 txtUnidad.Visibility = Visibility.Visible;
+
+                lblProveedor.Visibility = Visibility.Visible;
+                txtProveedor.Visibility = Visibility.Visible;
+
+                lblFechaven.Visibility = Visibility.Visible;
+                txtfechaVencimiento.Visibility = Visibility.Visible;
+
+
+                lblviat.Visibility = Visibility.Collapsed;
+                txtViat.Visibility = Visibility.Collapsed;
             }
             else if (RbSueldo.IsChecked == true)
             {
@@ -142,6 +404,16 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
                 lblunidad.Visibility = Visibility.Collapsed;
                 txtUnidad.Visibility = Visibility.Collapsed;
+
+                lblProveedor.Visibility = Visibility.Collapsed;
+                txtProveedor.Visibility = Visibility.Collapsed;
+
+                lblFechaven.Visibility = Visibility.Collapsed;
+                txtfechaVencimiento.Visibility = Visibility.Collapsed;
+
+
+                lblviat.Visibility = Visibility.Visible;
+                txtViat.Visibility = Visibility.Visible;
             }
             else
             {
@@ -150,11 +422,17 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
                 lblunidad.Visibility = Visibility.Collapsed;
                 txtUnidad.Visibility = Visibility.Collapsed;
+
+                lblProveedor.Visibility = Visibility.Collapsed;
+                txtProveedor.Visibility = Visibility.Collapsed;
+
+                lblFechaven.Visibility = Visibility.Collapsed;
+                txtfechaVencimiento.Visibility = Visibility.Collapsed;
+
+                lblviat.Visibility = Visibility.Collapsed;
+                txtViat.Visibility = Visibility.Collapsed;
             }
         }
-    
-
- 
         private void SeleccionarRadioButton()
         {
             rbImpuesto.IsChecked = true;
@@ -162,7 +440,6 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             RbSueldo.IsChecked = false;
             RbServicios.IsChecked = false;
         }
-
         private void CambiarRB()
         {
             rbOtros.IsChecked = true;
@@ -188,8 +465,6 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
            // dgvGastos.Columns.Add(textColumn3);
 
         }
-
-
         private void SetDGVGastos()
         {
             if (rbImpuesto.IsChecked == true)
@@ -227,29 +502,27 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
         {
-            //for (int i = 0; i < dgvGastos.Items.Count - 1; i++)
-            //{
-
-            //    var telefono = (dgvGastos.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-            //    j++;
-
-            //    var email = (dgvGastos.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-            //    j++;
-            //    var nombre2 = (dgvGastos.Items[i] as System.Data.DataRowView).Row.ItemArray[j].ToString();
-            //    j++;
-
-            //    j = 0;
-
-            //    Impuesto imp = new Impuesto(nombre2, email, telefono);
-            //    listagastos.Add(conA);
-
-
-            //}
+            Modificar();
+            CambiarRB();
         }
+        
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            ParaMensajeEliminar();
+            MessageBoxResult dialog = MessageBox.Show("Esta seguro que desea eliminar el " + tipoRb + "?", "Advertencia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+
+            if (dialog == MessageBoxResult.Yes)
+            {
+                var id = (dgvGastos.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                Impuesto i = new Impuesto();
+                i.Delete(id);
+                MessageBox.Show("" + tipoRb + " Eliminado correctamente", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Information);
+                cambiarRb();
+            }
+
+         
         }
 
         private void rbImpuesto_Checked(object sender, RoutedEventArgs e)

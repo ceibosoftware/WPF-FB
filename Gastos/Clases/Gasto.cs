@@ -14,7 +14,7 @@ namespace wpfFamiliaBlanco.Gastos.Clases
         CRUD conexion = new CRUD();
         public int idGasto { get; set; }
         public String nombre { get; set; }
-        public int tipo { get; set; }
+        public String tipo { get; set; }
         public float monto { get; set; }
         public String observaciones { get; set; }
         public int formaPago { get; set; }

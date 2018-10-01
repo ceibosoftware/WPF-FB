@@ -19,11 +19,13 @@
         <Label Content="Observaciones" HorizontalAlignment="Left" Margin="559,39,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="0.016,0.731" Height="26"/>
         <ComboBox x:Name="cmbFormadePAgo" HorizontalAlignment="Left" Margin="61,60,0,0" VerticalAlignment="Top" Width="213" Height="20"/>
         <Label Content="Forma de pago" HorizontalAlignment="Left" Margin="187,39,0,0" VerticalAlignment="Top" Width="92" Height="26"/>
-        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="569,1,0,65" Width="75" BorderBrush="{x:Null}" Height="23" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" Grid.Row="1"/>
+        <Button x:Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="569,12,0,54" Width="75" BorderBrush="{x:Null}" Height="23" Style="{DynamicResource agregar}" Foreground="White" Click="btnAgregar_Click" Grid.Row="1"/>
         <ComboBox x:Name="cmbTipo" HorizontalAlignment="Left" Margin="61,106,0,0" VerticalAlignment="Top" Width="213" Height="20" RenderTransformOrigin="-0.15,0.75"/>
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="243,85,0,0" VerticalAlignment="Top" Width="33" Height="26" RenderTransformOrigin="4.758,0"/>
         <DatePicker x:Name="dtpFecha" HorizontalAlignment="Left" Height="100" Margin="59,50,0,-61" Grid.Row="1" VerticalAlignment="Top" Width="215"/>
         <Label Content="Fecha del pago" HorizontalAlignment="Left" Margin="187,29,0,0" VerticalAlignment="Top" Width="92" Height="26" Grid.Row="1"/>
+        <DatePicker x:Name="dtpV" HorizontalAlignment="Left" Height="100" Margin="305,4,0,-15" VerticalAlignment="Top" Width="215" Grid.Row="1"/>
+        <Label Content="Fecha de vencimiento" HorizontalAlignment="Left" Margin="397,183,0,0" VerticalAlignment="Top" Width="128" Height="26" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

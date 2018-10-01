@@ -27,6 +27,55 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             LoadCMBTIpo();
         }
 
+        public windowAgregarServicio(String nombre, int tipo, float monto, String obs, int formaPago, DateTime fecha, DateTime fechav, String proveedor, String unidad)
+        {
+            InitializeComponent();
+            LoadCMBModificar(formaPago);
+            LoadCMBTIpoModificar(tipo);
+            txtNombre.Text = nombre;
+            txtMonto.Text = monto.ToString();
+            txtObservaciones.Text = obs;
+            dtpFecha.SelectedDate = fecha.Date;
+            dtpV.SelectedDate = fechav.Date;
+            txtProveedor.Text = proveedor;
+            txtUnidad.Text = unidad;
+
+        }
+
+        private void LoadCMBModificar(int f)
+        {
+            cmbFormadePAgo.Items.Add("Efectivo");
+            cmbFormadePAgo.Items.Add("Transferencia");
+
+            if (f == 0)
+            {
+                cmbFormadePAgo.SelectedIndex = 0;
+            }
+            else
+            {
+                cmbFormadePAgo.SelectedIndex = 1;
+            }
+         
+        }
+
+        private void LoadCMBTIpoModificar(int t)
+        {
+            cmbTipo.Items.Add("Directo");
+            cmbTipo.Items.Add("Indirecto");
+
+            if (t == 7)
+            {
+                cmbTipo.SelectedIndex = 0; 
+            }
+            else if (t == 8)
+            {
+                cmbTipo.SelectedIndex = 1;
+
+            }
+           
+
+        }
+         
         private void LoadCMB()
         {
             cmbFormadePAgo.Items.Add("Efectivo");
@@ -36,9 +85,8 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
         private void LoadCMBTIpo()
         {
-            cmbTipo.Items.Add("Ingresos Brutos");
-            cmbTipo.Items.Add("IVA");
-            cmbTipo.Items.Add("Otro");
+            cmbTipo.Items.Add("Directo");
+            cmbTipo.Items.Add("Indirecto");
             cmbTipo.SelectedIndex = 0;
         }
         private void txtMonto_KeyDown(object sender, KeyEventArgs e)
@@ -61,8 +109,8 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
         private bool Valida()
         {
-            String tieneN = "SELECT COUNT(*) FROM gasto WHERE nombre  = '" + txtNombre.Text + "'";
-            String NC = conexion.ValorEnVariable(tieneN).ToString();
+            //String tieneN = "SELECT COUNT(*) FROM gasto WHERE nombre  = '" + txtNombre.Text + "'";
+            //String NC = conexion.ValorEnVariable(tieneN).ToString();
 
             if (txtMonto.Text == "")
             {
@@ -70,11 +118,11 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
                 return false;
 
             }
-            else if (NC != "0")
-            {
-                MessageBox.Show("El nombre ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+            //else if (NC != "0")
+            //{
+            //    MessageBox.Show("El nombre ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return false;
+            //}
             else if (txtNombre.Text == "")
             {
                 MessageBox.Show("Ingrese el nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -28,6 +28,39 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             
         }
 
+        private String SetTipo(String t)
+        {
+            String tipo="";
+            if (t == "Directo")
+            {
+                tipo = "7";
+            }
+            else if (t == "Indirecto")
+            {
+                tipo = "8";
+            }
+            else if (t == "Ingresos Brutos")
+            {
+                tipo = "0";
+            }
+            else if (t == "IVA")
+            {
+                tipo = "1";
+            }
+            else if (t == "Otro")
+            {
+                tipo = "2";
+            }
+            else if (t == "Jornal")
+            {
+                tipo = "4";
+            }
+            else if (t == "Mensual")
+            {
+                tipo = "5";
+            }
+            return tipo;
+        }
         private void btnImpuesto_Click(object sender, RoutedEventArgs e)
         {
             windowAgregarImpuesto newW = new windowAgregarImpuesto();
@@ -36,9 +69,12 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
             if (newW.DialogResult == true)
             {
+                DateTime dtpv = System.DateTime.Now;
+                dtpv = newW.dtpV.SelectedDate.Value;
+                String tipo =SetTipo(newW.cmbTipo.SelectedValue.ToString());
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtpFecha.SelectedDate.Value;
-                Impuesto i = new Impuesto(newW.txtNombre.Text, newW.cmbTipo.SelectedIndex, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, dtp);
+                Impuesto i = new Impuesto(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, dtp,dtpv);
                 i.Save();
                 MessageBox.Show("El impuesto se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -51,12 +87,16 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
         {
             windowAgregarServicio newW = new windowAgregarServicio();
             newW.ShowDialog();
-
+           
             if (newW.DialogResult == true)
             {
+
+                String tipo = SetTipo(newW.cmbTipo.SelectedValue.ToString());
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtpFecha.SelectedDate.Value;
-                Servicio i = new Servicio(newW.txtNombre.Text, newW.cmbTipo.SelectedIndex, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtUnidad.Text,dtp);
+                DateTime dtpv = System.DateTime.Now;
+                dtpv = newW.dtpV.SelectedDate.Value;
+                Servicio i = new Servicio(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtUnidad.Text,dtp, newW.txtProveedor.Text,dtpv);
                 i.Save();
                 MessageBox.Show("El servicio se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -72,9 +112,10 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
             if (newW.DialogResult == true)
             {
+                String tipo = SetTipo(newW.cmbTipo.SelectedValue.ToString());
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtpFecha.SelectedDate.Value;
-                Sueldo i = new Sueldo(newW.txtNombre.Text, newW.cmbTipo.SelectedIndex, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtHoras.Text,dtp);
+                Sueldo i = new Sueldo(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0, newW.txtHoras.Text,dtp,float.Parse( newW.txtViaticos.Text));
                 i.Save();
                 MessageBox.Show("El sueldo se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -89,9 +130,10 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
             if (newW.DialogResult == true)
             {
+                String tipo = SetTipo(newW.cmbTipo.SelectedValue.ToString());
                 DateTime dtp = System.DateTime.Now;
                 dtp = newW.dtpFecha.SelectedDate.Value;
-                Otro i = new Otro(newW.txtNombre.Text, newW.cmbTipo.SelectedIndex, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0,dtp);
+                Otro i = new Otro(newW.txtNombre.Text, tipo, float.Parse(newW.txtMonto.Text), newW.txtObservaciones.Text, newW.cmbFormadePAgo.SelectedIndex, 0,dtp);
                 i.Save();
                 MessageBox.Show("Otro tipo de gasto se agregó correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

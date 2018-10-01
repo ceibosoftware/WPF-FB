@@ -26,6 +26,53 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             LoadCMB();
             LoadCMBTIpo();
         }
+
+        public windowAgregarSueldo(int tipo, String nombre, float monto, int horast, String obs, int formap, DateTime fecha, float viat)
+        {
+            InitializeComponent();
+            LoadCMBModificar(formap);
+            LoadCMBTIpoModificar(tipo);
+            txtHoras.Text = horast.ToString();
+            txtMonto.Text = monto.ToString();
+            txtNombre.Text = nombre;
+            txtObservaciones.Text = obs;
+            txtViaticos.Text = viat.ToString();
+            dtpFecha.SelectedDate = fecha.Date;
+           
+        }
+
+        private void LoadCMBTIpoModificar(int t)
+        {
+            cmbTipo.Items.Add("Mensual");
+            cmbTipo.Items.Add("Jornal");
+
+            if (t == 4)
+            {
+                cmbTipo.SelectedIndex = 1; 
+            }
+            else if (t == 5)
+            {
+                cmbTipo.SelectedIndex = 0;
+
+            }
+          
+        }
+
+        private void LoadCMBModificar(int f)
+        {
+            cmbFormadePAgo.Items.Add("Efectivo");
+            cmbFormadePAgo.Items.Add("Transferencia");
+            if (f == 0)
+            {
+                cmbFormadePAgo.SelectedIndex = 0;
+            }
+            else
+            {
+                cmbFormadePAgo.SelectedIndex = 1;
+            }
+
+        }
+
         private void LoadCMB()
         {
             cmbFormadePAgo.Items.Add("Efectivo");
@@ -35,9 +82,8 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
 
         private void LoadCMBTIpo()
         {
-            cmbTipo.Items.Add("Ingresos Brutos");
-            cmbTipo.Items.Add("IVA");
-            cmbTipo.Items.Add("Otro");
+            cmbTipo.Items.Add("Mensual");
+            cmbTipo.Items.Add("Jornal");
             cmbTipo.SelectedIndex = 0;
         }
         private void txtMonto_KeyDown(object sender, KeyEventArgs e)
@@ -69,11 +115,7 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
                 return false;
 
             }
-            else if (NC != "0")
-            {
-                MessageBox.Show("El nombre ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+       
             else if (txtNombre.Text == "")
             {
                 MessageBox.Show("Ingrese el nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -93,6 +135,16 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             {
                 return true;
 
+            }
+        }
+
+        private void txtViaticos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString() == "Decimal" || e.Key.ToString() == "OemPeriod")
+            {
+                e.Handled = true;
+                txtViaticos.Text = txtViaticos.Text + ",";
+                txtViaticos.SelectionStart = txtViaticos.Text.Length;
             }
         }
     }

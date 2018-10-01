@@ -26,6 +26,53 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
             LoadCMB();
             LoadCMBTIpo();
         }
+
+        public windowAgregarOtro(int tipo, float monto, String nombre, int formap, String obs, DateTime fecha)
+        {
+            InitializeComponent();
+            LoadCMBModificar(formap);
+            LoadCMBTIpoModificar(tipo);
+            txtNombre.Text = nombre;
+            txtMonto.Text = monto.ToString();
+            txtObservaciones.Text = obs;
+            dtpFecha.SelectedDate = fecha.Date;
+            
+        }
+        private void LoadCMBTIpoModificar(int t)
+        {
+            cmbTipo.Items.Add("Ingresos Brutos");
+            cmbTipo.Items.Add("IVA");
+            cmbTipo.Items.Add("Otro");
+            if (t == 0)
+            {
+                cmbTipo.SelectedIndex = 0; cmbTipo.SelectedIndex = 0;
+            }
+            else if (t == 1)
+            {
+                cmbTipo.SelectedIndex = 1;
+
+            }
+            else
+            {
+                cmbTipo.SelectedIndex = 2;
+            }
+        }
+
+        private void LoadCMBModificar(int f)
+        {
+            cmbFormadePAgo.Items.Add("Efectivo");
+            cmbFormadePAgo.Items.Add("Transferencia");
+            if (f == 0)
+            {
+                cmbFormadePAgo.SelectedIndex = 0;
+            }
+            else
+            {
+                cmbFormadePAgo.SelectedIndex = 1;
+            }
+
+        }
+
         private void LoadCMB()
         {
             cmbFormadePAgo.Items.Add("Efectivo");
@@ -65,11 +112,7 @@ namespace wpfFamiliaBlanco.Gastos.Vistas
                 return false;
 
             }
-            else if (NC != "0")
-            {
-                MessageBox.Show("El nombre ingresado ya existe", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+        
             else if (txtNombre.Text == "")
             {
                 MessageBox.Show("Ingrese el nombre", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

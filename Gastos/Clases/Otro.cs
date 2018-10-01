@@ -11,7 +11,7 @@ namespace wpfFamiliaBlanco.Gastos.Clases
         int idOtro;
         String observacion;
 
-        public Otro(string nombre, int tipo, float monto, string observaciones, int formaPago, int gasto, DateTime fech)
+        public Otro(string nombre, String tipo, float monto, string observaciones, int formaPago, int gasto, DateTime fech)
         {
             this.nombre = nombre;
             this.tipo = tipo;
@@ -32,9 +32,10 @@ namespace wpfFamiliaBlanco.Gastos.Clases
             this.Conexion.operaciones(insert);
         }
 
-        public  void Update()
+        public  void Update(int id)
         {
-            
+            String updateOtro = "UPDATE gasto SET nombre =  '" + this.nombre + "',tipo = '" + this.tipo + "' ,monto = '" + this.monto + "',observaciones= '" + this.observaciones + "',formaPago='" + this.formaPago + "' ,fecha = '" + this.fecha.ToString("yyyy/MM/dd") + "' WHERE idGasto = '" + id + "'";
+            Conexion.operaciones(updateOtro);
         }
     }
 }

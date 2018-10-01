@@ -71,7 +71,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="#FF171717">
+    <Grid Background="#FF171717" Margin="0,-4,0,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="237*"/>
             <ColumnDefinition Width="563*"/>
@@ -86,16 +86,24 @@
         <RadioButton x:Name="RbServicios" Content="Servicios" HorizontalAlignment="Left" Margin="11,95,0,0" VerticalAlignment="Top" Checked="RbServicios_Checked" Grid.Column="1"/>
         <RadioButton x:Name="RbSueldo" Content="Sueldos" HorizontalAlignment="Left" Margin="122,95,0,0" VerticalAlignment="Top" Checked="RbSueldo_Checked" Grid.Column="1"/>
         <RadioButton x:Name="rbOtros" Content="Otros" HorizontalAlignment="Left" Margin="223,95,0,0" VerticalAlignment="Top" Grid.Column="1" Checked="rbOtros_Checked"/>
-        <TextBox x:Name="txtObservaciones" Grid.Column="1" HorizontalAlignment="Left" Height="144" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"/>
-        <Label Content="Observaciones" HorizontalAlignment="Left" Margin="106,341,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
-        <TextBox x:Name="txtUnidad" HorizontalAlignment="Left" Height="23" Margin="108,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
-        <Label x:Name="lblunidad" Content="Unidad" HorizontalAlignment="Left" Margin="106,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
-        <TextBox x:Name="txtHoras" HorizontalAlignment="Left" Height="23" Margin="108,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
-        <Label x:Name="lblHorasT" Content="Horas Trabajadas" HorizontalAlignment="Left" Margin="106,238,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
-        <TextBox x:Name="txtFormaDePago" HorizontalAlignment="Left" Height="22" Margin="108,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
-        <Label x:Name="lblFormaPAgo" Content="Forma de Pago" HorizontalAlignment="Left" Margin="106,189,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
-        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="22" Margin="110,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <TextBox x:Name="txtObservaciones" Grid.Column="1" HorizontalAlignment="Left" Height="101" Margin="108,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"/>
+        <Label Content="Observaciones" HorizontalAlignment="Left" Margin="106,385,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtUnidad" HorizontalAlignment="Left" Height="23" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblunidad" Content="Unidad" HorizontalAlignment="Left" Margin="106,339,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtHoras" HorizontalAlignment="Left" Height="23" Margin="108,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblHorasT" Content="Horas Trabajadas" HorizontalAlignment="Left" Margin="106,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtFormaDePago" HorizontalAlignment="Left" Height="22" Margin="110,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Grid.Column="1"/>
+        <Label x:Name="lblFormaPAgo" Content="Forma de Pago" HorizontalAlignment="Left" Margin="106,241,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtfecha" HorizontalAlignment="Left" Height="22" Margin="110,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
         <Label x:Name="lblFormaPAgo_Copy" Content="Fecha" HorizontalAlignment="Left" Margin="108,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtProveedor" HorizontalAlignment="Left" Height="22" Margin="110,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblProveedor" Content="Proveedor" HorizontalAlignment="Left" Margin="106,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtfechaVencimiento" HorizontalAlignment="Left" Height="22" Margin="110,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblFechaven" Content="Fecha de Vencimiento" HorizontalAlignment="Left" Margin="110,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtTipo" HorizontalAlignment="Left" Height="22" Margin="294,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Grid.Column="1"/>
+        <Label x:Name="lblTipo" Content="Tipo" HorizontalAlignment="Left" Margin="290,241,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
+        <TextBox x:Name="txtViat" HorizontalAlignment="Left" Height="23" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346" Grid.Column="1"/>
+        <Label x:Name="lblviat" Content="Viáticos" HorizontalAlignment="Left" Margin="106,339,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.728,0.577" Grid.Column="1"/>
 
     </Grid>
 </Page>
