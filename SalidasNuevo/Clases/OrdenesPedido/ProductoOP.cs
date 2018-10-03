@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
 {
-    class ProductoOP
+   public class ProductoOP
     {
 
         public ProductoOP()
@@ -26,6 +26,17 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
             codigoINV = GetCodigoINV(idAnalisis);
             Precio = precio;
         }
+
+        public ProductoOP(int idProducto, int cantidad, float descuento, float precio)
+        {
+            nombre = GetNombre(idProducto);
+            Id =int.Parse( Getid(nombre));
+            TotalBotellas = cantidad;
+            Descuento = descuento;
+            Precio = precio;
+           
+        }
+
         private CRUD conexion = new CRUD();
         private int id;
         private string nombre;
@@ -89,6 +100,12 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Clases.OrdenesPedido
         private String GetNombre(int idProducto)
         {
             string consulta = "SELECT nombre FROM productos where idProductos = '"+idProducto+"'";
+            return conexion.ValorEnVariable(consulta);
+        }
+
+        public String Getid(String  n)
+        {
+            string consulta = "SELECT idProductos FROM productos where nombre = '" + n + "'";
             return conexion.ValorEnVariable(consulta);
         }
         private String GetCodigoINV(int idAnalisis)
