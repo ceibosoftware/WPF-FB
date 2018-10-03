@@ -106,74 +106,82 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.FacturaMI
         private void btnProdAgregar_Click(object sender, RoutedEventArgs e)
         {
 
-            try
-            {
+            //try
+            //{
 
                 bool existe = false;
-                Producto prod = dgvProductosOC.SelectedItem as Producto;
-                int id;
-                id = prod.id;
-                if (prod.cantidad > 0)
-                {
-                    var newW = new WindowAgregarProductoFactura();
-                    for (int i = 0; i < itemsFact.Count; i++)
-                    {
-                        if (itemsFact[i].nombre == prod.nombre)
-                        {
-                            existe = true;
-                        }
-                        else
-                        {
-                            existe = false;
-                        }
-                    }
-                    if (prod.cantidad >= 1 && !existe)
-                    {
 
-                        newW.txtCantidad.Text = prod.cantidad.ToString();
-                        newW.can = prod.cantidad;
-                        newW.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+                //Producto prod = dgvProductosOC.SelectedItem as Producto;
+                var i0 = (dgvProductosOC.SelectedItem as System.Data.DataRowView).Row[0].ToString();
+                var i1 = (dgvProductosOC.SelectedItem as System.Data.DataRowView).Row[1].ToString();
+                var i2= (dgvProductosOC.SelectedItem as System.Data.DataRowView).Row[2].ToString();
+                var i3= (dgvProductosOC.SelectedItem as System.Data.DataRowView).Row[3].ToString();
+                MessageBox.Show("0" + i0);
+                MessageBox.Show("1" + i1);
+                MessageBox.Show("2" + i2);
+                MessageBox.Show("3" + i3);
+                //id = prod.id;
+                //    if (prod.cantidad > 0)
+                //    {
+                //        var newW = new WindowAgregarProductoFactura();
+                //        for (int i = 0; i < itemsFact.Count; i++)
+                //        {
+                //            if (itemsFact[i].nombre == prod.nombre)
+                //            {
+                //                existe = true;
+                //            }
+                //            else
+                //            {
+                //                existe = false;
+                //            }
+                //        }
+                //        if (prod.cantidad >= 1 && !existe)
+                //        {
 
-
-                    if (newW.DialogResult == true)
-                    {
-                        if (int.Parse(newW.txtCantidad.Text) > 0)
-                        {
-
-                            Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
-                            itemsFact.Add(productoFactura);
-                            Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
-
-                            dgvProductosFactura.Items.Refresh();
-                            // float.TryParse(txtSubtotal.Text, out subtotal);
+                //            newW.txtCantidad.Text = prod.cantidad.ToString();
+                //            newW.can = prod.cantidad;
+                //            newW.ShowDialog();
+                //        }
+                //        else
+                //        {
+                //            MessageBox.Show("El producto ya se agrego", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //        }
 
 
-                            txtSubtotal.Text = (Subtotal).ToString();
-                            prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
-                            dgvProductosOC.Items.Refresh();
-                            //calculaTotal();
-                        }
-                        else
-                        {
-                            MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Ya se agregaron todas las facturas de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Seleccione un producto a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //        if (newW.DialogResult == true)
+                //        {
+                //            if (int.Parse(newW.txtCantidad.Text) > 0)
+                //            {
 
-            }
+                //                Producto productoFactura = new Producto(prod.nombre, prod.id, int.Parse(newW.txtCantidad.Text), prod.total, prod.precioUnitario);
+                //                itemsFact.Add(productoFactura);
+                //                Subtotal = Subtotal + (productoFactura.cantidad * productoFactura.precioUnitario);
+
+                //                dgvProductosFactura.Items.Refresh();
+                //                // float.TryParse(txtSubtotal.Text, out subtotal);
+
+
+                //                txtSubtotal.Text = (Subtotal).ToString();
+                //                prod.cantidad = prod.cantidad - int.Parse(newW.txtCantidad.Text);
+                //                dgvProductosOC.Items.Refresh();
+                //                //calculaTotal();
+                //            }
+                //            else
+                //            {
+                //                MessageBox.Show("La cantidad no puede ser cero", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //            }
+                //        }
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Ya se agregaron todas las facturas de este producto", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                //    }
+            //}
+            //catch (NullReferenceException)
+            //{
+            //    MessageBox.Show("Seleccione un producto a agregar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            //}
         }
 
 
