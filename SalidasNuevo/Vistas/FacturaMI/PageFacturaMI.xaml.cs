@@ -40,7 +40,8 @@ namespace wpfFamiliaBlanco.SalidasNuevo.Vistas.FacturaMI
 
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
-
+            WindowAgregarFMI newW = new WindowAgregarFMI();
+            newW.ShowDialog();
         }
 
         private void btnModificar_Copy_Click(object sender, RoutedEventArgs e)
